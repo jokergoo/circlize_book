@@ -1,0 +1,63 @@
+
+# Implement high-level plots {#high-level-plots}
+
+In this chapter, we show several examples which combines low-level graphic
+functions to construct complicated graphics for specific purpose.
+
+## Circular barplots {#circular-barplot}
+
+In the following code, we put all 10 bars in one track and one sector.
+You can also put the 10 bars into 10 tracks, but code will be similar. 
+
+```{r circular-barplot, fig.width = 4, fig.height = 8}
+category = paste0("category", "_", 1:10)
+percent = sort(sample(40:80, 10))
+color = rev(rainbow(length(percent)))
+
+circos.par("start.degree" = 90, cell.padding = c(0, 0, 0, 0))
+circos.initialize("a", xlim = c(0, 100)) # 'a` just means there is one sector
+circos.track(ylim = c(0.5, length(percent)+0.5), , track.height = 0.8, 
+    bg.border = NA, panel.fun = function(x, y) {
+        xlim = CELL_META$xlim # in fact, it is c(0, 100)
+        circos.segments(rep(xlim[1], 10), 1:10,
+                        rep(xlim[2], 10), 1:10,
+                        col = "#CCCCCC")
+        circos.rect(rep(0, 10), 1:10 - 0.45, percent, 1:10 + 0.45,
+        	col = color, border = "white")
+
+        circos.text(rep(xlim[1], 10), 1:10, 
+        	paste(category, " - ", percent, "%"), 
+            facing = "downward", adj = c(1.05, 0.5)) 
+
+        breaks = seq(0, 90, by = 5)
+        circos.axis(h = "top", major.at = breaks, labels = paste0(breaks, "%"), 
+        	labels.cex = 0.6)
+})
+circos.clear()
+```
+
+When adding text, `adj` is specified to `c(1.05, 0.5)`. We can also use `ux()` to set the offset
+to absolute units. Since `h` argument in `ux()` currently cannot be vectorized, we put `circos.text()`
+into a `for` loop.
+
+```{r, eval = FALSE}
+for(i in 1:10) {
+    circos.text(xlim[1] - ux(2, "mm", h = i), i, 
+    	paste(category[i], " - ", percent[i], "%"), 
+        facing = "downward", adj = c(1, 0.5))
+}
+```
+
+## Histomes
+
+```{r}
+source("src/intro-14-hist.R")
+```
+
+
+## dendrograms
+
+```{r}
+source("src/intro-15-heatmap.R")
+
+```

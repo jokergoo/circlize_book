@@ -1,0 +1,259 @@
+
+# Graphics {#graphics}
+
+In this chapter, we will introduce low-level functions that add graphics to
+the circle. Usages of most of these functions are similar as normal graphic
+functions (e.g. `points()`, `lines()`). Combination use of these functions can
+generate very complex circular plots.
+
+All low-level functions accept `sector.index` and `track.index` arguments
+which indicate which cell the graphics are added in. By default the graphics
+are added in the "current" sector and "current" track, so it is recommended to
+use them directly inside `panel.fun` function. However, they can also be used
+in other places with explicitly specifying sector and track index. Following
+code shows an example of using `ciros.points()`.
+
+```{r, eval = FALSE}
+circos.track(..., panel.fun = function(x, y) {
+    circos.points(x, y)
+})
+circos.points(x, y, sector.index, track.index)
+```
+
+## Points {#points}
+
+Adding points by `circos.points()` is similar as `points()` function. Possible
+usage is:
+
+```{r, eval = FALSE}
+circos.points(x, y)
+circos.points(x, y, sector.index, track.index)
+circos.points(x, y, pch, col, cex)
+```
+
+There is a companion function `circos.trackPoints()` which adds points to all
+sectors in a same track simultaneously. The input of `circos.trackPoints()`
+must contain a vector of categorical factors, a vector of x values and a
+vector of y values. X values and y values are split by the categorical
+variable and corresponding subset of x and y values are sent to
+`circos.points()`. `circos.trackPoints()` adds points to the "current" track
+by default which is the most recently created track. Other tracks can also be
+selected by explictly setting `track.index` argument.
+
+```{r, eval = FALSE}
+circos.track(...)
+circos.trackPoints(fa, x, y)
+```
+
+`circos.trackPoints()` is simply implemented by `circos.points()` with a `for`
+loop. However, it is more recommended to directly use `circos.points()` and
+`panel.fun` which provides great more flexibility.
+
+Other low-level functions also have their companion `circos.track*()`
+function. The usage is same as `circos.trackPoints()` and they will not be
+further discussed in following sections.
+
+## Lines {#lines}
+
+Adding lines by `circos.lines()` is similar as `lines()` function. One
+additional feature is that the areas under or above the lines can be filled by
+specifing `area` argument to `TRUE`. Position of the baseline can be set to a
+pre-defined string of `bottom` or `top`, or a numeric value which is the
+position of y-axis. When `area` is set to `TRUE`, `col` controls the filled
+color and `border` controls the color for the borders.
+
+`baseline` argument is also workable when `lty` is set to `"h"`. Note when `lty`
+is set to `"h"`, graphic parameters such as `col` can be set as a vector with
+same length as `x`. Figure \@ref(fig:circlize-lines) illustrates supported `lty`
+settings and `area`/`baseline` settings.
+
+```{r circlize-lines, echo = FALSE, fig.width = 8, fig.cap = "Line styles and areas supported in `circos.lines()`"}
+source("src/intro-08-lines.R")
+```
+
+Straight lines are transformed to curves when mapping to the circular layout
+(figure \@ref(fig:circlize-linecurve)). Normally, curves are approximated by a
+series of segments of straight lines. With more and shorter segments, there is
+better approximation, but with larger size if the figures are generated into
+e.g. PDF files, especially for huge dataset. Default length of segments in
+**circlize** is a balance between the quality and size of the figure. You can
+set the length of the unit segment by `unit.circle.segments` option in
+`circos.par()`. The length of the segment is calculated as the length of the
+unit circle (2$\pi$) divided by `unit.circle.segments`. In some scenarios,
+actually you don't need to segment the lines such as radical lines, then you can
+set `straight` argument to `TRUE` to get rid of unnecessary segmentations.
+
+```{r circlize-linecurve, echo = FALSE, fig.width = 8, fig.height = 2, fig.cap = "Transformation of straight lines into curves in the circle."}
+source("src/intro-08-linescurve.R")
+```
+
+Possible usage for `circos.lines()` is:
+
+```{r, eval = FALSE}
+circos.lines(x, y)
+circos.lines(x, y, sector.index, track.index)
+circos.lines(x, y, col, lwd, lty, type, straight)
+circos.lines(x, y, col, area, baseline, border)
+```
+
+## Segments {#segments}
+
+Line segments can be added by `circos.segments()` function. The usage is similar
+as `segments()`. Radical segments can be added by setting `straight` to `TRUE`.
+
+
+```{r, eval = FALSE}
+circos.segments(x0, y0, x1, y1)
+circos.segments(x0, y0, x1, y1, straight)
+```
+
+## Text {#text}
+
+Adding text by `circos.text()` is similar as `text()` function. Text is added on
+the plot for human reading, thus, when putting the text on the circle, the
+facing of text is very important. `circos.text()` supports seven facing options
+which are `inside`, `outside`, `clockwise`, `reverse.clockwise`, `downward`,
+`bending.inside` and `bending.outside`. Please note for `bending.inside` and
+`bending.outside`, currently, single line text is only supported. If you want to
+put bended text into two lines, you need to split text into two lines and add
+each line by `circos.text()` separately. The different facings are illustrated
+in figure \@ref(fig:circlize-text).
+
+```{r circlize-text, echo = FALSE, fig.cap = "Text facing."}
+source("src/intro-09-text.R")
+```
+
+Possible usage for `circos.text()` is:
+
+```{r, eval = FALSE}
+circos.text(x, y, labels)
+circos.text(x, y, labels, sector.index, track.index)
+circos.text(x, y, labels, facing, niceFacing, adj, cex, col, font)
+```
+
+If, e.g., `facing` is set to `inside`, text which is on the bottom half of the
+circle is still facing to the top and hard to read. To make text more easy to
+read and not to hurt users' neck too much, `circos.text()` provides `niceFacing`
+option which automatically adjust text facing according to their positions in
+the circle. `niceFacing` only works for {\tt facing} value of {\tt inside}, {\tt
+outside}, {\tt clockwise}, {\tt reverse.clockwise}, {\tt bending.inside} and
+{\tt bending.outside}.
+
+When `niceFacing` is on, `adj` is also adjusted according to the corresponding
+facings. Figure \@ref(fig:circlize-text-easy) illustrates text positions under
+different settings of `adj` and `facing`.
+
+```{r circlize-text-easy, echo = FALSE, fig.width = 6, fig.height = 9, fig.cap = "Human easy text facing", fig.subcap = "Red dots represent positions of the texts."}
+source("src/intro-09-text-niceFacing.R")
+```
+
+`adj` is internally passed to `text()`, thus, it actually adjusts text positions
+either horizontally or vertically (in the canvas coordinate). If the offset is
+measured in the data coordinate, and the direction of the offset is circular,
+the offset value can be set as degrees that the position of the text is adjusted
+by wrapping the offset by `degree()`.
+
+```{r, eval = FALSE}
+circos.text(x, y, labels, adj = c(0, degree(5)), facing = "clockwise")
+```
+
+As `circos.text()` is applied in the data coordiante, offset can be directly
+added to `x` or/and `y` as a value measured in the data coordinate. An absolute
+offset can be set by using `u_x()` (in x direction) and `u_y()` (in y
+direction).
+
+```{r, eval = FALSE}
+circos.text(x + u_x(2, "mm"), y + u_y(2, "mm"), labels)
+```
+
+## Rectangles and polygons {#rectangles}
+
+Theoretically, circular rectangles and polygons are all polygons. If you imagine
+the plotting region in a cell as Cartesian coordinate, then `circos.rect()`
+draws rectangles. In the circle, the up and bottom edge become two arcs. This
+function can be vectorized.
+
+```{r, eval = FALSE}
+circos.rect(xleft, ybottom, xright, ytop)
+circos.rect(xleft, ybottom, xright, ytop, sector.index, track.index)
+circos.rect(xleft, ybottom, xright, ytop, col, border, lty, lwd)
+```
+
+circos.polygon() draws a polygon through a series of points in a cell.
+
+```{r, eval = FALSE}
+circos.polygon(x, y)
+circos.polygon(x, y, col, border, lty, lwd)
+```
+
+In figure \@ref(fig:circlize-errorline), the area of standard deviation of the
+smoothed line is drawn by `circos.polygon()`. Source code can be found in the
+**Examples** section of the `circos.polygon()` help page.
+
+```{r circlize-errorline, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Area of standard deviation of the smoothed line."}
+source("src/intro-10-smooth.R")
+```
+
+## Axes {#axes}
+
+Mostly, we only draw x-axes on the circle. `circos.axis()` or `circos.xaxis()`
+privides options to customize x-axes which are on the circular direction. It
+supports basic functionalities as `axis()` such as defining the breaks and
+corresponding labels. Besides that, the function also supports to put x-axes to
+a specified position on y direction, to position the x-axes facing the center of
+the circle or outside of the circle, and to customize the axes ticks. The `at`
+and `labels` arguments can be set to a long vector that the parts which exceed
+the maximal value in the corresponding cell are removed automatically. The
+facing of labels text can be optimized by `labels.niceFacing` (by default it is
+`TRUE`).
+
+Figure \@ref(fig:circlize-xaxis) illustrates different settings of x-axes. The
+explanations are as follows:
+
+- a: Major ticks are calculated automatically, other settings are defaults.
+- b: Ticks are pointing to inside of the circle, facing of tick labels is set to
+  `outside`.
+- c: Position of x-axis is `bottom` in the cell.
+- d: Ticks are pointing to the inside of the circle, facing of tick labels is
+  set to `reverse.clockwise`.
+- e: manually set major ticks and also set the position of x-axis.
+- f: replace numeric labels to characters, with no minor ticks.
+- g: No ticks for both major and minor, facing of tick labels is set to
+  `reverse.clockwise`.
+- h: Number of minor ticks between two major ticks is set to 2. Length of ticks
+  is longer. Facing of tick labels is set to `clockwise`.
+
+```{r circlize-xaxis, echo = FALSE, fig.cap = "X-axes"}
+source("src/intro-11-axis.R")
+```
+
+As you can notice in the above figure, when the first and last axis labels
+exceed data ranges on x-axis in the corresponding cell, their positions are
+adjusted to be put inside the cell.
+
+Possible usage of `circos.axis()` is as follows. Note `h` can be `bottom`, `top`
+or a numeric value.
+
+```{r, eval = FALSE}
+circos.axis(h)
+circos.axis(h, sector.index, track.index)
+circos.axis(h, major.at, labels, major.tick, direction)
+circos.axis(h, major.at, labels, major.tick, labels.font, labels.cex,
+            labels.facing, labels.niceFacing)
+circos.axis(h, major.at, labels, major.tick, minor.ticks,
+            major.tick.length, lwd)
+```
+
+Y-axis is also supported by `circos.yaxis()`. The usage is similar as
+`circos.axis()` One thing that needs to be note is users need to manually adjust
+`gap.degree` in `circos.par()` to make sure there are enough spaces for y-axes.
+(Figure \ref{fig:circlize-yaxis})
+
+```{r, eval = FALSE}
+circos.yaxis(side)
+circos.yaxis(at, labels, sector.index, track.index)
+```
+
+```{r circlize-yaxis, echo = FALSE, fig.cap = "Y-axes"}
+source("src/intro-11-yaxis.R")
+```

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Circular Visualization</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Circular Visualization" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Circular Visualization" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R." />
+  
+
+<meta name="author" content="Zuguang Gu">
+
+
+<meta name="date" content="2017-03-29">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="introduction.html">
+<link rel="next" href="graphics.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a><ul>
+<li class="chapter" data-level="2.1" data-path="circular-layout.html"><a href="circular-layout.html#coordinate-transformation"><i class="fa fa-check"></i><b>2.1</b> Coordinate transformation</a></li>
+<li class="chapter" data-level="2.2" data-path="circular-layout.html"><a href="circular-layout.html#rules-for-making-circular-layout"><i class="fa fa-check"></i><b>2.2</b> Rules for making circular layout</a></li>
+<li class="chapter" data-level="2.3" data-path="circular-layout.html"><a href="circular-layout.html#sectors-and-tracks"><i class="fa fa-check"></i><b>2.3</b> Sectors and tracks</a></li>
+<li class="chapter" data-level="2.4" data-path="circular-layout.html"><a href="circular-layout.html#graphic-parameters"><i class="fa fa-check"></i><b>2.4</b> Graphic parameters</a></li>
+<li class="chapter" data-level="2.5" data-path="circular-layout.html"><a href="circular-layout.html#create-plotting-regions"><i class="fa fa-check"></i><b>2.5</b> Create plotting regions</a></li>
+<li class="chapter" data-level="2.6" data-path="circular-layout.html"><a href="circular-layout.html#update-plotting-regions"><i class="fa fa-check"></i><b>2.6</b> Update plotting regions</a></li>
+<li class="chapter" data-level="2.7" data-path="circular-layout.html"><a href="circular-layout.html#panel-fun"><i class="fa fa-check"></i><b>2.7</b> <code>panel.fun</code> argument</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a></li>
+<li class="chapter" data-level="4" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>4</b> Placeholder</a></li>
+<li class="chapter" data-level="5" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>5</b> Placeholder</a></li>
+<li class="chapter" data-level="6" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>6</b> Placeholder</a></li>
+<li class="chapter" data-level="7" data-path="placeholder-3.html"><a href="placeholder-3.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
+<li class="chapter" data-level="8" data-path="placeholder-4.html"><a href="placeholder-4.html"><i class="fa fa-check"></i><b>8</b> Placeholder</a></li>
+<li class="chapter" data-level="9" data-path="placeholder-5.html"><a href="placeholder-5.html"><i class="fa fa-check"></i><b>9</b> Placeholder</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="circular-layout" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Circular layout</h1>
+<div id="coordinate-transformation" class="section level2">
+<h2><span class="header-section-number">2.1</span> Coordinate transformation</h2>
+<p>To map graphics onto the circle, there exist transformations from several coordinate systems. First, there is a data coordinate system in which ranges for x-axes and y-axes are the ranges of original data. Second, there is a polar coordinate system in which these coordinates are mapped onto a circle. Finally, there is a canvas coordinate system in which graphics are really drawn on the graphical device (figure <a href="circular-layout.html#fig:coordinate-transformation">2.1</a>). <strong>circlize</strong> first transforms coordinates from data coordinate system to polar coordinate system and finally transforms into canvas coordinate system. For users, they only need to imagine that each cell is a normal rectangular plotting region (data coordinate) in which x-lim and y-lim are ranges of data in the category respectively. <strong>circlize</strong> knows which cell you are in and does all the transformations automatically.</p>
+<div class="figure"><span id="fig:coordinate-transformation"></span>
+<img src="bookdown-demo_files/figure-html/coordinate-transformation-1.png" alt="Transformation between different coordinates" width="768" />
+<p class="caption">
+Figure 2.1: Transformation between different coordinates
+</p>
+</div>
+<p>The final canvas coordinate is in fact an ordinary coordinate in the base R graphic system with x-range in <code>(-1, 1)</code> and y-range in <code>(-1, 1)</code> by default. It should be noted that <strong>the circular plot is always (or mostly except you want to draw something out of the circle) drawn inside the circle which has radius of 1 (unit circle), and from outside to inside</strong>.</p>
+</div>
+<div id="rules-for-making-circular-layout" class="section level2">
+<h2><span class="header-section-number">2.2</span> Rules for making circular layout</h2>
+<p>The rule for making circular layout is rather simple. It follows the sequence of <code>initialize layout -&gt; create track -&gt; add graphics -&gt; create track -&gt; add graphics - ... -&gt; clear</code>. Details are shown in figure <a href="circular-layout.html#fig:circlize-order">2.2</a> and as follows:</p>
+<div class="figure"><span id="fig:circlize-order"></span>
+<img src="bookdown-demo_files/figure-html/circlize-order-1.png" alt="Order of drawing circular layout." width="768" />
+<p class="caption">
+Figure 2.2: Order of drawing circular layout.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li>Initialize the layout using <code>circos.initialize()</code>. Since circular layout in fact visualizes data which is in categories, there must be at least a categorical variable. Ranges of x values on each category can be specified as a vector or the range itself. See section @ref(sectors-and- tracks).</li>
+<li><p>Create plotting regions for the new track and add graphics. The new track is created just inside the previously created one. Only after the creation of the track can you add other graphics on it. There are three ways to add graphics in cells.</p>
+<ul>
+<li>After the creation of the track, use low-level graphic function like <code>circos.points()</code>, <code>circos.lines()</code>, … to add graphics cell by cell. It always involves a <code>for</code> loop.</li>
+<li>Use <code>circis.trackPoints()</code>, <code>circos.trackLines()</code>, … to add graphics through all cells simultaneously. However, it is not recommended because it would make code a little confusing to understand and also it cannot make complicated graphics.</li>
+<li>Use <code>panel.fun</code> argument in <code>circos.track()</code> to add graphics immediately after the creation of a certain cell. <code>panel.fun</code> needs two arguments <code>x</code> and <code>y</code> which are x-values and y-values that are in the current category. This subset operation is applied automatically. This is the most recommended way. Section <a href="circular-layout.html#panel-fun">2.7</a> gives detailed explanation of using <code>panel.fun</code> argument.</li>
+</ul></li>
+<li>Repeat step 2 to add more tracks on the circle unless it reaches the center of the circle.</li>
+<li><p>Call <code>circos.clear()</code> to do the cleanup.</p></li>
+</ol>
+<p>As mentioned above, there are three ways to add graphics on the track.</p>
+<ol style="list-style-type: decimal">
+<li><p>Create plotting regions for the whole track first and then add graphics by specifying <code>sector.index</code>. In the following pseudo code, <code>x1</code>, <code>y1</code> are data points in a given cell, which means you need to do data subsetting by yourself.</p>
+<p>In following code, <code>circos.points()</code> and <code>circos.lines()</code> are used separatedly from <code>circos.track()</code>, thus, the index for the sector needs to be explicitly specified by <code>sector.index</code> argument. There is also a <code>track.index</code> argument for both functions, however, the default value is the “current” track index and as the two functions are used just after <code>circos.track()</code>, the “current” track index is what the two function expect and it can be ommited when calling the two functions.</p></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initialize</span>(factors, xlim)
+<span class="kw">circos.track</span>(factors, ylim)
+<span class="cf">for</span>(sector.index <span class="cf">in</span> all.sector.index) {
+    <span class="kw">circos.points</span>(x1, y1, sector.index)
+    <span class="kw">circos.lines</span>(x2, y2, sector.index)
+}</code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Add graphics in a batch mode. In following code, <code>circos.trackPoints()</code> and <code>circos.trackLines()</code> need a categorical variable, a vector of x values and a vector of y values. X and y values will be split by the categorical variable and sent to corresponding sector to add the graphics. Internally, this is done by using <code>circos.points()</code> or <code>circos.lines()</code> in a <code>for</code> loop. This way to add graphics would be convenient if users only want to add a specific type of graphics (e.g. only points) to the track.</p>
+<p><code>circos.trackPoints()</code> and <code>circos.trackLines()</code> need a <code>track.index</code> to specify which track to add the graphics. Similarly, since they two are called just after <code>circos.track()</code>, the graphics are added in the newly created track right away.</p></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initialize</span>(factors, xlim)
+<span class="kw">circos.track</span>(factors, ylim)
+<span class="kw">circos.trackPoints</span>(factors, x, y)
+<span class="kw">circos.trackLines</span>(factors, x, y)</code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li><p>use a panel function to add self-defined graphics as soon as the cell has been created. This is the way recommended and you can find most of the code in this documentation uses <code>panel.fun</code>. <code>circos.track()</code> creates cells one by one and after the creation of a cell, <code>panel.fun</code> is executed on this cell right away. In this case, the “current” sector and “current” track are marked to this cell and when using low-level functions, they just add graphics to this cell.</p>
+<p>If you look at following code, you will find the code inside <code>panel.fun</code> is as natural as using <code>points()</code> or <code>lines()</code> in the normal R graphic system. This is a way to help you think a cell is an “imaginary rectangular plotting region”.</p></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initialize</span>(factors, xlim)
+<span class="kw">circos.track</span>(factors, all_x, all_y, ylim,
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+        <span class="kw">circos.points</span>(x, y)
+        <span class="kw">circos.lines</span>(x, y)
+})</code></pre></div>
+<p>As mentioned above, there are several internal variables keeping tracing of the current sector and track when applying <code>circos.track()</code> and <code>circos.update()</code>. Thus, although functions like <code>circos.points()</code>, <code>circos.lines()</code> need to specify the index of sector and track, they will take the current one by default. As a result, if you draw points, lines, text <em>et al</em> just after the creation of the track or cell, you do not need to set the sector index and the track index explicitly and it will be added in the most recently created cell.</p>
+</div>
+<div id="sectors-and-tracks" class="section level2">
+<h2><span class="header-section-number">2.3</span> Sectors and tracks</h2>
+<p>A circular layout is composed of sectors and tracks. As illustrated in figure <a href="circular-layout.html#fig:circlize-coordinate">2.3</a>, the red circle is one track and the blue represent one sector. The intersection of a sector and a track is called a cell which can be thought as an imaginary plotting region for data points. In this section, we introduce how to set data ranges on x and y directions in cells.</p>
+<div class="figure"><span id="fig:circlize-coordinate"></span>
+<img src="bookdown-demo_files/figure-html/circlize-coordinate-1.png" alt="Sectors and tracks in circular layout." width="384" />
+<p class="caption">
+Figure 2.3: Sectors and tracks in circular layout.
+</p>
+</div>
+<p>Sectors are first allocated on the circle by <code>circos.initialize()</code>. There must be a categorical variable (say <code>factors</code>) that on the circle, each sector corresponds to one category. The width of sectors are proportional to the data range in sectors on x direction. The data range can be specified as a numeric vector <code>x</code> which has same length as <code>factors</code>, then <code>x</code> is split by <code>factors</code> and data ranges are calculated for each sector internally.</p>
+<p>Data ranges can also be specified directly by <code>xlim</code> argument. The valid value for <code>xilm</code> is a two-column matrix with same number of rows as number of sectors that each row in <code>xlim</code> corresponds to one sector. If <code>xlim</code> has row names which already cover sector names, row order of <code>xlim</code> is automatically adjusted.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initialize</span>(factors, <span class="dt">x =</span> x)
+<span class="kw">circos.initialize</span>(factors, <span class="dt">xlim =</span> xlim)</code></pre></div>
+<p>After the creation of the layout, you may not see anything drawn or only an empty graphical device is opened. That is because no track has been created yet, however, the layout has already been recorded internally.</p>
+<p>There are something very important that should be noted in the initialization step. In this step, not only the width of each sector is assigned, but also the order of sectors on the circle is determined. <strong>Order of the sectors are determined by the order of levels of the input factor</strong>. If the value for <code>factors</code> is not a factor, the order of sectors is <code>unique(factors)</code>. Thus, if you want to change the order of sectors, you can just change of the level of {factors} variable. The following code generates plots with different sector orders (Figure <a href="circular-layout.html#fig:circlize-factor">2.4</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fa =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;d&quot;</span>, <span class="st">&quot;f&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>)
+f1 =<span class="st"> </span><span class="kw">factor</span>(fa)
+<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> f1, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
+f2 =<span class="st"> </span><span class="kw">factor</span>(fa, <span class="dt">levels =</span> fa)
+<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> f2, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</code></pre></div>
+<div class="figure"><span id="fig:circlize-factor"></span>
+<img src="bookdown-demo_files/figure-html/circlize-factor-1.png" alt="Different sector orders." width="768" />
+<p class="caption">
+Figure 2.4: Different sector orders.
+</p>
+</div>
+<p><strong>In different tracks, cells in the same sector share the same data range on x-axes.</strong> Then, for each track, we only need to specify the data range on y direction for cells. Similar as <code>circos.initialize()</code>, <code>circos.track()</code> also receives either <code>y</code> or <code>ylim</code> argument to specify the range of y-values. Since all cells in a same track shares a same y range, <code>ylim</code> is just a vector of length two if it is specified.</p>
+<p>In Section <a href="circular-layout.html#panel-fun">2.7</a>, we will introduce how <code>x</code> and <code>y</code> are sent to each cell and how the graphics are added.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(factors, <span class="dt">y =</span> y)
+<span class="kw">circos.track</span>(factors, <span class="dt">ylim =</span> ylim)</code></pre></div>
+<p>In the track creation step, since all sectors have already been allocated in the circle, if <code>factors</code> argument is not set, <code>circos.track()</code> would create plotting regions for all available sectors. Also, levels of <code>factors</code> do not need to be specified explicitly because the order of sectors has already be determined in the initialization step. If users only create cells for a part of sectors in the track (not all sectors), in fact, cells in remaining unspecified sectors are created as well, but with no borders (pretending they are not created).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># assume `factors` only cover subset of sectors</span>
+<span class="co"># you will only see cells covered in `factors`</span>
+<span class="kw">circos.track</span>(factors, <span class="dt">y =</span> y)
+<span class="co"># all cells are covered</span>
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">ranges</span>(y))</code></pre></div>
+<p>Cells are basic units in the circle and are independent with each other. After the creation of cells, they have self-contained meta values of x-lim and y-lim (data range measured in data coordinate). So if you are adding graphics in one cell, you do not need to consider things outside the cell and also you do not need to consider you are in the circle. Just pretending it is rectangle area.</p>
+<div class="figure"><span id="fig:circlize-direction"></span>
+<img src="bookdown-demo_files/figure-html/circlize-direction-1.png" alt="Sector directions." width="768" />
+<p class="caption">
+Figure 2.5: Sector directions.
+</p>
+</div>
+</div>
+<div id="graphic-parameters" class="section level2">
+<h2><span class="header-section-number">2.4</span> Graphic parameters</h2>
+<p>Some basic parameters for the circular layout can be set by <code>circos.par()</code>. The parameters are listed as follows. Note some parameters can only be modified before the initialization of the circular layout.</p>
+<ul>
+<li><code>start.degree</code>: The starting degree where the first sector is put. Note this degree is measured in the standard polar coordinate which means it is always reverse clockwise. See figure <a href="circular-layout.html#fig:circlize-direction">2.5</a>.</li>
+<li><code>gap.degree</code>: Gap between two neighbour sectors. It can be a single value which means all gaps share same degree, or a vector which has same number as sectors. ** Note the first gap is after the first sector.** See figure <a href="circular-layout.html#fig:circlize-direction">2.5</a> and figure @ref(fig:circlize_region).</li>
+<li><code>gap.after</code>: Same as <code>gap.degree</code>, but more understandable. Modifying values of <code>gap.after</code> will also modify <code>gap.degree</code> and vice versa.</li>
+<li><code>track.margin</code>: Like <code>margin</code> in Cascading Style Sheets (CSS), it is the blank area out of the plotting region, also outside of the borders. Since left and right margin are controlled by <code>gap.degree</code>, only bottom and top margin need to be set. The value for <code>track.margin</code> is the percentage to the radius of the unit circle. The value can also be set by <code>uh()</code> function with absolute units. See figure @(fig:circlize-region).</li>
+<li><code>cell.padding</code>: Padding of the cell. Like <code>padding</code> in Cascading Style Sheets (CSS), it is the blank area around the plotting regions, but within the borders. The parameter has four values, which control the bottom, left, top and right padding respectively. The first and the third padding values are the percentages to the radius of the unit circle, and the second and fourth values are the degrees. The first and the third value can be set by <code>uh()</code> with absolute units. See figure @ref{fig:circlize-region}.</li>
+<li><code>unit.circle.segments</code>: Since curves are simulated by a series of straight lines, this parameter controls the amount of segments to represent a curve. The minimal length of the line segment is the length of the unit circle (<span class="math inline">\(2\pi\)</span>) divided by <code>unit.circle.segments</code>. More segments means better approximation for the curves, while generate larger file size if figures are in PDF format. See explanantion in Section <a href="#lines"><strong>??</strong></a>.</li>
+<li><code>track.height</code>: The default height of tracks. It is the percentage to the radius of the unit circle. The height includes the top and bottom cell paddings but not the margins. The value can be set by <code>uh()</code> with absolute units.</li>
+<li><code>points.overflow.warning</code>: Since each cell is in fact not a real plotting region but only an ordinary rectangle (or more precisely, rectangle-like), it does not remove points that are plotted outside of the region. So if some points are out of the plotting region, by default, the package would continue drawing the points and print warnings. But in some circumstances, draw something out of the plotting region is useful, such as adding some text annotations. Set this value to <code>FALSE</code> to turn off the warnings.</li>
+<li><code>canvas.xlim</code>: The coordinate for the canvas in x direction. <strong>circlize</strong> is forced to put everything inside the unit circle, so <code>xlim</code> and <code>ylim</code> for the canvas would be <code>c(-1, 1)</code> by default. However, you can set it to a more broad interval if you want to draw other things out of the circle. By choosing proper <code>canvas.xlim</code> and <code>canvas.ylim</code>, you can only draw part of the circle. E.g. setting <code>canvas.xlim</code> to <code>c(0, 1)</code> and <code>canvas.ylim</code> to <code>c(0, 1)</code> would only draw circle in the region of <code>(0, pi/2)</code>.</li>
+<li><code>canvas.ylim</code>: The coordinate for the canvas in y direction.</li>
+<li><code>clock.wise</code>: The order for drawing sectors. Default is <code>TRUE</code> which means clockwise (figure <a href="circular-layout.html#fig:circlize-direction">2.5</a>. <strong>But note that inside each cell, the direction of x-axis is always clockwise and direction of y-axis is always from inside to outside in the circle.</strong></li>
+</ul>
+<div class="figure"><span id="fig:circlize-region"></span>
+<img src="bookdown-demo_files/figure-html/circlize-region-1.png" alt="Regions in a cell" width="384" />
+<p class="caption">
+Figure 2.6: Regions in a cell
+</p>
+</div>
+<p>Default values for graphic parameters are in following table.</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><code>start.degree</code></td>
+<td align="left"><code>0</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>gap.degree</code>/<code>gap.after</code></td>
+<td align="left"><code>1</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>track.margin</code></td>
+<td align="left"><code>c(0.01, 0.01)</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>cell.padding</code></td>
+<td align="left"><code>c(0.02, 1.00, 0.02, 1.00)</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>unit.circle.segments</code></td>
+<td align="left"><code>500</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>track.height</code></td>
+<td align="left"><code>0.2</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>points.overflow.warning</code></td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>canvas.xlim</code></td>
+<td align="left"><code>c(-1, 1)</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>canvas.ylim</code></td>
+<td align="left"><code>c(-1, 1)</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>clock.wise</code></td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+</tbody>
+</table>
+<p>Parameters related to the allocation of sectors cannot be changed after the initialization of the circular layout. Thus, <code>start.degree</code>, <code>gap.degree</code>/<code>gap.after</code>, <code>canvas.xlim</code>, <code>canvas.ylim</code> and <code>clock.wise</code> can only be modified before <code>circos.initialize()</code>. The second and the fourth values of <code>cell.padding</code> (left and right paddings) can not be modified neither (or will be ignored).</p>
+</div>
+<div id="create-plotting-regions" class="section level2">
+<h2><span class="header-section-number">2.5</span> Create plotting regions</h2>
+<p>As described above, only after creating the plotting region can you add low- level graphics on it. The minimal set of arguments for this function is to set either <code>y</code> or <code>ylim</code> which assigns range of y-values for the track. <code>circos.track()</code> creates tracks for all sectors although in some case only parts of them are visible.</p>
+<p>If <code>factors</code> is not specified, all cells in the track will be created with the same settings. If <code>factors</code>, <code>x</code> and <code>y</code> are set, they need to be vectors with the same length. Proper values of <code>x</code> and <code>y</code> that correspond to current cell will be passed to <code>panel.fun</code> by subsetting <code>factors</code> internally. Section <a href="circular-layout.html#panel-fun">2.7</a> explains the usage of <code>panel.fun</code>.</p>
+<p>Graphic arguments such as <code>bg.border</code> and <code>bg.col</code> can either be a scalar or a vector. If it is a vector, the length must be equal to the number of sectors. Thus, you can create plot regions with different styles of borders and background colors.</p>
+<p>If you are confused with the <code>factors</code> orders, you can also customize the borders and background colors inside <code>panel.fun</code>. <code>get.cell.meta.data(&quot;cell.xlim&quot;)</code> and <code>get.cell.meta.data(&quot;cell.ylim&quot;)</code> give you dimensions of the plotting region and you can customize plot regions directly by <code>circos.rect()</code>.</p>
+</div>
+<div id="update-plotting-regions" class="section level2">
+<h2><span class="header-section-number">2.6</span> Update plotting regions</h2>
+<p><code>circos.track()</code> creates new tracks, however, if <code>track.index</code> argument is set to a track which already exists, <code>circos.track()</code> actually <strong>re-creates</strong> this track. In this case, settings related to the positions of the track such as the height of the track can not be modified.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(factors, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.index =</span> <span class="dv">1</span>, ...)</code></pre></div>
+<p>For a single cell, <code>circos.update()</code> can be used to erase all graphics that have been already added in the cell. However, the data coordinate in the cell still keeps unchanged.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.update</span>(sector.index, track.index)
+<span class="kw">circos.points</span>(x, y, sector.index, track.index)</code></pre></div>
+</div>
+<div id="panel-fun" class="section level2">
+<h2><span class="header-section-number">2.7</span> <code>panel.fun</code> argument</h2>
+<p><code>panel.fun</code> argument in <code>circos.track()</code> is extremely useful to apply plotting as soon as the cell has been created. This self-defined function needs two arguments <code>x</code> and <code>y</code> which are data points that belong to this cell. The value for <code>x</code> and <code>y</code> are automatically extracted from <code>x</code> and <code>y</code> in <code>circos.track()</code> according to the category defined in <code>factors</code>. In the following example, inside <code>panel.fun</code>, in sector <code>a</code>, <code>x</code> is <code>1:3</code> and in sector <code>b</code>, <code>x</code> is <code>4:5</code>. If <code>x</code> or <code>y</code> in <code>circos.track()</code> is <code>NULL</code>, then <code>x</code> or <code>y</code> inside <code>panel.fun</code> is also <code>NULL</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;b&quot;</span>)
+x =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>
+y =<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span>
+<span class="kw">circos.track</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x, <span class="dt">y =</span> y,
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+        <span class="kw">circos.points</span>(x, y)
+})</code></pre></div>
+<p>In <code>panel.fun</code>, one thing important is that if you use any low-level graphic functions, you don’t need to specify <code>sector.index</code> and <code>track.index</code> explicitly. Remember that when applying <code>circos.track()</code>, cells in the track are created one after one. When a cell is created, <strong>circlize</strong> would set the sector index and track index of the cell as the ‘current’ index for the sector and track. When the cell is created, <code>panel.fun</code> is executed immediately. Without specifying <code>sector.index</code> and <code>track.index</code>, the ‘current’ ones are used and that’s exactly what you need.</p>
+<p>The advantage of <code>panel.fun</code> is that it makes you feel you are using graphic functions in the base graphic engine (You can see it is almost the same of using <code>circos.points(x, y)</code> and <code>points(x, y)</code>). It will be much easier for users to understand and customize new graphics.</p>
+<p>Inside <code>panel.fun</code>, information of the ‘current’ cell can be obtained through <code>get.cell.meta.data()</code>. Also this function takes the ‘current’ sector and ‘current’ track by default.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get.cell.meta.data</span>(name)
+<span class="kw">get.cell.meta.data</span>(name, sector.index, track.index)</code></pre></div>
+<p>Information that can be extracted by <code>get.cell.meta.data()</code> are:</p>
+<ul>
+<li><code>sector.index</code>: The name (label) for the sector.</li>
+<li><code>sector.numeric.index</code>: Numeric index for the sector.</li>
+<li><code>track.index</code>: Numeric index for the track.</li>
+<li><code>xlim</code>: Minimal and maximal values on the x-axis.</li>
+<li><code>ylim</code>: Minimal and maximal values on the y-axis.</li>
+<li><code>xcenter</code>: mean of <code>xlim</code>.</li>
+<li><code>ycenter</code>: mean of <code>ylim</code>.</li>
+<li><code>xrange</code>: defined as <code>xlim[2] - xlim[1]</code>.</li>
+<li><code>yrange</code>: defined as <code>ylim[2] - ylim[1]</code>.</li>
+<li><code>cell.xlim</code>: Minimal and maximal values on the x-axis extended by cell paddings.</li>
+<li><code>cell.ylim</code>: Minimal and maximal values on the y-axis extended by cell paddings.</li>
+<li><code>xplot</code>: Degree of right and left borders in the plotting region. The first element corresponds to the start point of values on x-axis and the second element corresponds to the end point of values on x-axis Since x-axis in data coordinate in cells are always clockwise, <code>xplot[1]</code> is larger than <code>xplot[2]</code>.</li>
+<li><code>yplot</code>: Radius of bottom and top radius in the plotting region.</li>
+<li><code>cell.start.degree</code>: Same as <code>xplot[1]</code>.</li>
+<li><code>cell.end.degree</code>: Same as <code>xplot[2]</code>.</li>
+<li><code>cell.bottom.radius</code>: Same as <code>yplot[1]</code>.</li>
+<li><code>cell.top.radius</code>: Same as <code>yplot[2]</code>.</li>
+<li><code>track.margin</code>: Margins of the cell.</li>
+<li><code>cell.padding</code>: Paddings of the cell.</li>
+</ul>
+<p>Following example code uses <code>get.cell.meta.data()</code> to add sector index in the center of each cell.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> ylim, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+    sector.index =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)
+    xcenter =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xcenter&quot;</span>)
+    ycenter =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ycenter&quot;</span>)
+    <span class="kw">circos.text</span>(xcenter, ycenter, sector.index)
+})</code></pre></div>
+<p><code>get.cell.meta.data()</code> can also be used outside <code>panel.fun</code>, but you need to explictly specify <code>sector.index</code> and <code>track.index</code> arguments or you need to be aware of which is your ‘current’ track and sector.</p>
+<p>There is a companion variable <code>CELL_META</code> which is identical to <code>get.cell.meta.data()</code> to get cell meta information, but easier and shorter to write. Actually, the value of <code>CELL_META</code> itself is meaningless, but e.g. <code>CELL_META$sector.index</code> is automatically redirected to <code>get.cell.meta.data(&quot;sector.index&quot;)</code>. Following code rewrites above example code with <code>CELL_META</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> ylim, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, 
+        CELL_META<span class="op">$</span>sector.index)
+})</code></pre></div>
+<p>Please note <code>CELL_META</code> only extract information for the “current” cell.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="graphics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-circlize-layout.Rmd",
+"text": "Edit"
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Circular Visualization</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Circular Visualization" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Circular Visualization" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R." />
+  
+
+<meta name="author" content="Zuguang Gu">
+
+
+<meta name="date" content="2017-03-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="placeholder.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#principle-of-design"><i class="fa fa-check"></i><b>1.1</b> Principle of design</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#a-qiuck-glance"><i class="fa fa-check"></i><b>1.2</b> A quick glance</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>2</b> Placeholder</a></li>
+<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a></li>
+<li class="chapter" data-level="4" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>4</b> Placeholder</a></li>
+<li class="chapter" data-level="5" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>5</b> Placeholder</a></li>
+<li class="chapter" data-level="6" data-path="placeholder-3.html"><a href="placeholder-3.html"><i class="fa fa-check"></i><b>6</b> Placeholder</a></li>
+<li class="chapter" data-level="7" data-path="placeholder-4.html"><a href="placeholder-4.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
+<li class="chapter" data-level="8" data-path="placeholder-5.html"><a href="placeholder-5.html"><i class="fa fa-check"></i><b>8</b> Placeholder</a></li>
+<li class="chapter" data-level="9" data-path="placeholder-6.html"><a href="placeholder-6.html"><i class="fa fa-check"></i><b>9</b> Placeholder</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
+<p>Circular layout is very useful to represent complicated information. First, it elegantly represents information with long axes or a large amount of categories; second, it intuitively shows data with multiple tracks focusing on the same object; third, it easily demonstrates relations between elements. It provides an efficient way to arrange information on the circle and it is beautiful.</p>
+<p><a href="http://circos.ca"><strong>Circos</strong></a> is a pioneer tool widely used for circular layout representations implemented in <em>Perl</em>. It greatly enhances the visualization of scientific results. Thus, plots with circular layout are normally named as <strong>“circos plot”</strong>. Here the <strong>circlize</strong> package aims to implement <strong>Circos</strong> in R. One important advantage for the implementation in R is that R is an ideal environment which provides seamless connection between data analysis and data visualization. <strong>circlize</strong> is not a front-end wrapper to generate configuration files for <strong>Circos</strong>, while completely coded in R style by using R’s elegant statistical and graphic engine. We aim to keep the flexibility and configurability of <strong>Circos</strong>, but also make the package more straightforward to use and enhance it to support more types of graphics.</p>
+<p>Chapter give an detailed overview of the general circlize functionalities. Chapter introduces functions specificly designed for visualizing genomic datasets. Chapter gives comprehensive overview of visualizing relation.</p>
+<div id="principle-of-design" class="section level2">
+<h2><span class="header-section-number">1.1</span> Principle of design</h2>
+<p>A circular layout is composed of sectors and tracks. For data in different categories, they are allocated into different sectors and for multiple measurements of the same category, they are represented as stacked tracks from outside of the circle to the inside. The intersection of a sector and a track is called a cell, which is the basic unit in a circular layout. It is an imaginary plotting region for data points in a certain category.</p>
+<p>Since most of the figures are composed of simple graphics, such as points, lines, polygon, <strong>circlize</strong> implements low-level graphic functions for adding graphics in the circular plotting regions, so that more complicated graphics can be easily generated by different combinations of low-level graphics functions. This principle ensures the generality that types of high-level graphics are not restricted by the software itself and high-level packages focusing on specific interests can be built on it.</p>
+<p>Currently there are following low-level graphic functions that can be used for adding graphics. The usage is very similar to the functions without <code>circos.</code> prefix from the base graphic engine, except there are some enhancement specifically designed for circular visualization.</p>
+<ul>
+<li><code>circos.points()</code>: add points in a cell.</li>
+<li><code>circos.lines()</code>: add lines in a cell.</li>
+<li><code>circos.segments()</code>: add lines in a cell.</li>
+<li><code>circos.rect()</code>: add rectangle in a cell.</li>
+<li><code>circos.polygon()</code>: add polygon in a cell.</li>
+<li><code>circos.text()</code>: add text in a cell.</li>
+<li><code>circos.axis()</code> and <code>circos.yaxis()</code>: add axis in a cell.</li>
+</ul>
+<p>Following functions arrange the circular layout.</p>
+<ul>
+<li><code>circos.track()</code>: create plotting regions for cells in a track.</li>
+<li><code>circos.update()</code>: update an existed cell.</li>
+<li><code>circos.par()</code>: graphic parameters.</li>
+<li><code>circos.info()</code>: print general parameters of current circos plot.</li>
+<li><code>circos.clear()</code>: reset graphic parameters and internal variables.</li>
+</ul>
+<p>Thus, theoretically, you are able to draw most kinds of circular figures by the above functionalities. Figure <a href="introduction.html#fig:circlize-example">1.1</a> lists several complex circular plots made by <strong>circlize</strong>. After going through this documentation, you will be able to implement yours.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;images/ciclize_examples.jpg&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:circlize-example"></span>
+<img src="images/ciclize_examples.jpg" alt="Examples by circlize" width="100%" />
+<p class="caption">
+Figure 1.1: Examples by circlize
+</p>
+</div>
+</div>
+<div id="a-qiuck-glance" class="section level2">
+<h2><span class="header-section-number">1.2</span> A quick glance</h2>
+<p>Before we go too deep into the details, I first demonstrate a simple example with using basic functionalities in <strong>circlize</strong> package.</p>
+<p>First let’s generate some random data. There needs a character vector to represent categories, values on x-axis, and values on y-axis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">999</span>)
+n =<span class="st"> </span><span class="dv">1000</span>
+df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">factors =</span> <span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>], n, <span class="dt">replace =</span> <span class="ot">TRUE</span>),
+    <span class="dt">x =</span> <span class="kw">rnorm</span>(n), <span class="dt">y =</span> <span class="kw">runif</span>(n))</code></pre></div>
+<p>First we initialize the circular layout. The circle is split into sectors based on the data range on x-axes in each category. In above code, <code>df$x</code> is split by <code>df$factors</code> and the width of sectors are automatically calculated. Be default, sectors are positioned started from <span class="math inline">\(\theta = 0\)</span> (in the polar coordinate) and go along the circle clock-wisely. You may not see anything after running following code because no track has been added yet.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(circlize)
+<span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.1</span>)
+<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> df<span class="op">$</span>factors, <span class="dt">x =</span> df<span class="op">$</span>x)</code></pre></div>
+<p>After the circular layout is initialized, graphics can be added to the plot track by track. Before drawing anything, we need to know that all tracks should be created by <code>circos.trackPlotRegion()</code> or, for short, <code>circos.track()</code>, then the low-level functions can be added afterwards. Just think in base R graphic engine, you need first call <code>plot()</code> then you can use functions such as points()<code>and</code>lines()<code>to add graphics. Since x ranges for cells in the track have already been defined in the initialization step, here we only need to specify the y ranges for each cell. The y ranges can be specified by</code>y<code>argument as a numeric vector (so that y ranges will be automatically calculated) or</code>ylim` argument as a vector of length two. In principle, y ranges should be same for cells in a same track.</p>
+<p>Axes for the circular plt are always drawn on the most outside of the circle. Here we add axes in the first track by putting <code>circos.axis()</code> inside the self-defined function <code>panel.fun</code>. <code>circos.track()</code> creates plotting region in a cell-by-cell manner and the <code>panel.fun</code> is actually executed immediately after the plotting region for a certain cell is created. Thus, <code>panel.fun</code> actually means adding graphics in the “current cell”.</p>
+<p>Name of each sector is added outside the first track by <code>circos.text()</code>. <code>CELL_META</code> provides “meta information” for the current cell. There are several parameters which can be retrieved by <code>CELL_META</code>. Sector explains all its usage. In the code, the sector names are drawn outside the cells and you may see warning messages saying data points exceeding the plotting regions. That is just fine and no worry about it. You can also add sector names by creating an empty track with no borders as the first track and add sector names in it (like what <code>circos.initializeWithIdeogram()</code> and <code>chordDiagram()</code> do).</p>
+<p>When specifying the position of text on the y direction, an offset of <code>uy(5, &quot;mm&quot;)</code> is added to the y position of the text. In <code>circos.text()</code>, x and y values are measured in the data coordinate, and <code>uy()</code> function (or <code>ux()</code> which is measured on x direction) converts absolute units to corresponding values in data coordinate.</p>
+<p>Points are added to the first track by <code>circos.trackPoints()</code>. <code>circos.trackPoints()</code> simply adds points in all cells simultaneously. As further explained in Section, it can be replaced by putting <code>circos.text()</code> in <code>panel.fun</code>, however, <code>circos.trackPoints()</code> would be more convenient if only the points are needed to put in the cells.</p>
+<p>Low-level functions such as <code>circos.text()</code> can also be used outside <code>panel.fun</code>. If so, <code>sector.index</code> and <code>track.index</code> need to be specified explicitly because the “current” sector and track may be not what you want. If the graphics are directly added to the track which are most recently created, <code>track.index</code> can be ommitted because this track is just marked as the “current” track.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(<span class="dt">factors =</span> df<span class="op">$</span>factors, <span class="dt">y =</span> df<span class="op">$</span>y,
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+        <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">uy</span>(<span class="dv">5</span>, <span class="st">&quot;mm&quot;</span>), 
+            CELL_META<span class="op">$</span>sector.index)
+        <span class="kw">circos.axis</span>()
+})
+col =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#FF0000&quot;</span>, <span class="st">&quot;#00FF00&quot;</span>), <span class="dv">4</span>)
+<span class="kw">circos.trackPoints</span>(df<span class="op">$</span>factors, df<span class="op">$</span>x, df<span class="op">$</span>y, <span class="dt">col =</span> col, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)
+<span class="kw">circos.text</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="st">&quot;text&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>)</code></pre></div>
+<p>The second track is added as histograms. <code>circos.trackHist()</code> is a high-level function which means it creates a new track. <code>bin.size</code> is explicitly set so that the bin size for histograms in all cells are the same and can be compared to each other.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bgcol =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#EFEFEF&quot;</span>, <span class="st">&quot;#CCCCCC&quot;</span>), <span class="dv">4</span>)
+<span class="kw">circos.trackHist</span>(df<span class="op">$</span>factors, df<span class="op">$</span>x, <span class="dt">bin.size =</span> <span class="fl">0.2</span>, <span class="dt">bg.col =</span> bgcol, <span class="dt">col =</span> <span class="ot">NA</span>)</code></pre></div>
+<p>In the third track and in <code>panel.fun</code>, we randomly picked 10 data points in each cell, sort them and connect them with lines.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(<span class="dt">factors =</span> df<span class="op">$</span>factors, <span class="dt">x =</span> df<span class="op">$</span>x, <span class="dt">y =</span> df<span class="op">$</span>y,
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+        ind =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">length</span>(x), <span class="dv">10</span>)
+        x2 =<span class="st"> </span>x[ind]
+        y2 =<span class="st"> </span>y[ind]
+        od =<span class="st"> </span><span class="kw">order</span>(x2)
+        <span class="kw">circos.lines</span>(x2[od], y2[od])
+})</code></pre></div>
+<p>Now we go back to the second track and update the cell with sector index “d”. This is done by <code>circos.updatePlotRegion()</code> or the short version: <code>circos.update()</code>. The function erases graphics which have been added. <code>circos.update()</code> can not modify the <code>xlim</code> and <code>ylim</code> of the cell as well as other settings related to the position of the cell. Since sector index and track index need to be specified in <code>circos.update()</code>, they are set as the “current” sector and track index and they do not need to be explicitly set in the low-level functions being called.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.update</span>(<span class="dt">sector.index =</span> <span class="st">&quot;d&quot;</span>, <span class="dt">track.index =</span> <span class="dv">2</span>, 
+    <span class="dt">bg.col =</span> <span class="st">&quot;#FF8080&quot;</span>, <span class="dt">bg.border =</span> <span class="st">&quot;black&quot;</span>)
+<span class="kw">circos.points</span>(<span class="dt">x =</span> <span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">y =</span> <span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">5</span>), <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>)
+<span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, <span class="st">&quot;updated&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
+<p>Although we have gone back to the second track, when creating a new track, the new track is still created inside the track which is most inside. In this new track, we add heatmaps by <code>circos.rect()</code>. Note here we don’t set the input data, while only set <code>ylim</code> argument because heatmaps just fill the whole cell from the most left to right and from bottom to top. Also the exact value of <code>ylim</code> is not important and <code>x</code>, <code>y</code> in <code>panel.fun()</code> are not used.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+    xlim =<span class="st"> </span>CELL_META<span class="op">$</span>xlim
+    ylim =<span class="st"> </span>CELL_META<span class="op">$</span>ylim
+    breaks =<span class="st"> </span><span class="kw">seq</span>(xlim[<span class="dv">1</span>], xlim[<span class="dv">2</span>], <span class="dt">by =</span> <span class="fl">0.1</span>)
+    n_breaks =<span class="st"> </span><span class="kw">length</span>(breaks)
+    <span class="kw">circos.rect</span>(breaks[<span class="op">-</span>n_breaks], <span class="kw">rep</span>(ylim[<span class="dv">1</span>], n_breaks <span class="op">-</span><span class="st"> </span><span class="dv">1</span>),
+                breaks[<span class="op">-</span><span class="dv">1</span>], <span class="kw">rep</span>(ylim[<span class="dv">2</span>], n_breaks <span class="op">-</span><span class="st"> </span><span class="dv">1</span>),
+                <span class="dt">col =</span> <span class="kw">rand_color</span>(n_breaks), <span class="dt">border =</span> <span class="ot">NA</span>)
+})</code></pre></div>
+<p>In the most inside of the circle, links or ribbons are added. Links can be from single point to point, point to interval or interval to interval. Section</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.link</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">0</span>, <span class="st">&quot;b&quot;</span>, <span class="dv">0</span>, <span class="dt">h =</span> <span class="fl">0.4</span>)
+<span class="kw">circos.link</span>(<span class="st">&quot;c&quot;</span>, <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="st">&quot;d&quot;</span>, <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,
+    <span class="dt">border =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">h =</span> <span class="fl">0.2</span>)
+<span class="kw">circos.link</span>(<span class="st">&quot;e&quot;</span>, <span class="dv">0</span>, <span class="st">&quot;g&quot;</span>, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</code></pre></div>
+<p>Finally we need to reset the graphic parameters and internal variables, so that it will not mess up your next plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+<div class="figure"><span id="fig:circlize-glance"></span>
+<img src="bookdown-demo_files/figure-html/circlize-glance-1.png" alt="A step-by-step example" width="672" />
+<p class="caption">
+Figure 1.2: A step-by-step example
+</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="placeholder.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-introduction.Rmd",
+"text": "Edit"
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

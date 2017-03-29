@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Circular Visualization</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Circular Visualization" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Circular Visualization" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R." />
+  
+
+<meta name="author" content="Zuguang Gu">
+
+
+<meta name="date" content="2017-03-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="circular-layout.html">
+<link rel="next" href="placeholder.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a></li>
+<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a><ul>
+<li class="chapter" data-level="3.1" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>3.1</b> Points</a></li>
+<li class="chapter" data-level="3.2" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>3.2</b> Lines</a></li>
+<li class="chapter" data-level="3.3" data-path="graphics.html"><a href="graphics.html#segments"><i class="fa fa-check"></i><b>3.3</b> Segments</a></li>
+<li class="chapter" data-level="3.4" data-path="graphics.html"><a href="graphics.html#text"><i class="fa fa-check"></i><b>3.4</b> Text</a></li>
+<li class="chapter" data-level="3.5" data-path="graphics.html"><a href="graphics.html#rectangles"><i class="fa fa-check"></i><b>3.5</b> Rectangles and polygons</a></li>
+<li class="chapter" data-level="3.6" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.6</b> Axes</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>4</b> Placeholder</a></li>
+<li class="chapter" data-level="5" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>5</b> Placeholder</a></li>
+<li class="chapter" data-level="6" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>6</b> Placeholder</a></li>
+<li class="chapter" data-level="7" data-path="placeholder-3.html"><a href="placeholder-3.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
+<li class="chapter" data-level="8" data-path="placeholder-4.html"><a href="placeholder-4.html"><i class="fa fa-check"></i><b>8</b> Placeholder</a></li>
+<li class="chapter" data-level="9" data-path="placeholder-5.html"><a href="placeholder-5.html"><i class="fa fa-check"></i><b>9</b> Placeholder</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="graphics" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Graphics</h1>
+<p>In this chapter, we will introduce low-level functions that add graphics to the circle. Usages of most of these functions are similar as normal graphic functions (e.g. <code>points()</code>, <code>lines()</code>). Combination use of these functions can generate very complex circular plots.</p>
+<p>All low-level functions accept <code>sector.index</code> and <code>track.index</code> arguments which indicate which cell the graphics are added in. By default the graphics are added in the “current” sector and “current” track, so it is recommended to use them directly inside <code>panel.fun</code> function. However, they can also be used in other places with explicitly specifying sector and track index. Following code shows an example of using <code>ciros.points()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(..., <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+    <span class="kw">circos.points</span>(x, y)
+})
+<span class="kw">circos.points</span>(x, y, sector.index, track.index)</code></pre></div>
+<div id="points" class="section level2">
+<h2><span class="header-section-number">3.1</span> Points</h2>
+<p>Adding points by <code>circos.points()</code> is similar as <code>points()</code> function. Possible usage is:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.points</span>(x, y)
+<span class="kw">circos.points</span>(x, y, sector.index, track.index)
+<span class="kw">circos.points</span>(x, y, pch, col, cex)</code></pre></div>
+<p>There is a companion function <code>circos.trackPoints()</code> which adds points to all sectors in a same track simultaneously. The input of <code>circos.trackPoints()</code> must contain a vector of categorical factors, a vector of x values and a vector of y values. X values and y values are split by the categorical variable and corresponding subset of x and y values are sent to <code>circos.points()</code>. <code>circos.trackPoints()</code> adds points to the “current” track by default which is the most recently created track. Other tracks can also be selected by explictly setting <code>track.index</code> argument.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(...)
+<span class="kw">circos.trackPoints</span>(fa, x, y)</code></pre></div>
+<p><code>circos.trackPoints()</code> is simply implemented by <code>circos.points()</code> with a <code>for</code> loop. However, it is more recommended to directly use <code>circos.points()</code> and <code>panel.fun</code> which provides great more flexibility.</p>
+<p>Other low-level functions also have their companion <code>circos.track*()</code> function. The usage is same as <code>circos.trackPoints()</code> and they will not be further discussed in following sections.</p>
+</div>
+<div id="lines" class="section level2">
+<h2><span class="header-section-number">3.2</span> Lines</h2>
+<p>Adding lines by <code>circos.lines()</code> is similar as <code>lines()</code> function. One additional feature is that the areas under or above the lines can be filled by specifing <code>area</code> argument to <code>TRUE</code>. Position of the baseline can be set to a pre-defined string of <code>bottom</code> or <code>top</code>, or a numeric value which is the position of y-axis. When <code>area</code> is set to <code>TRUE</code>, <code>col</code> controls the filled color and <code>border</code> controls the color for the borders.</p>
+<p><code>baseline</code> argument is also workable when <code>lty</code> is set to <code>&quot;h&quot;</code>. Note when <code>lty</code> is set to <code>&quot;h&quot;</code>, graphic parameters such as <code>col</code> can be set as a vector with same length as <code>x</code>. Figure <a href="graphics.html#fig:circlize-lines">3.1</a> illustrates supported <code>lty</code> settings and <code>area</code>/<code>baseline</code> settings.</p>
+<div class="figure"><span id="fig:circlize-lines"></span>
+<img src="bookdown-demo_files/figure-html/circlize-lines-1.png" alt="Line styles and areas supported in `circos.lines()`" width="768" />
+<p class="caption">
+Figure 3.1: Line styles and areas supported in <code>circos.lines()</code>
+</p>
+</div>
+<p>Straight lines are transformed to curves when mapping to the circular layout (figure <a href="graphics.html#fig:circlize-linecurve">3.2</a>). Normally, curves are approximated by a series of segments of straight lines. With more and shorter segments, there is better approximation, but with larger size if the figures are generated into e.g. PDF files, especially for huge dataset. Default length of segments in <strong>circlize</strong> is a balance between the quality and size of the figure. You can set the length of the unit segment by <code>unit.circle.segments</code> option in <code>circos.par()</code>. The length of the segment is calculated as the length of the unit circle (2<span class="math inline">\(\pi\)</span>) divided by <code>unit.circle.segments</code>. In some scenarios, actually you don’t need to segment the lines such as radical lines, then you can set <code>straight</code> argument to <code>TRUE</code> to get rid of unnecessary segmentations.</p>
+<div class="figure"><span id="fig:circlize-linecurve"></span>
+<img src="bookdown-demo_files/figure-html/circlize-linecurve-1.png" alt="Transformation of straight lines into curves in the circle." width="768" />
+<p class="caption">
+Figure 3.2: Transformation of straight lines into curves in the circle.
+</p>
+</div>
+<p>Possible usage for <code>circos.lines()</code> is:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.lines</span>(x, y)
+<span class="kw">circos.lines</span>(x, y, sector.index, track.index)
+<span class="kw">circos.lines</span>(x, y, col, lwd, lty, type, straight)
+<span class="kw">circos.lines</span>(x, y, col, area, baseline, border)</code></pre></div>
+</div>
+<div id="segments" class="section level2">
+<h2><span class="header-section-number">3.3</span> Segments</h2>
+<p>Line segments can be added by <code>circos.segments()</code> function. The usage is similar as <code>segments()</code>. Radical segments can be added by setting <code>straight</code> to <code>TRUE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.segments</span>(x0, y0, x1, y1)
+<span class="kw">circos.segments</span>(x0, y0, x1, y1, straight)</code></pre></div>
+</div>
+<div id="text" class="section level2">
+<h2><span class="header-section-number">3.4</span> Text</h2>
+<p>Adding text by <code>circos.text()</code> is similar as <code>text()</code> function. Text is added on the plot for human reading, thus, when putting the text on the circle, the facing of text is very important. <code>circos.text()</code> supports seven facing options which are <code>inside</code>, <code>outside</code>, <code>clockwise</code>, <code>reverse.clockwise</code>, <code>downward</code>, <code>bending.inside</code> and <code>bending.outside</code>. Please note for <code>bending.inside</code> and <code>bending.outside</code>, currently, single line text is only supported. If you want to put bended text into two lines, you need to split text into two lines and add each line by <code>circos.text()</code> separately. The different facings are illustrated in figure <a href="graphics.html#fig:circlize-text">3.3</a>.</p>
+<div class="figure"><span id="fig:circlize-text"></span>
+<img src="bookdown-demo_files/figure-html/circlize-text-1.png" alt="Text facing." width="672" />
+<p class="caption">
+Figure 3.3: Text facing.
+</p>
+</div>
+<p>Possible usage for <code>circos.text()</code> is:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.text</span>(x, y, labels)
+<span class="kw">circos.text</span>(x, y, labels, sector.index, track.index)
+<span class="kw">circos.text</span>(x, y, labels, facing, niceFacing, adj, cex, col, font)</code></pre></div>
+<p>If, e.g., <code>facing</code> is set to <code>inside</code>, text which is on the bottom half of the circle is still facing to the top and hard to read. To make text more easy to read and not to hurt users’ neck too much, <code>circos.text()</code> provides <code>niceFacing</code> option which automatically adjust text facing according to their positions in the circle. <code>niceFacing</code> only works for {facing} value of {inside}, {outside}, {clockwise}, {reverse.clockwise}, {bending.inside} and {bending.outside}.</p>
+<p>When <code>niceFacing</code> is on, <code>adj</code> is also adjusted according to the corresponding facings. Figure <a href="graphics.html#fig:circlize-text-easy">3.4</a> illustrates text positions under different settings of <code>adj</code> and <code>facing</code>.</p>
+<div class="figure"><span id="fig:circlize-text-easy"></span>
+<img src="bookdown-demo_files/figure-html/circlize-text-easy-1.png" alt="Human easy text facing" width="576" />
+<p class="caption">
+Figure 3.4: Human easy text facing
+</p>
+</div>
+<p><code>adj</code> is internally passed to <code>text()</code>, thus, it actually adjusts text positions either horizontally or vertically (in the canvas coordinate). If the offset is measured in the data coordinate, and the direction of the offset is circular, the offset value can be set as degrees that the position of the text is adjusted by wrapping the offset by <code>degree()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.text</span>(x, y, labels, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">degree</span>(<span class="dv">5</span>)), <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>)</code></pre></div>
+<p>As <code>circos.text()</code> is applied in the data coordiante, offset can be directly added to <code>x</code> or/and <code>y</code> as a value measured in the data coordinate. An absolute offset can be set by using <code>u_x()</code> (in x direction) and <code>u_y()</code> (in y direction).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.text</span>(x <span class="op">+</span><span class="st"> </span><span class="kw">u_x</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), y <span class="op">+</span><span class="st"> </span><span class="kw">u_y</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), labels)</code></pre></div>
+</div>
+<div id="rectangles" class="section level2">
+<h2><span class="header-section-number">3.5</span> Rectangles and polygons</h2>
+<p>Theoretically, circular rectangles and polygons are all polygons. If you imagine the plotting region in a cell as Cartesian coordinate, then <code>circos.rect()</code> draws rectangles. In the circle, the up and bottom edge become two arcs. This function can be vectorized.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.rect</span>(xleft, ybottom, xright, ytop)
+<span class="kw">circos.rect</span>(xleft, ybottom, xright, ytop, sector.index, track.index)
+<span class="kw">circos.rect</span>(xleft, ybottom, xright, ytop, col, border, lty, lwd)</code></pre></div>
+<p>circos.polygon() draws a polygon through a series of points in a cell.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.polygon</span>(x, y)
+<span class="kw">circos.polygon</span>(x, y, col, border, lty, lwd)</code></pre></div>
+<p>In figure <a href="graphics.html#fig:circlize-errorline">3.5</a>, the area of standard deviation of the smoothed line is drawn by <code>circos.polygon()</code>. Source code can be found in the <strong>Examples</strong> section of the <code>circos.polygon()</code> help page.</p>
+<div class="figure"><span id="fig:circlize-errorline"></span>
+<img src="bookdown-demo_files/figure-html/circlize-errorline-1.png" alt="Area of standard deviation of the smoothed line." width="384" />
+<p class="caption">
+Figure 3.5: Area of standard deviation of the smoothed line.
+</p>
+</div>
+</div>
+<div id="axes" class="section level2">
+<h2><span class="header-section-number">3.6</span> Axes</h2>
+<p>Mostly, we only draw x-axes on the circle. <code>circos.axis()</code> or <code>circos.xaxis()</code> privides options to customize x-axes which are on the circular direction. It supports basic functionalities as <code>axis()</code> such as defining the breaks and corresponding labels. Besides that, the function also supports to put x-axes to a specified position on y direction, to position the x-axes facing the center of the circle or outside of the circle, and to customize the axes ticks. The <code>at</code> and <code>labels</code> arguments can be set to a long vector that the parts which exceed the maximal value in the corresponding cell are removed automatically. The facing of labels text can be optimized by <code>labels.niceFacing</code> (by default it is <code>TRUE</code>).</p>
+<p>Figure <a href="graphics.html#fig:circlize-xaxis">3.6</a> illustrates different settings of x-axes. The explanations are as follows:</p>
+<ul>
+<li>a: Major ticks are calculated automatically, other settings are defaults.</li>
+<li>b: Ticks are pointing to inside of the circle, facing of tick labels is set to <code>outside</code>.</li>
+<li>c: Position of x-axis is <code>bottom</code> in the cell.</li>
+<li>d: Ticks are pointing to the inside of the circle, facing of tick labels is set to <code>reverse.clockwise</code>.</li>
+<li>e: manually set major ticks and also set the position of x-axis.</li>
+<li>f: replace numeric labels to characters, with no minor ticks.</li>
+<li>g: No ticks for both major and minor, facing of tick labels is set to <code>reverse.clockwise</code>.</li>
+<li>h: Number of minor ticks between two major ticks is set to 2. Length of ticks is longer. Facing of tick labels is set to <code>clockwise</code>.</li>
+</ul>
+<div class="figure"><span id="fig:circlize-xaxis"></span>
+<img src="bookdown-demo_files/figure-html/circlize-xaxis-1.png" alt="X-axes" width="384" />
+<p class="caption">
+Figure 3.6: X-axes
+</p>
+</div>
+<p>As you can notice in the above figure, when the first and last axis labels exceed data ranges on x-axis in the corresponding cell, their positions are adjusted to be put inside the cell.</p>
+<p>Possible usage of <code>circos.axis()</code> is as follows. Note <code>h</code> can be <code>bottom</code>, <code>top</code> or a numeric value.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.axis</span>(h)
+<span class="kw">circos.axis</span>(h, sector.index, track.index)
+<span class="kw">circos.axis</span>(h, major.at, labels, major.tick, direction)
+<span class="kw">circos.axis</span>(h, major.at, labels, major.tick, labels.font, labels.cex,
+            labels.facing, labels.niceFacing)
+<span class="kw">circos.axis</span>(h, major.at, labels, major.tick, minor.ticks,
+            major.tick.length, lwd)</code></pre></div>
+<p>Y-axis is also supported by <code>circos.yaxis()</code>. The usage is similar as <code>circos.axis()</code> One thing that needs to be note is users need to manually adjust <code>gap.degree</code> in <code>circos.par()</code> to make sure there are enough spaces for y-axes. (Figure )</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.yaxis</span>(side)
+<span class="kw">circos.yaxis</span>(at, labels, sector.index, track.index)</code></pre></div>
+<div class="figure"><span id="fig:circlize-yaxis"></span>
+<img src="bookdown-demo_files/figure-html/circlize-yaxis-1.png" alt="Y-axes" width="384" />
+<p class="caption">
+Figure 3.7: Y-axes
+</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="circular-layout.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="placeholder.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-graphics.Rmd",
+"text": "Edit"
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
