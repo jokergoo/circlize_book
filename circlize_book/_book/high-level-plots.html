@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Circular Visualization in R</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Circular Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="github-repo" content="jokergoo/books" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Circular Visualization in R" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  
+
+<meta name="author" content="Zuguang Gu">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="legends.html">
+<link rel="next" href="advanced-usage.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Circular Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I Part I</b></span></li>
+<li class="chapter" data-level="1" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>1</b> Circular layout</a></li>
+<li class="chapter" data-level="2" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>2</b> Graphics</a></li>
+<li class="chapter" data-level="3" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>3</b> Legends</a></li>
+<li class="chapter" data-level="4" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>4</b> Implement high-level plots</a><ul>
+<li class="chapter" data-level="4.1" data-path="high-level-plots.html"><a href="high-level-plots.html#circular-barplot"><i class="fa fa-check"></i><b>4.1</b> Circular barplots</a></li>
+<li class="chapter" data-level="4.2" data-path="high-level-plots.html"><a href="high-level-plots.html#histograms"><i class="fa fa-check"></i><b>4.2</b> Histograms</a></li>
+<li class="chapter" data-level="4.3" data-path="high-level-plots.html"><a href="high-level-plots.html#phylogenetic-trees"><i class="fa fa-check"></i><b>4.3</b> Phylogenetic trees</a></li>
+<li class="chapter" data-level="4.4" data-path="high-level-plots.html"><a href="high-level-plots.html#heatmaps"><i class="fa fa-check"></i><b>4.4</b> Heatmaps</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="advanced-usage.html"><a href="advanced-usage.html"><i class="fa fa-check"></i><b>5</b> Advanced usage</a></li>
+<li class="part"><span><b>II Part II</b></span></li>
+<li class="chapter" data-level="6" data-path="copy-regions-for-the-two-zoomed-chromosomes.html"><a href="copy-regions-for-the-two-zoomed-chromosomes.html"><i class="fa fa-check"></i><b>6</b> copy regions for the two zoomed chromosomes</a></li>
+<li class="chapter" data-level="7" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
+<li class="part"><span><b>III Part II</b></span></li>
+<li class="chapter" data-level="8" data-path="just-note-numeric-column-is-measured-in-bed.html"><a href="just-note-numeric-column-is-measured-in-bed.html"><i class="fa fa-check"></i><b>8</b> just note <code>numeric.column</code> is measured in <code>bed</code></a></li>
+<li class="chapter" data-level="9" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>9</b> Placeholder</a></li>
+<li class="chapter" data-level="10" data-path="note-how-horizontalline-works.html"><a href="note-how-horizontalline-works.html"><i class="fa fa-check"></i><b>10</b> note how ‘horizontalLine’ works</a></li>
+<li class="chapter" data-level="11" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>11</b> Placeholder</a></li>
+<li class="part"><span><b>IV Part III</b></span></li>
+<li class="chapter" data-level="12" data-path="code-is-not-run-when-building-the-vignette.html"><a href="code-is-not-run-when-building-the-vignette.html"><i class="fa fa-check"></i><b>12</b> code is not run when building the vignette</a></li>
+<li class="chapter" data-level="13" data-path="yang-yao-is-.html"><a href="yang-yao-is-.html"><i class="fa fa-check"></i><b>13</b> yang yao is -</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="high-level-plots" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Implement high-level plots</h1>
+<p>In this chapter, we show several examples which combine low-level graphic functions to construct complicated graphics for specific purposes.</p>
+<div id="circular-barplot" class="section level2">
+<h2><span class="header-section-number">4.1</span> Circular barplots</h2>
+<p>In the following code, we put all the nine bars in one track and one sector. You can also put them into 9 tracks, but the code would be very similar. See Figure <a href="high-level-plots.html#fig:circular-barplot">4.1</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">category =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;category&quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>)
+percent =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">sample</span>(<span class="dv">40</span><span class="op">:</span><span class="dv">80</span>, <span class="dv">9</span>))
+color =<span class="st"> </span><span class="kw">rev</span>(<span class="kw">rainbow</span>(<span class="kw">length</span>(percent)))
+
+<span class="kw">library</span>(circlize)
+<span class="kw">circos.par</span>(<span class="st">&quot;start.degree&quot;</span> =<span class="st"> </span><span class="dv">90</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))
+<span class="kw">circos.initialize</span>(<span class="st">&quot;a&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>)) <span class="co"># &#39;a` just means there is one sector</span>
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="kw">length</span>(percent)<span class="op">+</span><span class="fl">0.5</span>), <span class="dt">track.height =</span> <span class="fl">0.8</span>, 
+    <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+        xlim =<span class="st"> </span>CELL_META<span class="op">$</span>xlim
+        <span class="kw">circos.segments</span>(<span class="kw">rep</span>(xlim[<span class="dv">1</span>], <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>,
+                        <span class="kw">rep</span>(xlim[<span class="dv">2</span>], <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>,
+                        <span class="dt">col =</span> <span class="st">&quot;#CCCCCC&quot;</span>)
+        <span class="kw">circos.rect</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.45</span>, percent, <span class="dv">1</span><span class="op">:</span><span class="dv">9</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.45</span>,
+            <span class="dt">col =</span> color, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)
+        <span class="kw">circos.text</span>(<span class="kw">rep</span>(xlim[<span class="dv">1</span>], <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, 
+            <span class="kw">paste</span>(category, <span class="st">&quot; - &quot;</span>, percent, <span class="st">&quot;%&quot;</span>), 
+            <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">0.5</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>) 
+        breaks =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">85</span>, <span class="dt">by =</span> <span class="dv">5</span>)
+        <span class="kw">circos.axis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>, <span class="dt">major.at =</span> breaks, <span class="dt">labels =</span> <span class="kw">paste0</span>(breaks, <span class="st">&quot;%&quot;</span>), 
+            <span class="dt">labels.cex =</span> <span class="fl">0.6</span>)
+})</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:circular-barplot"></span>
+<img src="circlize-book_files/figure-html/circular-barplot-1.png" alt="A circular barplot." width="384" />
+<p class="caption">
+Figure 4.1: A circular barplot.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+<p>When adding text by <code>circos.text()</code>, <code>adj</code> is specified to <code>c(1.05, 0.5)</code> which means text is aligned to the right and there is also offset between the text and the anchor points. We can also use <code>ux()</code> to set the offset to absolute units. Conversion on x direction in a circular coordinate is affected by the position on y axis, here we must set the <code>h</code> argument. Following code can be used to replace the <code>circos.text()</code> in above example.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.text</span>(xlim[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">ux</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>, <span class="dt">h =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, 
+    <span class="kw">paste</span>(category, <span class="st">&quot; - &quot;</span>, percent, <span class="st">&quot;%&quot;</span>), 
+    <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>)</code></pre></div>
+</div>
+<div id="histograms" class="section level2">
+<h2><span class="header-section-number">4.2</span> Histograms</h2>
+<p><strong>circlize</strong> ships a <code>circos.trackHist()</code> function which draws histograms in cells. This function is a high-level function which caculates data ranges on y axes and creates a new track. The implement of this function is simple, that it first calculates the histogram in each cell by <code>hist()</code> function, then draws histogram by using <code>circos.rect()</code>.</p>
+<p>Users can choose to visualize data distributions by density lines by setting <code>draw.density = TRUE</code>.</p>
+<p>Figure <a href="high-level-plots.html#fig:circular-histograms">4.2</a> shows a histogram track under default settings, a histogram track with specified <code>bin.size</code> and a track with density lines. By default, bin size of histogram in each cell is calculated separatedly and they will be different between cells, which makes it not consistent to compare. Manually setting <code>bin.size</code> in all cells to a same value helps to compare the distributions between cells.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1600</span>)
+factors =<span class="st"> </span><span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>], <span class="dv">1600</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x)
+<span class="kw">circos.trackHist</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x, <span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, 
+    <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)
+<span class="kw">circos.trackHist</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x, <span class="dt">bin.size =</span> <span class="fl">0.1</span>, 
+    <span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)
+<span class="kw">circos.trackHist</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x, <span class="dt">draw.density =</span> <span class="ot">TRUE</span>, 
+    <span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:circular-histograms"></span>
+<img src="circlize-book_files/figure-html/circular-histograms-1.png" alt="Histograms on circular layout." width="384" />
+<p class="caption">
+Figure 4.2: Histograms on circular layout.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+</div>
+<div id="phylogenetic-trees" class="section level2">
+<h2><span class="header-section-number">4.3</span> Phylogenetic trees</h2>
+<p>Circular dendrograms have many applications, one of which is to visualize phylogenetic trees. Basically, a phylogenetic tree is a dendrogram which is a combination of lines. In R, there are several classes that describe such type of tree such as <code>hclust</code>, <code>dendrogram</code> and <code>phylo</code>. In this example, we will demonstrate how to draw the tree from the <code>dendrogram</code> class. Nevertheless, other classes can be converted to <code>dendrogram</code> without too much difficulty.</p>
+<p>The <code>bird.orders</code> data we are using here is from <strong>ape</strong> package. This data set is related to species of birds.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ape)
+<span class="kw">data</span>(bird.orders)
+hc =<span class="st"> </span><span class="kw">as.hclust</span>(bird.orders)</code></pre></div>
+<p>We split the tree into six sub trees by <code>cutree()</code> and convert the data into a <code>dendrogram</code> object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">labels =<span class="st"> </span>hc<span class="op">$</span>labels  <span class="co"># name of birds</span>
+ct =<span class="st"> </span><span class="kw">cutree</span>(hc, <span class="dv">6</span>)  <span class="co"># cut tree into 6 pieces</span>
+n =<span class="st"> </span><span class="kw">length</span>(labels)  <span class="co"># number of bird species</span>
+dend =<span class="st"> </span><span class="kw">as.dendrogram</span>(hc)</code></pre></div>
+<p>As we mentioned before, the x-value for the phylogenetic tree is in fact index. Thus, the x-lim is just the minimum and maximum index of labels in the tree. Since there is only one phylogenetic tree, we only need one “big” sector.</p>
+<p>In the first track, we plot the name of each bird, with different colors to represent different sub trees.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))
+<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, n)) <span class="co"># only one sector</span>
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.3</span>, 
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+        <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(n)) {
+            <span class="kw">circos.text</span>(i<span class="op">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, labels[i], <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), 
+                <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>,
+                <span class="dt">col =</span> ct[labels[i]], <span class="dt">cex =</span> <span class="fl">0.5</span>)
+        }
+})</code></pre></div>
+<p>In the above code, setting <code>xlim</code> to <code>c(0, n)</code> is very important because the leaves of the dendrogram are drawn at <code>x = seq(0.5, n - 0.5)</code>.</p>
+<p>In the second track, we plot the circular dendrogram by <code>circos.dendrogram()</code> (Figure @ref(fig:phylogenetic_tree) left). You can render the dendrogram by <strong>dendextend</strong> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(dendextend))
+dend =<span class="st"> </span><span class="kw">color_branches</span>(dend, <span class="dt">k =</span> <span class="dv">6</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)
+dend_height =<span class="st"> </span><span class="kw">attr</span>(dend, <span class="st">&quot;height&quot;</span>)
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, dend_height), <span class="dt">bg.border =</span> <span class="ot">NA</span>, 
+    <span class="dt">track.height =</span> <span class="fl">0.4</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+        <span class="kw">circos.dendrogram</span>(dend)
+})
+<span class="kw">circos.clear</span>()</code></pre></div>
+<p>By default, dendrograms are facing outside of the circle (so that the labels should also be added outside the dendrogram). In <code>circos.dendrogram()</code>, you can set <code>facing</code> argument to <code>inside</code> to make them facing inside. In this case, dendrogram track is added first and labels are added later (Figure <a href="high-level-plots.html#fig:phylogenetic-tree">4.3</a> right).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.dendrogram</span>(dend, <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:phylogenetic-tree"></span>
+<img src="circlize-book_files/figure-html/phylogenetic-tree-1.png" alt="A circular phylogenetic tree." width="768" />
+<p class="caption">
+Figure 4.3: A circular phylogenetic tree.
+</p>
+</div>
+<p>If you look at the souce code of <code>circos.dendrogram()</code> and replace <code>circos.lines()</code> to <code>lines()</code>, actually the function can correctly make a dendrogram in the normal coordinate.</p>
+<p>With the flexibility of <strong>circlize</strong> package, it is easy to add more tracks if you want to add more corresponded information for the dendrogram to the plot.</p>
+</div>
+<div id="heatmaps" class="section level2">
+<h2><span class="header-section-number">4.4</span> Heatmaps</h2>
+<p>Heatmaps, and sometimes combined with dendrograms are frequently used to visualize e.g. gene expression. Heatmaps are basically composed by rectangles, thus, they can be implemented by <code>circos.rect()</code>.</p>
+<p>In following example, we make a circular plot with two heatmaps. First we generate the two matrix and perform clustring on the two matrix.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">100</span><span class="op">*</span><span class="dv">10</span>), <span class="dt">nrow =</span> <span class="dv">10</span>, <span class="dt">ncol =</span> <span class="dv">100</span>)
+col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))
+factors =<span class="st"> </span><span class="kw">rep</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">times =</span> <span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">70</span>))
+mat_list =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> mat[, factors <span class="op">==</span><span class="st"> &quot;a&quot;</span>],
+                <span class="dt">b =</span> mat[, factors <span class="op">==</span><span class="st"> &quot;b&quot;</span>])
+dend_list =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="kw">as.dendrogram</span>(<span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">t</span>(mat_list[[<span class="st">&quot;a&quot;</span>]])))),
+                 <span class="dt">b =</span> <span class="kw">as.dendrogram</span>(<span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">t</span>(mat_list[[<span class="st">&quot;b&quot;</span>]])))))</code></pre></div>
+<p>In the first track, columns in the matrix are adjusted by the clustering. Also note we use <code>circos.rect()</code> in a vectorized way.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">gap.degree =</span> <span class="dv">5</span>)
+<span class="kw">circos.initialize</span>(factors, <span class="dt">xlim =</span> <span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="kw">table</span>(factors)))
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+    sector.index =<span class="st"> </span>CELL_META<span class="op">$</span>sector.index
+    m =<span class="st"> </span>mat_list[[sector.index]]
+    dend =<span class="st"> </span>dend_list[[sector.index]]
+
+    m2 =<span class="st"> </span>m[, <span class="kw">order.dendrogram</span>(dend)]
+    col_mat =<span class="st"> </span><span class="kw">col_fun</span>(m2)
+    nr =<span class="st"> </span><span class="kw">nrow</span>(m2)
+    nc =<span class="st"> </span><span class="kw">ncol</span>(m2)
+    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nr) {
+        <span class="kw">circos.rect</span>(<span class="dv">1</span><span class="op">:</span>nc <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">rep</span>(nr <span class="op">-</span><span class="st"> </span>i, nc), 
+            <span class="dv">1</span><span class="op">:</span>nc, <span class="kw">rep</span>(nr <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, nc), 
+            <span class="dt">border =</span> col_mat[i, ], <span class="dt">col =</span> col_mat[i, ])
+    }
+})</code></pre></div>
+<p>Since there are two dendrograms, it is important to make the height of both dendrogram in a same scale. We calculate the maximum height of the two dendrograms and set it to <code>ylim</code> of the second track (Figure <a href="high-level-plots.html#fig:circular-heatmap">4.4</a>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">max_height =<span class="st"> </span><span class="kw">max</span>(<span class="kw">sapply</span>(dend_list, <span class="cf">function</span>(x) <span class="kw">attr</span>(x, <span class="st">&quot;height&quot;</span>)))
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, max_height), <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.3</span>, 
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+
+    sector.index =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)
+    dend =<span class="st"> </span>dend_list[[sector.index]]
+    <span class="kw">circos.dendrogram</span>(dend, <span class="dt">max_height =</span> max_height)
+})
+<span class="kw">circos.clear</span>()</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:circular-heatmap"></span>
+<img src="circlize-book_files/figure-html/circular-heatmap-1.png" alt="Circular heatmaps." width="384" />
+<p class="caption">
+Figure 4.4: Circular heatmaps.
+</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="legends.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="advanced-usage.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-implement-high-level-plots.Rmd",
+"text": "Edit"
+},
+"download": ["circlize-book.pdf", "circlize-book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

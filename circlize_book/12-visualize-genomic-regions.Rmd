@@ -1,0 +1,39 @@
+
+\subsection{Genomic density and Rainfall plot}
+
+
+{\tt circos.genomicDensity} calculates how much a genomic window is covered by regions in {\tt bed}.
+The input data can be a single data frame or a list of data frames.
+
+<<eval = FALSE>>=
+circos.genomicDensity(bed)
+circos.genomicDensity(bed, baseline = 0)
+circos.genomicDensity(bed, window.size = 1e6)
+circos.genomicDensity(bedlist, col = c("#FF000080", "#0000FF80"))
+@
+
+Rainfall plot can be used to visualize distribution of regions. On the plot, y-axis
+corresponds to the distance to neighbour regions (log10-based). So if there is a drop-down on
+the plot, it means there is a cluster of regions at that area (figure \ref{fig:genomic_rainfall}).
+The input data can be a single data frame or a list of data frames.
+
+<<eval = FALSE>>=
+circos.genoimcRainfall(bed)
+circos.genoimcRainfall(bedlist, col = c("red", "green"))
+@
+
+Following example makes a rainfall plot for differentially methylated regions (DMR) and their
+genomic densities. In the plot, red corresponds to hyper-methylated DMRs (gain of methylation) and blue corresponds
+to hypo-methylated DMRs (loss of methylation) (figure \ref{fig:genomic_rainfall}).
+
+<<genomic_rainfall, out.width = "0.8\\textwidth", fig.cap = "Genomic rainfall plot and densities.">>=
+load(paste0(system.file(package = "circlize"), "/extdata/DMR.RData"))
+par(mar = c(1, 1, 1, 1))
+circos.initializeWithIdeogram(plotType = c("axis", "labels"))
+
+bed_list = list(DMR_hyper, DMR_hypo)
+circos.genomicRainfall(bed_list, pch = 16, cex = 0.4, col = c("#FF000080", "#0000FF80"))
+circos.genomicDensity(DMR_hyper, col = c("#FF000080"), track.height = 0.1)
+circos.genomicDensity(DMR_hypo, col = c("#0000FF80"), track.height = 0.1)
+circos.clear()
+@

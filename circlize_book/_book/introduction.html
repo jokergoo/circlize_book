@@ -25,7 +25,6 @@
 <meta name="author" content="Zuguang Gu">
 
 
-<meta name="date" content="2017-03-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +32,7 @@
   
   
 <link rel="prev" href="index.html">
-<link rel="next" href="placeholder.html">
+<link rel="next" href="circular-layout.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -104,18 +103,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I Part I</b></span></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#principle-of-design"><i class="fa fa-check"></i><b>1.1</b> Principle of design</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#a-qiuck-glance"><i class="fa fa-check"></i><b>1.2</b> A quick glance</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>2</b> Placeholder</a></li>
+<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a></li>
 <li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a></li>
-<li class="chapter" data-level="4" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>4</b> Placeholder</a></li>
-<li class="chapter" data-level="5" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>5</b> Placeholder</a></li>
-<li class="chapter" data-level="6" data-path="placeholder-3.html"><a href="placeholder-3.html"><i class="fa fa-check"></i><b>6</b> Placeholder</a></li>
-<li class="chapter" data-level="7" data-path="placeholder-4.html"><a href="placeholder-4.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
-<li class="chapter" data-level="8" data-path="placeholder-5.html"><a href="placeholder-5.html"><i class="fa fa-check"></i><b>8</b> Placeholder</a></li>
-<li class="chapter" data-level="9" data-path="placeholder-6.html"><a href="placeholder-6.html"><i class="fa fa-check"></i><b>9</b> Placeholder</a></li>
+<li class="chapter" data-level="4" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>4</b> Links</a></li>
+<li class="chapter" data-level="5" data-path="other-utilities.html"><a href="other-utilities.html"><i class="fa fa-check"></i><b>5</b> Other utilities</a></li>
+<li class="chapter" data-level="6" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>6</b> Implement high-level plots</a></li>
+<li class="chapter" data-level="7" data-path="advanced-usage.html"><a href="advanced-usage.html"><i class="fa fa-check"></i><b>7</b> Advanced usage</a></li>
+<li class="chapter" data-level="8" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>8</b> Legends</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -143,7 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Chapter give an detailed overview of the general circlize functionalities. Chapter introduces functions specificly designed for visualizing genomic datasets. Chapter gives comprehensive overview of visualizing relation.</p>
 <div id="principle-of-design" class="section level2">
 <h2><span class="header-section-number">1.1</span> Principle of design</h2>
-<p>A circular layout is composed of sectors and tracks. For data in different categories, they are allocated into different sectors and for multiple measurements of the same category, they are represented as stacked tracks from outside of the circle to the inside. The intersection of a sector and a track is called a cell, which is the basic unit in a circular layout. It is an imaginary plotting region for data points in a certain category.</p>
+<p>A circular layout is composed of sectors and tracks. For data in different categories, they are allocated into different sectors and for multiple measurements of the same category, they are represented as stacked tracks from outside of the circle to the inside. The intersection of a sector and a track is called a cell (or a grid, a panel), which is the basic unit in a circular layout. It is an imaginary plotting region for data points in a certain category.</p>
 <p>Since most of the figures are composed of simple graphics, such as points, lines, polygon, <strong>circlize</strong> implements low-level graphic functions for adding graphics in the circular plotting regions, so that more complicated graphics can be easily generated by different combinations of low-level graphics functions. This principle ensures the generality that types of high-level graphics are not restricted by the software itself and high-level packages focusing on specific interests can be built on it.</p>
 <p>Currently there are following low-level graphic functions that can be used for adding graphics. The usage is very similar to the functions without <code>circos.</code> prefix from the base graphic engine, except there are some enhancement specifically designed for circular visualization.</p>
 <ul>
@@ -164,7 +163,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>circos.clear()</code>: reset graphic parameters and internal variables.</li>
 </ul>
 <p>Thus, theoretically, you are able to draw most kinds of circular figures by the above functionalities. Figure <a href="introduction.html#fig:circlize-example">1.1</a> lists several complex circular plots made by <strong>circlize</strong>. After going through this documentation, you will be able to implement yours.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;images/ciclize_examples.jpg&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:circlize-example"></span>
 <img src="images/ciclize_examples.jpg" alt="Examples by circlize" width="100%" />
 <p class="caption">
@@ -248,7 +246,7 @@ Figure 1.2: A step-by-step example
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="placeholder.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="circular-layout.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

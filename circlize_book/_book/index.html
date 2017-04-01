@@ -5,27 +5,26 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Circular Visualization</title>
-  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R.">
+  <title>Circular Visualization in R</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
   <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Circular Visualization" />
+  <meta property="og:title" content="Circular Visualization in R" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="github-repo" content="jokergoo/books" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Circular Visualization" />
+  <meta name="twitter:title" content="Circular Visualization in R" />
   
-  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization by cirlize package in R." />
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   
 
 <meta name="author" content="Zuguang Gu">
 
 
-<meta name="date" content="2017-03-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +32,7 @@
   
   
 
-<link rel="next" href="introduction.html">
+<link rel="next" href="circular-layout.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -63,19 +62,27 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Circular Visualization in R</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>2</b> Placeholder</a></li>
-<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a></li>
-<li class="chapter" data-level="4" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>4</b> Placeholder</a></li>
-<li class="chapter" data-level="5" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>5</b> Placeholder</a></li>
-<li class="chapter" data-level="6" data-path="placeholder-3.html"><a href="placeholder-3.html"><i class="fa fa-check"></i><b>6</b> Placeholder</a></li>
-<li class="chapter" data-level="7" data-path="placeholder-4.html"><a href="placeholder-4.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
-<li class="chapter" data-level="8" data-path="placeholder-5.html"><a href="placeholder-5.html"><i class="fa fa-check"></i><b>8</b> Placeholder</a></li>
-<li class="chapter" data-level="9" data-path="placeholder-6.html"><a href="placeholder-6.html"><i class="fa fa-check"></i><b>9</b> Placeholder</a></li>
+<li class="part"><span><b>I Part I</b></span></li>
+<li class="chapter" data-level="1" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>1</b> Circular layout</a></li>
+<li class="chapter" data-level="2" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>2</b> Graphics</a></li>
+<li class="chapter" data-level="3" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>3</b> Legends</a></li>
+<li class="chapter" data-level="4" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>4</b> Implement high-level plots</a></li>
+<li class="chapter" data-level="5" data-path="advanced-usage.html"><a href="advanced-usage.html"><i class="fa fa-check"></i><b>5</b> Advanced usage</a></li>
+<li class="part"><span><b>II Part II</b></span></li>
+<li class="chapter" data-level="6" data-path="copy-regions-for-the-two-zoomed-chromosomes.html"><a href="copy-regions-for-the-two-zoomed-chromosomes.html"><i class="fa fa-check"></i><b>6</b> copy regions for the two zoomed chromosomes</a></li>
+<li class="chapter" data-level="7" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
+<li class="part"><span><b>III Part II</b></span></li>
+<li class="chapter" data-level="8" data-path="just-note-numeric-column-is-measured-in-bed.html"><a href="just-note-numeric-column-is-measured-in-bed.html"><i class="fa fa-check"></i><b>8</b> just note <code>numeric.column</code> is measured in <code>bed</code></a></li>
+<li class="chapter" data-level="9" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>9</b> Placeholder</a></li>
+<li class="chapter" data-level="10" data-path="note-how-horizontalline-works.html"><a href="note-how-horizontalline-works.html"><i class="fa fa-check"></i><b>10</b> note how ‘horizontalLine’ works</a></li>
+<li class="chapter" data-level="11" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>11</b> Placeholder</a></li>
+<li class="part"><span><b>IV Part III</b></span></li>
+<li class="chapter" data-level="12" data-path="code-is-not-run-when-building-the-vignette.html"><a href="code-is-not-run-when-building-the-vignette.html"><i class="fa fa-check"></i><b>12</b> code is not run when building the vignette</a></li>
+<li class="chapter" data-level="13" data-path="yang-yao-is-.html"><a href="yang-yao-is-.html"><i class="fa fa-check"></i><b>13</b> yang yao is -</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -88,7 +95,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization in R</a>
           </h1>
         </div>
 
@@ -97,16 +104,20 @@
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Circular Visualization</h1>
+<h1 class="title">Circular Visualization in R</h1>
 <h4 class="author"><em>Zuguang Gu</em></h4>
-<h4 class="date"><em>2017-03-28</em></h4>
+<h4 class="date"><em>last revised on 2017-03-31</em></h4>
 </div>
 <div id="about" class="section level1 unnumbered">
 <h1>About</h1>
-<p>This is the documentation of the <a href="https://cran.r-project.org/package=circlize"><strong>circlize</strong></a> package (illustrated with version 0.4.0).</p>
-<p><img src="images/circlize_cover.jpg" width="400" alt="Cover image" /></p>
+<p>This is the documentation of the <a href="https://cran.r-project.org/package=circlize"><strong>circlize</strong></a> package. Examples in the book are generated under version 0.4.0.</p>
+<p><img src="images/circlize_cover.jpg" width="400" style="display: block; margin: auto;" /></p>
 <p>If you use <strong>circlize</strong> in your publications, I would be appreciated if you can cite:</p>
 <p>Gu, Z. (2014) circlize implements and enhances circular visualization in R. Bioinformatics. DOI: <a href="https://doi.org/10.1093/bioinformatics/btu393">10.1093/bioinformatics/btu393</a></p>
+
+</div>
+
+
 
 </div>
             </section>
@@ -115,7 +126,7 @@
         </div>
       </div>
 
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="circular-layout.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -147,7 +158,7 @@ gitbook.start({
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
 "text": "Edit"
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["circlize-book.pdf", "circlize-book.epub"],
 "toc": {
 "collapse": "subsection"
 }

@@ -11,6 +11,7 @@ circos.trackPlotRegion(factors = factors, ylim = c(0, 10), track.height = 0.1, b
     circos.text(5, 10, get.cell.meta.data("sector.index"), niceFacing = TRUE)
 })
 
+par(cex = 0.8)
 circos.trackPlotRegion(factors = factors, ylim = c(0, 10))
 circos.axis(labels.niceFacing = FALSE, sector.index = "a")
 circos.axis(labels.niceFacing = FALSE, sector.index = "b", direction = "inside", labels.facing = "outside")

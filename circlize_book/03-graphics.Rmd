@@ -20,6 +20,9 @@ circos.track(..., panel.fun = function(x, y) {
 circos.points(x, y, sector.index, track.index)
 ```
 
+In this chapter, we will also discuss how to customize links and how to highlight
+regions in the circle.
+
 ## Points {#points}
 
 Adding points by `circos.points()` is similar as `points()` function. Possible
@@ -35,7 +38,7 @@ There is a companion function `circos.trackPoints()` which adds points to all
 sectors in a same track simultaneously. The input of `circos.trackPoints()`
 must contain a vector of categorical factors, a vector of x values and a
 vector of y values. X values and y values are split by the categorical
-variable and corresponding subset of x and y values are sent to
+variable and corresponding subset of x and y values are internally sent to
 `circos.points()`. `circos.trackPoints()` adds points to the "current" track
 by default which is the most recently created track. Other tracks can also be
 selected by explictly setting `track.index` argument.
@@ -47,7 +50,14 @@ circos.trackPoints(fa, x, y)
 
 `circos.trackPoints()` is simply implemented by `circos.points()` with a `for`
 loop. However, it is more recommended to directly use `circos.points()` and
-`panel.fun` which provides great more flexibility.
+`panel.fun` which provides great more flexibility. Actually following code is
+identical to above code.
+
+```{r, eval = FALSE}
+circos.track(fa, x, y, panel.fun = function(x, y) {
+	circos.points(x, y)
+})
+```
 
 Other low-level functions also have their companion `circos.track*()`
 function. The usage is same as `circos.trackPoints()` and they will not be
@@ -59,7 +69,7 @@ Adding lines by `circos.lines()` is similar as `lines()` function. One
 additional feature is that the areas under or above the lines can be filled by
 specifing `area` argument to `TRUE`. Position of the baseline can be set to a
 pre-defined string of `bottom` or `top`, or a numeric value which is the
-position of y-axis. When `area` is set to `TRUE`, `col` controls the filled
+position on y-axis. When `area` is set to `TRUE`, `col` controls the filled
 color and `border` controls the color for the borders.
 
 `baseline` argument is also workable when `lty` is set to `"h"`. Note when `lty`
@@ -72,7 +82,7 @@ source("src/intro-08-lines.R")
 ```
 
 Straight lines are transformed to curves when mapping to the circular layout
-(figure \@ref(fig:circlize-linecurve)). Normally, curves are approximated by a
+(Figure \@ref(fig:circlize-linecurve)). Normally, curves are approximated by a
 series of segments of straight lines. With more and shorter segments, there is
 better approximation, but with larger size if the figures are generated into
 e.g. PDF files, especially for huge dataset. Default length of segments in
@@ -119,7 +129,7 @@ put bended text into two lines, you need to split text into two lines and add
 each line by `circos.text()` separately. The different facings are illustrated
 in figure \@ref(fig:circlize-text).
 
-```{r circlize-text, echo = FALSE, fig.cap = "Text facing."}
+```{r circlize-text, echo = FALSE, fig.cap = "Text facings."}
 source("src/intro-09-text.R")
 ```
 
@@ -133,25 +143,25 @@ circos.text(x, y, labels, facing, niceFacing, adj, cex, col, font)
 
 If, e.g., `facing` is set to `inside`, text which is on the bottom half of the
 circle is still facing to the top and hard to read. To make text more easy to
-read and not to hurt users' neck too much, `circos.text()` provides `niceFacing`
-option which automatically adjust text facing according to their positions in
-the circle. `niceFacing` only works for {\tt facing} value of {\tt inside}, {\tt
-outside}, {\tt clockwise}, {\tt reverse.clockwise}, {\tt bending.inside} and
-{\tt bending.outside}.
+read and not to hurt users' neck too much, `circos.text()` provides
+`niceFacing` option which automatically adjust text facing according to their
+positions in the circle. `niceFacing` only works for `facing` value of
+`inside`, `outside`, `clockwise`, `reverse.clockwise`, `bending.inside` and
+`bending.outside`.
 
 When `niceFacing` is on, `adj` is also adjusted according to the corresponding
 facings. Figure \@ref(fig:circlize-text-easy) illustrates text positions under
-different settings of `adj` and `facing`.
+different settings of `adj` and `facing`. The red dots are the positions of the texts.
 
-```{r circlize-text-easy, echo = FALSE, fig.width = 6, fig.height = 9, fig.cap = "Human easy text facing", fig.subcap = "Red dots represent positions of the texts."}
+```{r circlize-text-easy, echo = FALSE, fig.width = 6, fig.height = 9, fig.cap = "Human easy text facing."}
 source("src/intro-09-text-niceFacing.R")
 ```
 
-`adj` is internally passed to `text()`, thus, it actually adjusts text positions
-either horizontally or vertically (in the canvas coordinate). If the offset is
-measured in the data coordinate, and the direction of the offset is circular,
-the offset value can be set as degrees that the position of the text is adjusted
-by wrapping the offset by `degree()`.
+`adj` is internally passed to `text()`, thus, it actually adjusts text
+positions either horizontally or vertically (in the canvas coordinate). If the
+direction of the offset is circular, the offset value can be set as degrees
+that the position of the text is adjusted by wrapping the offset by
+`degree()`.
 
 ```{r, eval = FALSE}
 circos.text(x, y, labels, adj = c(0, degree(5)), facing = "clockwise")
@@ -159,11 +169,11 @@ circos.text(x, y, labels, adj = c(0, degree(5)), facing = "clockwise")
 
 As `circos.text()` is applied in the data coordiante, offset can be directly
 added to `x` or/and `y` as a value measured in the data coordinate. An absolute
-offset can be set by using `u_x()` (in x direction) and `u_y()` (in y
+offset can be set by using `ux()` (in x direction) and `uy()` (in y
 direction).
 
 ```{r, eval = FALSE}
-circos.text(x + u_x(2, "mm"), y + u_y(2, "mm"), labels)
+circos.text(x + ux(2, "mm"), y + uy(2, "mm"), labels)
 ```
 
 ## Rectangles and polygons {#rectangles}
@@ -179,14 +189,15 @@ circos.rect(xleft, ybottom, xright, ytop, sector.index, track.index)
 circos.rect(xleft, ybottom, xright, ytop, col, border, lty, lwd)
 ```
 
-circos.polygon() draws a polygon through a series of points in a cell.
+`circos.polygon()` draws a polygon through a series of points in a cell.
+Please note the first data point shoud overlap to the last data point.
 
 ```{r, eval = FALSE}
 circos.polygon(x, y)
 circos.polygon(x, y, col, border, lty, lwd)
 ```
 
-In figure \@ref(fig:circlize-errorline), the area of standard deviation of the
+In Figure \@ref(fig:circlize-errorline), the area of standard deviation of the
 smoothed line is drawn by `circos.polygon()`. Source code can be found in the
 **Examples** section of the `circos.polygon()` help page.
 
@@ -229,7 +240,7 @@ source("src/intro-11-axis.R")
 
 As you can notice in the above figure, when the first and last axis labels
 exceed data ranges on x-axis in the corresponding cell, their positions are
-adjusted to be put inside the cell.
+automatically adjusted to be shifted towards in the cell.
 
 Possible usage of `circos.axis()` is as follows. Note `h` can be `bottom`, `top`
 or a numeric value.
@@ -247,7 +258,7 @@ circos.axis(h, major.at, labels, major.tick, minor.ticks,
 Y-axis is also supported by `circos.yaxis()`. The usage is similar as
 `circos.axis()` One thing that needs to be note is users need to manually adjust
 `gap.degree` in `circos.par()` to make sure there are enough spaces for y-axes.
-(Figure \ref{fig:circlize-yaxis})
+(Figure \@ref(fig:circlize-yaxis))
 
 ```{r, eval = FALSE}
 circos.yaxis(side)
@@ -257,3 +268,284 @@ circos.yaxis(at, labels, sector.index, track.index)
 ```{r circlize-yaxis, echo = FALSE, fig.cap = "Y-axes"}
 source("src/intro-11-yaxis.R")
 ```
+
+## Links {#links}
+
+Links or ribbons are important part for the circular visualization. They are
+used to represent relations or interactions between sectors. In **circlize**,
+`circos.link()` draws links between single points and intervals. There are
+four mandatory arguments which are index for the first sector, positions on
+the first sector, index for the second sector and positions on the second
+sector. If the positions on the two sectors are all single points, the link
+represents a line. If the positions on the two sectors are intervals, the link
+represents as a robbon (Figure \@ref(fig:link-example)). Possible usage for
+`circos.link()` is as follows.
+
+```{r, eval = FALSE}
+circos.link(sector.index1, 0, sector.index2, 0)
+circos.link(sector.index1, c(0, 1), sector.index2, 0)
+circos.link(sector.index1, c(0, 1), sector.index2, c(1, 2))
+circos.link(sector.index1, c(0, 1), sector.index2, 0, col, lwd, lty, border)
+```
+
+```{r link-example, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Different types of links."}
+factors = letters[1:8]
+circos.par(points.overflow.warning = FALSE)
+circos.initialize(factors = factors, xlim = c(0, 10))
+circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+
+circos.link("a", 5, "c", 5, border = 1)
+circos.link("b", 5, "d", c(4, 6), border = 1)
+circos.link("a", c(2, 3), "f", c(4, 6), border = 1)
+circos.link("e", c(2, 3), "g", 5, border = 1)
+
+circos.clear()
+```
+
+The position of link end is controlled by `rou`. By default, it is the bottom
+of the most inside track and normally, you don't need to care about
+this setting. The two ends of the link are located in a same circle by default. The
+positions of two ends can be adjusted with different values for `rou1` and
+`rou2` arguments. See Figure \@ref(fig:link-ends).
+
+```{r, eval = FALSE}
+circos.link(sector.index1, 0, sector.index2, 0, rou)
+circos.link(sector.index1, 0, sector.index2, 0, rou1, rou2)
+```
+
+```{r, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Positions of link ends."}
+circos.par(points.overflow.warning = FALSE)
+circos.initialize(factors = factors, xlim = c(0, 10))
+circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+
+circos.link("a", 5, "c", 5, rou2 = 0.5, border = 1)
+circos.link("b", 5, "d", c(4, 6), rou2 = 0.5, border = 1)
+circos.link("a", c(2, 3), "f", c(4, 6), rou2 = 0.5, border = 1)
+```
+
+The height of the link is controlled by `h` argument. In most cases, you don't
+need to care about the value of `h` because they are internally calculated
+based on the width of each link. However, when the link represents as a ribbon
+(i.e. link from point to interval or from interval to interval), It can not
+always ensure that one border is always below or above the other, which means,
+in some extreme cases, the two borders are intersected and the link would be
+messed up. It happens especially when position of the two ends are too close
+or the width of one end is extremely large while the width of the other end is
+too small. In that case, users can manually set height of the top and bottom
+border by `h` and `h2` (Figure \@ref(fig:link-height)).
+
+```{r, eval = FALSE}
+circos.link(sector.index1, 0, sector.index2, 0, h)
+circos.link(sector.index1, 0, sector.index2, 0, h, h2)
+```
+
+```{r link-height, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Adjust link heights."}
+circos.par(points.overflow.warning = FALSE)
+circos.initialize(factors = factors, xlim = c(0, 10))
+circos.trackPlotRegion(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+
+circos.link("a", 10, "b", c(1, 9), border = 1);
+circos.text(9, -8, "default `h`", adj = c(0, 0.5), sector.index = "a", facing = "downward") 
+circos.link("c", 10, "d", c(1, 9), h = 0.5, h2 = 0.2, border = 1)
+circos.text(1, -3, "h = 0.5\nh2 = 0.2", adj = c(0, 0.5), sector.index = "e", facing = "downward")
+circos.clear()
+```
+
+The border of link (if it is a ribbon) or the link itself (if it is a line) is
+in fact a quadratic Bezier curve, thus you can control the shape of the link
+by `w` and `w2` (`w2` controls the shape of bottom border). See Figure
+\@ref(fig:link-shape) for examples. For more explanation of `w`, please refer
+to http://en.wikipedia.org/wiki/B%C3%A9zier_curve#Rational_B.C3.A9zier_curves.
+
+```{r, eval = FALSE}
+circos.link(sector.index1, 0, sector.index2, 0, w)
+circos.link(sector.index1, 0, sector.index2, 0, w, w2)
+```
+
+```{r link-shape, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Different link shapes."}
+circos.par(points.overflow.warning = FALSE)
+circos.initialize(factors = factors, xlim = c(0, 10))
+circos.trackPlotRegion(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+
+circos.link("a", 5, "b", 5); circos.text(10, -5, "default", facing = "outside", sector.index = "a")
+circos.link("b", 5, "c", 5, h = 0.2); circos.text(10, -5, "h=0.2", facing = "outside", sector.index = "b")
+circos.link("c", 5, "d", 5, h = 0.8); circos.text(10, -5, "h=0.8", facing = "outside", sector.index = "c")
+circos.link("d", 5, "e", 5, w = 2); circos.text(10, -5, "w=2", facing = "downward", sector.index = "d")
+circos.link("e", 5, "f", 5, w = -0.5); circos.text(10, 5, "w=-0.5", sector.index = "e")
+circos.link("f", 5, "g", 5, w = 0.1, h = 0.3); circos.text(10, -5, "w=0.1\nh=0.3", sector.index = "f")
+circos.clear()
+```
+
+When the links represent as ribbons and the two ends overlap, the links will
+be de-generated as a 'hill' (Figure \@ref(fig:link-hill)).
+
+```{r link-hill, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Link as a hill."}
+circos.par(points.overflow.warning = FALSE)
+circos.initialize(factors = factors, xlim = c(0, 10))
+circos.trackPlotRegion(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+circos.link("a", c(2, 6), "a", c(3, 7))
+circos.clear()
+```
+
+Links can have arrows to represent the directions. The `directional` argument
+controls how to add arrows. A value of `0` means there is no direction, `1`
+means the direction is from end 1 to end 2, `-1` means the direction is from
+end 2 to end 1, and `2` means bi-direction. If the link represents as a
+ribbon, a line with arrow will be added in the center of the link to represent
+directions. See Figure \@ref(fig:link-arrow).
+
+Type of arrows is controlled by `arr.type` argument and it is actually passed
+to `Arrowhead()` defined in **shape** package. Besides the arrow types
+supported in **shape** package, there is an additional arrow type `big.arrow`
+which turns the robbon into a big arrow.
+
+Unequal height of the link ends can also represent directions which we will
+discuss more with the `chordDiagram()` function.
+
+```{r, eval = FALSE}
+circos.link(sector.index1, 0, sector.index2, 0, directional = 1)
+circos.link(sector.index1, c(0, 1), sector.index2, c(0, 1), directional = -1)
+```
+
+```{r link-arrow, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Link with arrows."}
+circos.par(points.overflow.warning = FALSE)
+circos.initialize(factors = factors, xlim = c(0, 10))
+circos.trackPlotRegion(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+circos.link("a", 5, "b", 5, directional = 1, arr.length = 0.2)
+circos.link("c", c(3, 7), "d", c(3, 7), directional = 1, arr.col = "white", arr.length = 0.2)
+circos.link("e", c(4, 6), "f", c(4, 6), directional = 1, arr.type = "big.arrow", arr.length = 0.04)
+circos.clear()
+```
+
+## Highlight sectors and tracks {#highlight-sectors-and-tracks}
+
+`draw.sector()` draws sectors, rings or their parts. This function is useful
+if you want to highlight some parts of your circular plot. it needs arguments
+of the position of circle center (by default `c(0, 0)`), the start degree and
+the end degree for sectors, and radius for two edges (or one edge) which are
+up or bottom borders. `draw.sector()` is independent from the circular plot.
+
+Possible usage of `draw.sector()` is as follows.
+
+```{r eval = FALSE}
+draw.sector(start.degree, end.degree, rou1)
+draw.sector(start.degree, end.degree, rou1, rou2, center)
+draw.sector(start.degree, end.degree, rou1, rou2, center, col, border, lwd, lty)
+```
+
+Directions from `start.degree` and `end.degree` is important for drawing sectors. 
+By default, it is clock wise.
+
+```{r eval = FALSE}
+draw.sector(start.degree, end.degree, clock.wise = FALSE)
+```
+
+Following code shows examples of `draw.sector()` (Figure \@ref(fig:draw-sector-general)).
+
+```{r draw-sector-general, fig.width = 4, fig.height = 4, fig.cap = "General usage of `draw.sector()`."}
+par(mar = c(1, 1, 1, 1))
+plot(c(-1, 1), c(-1, 1), type = "n", axes = FALSE, ann = FALSE, asp = 1)
+draw.sector(20, 0)
+draw.sector(30, 60, rou1 = 0.8, rou2 = 0.5, clock.wise = FALSE, col = "#FF000080")
+draw.sector(350, 1000, col = "#00FF0080", border = NA)
+draw.sector(0, 180, rou1 = 0.25, center = c(-0.5, 0.5), border = 2, lwd = 2, lty = 2)
+draw.sector(0, 360, rou1 = 0.7, rou2 = 0.6, col = "#0000FF80")
+```
+
+In order to highlight cells in the circular plot, we can use
+`get.cell.meta.data()` to get the information of positions of cells. E.g. the
+start degree and end degree can be obtained through `cell.start.degree` and
+`cell.end.degree`, and the position of the top border and bottom border can be
+obtained through `cell.top.radius` and `cell.bottom.radius`.  Following code
+shows several examples to highlight sectors and tracks.
+
+First we create a circular plot with eight sectors and three tracks.
+
+```{r circlize_highlight_1, eval = FALSE}
+factors = letters[1:8]
+circos.initialize(factors, xlim = c(0, 1))
+for(i in 1:3) {
+    circos.track(ylim = c(0, 1))
+}
+circos.info(plot = TRUE)
+```
+
+If we want to highlight sector a (Figure \@ref(fig:circlize-highlight)):
+
+```{r circlize_highlight_2, eval = FALSE}
+draw.sector(get.cell.meta.data("cell.start.degree", sector.index = "a"),
+            get.cell.meta.data("cell.end.degree", sector.index = "a"),
+            rou1 = get.cell.meta.data("cell.top.radius", track.index = 1), 
+            col = "#FF000040")
+```
+
+If we want to highlight track 1 (Figure \@ref(fig:circlize-highlight)):
+
+```{r circlize_highlight_3, eval = FALSE}
+draw.sector(0, 360, 
+    rou1 = get.cell.meta.data("cell.top.radius", track.index = 1),
+    rou2 = get.cell.meta.data("cell.bottom.radius", track.index = 1),
+    col = "#00FF0040")           
+```
+
+If we want to highlight track 2 and 3 in sector e and f (Figure \@ref(fig:circlize-highlight)):
+
+```{r circlize_highlight_4, eval = FALSE}
+draw.sector(get.cell.meta.data("cell.start.degree", sector.index = "e"),
+            get.cell.meta.data("cell.end.degree", sector.index = "f"),
+            rou1 = get.cell.meta.data("cell.top.radius", track.index = 2),
+            rou2 = get.cell.meta.data("cell.bottom.radius", track.index = 3),
+            col = "#0000FF40")
+```
+
+If we want to highlight specific regions such as a small region inside cell
+`h:2`, we can use `circlize()` to calculate the positions in the polar
+coordinate. But always keep in mind that x-axis in the cell are always clock
+wise. See Figure \@ref(fig:circlize-highlight).
+
+```{r circlize_highlight_5, eval = FALSE}
+pos = circlize(c(0.2, 0.8), c(0.2, 0.8), sector.index = "h", track.index = 2)
+draw.sector(pos[1, "theta"], pos[2, "theta"], pos[1, "rou"], pos[2, "rou"], 
+    clock.wise = TRUE, col = "#00FFFF40")
+circos.clear()
+```
+
+```{r circlize-highlight, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Highlight sectors and tracks."}
+chunks <- knitr:::knit_code$get()
+eval(parse(text = chunks[["circlize_highlight_1"]]))
+eval(parse(text = chunks[["circlize_highlight_2"]]))
+eval(parse(text = chunks[["circlize_highlight_3"]]))
+eval(parse(text = chunks[["circlize_highlight_4"]]))
+eval(parse(text = chunks[["circlize_highlight_5"]]))
+```
+
+If the purpose is to simply highlight complete cells, there is a helper
+function `highlight.sector()` for which you only need to specify index for
+sectors and tracks that you want to to highlight. Paddings of the highligted
+regions can be set by `padding` argument which should contain four values
+representing ratios of the width or height of the highlighted region (Figure \@ref(fig:circlize-highlight-sector)).
+
+One advantage of `highlight.sector()` is that it supports to add text for the
+highlighted regions. By default, the text is drawn at that center of the
+highlighted region. The position on the radical direction can be set by
+`text.vjust` argument either by a numeric value or a string in a form of "2 inches" or "-1.2cm".
+
+```{r circlize-highlight-sector, fig.width = 4, fig.height = 4}
+factors = letters[1:8]
+circos.initialize(factors, xlim = c(0, 1))
+for(i in 1:4) {
+    circos.track(ylim = c(0, 1))
+}
+circos.info(plot = TRUE)
+
+highlight.sector(c("a", "h"), track.index = 1, text = "a and h belong to a same group",
+    facing = "bending.inside", niceFacing = TRUE, text.vjust = "6mm", cex = 0.8)
+highlight.sector("c", col = "#00FF0040")
+highlight.sector("d", col = NA, border = "red", lwd = 2)
+highlight.sector("e", col = "#0000FF40", track.index = c(2, 3))
+highlight.sector(c("f", "g"), col = NA, border = "green", 
+    lwd = 2, track.index = c(2, 3), padding = c(0.1, 0.1, 0.1, 0.1))
+highlight.sector(factors, col = "#FFFF0040", track.index = 4)
+circos.clear()
+```
+

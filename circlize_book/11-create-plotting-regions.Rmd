@@ -1,0 +1,148 @@
+
+\subsection{Points}
+
+{\tt circos.genomicPoints} is similar as {\tt circos.points}. The difference is {\tt circos.genomicPoints}
+expects a data frame containing genomic regions and a data frame containing values. The data column for 
+plotting should be indicated by {\tt numeric.column}. If the function is called
+inside {\tt circos.genomicTrackPlotRegion} and users have been already set {\tt numeric.column}
+in {\tt circos.genomicTrackPlotRegion}, proper value of {\tt numeric.column} will be
+passed to {\tt circos.genomicPoints} through {\tt ...} in {\tt panel.fun}. Which means, you need
+to add {\tt ...} as the final argument in {\tt circos.genomicPoints} to get such information.
+If {\tt numeric.column} is not set in both place, {\tt circos.genomicPoints} will use all numeric columns detected in {\tt value}.
+
+Note here {\tt numeric.column} is measured in {\tt value} while {\tt numeric.column} in
+{\tt circos.genomicTrackPlotRegion} is measured in the complete data frame. There is a
+difference of 3! When {\tt numeric.column} is passed to {\tt circos.genomicPoints} internally, 3 is subtracted automatically. 
+If you use character index instead of numeric index, you do not need to worry about it. 
+
+<<eval=FALSE>>=
+circos.genomicPoints(region, value, ...)
+circos.genomicPoints(region, value, numeric.column = c(1, 2))
+circos.genomicPoints(region, value, cex, pch)
+circos.genomicPoints(region, value, sector.index, track.index)
+@
+
+If there is only one numeric column, graphical parameters such as {\tt pch}, {\tt cex}
+can be of length one or number of rows of {\tt region}. If there are more than
+one numeric columns specified, points for each numeric column will be added iteratively,
+and the graphical parameters should be either length one or number of numeric columns specified.
+
+{\tt circos.genomicPoints} is implemented by {\tt circos.points}. The basic idea of the 
+implementation is like follows.
+
+<<eval = FALSE>>=
+circos.genomicPoints = function(region, value, numeric.column = 1, ...) {
+    x = (region[[2]] + region[[1]])/2
+    y = value[[numeric.column]]
+    circos.points(x, y, ...)
+}
+@
+
+As shown above, {\tt circos.genomicPoints} also provides arguments {\tt sector.index} and {\tt track.index}.
+The default values are current sector and current track. With these two arguments, you can
+add points by {\tt circos.genomicPoints} outside {\tt circos.genomicPlotTrackRegion}. 
+
+\subsection{Lines}
+
+{\tt circos.genomicLines} is similar as {\tt circos.lines}. The setting of graphical parameters
+is similar as {\tt circos.genomicPoints}. 
+
+<<eval=FALSE>>=
+circos.genomicLines(region, value, ...)
+circos.genomicLines(region, value, numeric.column = c(1, 2))
+circos.genomicLines(region, value, lwd, lty = "segment")
+circos.genomicLines(region, value, area, baseline, border)
+circos.genomicLines(region, value, sector.index, track.index)
+@
+
+For {\tt lty}, we additionally provide a new option {\tt segment} by which each genomic
+interval will represent as a 'horizontal' line.
+
+\subsection{Text}
+
+For {\tt circos.genomicText}, the position of text can be specified either by {\tt numeric.column} (index)
+or a separated vector {\tt y}. The labels of text can be specified either by {\tt labels.column} (index)
+or a vector {\tt labels}.
+
+<<eval=FALSE>>=
+circos.genomicText(region, value, ...)
+circos.genomicText(region, value, y, labels)
+circos.genomicText(region, value, numeric.column, labels.column)
+circos.genomicText(region, value, facing, niceFacing, adj)
+circos.genomicText(region, value, sector.index, track.index)
+@
+
+
+\subsection{Rectangle}
+
+For {\tt circos.genomicRect}, the positions of top and bottom of the rectangles can be
+specified by {\tt ytop}, {\tt ybottom} or {\tt ytop.column}, {\tt ybottom.column} (index).
+
+<<eval=FALSE>>=
+circos.genomicRect(region, value, ytop = 1, ybottom = 0)
+circos.genomicRect(region, value, ytop.column = 2, ybottom = 0)
+circos.genomicRect(region, value, col, border)
+@
+
+One of the usage of {\tt circos.genomicRect} is to plot heatmap on the circle.
+\textbf{circlize} provides a simple function {\tt colorRamp2} to interpolate colors. 
+The arguments of {\tt colorRamp2} are break points and colors
+which correspond to the break points. {\tt colorRamp2} returns a new function
+which can be used to generate new colors. 
+
+<<>>=
+col_fun = colorRamp2(breaks = c(-1, 0, 1), colors = c("green", "black", "red"))
+col_fun(c(-2, -1, -0.5, 0, 0.5, 1, 2))
+col_fun = colorRamp2(breaks = -log10(c(1, 0.05, 1e-4)), 
+    colors = c("green", "black", "red"))
+p_value = c(0.8, 0.5, 0.001)
+col_fun(-log10(p_value))
+@
+
+
+\section{Highlight chromosomes}
+
+{\tt highlight.chromosome} provides a simple way to highlight chromosomes. Just remember
+to use transparent filled colors. The position of the highlighted regions
+can be fine-tuned by {\tt padding} argument which are percent of corresponding height 
+and width in the highlighted regions.
+
+In following examples, we first create five more tracks with random points.
+
+<<genomic_highlight_1, eval = FALSE>>=
+circos.par("track.height" = 0.1)
+circos.initializeWithIdeogram(plotType = c("axis", "labels"))
+
+for(i in 1:5) {
+    bed = generateRandomBed(nr = 100)
+    circos.genomicTrackPlotRegion(bed, panel.fun = function(region, value, ...) {
+        circos.genomicPoints(region, value, pch = 16, cex = 0.5, ...)
+    })
+}
+@
+
+Following are several ways of highlighting.
+we can highlight individual tracks by setting {\tt track.index}. If two tracks or
+two chromosomes are neighbours, they will be taken as a union (figure \ref{fig:genomic_highlight}).
+
+<<genomic_highlight_2, eval = FALSE>>=
+highlight.chromosome(c("chrX", "chrY", "chr1"))
+highlight.chromosome("chr3", col = "#00FF0040", padding = c(0.05, 0.05, 0.15, 0.05))
+highlight.chromosome("chr5", col = NA, border = "red", lwd = 2, 
+    padding = c(0.05, 0.05, 0.15, 0.05))
+highlight.chromosome("chr7", col = "#0000FF40", track.index = c(2, 4, 5))
+highlight.chromosome(c("chr9", "chr10", "chr11"), col = NA, border = "green", 
+    lwd = 2, track.index = c(2, 4, 5))
+highlight.chromosome(paste0("chr", c(1:22, "X", "Y")), col = "#FFFF0040", 
+    track.index = 6)
+circos.clear()
+@
+
+<<genomic_highlight, echo = FALSE, out.width = "0.8\\textwidth", fig.cap = "Highlight different chromosomes and tracks.">>=
+par(mar = c(1, 1, 1, 1))
+<<genomic_highlight_1>>
+<<genomic_highlight_2>>
+@
+
+{\tt circos.info} would be helpful for you to find the correct track index. 
+And if you only want to highlight some sub regions in one chromosome, use {\tt draw.sector} directly. 

@@ -1,0 +1,292 @@
+
+# Advanced layout {#advanced-layout}
+
+## Zooming of sectors {#zooming-of-sectors}
+
+Under the default settings, width of sectors are calculated according to the range of data 
+in each category. In some circumstance, you may want to manually set the width of each 
+sector. Normally it is not a good idea since width of sectors can reflect useful information of your data. However, 
+sometimes it is useful to modify the width of sectors, e.g., you want to put your plot only 
+in half of the circle while in the other half of the circle, zooming of certain sectors are applied.
+The width of sectors can be manually set by {\tt sector.width} argument in {\tt circos.initialize}. 
+The value for the argument should be a vector with length of either one or as same as the 
+number of categories (again, order of {\tt sector.width} vector corresponds to the order of levels of {\tt factors}). 
+{\tt sector.width} is relative value, and it will be scaled to percentage 
+(e.g. if you set {\tt sector.width} to {\tt c(1, 3)}, it will be scaled as {\tt c(0.25, 0.75)}).
+
+In order to zoom e.g. one sector, the copy of the data corresponding to this sector
+should be attached to the original data. Since these two sectors (original sector and 
+the zoomed sector) contain the same data, if same plotting functions are applied to them,
+there will be same graphics generated.
+
+In the following code, sector a and b are zoomed. To make thing simple, we put all data into 
+one data frame. 
+
+```{r}
+df = data.frame(
+    factors = sample(letters[1:6], 100, replace = TRUE),
+    x = rnorm(100),
+    y = rnorm(100),
+    stringsAsFactors = FALSE
+)
+```
+
+Extract the data for sector a and b, and assign to a new variable.
+
+```{r}
+zoom_df_a = df[df$factors == "a", ]
+zoom_df_b = df[df$factors == "b", ]
+zoom_df_b = sort(zoom_df_b)[1:10, ]
+zoom_df = rbind(zoom_df_a, zoom_df_b)
+```
+
+Modify the names for the zoomed sector, because in the circos plot, zoomed sectors are same
+as other normal sectors. Attach to the original data frame.
+
+```{r}
+zoom_df$factors = paste0("zoom_", zoom_df$factors)
+df2 = rbind(df, zoom_df)
+```
+
+In order to put the normal sectors in half of the circle and the zoomed sectors in the other half,
+just normalize the width of normal sectors and normalize the width
+of zoomed sectors separately.
+
+```{r}
+xrange = tapply(df2$x, df2$factors, function(x) max(x) - min(x))
+normal_sector_index = unique(df$factors)
+zoomed_sector_index = unique(zoom_df$factors)
+sector.width = c(xrange[normal_sector_index] / sum(xrange[normal_sector_index]), 
+                 xrange[zoomed_sector_index] / sum(xrange[zoomed_sector_index]))
+```
+
+Now make the circos plot in the normal way.
+
+```{r circlize_zoom_1, eval = FALSE}
+circos.par(start.degree = 90)
+circos.initialize(df2$factors, x = df2$x, sector.width = sector.width)
+circos.trackPlotRegion(df2$factors, x = df2$x, y = df2$y, 
+    panel.fun = function(x, y) {
+    circos.points(x, y, col = "red", pch = 16, cex = 0.5)
+    circos.text(CELL_META$xcenter, CELL_META$cell.ylim[2] + uy(2, "mm"), 
+        CELL_META$sector.index, niceFacing = TRUE)
+})
+```
+
+If you want to add links from original sectors to zoomed sectors, 
+
+```{r circlize_zoom_2, eval = FALSE}
+circos.link("a", get.cell.meta.data("cell.xlim", sector.index = "a"),
+    "zoom_a", get.cell.meta.data("cell.xlim", sector.index = "zoom_a"),
+    border = NA, col = "#00000020")
+circos.link("b", c(zoom_df_b[1, 1], zoom_df_b[1, 10]),
+    "zoom_b", get.cell.meta.data("cell.xlim", sector.index = "zoom_b"),
+    border = NA, col = "#00000020")circos.clear()
+```
+
+```{r circlize_zoom, echo = FALSE, fig.cap = "Zoom sectors."}
+chunks <- knitr:::knit_code$get()
+eval(parse(text = chunks[["circlize_zoom_1"]]))
+eval(parse(text = chunks[["circlize_zoom_2"]]))
+```
+
+## A part of the circular layout
+
+{\tt canvas.xlim} and {\tt canvas.ylim} in {\tt circos.par} is useful to make figures on only part of circle. In the example,
+only sectors between $0^\circ$ to $90^\circ$ are plotted (figure \ref{fig:circlize_part}). First, four sectors
+with the same width are initialized. Then only the first sector is drawn with points and lines. From figure \ref{fig:circlize_part},
+we in fact created the whole circle, but only a quarter of the circle is in the canvas region. Codes are as follows. 
+
+```{r, eval = FALSE}
+circos.par("canvas.xlim" = c(0, 1), "canvas.ylim" = c(0, 1),
+    "clock.wise" = FALSE, "gap.degree" = 0)
+factors = letters[1:4]
+circos.initialize(factors = factors, xlim = c(0, 1))
+circos.trackPlotRegion(factors = factors, ylim = c(0, 1), bg.border = NA)
+circos.updatePlotRegion(sector.index = "a", bg.border = "black")
+x1 = runif(100)
+y1 = runif(100)
+circos.points(x1, y1, pch = 16, cex = 0.5)
+circos.trackPlotRegion(factors = factors, ylim = c(0, 1), bg.border = NA)
+circos.updatePlotRegion(sector.index = "a", bg.border = "black")
+circos.lines(1:100/100, y1, pch = 16, cex = 0.5)
+circos.clear()
+```
+
+
+```{r circlize_part, echo = FALSE, fig.width = 6, fig.height = 12, fig.cap = "One quarter of the circle."}
+source("src/intro-17-part.R")
+```
+
+In the second situation, in some tracks, you only need to add graphic on subset of sectors.
+Remember when you are creating new track with {\tt circos.trackPlotRegion} and set {\tt bg.col} and {\tt bg.border}
+to {\tt NA}, it means create the new track while draw nothing. After that, you can use {\tt circos.updatePlotRegion} to update
+these invisible cells of interest and add graphics on it (figure \ref{fig:circlize_part2}).
+
+```{r, eval = FALSE}
+par(mar = c(1, 1, 1, 1))
+factors = letters[1:4]
+circos.initialize(factors = factors, xlim = c(0, 1))
+circos.trackPlotRegion(factors = factors, ylim = c(0, 1), bg.col = NA, bg.border = NA)
+circos.updatePlotRegion(sector.index = "a", bg.border = "black")
+x1 = runif(100)
+y1 = runif(100)
+circos.points(x1, y1, pch = 16, cex = 0.5)
+
+circos.trackPlotRegion(factors = factors, ylim = c(0, 1),bg.col = NA, bg.border = NA)
+circos.updatePlotRegion(sector.index = "a", bg.border = "black")
+x1 = runif(100)
+y1 = runif(100)
+circos.points(x1, y1, pch = 16, cex = 0.5)
+
+circos.trackPlotRegion(factors = factors, ylim = c(0, 1))
+circos.trackPlotRegion(factors = factors, ylim = c(0, 1))
+circos.clear()
+```
+
+```{r circlize_part2, echo = FALSE, fig.cap = "Only plot subset of sectors in certain tracks."}
+source("src/intro-18-part2.R")
+```
+
+## Combine more than one circular plots
+
+Since circular layout by \textbf{circlize} is finally plotted in an ordinary R plotting system.
+Two seperated circular layouts can be plotted together by some tricks. Here the key is 
+{\tt par(new = TRUE)} which allows to draw a new figure on the previous canvas region.
+{\bf Just remember the radius of the circos is always 1.}
+
+The first example is to make one outer circos plot and an inner circos plot (figure \ref{fig:circlize_nested}).
+
+```{r, eval = FALSE}
+par(mar = c(1, 1, 1, 1))
+factors = letters[1:4]
+circos.initialize(factors = factors, xlim = c(0, 1))
+circos.trackPlotRegion(ylim = c(0, 1), panel.fun = function(x, y) {
+    circos.text(0.5, 0.5, "outer circos")
+})
+circos.clear()
+
+par(new = TRUE)
+circos.par("canvas.xlim" = c(-2, 2), "canvas.ylim" = c(-2, 2))
+factors = letters[1:3]
+circos.initialize(factors = factors, xlim = c(0, 1))
+circos.trackPlotRegion(ylim = c(0, 1), panel.fun = function(x, y) {
+    circos.text(0.5, 0.5, "inner circos")
+})
+circos.clear()
+```
+
+```{r circlize_nested, echo = FALSE, fig.cap = "An outer circos plot plus an inner one."}
+source("src/intro-19-nested.R")
+```
+
+The second example is to make two separated circos plot in which every
+circos plot only contains a half (figure \ref{fig:circlize_separated}).
+
+```{r, eval = FALSE}
+par(mar = c(1, 1, 1, 1))
+factors = letters[1:4]
+circos.par("canvas.xlim" = c(-1, 1.5), "canvas.ylim" = c(-1, 1.5), start.degree = -45)
+circos.initialize(factors = factors, xlim = c(0, 1))
+circos.trackPlotRegion(ylim = c(0, 1), bg.col = NA, bg.border = NA)
+circos.updatePlotRegion(sector.index = "a")
+circos.text(0.5, 0.5, "first one")
+circos.updatePlotRegion(sector.index = "b")
+circos.text(0.5, 0.5, "first one")
+
+circos.clear()
+
+par(new = TRUE)
+circos.par("canvas.xlim" = c(-1.5, 1), "canvas.ylim" = c(-1.5, 1), start.degree = -45)
+circos.initialize(factors = factors, xlim = c(0, 1))
+circos.trackPlotRegion(ylim = c(0, 1), bg.col = NA, bg.border = NA)
+circos.updatePlotRegion(sector.index = "d")
+circos.text(0.5, 0.5, "second one")
+circos.updatePlotRegion(sector.index = "c")
+circos.text(0.5, 0.5, "second one")
+
+circos.clear()
+```
+
+```{r circlize_separated, echo = FALSE, fig.cap = "Two separated circos plots"}
+source("src/intro-20-seperated.R")
+```
+
+The third example is to draw sectors with different radius (figure \ref{fig:circlize_diff_radius}). In fact,
+it makes four circos plots in which only one sector of each graphs is plotted. Note links
+can not be drawn in these different sectors because links can only be drawn in one circos
+plot. 
+
+```{r, eval = FALSE}
+library(circlize)
+par(mar = c(1, 1, 1, 1))
+factors = letters[1:4]
+lim = c(1, 1.1, 1.2, 1.3)
+for(i in 1:4) {
+    circos.par("canvas.xlim" = c(-lim[i], lim[i]),
+        "canvas.ylim" = c(-lim[i], lim[i]), "track.height" = 0.4)
+    circos.initialize(factors = factors, xlim = c(0, 1))
+    circos.trackPlotRegion(ylim = c(0, 1), bg.border = NA)
+    circos.updatePlotRegion(sector.index = factors[i], bg.border = "black")
+    circos.points(runif(10), runif(10), pch = 16)
+    circos.clear()
+    par(new = TRUE)
+}
+par(new = FALSE)
+```
+
+It is different from example in ``Draw part of the circos layout'' section. In that example,
+cells both visible and invisible all belong to a same track and they are in a same circos plot, so they
+should have same radius. But here, cells have different radius and they
+belong to different circos plot.
+
+
+```{r circlize_diff_radius, echo = FALSE, fig.cap = "Sectors with different radius."}
+source("src/intro-21-diffradius.R")
+```
+
+## Work with the base graphic system {#work-with-base-graphic-system}
+
+**circlize** is built on the base R graphic system, then, of course the base graphic
+functions can be used in combination with circlize functions. On the other hand,
+`circlize()` converts data points from the data coordinates to the canvas coordinates
+where the base graphic function can be directly applied. 
+
+Normally, the base functions such as `title()`, `text()`, `legend()` can be used to 
+add extra information on the plot (Figure \@ref(fig:circlize-base)).
+
+```{r circlize-base, eval = FALSE}
+factors = letters[1:4]
+circos.initialize(factors = factors, xlim = c(0, 1))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    circos.points(1:20/20, 1:20/20)
+})
+text(0, 0, "This is\nthe center", cex = 1.5)
+legend("bottomleft", pch = 1, legend = "This is the legend")
+title("This is the title")
+circos.clear()
+```
+
+## Arrange multiple plots
+
+**circlize** is implemented in the base R graphic system, thus, you can use
+`layout()` or `par(mforw, mfcol)` to arrange multiple circular plots in one page.
+
+```{r circlize-multiple-layout, fig.width = 8, fig.height = 8, fig.cap = "Arrange multiple circular plots."}
+layout(matrix(1:9, 3, 3))
+for(i in 1:9) {
+    factors = 1:8
+    par(mar = c(0.5, 0.5, 0.5, 0.5))
+    circos.par(cell.padding = c(0, 0, 0, 0))
+    circos.initialize(factors, xlim = c(0, 1))
+    circos.trackPlotRegion(ylim = c(0, 1), track.height = 0.05,
+        bg.col = rand_color(8), bg.border = NA)
+    for(i in 1:20) {
+        se = sample(1:8, 2)
+        circos.link(se[1], runif(2), se[2], runif(2), 
+            col = rand_color(1, transparency = 0.4), border = NA)
+    }
+    circos.clear()
+}
+```
+
