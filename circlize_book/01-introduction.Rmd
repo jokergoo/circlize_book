@@ -1,4 +1,4 @@
-# (PART) Part I {-} 
+# (PART) General Functionality {-} 
 
 # Introduction {#introduction}
 

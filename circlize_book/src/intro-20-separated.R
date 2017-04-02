@@ -2,9 +2,7 @@
 op = par(no.readonly = TRUE)
 
 library(circlize)
-layout(rbind(c(1,1,2,2), c(0, 3, 3,0)))
-par(mar = c(2, 2, 2, 2))
-
+par(mar = c(2, 2, 2, 2), mfrow = c(1, 3))
 
 factors = letters[1:4]
 circos.par("canvas.xlim" = c(-1, 1.5), "canvas.ylim" = c(-1, 1.5), start.degree = -45)

@@ -549,3 +549,27 @@ highlight.sector(factors, col = "#FFFF0040", track.index = 4)
 circos.clear()
 ```
 
+## Work with the base graphic system {#work-with-base-graphic-system}
+
+**circlize** is built on the base R graphic system, then, of course the base graphic
+functions can be used in combination with circlize functions. On the other hand,
+`circlize()` converts data points from the data coordinates to the canvas coordinates
+where the base graphic function can be directly applied. 
+
+Normally, the base functions such as `title()`, `text()`, `legend()` can be used to 
+add extra information on the plot (Figure \@ref(fig:circlize-base)).
+
+Sometimes, when the text or other graphics are far from the circle, you may set `par(xpd = NA)`
+so that the plotting is not clipped.
+
+```{r circlize-base, eval = FALSE}
+factors = letters[1:4]
+circos.initialize(factors = factors, xlim = c(0, 1))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    circos.points(1:20/20, 1:20/20)
+})
+text(0, 0, "This is\nthe center", cex = 1.5)
+legend("bottomleft", pch = 1, legend = "This is the legend")
+title("This is the title")
+circos.clear()
+```

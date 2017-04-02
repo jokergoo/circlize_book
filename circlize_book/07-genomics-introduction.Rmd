@@ -1,5 +1,5 @@
 
-# (PART) Part II {-} 
+# (PART) Applications in Genomics {-} 
 
 # Introduction {#genomic-introduction}
 

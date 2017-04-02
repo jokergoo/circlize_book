@@ -2,8 +2,7 @@ library(circlize)
 
 op = par(no.readonly = TRUE)
 
-layout(rbind(c(1,1,2,2), c(0, 3, 3,0)))
-par(mar = c(2, 2, 2, 2))
+par(mar = c(2, 2, 2, 2), mfrow = c(1, 3))
 factors = letters[1:4]
 circos.initialize(factors = factors, xlim = c(0, 1))
 circos.trackPlotRegion(ylim = c(0, 1), panel.fun = function(x, y) {
