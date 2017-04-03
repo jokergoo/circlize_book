@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Circular Visualization in R</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Circular Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="github-repo" content="jokergoo/books" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Circular Visualization in R" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  
+
+<meta name="author" content="Zuguang Gu">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="advanced-layout.html">
+<link rel="next" href="placeholder.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Circular Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I General Functionality</b></span></li>
+<li class="chapter" data-level="1" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>1</b> Circular layout</a></li>
+<li class="chapter" data-level="2" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>2</b> Graphics</a></li>
+<li class="chapter" data-level="3" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>3</b> Legends</a></li>
+<li class="chapter" data-level="4" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>4</b> Implement high-level plots</a></li>
+<li class="chapter" data-level="5" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>5</b> Advanced layout</a></li>
+<li class="part"><span><b>II Applications in Genomics</b></span></li>
+<li class="chapter" data-level="6" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>6</b> Initialize with genomic data</a><ul>
+<li class="chapter" data-level="6.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>6.1</b> Initialize with cytoband data</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>6.1.1</b> Basic usage</a></li>
+<li class="chapter" data-level="6.1.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#pre-defined-tracks"><i class="fa fa-check"></i><b>6.1.2</b> Pre-defined tracks</a></li>
+<li class="chapter" data-level="6.1.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#other-general-settings"><i class="fa fa-check"></i><b>6.1.3</b> Other general settings</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>6.2</b> Customize chromosome track</a></li>
+<li class="chapter" data-level="6.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>6.3</b> Initialize with general genomic category</a></li>
+<li class="chapter" data-level="6.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>6.4</b> Zooming chromosomes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
+<li class="part"><span><b>III Part II</b></span></li>
+<li class="chapter" data-level="8" data-path="just-note-numeric-column-is-measured-in-bed.html"><a href="just-note-numeric-column-is-measured-in-bed.html"><i class="fa fa-check"></i><b>8</b> just note <code>numeric.column</code> is measured in <code>bed</code></a></li>
+<li class="chapter" data-level="9" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>9</b> Placeholder</a></li>
+<li class="chapter" data-level="10" data-path="note-how-horizontalline-works.html"><a href="note-how-horizontalline-works.html"><i class="fa fa-check"></i><b>10</b> note how ‘horizontalLine’ works</a></li>
+<li class="chapter" data-level="11" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>11</b> Placeholder</a></li>
+<li class="part"><span><b>IV Visualize Relations</b></span></li>
+<li class="chapter" data-level="12" data-path="code-is-not-run-when-building-the-vignette.html"><a href="code-is-not-run-when-building-the-vignette.html"><i class="fa fa-check"></i><b>12</b> code is not run when building the vignette</a></li>
+<li class="chapter" data-level="13" data-path="yang-yao-is-.html"><a href="yang-yao-is-.html"><i class="fa fa-check"></i><b>13</b> yang yao is -</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="initialize-genomic-plot" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Initialize with genomic data</h1>
+<p><strong>circlize</strong> is quite flexible to initialize the circular plot not only by chromosomes, but also by any type of general genomic categories.</p>
+<div id="initialize-cytoband" class="section level2">
+<h2><span class="header-section-number">6.1</span> Initialize with cytoband data</h2>
+<p><a href="https://genome.ucsc.edu/cgi-bin/hgTables?hgta_table=cytoBand&amp;hgta_doSchema=describe%20table%20schema">Cytoband data</a> is an ideal data source to initialize genomic plots. It contains length of chromosomes as well as so called “chromosome band” annotation to help to identify positions on chromosomes.</p>
+<div id="basic-usage" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Basic usage</h3>
+<p>If you work on human genome, the most straightforward way is to directly use <code>circos.initializeWithIdeogram()</code> (Figure @ref(fig:genomic-initialize- ideogram) A). By default, the function creates a track with chromosome name and axes, and a track of ideograms.</p>
+<p>Although chromosome names added to the plot are pure numeric, actually the internally names have the “chr” index. When you adding more tracks, the chromosome names should also have “chr” index.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>()</code></pre></div>
+<p>By default, <code>circos.initializeWithIdeogram()</code> initializes the plot with cytoband data of human genome <code>hg19</code>. Users can also initialize with other species by specifying <code>species</code> argument and it will automatically download cytoband files for corresponding species.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">species =</span> <span class="st">&quot;hg18&quot;</span>)
+<span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">species =</span> <span class="st">&quot;mm10&quot;</span>)</code></pre></div>
+<p>When you are dealing rare species and there is no cytoband data available yet, <code>circos.initializeWithIdeogram()</code> will try to continue to download the “chromInfo” file form UCSC, which also contains lengths of chromosomes, but of course, there is no ideogram track on the plot.</p>
+<p>In some cases, when there is no internet connection for downloading or there is no corresponding data avaiable on UCSC yet. You can manually construct a data frame which contains ranges of chromosomes or a file path if it is stored in a file, and sent to <code>circos.initializeWithIdeogram()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cytoband.file =<span class="st"> </span><span class="kw">system.file</span>(<span class="dt">package =</span> <span class="st">&quot;circlize&quot;</span>, <span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;cytoBand.txt&quot;</span>)
+<span class="kw">circos.initializeWithIdeogram</span>(cytoband.file)
+
+cytoband.df =<span class="st"> </span><span class="kw">read.table</span>(cytoband.file, <span class="dt">colClasses =</span> <span class="kw">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;numeric&quot;</span>,
+    <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;character&quot;</span>, <span class="st">&quot;character&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)
+<span class="kw">circos.initializeWithIdeogram</span>(cytoband.df)</code></pre></div>
+<p>If you read cytoband data directly from file, please explicitly specify <code>colClasses</code> arguments and set the class of position columns as <code>numeric</code>. The reason is since positions are represented as integers, <code>read.table</code> would treat those numbers as <code>integer</code> by default. In initialization of circular plot, <strong>circlize</strong> needs to calculate the summation of all chromosome lengths. The sumation of such large integers would throw error of integer overflow.</p>
+<p>By default, <code>circos.intializeWithIdeogram()</code> uses all chromosomes which are available in cytoband data to initialize the circular plot. Users can choose a subset of chromosomes by specifying <code>chromosome.index</code>. This argument is also for ordering chromosomes (Figure <a href="initialize-genomic-plot.html#fig:genomic-initialize-ideogram">6.1</a> B).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">8</span>)))</code></pre></div>
+<p>When there is no cytoband data for the specified species, and chromInfo data is used instead, they may be many many extra short contigs. <code>chromosome.index</code> can also be useful to remove unnecessary contigs.</p>
+</div>
+<div id="pre-defined-tracks" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> Pre-defined tracks</h3>
+<p>After the initialization of the circular plot, <code>circos.initializeWithIdeogram()</code> additionally creates a track where there are genomic axes and chromosome names, and create another track where there is an ideogram (depends on whether cytoband data is available). <code>plotType</code> argument is used to control which type of tracks to add. (figure Figure <a href="initialize-genomic-plot.html#fig:genomic-initialize-ideogram">6.1</a> C, D).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="kw">c</span>(<span class="st">&quot;axis&quot;</span>, <span class="st">&quot;labels&quot;</span>))
+<span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</code></pre></div>
+</div>
+<div id="other-general-settings" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> Other general settings</h3>
+<p>Similar as general circular plot, the parameters for the layout can be controlled by <code>circos.par()</code> (Figure <a href="initialize-genomic-plot.html#fig:genomic-initialize-ideogram">6.1</a> E, F).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="st">&quot;start.degree&quot;</span> =<span class="st"> </span><span class="dv">90</span>)
+<span class="kw">circos.initializeWithIdeogram</span>()
+<span class="kw">circos.clear</span>()
+<span class="kw">circos.par</span>(<span class="st">&quot;gap.degree&quot;</span> =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="dv">12</span>))
+<span class="kw">circos.initializeWithIdeogram</span>()
+<span class="kw">circos.clear</span>()</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:genomic-initialize-ideogram"></span>
+<img src="circlize-book_files/figure-html/genomic-initialize-ideogram-1.png" alt="Initialize genomic plot." width="768" />
+<p class="caption">
+Figure 6.1: Initialize genomic plot.
+</p>
+</div>
+</div>
+</div>
+<div id="customize-chromosome-track" class="section level2">
+<h2><span class="header-section-number">6.2</span> Customize chromosome track</h2>
+<p>By default <code>circos.initializeWithIdeogram()</code> initializes the layout and adds two tracks. When <code>plotType</code> argument is set to <code>NULL</code>, the circular layout is only initialized but nothing is added. This makes it possible for users to completely design their own style of chromosome track.</p>
+<p>In the following example, we use different colors to represent chromosomes and put chromosome names in the center of each cell (Figure <a href="initialize-genomic-plot.html#fig:genomic-customize-chromosome">6.2</a>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
+<span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+    chr =<span class="st"> </span>CELL_META<span class="op">$</span>sector.index
+    xlim =<span class="st"> </span>CELL_META<span class="op">$</span>xlim
+    ylim =<span class="st"> </span>CELL_META<span class="op">$</span>ylim
+    <span class="kw">circos.rect</span>(xlim[<span class="dv">1</span>], <span class="dv">0</span>, xlim[<span class="dv">2</span>], <span class="dv">1</span>, <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="dv">1</span>))
+    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="kw">mean</span>(ylim), chr, <span class="dt">cex =</span> <span class="fl">0.7</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>,
+        <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
+}, <span class="dt">track.height =</span> <span class="fl">0.15</span>, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:genomic-customize-chromosome"></span>
+<img src="circlize-book_files/figure-html/genomic-customize-chromosome-1.png" alt="Customize chromosome track." width="384" />
+<p class="caption">
+Figure 6.2: Customize chromosome track.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+</div>
+<div id="initialize-with-general-genomic-category" class="section level2">
+<h2><span class="header-section-number">6.3</span> Initialize with general genomic category</h2>
+<p>Chromosome is just a special case of genomic category. <code>circos.genomicInitialize()</code> can initialize circular layout with any type of genomic categories. In fact, <code>circos.initializeWithIdeogram()</code> is implemented by <code>circos.genomicInitialize()</code>. The input data for <code>circos.genomicInitialize()</code> is also a data frame with at least three columns. The first column is genomic category (for cytoband data, it is chromosome name), and the next two columns are positions in each genomic category. The range in each category will be inferred as the minimum position and the maximum position in corresponding category.</p>
+<p>In the following example, a circular plot is initialized with three genes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df =<span class="st"> </span><span class="kw">data.frame</span>(
+    <span class="dt">name  =</span> <span class="kw">c</span>(<span class="st">&quot;TP53&quot;</span>,  <span class="st">&quot;TP63&quot;</span>,    <span class="st">&quot;TP73&quot;</span>),
+    <span class="dt">start =</span> <span class="kw">c</span>(<span class="dv">7565097</span>, <span class="dv">189349205</span>, <span class="dv">3569084</span>),
+    <span class="dt">end   =</span> <span class="kw">c</span>(<span class="dv">7590856</span>, <span class="dv">189615068</span>, <span class="dv">3652765</span>))
+<span class="kw">circos.genomicInitialize</span>(df)</code></pre></div>
+<p>Note it is not necessary that the record for each gene is only one row.</p>
+<p>In following example, we plot the transcripts for TP53, TP63 and TP73 in a circular layout (Figure <a href="initialize-genomic-plot.html#fig:genomic-gene-model">6.3</a>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tp_family =<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">system.file</span>(<span class="dt">package =</span> <span class="st">&quot;circlize&quot;</span>, <span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;tp_family_df.rds&quot;</span>))
+<span class="kw">head</span>(tp_family)</code></pre></div>
+<pre><code>##   gene   start     end        transcript exon
+## 1 TP53 7565097 7565332 ENST00000413465.2    7
+## 2 TP53 7577499 7577608 ENST00000413465.2    6
+## 3 TP53 7578177 7578289 ENST00000413465.2    5
+## 4 TP53 7578371 7578554 ENST00000413465.2    4
+## 5 TP53 7579312 7579590 ENST00000413465.2    3
+## 6 TP53 7579700 7579721 ENST00000413465.2    2</code></pre>
+<p>In the following code, we first create a track which identifies three genes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicInitialize</span>(tp_family)
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), 
+    <span class="dt">bg.col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000040&quot;</span>, <span class="st">&quot;#00FF0040&quot;</span>, <span class="st">&quot;#0000FF40&quot;</span>), 
+    <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.05</span>)</code></pre></div>
+<p>Next, we put transcripts one after the other for each gene. It is simply to add lines and rectangles. The usage of <code>circos.genomicTrack()</code> and <code>circos.genomicRect()</code> will be discussed in Sector @ref(genomic-plotting- region).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n =<span class="st"> </span><span class="kw">max</span>(<span class="kw">tapply</span>(tp_family<span class="op">$</span>transcript, tp_family<span class="op">$</span>gene, <span class="cf">function</span>(x) <span class="kw">length</span>(<span class="kw">unique</span>(x))))
+<span class="kw">circos.genomicTrack</span>(tp_family, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, n <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span>), 
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
+        all_tx =<span class="st"> </span><span class="kw">unique</span>(value<span class="op">$</span>transcript)
+        <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_along</span>(all_tx)) {
+            l =<span class="st"> </span>value<span class="op">$</span>transcript <span class="op">==</span><span class="st"> </span>all_tx[i]
+            <span class="co"># for each transcript</span>
+            current_tx_start =<span class="st"> </span><span class="kw">min</span>(region[l, <span class="dv">1</span>])
+            current_tx_end =<span class="st"> </span><span class="kw">max</span>(region[l, <span class="dv">2</span>])
+            <span class="kw">circos.lines</span>(<span class="kw">c</span>(current_tx_start, current_tx_end), 
+                <span class="kw">c</span>(n <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, n <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">col =</span> <span class="st">&quot;#CCCCCC&quot;</span>)
+            <span class="kw">circos.genomicRect</span>(region[l, , <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">ytop =</span> n <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.4</span>, 
+                <span class="dt">ybottom =</span> n <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.4</span>, <span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">border =</span> <span class="ot">NA</span>)
+        }
+}, <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.4</span>)
+<span class="kw">circos.clear</span>()</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:genomic-gene-model"></span>
+<img src="circlize-book_files/figure-html/genomic-gene-model-1.png" alt="Circular representation of alternative transcripts for genes." width="384" />
+<p class="caption">
+Figure 6.3: Circular representation of alternative transcripts for genes.
+</p>
+</div>
+<p>In Figure <a href="initialize-genomic-plot.html#fig:genomic-gene-model">6.3</a>, you may notice the start of axes becomes “0KB” while not the correct values. It is just an adjustment of the axes labels to reflect the relative distance to the start of each gene, while the coordinate in the cells are still using the original values. Set <code>tickLabelsStartFromZero</code> to <code>FALSE</code> to recover axes labels to the original values.</p>
+</div>
+<div id="zooming-chromosomes" class="section level2">
+<h2><span class="header-section-number">6.4</span> Zooming chromosomes</h2>
+<p>The strategy is the same as introduced in Section @ref(#zooming-of-sectors). We first define a function <code>extend_chromosomes()</code> which copy data in subset of chromosomes into the original data frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">extend_chromosomes =<span class="st"> </span><span class="cf">function</span>(bed, chromosome, <span class="dt">prefix =</span> <span class="st">&quot;zoom_&quot;</span>) {
+    zoom_bed =<span class="st"> </span>bed[bed[[<span class="dv">1</span>]] <span class="op">%in%</span><span class="st"> </span>chromosome, , drop =<span class="st"> </span><span class="ot">FALSE</span>]
+    zoom_bed[[<span class="dv">1</span>]] =<span class="st"> </span><span class="kw">paste0</span>(prefix, zoom_bed[[<span class="dv">1</span>]])
+    <span class="kw">rbind</span>(bed, zoom_bed)
+}</code></pre></div>
+<p><code>read.cytoband()</code> downloads and reads cytoband data from UCSC. In following, x ranges for normal chromosomes and zoomed chromosomes are normalized separetely.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cytoband =<span class="st"> </span><span class="kw">read.cytoband</span>()
+cytoband_df =<span class="st"> </span>cytoband<span class="op">$</span>df
+chromosome =<span class="st"> </span>cytoband<span class="op">$</span>chromosome
+
+xrange =<span class="st"> </span><span class="kw">c</span>(cytoband<span class="op">$</span>chr.len, cytoband<span class="op">$</span>chr.len[<span class="kw">c</span>(<span class="st">&quot;chr1&quot;</span>, <span class="st">&quot;chr2&quot;</span>)])
+normal_chr_index =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">24</span>
+zoomed_chr_index =<span class="st"> </span><span class="dv">25</span><span class="op">:</span><span class="dv">26</span>
+
+<span class="co"># normalize in normal chromsomes and zoomed chromosomes separately</span>
+sector.width =<span class="st"> </span><span class="kw">c</span>(xrange[normal_chr_index] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(xrange[normal_chr_index]), 
+                 xrange[zoomed_chr_index] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(xrange[zoomed_chr_index])) </code></pre></div>
+<p>The extended cytoband data which is in form of a data frame is sent to <code>circos.initializeWithIdeogram()</code>. You can see the ideograms for chromosome 1 and 2 are zoomed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>)
+<span class="kw">circos.initializeWithIdeogram</span>(<span class="kw">extend_chromosomes</span>(cytoband_df, <span class="kw">c</span>(<span class="st">&quot;chr1&quot;</span>, <span class="st">&quot;chr2&quot;</span>)), 
+    <span class="dt">sector.width =</span> sector.width)</code></pre></div>
+<p>Add a new track.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dv">500</span>)
+<span class="kw">circos.genomicTrackPlotRegion</span>(<span class="kw">extend_chromosomes</span>(bed, <span class="kw">c</span>(<span class="st">&quot;chr1&quot;</span>, <span class="st">&quot;chr2&quot;</span>)),
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
+        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.3</span>)
+})</code></pre></div>
+<p>Add a link from original chromosome to the zoomed chromosome (Figure <a href="initialize-genomic-plot.html#fig:genomic-zoom">6.4</a>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.link</span>(<span class="st">&quot;chr1&quot;</span>, <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;chr1&quot;</span>),
+    <span class="st">&quot;zoom_chr1&quot;</span>, <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;zoom_chr1&quot;</span>),
+    <span class="dt">col =</span> <span class="st">&quot;#00000020&quot;</span>, <span class="dt">border =</span> <span class="ot">NA</span>)
+<span class="kw">circos.clear</span>()</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:genomic-zoom"></span>
+<img src="circlize-book_files/figure-html/genomic-zoom-1.png" alt="Zoom chromosomes." width="384" />
+<p class="caption">
+Figure 6.4: Zoom chromosomes.
+</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="advanced-layout.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="placeholder.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/08-initialize-genomic-data.Rmd",
+"text": "Edit"
+},
+"download": ["circlize-book.pdf", "circlize-book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

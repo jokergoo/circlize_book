@@ -1,402 +1,303 @@
 
-\section{Initialize the layout}
+```{r, echo = FALSE}
+library(circlize)
+```
 
-\subsection{Initialize with cytoband data}
+# Initialize with genomic data {#initialize-genomic-plot}
 
-\subsubsection{Basic usage}
+**circlize** is quite flexible to initialize the circular plot
+not only by chromosomes, but also by any type of general genomic categories.
 
-Similar as general circos plots, the first step is to initialize the plot with genomic categories.
-In most situations, genomic categories are measured by chromosomes. The easiest way is to used
-{\tt circos.initializeWithIdeogram} (figure \ref{fig:genomic_initialize_ideogram} A):
+## Initialize with cytoband data {#initialize-cytoband}
 
-<<genomic_initialize_ideogram_1, eval = FALSE, echo = 1:2>>=
-par(mar = c(1, 1, 1, 1))
+[Cytoband data](https://genome.ucsc.edu/cgi-bin/hgTables?hgta_table=cytoBand&hgta_doSchema=describe%20table%20schema) is
+an ideal data source to initialize genomic plots. It contains length of
+chromosomes as well as so called "chromosome band" annotation to help to
+identify positions on chromosomes.
+
+### Basic usage
+
+If you work on human genome, the most straightforward way is to directly use
+`circos.initializeWithIdeogram()` (Figure \@ref(fig:genomic-initialize-
+ideogram) A). By default, the function creates a track with chromosome name
+and axes, and a track of ideograms.
+
+Although chromosome names added to the plot are pure numeric, actually the
+internally names have the "chr" index. When you adding more tracks, the
+chromosome names should also have "chr" index.
+
+```{r genomic_initialize_ideogram_1, eval = FALSE, echo = 1}
 circos.initializeWithIdeogram()
-text(0, 0, "default", cex = 0.7)
+text(0, 0, "default", cex = 1)
 text(-0.9, 0.9, "A", cex = 1.5)
-@
+# circos.info()
+```
 
-By default, the function will initialize the plot with cytoband data of hg19. You can also 
-use your own cytoband data by specifying the path of your cytoband file (no matter 
-compressed or not) or providing your cytoband data as a data frame.  An example for 
-cytoband file is \url{http://hgdownload.soe.ucsc.edu/goldenpath/hg19/database/cytoBand.txt.gz}.
+By default, `circos.initializeWithIdeogram()` initializes the plot with
+cytoband data of human genome `hg19`. Users can also initialize with other
+species by specifying `species` argument and it will automatically download
+cytoband files for corresponding species.
 
-<<echo = 2:6>>=
-pdf(NULL)
-cytoband.file = paste0(system.file(package = "circlize"), "/extdata/cytoBand.txt")
+```{r, eval = FALSE}
+circos.initializeWithIdeogram(species = "hg18")
+circos.initializeWithIdeogram(species = "mm10")
+```
+
+When you are dealing rare species and there is no cytoband data available yet,
+`circos.initializeWithIdeogram()` will try to continue to download the
+"chromInfo" file form UCSC, which also contains lengths of chromosomes, but of
+course, there is no ideogram track on the plot.
+
+In some cases, when there is no internet connection for downloading or there is 
+no corresponding data avaiable on UCSC yet. You can manually construct a data frame
+which contains ranges of chromosomes or a file path if it is stored in a file,
+and sent to `circos.initializeWithIdeogram()`.
+
+```{r eval = FALSE}
+cytoband.file = system.file(package = "circlize", "extdata", "cytoBand.txt")
 circos.initializeWithIdeogram(cytoband.file)
+
 cytoband.df = read.table(cytoband.file, colClasses = c("character", "numeric",
     "numeric", "character", "character"), sep = "\t")
 circos.initializeWithIdeogram(cytoband.df)
-circos.clear()
-invisible(dev.off())
-@
+```
 
-If you want to read cytoband data from file, please explicitly specify {\tt colClasses} 
-arguments and set the class of position columns as {\tt numeric}. The reason is since 
-positions are represented as integers, {\tt read.table} would treat those numbers as 
-{\tt integer} by default. In initialization of circos plot, \textbf{circlize} needs to 
-calculate the summation of all chromosome lengths. The sumation of such large integers 
-would throw error of data overflow.
+If you read cytoband data directly from file, please explicitly specify
+`colClasses` arguments and set the class of position columns as `numeric`. The
+reason is since positions are represented as integers, `read.table` would
+treat those numbers as `integer` by default. In initialization of circular
+plot, **circlize** needs to calculate the summation of all chromosome lengths.
+The sumation of such large integers would throw error of integer overflow.
 
-For simple use, users can also specify abbreviation of the species and the function will 
-download cytoband file from UCSC server automatically (If it exists in UCSC. As you can guess,
-the URL template we use is {\tt http://hgdownload.soe.ucsc.edu/goldenpath/\$species/database/cytoBand.txt.gz}).
+By default, `circos.intializeWithIdeogram()` uses all chromosomes which are
+available in cytoband data to initialize the circular plot. Users can
+choose a subset of chromosomes by specifying `chromosome.index`. This
+argument is also for ordering chromosomes (Figure \@ref(fig:genomic-initialize-ideogram) B).
 
-<<eval = FALSE>>=
-circos.initializeWithIdeogram(species = "hg18")
-circos.initializeWithIdeogram(species = "mm10")
-@
-
-By default, the function will use all chromosomes which are available in cytoband data to 
-initialize the circos plot. Users can also choose a subset of chromosomes by specifying 
-{\tt chromosome.index}. This argument is also for 
-ordering chromosomes (figure \ref{fig:genomic_initialize_ideogram} B).
-
-<<genomic_initialize_ideogram_2, eval = FALSE, echo = 1>>=
-circos.initializeWithIdeogram(chromosome.index = paste0("chr", 10:1))
-text(0, 0, "subset of chromosomes", cex = 0.7)
+```{r genomic_initialize_ideogram_2, eval = FALSE, echo = 1}
+circos.initializeWithIdeogram(chromosome.index = paste0("chr", c(3,5,2,8)))
+text(0, 0, "subset of chromosomes", cex = 1)
 text(-0.9, 0.9, "B", cex = 1.5)
-@
+```
 
-\subsubsection{Order chromosomes}
+When there is no cytoband data for the specified species, and chromInfo data
+is used instead, they may be many many extra short contigs. `chromosome.index`
+can also be useful to remove unnecessary contigs.
 
-Initialization step is important for circos plot. It controls orders of chromosomes
-which are going to be put on the circle. There are several ways to control the order:
+### Pre-defined tracks
 
-\begin{itemize}
-  \item If {\tt chromosome.index} is set, the order of {\tt chromosome.index} is taken as 
-        order of chromosomes.
-  \item If {\tt chromosome.index} is not set and {\tt sort.chr} is set to {\tt TRUE}, chromosomes will be sorted 
-      first by numbers then by letters (figure \ref{fig:genomic_initialize_ideogram} C).
-  \item If {\tt chromosome.index} and {\tt sort.chr} are not set neither:
-  \begin{itemize}
-    \item If {\tt cytoband} is provided as a data frame, and if the first column is not a factor, the order of chromosomes would be 
-        {\tt unique(cytoband[[1]])} (figure \ref{fig:genomic_initialize_ideogram} D). 
-    \item If {\tt cytoband} is provided as a data frame, and if the first column is a factor, 
-        the order of chromosome would be {\tt levels(cytoband[[1]])}  (figure \ref{fig:genomic_initialize_ideogram} E). 
-    \item If {\tt cytoband} is specified as a file path, or {\tt species} is specified, the order 
-        of chromosomes depends on the original order in the source file.
-  \end{itemize}
-\end{itemize}
+After the initialization of the circular plot,
+`circos.initializeWithIdeogram()` additionally creates a track where there are
+genomic axes and chromosome names, and create another track where there is an
+ideogram (depends on whether cytoband data is available). `plotType` argument
+is used to control which type of tracks to add. (figure Figure \@ref(fig:genomic-initialize-ideogram) C, D).
 
-<<genomic_initialize_ideogram_3, eval = FALSE, echo = c(1:2, 6:7, 11:12)>>=
-cytoband = cytoband.df
-circos.initializeWithIdeogram(cytoband, sort.chr = TRUE)
-text(0, 0, "read from cytoband df\nsort.chr = TRUE", cex = 0.7)
-text(-0.9, 0.9, "C", cex = 1.5)
-
-cytoband = cytoband.df
-circos.initializeWithIdeogram(cytoband, sort.chr = FALSE)
-text(0, 0, "read from a data frame\nunique(cytoband[[1]])", cex = 0.7)
-text(-0.9, 0.9, "D", cex = 1.5)
-
-cytoband[[1]] = factor(cytoband[[1]], levels = paste0("chr", c(22:1, "X", "Y")))
-circos.initializeWithIdeogram(cytoband, sort.chr = FALSE)
-text(0, 0, "read from cytoband file\nfirst column converted to factor\nlevels = paste0('chr', c(22:1, 'X', 'Y'))", cex = 0.7)
-text(-0.9, 0.9, "E", cex = 1.5)
-@
-
-\textbf{circlize} provides a function {\tt read.cytoband} which can read/download and process cytoband data.
-In fact, {\tt circos.initializeWithIdeogram} calls {\tt read.cytoband} internally (actually, if there is no cytoband 
-available, {\tt read.chromInfo} will be called later). Please refer to the
-help page of the function for more details.
-
-<<eval=FALSE>>=
-cytoband = read.cytoband()
-cytoband = read.cytoband(file)
-cytoband = read.cytoband(df)
-cytoband = read.cytoband(species)
-@
-
-\subsubsection{Pre-defined tracks}
-
-After the initialization of the circos plot, the function will additionally create a track where there
-are genomic axes and chromosome names, and create another track where there is an ideogram 
-(depends on whether cytoband data is available).
-{\tt plotType} can be used to control which kind of graphics need to be added 
-(figure \ref{fig:genomic_initialize_ideogram} F, G).
-
-<<genomic_initialize_ideogram_4, eval = FALSE, echo = c(1, 4, 8)>>=
+```{r genomic_initialize_ideogram_4, eval = FALSE, echo = c(1, 4)}
 circos.initializeWithIdeogram(plotType = c("axis", "labels"))
-text(0, 0, "plotType = c('axis', 'labels')", cex = 0.7)
-text(-0.9, 0.9, "F", cex = 1.5)
+text(0, 0, "plotType = c('axis', 'labels')", cex = 1)
+text(-0.9, 0.9, "C", cex = 1.5)
 circos.initializeWithIdeogram(plotType = NULL)
-text(0, 0, "plotType = NULL", cex = 0.7)
-text(-0.9, 0.9, "G", cex = 1.5)
-
+text(0, 0, "plotType = NULL", cex = 1)
+text(-0.9, 0.9, "D", cex = 1.5)
 circos.clear()
-@
+```
 
-\subsubsection{Other general settings}
+### Other general settings
 
-Similar as general circos plot, the layout of circos plot can be controlled by {\tt circos.par}
-(figure \ref{fig:genomic_initialize_ideogram} H, I).
+Similar as general circular plot, the parameters for the layout can be
+controlled by `circos.par()` (Figure \@ref(fig:genomic-initialize-ideogram) E,
+F).
 
-<<genomic_initialize_ideogram_5, eval = FALSE, echo = c(1:3, 7:9)>>=
+```{r genomic_initialize_ideogram_5, eval = FALSE, echo = c(1:3, 7:9)}
 circos.par("start.degree" = 90)
 circos.initializeWithIdeogram()
 circos.clear()
-text(0, 0, "'start.degree' = 90", cex = 0.7)
-text(-0.9, 0.9, "H", cex = 1.5)
+text(0, 0, "'start.degree' = 90", cex = 1)
+text(-0.9, 0.9, "E", cex = 1.5)
 
 circos.par("gap.degree" = rep(c(2, 4), 12))
 circos.initializeWithIdeogram()
 circos.clear()
-text(0, 0, "'gap.degree' = rep(c(2, 4), 12)", cex = 0.7)
-text(-0.9, 0.9, "I", cex = 1.5)
-@
+text(0, 0, "'gap.degree' = rep(c(2, 4), 12)", cex = 1)
+text(-0.9, 0.9, "F", cex = 1.5)
+```
 
+```{r genomic-initialize-ideogram, echo = FALSE, fig.width = 8, fig.height = 8*2/3, fig.cap = "Initialize genomic plot."}
+chunks <- knitr:::knit_code$get()
 
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{figures/genomic_initialize_ideogram-1.pdf}
-\caption{Different ways to initialize genomic circos plot. A) default; B) select subset of chromosomes; C) read from a data frame; D) the first column of the data frame is a factor; E) sort chromosomes; F) do not add ideogram; G) initialize the plot while plot nothing; H) set start degree of the plot; I) set gap degree.}
-\label{fig:genomic_initialize_ideogram}
-\end{figure}
+par(mfrow = c(2, 3))
 
+eval(parse(text = chunks[["genomic_initialize_ideogram_1"]]))
+eval(parse(text = chunks[["genomic_initialize_ideogram_2"]]))
+eval(parse(text = chunks[["genomic_initialize_ideogram_4"]]))
+eval(parse(text = chunks[["genomic_initialize_ideogram_5"]]))
+```
 
-\subsection{Customize ideogram}
+## Customize chromosome track
 
-The default behaviour of {\tt circos.initializeWithIdeogram} is both initializing the layout
-and adding two tracks. But if {\tt plotType} is set to {\tt NULL}, the circular layout is only 
-initialized but nothing is added. It provides possibility for users to completely design
-their own style of plots. In the following example, we use different colors to represent 
-chromosomes and change the style of chromosome names (figure \ref{fig:genomic_customize_ideogram}).
+By default `circos.initializeWithIdeogram()` initializes the layout and adds
+two tracks. When `plotType` argument is set to `NULL`, the circular layout is
+only initialized but nothing is added. This makes it possible for users to
+completely design their own style of chromosome track.
 
-<<genomic_customize_ideogram, out.width = "0.8\\textwidth", fig.cap = "Customize ideogram.">>=
-par(mar = c(1, 1, 1, 1))
+In the following example, we use different colors to represent chromosomes and
+put chromosome names in the center of each cell (Figure \@ref(fig:genomic-customize-chromosome)).
+
+```{r genomic-customize-chromosome, fig.cap = "Customize chromosome track."}
+set.seed(123)
 circos.initializeWithIdeogram(plotType = NULL)
-circos.trackPlotRegion(ylim = c(0, 1), panel.fun = function(x, y) {
-    chr = get.cell.meta.data("sector.index")
-    xlim = get.cell.meta.data("xlim")
-    ylim = get.cell.meta.data("ylim")
-    circos.rect(xlim[1], 0, xlim[2], 0.5, col = rand_color(1))
-    circos.text(mean(xlim), 0.9, chr, cex = 0.5, facing = "clockwise", 
-        niceFacing = TRUE)
-}, bg.border = NA)
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    chr = CELL_META$sector.index
+    xlim = CELL_META$xlim
+    ylim = CELL_META$ylim
+    circos.rect(xlim[1], 0, xlim[2], 1, col = rand_color(1))
+    circos.text(mean(xlim), mean(ylim), chr, cex = 0.7, col = "white",
+        facing = "inside", niceFacing = TRUE)
+}, track.height = 0.15, bg.border = NA)
 circos.clear()
-@
+```
 
+## Initialize with general genomic category
 
-\subsection{Initialize with general genomic category}
+Chromosome is just a special case of genomic category.
+`circos.genomicInitialize()` can initialize circular layout with any type of
+genomic categories. In fact, `circos.initializeWithIdeogram()` is implemented
+by `circos.genomicInitialize()`. The input data for
+`circos.genomicInitialize()` is also a data frame with at least three columns.
+The first column is genomic category (for cytoband data, it is chromosome
+name), and the next two columns are positions in each genomic category. The
+range in each category will be inferred as the minimum position and the
+maximum position in corresponding category. 
 
-Cytoband data is just a special case of genomic category. {\tt circos.genomicInitialize}
-can initialize circular layout with any kind of genomic categories. In fact, 
-{\tt circos.initializeWithIdeogram} is implemented by {\tt circos.genomicInitialize}. 
-The input data for the function is also a data frame with at least three columns. The first 
-column is genomic category (for cytoband data, it is chromosome name), and the next two columns 
-are genomic positions in each genomic category. The range of each category will be inferred 
-from the minimum position and the maximum position in corresponding category. 
-In the following example, a circos plot is initialized with three genes.
+In the following example, a circular plot is initialized with three genes.
 
-<<eval = FALSE>>=
+```{r, eval = FALSE}
 df = data.frame(
     name  = c("TP53",  "TP63",    "TP73"),
     start = c(7565097, 189349205, 3569084),
     end   = c(7590856, 189615068, 3652765))
 circos.genomicInitialize(df)
-@
+```
 
-Note it is not necessary that the record for each gene is one row.
+Note it is not necessary that the record for each gene is only one row.
 
-As explained in previous section, the order of genomic categories is controlled by the first column of {\tt df}
-which depends on whether it is a factor or a simple vector. Alternative names can be assigned to each category
-and the order of alternative names correspond to the order of genomic categories.
+In following example, we plot the transcripts for TP53, TP63 and TP73 in a
+circular layout (Figure \@ref(fig:genomic-gene-model)).
 
-<<eval=FALSE>>=
-circos.genomicInitialize(df)
-circos.genomicInitialize(df, sector.names = c("tp53", "tp63", "tp73"))
-circos.genomicInitialize(df, plotType)
-
-circos.par(gap.degree = 2)
-circos.genomicInitialize(df)
-@
-
-In following example, we plot the transcripts for TP53, TP63 and TP73 in a circular layout (figure \ref{fig:genomic_gene_model}).
-The object {\tt tp\_family} is a list of data frames which contain positions of exons for
-each transcript.
-
-<<>>=
-load(paste0(system.file(package = "circlize"), "/extdata/tp_family.RData"))
-names(tp_family)
-names(tp_family[["TP53"]])
-head(tp_family[["TP53"]][[1]])
-
-df = data.frame(gene = names(tp_family),
-                start = sapply(tp_family, function(x) min(unlist(x))),
-                end = sapply(tp_family, function(x) max(unlist(x))))
-df
-@
+```{r}
+tp_family = readRDS(system.file(package = "circlize", "extdata", "tp_family_df.rds"))
+head(tp_family)
+```
 
 In the following code, we first create a track which identifies three genes.
 
-<<genomic_gene_model_1, eval = FALSE>>=
-circos.genomicInitialize(df)
-circos.genomicTrackPlotRegion(ylim = c(0, 1), 
+```{r genomic_gene_model_1, eval = FALSE}
+circos.genomicInitialize(tp_family)
+circos.track(ylim = c(0, 1), 
     bg.col = c("#FF000040", "#00FF0040", "#0000FF40"), 
     bg.border = NA, track.height = 0.05)
-@
+```
 
-Next, we put each transcript line by line. It is simply adding lines and rectangles. 
-The usage of {\tt circos.genomicTrackPlotRegion} will be introduced in later sections.
+Next, we put transcripts one after the other for each gene. It is simply to
+add lines and rectangles. The usage of `circos.genomicTrack()` and
+`circos.genomicRect()` will be discussed in Sector \@ref(genomic-plotting-
+region).
 
-<<genomic_gene_model_2, eval = FALSE>>=
-n = max(sapply(tp_family, length))
-circos.genomicTrackPlotRegion(ylim = c(0.5, n + 0.5), 
+```{r genomic_gene_model_2, eval = FALSE}
+n = max(tapply(tp_family$transcript, tp_family$gene, function(x) length(unique(x))))
+circos.genomicTrack(tp_family, ylim = c(0.5, n + 0.5), 
     panel.fun = function(region, value, ...) {
-        gn = get.cell.meta.data("sector.index")
-        tr = tp_family[[gn]]  # all transcripts for this gene
-        for(i in seq_along(tr)) {
+        all_tx = unique(value$transcript)
+        for(i in seq_along(all_tx)) {
+            l = value$transcript == all_tx[i]
             # for each transcript
-            current_tr_start = min(tr[[i]]$start)
-            current_tr_end = max(tr[[i]]$end)
-            circos.lines(c(current_tr_start, current_tr_end), 
-                c(n - i, n - i), col = "#CCCCCC")
-            circos.genomicRect(tr[[i]], ytop = n - i + 0.4, 
-                ybottom = n - i - 0.4, col = "orange", border = NA)
+            current_tx_start = min(region[l, 1])
+            current_tx_end = max(region[l, 2])
+            circos.lines(c(current_tx_start, current_tx_end), 
+                c(n - i + 1, n - i + 1), col = "#CCCCCC")
+            circos.genomicRect(region[l, , drop = FALSE], ytop = n - i + 1 + 0.4, 
+                ybottom = n - i + 1 - 0.4, col = "orange", border = NA)
         }
-}, bg.border = NA, track.height = 0.3)
+}, bg.border = NA, track.height = 0.4)
 circos.clear()
-@
+```
 
-<<genomic_gene_model, echo = FALSE, out.width = '\\textwidth', fig.cap = "Alternative transcripts for genes.">>=
-par(mar = c(1, 1, 1, 1))
-<<genomic_gene_model_1>>
-<<genomic_gene_model_2>>
-@
+```{r genomic-gene-model, echo = FALSE, fig.cap = "Circular representation of alternative transcripts for genes."}
+chunks <- knitr:::knit_code$get()
+eval(parse(text = chunks[["genomic_gene_model_1"]]))
+eval(parse(text = chunks[["genomic_gene_model_2"]]))
+```
 
-\subsection{Zooming}
+In Figure \@ref(fig:genomic-gene-model), you may notice the start of axes
+becomes "0KB" while not the correct values. It is just an adjustment of the
+axes labels to reflect the relative distance to the start of each gene, while
+the coordinate in the cells are still using the original values. Set
+`tickLabelsStartFromZero` to `FALSE` to recover axes labels to the original
+values.
 
-{\tt circos.genomicInitialize} is implemented by the general {\tt circos.initialize} function,
-so same strategy can be applied to zoom chromosomes (figure \ref{fig:genomic_zoom}). Just be careful with the order of chromosomes.
+## Zooming chromosomes
 
-<<>>=
-cytoband = read.cytoband()
-df = cytoband$df
-chromosome = cytoband$chromosome
+The strategy is the same as introduced in Section \@ref(zooming-of-sectors).
+We first define a function `extend_chromosomes()` which copy data in subset of
+chromosomes into the original data frame.
 
-# copy regions for the two zoomed chromosomes
-zoom_df = df[df[[1]] %in% chromosome[1:2], ]
-zoom_df[[1]] = paste0("zoom_", zoom_df[[1]])
-df2 = rbind(df, zoom_df)
-
-# attach ranges for two zoomed chromosomes
-xrange = c(cytoband$chr.len, cytoband$chr.len[1:2])
-normal_sector_index = seq_along(chromosome)
-zoomed_sector_index = length(chromosome) + 1:2
-
-# normalize in normal chromsomes and zoomed chromosomes separately
-sector.width = c(xrange[normal_sector_index] / sum(xrange[normal_sector_index]), 
-                 xrange[zoomed_sector_index] / sum(xrange[zoomed_sector_index])) 
-@
-
-Here we can only use {\tt circos.genomicInitialize} to deal with zoomed chromosomes because chromosome 
-with name "zoom\_chr1" is not a normal chromosome.
-
-<<genomic_zoom_1, eval = FALSE>>=
-par(mar = c(1, 1, 1, 1))
-circos.par(start.degree = 90)
-circos.genomicInitialize(df2, sector.width = sector.width)
-@
-
-In following tracks, data frames should also be extended with zoomed chromosomes.
-We can write a simple function to do the extension.
-
-<<>>=
-extend_zoomed_chromosome_in_bed = function(bed, chromosome, prefix = "zoom_") {
+```{r}
+extend_chromosomes = function(bed, chromosome, prefix = "zoom_") {
     zoom_bed = bed[bed[[1]] %in% chromosome, , drop = FALSE]
     zoom_bed[[1]] = paste0(prefix, zoom_bed[[1]])
     rbind(bed, zoom_bed)
 }
-@
+```
 
-Then add a new track:
+`read.cytoband()` downloads and reads cytoband data from UCSC. In following,
+x ranges for normal chromosomes and zoomed chromosomes are normalized separetely.
 
-<<genomic_zoom_2, eval = FALSE>>=
-bed = generateRandomBed(100)
-circos.genomicTrackPlotRegion(extend_zoomed_chromosome_in_bed(bed, chromosome[1:2]),
+```{r}
+cytoband = read.cytoband()
+cytoband_df = cytoband$df
+chromosome = cytoband$chromosome
+
+xrange = c(cytoband$chr.len, cytoband$chr.len[c("chr1", "chr2")])
+normal_chr_index = 1:24
+zoomed_chr_index = 25:26
+
+# normalize in normal chromsomes and zoomed chromosomes separately
+sector.width = c(xrange[normal_chr_index] / sum(xrange[normal_chr_index]), 
+                 xrange[zoomed_chr_index] / sum(xrange[zoomed_chr_index])) 
+```
+
+The extended cytoband data which is in form of a data frame is sent to
+`circos.initializeWithIdeogram()`. You can see the ideograms for chromosome 1
+and 2 are zoomed.
+
+```{r genomic_zoom_1, eval = FALSE}
+circos.par(start.degree = 90)
+circos.initializeWithIdeogram(extend_chromosomes(cytoband_df, c("chr1", "chr2")), 
+    sector.width = sector.width)
+```
+
+Add a new track.
+
+```{r genomic_zoom_2, eval = FALSE}
+bed = generateRandomBed(500)
+circos.genomicTrackPlotRegion(extend_chromosomes(bed, c("chr1", "chr2")),
     panel.fun = function(region, value, ...) {
-        circos.genomicPoints(region, value, pch = 16, cex = 0.5)
+        circos.genomicPoints(region, value, pch = 16, cex = 0.3)
 })
-@
+```
 
-Also add link from original chromosome to the zoomed chromosome.
+Add a link from original chromosome to the zoomed chromosome (Figure \@ref(fig:genomic-zoom)).
 
-<<genomic_zoom_3, eval = FALSE>>=
+```{r genomic_zoom_3, eval = FALSE}
 circos.link("chr1", get.cell.meta.data("cell.xlim", sector.index = "chr1"),
     "zoom_chr1", get.cell.meta.data("cell.xlim", sector.index = "zoom_chr1"),
     col = "#00000020", border = NA)
 circos.clear()
-@
+```
 
-<<genomic_zoom, echo = FALSE, out.width = "0.8\\textwidth", fig.cap = "Zoom chromosomes.">>=
-<<genomic_zoom_1>>
-<<genomic_zoom_2>>
-<<genomic_zoom_3>>
-@
-
-Same strategy can be applied if you only want to zoom sub regions inside a certain chromosome (just make them as pseudo chromosomes).
-
-\section{Create plotting regions}
-
-In following sections, chromosome will be used as the type of genomic category. 
-In this section, we assume {\tt data} is simply a data frame. For more complex
-situations and behaviour of the functions, we will introduce in the next section.
-
-Similar as {\tt circos.trackPlotRegion}, {\tt circos.genomicTrackPlotRegion} also
-accepts a self-defined function {\tt panel.fun} which is applied in every cell but with 
-different form.
-
-<<eval=FALSE>>=
-circos.genomicTrackPlotRegion(data, panel.fun = function(region, value, ...) {
-    circos.genomicPoints(region, value, ...)
-})
-@
-
-Inside {\tt panel.fun}, users can use low-level genomic graphic functions to add basic
-graphics in each cell. {\tt panel.fun} expects two arguments {\tt region} and {\tt value}.
-{\tt region} is a data frame containing start position and end position in the current chromosome which is extracted
-from {\tt data}, and you can think it corresponds to values on x-axes. {\tt value} is also 
-a data frame which contains other columns in {\tt data}, and you can think it corresponds
-to values on y-axes. Besides, there should be a third arguments {\tt ...} which is 
-mandatory and is used to pass user-invisible variables to inner functions (which we will
-explain in next sections).
-
-
-Following codes demonstrate values for {\tt region} and {\tt value} when used inside {\tt panel.fun}.
-
-<<echo = 2:6>>=
-pdf(NULL)
-bed = generateRandomBed(nc = 1)
-head(bed)
-circos.initializeWithIdeogram(plotType = NULL)
-circos.genomicTrackPlotRegion(bed, panel.fun = function(region, value, ...) {
-    if(get.cell.meta.data("sector.index") == "chr1") {
-        print(head(region))
-        print(head(value))
-    }
-})
-circos.clear()
-invisible(dev.off())
-@
-
-Since {\tt circos.genomicTrackPlotRegion} will create a new track, it needs values to
-calculate range of y-values to arrange data points. Users can either specify the index of 
-numeric columns in {\tt data} by {\tt numeric.column} ({\bf named index or numeric index})
-or set {\tt ylim}. If none of them are set, the function will try to look for all numeric columns
-in {\tt data} (of course, excluding the first three columns), and set them as {\tt numeric.column}.
-
-<<eval=FALSE>>=
-circos.genomicTrackPlotRegion(data, ylim = c(0, 1),
-    panel.fun = function(region, value, ...) {
-        circos.genomicPoints(region, value, ...)
-})
-circos.genomicTrackPlotRegion(data, numeric.column, 
-    panel.fun = function(region, value, ...) {
-        circos.genomicPoints(region, value, ...)
-})
-@
-
-Since genomic functions are implemented by basic circos functions, you can use {\tt circos.info}
-anywhere to get information of sectors and tracks.
+```{r genomic-zoom, echo = FALSE, fig.cap = "Zoom chromosomes."}
+chunks <- knitr:::knit_code$get()
+eval(parse(text = chunks[["genomic_zoom_1"]]))
+eval(parse(text = chunks[["genomic_zoom_2"]]))
+eval(parse(text = chunks[["genomic_zoom_3"]]))
+```

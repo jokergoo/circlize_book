@@ -244,9 +244,9 @@ max_height = max(sapply(dend_list, function(x) attr(x, "height")))
 circos.track(ylim = c(0, max_height), bg.border = NA, track.height = 0.3, 
     panel.fun = function(x, y) {
 
-    sector.index = get.cell.meta.data("sector.index")
-    dend = dend_list[[sector.index]]
-    circos.dendrogram(dend, max_height = max_height)
+        sector.index = get.cell.meta.data("sector.index")
+        dend = dend_list[[sector.index]]
+        circos.dendrogram(dend, max_height = max_height)
 })
 circos.clear()
 ```

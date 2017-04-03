@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Circular Visualization in R</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Circular Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="github-repo" content="jokergoo/books" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Circular Visualization in R" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  
+
+<meta name="author" content="Zuguang Gu">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="initialize-genomic-plot.html">
+<link rel="next" href="just-note-numeric-column-is-measured-in-bed.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Circular Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I General Functionality</b></span></li>
+<li class="chapter" data-level="1" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>1</b> Circular layout</a></li>
+<li class="chapter" data-level="2" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>2</b> Graphics</a></li>
+<li class="chapter" data-level="3" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>3</b> Legends</a></li>
+<li class="chapter" data-level="4" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>4</b> Implement high-level plots</a></li>
+<li class="chapter" data-level="5" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>5</b> Advanced layout</a></li>
+<li class="part"><span><b>II Applications in Genomics</b></span></li>
+<li class="chapter" data-level="6" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>6</b> Initialize with genomic data</a></li>
+<li class="chapter" data-level="7" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html"><i class="fa fa-check"></i><b>7</b> Create plotting regions for genomic data</a><ul>
+<li class="chapter" data-level="7.1" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html#points"><i class="fa fa-check"></i><b>7.1</b> Points</a></li>
+<li class="chapter" data-level="7.2" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html#lines"><i class="fa fa-check"></i><b>7.2</b> Lines</a></li>
+<li class="chapter" data-level="7.3" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html#text"><i class="fa fa-check"></i><b>7.3</b> Text</a></li>
+<li class="chapter" data-level="7.4" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html#rectangle"><i class="fa fa-check"></i><b>7.4</b> Rectangle</a></li>
+<li class="chapter" data-level="7.5" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html#links"><i class="fa fa-check"></i><b>7.5</b> Links</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="just-note-numeric-column-is-measured-in-bed.html"><a href="just-note-numeric-column-is-measured-in-bed.html"><i class="fa fa-check"></i><b>8</b> just note <code>numeric.column</code> is measured in <code>bed</code></a></li>
+<li class="chapter" data-level="9" data-path="note-how-horizontalline-works.html"><a href="note-how-horizontalline-works.html"><i class="fa fa-check"></i><b>9</b> note how ‘horizontalLine’ works</a></li>
+<li class="chapter" data-level="10" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>10</b> Placeholder</a></li>
+<li class="part"><span><b>III Visualize Relations</b></span></li>
+<li class="chapter" data-level="11" data-path="code-is-not-run-when-building-the-vignette.html"><a href="code-is-not-run-when-building-the-vignette.html"><i class="fa fa-check"></i><b>11</b> code is not run when building the vignette</a></li>
+<li class="chapter" data-level="12" data-path="yang-yao-is-.html"><a href="yang-yao-is-.html"><i class="fa fa-check"></i><b>12</b> yang yao is -</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="create-plotting-regions-for-genomic-data" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Create plotting regions for genomic data</h1>
+<p>Tracks are created and graphics are added by <code>circos.genomicTrackPlotRegions()</code>, or the short version <code>circos.genomicTrack()</code>. In following examples, chromosome will be used as the genomic category, and we assume <code>data</code> is simply a data frame in <em>BED</em> format (where the first column is the chromosome name, the second and third column are start and end positions, and the following columns are associated values). For more complex form of <code>data</code> and behaviour of the functions, we will introduce in Chapter <a href="#modes-of-input"><strong>??</strong></a>.</p>
+<p>Similar as <code>circos.track()</code>, <code>circos.genomicTrack()</code> also accepts a self- defined function <code>panel.fun</code> which is applied in every cell but with different form.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
+    <span class="kw">circos.genomicPoints</span>(region, value, ...)
+})</code></pre></div>
+<p>Inside <code>panel.fun</code>, users can use low-level graphic functions to add basic graphics in each cell. <code>panel.fun</code> expects two arguments <code>region</code> and <code>value</code> which are automatically processed and passed from <code>circos.genomicTrack()</code>. <code>region</code> is a two-column data frame which only contains start position and end position in the current chromosome. <code>value</code> is also a data frame which contains other columns (start for the fourth column, if it exists). Thus, basically, <code>region</code> can be thought as values on x axes and <code>value</code> as values on y axes.</p>
+<p>There should be a third arguments <code>...</code> which is mandatory and is used to pass user- invisible variables to inner functions and make magics (explained in Chapter <a href="#modes-of-input"><strong>??</strong></a>). So whenever you use <code>panel.fun</code> in <code>circos.genomicTrack()</code>, please add it to the end of your function.</p>
+<p>Following code demonstrates the values for <code>region</code> and <code>value</code> when used inside <code>panel.fun</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)
+<span class="kw">head</span>(bed, <span class="dt">n =</span> <span class="dv">2</span>)</code></pre></div>
+<pre><code>##    chr  start    end     value1     value2
+## 1 chr1 372897 373631 -0.3928842 -0.4725035
+## 2 chr1 668427 700562  0.1255983 -0.1591350</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)
+<span class="kw">circos.genomicTrackPlotRegion</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
+    <span class="cf">if</span>(CELL_META<span class="op">$</span>sector.index <span class="op">==</span><span class="st"> &quot;chr1&quot;</span>) {
+        <span class="kw">print</span>(<span class="kw">head</span>(region, <span class="dt">n =</span> <span class="dv">2</span>))
+        <span class="kw">print</span>(<span class="kw">head</span>(value, <span class="dt">n =</span> <span class="dv">2</span>))
+    }
+})</code></pre></div>
+<pre><code>##    start    end
+## 1 372897 373631
+## 2 668427 700562
+##       value1     value2
+## 1 -0.3928842 -0.4725035
+## 2  0.1255983 -0.1591350</code></pre>
+<p>Since <code>circos.genomicTrack()</code> creates a new track, it needs values to calculate data ranges on y direction. Users can either specify the index of numeric columns in <code>data</code> by <code>numeric.column</code> (named index or numeric index, can be a vector with more than one columns) or directly set <code>ylim</code>. If none of them are set, the function will try to look for all numeric columns in <code>data</code> (of course, excluding the first three columns), and set them as <code>numeric.column</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
+        <span class="kw">circos.genomicPoints</span>(region, value, ...)
+})
+<span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">numeric.column =</span> <span class="kw">c</span>(<span class="st">&quot;value1&quot;</span>, <span class="st">&quot;value2&quot;</span>), 
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
+        <span class="kw">circos.genomicPoints</span>(region, value, ...)
+})</code></pre></div>
+<p>Since genomic functions are implemented by basic circlize functions, you can use <code>circos.info()</code> anywhere to get information of sectors and tracks.</p>
+<p>As you already see in previous examples, <strong>circlize</strong> also provides low-level graphic functions specifically designed for genomic data. They are all implemented by corresponding normal circlize functions, but needs input variables with special format.</p>
+<p>In this chapter, we introduce the basic usage of <code>circos.genomicTrack()</code> and low-level <code>circos.genomic*()</code>. In Chapter <a href="#modes-of-input"><strong>??</strong></a>, we will introduce more usages of these functions, which are especially designed for genomic regions measured at multiple conditions. Example plots are shown together in Chapter <a href="#modes-of-input"><strong>??</strong></a>.</p>
+<div id="points" class="section level2">
+<h2><span class="header-section-number">7.1</span> Points</h2>
+<p>Usage of <code>circos.genomicPoints()</code> is similar as <code>circos.points()</code>. <code>circos.genomicPoints()</code> expects a data frame which contains genomic regions and a data frame containing corresponding values. Points are always drawn at the middle of each region. The data column of the y values for plotting should be specified by <code>numeric.column</code>. If <code>numeric.column</code> has length larger than one, all the specified columns will be used to add points.</p>
+<p>If the function is called inside <code>circos.genomicTrack()</code> and users have been already set <code>numeric.column</code> in <code>circos.genomicTrack()</code>, proper value of <code>numeric.column</code> will be passed to <code>circos.genomicPoints()</code> through <code>...</code> in <code>panel.fun</code>, which means, you must add <code>...</code> as the final argument in <code>circos.genomicPoints()</code> to get such information. If <code>numeric.column</code> is not set in both places, <code>circos.genomicPoints()</code> will use all numeric columns detected in <code>value</code>.</p>
+<p>Note here <code>numeric.column</code> is measured in <code>value</code> while <code>numeric.column</code> in <code>circos.genomicTrack()</code> is measured in the complete data frame. There is a difference of 3 for the column index! When <code>numeric.column</code> is passed to <code>circos.genomicPoints()</code> internally, 3 is subtracted automatically. If you use character index instead of numeric index, you do not need to worry about it.</p>
+<p>Possible usages of <code>circos.genomicPoints()</code> are as follows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">numeric.column =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">circos.genomicPoints</span>(region, value, cex, pch)
+<span class="kw">circos.genomicPoints</span>(region, value, sector.index, track.index)
+<span class="kw">circos.genomicTrack</span>(data, <span class="dt">numeric.column =</span> <span class="dv">4</span>, 
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
+        <span class="co"># numeric.column is changed to 1</span>
+        <span class="kw">circos.genomicPoints</span>(region, value, ...)
+})</code></pre></div>
+<p>If there is only one numeric column, graphical parameters such as <code>pch</code>, <code>cex</code> can be of length one or number of rows of <code>region</code>. If there are more than one numeric columns specified, points for each numeric column will be added iteratively, and the graphical parameters should be either length one or number of numeric columns specified.</p>
+<p><code>circos.genomicPoints()</code> is simply implemented by <code>circos.points()</code>. The basic idea of the implementation is shown as following code, so, if you don’t like the <code>circos.genomic*()</code> functions, it would not be difficult to directly use the <code>circos.*()</code> functions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">circos.genomicPoints =<span class="st"> </span><span class="cf">function</span>(region, value, <span class="dt">numeric.column =</span> <span class="dv">1</span>, ...) {
+    x =<span class="st"> </span>(region[[<span class="dv">2</span>]] <span class="op">+</span><span class="st"> </span>region[[<span class="dv">1</span>]])<span class="op">/</span><span class="dv">2</span>
+    y =<span class="st"> </span>value[[numeric.column]]
+    <span class="kw">circos.points</span>(x, y, ...)
+}</code></pre></div>
+</div>
+<div id="lines" class="section level2">
+<h2><span class="header-section-number">7.2</span> Lines</h2>
+<p><code>circos.genomicLines()</code> is similar as <code>circos.lines()</code>. The setting of graphical parameters is similar as <code>circos.genomicPoints()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicLines</span>(region, value, ...)
+<span class="kw">circos.genomicLines</span>(region, value, <span class="dt">numeric.column =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">circos.genomicLines</span>(region, value, area, baseline, border)
+<span class="kw">circos.genomicLines</span>(region, value, sector.index, track.index)</code></pre></div>
+<p><strong>circlize</strong> additionally provides a new option <code>segment</code> for <code>lty</code> by which each genomic regions represent as ‘horizontal’ lines at y positions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicLines</span>(region, value, lwd, <span class="dt">lty =</span> <span class="st">&quot;segment&quot;</span>)</code></pre></div>
+</div>
+<div id="text" class="section level2">
+<h2><span class="header-section-number">7.3</span> Text</h2>
+<p>For <code>circos.genomicText()</code>, the position of text can be specified either by <code>numeric.column</code> or a separated vector <code>y</code>. The labels of text can be specified either by <code>labels.column</code> or a vector <code>labels</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicText</span>(region, value, ...)
+<span class="kw">circos.genomicText</span>(region, value, <span class="dt">y =</span> <span class="dv">1</span>, labels)
+<span class="kw">circos.genomicText</span>(region, value, numeric.column, labels.column)
+<span class="kw">circos.genomicText</span>(region, value, facing, niceFacing, adj)
+<span class="kw">circos.genomicText</span>(region, value, sector.index, track.index)</code></pre></div>
+</div>
+<div id="rectangle" class="section level2">
+<h2><span class="header-section-number">7.4</span> Rectangle</h2>
+<p>For <code>circos.genomicRect()</code>, Since the left and right of the rectangles are already determined by the start and end of the genomic regions, we only need to set the positions of top and bottom of the rectangles by specifying <code>ytop</code>, <code>ybottom</code> or <code>ytop.column</code>, <code>ybottom.column</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop =</span> <span class="dv">1</span>, <span class="dt">ybottom =</span> <span class="dv">0</span>)
+<span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop.column =</span> <span class="dv">2</span>, <span class="dt">ybottom =</span> <span class="dv">0</span>)
+<span class="kw">circos.genomicRect</span>(region, value, col, border)</code></pre></div>
+</div>
+<div id="links" class="section level2">
+<h2><span class="header-section-number">7.5</span> Links</h2>
+<p><code>circos.genomicLink()</code> expects two data frames and it adds links from genomic regions in the first data frame to corresponding genomic regions in the second data frame. All additional arguments are passed to <code>circos.link()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed1 =<span class="st"> </span>bed1[<span class="kw">sample</span>(<span class="kw">nrow</span>(bed1), <span class="dv">20</span>), ]
+bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)
+bed2 =<span class="st"> </span>bed2[<span class="kw">sample</span>(<span class="kw">nrow</span>(bed2), <span class="dv">20</span>), ]
+
+<span class="kw">circos.initializeWithIdeogram</span>()
+<span class="kw">circos.genomicLink</span>(bed1, bed2, <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="kw">nrow</span>(bed1), <span class="dt">transparency =</span> <span class="fl">0.5</span>), 
+    <span class="dt">border =</span> <span class="ot">NA</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:genomic-links"></span>
+<img src="circlize-book_files/figure-html/genomic-links-1.png" alt="Add links from two sets of genomic regions." width="384" />
+<p class="caption">
+Figure 7.1: Add links from two sets of genomic regions.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="initialize-genomic-plot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="just-note-numeric-column-is-measured-in-bed.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-create-plotting-regions.Rmd",
+"text": "Edit"
+},
+"download": ["circlize-book.pdf", "circlize-book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

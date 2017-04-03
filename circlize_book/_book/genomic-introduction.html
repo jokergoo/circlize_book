@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Circular Visualization in R</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Circular Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="github-repo" content="jokergoo/books" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Circular Visualization in R" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  
+
+<meta name="author" content="Zuguang Gu">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="advanced-layout.html">
+<link rel="next" href="copy-regions-for-the-two-zoomed-chromosomes.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Circular Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I General Functionality</b></span></li>
+<li class="chapter" data-level="1" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>1</b> Circular layout</a></li>
+<li class="chapter" data-level="2" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>2</b> Graphics</a></li>
+<li class="chapter" data-level="3" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>3</b> Legends</a></li>
+<li class="chapter" data-level="4" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>4</b> Implement high-level plots</a></li>
+<li class="chapter" data-level="5" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>5</b> Advanced layout</a></li>
+<li class="part"><span><b>II Applications in Genomics</b></span></li>
+<li class="chapter" data-level="6" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>6</b> Introduction</a><ul>
+<li class="chapter" data-level="6.1" data-path="genomic-introduction.html"><a href="genomic-introduction.html#input-data"><i class="fa fa-check"></i><b>6.1</b> Input data</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="copy-regions-for-the-two-zoomed-chromosomes.html"><a href="copy-regions-for-the-two-zoomed-chromosomes.html"><i class="fa fa-check"></i><b>7</b> copy regions for the two zoomed chromosomes</a></li>
+<li class="chapter" data-level="8" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>8</b> Placeholder</a></li>
+<li class="part"><span><b>III Part II</b></span></li>
+<li class="chapter" data-level="9" data-path="just-note-numeric-column-is-measured-in-bed.html"><a href="just-note-numeric-column-is-measured-in-bed.html"><i class="fa fa-check"></i><b>9</b> just note <code>numeric.column</code> is measured in <code>bed</code></a></li>
+<li class="chapter" data-level="10" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>10</b> Placeholder</a></li>
+<li class="chapter" data-level="11" data-path="note-how-horizontalline-works.html"><a href="note-how-horizontalline-works.html"><i class="fa fa-check"></i><b>11</b> note how ‘horizontalLine’ works</a></li>
+<li class="chapter" data-level="12" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>12</b> Placeholder</a></li>
+<li class="part"><span><b>IV Visualize Relations</b></span></li>
+<li class="chapter" data-level="13" data-path="code-is-not-run-when-building-the-vignette.html"><a href="code-is-not-run-when-building-the-vignette.html"><i class="fa fa-check"></i><b>13</b> code is not run when building the vignette</a></li>
+<li class="chapter" data-level="14" data-path="yang-yao-is-.html"><a href="yang-yao-is-.html"><i class="fa fa-check"></i><b>14</b> yang yao is -</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="genomic-introduction" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Introduction</h1>
+<p>Circular visualization is popular in Genomics and related omics fields. It is efficient in revealing associations in high dimensional genomic data. In genomic plots, categories are usually chromosomes and data on x axes are genomic positions.</p>
+<p>To make is easy for genomics analysis, <strong>circlize</strong> package particularly provides functions which focus on genomic plots. These functions are synonymous to the basic graphic functions but expect special format of input data:</p>
+<ul>
+<li><code>circos.genomicTrack()</code>: create a new track and add graphics.</li>
+<li><code>circos.genomicPoints()</code>: low-level function, add points.</li>
+<li><code>circos.genomicLines()</code>: low-level function, add lines or segments.</li>
+<li><code>circos.genomicRect()</code>: low-level function, add rectangles.</li>
+<li><code>circos.genomicText()</code>: low-level function, add text.</li>
+<li><code>circos.genomicLink()</code>: add links.</li>
+</ul>
+<p>The genomic functions are implemented by basic circlize functions (e.g. <code>circos.track()</code>, <code>circos.points()</code>), thus, the use of genomic functions can be mixed with the basic circlize functions.</p>
+<div id="input-data" class="section level2">
+<h2><span class="header-section-number">6.1</span> Input data</h2>
+<p>Genomic data is usually stored as a table where the first three columns define the genomic regions and following columns are values associated with the corresponding regions. Each genomic region are composed by three elements: genomic category (in most case, it is the chromosome), start position on the genomic category and the end position. Such data structure is known as <a href="https://genome.ucsc.edu/FAQ/FAQformat#format1"><em>BED</em></a> format and is broadly used in genomic research.</p>
+<p><strong>circlize</strong> provides a simple function <code>generateRandomBed()</code> which generates random genomic data. Positions are uniformly generated from human genome and the number of regions on chromosomes approximately proportional to the length of chromosomes. In the function, <code>nr</code> and <code>nc</code> control the number of rows and numeric columns that users need. Please note <code>nr</code> are not exactly the same as the number of rows which are returned by the function. <code>fun</code> argument is a self-defined function to generate random values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">999</span>)
+bed =<span class="st"> </span><span class="kw">generateRandomBed</span>()
+<span class="kw">head</span>(bed)</code></pre></div>
+<pre><code>##    chr   start     end     value1
+## 1 chr1   39485  159163 -0.1887635
+## 2 chr1  897195 1041959 -0.2435220
+## 3 chr1 1161957 1177159  0.3749953
+## 4 chr1 1201513 1481406 -0.2600839
+## 5 chr1 1487402 1531773 -0.4633990
+## 6 chr1 1769949 2736215 -0.8159909</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>, <span class="dt">nc =</span> <span class="dv">4</span>)
+<span class="kw">nrow</span>(bed)</code></pre></div>
+<pre><code>## [1] 205</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>, 
+    <span class="dt">fun =</span> <span class="cf">function</span>(k) <span class="kw">sample</span>(letters, k, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
+<span class="kw">head</span>(bed)</code></pre></div>
+<pre><code>##    chr   start     end value1 value2
+## 1 chr1   98740  566688      e      e
+## 2 chr1  769960  887938      b      q
+## 3 chr1  906851  933021      u      o
+## 4 chr1 1241911 1243537      k      f
+## 5 chr1 1385344 1410947      v      x
+## 6 chr1 1498302 1585389      u      v</code></pre>
+<p>All genomic functions expects input variable as a data frame which contains genomic data or a list of data frames which contains genomic data in different samples.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="advanced-layout.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="copy-regions-for-the-two-zoomed-chromosomes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-genomics-introduction.Rmd",
+"text": "Edit"
+},
+"download": ["circlize-book.pdf", "circlize-book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
