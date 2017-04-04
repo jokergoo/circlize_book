@@ -222,75 +222,53 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">8.3.1</span> Points</h3>
 <p>To make plots more clear to look at, we only add graphics in the first quarter of the circle and initialize the plot only with chromosome 1.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">999</span>)
-
 <span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.1</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>,
     <span class="dt">canvas.xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">canvas.ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">gap.degree =</span> <span class="dv">270</span>)
 <span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="st">&quot;chr1&quot;</span>, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</code></pre></div>
-<p>In the example figure (Figure <a href="#genomic-application-points"><strong>??</strong></a>), each track contains points under different modes.</p>
+<p>In the example figure (Figure <a href="modes-of-input.html#fig:genomic-application-points">8.1</a>) below, each track contains points under different modes.</p>
 <p>In track A, it is the most normal way to add points. Here <code>bed</code> only contains one numeric column and points are added at the middle points of regions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>)
 <span class="kw">circos.genomicTrack</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
-    <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, ...)
-})
-pos =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;yplot&quot;</span>)</code></pre></div>
-<p>In track B, if it is specified as <code>stack</code> mode, points are added in a horizontal line (additionally identify by a dashed line) because there is only one numeric column in <code>bed</code>.</p>
+    <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, ...)
+})</code></pre></div>
+<p>In track B, if it is specified as <code>stack</code> mode, points are added in a horizontal line (or visually, a circular line).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
-        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, ...)
+        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>,...)
         i =<span class="st"> </span><span class="kw">getI</span>(...)
         <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(i, i), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)
-})
-pos =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;yplot&quot;</span>)
-<span class="kw">text</span>(<span class="dv">0</span>, <span class="kw">mean</span>(pos), <span class="st">&quot;B&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">0.5</span>))</code></pre></div>
-<p>In track C, the input data is a list of two data frames.</p>
+})</code></pre></div>
+<p>In track C, the input data is a list of two data frames. <code>panel.fun</code> is applied iterately on each data frame. The index of “current” index can be obtained by <code>getI(...)</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>)
 bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>)
 bed_list =<span class="st"> </span><span class="kw">list</span>(bed1, bed2)
 <span class="kw">circos.genomicTrackPlotRegion</span>(bed_list, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         i =<span class="st"> </span><span class="kw">getI</span>(...)
-        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">col =</span> i, ...)
-})
-pos =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;yplot&quot;</span>)
-<span class="kw">text</span>(<span class="dv">0</span>, <span class="kw">mean</span>(pos), <span class="st">&quot;C&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">0.5</span>))</code></pre></div>
-<p>In track D, the list of data frames is plotted under <code>stack</code> mode.</p>
+        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> i, ...)
+})</code></pre></div>
+<p>In track D, the list of data frames is plotted under <code>stack</code> mode. Graphics corresponding to each data frame is added to a horizontal line.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         i =<span class="st"> </span><span class="kw">getI</span>(...)
-        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">col =</span> i, ...)
+        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> i, ...)
         <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(i, i), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)
-})
-pos =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;yplot&quot;</span>)
-<span class="kw">text</span>(<span class="dv">0</span>, <span class="kw">mean</span>(pos), <span class="st">&quot;D&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">0.5</span>))
-<span class="ot">NA</span></code></pre></div>
-<p>In track E, the data frame has four numeric columns. Different colors are assigned to different columns.</p>
+})</code></pre></div>
+<p>In track E, the data frame has four numeric columns. Under normal mode, all the four columns are used with the same genomic coordinates.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>, <span class="dt">nc =</span> <span class="dv">4</span>)
 <span class="kw">circos.genomicTrack</span>(bed, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
-        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, ...)
-})
-pos =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;yplot&quot;</span>)</code></pre></div>
-<p>In track F, the data frame has four columns but is plotted under <code>stack</code> mode. Note here <code>value</code> in <code>panel.fun</code> is a data frame with only one column (but it will be exexuted 4 times in each cell).</p>
+        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, ...)
+})</code></pre></div>
+<p>In track F, the data frame has four columns but is plotted under <code>stack</code> mode. Graphics for each column are added to a horizontal line. Current column can be obtained by <code>getI(...)</code>. Note here <code>value</code> in <code>panel.fun</code> is a data frame with only one column (which is the current numeric column).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>, <span class="dt">nc =</span> <span class="dv">4</span>)
 <span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         i =<span class="st"> </span><span class="kw">getI</span>(...)
-        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">col =</span> i, ...)
+        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> i, ...)
         <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(i, i), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)
 })
-pos =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;yplot&quot;</span>)
-<span class="kw">text</span>(<span class="dv">0</span>, <span class="kw">mean</span>(pos), <span class="st">&quot;F&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">0.5</span>))
-<span class="kw">circos.clear</span>()
-<span class="ot">NA</span>
-<span class="ot">NA</span></code></pre></div>
-<pre><code>## Warning in warning_wrap(&quot;&#39;start.degree&#39; can only be modified before `circos.initialize`, or maybe you forgot to call `circos.clear` in your last plot.&quot;): &#39;start.degree&#39; can only be modified before `circos.initialize`, or
-## maybe you forgot to call `circos.clear` in your last plot.</code></pre>
-<pre><code>## Warning in warning_wrap(&quot;&#39;canvas.xlim&#39; can only be modified before `circos.initialize`, or maybe you forgot to call `circos.clear` in your last plot.&quot;): &#39;canvas.xlim&#39; can only be modified before `circos.initialize`, or
-## maybe you forgot to call `circos.clear` in your last plot.</code></pre>
-<pre><code>## Warning in warning_wrap(&quot;&#39;canvas.ylim&#39; can only be modified before `circos.initialize`, or maybe you forgot to call `circos.clear` in your last plot.&quot;): &#39;canvas.ylim&#39; can only be modified before `circos.initialize`, or
-## maybe you forgot to call `circos.clear` in your last plot.</code></pre>
-<pre><code>## Warning in warning_wrap(&quot;&#39;gap.degree&#39; can only be modified before `circos.initialize`, or maybe you forgot to call `circos.clear` in your last plot.&quot;): &#39;gap.degree&#39; can only be modified before `circos.initialize`, or
-## maybe you forgot to call `circos.clear` in your last plot.</code></pre>
+<span class="kw">circos.clear</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-application-points"></span>
 <img src="circlize-book_files/figure-html/genomic-application-points-1.png" alt="Add points under different modes." width="384" />
 <p class="caption">
@@ -300,53 +278,57 @@ Figure 8.1: Add points under different modes.
 </div>
 <div id="lines" class="section level3">
 <h3><span class="header-section-number">8.3.2</span> Lines</h3>
-<p>Similar as previous figure, only the first quarter in the circle is visualized.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.1</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>,
-    <span class="dt">canvas.xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">canvas.ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">gap.degree =</span> <span class="dv">270</span>)
+<p>Similar as previous figure, only the first quarter in the circle is visualized. Examples are shown in Figure <a href="modes-of-input.html#fig:genomic-application-lines">8.2</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.08</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>,
+    <span class="dt">canvas.xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">canvas.ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">gap.degree =</span> <span class="dv">270</span>,
+    <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))
 <span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="st">&quot;chr1&quot;</span>, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</code></pre></div>
-<p>In track A, it is the most simple way to add lines.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### track A
-bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>)
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed, 
+<p>In track A, it is the most simple way to add lines. Middle points of regions are used as the values on x-axes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>)
+<span class="kw">circos.genomicTrack</span>(bed, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
-        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, ...)
+        <span class="kw">circos.genomicLines</span>(region, value)
 })</code></pre></div>
-<p>In track B, add lines for a list of data frames. Different colors refers to different data frames.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### track B
-bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>)
+<p><code>circos.genomicLines()</code> is implemented by <code>circos.lines()</code>, thus, arguments supported in <code>circos.lines()</code> can also be in <code>circos.genomicLines()</code>. In track B, the area under the line is filled with color and in track C, type of the line is set to <code>h</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicTrack</span>(bed, 
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
+        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">area =</span> <span class="ot">TRUE</span>)
+})
+<span class="kw">circos.genomicTrack</span>(bed, 
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
+        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">type =</span> <span class="st">&quot;h&quot;</span>)
+})</code></pre></div>
+<p>In track D, the input is a list of data frames. <code>panel.fun</code> is applied to each data frame iterately.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>)
 bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>)
 bed_list =<span class="st"> </span><span class="kw">list</span>(bed1, bed2)
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed_list, 
+<span class="kw">circos.genomicTrack</span>(bed_list, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         i =<span class="st"> </span><span class="kw">getI</span>(...)
         <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> i, ...)
 })</code></pre></div>
-<p>In track C, it is the {stack} mode of adding lines. Here the width of each line corresponds to the width of each genomic interval.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### track C
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>, 
+<p>In track E, the input is a list of data frames and is drawn under <code>stack</code> mode. Each genomic region is drawn as a horizontal segment and is put on a horizontal line where the width of the segment corresponds to the width of the genomc region. Under <code>stack</code> mode, for <code>circos.genomicLines()</code>, type of lines is only restricted to segments.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         i =<span class="st"> </span><span class="kw">getI</span>(...)
         <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> i, ...)
 })</code></pre></div>
-<p>In track D, lines for the four numeric columns are added with different colors.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### track D
-bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>, <span class="dt">nc =</span> <span class="dv">4</span>)
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed, 
+<p>In track F, the input is a data frame with four numeric columns. Each column is drawn under the normal mode where the same genomic coordinates are shared.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>, <span class="dt">nc =</span> <span class="dv">4</span>)
+<span class="kw">circos.genomicTrack</span>(bed, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, ...)
 })</code></pre></div>
-<p>In track E, it is the {stack} mode for a data frame with more than one numeric columns.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### track E
-bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>, <span class="dt">nc =</span> <span class="dv">4</span>)
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, 
+<p>In track G, the data frame with four numeric columns are drawn under <code>stack</code> mode. All the four columns are drawn to four horizontal lines.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>, <span class="dt">nc =</span> <span class="dv">4</span>)
+<span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         i =<span class="st"> </span><span class="kw">getI</span>(...)
         <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> i, ...)
 })</code></pre></div>
-<p>In track F, we specify {type} to {segment} and use different colors for segments. Note each segment is located at its corresponding y-value.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### track F
-bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>)
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed, 
+<p>In track H, we specify <code>type</code> to <code>segment</code> and set different colors for segments. Note each segment is located at the y position defined in the numeric column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>)
+<span class="kw">circos.genomicTrack</span>(bed, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">type =</span> <span class="st">&quot;segment&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, 
             <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="kw">nrow</span>(region)), ...)
@@ -361,49 +343,42 @@ Figure 8.2: Add lines under different modes.
 </div>
 <div id="rectangles" class="section level3">
 <h3><span class="header-section-number">8.3.3</span> Rectangles</h3>
-<p>Again, initialize the plot with one quarter of the circle (figure ). Also, we want to map the values to colors by {f}.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))
-<span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.1</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>,
+<p>Again, only the first quarter of the circle is initialized. For rectangles, the filled colors are always used to represent numeric values. Here we define a color mapping function <code>col_fun</code> to map values to colors. Examples are in Figure <a href="modes-of-input.html#fig:genomic-application-rect">8.3</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.15</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>,
     <span class="dt">canvas.xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">canvas.ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">gap.degree =</span> <span class="dv">270</span>)
 <span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="st">&quot;chr1&quot;</span>, <span class="dt">plotType =</span> <span class="ot">NULL</span>)
-f =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))</code></pre></div>
-<p>In track A, {bed} has four numeric columns and {stack} mode is used to arrange the heatmap.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### track A
-bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>, <span class="dt">nc =</span> <span class="dv">4</span>)
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, 
+col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))</code></pre></div>
+<p>To draw heatmaps, you probably want to use the <code>stack</code> mode. In track A, <code>bed</code> has four numeric columns and <code>stack</code> mode is used to arrange the heatmap. You can see rectangles are stacked for a certain genomic region.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>, <span class="dt">nc =</span> <span class="dv">4</span>)
+<span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
-        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">col =</span> <span class="kw">f</span>(value[[<span class="dv">1</span>]]), <span class="dt">border =</span> <span class="ot">NA</span>, ...)
+        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">col =</span> <span class="kw">col_fun</span>(value[[<span class="dv">1</span>]]), <span class="dt">border =</span> <span class="ot">NA</span>, ...)
 })</code></pre></div>
-<p>In track B, add rectangles for a list of data frames. Comparing to track A, here genomic regions for each data frame are different, so the positions of rectangles in the first layer are different from that in the second layer.</p>
-<p>Under {stack} mode, {ytop} and {ybottom} can be set to adjust the height of rectangles. It would be straightforward because for each layer, the position is {y = i} and the height of each rectangle is 1.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### track B
-bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)
+<p>In track B, the input is a list of data frames. Under <code>stack</code> mode, each data frame is added to a horizontal line. Since genomic positions for different data frames can be different, you may see in the figure, positions for the two sets of rectangles are different.</p>
+<p>Under <code>stack</code> mode, by default, the height of rectangles is internally set to make them completely fill the cell in the vertical direction. <code>ytop</code> and <code>ybottom</code> can be used to adjust the height of rectangles. Note each line of rectangles is at <code>y = i</code> and the default height of rectangles are 1.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)
 bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)
 bed_list =<span class="st"> </span><span class="kw">list</span>(bed1, bed2)
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>, 
+<span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         i =<span class="st"> </span><span class="kw">getI</span>(...)
-        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop =</span> i <span class="op">+</span><span class="st"> </span><span class="fl">0.4</span>, <span class="dt">ybottom =</span> i <span class="op">-</span><span class="st"> </span><span class="fl">0.4</span>,
-            <span class="dt">col =</span> <span class="kw">f</span>(value[[<span class="dv">1</span>]]), ...)
+        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop =</span> i <span class="op">+</span><span class="st"> </span><span class="fl">0.3</span>, <span class="dt">ybottom =</span> i <span class="op">-</span><span class="st"> </span><span class="fl">0.3</span>,
+            <span class="dt">col =</span> <span class="kw">col_fun</span>(value[[<span class="dv">1</span>]]), ...)
 })</code></pre></div>
-<p>In track C, the plot are the same as track B, but without {stack} mode. Note here we explicitly specify {ylim}.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### track C
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed_list, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>), 
+<p>In track C, we implement same graphics as in track B, but with the normal mode. Under <code>stack</code> mode, data range on y axes and positions of rectangles are adjusted internally. Here we explicitly adjust it under the normal mode.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>), 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         i =<span class="st"> </span><span class="kw">getI</span>(...)
-        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop =</span> i <span class="op">+</span><span class="st"> </span><span class="fl">0.4</span>, <span class="dt">ybottom =</span> i <span class="op">-</span><span class="st"> </span><span class="fl">0.4</span>, 
-            <span class="dt">col =</span> <span class="kw">f</span>(value[[<span class="dv">1</span>]]), ...)
+        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop =</span> i <span class="op">+</span><span class="st"> </span><span class="fl">0.3</span>, <span class="dt">ybottom =</span> i <span class="op">-</span><span class="st"> </span><span class="fl">0.3</span>, 
+            <span class="dt">col =</span> <span class="kw">col_fun</span>(value[[<span class="dv">1</span>]]), ...)
 })</code></pre></div>
-<p>In track D, bars are added to the base line ({y = 0}).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### track D
-bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>)
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed, 
+<p>In track D, rectangles are used to make barplots. We specify the position of the top of bars by <code>ytop.column</code> (1 means the first column in <code>value</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>)
+<span class="kw">circos.genomicTrack</span>(bed, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop.column =</span> <span class="dv">1</span>, <span class="dt">ybottom =</span> <span class="dv">0</span>, 
             <span class="dt">col =</span> <span class="kw">ifelse</span>(value[[<span class="dv">1</span>]] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), ...)
-            
-        cell.xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>)
-        <span class="kw">circos.lines</span>(cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)
+        <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)
 })
 <span class="kw">circos.clear</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-application-rect"></span>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Circular Visualization in R</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Circular Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="github-repo" content="jokergoo/books" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Circular Visualization in R" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  
+
+<meta name="author" content="Zuguang Gu">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="code-is-not-run-when-building-the-vignette.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Circular Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I General Functionality</b></span></li>
+<li class="chapter" data-level="1" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>1</b> Circular layout</a></li>
+<li class="chapter" data-level="2" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>2</b> Graphics</a></li>
+<li class="chapter" data-level="3" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>3</b> Legends</a></li>
+<li class="chapter" data-level="4" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>4</b> Implement high-level plots</a></li>
+<li class="chapter" data-level="5" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>5</b> Advanced layout</a></li>
+<li class="part"><span><b>II Applications in Genomics</b></span></li>
+<li class="chapter" data-level="6" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>6</b> Initialize with genomic data</a></li>
+<li class="chapter" data-level="7" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html"><i class="fa fa-check"></i><b>7</b> Create plotting regions for genomic data</a></li>
+<li class="chapter" data-level="8" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>8</b> modes for <code>circos.genomicTrack()</code></a></li>
+<li class="chapter" data-level="9" data-path="note-how-horizontalline-works.html"><a href="note-how-horizontalline-works.html"><i class="fa fa-check"></i><b>9</b> note how ‘horizontalLine’ works</a></li>
+<li class="chapter" data-level="10" data-path="genomic-density-and-rainfall-plot.html"><a href="genomic-density-and-rainfall-plot.html"><i class="fa fa-check"></i><b>10</b> Genomic density and Rainfall plot</a></li>
+<li class="part"><span><b>III Visualize Relations</b></span></li>
+<li class="chapter" data-level="11" data-path="code-is-not-run-when-building-the-vignette.html"><a href="code-is-not-run-when-building-the-vignette.html"><i class="fa fa-check"></i><b>11</b> code is not run when building the vignette</a></li>
+<li class="chapter" data-level="12" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>12</b> Make fun of the package</a><ul>
+<li class="chapter" data-level="12.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>12.1</b> A clock</a></li>
+<li class="chapter" data-level="12.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>12.2</b> A dartboard</a></li>
+<li class="chapter" data-level="12.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>12.3</b> Ba-Gua and Tai-Ji</a></li>
+<li class="chapter" data-level="12.4" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#circular-doodle"><i class="fa fa-check"></i><b>12.4</b> Circular doodle</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="make-fun-of-the-package" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Make fun of the package</h1>
+<div id="a-clock" class="section level2">
+<h2><span class="header-section-number">12.1</span> A clock</h2>
+<p>The first example is a clock. The key function here is <code>circos.axis()</code> (Figure <a href="make-fun-of-the-package.html#fig:clock">12.1</a>). In the example, the whole circle only contains one sector in which major tick at 0 is overlapping with major tick at 12.</p>
+<p>Later we calculate the positions of the hour hand, the minute hand and the second hand based on current time when this Chapter is generated. The hands are drawn by <code>arraws()</code> function in the canvas coordinate. A real-time clock can be found at the <strong>Examples</strong> section in the help page of <code>circos.axis()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">0</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">90</span>)
+<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">12</span>))
+<span class="kw">circos.trackPlotRegion</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>)
+<span class="kw">circos.axis</span>(<span class="dt">major.at =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">labels =</span> <span class="ot">NULL</span>, <span class="dt">direction =</span> <span class="st">&quot;inside&quot;</span>, 
+    <span class="dt">major.tick.length =</span> <span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>))
+<span class="kw">circos.text</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">12</span>) <span class="op">-</span><span class="st"> </span><span class="kw">uy</span>(<span class="dv">6</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>)
+
+current.time =<span class="st"> </span><span class="kw">as.POSIXlt</span>(<span class="kw">Sys.time</span>())
+sec =<span class="st"> </span><span class="kw">ceiling</span>(current.time<span class="op">$</span>sec)
+min =<span class="st"> </span>current.time<span class="op">$</span>min
+hour =<span class="st"> </span>current.time<span class="op">$</span>hour
+
+sec.degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>sec<span class="op">/</span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span>
+<span class="kw">arrows</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">cos</span>(sec.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.8</span>, <span class="kw">sin</span>(sec.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.8</span>)
+
+min.degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>min<span class="op">/</span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span>
+<span class="kw">arrows</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">cos</span>(min.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.7</span>, <span class="kw">sin</span>(min.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.7</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)   
+
+hour.degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>hour<span class="op">/</span><span class="dv">12</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span> <span class="op">-</span><span class="st"> </span>min<span class="op">/</span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span><span class="op">/</span><span class="dv">12</span>
+<span class="kw">arrows</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">cos</span>(hour.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.4</span>, <span class="kw">sin</span>(hour.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.4</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:clock"></span>
+<img src="circlize-book_files/figure-html/clock-1.png" alt="A clock." width="384" />
+<p class="caption">
+Figure 12.1: A clock.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+</div>
+<div id="a-dartboard" class="section level2">
+<h2><span class="header-section-number">12.2</span> A dartboard</h2>
+<p>The second example is a dartboard. In Figure <a href="make-fun-of-the-package.html#fig:dartboard">12.2</a>, tracks are assigned with different heights and each cell is initialized with different colors. The most inside green ring and red circle are plotted by <code>draw.sector()</code>.</p>
+<p>We use <code>circos.trackText()</code> to add labels because we know the global order of the labels.</p>
+<p>Now you can project the plot on your door and begin to play!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span>  <span class="co"># just indicate there are 20 sectors</span>
+<span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">0</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),
+    <span class="dt">start.degree =</span> <span class="dv">360</span><span class="op">/</span><span class="dv">20</span><span class="op">/</span><span class="dv">2</span>, <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">clock.wise =</span> <span class="ot">FALSE</span>)
+<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
+
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.15</span>)
+<span class="kw">circos.trackText</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">20</span>), <span class="dt">y =</span> <span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">20</span>),
+    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">4</span>, <span class="dv">18</span>, <span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">5</span>, <span class="dv">12</span>, <span class="dv">9</span>, <span class="dv">14</span>, <span class="dv">11</span>, <span class="dv">8</span>, <span class="dv">16</span>, <span class="dv">7</span>, <span class="dv">19</span>, <span class="dv">3</span>, <span class="dv">17</span>, <span class="dv">2</span>, <span class="dv">15</span>, <span class="dv">10</span>, <span class="dv">6</span>),
+    <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">factors =</span> factors, <span class="dt">col =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">font =</span> <span class="dv">2</span>, <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>)
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors,
+    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#E41A1C&quot;</span>, <span class="st">&quot;#4DAF4A&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.05</span>)
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors,
+    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;white&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.275</span>)
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors,
+    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#E41A1C&quot;</span>, <span class="st">&quot;#4DAF4A&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.05</span>)
+<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, 
+    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;white&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.375</span>)
+
+<span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,
+    <span class="dt">rou1 =</span> <span class="fl">0.1</span>, <span class="dt">col =</span> <span class="st">&quot;#4DAF4A&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#EEEEEE&quot;</span>)
+<span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,
+    <span class="dt">rou1 =</span> <span class="fl">0.05</span>, <span class="dt">col =</span> <span class="st">&quot;#E41A1C&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#EEEEEE&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:dartboard"></span>
+<img src="circlize-book_files/figure-html/dartboard-1.png" alt="A dartboard." width="384" />
+<p class="caption">
+Figure 12.2: A dartboard.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+</div>
+<div id="ba-gua-and-tai-ji" class="section level2">
+<h2><span class="header-section-number">12.3</span> Ba-Gua and Tai-Ji</h2>
+<p>The third example is <a href="https://en.wikipedia.org/wiki/Bagua">Ba-Gua</a>. The key functions are <code>circos.rect()</code> and <code>draw.sector()</code> (Figure <a href="make-fun-of-the-package.html#fig:bagua">12.3</a>).</p>
+<p>Bagua was originated several thousands years ago in China. It is the source of almost all ancient Chinese philosophy. It abstracts the rule of universe into base signs and combination of the two basic signs generates the whole system of the universe.</p>
+<p>Inside Ba-Gua, these is the <a href="http://en.wikipedia.org/wiki/Taiji_(philosophy)">Tai-Ji</a>. Tai-Ji refers to the most original state at the creation of the universe. In ancient Chinese philosophy system, at the very beginning, the whole world is a huge mass of air (chaos). Then the lighter air floated up and created sky while heavier sinked down and created ground. The upper world is called Yang and the bottom world is called Ying. And that is Tai-Ji.</p>
+<p>Looking at Tai-Ji, you can see there are two states interacting with each other. The white one and the black one gradually transformed into each other at the end. And in the center of white and black, the opposite color is generated. In real world, Taiji can represent all phenomenon that is of dualism. Such as male and female, correct and wrong. However things would change, good thing would become bad thing as time goes by, and bad thing would also turn into good according to how you look at the world.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">8</span>
+<span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="fl">22.5</span>, <span class="dt">gap.degree =</span> <span class="dv">6</span>)
+<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
+
+<span class="co"># yang yao is __ (a long segment)</span>
+add_yang_yao =<span class="st"> </span><span class="cf">function</span>() {
+    <span class="kw">circos.rect</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)
+}
+
+<span class="co"># yin yao is -- (two short segments)</span>
+add_yin_yao =<span class="st"> </span><span class="cf">function</span>() {
+    <span class="kw">circos.rect</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.45</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)
+    <span class="kw">circos.rect</span>(<span class="fl">0.55</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)
+}
+<span class="kw">circos.trackPlotRegion</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.border =</span> <span class="ot">NA</span>,
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+        i =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.numeric.index&quot;</span>)
+        <span class="cf">if</span>(i <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>)) <span class="kw">add_yang_yao</span>() <span class="cf">else</span> <span class="kw">add_yin_yao</span>()
+}, <span class="dt">track.height =</span> <span class="fl">0.1</span>)
+
+<span class="kw">circos.trackPlotRegion</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.border =</span> <span class="ot">NA</span>,
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+        i =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.numeric.index&quot;</span>)
+        <span class="cf">if</span>(i <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)) <span class="kw">add_yang_yao</span>() <span class="cf">else</span> <span class="kw">add_yin_yao</span>()
+    }, <span class="dt">track.height =</span> <span class="fl">0.1</span>)
+
+<span class="kw">circos.trackPlotRegion</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.border =</span> <span class="ot">NA</span>, 
+    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+        i =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.numeric.index&quot;</span>)
+        <span class="cf">if</span>(i <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)) <span class="kw">add_yang_yao</span>() <span class="cf">else</span> <span class="kw">add_yin_yao</span>()
+    }, <span class="dt">track.height =</span> <span class="fl">0.1</span>)
+
+<span class="co"># the bottom of the most recent track</span>
+r =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.bottom.radius&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.1</span>
+<span class="co"># draw taiji, note default order is clock wise for `draw.sector`</span>
+<span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">90</span>, <span class="dt">end.degree =</span> <span class="op">-</span><span class="dv">90</span>,
+    <span class="dt">rou1 =</span> r, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)
+<span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">270</span>, <span class="dt">end.degree =</span> <span class="dv">90</span>,
+    <span class="dt">rou1 =</span> r, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)
+<span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,
+    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)
+<span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span>r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,
+    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)
+<span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,
+    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">8</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)
+<span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span>r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,
+    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">8</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:bagua"></span>
+<img src="circlize-book_files/figure-html/bagua-1.png" alt="Ba-Gua and Tai-Ji." width="384" />
+<p class="caption">
+Figure 12.3: Ba-Gua and Tai-Ji.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+</div>
+<div id="circular-doodle" class="section level2">
+<h2><span class="header-section-number">12.4</span> Circular doodle</h2>
+<p>Figure <a href="make-fun-of-the-package.html#fig:doodle">12.4</a> is a circular style of <a href="https://en.wikipedia.org/wiki/Keith_Haring">Keith Haring</a>’s doodle. The circular transformation is as follows: 1. use <strong>jpeg</strong> package to read RGB values in the original figure; 2. use <code>circos.rect()</code> to draw every pixel as tiny rectangles into the circle. Source code for generating the figure can be found at <a href="http://jokergoo.github.io/circlize/example/doodle.html" class="uri">http://jokergoo.github.io/circlize/example/doodle.html</a> (note this implementation is quite slow to run).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;images/doodle.jpeg&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:doodle"></span>
+<img src="images/doodle.jpeg" alt="Keith Haring doodle in circular layout." width="400" />
+<p class="caption">
+Figure 12.4: Keith Haring doodle in circular layout.
+</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="code-is-not-run-when-building-the-vignette.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/17-make-fun.Rmd",
+"text": "Edit"
+},
+"download": ["circlize-book.pdf", "circlize-book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

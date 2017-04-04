@@ -123,9 +123,9 @@ using a list of data frames, the genomic positions can be different.
 
 ## Applications
 
-In this section, we will show several real examples of making genomic plots under different modes.
-Again, if you are not happy with these functionalities, you can simply re-implement
-your plot with the basic circlize functions.
+In this section, we will show several real examples of making genomic plots
+under different modes. Again, if you are not happy with these functionalities,
+you can simply re-implement your plot with the basic circlize functions.
 
 ### Points
 
@@ -134,19 +134,18 @@ of the circle and initialize the plot only with chromosome 1.
 
 ```{r genomic_application_points_0, eval = FALSE}
 set.seed(999)
-
 circos.par("track.height" = 0.1, start.degree = 90,
     canvas.xlim = c(0, 1), canvas.ylim = c(0, 1), gap.degree = 270)
 circos.initializeWithIdeogram(chromosome.index = "chr1", plotType = NULL)
 ```
 
-In the example figure (Figure \@ref(genomic-application-points)), each track
+In the example figure (Figure \@ref(fig:genomic-application-points)) below, each track
 contains points under different modes.
 
 In track A, it is the most normal way to add points. Here `bed` only contains
 one numeric column and points are added at the middle points of regions.
 
-```{r genomic_application_points_A, eval = FALSE, echo = 1:5}
+```{r genomic_application_points_A, eval = FALSE, echo = 1:4}
 bed = generateRandomBed(nr = 300)
 circos.genomicTrack(bed, panel.fun = function(region, value, ...) {
     circos.genomicPoints(region, value, pch = 16, cex = 0.5, ...)
@@ -156,10 +155,9 @@ text(0, mean(pos), "A", adj = c(1.1, 0.5))
 ```
 
 In track B, if it is specified as `stack` mode, points are added in a
-horizontal line (additionally identify by a dashed line) because there
-is only one numeric column in `bed`.
+horizontal line (or visually, a circular line).
 
-```{r genomic_application_points_B, eval = FALSE, echo = 1:8}
+```{r genomic_application_points_B, eval = FALSE, echo = 1:6}
 circos.genomicTrack(bed, stack = TRUE, 
     panel.fun = function(region, value, ...) {
         circos.genomicPoints(region, value, pch = 16, cex = 0.5,...)
@@ -170,9 +168,10 @@ pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "B", adj = c(1.1, 0.5))
 ```
 
-In track C, the input data is a list of two data frames. 
+In track C, the input data is a list of two data frames. `panel.fun` is applied
+iterately on each data frame. The index of "current" index can be obtained by `getI(...)`.
 
-```{r genomic_application_points_C, eval = FALSE, echo = 1:10}
+```{r genomic_application_points_C, eval = FALSE, echo = 1:8}
 bed1 = generateRandomBed(nr = 300)
 bed2 = generateRandomBed(nr = 300)
 bed_list = list(bed1, bed2)
@@ -185,9 +184,10 @@ pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "C", adj = c(1.1, 0.5))
 ```
 
-In track D, the list of data frames is plotted under `stack` mode.
+In track D, the list of data frames is plotted under `stack` mode. Graphics
+corresponding to each data frame is added to a horizontal line.
 
-```{r genomic_application_points_D, eval = FALSE, echo = 1:9}
+```{r genomic_application_points_D, eval = FALSE, echo = 1:6}
 circos.genomicTrack(bed_list, stack = TRUE, 
     panel.fun = function(region, value, ...) {
         i = getI(...)
@@ -198,10 +198,10 @@ pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "D", adj = c(1.1, 0.5))
 ```
 
-In track E, the data frame has four numeric columns. Different colors are assigned to 
-different columns.
+In track E, the data frame has four numeric columns. Under normal mode, all the four
+columns are used with the same genomic coordinates.
 
-```{r genomic_application_points_E, eval = FALSE, echo = 1:6}
+```{r genomic_application_points_E, eval = FALSE, echo = 1:5}
 bed = generateRandomBed(nr = 300, nc = 4)
 circos.genomicTrack(bed, 
     panel.fun = function(region, value, ...) {
@@ -212,10 +212,11 @@ text(0, mean(pos), "E", adj = c(1.1, 0.5))
 ```
 
 In track F, the data frame has four columns but is plotted under `stack` mode.
-Note here  `value` in `panel.fun` is a data frame with only one column (but it
-will be exexuted 4 times in each cell).
+Graphics for each column are added to a horizontal line. Current column can be
+obtained by `getI(...)`. Note here  `value` in `panel.fun` is a data frame
+with only one column (which is the current numeric column).
 
-```{r genomic_application_points_F, eval = FALSE, echo = c(1:11, 14)}
+```{r genomic_application_points_F, eval = FALSE, echo = c(1:7, 10)}
 bed = generateRandomBed(nr = 300, nc = 4)
 circos.genomicTrack(bed, stack = TRUE, 
     panel.fun = function(region, value, ...) {
@@ -241,86 +242,73 @@ eval(parse(text = chunks[["genomic_application_points_F"]]))
 
 ### Lines
 
-Similar as previous figure, only the first quarter in the circle is visualized.
+Similar as previous figure, only the first quarter in the circle is
+visualized. Examples are shown in Figure \@ref(fig:genomic-application-lines).
 
 ```{r genomic_application_lines_0, eval = FALSE}
-circos.par("track.height" = 0.75, start.degree = 90,
+circos.par("track.height" = 0.08, start.degree = 90,
     canvas.xlim = c(0, 1), canvas.ylim = c(0, 1), gap.degree = 270,
     cell.padding = c(0, 0, 0, 0))
 circos.initializeWithIdeogram(chromosome.index = "chr1", plotType = NULL)
 ```
 
-In track A, it is the most simple way to add lines.
+In track A, it is the most simple way to add lines. Middle points of regions
+are used as the values on x-axes.
 
-```{r genomic_application_lines_A, eval = FALSE, echo = 1:6}
-### track A
+```{r genomic_application_lines_A, eval = FALSE, echo = 1:5}
 bed = generateRandomBed(nr = 500)
-circos.genomicTrackPlotRegion(bed, 
+circos.genomicTrack(bed, 
     panel.fun = function(region, value, ...) {
         circos.genomicLines(region, value)
-})
-circos.genomicTrackPlotRegion(bed, 
-    panel.fun = function(region, value, ...) {
-        circos.genomicLines(region, value, area = TRUE)
-})
-circos.genomicTrackPlotRegion(bed, 
-    panel.fun = function(region, value, ...) {
-        circos.genomicLines(region, value, type = "h")
 })
 pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "A", adj = c(1.1, 0.5))
 ```
 
-In track B, add lines for a list of data frames. Different colors refers to different
-data frames.
+`circos.genomicLines()` is implemented by `circos.lines()`, thus, arguments
+supported in `circos.lines()` can also be in `circos.genomicLines()`. In track
+B, the area under the line is filled with color and in track C, type of the
+line is set to `h`.
 
-```{r genomic_application_lines_B, eval = FALSE, echo = 1:9}
-### track B
-bed1 = generateRandomBed(nr = 500)
-bed2 = generateRandomBed(nr = 500)
-bed_list = list(bed1, bed2)
-circos.genomicTrackPlotRegion(bed_list, 
+```{r genomic_application_lines_BC, eval = FALSE, echo = c(1:4, 7:10)}
+circos.genomicTrack(bed, 
     panel.fun = function(region, value, ...) {
-        i = getI(...)
-        circos.genomicLines(region, value, col = i, ...)
+        circos.genomicLines(region, value, area = TRUE)
 })
 pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "B", adj = c(1.1, 0.5))
-```
-
-In track C, it is the {\tt stack} mode of adding lines. Here the width of each line corresponds
-to the width of each genomic interval.
-
-```{r genomic_application_lines_C, eval = FALSE, echo = 1:6}
-### track C
-circos.genomicTrackPlotRegion(bed_list, stack = TRUE, 
+circos.genomicTrack(bed, 
     panel.fun = function(region, value, ...) {
-        i = getI(...)
-        circos.genomicLines(region, value, col = i, ...)
+        circos.genomicLines(region, value, type = "h")
 })
 pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "C", adj = c(1.1, 0.5))
 ```
 
-In track D, lines for the four numeric columns are added with different colors.
+In track D, the input is a list of data frames. `panel.fun` is applied to each data frame
+iterately.
 
-```{r genomic_application_lines_D, eval = FALSE, echo = 1:6}
-### track D
-bed = generateRandomBed(nr = 500, nc = 4)
-circos.genomicTrackPlotRegion(bed, 
+```{r genomic_application_lines_D, eval = FALSE, echo = 1:8}
+bed1 = generateRandomBed(nr = 500)
+bed2 = generateRandomBed(nr = 500)
+bed_list = list(bed1, bed2)
+circos.genomicTrack(bed_list, 
     panel.fun = function(region, value, ...) {
-        circos.genomicLines(region, value, col = 1:4, ...)
+        i = getI(...)
+        circos.genomicLines(region, value, col = i, ...)
 })
 pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "D", adj = c(1.1, 0.5))
 ```
 
-In track E, it is the {\tt stack} mode for a data frame with more than one numeric columns.
+In track E, the input is a list of data frames and is drawn under `stack`
+mode. Each genomic region is drawn as a horizontal segment and is put on a
+horizontal line where the width of the segment corresponds to the width of the
+genomc region. Under `stack` mode, for `circos.genomicLines()`, type of lines
+is only restricted to segments.
 
-```{r genomic_application_lines_E, eval = FALSE, echo = 1:7}
-### track E
-bed = generateRandomBed(nr = 500, nc = 4)
-circos.genomicTrackPlotRegion(bed, stack = TRUE, 
+```{r genomic_application_lines_E, eval = FALSE, echo = 1:5}
+circos.genomicTrack(bed_list, stack = TRUE, 
     panel.fun = function(region, value, ...) {
         i = getI(...)
         circos.genomicLines(region, value, col = i, ...)
@@ -329,19 +317,45 @@ pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "E", adj = c(1.1, 0.5))
 ```
 
-In track F, we specify {\tt type} to {\tt segment} and use different colors for segments.
-Note each segment is located at its corresponding y-value.
+In track F, the input is a data frame with four numeric columns. Each column
+is drawn under the normal mode where the same genomic coordinates are shared.
 
-```{r genomic_application_lines_F, eval = FALSE, echo = c(1:7, 10)}
-### track F
-bed = generateRandomBed(nr = 200)
-circos.genomicTrackPlotRegion(bed, 
+```{r genomic_application_lines_F, eval = FALSE, echo = 1:5}
+bed = generateRandomBed(nr = 500, nc = 4)
+circos.genomicTrack(bed, 
     panel.fun = function(region, value, ...) {
-        circos.genomicLines(region, value, type = "segment", lwd = 2, 
-            col = rand_color(1), ...)
+        circos.genomicLines(region, value, col = 1:4, ...)
 })
 pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "F", adj = c(1.1, 0.5))
+```
+
+In track G, the data frame with four numeric columns are drawn under `stack` mode.
+All the four columns are drawn to four horizontal lines.
+
+```{r genomic_application_lines_G, eval = FALSE, echo = 1:6}
+bed = generateRandomBed(nr = 500, nc = 4)
+circos.genomicTrack(bed, stack = TRUE, 
+    panel.fun = function(region, value, ...) {
+        i = getI(...)
+        circos.genomicLines(region, value, col = i, ...)
+})
+pos = get.cell.meta.data("yplot")
+text(0, mean(pos), "G", adj = c(1.1, 0.5))
+```
+
+In track H, we specify `type` to `segment` and set different colors for segments.
+Note each segment is located at the y position defined in the numeric column.
+
+```{r genomic_application_lines_H, eval = FALSE, echo = c(1:6, 9)}
+bed = generateRandomBed(nr = 200)
+circos.genomicTrack(bed, 
+    panel.fun = function(region, value, ...) {
+        circos.genomicLines(region, value, type = "segment", lwd = 2, 
+            col = rand_color(nrow(region)), ...)
+})
+pos = get.cell.meta.data("yplot")
+text(0, mean(pos), "H", adj = c(1.1, 0.5))
 circos.clear()
 ```
 
@@ -349,90 +363,91 @@ circos.clear()
 chunks <- knitr:::knit_code$get()
 eval(parse(text = chunks[["genomic_application_lines_0"]]))
 eval(parse(text = chunks[["genomic_application_lines_A"]]))
-eval(parse(text = chunks[["genomic_application_lines_B"]]))
-eval(parse(text = chunks[["genomic_application_lines_C"]]))
+eval(parse(text = chunks[["genomic_application_lines_BC"]]))
 eval(parse(text = chunks[["genomic_application_lines_D"]]))
 eval(parse(text = chunks[["genomic_application_lines_E"]]))
 eval(parse(text = chunks[["genomic_application_lines_F"]]))
+eval(parse(text = chunks[["genomic_application_lines_G"]]))
+eval(parse(text = chunks[["genomic_application_lines_H"]]))
 ```
 
 ### Rectangles
 
-Again, initialize the plot with one quarter of the circle (figure \ref{fig:genomic_application_rect}).
-Also, we want to map the values to colors by {\tt f}.
+Again, only the first quarter of the circle is initialized. For rectangles,
+the filled colors  are always used to represent numeric values. Here we define
+a color mapping function `col_fun` to map values to colors. Examples are in
+Figure \@ref(fig:genomic-application-rect).
 
 ```{r genomic_application_rect_0, eval = FALSE}
-par(mar = c(1, 1, 1, 1))
 circos.par("track.height" = 0.15, start.degree = 90,
     canvas.xlim = c(0, 1), canvas.ylim = c(0, 1), gap.degree = 270)
 circos.initializeWithIdeogram(chromosome.index = "chr1", plotType = NULL)
-f = colorRamp2(breaks = c(-1, 0, 1), colors = c("green", "black", "red"))
+col_fun = colorRamp2(breaks = c(-1, 0, 1), colors = c("green", "black", "red"))
 ```
 
-In track A, {\tt bed} has four numeric columns and {\tt stack} mode is used to arrange 
-the heatmap.
+To draw heatmaps, you probably want to use the `stack` mode. In track A, `bed`
+has four numeric columns and `stack` mode is used to arrange the heatmap. You
+can see rectangles are stacked for a certain genomic region.
 
-```{r genomic_application_rect_A, eval = FALSE, echo = 1:6}
-### track A
+```{r genomic_application_rect_A, eval = FALSE, echo = 1:5}
 bed = generateRandomBed(nr = 100, nc = 4)
-circos.genomicTrackPlotRegion(bed, stack = TRUE, 
+circos.genomicTrack(bed, stack = TRUE, 
     panel.fun = function(region, value, ...) {
-        circos.genomicRect(region, value, col = f(value[[1]]), border = NA, ...)
+        circos.genomicRect(region, value, col = col_fun(value[[1]]), border = NA, ...)
 })
 pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "A", adj = c(1.1, 0.5))
 ```
 
-In track B, add rectangles for a list of data frames. Comparing to track A, here genomic
-regions for each data frame are different, so the positions of rectangles in the first layer
-are different from that in the second layer.
+In track B, the input is a list of data frames. Under `stack` mode, each data
+frame is added to a horizontal line. Since genomic positions for different
+data frames can be different, you may see in the figure, positions for the two
+sets of rectangles are different.
 
-Under {\tt stack} mode, {\tt ytop} and {\tt ybottom} can be set to adjust the height of 
-rectangles. It would be straightforward because for each layer, the position is {\tt y = i}
-and the height of each rectangle is 1.
+Under `stack` mode, by default, the height of rectangles is internally set to
+make them completely fill the cell in the vertical direction. `ytop` and
+`ybottom` can be used to adjust the height of rectangles. Note each line of
+rectangles is at `y = i` and the default height of rectangles are 1.
 
-```{r genomic_application_rect_B, eval = FALSE, echo = 1:10}
-### track B
+```{r genomic_application_rect_B, eval = FALSE, echo = 1:9}
 bed1 = generateRandomBed(nr = 100)
 bed2 = generateRandomBed(nr = 100)
 bed_list = list(bed1, bed2)
-circos.genomicTrackPlotRegion(bed_list, stack = TRUE, 
+circos.genomicTrack(bed_list, stack = TRUE, 
     panel.fun = function(region, value, ...) {
         i = getI(...)
-        circos.genomicRect(region, value, ytop = i + 0.4, ybottom = i - 0.4,
-            col = f(value[[1]]), ...)
+        circos.genomicRect(region, value, ytop = i + 0.3, ybottom = i - 0.3,
+            col = col_fun(value[[1]]), ...)
 })
 pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "B", adj = c(1.1, 0.5))
 ```
 
-In track C, the plot are the same as track B, but without {\tt stack} mode.
-Note here we explicitly specify {\tt ylim}.
+In track C, we implement same graphics as in track B, but with the normal mode.
+Under `stack` mode, data range on y axes and positions of rectangles are adjusted
+internally. Here we explicitly adjust it under the normal mode.
 
-```{r genomic_application_rect_C, eval = FALSE, echo = 1:7}
-### track C
-circos.genomicTrackPlotRegion(bed_list, ylim = c(0, 3), 
+```{r genomic_application_rect_C, eval = FALSE, echo = 1:6}
+circos.genomicTrack(bed_list, ylim = c(0.5, 2.5), 
     panel.fun = function(region, value, ...) {
         i = getI(...)
-        circos.genomicRect(region, value, ytop = i + 0.4, ybottom = i - 0.4, 
-            col = f(value[[1]]), ...)
+        circos.genomicRect(region, value, ytop = i + 0.3, ybottom = i - 0.3, 
+            col = col_fun(value[[1]]), ...)
 })
 pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "C", adj = c(1.1, 0.5))
 ```
 
-In track D, bars are added to the base line ({\tt y = 0}).
+In track D, rectangles are used to make barplots. We specify the position of
+the top of bars by `ytop.column` (1 means the first column in `value`).
 
-```{r genomic_application_rect_D, eval = FALSE, echo = c(1:10, 13)}
-### track D
+```{r genomic_application_rect_D, eval = FALSE, echo = c(1:7, 10)}
 bed = generateRandomBed(nr = 200)
-circos.genomicTrackPlotRegion(bed, 
+circos.genomicTrack(bed, 
     panel.fun = function(region, value, ...) {
         circos.genomicRect(region, value, ytop.column = 1, ybottom = 0, 
             col = ifelse(value[[1]] > 0, "red", "green"), ...)
-            
-        cell.xlim = get.cell.meta.data("cell.xlim")
-        circos.lines(cell.xlim, c(0, 0), lty = 2, col = "#00000040")
+        circos.lines(CELL_META$cell.xlim, c(0, 0), lty = 2, col = "#00000040")
 })
 pos = get.cell.meta.data("yplot")
 text(0, mean(pos), "D", adj = c(1.1, 0.5))

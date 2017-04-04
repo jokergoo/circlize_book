@@ -1,0 +1,7 @@
+```{r, echo = FALSE}
+library(circlize)
+```
+
+# Revisit zooming
+
+After we have learned the basic of advanced technique of **circlize**

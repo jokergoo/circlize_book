@@ -1,0 +1,58 @@
+
+# Genomic density and Rainfall plot
+
+Rainfall plots are used to visualize the distribution of genomic regions in the genome.
+Rainfall plots are particularly useful to identify clusters of regions. In the
+rainfall plot, each dot represents a region. The x-axis corresponds to the
+genomic coordinate, and the y-axis corresponds to the minimal distance (log10
+transformed) of the region to its two neighbouring regions. A cluster of regions will
+appear as a “rainfall” in the plot.
+
+`circos.genomicRainfall()` calculates neighbouring distance for each region
+and draw as points on the plot. Since `circos.genomicRainfall()` generates data on
+y-direction (`log10(distance)`), it is actually a high-level function which
+creates a new track.
+
+The input data can be a single data frame or a list of data frames.
+
+```{r, eval = FALSE}
+circos.genoimcRainfall(bed)
+circos.genoimcRainfall(bed_list, col = c("red", "green"))
+```
+
+However, if the amount of regions in a cluster is high, dots will overlap, and
+direct assessment of the number and density of regions in the cluster will be
+impossible. To overcome this limitation, additional tracks are added which
+visualize the genomic density of regions (defined as the fraction of a genomic
+window that is covered by genomic regions).
+
+`circos.genomicDensity()` calculates how much a genomic window is covered by
+regions in `bed`. It is also a high-level function and creates a new track.
+
+The input data can be a single data frame or a list of data frames.
+
+```{r, eval = FALSE}
+circos.genomicDensity(bed)
+circos.genomicDensity(bed, baseline = 0)
+circos.genomicDensity(bed, window.size = 1e6)
+circos.genomicDensity(bedlist, col = c("#FF000080", "#0000FF80"))
+```
+
+Following example makes a rainfall plot for differentially methylated regions
+(DMR) and their genomic densities. In the plot, red corresponds to hyper-methylated 
+DMRs (gain of methylation) and blue corresponds to hypo-methylated
+DMRs (loss of methylation). You may see how the combination of rainfall track
+and genomic density track helps to get a more precise inference of the
+distribution of DMRs on genome (Figure \@ref(fig:genomic-rainfall)).
+
+```{r genomic-rainfall, fig.width = 6, fig.height = 6, fig.cap = "Genomic rainfall plot and densities."}
+load(system.file(package = "circlize", "extdata", "DMR.RData"))
+par(mar = c(1, 1, 1, 1))
+circos.initializeWithIdeogram(chromosome.index = paste0("chr", 1:22))
+
+bed_list = list(DMR_hyper, DMR_hypo)
+circos.genomicRainfall(bed_list, pch = 16, cex = 0.4, col = c("#FF000080", "#0000FF80"))
+circos.genomicDensity(DMR_hyper, col = c("#FF000080"), track.height = 0.1)
+circos.genomicDensity(DMR_hypo, col = c("#0000FF80"), track.height = 0.1)
+circos.clear()
+```
