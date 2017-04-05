@@ -1,9 +1,5 @@
 
-\section{High-level genomic functions}
-
-\textbf{circlize} implements several high-level functions which may help to visualize genomic data more effectively.
-
-\subsection{Position transformation}
+# Position transformation
 
 There is one representative situation when genomic position transformation needs to be applied. 
 For example, there are regions which are quite densely located on the chromosome. 

@@ -3,6 +3,8 @@
 library(circlize)
 ```
 
+# (PART) Others
+
 # Make fun of the package {#make-fun-of-the-package}
 
 ## A clock
@@ -163,7 +165,7 @@ values in the original figure; 2. use `circos.rect()` to draw every pixel as
 tiny rectangles into the circle. Source code for generating the figure can be
 found at http://jokergoo.github.io/circlize/example/doodle.html (note this implementation is quite slow to run).
 
-```{r doodle, fig.cap = "Keith Haring doodle in circular layout."}
+```{r doodle, echo = FALSE, fig.cap = "Keith Haring doodle in circular layout."}
 knitr::include_graphics("images/doodle.jpeg")
 ```
 

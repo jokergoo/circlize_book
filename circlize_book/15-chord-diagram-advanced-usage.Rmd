@@ -1,7 +1,6 @@
 
-# (PART) Visualize Relations {-} 
 
-\section{Advanced usage}
+# Advanced usage of `chordDiagram()`
 
 Although the default style of {\tt chordDiagram} is enough for most visualization tasks,
 still you can have more configurations on the plot. 

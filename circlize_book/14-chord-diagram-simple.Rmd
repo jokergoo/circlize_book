@@ -1,7 +1,9 @@
 
+# (PART) Visualize Relations {-} 
+
 One unique feature of circular layout is the links (or connectors) to represent relations
 between elements (\url{http://circos.ca/intro/tabular_visualization/}). The name
-of such plot is sometimes called Chord Diagram (\url{http://en.wikipedia.org/wiki/Chord_diagram}). 
+of such plot is called Chord Diagram (\url{http://en.wikipedia.org/wiki/Chord_diagram}). 
 In \textbf{circlize}, it is easy to plot it in a straightforward or customized way.
 
 There are two data formats that represent relations, either adjacency matrix or adjacency list.
