@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Circular Visualization in R</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Circular Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="github-repo" content="jokergoo/books" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Circular Visualization in R" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  
+
+<meta name="author" content="Zuguang Gu">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="revisit-zooming.html">
+<link rel="next" href="a-complex-example-of-chord-diagram.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Circular Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I General Functionality</b></span></li>
+<li class="chapter" data-level="1" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>1</b> Circular layout</a></li>
+<li class="chapter" data-level="2" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>2</b> Graphics</a></li>
+<li class="chapter" data-level="3" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>3</b> Legends</a></li>
+<li class="chapter" data-level="4" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>4</b> Implement high-level plots</a></li>
+<li class="chapter" data-level="5" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>5</b> Advanced layout</a></li>
+<li class="part"><span><b>II Applications in Genomics</b></span></li>
+<li class="chapter" data-level="6" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>6</b> Initialize with genomic data</a></li>
+<li class="chapter" data-level="7" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html"><i class="fa fa-check"></i><b>7</b> Create plotting regions for genomic data</a></li>
+<li class="chapter" data-level="8" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>8</b> modes for <code>circos.genomicTrack()</code></a></li>
+<li class="chapter" data-level="9" data-path="position-transformation.html"><a href="position-transformation.html"><i class="fa fa-check"></i><b>9</b> Position transformation</a></li>
+<li class="chapter" data-level="10" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>10</b> High-level genomic functions</a></li>
+<li class="chapter" data-level="11" data-path="revisit-zooming.html"><a href="revisit-zooming.html"><i class="fa fa-check"></i><b>11</b> Revisit zooming</a></li>
+<li class="part"><span><b>III Visualize Relations</b></span></li>
+<li class="chapter" data-level="12" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>12</b> Advanced usage of <code>chordDiagram()</code></a><ul>
+<li class="chapter" data-level="12.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>12.1</b> Organization of tracks</a></li>
+<li class="chapter" data-level="12.2" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-labels"><i class="fa fa-check"></i><b>12.2</b> Customize sector labels</a></li>
+<li class="chapter" data-level="12.3" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-axes"><i class="fa fa-check"></i><b>12.3</b> Customize sector axes</a></li>
+<li class="chapter" data-level="12.4" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#put-chord-diagram-horizontally-or-vertically-symmetric"><i class="fa fa-check"></i><b>12.4</b> Put Chord diagram horizontally or vertically symmetric</a></li>
+<li class="chapter" data-level="12.5" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#compare-two-chord-diagrams"><i class="fa fa-check"></i><b>12.5</b> Compare two Chord diagrams</a></li>
+<li class="chapter" data-level="12.6" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#multiple-group-chord-diagram"><i class="fa fa-check"></i><b>12.6</b> Multiple-group Chord diagram</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>13</b> A complex example of Chord diagram</a></li>
+<li class="chapter" data-level="14" data-path="part-others.html"><a href="part-others.html"><i class="fa fa-check"></i><b>14</b> (PART) Others</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="advanced-usage-of-chorddiagram" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Advanced usage of <code>chordDiagram()</code></h1>
+<p>The default style of <code>chordDiagram()</code> is somehow enough for most visualization tasks, still you can have more configurations on the plot.</p>
+<p>The usage is same for both ajacency matrix and ajacency list, so we only demonstrate with the matrix.</p>
+<div id="organization-of-tracks" class="section level2">
+<h2><span class="header-section-number">12.1</span> Organization of tracks</h2>
+<p>By default, <code>chordDiagram()</code> creates two tracks, one track for labels and one track for grids with axes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat)
+<span class="kw">circos.info</span>()</code></pre></div>
+<pre><code>## All your sectors:
+## [1] &quot;S1&quot; &quot;S2&quot; &quot;S3&quot; &quot;E1&quot; &quot;E2&quot; &quot;E3&quot; &quot;E4&quot; &quot;E5&quot; &quot;E6&quot;
+## 
+## All your tracks:
+## [1] 1 2
+## 
+## Your current sector.index is E6
+## Your current track.index is 2</code></pre>
+<p>These two tracks can be controlled by <code>annotationTrack</code> argument. Available values for this argument are <code>grid</code>, <code>name</code> and <code>axis</code>. The height of annotation tracks can be set by <code>annotationTrackHeight</code> which is the percentage to the radius of unit circle and can be set by <code>uh()</code> function with an absolute unit. Axes are only added if <code>grid</code> is set in <code>annotationTrack</code> (Figure @ref(fig:chord_diagram-default-track)).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>)
+<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;grid&quot;</span>),
+    <span class="dt">annotationTrackHeight =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.01</span>))
+<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>)</code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="circlize-book_files/figure-html/chord_diagram-default-track-1.png" alt="Track organization in `chordDiagram()`." width="768" />
+<p class="caption">
+(#fig:chord_diagram-default-track)Track organization in <code>chordDiagram()</code>.
+</p>
+</div>
+<p>Several empty tracks can be allocated before Chord diagram is drawn. Then self-defined graphics can be added to these empty tracks afterwards. The number of pre-allocated tracks can be set through <code>preAllocateTracks</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">preAllocateTracks =</span> <span class="dv">2</span>)
+<span class="kw">circos.info</span>()</code></pre></div>
+<pre><code>## All your sectors:
+## [1] &quot;S1&quot; &quot;S2&quot; &quot;S3&quot; &quot;E1&quot; &quot;E2&quot; &quot;E3&quot; &quot;E4&quot; &quot;E5&quot; &quot;E6&quot;
+## 
+## All your tracks:
+## [1] 1 2 3 4
+## 
+## Your current sector.index is E6
+## Your current track.index is 4</code></pre>
+<p>The default settings for pre-allocated tracks are:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+     <span class="dt">track.height =</span> <span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span>),
+     <span class="dt">bg.col =</span> <span class="ot">NA</span>,
+     <span class="dt">bg.border =</span> <span class="ot">NA</span>,
+     <span class="dt">bg.lty =</span> <span class="kw">par</span>(<span class="st">&quot;lty&quot;</span>),
+     <span class="dt">bg.lwd =</span> <span class="kw">par</span>(<span class="st">&quot;lwd&quot;</span>))</code></pre></div>
+<p>The default settings for pre-allocated tracks can be overwritten by specifying <code>preAllocateTracks</code> as a list.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>,
+    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.3</span>))</code></pre></div>
+<p>If more than one tracks need to be pre-allocated, just specify <code>preAllocateTracks</code> as a list which contains settings for each track:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>,
+    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.1</span>),
+                             <span class="kw">list</span>(<span class="dt">bg.border =</span> <span class="st">&quot;black&quot;</span>)))</code></pre></div>
+<p>By default <code>chordDiagram()</code> provides poor supports for customization of sector labels and axes, but with <code>preAllocateTracks</code> it is rather easy to customize them. Such customization will be introduced in next section.</p>
+</div>
+<div id="customize-sector-labels" class="section level2">
+<h2><span class="header-section-number">12.2</span> Customize sector labels</h2>
+<p>In <code>chordDiagram()</code>, there is no argument to control the style of sector labels, but this can be done by first pre-allocating an empty track and customizing the labels in it later. In the following example, one track is firstly allocated and a Chord diagram is added without label track and axes. Later, the first track is updated adding labels with clock wise facings (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels">12.1</a> A).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, 
+    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">max</span>(<span class="kw">strwidth</span>(<span class="kw">unlist</span>(<span class="kw">dimnames</span>(mat))))))
+<span class="co"># we go back to the first track and customize sector labels</span>
+<span class="kw">circos.trackPlotRegion</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ylim[<span class="dv">1</span>], CELL_META<span class="op">$</span>sector.index, 
+        <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>))
+}, <span class="dt">bg.border =</span> <span class="ot">NA</span>) <span class="co"># here set bg.border to NA is important</span></code></pre></div>
+<p>In the following example, the labels are put on the grids (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels">12.1</a> B). Please not <code>circos.text()</code> and <code>get.cell.meta.data()</code> can be used outside <code>panel.fun</code> if the sector index and track index are specified explicitly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, 
+    <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;grid&quot;</span>, <span class="st">&quot;axis&quot;</span>), <span class="dt">annotationTrackHeight =</span> <span class="kw">uh</span>(<span class="dv">5</span>, <span class="st">&quot;mm&quot;</span>))
+<span class="cf">for</span>(si <span class="cf">in</span> <span class="kw">get.all.sector.index</span>()) {
+    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>)
+    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>)
+    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="kw">mean</span>(ylim), si, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>, 
+        <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>)
+}</code></pre></div>
+<p>For the last example in this section, if the width of the sector is less than 20 degree, the labels are added in the radical direction (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels">12.1</a> C).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
+mat2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>), <span class="dv">10</span>)
+<span class="kw">chordDiagram</span>(mat2, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, 
+    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">max</span>(<span class="kw">strwidth</span>(<span class="kw">unlist</span>(<span class="kw">dimnames</span>(mat))))))
+<span class="kw">circos.trackPlotRegion</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>)
+    xplot =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xplot&quot;</span>)
+    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>)
+    sector.name =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)
+
+    <span class="cf">if</span>(<span class="kw">abs</span>(xplot[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xplot[<span class="dv">1</span>]) <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>) {
+        <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), ylim[<span class="dv">1</span>], sector.name, <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>,
+            <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)
+    } <span class="cf">else</span> {
+        <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), ylim[<span class="dv">1</span>], sector.name, <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>, 
+            <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>), <span class="dt">col=</span> <span class="st">&quot;blue&quot;</span>)
+    }
+}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:chord-diagram-labels"></span>
+<img src="circlize-book_files/figure-html/chord-diagram-labels-1.png" alt="Customize sector labels in Chord diagram." width="768" />
+<p class="caption">
+Figure 12.1: Customize sector labels in Chord diagram.
+</p>
+</div>
+<p>When you set direction of sector labels as radical (<code>clockwise</code> or <code>reverse.clockwise</code>), if the labels are too long and exceed your figure region, you can either decrease the size of the font or set <code>canvas.xlim</code> and <code>canvas.ylim</code> parameters in <code>circos.par()</code> to wider intervals.</p>
+</div>
+<div id="customize-sector-axes" class="section level2">
+<h2><span class="header-section-number">12.3</span> Customize sector axes</h2>
+<p>Axes are helpful to correspond to the absolute values of links. By default <code>chordDiagram()</code> adds axes on the grid track. But it is easy to customize one with self-defined code.</p>
+<p>In following example code, we draw another type of axes which show relative percent on sectors. We first pre-allocate an empty track by <code>preAllocateTracks</code> and come back to this track to add axes later.</p>
+<p>You may see we add the first axes to the top of second track. You can also put them to the bottom of the first track.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># similar as the previous example, but we only plot the grid track</span>
+<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, 
+    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">uh</span>(<span class="dv">5</span>, <span class="st">&quot;mm&quot;</span>)))
+<span class="cf">for</span>(si <span class="cf">in</span> <span class="kw">get.all.sector.index</span>()) {
+    <span class="kw">circos.axis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>, <span class="dt">labels.cex =</span> <span class="fl">0.3</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">2</span>)
+}</code></pre></div>
+<p>Now we go back to the first track to add the second type of axes and sector names. In <code>panel.fun</code>, if the sector is less than 30 degree, the break for the axis is set to 0.5 (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-axes">12.2</a>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the second axis as well as the sector labels are added in this track</span>
+<span class="kw">circos.trackPlotRegion</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>)
+    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>)
+    sector.name =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)
+    xplot =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xplot&quot;</span>)
+    
+    <span class="kw">circos.lines</span>(xlim, <span class="kw">c</span>(<span class="kw">mean</span>(ylim), <span class="kw">mean</span>(ylim)), <span class="dt">lty =</span> <span class="dv">3</span>) <span class="co"># dotted line</span>
+    by =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">abs</span>(xplot[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xplot[<span class="dv">1</span>]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>)
+    <span class="cf">for</span>(p <span class="cf">in</span> <span class="kw">seq</span>(by, <span class="dv">1</span>, <span class="dt">by =</span> by)) {
+        <span class="kw">circos.text</span>(p<span class="op">*</span>(xlim[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xlim[<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span>xlim[<span class="dv">1</span>], <span class="kw">mean</span>(ylim) <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span>, 
+            <span class="kw">paste0</span>(p<span class="op">*</span><span class="dv">100</span>, <span class="st">&quot;%&quot;</span>), <span class="dt">cex =</span> <span class="fl">0.3</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>), <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
+    }
+    
+    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="dv">1</span>, sector.name, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>))
+}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)
+<span class="kw">circos.clear</span>()</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:chord-diagram-axes"></span>
+<img src="circlize-book_files/figure-html/chord-diagram-axes-1.png" alt="Customize sector axes for Chord diagram." width="384" />
+<p class="caption">
+Figure 12.2: Customize sector axes for Chord diagram.
+</p>
+</div>
+</div>
+<div id="put-chord-diagram-horizontally-or-vertically-symmetric" class="section level2">
+<h2><span class="header-section-number">12.4</span> Put Chord diagram horizontally or vertically symmetric</h2>
+<p>In Chord diagram, when there are two groups (which correspond to rows and columns if the input is an adjacency matrix), it is always visually beautiful to rotate the diagram to be symmetric on horizontal direction or vertical direction. Actually it is quite easy to calculate a proper degree that needs to be rotated for the circle.</p>
+<p>In the Chord diagram, the total width of row sectors corresponds to the sum of row sum of the matrix with absolute values and so is for the column sectors.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">row_sum =<span class="st"> </span><span class="kw">sum</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(mat)))
+col_sum =<span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(<span class="kw">abs</span>(mat)))</code></pre></div>
+<p>Small gaps between sectors are set to 1 degree and big gaps between row and column sectors are set to 20 degree.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">small_gap =<span class="st"> </span><span class="dv">1</span>
+big_gap =<span class="st"> </span><span class="dv">20</span></code></pre></div>
+<p>In the circle, there are regions which are covered by small gaps, big gaps and sectors. Since the width of sectors are proportional to the row sums and/or column sums of the matrix, it is easy to calculate how much degrees are hold by the row sectors:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nr =<span class="st"> </span><span class="kw">nrow</span>(mat)
+nc =<span class="st"> </span><span class="kw">ncol</span>(mat)
+n_sector =<span class="st"> </span>nr <span class="op">+</span><span class="st"> </span>nc
+row_sector_degree =<span class="st"> </span>(<span class="dv">360</span> <span class="op">-</span><span class="st"> </span>small_gap<span class="op">*</span>(n_sector <span class="op">-</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span>big_gap<span class="op">*</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>(row_sum<span class="op">/</span>(row_sum <span class="op">+</span><span class="st"> </span>col_sum)) <span class="op">+</span><span class="st"> </span>
+<span class="st">                    </span>small_gap<span class="op">*</span>(nr<span class="op">-</span><span class="dv">1</span>)</code></pre></div>
+<p>If the row sectors are put in the right of the circle, we can calculate the “start degree” for the circle. Note <code>chordDiagram()</code> always draw row sectors first and by default the circle goes clock-wisely.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">180</span> <span class="op">-</span><span class="st"> </span>row_sector_degree)<span class="op">/</span><span class="dv">2</span></code></pre></div>
+<p>When there are small gaps and big gaps between sectors, the <code>gap.degree</code> in <code>circos.par()</code> should be set as a vector. We also added a vertical line which assists to see the symmetry (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-symmetric">12.3</a> left).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gaps =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(small_gap, <span class="kw">nrow</span>(mat) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), big_gap, <span class="kw">rep</span>(small_gap, <span class="kw">ncol</span>(mat) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), big_gap)
+<span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> gaps, <span class="dt">start.degree =</span> start_degree)
+<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col)
+<span class="kw">circos.clear</span>()
+<span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000080&quot;</span>)</code></pre></div>
+<p>Similarly we can adjust the “start degree” to let the circle looks horizonally symmetric (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-symmetric">12.3</a> right).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_degree =<span class="st"> </span><span class="dv">0</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">180</span> <span class="op">-</span><span class="st"> </span>row_sector_degree)<span class="op">/</span><span class="dv">2</span>
+gaps =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(small_gap, <span class="kw">nrow</span>(mat) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), big_gap, <span class="kw">rep</span>(small_gap, <span class="kw">ncol</span>(mat) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), big_gap)
+<span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> gaps, <span class="dt">start.degree =</span> start_degree)
+<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col)
+<span class="kw">circos.clear</span>()
+<span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000080&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:chord-diagram-symmetric"></span>
+<img src="circlize-book_files/figure-html/chord-diagram-symmetric-1.png" alt="Rotate Chord diagram." width="768" />
+<p class="caption">
+Figure 12.3: Rotate Chord diagram.
+</p>
+</div>
+</div>
+<div id="compare-two-chord-diagrams" class="section level2">
+<h2><span class="header-section-number">12.5</span> Compare two Chord diagrams</h2>
+<p>Normally, in Chord diagram, values in <code>mat</code> are normalized to the summation of the absolute values in the matrix, which means the width for links only represents relative values. Then, when comparing two Chord diagrams, it is necessary that unit width of links in the two plots should be represented in a same scale. This problem can be solved by adding more blank gaps to the Chord diagram which has smaller matrix.</p>
+<p>First, let’s plot a Chord diagram. In this Chord diagram, we set larger gaps between rows and columns for better visualization. Axis on the grid illustrates scale of the values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat1 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">20</span>, <span class="dv">25</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dv">5</span>)
+gap.degree =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="dv">10</span>, <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="dv">10</span>)
+<span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> gap.degree, <span class="dt">start.degree =</span> <span class="op">-</span><span class="dv">10</span><span class="op">/</span><span class="dv">2</span>)
+<span class="kw">chordDiagram</span>(mat1, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>))
+<span class="kw">circos.clear</span>()</code></pre></div>
+<p>The second matrix only has half the values in <code>mat1</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat2 =<span class="st"> </span>mat1 <span class="op">/</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
+<p>If the second Chord diagram is plotted in the way as the first one, the two diagrams will looks exactly the same (except the axes) which makes the comparison impossible. However, we can adjust the gaps between sectors to make the scale of the two plots same.</p>
+<p>First we calculate the percentage of <code>mat2</code> in <code>mat1</code>. And then we calculate the degree which corresponds to the difference. In the following code, <code>360 - sum(gap.degree)</code> is the total degree for values in <code>mat1</code> (excluding the gaps) and <code>blank.degree</code> corresponds the difference between <code>mat1</code> and <code>mat2</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">percent =<span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(mat2)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(mat1))
+blank.degree =<span class="st"> </span>(<span class="dv">360</span> <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(gap.degree)) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>percent)</code></pre></div>
+<p>Since now we have the additional blank gap, we can set it to <code>circos.par()</code> and plot the second Chord Diagram.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big.gap =<span class="st"> </span>(blank.degree <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">8</span>)))<span class="op">/</span><span class="dv">2</span>
+gap.degree =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), big.gap, <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), big.gap)
+<span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> gap.degree, <span class="dt">start.degree =</span> <span class="op">-</span>big.gap<span class="op">/</span><span class="dv">2</span>)
+<span class="kw">chordDiagram</span>(mat2, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">transparency =</span> <span class="fl">0.5</span>)
+<span class="kw">circos.clear</span>()</code></pre></div>
+<p>Now the scale of the two Chord diagrams (figure ) are the same if you compare the scale of axes in the two diagrams.</p>
+<div class="figure" style="text-align: center"><span id="fig:chord-diagram-compare"></span>
+<img src="circlize-book_files/figure-html/chord-diagram-compare-1.png" alt="Compare two Chord Diagrams in a same scale." width="768" />
+<p class="caption">
+Figure 12.4: Compare two Chord Diagrams in a same scale.
+</p>
+</div>
+</div>
+<div id="multiple-group-chord-diagram" class="section level2">
+<h2><span class="header-section-number">12.6</span> Multiple-group Chord diagram</h2>
+<p>Generally <code>chordDiagram()</code> function visualizes relations between two groups (i.e. from rows to columns if the input is an adjacency matrix or from column 1 to column 2 if the input is an adjacency list), however, for <code>chordDiagram()</code>, it actually doesn’t need any grouping information. The visual effect of grouping is just enhanced by setting different gap degrees. In this case, it is easy to make a Chord diagram with more than two groups.</p>
+<p>First let’s generate three matrix which contain pairwise relations from three groups:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">digits =</span> <span class="dv">2</span>)
+mat1 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)
+<span class="kw">rownames</span>(mat1) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
+<span class="kw">colnames</span>(mat1) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
+
+mat2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)
+<span class="kw">rownames</span>(mat2) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
+<span class="kw">colnames</span>(mat2) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
+
+mat3 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)
+<span class="kw">rownames</span>(mat3) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
+<span class="kw">colnames</span>(mat3) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre></div>
+<p>Since <code>chordDiagram()</code> only accepts one single matrix, here the three matrix are merged into one big matrix.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> <span class="dv">10</span>, <span class="dt">ncol =</span> <span class="dv">10</span>)
+<span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rownames</span>(mat2), <span class="kw">rownames</span>(mat3))
+<span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">colnames</span>(mat1), <span class="kw">colnames</span>(mat2))
+mat[<span class="kw">rownames</span>(mat1), <span class="kw">colnames</span>(mat1)] =<span class="st"> </span>mat1
+mat[<span class="kw">rownames</span>(mat2), <span class="kw">colnames</span>(mat2)] =<span class="st"> </span>mat2
+mat[<span class="kw">rownames</span>(mat3), <span class="kw">colnames</span>(mat3)] =<span class="st"> </span>mat3
+mat</code></pre></div>
+<pre><code>##       B1    B2     B3    B4    B5     C1    C2      C3     C4    C5
+## A1 -0.26  0.90 -0.048  0.85 -1.83 -0.019 -0.33  2.1960  0.786  1.80
+## A2 -0.75 -1.26 -2.399 -0.71 -1.81  0.362 -0.28 -0.2047 -2.102 -0.81
+## A3  0.44  0.84 -0.019  1.07  1.37  2.011  0.31  0.9751 -0.042  1.90
+## A4 -1.28 -2.35 -0.089 -0.54 -0.56 -1.178  1.84 -0.8676 -0.405  0.71
+## A5  1.18  0.61 -1.595  0.54  0.97 -0.755 -0.98 -0.5012 -0.113  0.74
+## B1  0.00  0.00  0.000  0.00  0.00  1.366 -0.71 -0.1262 -0.870  0.32
+## B2  0.00  0.00  0.000  0.00  0.00 -0.576 -1.28 -1.3884 -0.463 -0.28
+## B3  0.00  0.00  0.000  0.00  0.00 -0.805  2.38  0.4699 -1.911  1.09
+## B4  0.00  0.00  0.000  0.00  0.00 -0.535 -1.09  0.9604  0.370  0.16
+## B5  0.00  0.00  0.000  0.00  0.00  0.792  0.19 -0.0051 -0.462  2.71</code></pre>
+<p>When making the chord diagram, we set larger gaps between groups to identify different groups. Here we manually adjust <code>gap.degree</code> in <code>circos.par()</code>.</p>
+<p>Also we add an additional track in which we add lines to enhance the visual effect of different groups.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(circlize)
+<span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="dv">8</span>), <span class="dv">3</span>))
+<span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;grid&quot;</span>, <span class="st">&quot;axis&quot;</span>),
+    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(
+        <span class="dt">track.height =</span> <span class="kw">uh</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>),
+        <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="kw">uh</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">0</span>)
+))
+<span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">2</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+    sector.index =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)
+    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>)
+    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>)
+    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="kw">mean</span>(ylim), sector.index, <span class="dt">cex =</span> <span class="fl">0.6</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
+}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)
+
+<span class="kw">highlight.sector</span>(<span class="kw">rownames</span>(mat1), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, 
+    <span class="dt">text =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
+<span class="kw">highlight.sector</span>(<span class="kw">colnames</span>(mat1), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>, 
+    <span class="dt">text =</span> <span class="st">&quot;B&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>,  <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
+<span class="kw">highlight.sector</span>(<span class="kw">colnames</span>(mat2), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, 
+    <span class="dt">text =</span> <span class="st">&quot;C&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="circlize-book_files/figure-html/unnamed-chunk-14-1.png" width="384" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+<p>If row names and column names in the big matrix are not grouped, the sector order can be manually adjusted by <code>order</code> argument.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">order =</span> <span class="kw">c</span>(<span class="kw">paset0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paset0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paset0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)))</code></pre></div>
+<p>It is similar way to construct a multiple-group Chord diagram with data frame as input.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape2)
+df2 =<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="kw">list</span>(<span class="kw">melt</span>(mat1), <span class="kw">melt</span>(mat2), <span class="kw">melt</span>(mat3)))
+<span class="kw">chordDiagram</span>(df2, <span class="dt">order =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paste0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)))</code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="revisit-zooming.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-complex-example-of-chord-diagram.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/15-chord-diagram-advanced-usage.Rmd",
+"text": "Edit"
+},
+"download": ["circlize-book.pdf", "circlize-book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

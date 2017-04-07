@@ -618,3 +618,40 @@ eval(parse(text = chunks[["chord_diagram_directional_arrow4"]]))
 ```
 
 
+## Reduce
+
+If a sector in Chord Diagram is too small, it will be removed from the
+original matrix, since basically it can be ignored visually from the plot. In
+the following matrix, the second row and third column contain tiny values.
+
+```{r}
+mat = matrix(rnorm(36), 6, 6)
+rownames(mat) = paste0("R", 1:6)
+colnames(mat) = paste0("C", 1:6)
+mat[2, ] = 1e-10
+mat[, 3] = 1e-10
+```
+
+In the Chord Diagram, categories corresponding to the second row and the third column will
+be removed.
+
+```{r, echo = 2:3}
+pdf(NULL)
+chordDiagram(mat)
+circos.info()
+dev.off()
+```
+
+The `reduce` argument controls the size of sectors to be removed. The value is
+a percent of the size of a sector to the total size of all sectors.
+
+You can also explictly remove sectors by assigning corresponding values to 0.
+
+```{r}
+mat[2, ] = 0
+mat[, 3] = 0
+```
+
+All parameters for sectors such as colors or gaps between sectors are also
+reduced accordingly by the function.
+

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Circular Visualization in R</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Circular Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="github-repo" content="jokergoo/books" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Circular Visualization in R" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  
+
+<meta name="author" content="Zuguang Gu">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="advanced-usage-of-chorddiagram.html">
+<link rel="next" href="part-others.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Circular Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I General Functionality</b></span></li>
+<li class="chapter" data-level="1" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>1</b> Circular layout</a></li>
+<li class="chapter" data-level="2" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>2</b> Graphics</a></li>
+<li class="chapter" data-level="3" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>3</b> Legends</a></li>
+<li class="chapter" data-level="4" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>4</b> Implement high-level plots</a></li>
+<li class="chapter" data-level="5" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>5</b> Advanced layout</a></li>
+<li class="part"><span><b>II Applications in Genomics</b></span></li>
+<li class="chapter" data-level="6" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>6</b> Initialize with genomic data</a></li>
+<li class="chapter" data-level="7" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html"><i class="fa fa-check"></i><b>7</b> Create plotting regions for genomic data</a></li>
+<li class="chapter" data-level="8" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>8</b> modes for <code>circos.genomicTrack()</code></a></li>
+<li class="chapter" data-level="9" data-path="position-transformation.html"><a href="position-transformation.html"><i class="fa fa-check"></i><b>9</b> Position transformation</a></li>
+<li class="chapter" data-level="10" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>10</b> High-level genomic functions</a></li>
+<li class="chapter" data-level="11" data-path="revisit-zooming.html"><a href="revisit-zooming.html"><i class="fa fa-check"></i><b>11</b> Revisit zooming</a></li>
+<li class="part"><span><b>III Visualize Relations</b></span></li>
+<li class="chapter" data-level="12" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>12</b> Advanced usage of <code>chordDiagram()</code></a></li>
+<li class="chapter" data-level="13" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>13</b> A complex example of Chord diagram</a></li>
+<li class="chapter" data-level="14" data-path="part-others.html"><a href="part-others.html"><i class="fa fa-check"></i><b>14</b> (PART) Others</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="a-complex-example-of-chord-diagram" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> A complex example of Chord diagram</h1>
+<p>In this chapter, we demonstrate how to make a complex Chord diagram and how to customize additional tracks by visualizing chromatin state transitions as well as methylation changes. A chromatin state transition matrix shows how much a chromatin state in the genome has been changed from e.g. one group of samples to the other. The genomic regions for which the chromatin states change also have variable methylation patterns which may show interesting correspondings to chromatin states change.</p>
+<p>The data demonstrated in this post is processed from <a href="http://www.roadmapepigenomics.org/">Roadmap data</a>. The chromatin states <a href="http://egg2.wustl.edu/roadmap/web_portal/chr_s%20tate_learning.html#core_15state">are learned from five core chromatin marks</a>. Roadmap samples are classified into two groups based on expression profile. In each group, a chromatin state is assigned to the corresponding genomic bin if it is recurrent in at least half of the samples in each group.</p>
+<p>The processed data can be set from <a href="http://jokergoo.github.io/data/chromatin_transition.RData" class="uri">http://jokergoo.github.io/data/chromatin_transition.RData</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;data/chromatin_transition.RData&quot;</span>)</code></pre></div>
+<p>In the RData file, there are three matrix: <code>mat</code>, <code>meth_mat_1</code> and <code>meth_mat_2</code> which are:</p>
+<ul>
+<li><code>mat</code>: chromatin state transition matrix. Rows correspond to states in group 1 and columns correspond to group 2. The value in the matrix are total base pairs that transite from one state to the other. E.g. <code>mat[&quot;TssA&quot;,   &quot;TxFlnk&quot;]</code> is the total base pairs that have “TssA” state in samples in group 1 and transites to “TxFlnk” state in samples in group 2. On the diagonal are the regions where the states have not been changed in the two groups.</li>
+<li><code>meth_mat_1</code>: mean methylation for each set of regions in group 1. <code>meth_mat_1[&quot;TssA&quot;, &quot;TxFlnk&quot;]</code> is the mean methylation for the regions in <strong>group 1</strong> that have “TssA” state in group 1 and “TxFlnk” state in group 2.</li>
+<li><code>meth_mat_2</code>: mean methylation for each set of regions in group 2. <code>meth_mat_2[&quot;TssA&quot;, &quot;TxFlnk&quot;]</code> is the mean methylation for the regions in <strong>group 2</strong> that have “TssA” state in group 1 and “TxFlnk” state in group 2.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</code></pre></div>
+<pre><code>##            TssA TssAFlnk TxFlnk     Tx
+## TssA     497200    79600  13400   1800
+## TssAFlnk  56400   233200   5000    800
+## TxFlnk        0      400  43000   1800
+## Tx          800      200    200 166400</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">meth_mat_<span class="dv">1</span>[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</code></pre></div>
+<pre><code>##               TssA  TssAFlnk    TxFlnk        Tx
+## TssA     0.1647232 0.1580874 0.1917435 0.2690045
+## TssAFlnk 0.2591677 0.2689880 0.3616242 0.3411387
+## TxFlnk          NA 0.3697514 0.3360386 0.4752722
+## Tx       0.8268626 0.7822987 0.5799682 0.6595322</code></pre>
+<p>Normally, in majority in the genome, chromatin states of regions are not changed in the two groups, thus, we should only look at the regions in which the states are changed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># proportion of the unchanges states in the genome</span>
+<span class="kw">sum</span>(<span class="kw">diag</span>(mat))<span class="op">/</span><span class="kw">sum</span>(mat)</code></pre></div>
+<pre><code>## [1] 0.6192262</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># remove the unchanged states</span>
+<span class="kw">diag</span>(mat) =<span class="st"> </span><span class="dv">0</span></code></pre></div>
+<p>When making the plot, actually rows and columns are different (because one is from group 1 and the other is from group 2), thus we give them different names and the original names are stored in <code>all_states</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_states =<span class="st"> </span><span class="kw">rownames</span>(mat)
+n_states =<span class="st"> </span><span class="kw">nrow</span>(mat)
+
+<span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;R_&quot;</span>, <span class="kw">seq_len</span>(n_states))
+<span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C_&quot;</span>, <span class="kw">seq_len</span>(n_states))
+
+<span class="kw">dimnames</span>(meth_mat_<span class="dv">1</span>) =<span class="st"> </span><span class="kw">dimnames</span>(mat)
+<span class="kw">dimnames</span>(meth_mat_<span class="dv">2</span>) =<span class="st"> </span><span class="kw">dimnames</span>(mat)</code></pre></div>
+<p>Next we set the colors. <code>colmat</code> is the color of the links and the colors are represent as hex code. Links have more transparent (<code>A0</code>) if they contain few transitions (&lt; 70th percentile) because we don’t want it to disturb the visualization of the major transitions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">state_col =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;TssA&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,
+              <span class="st">&quot;TssAFlnk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,
+              <span class="st">&quot;TxFlnk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,
+              <span class="st">&quot;Tx&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,
+              <span class="st">&quot;TxWk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,
+              <span class="st">&quot;EnhG&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,
+              <span class="st">&quot;Enh&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,
+              <span class="st">&quot;ZNF/Rpts&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,
+              <span class="st">&quot;Het&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,
+              <span class="st">&quot;TssBiv&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,
+              <span class="st">&quot;BivFlnk&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,
+              <span class="st">&quot;EnhBiv&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,
+              <span class="st">&quot;ReprPC&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,
+              <span class="st">&quot;ReprPCWk&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,
+              <span class="st">&quot;Quies&quot;</span> =<span class="st"> &quot;black&quot;</span>)
+
+<span class="co"># one for rows and one for columns</span>
+state_col2 =<span class="st"> </span><span class="kw">c</span>(state_col, state_col)
+<span class="kw">names</span>(state_col2) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rownames</span>(mat), <span class="kw">colnames</span>(mat))
+
+colmat =<span class="st"> </span><span class="kw">rep</span>(state_col2[<span class="kw">rownames</span>(mat)], n_states)
+colmat =<span class="st"> </span><span class="kw">rgb</span>(<span class="kw">t</span>(<span class="kw">col2rgb</span>(colmat)), <span class="dt">maxColorValue =</span> <span class="dv">255</span>)
+
+qati =<span class="st"> </span><span class="kw">quantile</span>(mat, <span class="fl">0.7</span>)
+colmat[mat <span class="op">&gt;</span><span class="st"> </span>qati] =<span class="st"> </span><span class="kw">paste0</span>(colmat[mat <span class="op">&gt;</span><span class="st"> </span>qati], <span class="st">&quot;A0&quot;</span>)
+colmat[mat <span class="op">&lt;=</span><span class="st"> </span>qati] =<span class="st"> </span><span class="kw">paste0</span>(colmat[mat <span class="op">&lt;=</span><span class="st"> </span>qati], <span class="st">&quot;20&quot;</span>)
+<span class="kw">dim</span>(colmat) =<span class="st"> </span><span class="kw">dim</span>(mat)</code></pre></div>
+<p>Now we can use <code>chordDiagram()</code> function to make the plot. Here we set one pre-allocated track in which the methylation information will be put.</p>
+<p><code>chordDiagram()</code> returns a data frame which contains coordinates for all links which will be used later.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="op">-</span><span class="dv">5</span>, <span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, n_states<span class="op">-</span><span class="dv">1</span>), <span class="dv">10</span>, <span class="kw">rep</span>(<span class="dv">1</span>, n_states<span class="op">-</span><span class="dv">1</span>), <span class="dv">10</span>),
+    <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">points.overflow.warning =</span> <span class="ot">FALSE</span>)
+
+cdm_res =<span class="st"> </span><span class="kw">chordDiagram</span>(mat, <span class="dt">col =</span> colmat, <span class="dt">grid.col =</span> state_col2,
+    <span class="dt">directional =</span> <span class="ot">TRUE</span>, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.1</span>))</code></pre></div>
+<p><img src="circlize-book_files/figure-html/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>If the degree for a sector is larger than 3 degrees, the index for the state and axis is added. Note since there is already one pre-allocated track, the circular rectangles are in the second track (<code>track.index = 2</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">2</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
+    <span class="cf">if</span>(<span class="kw">abs</span>(CELL_META<span class="op">$</span>cell.start.degree <span class="op">-</span><span class="st"> </span>CELL_META<span class="op">$</span>cell.end.degree) <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) {
+        sn =<span class="st"> </span>CELL_META<span class="op">$</span>sector.index
+        i_state =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;(C|R)_&quot;</span>, <span class="st">&quot;&quot;</span>, sn))
+        <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, i_state, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, 
+            <span class="dt">font =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.7</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
+        xlim =<span class="st"> </span>CELL_META<span class="op">$</span>xlim
+        breaks =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, xlim[<span class="dv">2</span>], <span class="dt">by =</span> <span class="fl">4e5</span>)
+        <span class="kw">circos.axis</span>(<span class="dt">major.at =</span> breaks, <span class="dt">labels =</span> <span class="kw">paste0</span>(breaks<span class="op">/</span><span class="dv">1000</span>, <span class="st">&quot;KB&quot;</span>), <span class="dt">labels.cex =</span> <span class="fl">0.5</span>)
+    }
+}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</code></pre></div>
+<p><img src="circlize-book_files/figure-html/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>On the top half, it is easy to see the proportion of different transitions in group 1 that come to every state in group 2. However, it is not straightforward for the states in the bottom half to see the proportion of different states in group 2 they transite to. This can be solved by adding small circular rectangles. In following example, the newly added circular rectangles in the bottom half shows e.g. how much the state 15 in group 1 has been transited to different states in group 2.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(cdm_res))) {
+    <span class="cf">if</span>(cdm_res<span class="op">$</span>value[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
+        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], <span class="op">-</span><span class="fl">0.5</span>, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value&quot;</span>]), <span class="op">-</span><span class="fl">0.7</span>, 
+            <span class="dt">col =</span> state_col2[cdm_res<span class="op">$</span>cn[i]], <span class="dt">border =</span> state_col2[cdm_res<span class="op">$</span>cn[i]],
+            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">2</span>)
+    }
+}</code></pre></div>
+<p><img src="circlize-book_files/figure-html/unnamed-chunk-10-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Methylation in each category is put on the most outside of the circle. On this track, we will put two paralle rectangles which are mean methylation and methylation difference between group 1 and group 2. Basically, on the bottom, we show <code>meth_mat_2 - meth_mat_1</code> and on the top we show <code>meth_mat_1 - meth_mat_2</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">abs_max =<span class="st"> </span><span class="kw">quantile</span>(<span class="kw">abs</span>(<span class="kw">c</span>(meth_mat_<span class="dv">1</span>, meth_mat_<span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>), <span class="fl">0.95</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
+col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="fl">0.5</span> <span class="op">-</span><span class="st"> </span>abs_max, <span class="fl">0.5</span>, <span class="fl">0.5</span> <span class="op">+</span><span class="st"> </span>abs_max), <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;red&quot;</span>))
+col_fun2 =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span>abs_max, <span class="dv">0</span>, abs_max), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;orange&quot;</span>))
+
+ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>, <span class="dt">sector.index =</span> <span class="kw">rownames</span>(mat)[<span class="dv">1</span>], <span class="dt">track.index =</span> <span class="dv">1</span>)
+y1 =<span class="st"> </span>ylim[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(ylim[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ylim[<span class="dv">1</span>])<span class="op">*</span><span class="fl">0.4</span>
+y2 =<span class="st"> </span>ylim[<span class="dv">2</span>]
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(cdm_res))) {
+    <span class="cf">if</span>(cdm_res<span class="op">$</span>value[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
+        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, 
+            <span class="dt">col =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), 
+            <span class="dt">border =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),
+            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)
+
+        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value&quot;</span>]), y2, 
+            <span class="dt">col =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), 
+            <span class="dt">border =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),
+            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)
+
+        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, 
+            <span class="dt">col =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), 
+            <span class="dt">border =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),
+            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>cn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)
+
+        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value&quot;</span>]), y2, 
+            <span class="dt">col =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), 
+            <span class="dt">border =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),
+            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>cn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)
+    }
+}
+<span class="kw">circos.clear</span>()</code></pre></div>
+<p><img src="circlize-book_files/figure-html/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Legends can be added according to instructions discussed in Section <a href="legends.html#legends">3</a>.</p>
+<p><img src="circlize-book_files/figure-html/unnamed-chunk-12-1.png" width="669.2508192" style="display: block; margin: auto;" /></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="advanced-usage-of-chorddiagram.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="part-others.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/16-a-complex-example-with-chord-diagram.Rmd",
+"text": "Edit"
+},
+"download": ["circlize-book.pdf", "circlize-book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

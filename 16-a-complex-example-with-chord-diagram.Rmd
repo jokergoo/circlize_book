@@ -4,43 +4,53 @@ library(circlize)
 
 # A complex example of Chord diagram
 
-Visualize chromatin state transitions
-=========================================
+In this chapter, we demonstrate how to make a complex Chord diagram and how to
+customize additional tracks by visualizing chromatin state transitions as
+well as methylation changes. A chromatin state transition matrix shows how
+much a chromatin state in the genome has been changed from e.g. one group of
+samples to the other. The genomic regions for which the chromatin states change
+also have variable methylation patterns which may show interesting correspondings
+to chromatin states change.
 
-A chromatin state transition matrix shows how much the chromatin state in the genome
-has been changed from e.g. one sample to another. In our [recent paper](http://msb.embopress.org/content/12/3/861) 
-we demonstrated how chromatin states change between smoking people and non-smoking people 
-by means of [Chord Diagram](http://d3dwu2jylmmhzr.cloudfront.net/content/msb/12/3/861/F8.large.jpg).
-In this post, I will demonstrate how to make such plot by the **circlize** package 
-and enhance it by adding methylation information.
+The data demonstrated in this post is processed from [Roadmap
+data](http://www.roadmapepigenomics.org/). The chromatin states [are learned
+from five core chromatin marks](http://egg2.wustl.edu/roadmap/web_portal/chr_s
+tate_learning.html#core_15state). Roadmap samples are classified into two
+groups based on expression profile. In each group, a chromatin state is
+assigned to the corresponding genomic bin if it is recurrent in at least half
+of the samples in each group.
 
-The data demonstrated in this post is processed from [Roadmap data](http://www.roadmapepigenomics.org/). The
-chromatin states [are learned from five core chromatin marks](http://egg2.wustl.edu/roadmap/web_portal/chr_state_learning.html#core_15state). Roadmap samples are separated into two groups based on expression profile. In each group,
-a chromatin state is assigned to the corresponding genomic bin if it is recurrent in at least half of the samples.
-
-The processed data is stored as [chromatin_transition.RData](../../data/chromatin_transition.RData).
+The processed data can be set from http://jokergoo.github.io/data/chromatin_transition.RData.
 
 ```{r}
-library(circlize)
-load("../data/chromatin_transition.RData")
+load("data/chromatin_transition.RData")
 ```
 
-There are three matrix: `mat`, `meth_mat_1` and `meth_mat_2` which are:
+In the RData file, there are three matrix: `mat`, `meth_mat_1` and
+`meth_mat_2` which are:
 
-- `mat`: chromatin state transition matrix. Rows correspond to states in group 1 and columns
-   correspond to group 2. The value in the matrix are total base pairs that transite from one group to the other.
-   E.g. there are in total `r as.integer(mat[1, 2])` bp which are in "`r rownames(mat)[1]`" state in group 1 and they change 
-   to "`r colnames(mat)[2]`" state in group 2. On the digonal are the unchanged states.
-- `meth_mat_1`: mean methylation in group 1 in each category.
-- `meth_mat_2`: mean methylation in group 2 in each category.
+- `mat`: chromatin state transition matrix. Rows correspond to states in group
+  1 and columns correspond to group 2. The value in the matrix are total base
+  pairs that transite from one state to the other. E.g. `mat["TssA",
+  "TxFlnk"]` is the total base pairs that have "TssA" state in samples in
+  group 1 and transites to "TxFlnk" state in samples in group 2. On the
+  diagonal are the regions where the states have not been changed in the two
+  groups.
+- `meth_mat_1`: mean methylation for each set of regions in group 1.
+  `meth_mat_1["TssA", "TxFlnk"]` is the mean methylation for the regions in
+  **group 1** that have "TssA" state in group 1 and "TxFlnk" state in group 2.
+- `meth_mat_2`: mean methylation for each set of regions in group 2.
+  `meth_mat_2["TssA", "TxFlnk"]` is the mean methylation for the regions in
+  **group 2** that have "TssA" state in group 1 and "TxFlnk" state in group 2.
 
 ```{r}
 mat[1:4, 1:4]
 meth_mat_1[1:4, 1:4]
 ```
 
-Normally, majority in the genome are unchanged states, thus, we should only look at the regions
-in which their states are changed.
+Normally, in majority in the genome, chromatin states of regions are not
+changed in the two groups, thus, we should only look at the regions in which
+the states are changed.
 
 ```{r}
 # proportion of the unchanges states in the genome
@@ -49,8 +59,9 @@ sum(diag(mat))/sum(mat)
 diag(mat) = 0
 ```
 
-When making the plot, actually rows and columns are different (because one is from group 1 and the other is from group 2),
-thus we give them different names and the original names are stored in `all_states`.
+When making the plot, actually rows and columns are different (because one is
+from group 1 and the other is from group 2), thus we give them different names
+and the original names are stored in `all_states`.
 
 ```{r}
 all_states = rownames(mat)
@@ -104,11 +115,9 @@ track in which the methylation information will be put.
 `chordDiagram()` returns a data frame which contains coordinates for all links which will
 be used later.
 
-`de` is the degree for the "gap" between group 1 and group 2.
-
 ```{r first, eval = FALSE}
-de = 360 - (360 - 20 - 30) - 30
-circos.par(start.degree = -de/4, gap.degree = c(rep(1, n_states-1), de/2, rep(1, n_states-1), de/2))
+circos.par(start.degree = -5, gap.after = c(rep(1, n_states-1), 10, rep(1, n_states-1), 10),
+	cell.padding = c(0, 0, 0, 0), points.overflow.warning = FALSE)
 
 cdm_res = chordDiagram(mat, col = colmat, grid.col = state_col2,
 	directional = TRUE, annotationTrack = "grid", preAllocateTracks = list(track.height = 0.1))
@@ -124,18 +133,17 @@ If the degree for a sector is larger than 3 degrees, the index for the state and
 Note since there is already one pre-allocated track, the circular rectangles are in the second track (`track.index = 2`).
 
 ```{r second, eval = FALSE}
-for(sn in get.all.sector.index()) {
-	if(abs(get.cell.meta.data("cell.start.degree", sector.index = sn) - 
-	       get.cell.meta.data("cell.end.degree", sector.index = sn)) > 3) {
-		xcenter = get.cell.meta.data("xcenter", sector.index = sn, track.index = 2)
-		ycenter = get.cell.meta.data("ycenter", sector.index = sn, track.index = 2)
+circos.track(track.index = 2, panel.fun = function(x, y) {
+	if(abs(CELL_META$cell.start.degree - CELL_META$cell.end.degree) > 3) {
+		sn = CELL_META$sector.index
 		i_state = as.numeric(gsub("(C|R)_", "", sn))
-		circos.text(xcenter, ycenter, i_state, col = "white", font = 2, cex = 0.7, 
-			sector.index = sn, track.index = 2, adj = c(0.5, 0.5), niceFacing = TRUE)
-		circos.axis(sector.index = sn, track.index = 2, major.tick.percentage = 0.2, 
-			labels.away.percentage = 0.2, labels.cex = 0.5)
+		circos.text(CELL_META$xcenter, CELL_META$ycenter, i_state, col = "white", 
+			font = 2, cex = 0.7, adj = c(0.5, 0.5), niceFacing = TRUE)
+		xlim = CELL_META$xlim
+		breaks = seq(0, xlim[2], by = 4e5)
+		circos.axis(major.at = breaks, labels = paste0(breaks/1000, "KB"), labels.cex = 0.5)
 	}
-}
+}, bg.border = NA)
 ```
 
 ```{r, results = "hide", fig.width = 8, fig.height = 8, echo = FALSE}
@@ -203,7 +211,6 @@ for(i in seq_len(nrow(cdm_res))) {
 			sector.index = cdm_res$cn[i], track.index = 1)
 	}
 }
-
 circos.clear()
 ```
 
@@ -216,96 +223,33 @@ eval(parse(text = chunks[["last"]]))
 circos.clear()
 ```
 
-A complete plot with legends looks like:
+Legends can be added according to instructions discussed in Section \@ref(legends).
 
-```{r, results = "hide", fig.width = 8, fig.height = 8, echo = FALSE}
+```{r, echo = FALSE, fig.height = 6, fig.width = 6 + 1.165229 + 0.08}
+library(grid)
+library(gridBase)
+plot.new()
+circle_size = unit(1, "snpc") # snpc unit gives you a square region
+
+pushViewport(viewport(x = 0, y = 0.5, width = circle_size, height = circle_size,
+    just = c("left", "center")))
+par(omi = gridOMI(), new = TRUE)
 eval(parse(text = chunks[["first"]]))
 eval(parse(text = chunks[["second"]]))
 eval(parse(text = chunks[["third"]]))
 eval(parse(text = chunks[["last"]]))
 circos.clear()
-
-
-add_chord_diagram_legend = function(position = c("bottomleft", "bottomright", "topleft", "topright"), 
-	index = seq_along(labels), labels, col) {
-	
-	position = match.arg(position)[1]
-	if(length(index) == 0) {
-		return(NULL)
-	}
-
-	coor = par("usr")
-	n = length(labels)
-	text_height = strheight("a")
-	labels_max_width = max(strwidth(labels))
-	legend_width = text_height*(1+0.5) + labels_max_width
-	if(position == "bottomleft") {
-		x1 = rep(coor[1], n)
-		x2 = x1 + text_height
-		y1 = coor[3] + (rev(seq_len(n))-1)*1.5*text_height
-		y2 = y1 + text_height
-		rect(x1, y1, x2, y2, col = col, border = col)
-		text((x1+x2)/2, (y1+y2)/2, index, cex = 0.6, font = 2, col = "white")
-		text(x2 + 0.5*text_height, (y1+y2)/2, labels, adj = c(0, 0.5), cex = 0.8)
-	} else if(position == "bottomright") {
-		x1 = rep(coor[2] - labels_max_width, n)
-		x2 = x1 + text_height
-		y1 = coor[3] + (rev(seq_len(n))-1)*1.5*text_height
-		y2 = y1 + text_height
-		rect(x1, y1, x2, y2, col = col, border = col)
-		text((x1+x2)/2, (y1+y2)/2, index, cex = 0.6, font = 2, col = "white")
-		text(x2 + 0.5*text_height, (y1+y2)/2, labels, adj = c(0, 0.5), cex = 0.8)
-	} else if(position == "topleft") {
-		x1 = rep(coor[1], n)
-		x2 = x1 + text_height
-		y1 = coor[4] - (seq_len(n)-1)*1.5*text_height
-		y2 = y1 - text_height
-		rect(x1, y1, x2, y2, col = col, border = col)
-		text((x1+x2)/2, (y1+y2)/2, index, cex = 0.6, font = 2, col = "white")
-		text(x2 + 0.5*text_height, (y1+y2)/2, labels, adj = c(0, 0.5), cex = 0.8)
-	} else if(position == "topright") {
-		x1 = rep(coor[2] - labels_max_width, n)
-		x2 = x1 + text_height
-		y1 = coor[4] - (seq_len(n)-1)*1.5*text_height
-		y2 = y1 - text_height
-		rect(x1, y1, x2, y2, col = col, border = col)
-		text((x1+x2)/2, (y1+y2)/2, index, cex = 0.6, font = 2, col = "white")
-		text(x2 + 0.5*text_height, (y1+y2)/2, labels, adj = c(0, 0.5), cex = 0.8)
-	}
-}
-
-ib = ceiling(n_states/2)
-ind = 1:ib
-add_chord_diagram_legend("bottomleft", ind, all_states[ind], state_col[all_states][ind])
-ind = (ib+1):n_states
-add_chord_diagram_legend("bottomright", ind, all_states[ind], state_col[all_states][ind])
-
-text(-1.05, 0.5, "group2", adj = c(0, 0.5))
-text(-1.05, -0.5, "group1", adj = c(0, 0.5))
-
-suppressPackageStartupMessages(library(gridBase))
-suppressPackageStartupMessages(library(ComplexHeatmap))
-vps = baseViewports()
-pushViewport(vps$inner, vps$figure, vps$plot)
-
-at = round(c(0.5 - abs_max, 0.5, 0.5 + abs_max), digits = 1)
-lgd1 = Legend(at = at, labels = at, direction = "horizontal", col_fun = col_fun, title_position = "topcenter",
-	title = "Mean methylation", legend_width = unit(4, "cm"))
-
-at = round(c(-abs_max, 0, abs_max), digits = 1)
-lgd2 = Legend(at = at, labels = at, direction = "horizontal", col_fun = col_fun2, title_position = "topcenter",
-	title = "Mean difference", legend_width = unit(4, "cm"))
-
-pushViewport(viewport(x = unit(0.5, "npc") - unit(3, "cm"), y = unit(-2, "cm"), width = grobWidth(lgd1), 
-	height = grobHeight(lgd1), just = c("right", "bottom")))
-grid.draw(lgd1)
 upViewport()
-pushViewport(viewport(x = unit(0.5, "npc") + unit(2, "cm"), y = unit(-2, "cm"), 
-	width = grobWidth(lgd2), height = grobHeight(lgd2), just = c("left", "bottom")))
-grid.draw(lgd2)
-upViewport()
+
+library(ComplexHeatmap)
+lgd_list_vertical = packLegend(
+	Legend(at = 1:n_states, labels = names(state_col), pch = as.character(1:n_states),, 
+		legend_gp = gpar(col = "white", fontsize = 8), background = state_col, type = "points", 
+		title = "Chromatin States"),
+	Legend(at = c(0.1, 0.3, 0.5, 0.7, 0.9), col_fun = col_fun, title = "Mean Methylation"),
+	Legend(at = c(-0.4, -0.2, 0, 0.2, 0.4), col_fun = col_fun2, title = "Mean Difference"))
+pushViewport(viewport(x = circle_size, y = 0.5, width = grobWidth(lgd_list_vertical), 
+    height = grobHeight(lgd_list_vertical), just = c("left", "center")))
+grid.draw(lgd_list_vertical)
 upViewport()
 ```
-
-
-<!-- uid=Visualize_chromatin_states_transtitions -->
