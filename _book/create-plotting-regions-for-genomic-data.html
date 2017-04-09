@@ -11,8 +11,8 @@
 
   <meta property="og:title" content="Circular Visualization in R" />
   <meta property="og:type" content="book" />
-  
-  <meta property="og:image" content="images/circlize_cover.jpg" />
+  <meta property="og:url" content="https://bookdown.org/jokergoo/circlize-book/" />
+  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/images/circlize_cover.jpg" />
   <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   <meta name="github-repo" content="jokergoo/circlize_book" />
 
@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="Circular Visualization in R" />
   
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="twitter:image" content="images/circlize_cover.jpg" />
+  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/images/circlize_cover.jpg" />
 
 <meta name="author" content="Zuguang Gu">
 
@@ -261,9 +261,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Following code demonstrates the values for <code>region</code> and <code>value</code> when used inside <code>panel.fun</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)
 <span class="kw">head</span>(bed, <span class="dt">n =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>##    chr  start    end     value1      value2
-## 1 chr1 106998 196445 -0.3081770  1.13678005
-## 2 chr1 200107 610151  0.2884582 -0.01675545</code></pre>
+<pre><code>##    chr  start    end    value1       value2
+## 1 chr1  69194 277910 0.6002574 -0.311828056
+## 2 chr1 436198 483446 0.2123888  0.001619703</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)
 <span class="kw">circos.genomicTrackPlotRegion</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
     <span class="cf">if</span>(CELL_META<span class="op">$</span>sector.index <span class="op">==</span><span class="st"> &quot;chr1&quot;</span>) {
@@ -272,11 +272,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     }
 })</code></pre></div>
 <pre><code>##    start    end
-## 1 106998 196445
-## 2 200107 610151
-##       value1      value2
-## 1 -0.3081770  1.13678005
-## 2  0.2884582 -0.01675545</code></pre>
+## 1  69194 277910
+## 2 436198 483446
+##      value1       value2
+## 1 0.6002574 -0.311828056
+## 2 0.2123888  0.001619703</code></pre>
 <p>Since <code>circos.genomicTrack()</code> creates a new track, it needs values to calculate data ranges on y direction. Users can either specify the index of numeric columns in <code>data</code> by <code>numeric.column</code> (named index or numeric index, can be a vector with more than one columns) or directly set <code>ylim</code>. If none of them are set, the function will try to look for all numeric columns in <code>data</code> (of course, excluding the first three columns), and set them as <code>numeric.column</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
@@ -408,7 +408,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-create-plotting-regions.Rmd",
+"link": "https://github.com/jokergoo/circlize_book/edit/master/09-create-plotting-regions.Rmd",
 "text": "Edit"
 },
 "download": ["circlize-book.pdf", "circlize-book.epub"],

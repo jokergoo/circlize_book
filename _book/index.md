@@ -11,6 +11,7 @@ biblio-style: apalike
 link-citations: yes
 github-repo: jokergoo/circlize_book
 cover-image: images/circlize_cover.jpg
+url: 'https\://bookdown.org/jokergoo/circlize-book/'
 description: "This book provides a comprehensive overview of implementing circular visualization in R by cirlize package,
 	espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram."
 ---
