@@ -306,7 +306,7 @@ The position of link end is controlled by `rou`. By default, it is the bottom
 of the most inside track and normally, you don't need to care about
 this setting. The two ends of the link are located in a same circle by default. The
 positions of two ends can be adjusted with different values for `rou1` and
-`rou2` arguments. See Figure \@ref(fig:link-ends).
+`rou2` arguments. See Figure \@ref(fig:link-height).
 
 ```{r, eval = FALSE}
 circos.link(sector.index1, 0, sector.index2, 0, rou)
@@ -530,7 +530,7 @@ highlighted regions. By default, the text is drawn at that center of the
 highlighted region. The position on the radical direction can be set by
 `text.vjust` argument either by a numeric value or a string in a form of "2 inches" or "-1.2cm".
 
-```{r circlize-highlight-sector, fig.width = 4, fig.height = 4}
+```{r circlize-highlight-sector, fig.width = 4, fig.height = 4, fig.cap = "Highlight sectors."}
 factors = letters[1:8]
 circos.initialize(factors, xlim = c(0, 1))
 for(i in 1:4) {
@@ -562,7 +562,7 @@ add extra information on the plot (Figure \@ref(fig:circlize-base)).
 Sometimes, when the text or other graphics are far from the circle, you may set `par(xpd = NA)`
 so that the plotting is not clipped.
 
-```{r circlize-base, eval = FALSE}
+```{r circlize-base, fig.cap = "Work with base graphic functions."}
 factors = letters[1:4]
 circos.initialize(factors = factors, xlim = c(0, 1))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {

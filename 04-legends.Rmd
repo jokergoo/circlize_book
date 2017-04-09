@@ -1,3 +1,10 @@
+```{r, echo = FALSE}
+library(grid)
+knitr::opts_chunk$set(
+  dev = "png"
+)
+```
+
 # Legends {#legends}
 
 ```{r, echo = FALSE, warning = FALSE, results = "hide", message = FALSE, include = FALSE}
@@ -83,7 +90,7 @@ two systems can be mixed somehow. We can directly add grid graphics to the base
 graphics. (Actually they are two independent layers but drawn on a same
 graphic device.)
 
-```{r directly-add, echo = 1:9, fig.width = 4, fig.height = 4, fig.cap = "Directly add grid graphics."}
+```{r directly-add, dev = "png", echo = 1:9, fig.width = 4, fig.height = 4, fig.cap = "Directly add grid graphics."}
 circlize_plot()
 # next the grid graphics are added directly to the plot
 # where circlize has created.
@@ -102,7 +109,7 @@ the legends is too big, they may overap to the circle. One solution is to
 split the legends into several parts and add each part to different corners in
 the plot (Figure \@ref(fig:two-legends)).
 
-```{r two-legends, echo = FALSE}
+```{r two-legends, dev = "png", fig.cap = "Split into two legends."}
 lgd_list_vertical2 = packLegend(lgd_points, lgd_lines)
 circlize_plot()
 # next the grid graphics are added directly to the plot
@@ -141,7 +148,7 @@ Here I use `plot.new()` to open a new graphic device. In interactive session,
 it seems ok if you also use `grid.newpage()`, but `grid.newpage()` gives error
 when building a **knitr** document.
 
-```{r right-legend, fig.width = 4 + convertWidth(grobWidth(lgd_list_vertical), "inches", valueOnly = TRUE) + 0.08, fig.height = 4}
+```{r right-legend, dev = "png", fig.width = 4 + convertWidth(grobWidth(lgd_list_vertical), "inches", valueOnly = TRUE) + 0.08, fig.height = 4}
 library(gridBase)
 plot.new()
 circle_size = unit(1, "snpc") # snpc unit gives you a square region
@@ -181,7 +188,7 @@ lgd_list_horizontal = packLegend(lgd_points, lgd_lines, lgd_links,
 
 Similar code to arrange viewports.
 
-```{r bottom-legend, fig.height = 4 + convertHeight(grobHeight(lgd_list_horizontal), "inches", valueOnly = TRUE) + 0.08, fig.width = 4}
+```{r bottom-legend, dev = "png", fig.height = 4 + convertHeight(grobHeight(lgd_list_horizontal), "inches", valueOnly = TRUE) + 0.08, fig.width = 4}
 plot.new()
 pushViewport(viewport(x = 0.5, y = 1, width = circle_size, height = circle_size,
     just = c("center", "top")))

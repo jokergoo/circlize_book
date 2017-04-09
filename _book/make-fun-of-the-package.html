@@ -12,15 +12,15 @@
   <meta property="og:title" content="Circular Visualization in R" />
   <meta property="og:type" content="book" />
   
-  
+  <meta property="og:image" content="images/circlize_cover.jpg" />
   <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="github-repo" content="jokergoo/books" />
+  <meta name="github-repo" content="jokergoo/circlize_book" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Circular Visualization in R" />
   
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  
+  <meta name="twitter:image" content="images/circlize_cover.jpg" />
 
 <meta name="author" content="Zuguang Gu">
 
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="code-is-not-run-when-building-the-vignette.html">
-
+<link rel="prev" href="a-complex-example-of-chord-diagram.html">
+<link rel="next" href="session-info.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -104,25 +104,131 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="part"><span><b>I General Functionality</b></span></li>
-<li class="chapter" data-level="1" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>1</b> Circular layout</a></li>
-<li class="chapter" data-level="2" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>2</b> Graphics</a></li>
-<li class="chapter" data-level="3" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>3</b> Legends</a></li>
-<li class="chapter" data-level="4" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>4</b> Implement high-level plots</a></li>
-<li class="chapter" data-level="5" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>5</b> Advanced layout</a></li>
-<li class="part"><span><b>II Applications in Genomics</b></span></li>
-<li class="chapter" data-level="6" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>6</b> Initialize with genomic data</a></li>
-<li class="chapter" data-level="7" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html"><i class="fa fa-check"></i><b>7</b> Create plotting regions for genomic data</a></li>
-<li class="chapter" data-level="8" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>8</b> modes for <code>circos.genomicTrack()</code></a></li>
-<li class="chapter" data-level="9" data-path="note-how-horizontalline-works.html"><a href="note-how-horizontalline-works.html"><i class="fa fa-check"></i><b>9</b> note how ‘horizontalLine’ works</a></li>
-<li class="chapter" data-level="10" data-path="genomic-density-and-rainfall-plot.html"><a href="genomic-density-and-rainfall-plot.html"><i class="fa fa-check"></i><b>10</b> Genomic density and Rainfall plot</a></li>
-<li class="part"><span><b>III Visualize Relations</b></span></li>
-<li class="chapter" data-level="11" data-path="code-is-not-run-when-building-the-vignette.html"><a href="code-is-not-run-when-building-the-vignette.html"><i class="fa fa-check"></i><b>11</b> code is not run when building the vignette</a></li>
-<li class="chapter" data-level="12" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>12</b> Make fun of the package</a><ul>
-<li class="chapter" data-level="12.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>12.1</b> A clock</a></li>
-<li class="chapter" data-level="12.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>12.2</b> A dartboard</a></li>
-<li class="chapter" data-level="12.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>12.3</b> Ba-Gua and Tai-Ji</a></li>
-<li class="chapter" data-level="12.4" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#circular-doodle"><i class="fa fa-check"></i><b>12.4</b> Circular doodle</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#principle-of-design"><i class="fa fa-check"></i><b>1.1</b> Principle of design</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#a-qiuck-glance"><i class="fa fa-check"></i><b>1.2</b> A quick glance</a></li>
 </ul></li>
+<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a><ul>
+<li class="chapter" data-level="2.1" data-path="circular-layout.html"><a href="circular-layout.html#coordinate-transformation"><i class="fa fa-check"></i><b>2.1</b> Coordinate transformation</a></li>
+<li class="chapter" data-level="2.2" data-path="circular-layout.html"><a href="circular-layout.html#rules-for-making-the-circular-plot"><i class="fa fa-check"></i><b>2.2</b> Rules for making the circular plot</a></li>
+<li class="chapter" data-level="2.3" data-path="circular-layout.html"><a href="circular-layout.html#sectors-and-tracks"><i class="fa fa-check"></i><b>2.3</b> Sectors and tracks</a></li>
+<li class="chapter" data-level="2.4" data-path="circular-layout.html"><a href="circular-layout.html#graphic-parameters"><i class="fa fa-check"></i><b>2.4</b> Graphic parameters</a></li>
+<li class="chapter" data-level="2.5" data-path="circular-layout.html"><a href="circular-layout.html#create-plotting-regions"><i class="fa fa-check"></i><b>2.5</b> Create plotting regions</a></li>
+<li class="chapter" data-level="2.6" data-path="circular-layout.html"><a href="circular-layout.html#update-plotting-regions"><i class="fa fa-check"></i><b>2.6</b> Update plotting regions</a></li>
+<li class="chapter" data-level="2.7" data-path="circular-layout.html"><a href="circular-layout.html#panel-fun"><i class="fa fa-check"></i><b>2.7</b> <code>panel.fun</code> argument</a></li>
+<li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
+<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The convert functions</a></li>
+<li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a><ul>
+<li class="chapter" data-level="3.1" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>3.1</b> Points</a></li>
+<li class="chapter" data-level="3.2" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>3.2</b> Lines</a></li>
+<li class="chapter" data-level="3.3" data-path="graphics.html"><a href="graphics.html#segments"><i class="fa fa-check"></i><b>3.3</b> Segments</a></li>
+<li class="chapter" data-level="3.4" data-path="graphics.html"><a href="graphics.html#text"><i class="fa fa-check"></i><b>3.4</b> Text</a></li>
+<li class="chapter" data-level="3.5" data-path="graphics.html"><a href="graphics.html#rectangles"><i class="fa fa-check"></i><b>3.5</b> Rectangles and polygons</a></li>
+<li class="chapter" data-level="3.6" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.6</b> Axes</a></li>
+<li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.7</b> Links</a></li>
+<li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.8</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.9</b> Work with the base graphic system</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
+<li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level plots</a><ul>
+<li class="chapter" data-level="5.1" data-path="high-level-plots.html"><a href="high-level-plots.html#circular-barplot"><i class="fa fa-check"></i><b>5.1</b> Circular barplots</a></li>
+<li class="chapter" data-level="5.2" data-path="high-level-plots.html"><a href="high-level-plots.html#histograms"><i class="fa fa-check"></i><b>5.2</b> Histograms</a></li>
+<li class="chapter" data-level="5.3" data-path="high-level-plots.html"><a href="high-level-plots.html#phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Phylogenetic trees</a></li>
+<li class="chapter" data-level="5.4" data-path="high-level-plots.html"><a href="high-level-plots.html#heatmaps"><i class="fa fa-check"></i><b>5.4</b> Heatmaps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>6</b> Advanced layout</a><ul>
+<li class="chapter" data-level="6.1" data-path="advanced-layout.html"><a href="advanced-layout.html#zooming-of-sectors"><i class="fa fa-check"></i><b>6.1</b> Zooming of sectors</a></li>
+<li class="chapter" data-level="6.2" data-path="advanced-layout.html"><a href="advanced-layout.html#part-circle"><i class="fa fa-check"></i><b>6.2</b> Visualize part of the circle</a></li>
+<li class="chapter" data-level="6.3" data-path="advanced-layout.html"><a href="advanced-layout.html#combine-circular-plots"><i class="fa fa-check"></i><b>6.3</b> Combine multiple circular plots</a></li>
+<li class="chapter" data-level="6.4" data-path="advanced-layout.html"><a href="advanced-layout.html#arrange-multiple-plots"><i class="fa fa-check"></i><b>6.4</b> Arrange multiple plots</a></li>
+</ul></li>
+<li class="part"><span><b>II Applications in Genomics</b></span></li>
+<li class="chapter" data-level="7" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>7</b> Introduction</a><ul>
+<li class="chapter" data-level="7.1" data-path="genomic-introduction.html"><a href="genomic-introduction.html#input-data"><i class="fa fa-check"></i><b>7.1</b> Input data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>8</b> Initialize with genomic data</a><ul>
+<li class="chapter" data-level="8.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>8.1</b> Initialize with cytoband data</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>8.1.1</b> Basic usage</a></li>
+<li class="chapter" data-level="8.1.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#pre-defined-tracks"><i class="fa fa-check"></i><b>8.1.2</b> Pre-defined tracks</a></li>
+<li class="chapter" data-level="8.1.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#other-general-settings"><i class="fa fa-check"></i><b>8.1.3</b> Other general settings</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>8.2</b> Customize chromosome track</a></li>
+<li class="chapter" data-level="8.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>8.3</b> Initialize with general genomic category</a></li>
+<li class="chapter" data-level="8.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>8.4</b> Zooming chromosomes</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html"><i class="fa fa-check"></i><b>9</b> Create plotting regions for genomic data</a><ul>
+<li class="chapter" data-level="9.1" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>9.1</b> Points</a></li>
+<li class="chapter" data-level="9.2" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>9.2</b> Lines</a></li>
+<li class="chapter" data-level="9.3" data-path="graphics.html"><a href="graphics.html#text"><i class="fa fa-check"></i><b>9.3</b> Text</a></li>
+<li class="chapter" data-level="9.4" data-path="graphics.html"><a href="graphics.html#rectangles"><i class="fa fa-check"></i><b>9.4</b> Rectangles</a></li>
+<li class="chapter" data-level="9.5" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>9.5</b> Links</a></li>
+<li class="chapter" data-level="9.6" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html#mixed-use-of-general-circlize-functions"><i class="fa fa-check"></i><b>9.6</b> Mixed use of general circlize functions</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>10</b> modes for <code>circos.genomicTrack()</code></a><ul>
+<li class="chapter" data-level="10.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>10.1</b> Normal mode</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame"><i class="fa fa-check"></i><b>10.1.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="10.1.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames"><i class="fa fa-check"></i><b>10.1.2</b> Input is a list of data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>10.2</b> Stack mode</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame-1"><i class="fa fa-check"></i><b>10.2.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="10.2.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames-1"><i class="fa fa-check"></i><b>10.2.2</b> Input is a list of data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>10.3</b> Applications</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="modes-of-input.html"><a href="modes-of-input.html#points-1"><i class="fa fa-check"></i><b>10.3.1</b> Points</a></li>
+<li class="chapter" data-level="10.3.2" data-path="modes-of-input.html"><a href="modes-of-input.html#lines-1"><i class="fa fa-check"></i><b>10.3.2</b> Lines</a></li>
+<li class="chapter" data-level="10.3.3" data-path="modes-of-input.html"><a href="modes-of-input.html#rectangles-1"><i class="fa fa-check"></i><b>10.3.3</b> Rectangles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>11</b> High-level genomic functions</a><ul>
+<li class="chapter" data-level="11.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>11.1</b> Ideograms</a></li>
+<li class="chapter" data-level="11.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>11.2</b> Heatmaps</a></li>
+<li class="chapter" data-level="11.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>11.3</b> Labels</a></li>
+<li class="chapter" data-level="11.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>11.4</b> Genomic density and Rainfall plot</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>12</b> Nested zooming</a><ul>
+<li class="chapter" data-level="12.1" data-path="nested-zooming.html"><a href="nested-zooming.html#basic-idea"><i class="fa fa-check"></i><b>12.1</b> Basic idea</a></li>
+<li class="chapter" data-level="12.2" data-path="nested-zooming.html"><a href="nested-zooming.html#visualization-of-dmrs-from-tagmentation-based-wgbs"><i class="fa fa-check"></i><b>12.2</b> visualization of DMRs from tagmentation-based WGBS</a></li>
+</ul></li>
+<li class="part"><span><b>III Visualize Relations</b></span></li>
+<li class="chapter" data-level="13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>13</b> The <code>chordDiagram()</code> function</a><ul>
+<li class="chapter" data-level="13.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>13.1</b> Basic usage</a></li>
+<li class="chapter" data-level="13.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>13.2</b> Adjust by <code>circos.par()</code></a></li>
+<li class="chapter" data-level="13.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#colors"><i class="fa fa-check"></i><b>13.3</b> Colors</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#set-grid-colors"><i class="fa fa-check"></i><b>13.3.1</b> Set grid colors</a></li>
+<li class="chapter" data-level="13.3.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-color"><i class="fa fa-check"></i><b>13.3.2</b> Set link colors</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-border"><i class="fa fa-check"></i><b>13.4</b> Link border</a></li>
+<li class="chapter" data-level="13.5" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#highlight-links"><i class="fa fa-check"></i><b>13.5</b> Highlight links</a></li>
+<li class="chapter" data-level="13.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>13.6</b> Orders of links</a><ul>
+<li class="chapter" data-level="13.6.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-on-positions-on-sectors"><i class="fa fa-check"></i><b>13.6.1</b> Orders on positions on sectors</a></li>
+<li class="chapter" data-level="13.6.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#order-of-adding-links"><i class="fa fa-check"></i><b>13.6.2</b> Order of adding links</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#self-links"><i class="fa fa-check"></i><b>13.7</b> Self-links</a></li>
+<li class="chapter" data-level="13.8" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#symmetric-matrix"><i class="fa fa-check"></i><b>13.8</b> Symmetric matrix</a></li>
+<li class="chapter" data-level="13.9" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#directional-relations"><i class="fa fa-check"></i><b>13.9</b> Directional relations</a></li>
+<li class="chapter" data-level="13.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>13.10</b> Reduce</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>14</b> Advanced usage of <code>chordDiagram()</code></a><ul>
+<li class="chapter" data-level="14.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>14.1</b> Organization of tracks</a></li>
+<li class="chapter" data-level="14.2" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-labels"><i class="fa fa-check"></i><b>14.2</b> Customize sector labels</a></li>
+<li class="chapter" data-level="14.3" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-axes"><i class="fa fa-check"></i><b>14.3</b> Customize sector axes</a></li>
+<li class="chapter" data-level="14.4" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#put-horizontally-or-vertically-symmetric"><i class="fa fa-check"></i><b>14.4</b> Put horizontally or vertically symmetric</a></li>
+<li class="chapter" data-level="14.5" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#compare-two-chord-diagrams"><i class="fa fa-check"></i><b>14.5</b> Compare two Chord diagrams</a></li>
+<li class="chapter" data-level="14.6" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#multiple-group-chord-diagram"><i class="fa fa-check"></i><b>14.6</b> Multiple-group Chord diagram</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>15</b> A complex example of Chord diagram</a></li>
+<li class="part"><span><b>IV Others</b></span></li>
+<li class="chapter" data-level="16" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>16</b> Make fun of the package</a><ul>
+<li class="chapter" data-level="16.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>16.1</b> A clock</a></li>
+<li class="chapter" data-level="16.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>16.2</b> A dartboard</a></li>
+<li class="chapter" data-level="16.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>16.3</b> Ba-Gua and Tai-Ji</a></li>
+<li class="chapter" data-level="16.4" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#circular-doodle"><i class="fa fa-check"></i><b>16.4</b> Circular doodle</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>17</b> Session info</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -144,10 +250,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="make-fun-of-the-package" class="section level1">
-<h1><span class="header-section-number">Chapter 12</span> Make fun of the package</h1>
+<h1><span class="header-section-number">Chapter 16</span> Make fun of the package</h1>
 <div id="a-clock" class="section level2">
-<h2><span class="header-section-number">12.1</span> A clock</h2>
-<p>The first example is a clock. The key function here is <code>circos.axis()</code> (Figure <a href="make-fun-of-the-package.html#fig:clock">12.1</a>). In the example, the whole circle only contains one sector in which major tick at 0 is overlapping with major tick at 12.</p>
+<h2><span class="header-section-number">16.1</span> A clock</h2>
+<p>The first example is a clock. The key function here is <code>circos.axis()</code> (Figure <a href="make-fun-of-the-package.html#fig:clock">16.1</a>). In the example, the whole circle only contains one sector in which major tick at 0 is overlapping with major tick at 12.</p>
 <p>Later we calculate the positions of the hour hand, the minute hand and the second hand based on current time when this Chapter is generated. The hands are drawn by <code>arraws()</code> function in the canvas coordinate. A real-time clock can be found at the <strong>Examples</strong> section in the help page of <code>circos.axis()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">0</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">90</span>)
 <span class="kw">circos.initialize</span>(<span class="dt">factors =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">12</span>))
@@ -170,16 +276,16 @@ min.degree =<span class="st"> </span><span class="dv">90</span> <span class="op"
 hour.degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>hour<span class="op">/</span><span class="dv">12</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span> <span class="op">-</span><span class="st"> </span>min<span class="op">/</span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span><span class="op">/</span><span class="dv">12</span>
 <span class="kw">arrows</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">cos</span>(hour.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.4</span>, <span class="kw">sin</span>(hour.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.4</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:clock"></span>
-<img src="circlize-book_files/figure-html/clock-1.png" alt="A clock." width="384" />
+<img src="16-make-fun_files/figure-html/clock-1.svg" alt="A clock." width="384" />
 <p class="caption">
-Figure 12.1: A clock.
+Figure 16.1: A clock.
 </p>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
 </div>
 <div id="a-dartboard" class="section level2">
-<h2><span class="header-section-number">12.2</span> A dartboard</h2>
-<p>The second example is a dartboard. In Figure <a href="make-fun-of-the-package.html#fig:dartboard">12.2</a>, tracks are assigned with different heights and each cell is initialized with different colors. The most inside green ring and red circle are plotted by <code>draw.sector()</code>.</p>
+<h2><span class="header-section-number">16.2</span> A dartboard</h2>
+<p>The second example is a dartboard. In Figure <a href="make-fun-of-the-package.html#fig:dartboard">16.2</a>, tracks are assigned with different heights and each cell is initialized with different colors. The most inside green ring and red circle are plotted by <code>draw.sector()</code>.</p>
 <p>We use <code>circos.trackText()</code> to add labels because we know the global order of the labels.</p>
 <p>Now you can project the plot on your door and begin to play!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span>  <span class="co"># just indicate there are 20 sectors</span>
@@ -205,16 +311,16 @@ Figure 12.1: A clock.
 <span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,
     <span class="dt">rou1 =</span> <span class="fl">0.05</span>, <span class="dt">col =</span> <span class="st">&quot;#E41A1C&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#EEEEEE&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:dartboard"></span>
-<img src="circlize-book_files/figure-html/dartboard-1.png" alt="A dartboard." width="384" />
+<img src="16-make-fun_files/figure-html/dartboard-1.svg" alt="A dartboard." width="384" />
 <p class="caption">
-Figure 12.2: A dartboard.
+Figure 16.2: A dartboard.
 </p>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
 </div>
 <div id="ba-gua-and-tai-ji" class="section level2">
-<h2><span class="header-section-number">12.3</span> Ba-Gua and Tai-Ji</h2>
-<p>The third example is <a href="https://en.wikipedia.org/wiki/Bagua">Ba-Gua</a>. The key functions are <code>circos.rect()</code> and <code>draw.sector()</code> (Figure <a href="make-fun-of-the-package.html#fig:bagua">12.3</a>).</p>
+<h2><span class="header-section-number">16.3</span> Ba-Gua and Tai-Ji</h2>
+<p>The third example is <a href="https://en.wikipedia.org/wiki/Bagua">Ba-Gua</a>. The key functions are <code>circos.rect()</code> and <code>draw.sector()</code> (Figure <a href="make-fun-of-the-package.html#fig:bagua">16.3</a>).</p>
 <p>Bagua was originated several thousands years ago in China. It is the source of almost all ancient Chinese philosophy. It abstracts the rule of universe into base signs and combination of the two basic signs generates the whole system of the universe.</p>
 <p>Inside Ba-Gua, these is the <a href="http://en.wikipedia.org/wiki/Taiji_(philosophy)">Tai-Ji</a>. Tai-Ji refers to the most original state at the creation of the universe. In ancient Chinese philosophy system, at the very beginning, the whole world is a huge mass of air (chaos). Then the lighter air floated up and created sky while heavier sinked down and created ground. The upper world is called Yang and the bottom world is called Ying. And that is Tai-Ji.</p>
 <p>Looking at Tai-Ji, you can see there are two states interacting with each other. The white one and the black one gradually transformed into each other at the end. And in the center of white and black, the opposite color is generated. In real world, Taiji can represent all phenomenon that is of dualism. Such as male and female, correct and wrong. However things would change, good thing would become bad thing as time goes by, and bad thing would also turn into good according to how you look at the world.</p>
@@ -266,21 +372,20 @@ r =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span cla
 <span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span>r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,
     <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">8</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:bagua"></span>
-<img src="circlize-book_files/figure-html/bagua-1.png" alt="Ba-Gua and Tai-Ji." width="384" />
+<img src="16-make-fun_files/figure-html/bagua-1.svg" alt="Ba-Gua and Tai-Ji." width="384" />
 <p class="caption">
-Figure 12.3: Ba-Gua and Tai-Ji.
+Figure 16.3: Ba-Gua and Tai-Ji.
 </p>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
 </div>
 <div id="circular-doodle" class="section level2">
-<h2><span class="header-section-number">12.4</span> Circular doodle</h2>
-<p>Figure <a href="make-fun-of-the-package.html#fig:doodle">12.4</a> is a circular style of <a href="https://en.wikipedia.org/wiki/Keith_Haring">Keith Haring</a>’s doodle. The circular transformation is as follows: 1. use <strong>jpeg</strong> package to read RGB values in the original figure; 2. use <code>circos.rect()</code> to draw every pixel as tiny rectangles into the circle. Source code for generating the figure can be found at <a href="http://jokergoo.github.io/circlize/example/doodle.html" class="uri">http://jokergoo.github.io/circlize/example/doodle.html</a> (note this implementation is quite slow to run).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;images/doodle.jpeg&quot;</span>)</code></pre></div>
+<h2><span class="header-section-number">16.4</span> Circular doodle</h2>
+<p>Figure <a href="make-fun-of-the-package.html#fig:doodle">16.4</a> is a circular style of <a href="https://en.wikipedia.org/wiki/Keith_Haring">Keith Haring</a>’s doodle. The circular transformation is as follows: 1. use <strong>jpeg</strong> package to read RGB values in the original figure; 2. use <code>circos.rect()</code> to draw every pixel as tiny rectangles into the circle. Source code for generating the figure can be found at <a href="http://jokergoo.github.io/circlize/example/doodle.html" class="uri">http://jokergoo.github.io/circlize/example/doodle.html</a> (note this implementation is quite slow to run).</p>
 <div class="figure" style="text-align: center"><span id="fig:doodle"></span>
 <img src="images/doodle.jpeg" alt="Keith Haring doodle in circular layout." width="400" />
 <p class="caption">
-Figure 12.4: Keith Haring doodle in circular layout.
+Figure 16.4: Keith Haring doodle in circular layout.
 </p>
 </div>
 
@@ -291,8 +396,8 @@ Figure 12.4: Keith Haring doodle in circular layout.
           </div>
         </div>
       </div>
-<a href="code-is-not-run-when-building-the-vignette.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="a-complex-example-of-chord-diagram.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="session-info.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -321,7 +426,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/17-make-fun.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/16-make-fun.Rmd",
 "text": "Edit"
 },
 "download": ["circlize-book.pdf", "circlize-book.epub"],
@@ -332,6 +437,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

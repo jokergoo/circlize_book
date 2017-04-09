@@ -5,3 +5,4 @@ knitr::opts_chunk$set(
   fig.height = 4
 )
 
+library(circlize)

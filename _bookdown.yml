@@ -1,3 +1,5 @@
+new_session: yes
+
 book_filename: "circlize-book"
 language:
   ui:

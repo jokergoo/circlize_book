@@ -8,7 +8,8 @@ documentclass: book
 bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: jokergoo/books
+github-repo: jokergoo/circlize_book
+cover-image: images/circlize_cover.jpg
 description: "This book provides a comprehensive overview of implementing circular visualization in R by cirlize package,
 	espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram."
 ---
@@ -19,8 +20,8 @@ This is the documentation of the
 [**circlize**](https://cran.r-project.org/package=circlize) package. Examples
 in the book are generated under version `r installed.packages()["circlize", "Version"]`.
 
-```{r, echo = FALSE, out.width = 400}
-include_graphics("images/circlize_cover.jpg")
+```{r, echo = FALSE}
+knitr::include_graphics("images/circlize_cover.jpg")
 ```
 
 If you use **circlize** in your publications, I would be appreciated if you can cite:

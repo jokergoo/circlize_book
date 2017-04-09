@@ -1,0 +1,7 @@
+# Session info
+
+This book is built under following system settings.
+
+```{r}
+devtools::session_info()
+```

@@ -178,7 +178,7 @@ also the order of sectors on the circle is determined. **Order of the sectors
 are determined by the order of levels of the input factor**. If the value for
 `factors` is not a factor, the order of sectors is `unique(factors)`. Thus, if
 you want to change the order of sectors, you can just change of the level of
-{\tt factors} variable. The following code generates plots with different
+`factors` variable. The following code generates plots with different
 sector orders (Figure \@ref(fig:circlize-factor):
 
 ```{r, eval = FALSE}

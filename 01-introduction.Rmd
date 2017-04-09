@@ -165,7 +165,7 @@ When specifying the position of text on the y direction, an offset of `uy(5,
 "mm")` is added to the y position of the text. In `circos.text()`, x and y
 values are measured in the data coordinate (the coordinate in cell), and
 `uy()` function (or `ux()` which is measured on x direction) converts absolute
-units to corresponding values in data coordinate. Section \@ref(convert-units)
+units to corresponding values in data coordinate. Section \@ref(convert-functions)
 provides more information of converting units in different coordinates.
 
 After the track is created, points are added to the first track by

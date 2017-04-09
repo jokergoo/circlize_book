@@ -12,15 +12,15 @@
   <meta property="og:title" content="Circular Visualization in R" />
   <meta property="og:type" content="book" />
   
-  
+  <meta property="og:image" content="images/circlize_cover.jpg" />
   <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="github-repo" content="jokergoo/books" />
+  <meta name="github-repo" content="jokergoo/circlize_book" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Circular Visualization in R" />
   
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  
+  <meta name="twitter:image" content="images/circlize_cover.jpg" />
 
 <meta name="author" content="Zuguang Gu">
 
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="position-transformation.html">
-<link rel="next" href="revisit-zooming.html">
+<link rel="prev" href="modes-of-input.html">
+<link rel="next" href="nested-zooming.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -104,26 +104,131 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="part"><span><b>I General Functionality</b></span></li>
-<li class="chapter" data-level="1" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>1</b> Circular layout</a></li>
-<li class="chapter" data-level="2" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>2</b> Graphics</a></li>
-<li class="chapter" data-level="3" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>3</b> Legends</a></li>
-<li class="chapter" data-level="4" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>4</b> Implement high-level plots</a></li>
-<li class="chapter" data-level="5" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>5</b> Advanced layout</a></li>
-<li class="part"><span><b>II Applications in Genomics</b></span></li>
-<li class="chapter" data-level="6" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>6</b> Initialize with genomic data</a></li>
-<li class="chapter" data-level="7" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html"><i class="fa fa-check"></i><b>7</b> Create plotting regions for genomic data</a></li>
-<li class="chapter" data-level="8" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>8</b> modes for <code>circos.genomicTrack()</code></a></li>
-<li class="chapter" data-level="9" data-path="position-transformation.html"><a href="position-transformation.html"><i class="fa fa-check"></i><b>9</b> Position transformation</a></li>
-<li class="chapter" data-level="10" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>10</b> High-level genomic functions</a><ul>
-<li class="chapter" data-level="10.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>10.1</b> Ideograms</a></li>
-<li class="chapter" data-level="10.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#heatmaps"><i class="fa fa-check"></i><b>10.2</b> Heatmaps</a></li>
-<li class="chapter" data-level="10.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>10.3</b> Labels</a></li>
-<li class="chapter" data-level="10.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>10.4</b> Genomic density and Rainfall plot</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#principle-of-design"><i class="fa fa-check"></i><b>1.1</b> Principle of design</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#a-qiuck-glance"><i class="fa fa-check"></i><b>1.2</b> A quick glance</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="revisit-zooming.html"><a href="revisit-zooming.html"><i class="fa fa-check"></i><b>11</b> Revisit zooming</a></li>
+<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a><ul>
+<li class="chapter" data-level="2.1" data-path="circular-layout.html"><a href="circular-layout.html#coordinate-transformation"><i class="fa fa-check"></i><b>2.1</b> Coordinate transformation</a></li>
+<li class="chapter" data-level="2.2" data-path="circular-layout.html"><a href="circular-layout.html#rules-for-making-the-circular-plot"><i class="fa fa-check"></i><b>2.2</b> Rules for making the circular plot</a></li>
+<li class="chapter" data-level="2.3" data-path="circular-layout.html"><a href="circular-layout.html#sectors-and-tracks"><i class="fa fa-check"></i><b>2.3</b> Sectors and tracks</a></li>
+<li class="chapter" data-level="2.4" data-path="circular-layout.html"><a href="circular-layout.html#graphic-parameters"><i class="fa fa-check"></i><b>2.4</b> Graphic parameters</a></li>
+<li class="chapter" data-level="2.5" data-path="circular-layout.html"><a href="circular-layout.html#create-plotting-regions"><i class="fa fa-check"></i><b>2.5</b> Create plotting regions</a></li>
+<li class="chapter" data-level="2.6" data-path="circular-layout.html"><a href="circular-layout.html#update-plotting-regions"><i class="fa fa-check"></i><b>2.6</b> Update plotting regions</a></li>
+<li class="chapter" data-level="2.7" data-path="circular-layout.html"><a href="circular-layout.html#panel-fun"><i class="fa fa-check"></i><b>2.7</b> <code>panel.fun</code> argument</a></li>
+<li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
+<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The convert functions</a></li>
+<li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a><ul>
+<li class="chapter" data-level="3.1" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>3.1</b> Points</a></li>
+<li class="chapter" data-level="3.2" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>3.2</b> Lines</a></li>
+<li class="chapter" data-level="3.3" data-path="graphics.html"><a href="graphics.html#segments"><i class="fa fa-check"></i><b>3.3</b> Segments</a></li>
+<li class="chapter" data-level="3.4" data-path="graphics.html"><a href="graphics.html#text"><i class="fa fa-check"></i><b>3.4</b> Text</a></li>
+<li class="chapter" data-level="3.5" data-path="graphics.html"><a href="graphics.html#rectangles"><i class="fa fa-check"></i><b>3.5</b> Rectangles and polygons</a></li>
+<li class="chapter" data-level="3.6" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.6</b> Axes</a></li>
+<li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.7</b> Links</a></li>
+<li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.8</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.9</b> Work with the base graphic system</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
+<li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level plots</a><ul>
+<li class="chapter" data-level="5.1" data-path="high-level-plots.html"><a href="high-level-plots.html#circular-barplot"><i class="fa fa-check"></i><b>5.1</b> Circular barplots</a></li>
+<li class="chapter" data-level="5.2" data-path="high-level-plots.html"><a href="high-level-plots.html#histograms"><i class="fa fa-check"></i><b>5.2</b> Histograms</a></li>
+<li class="chapter" data-level="5.3" data-path="high-level-plots.html"><a href="high-level-plots.html#phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Phylogenetic trees</a></li>
+<li class="chapter" data-level="5.4" data-path="high-level-plots.html"><a href="high-level-plots.html#heatmaps"><i class="fa fa-check"></i><b>5.4</b> Heatmaps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>6</b> Advanced layout</a><ul>
+<li class="chapter" data-level="6.1" data-path="advanced-layout.html"><a href="advanced-layout.html#zooming-of-sectors"><i class="fa fa-check"></i><b>6.1</b> Zooming of sectors</a></li>
+<li class="chapter" data-level="6.2" data-path="advanced-layout.html"><a href="advanced-layout.html#part-circle"><i class="fa fa-check"></i><b>6.2</b> Visualize part of the circle</a></li>
+<li class="chapter" data-level="6.3" data-path="advanced-layout.html"><a href="advanced-layout.html#combine-circular-plots"><i class="fa fa-check"></i><b>6.3</b> Combine multiple circular plots</a></li>
+<li class="chapter" data-level="6.4" data-path="advanced-layout.html"><a href="advanced-layout.html#arrange-multiple-plots"><i class="fa fa-check"></i><b>6.4</b> Arrange multiple plots</a></li>
+</ul></li>
+<li class="part"><span><b>II Applications in Genomics</b></span></li>
+<li class="chapter" data-level="7" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>7</b> Introduction</a><ul>
+<li class="chapter" data-level="7.1" data-path="genomic-introduction.html"><a href="genomic-introduction.html#input-data"><i class="fa fa-check"></i><b>7.1</b> Input data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>8</b> Initialize with genomic data</a><ul>
+<li class="chapter" data-level="8.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>8.1</b> Initialize with cytoband data</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>8.1.1</b> Basic usage</a></li>
+<li class="chapter" data-level="8.1.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#pre-defined-tracks"><i class="fa fa-check"></i><b>8.1.2</b> Pre-defined tracks</a></li>
+<li class="chapter" data-level="8.1.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#other-general-settings"><i class="fa fa-check"></i><b>8.1.3</b> Other general settings</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>8.2</b> Customize chromosome track</a></li>
+<li class="chapter" data-level="8.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>8.3</b> Initialize with general genomic category</a></li>
+<li class="chapter" data-level="8.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>8.4</b> Zooming chromosomes</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html"><i class="fa fa-check"></i><b>9</b> Create plotting regions for genomic data</a><ul>
+<li class="chapter" data-level="9.1" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>9.1</b> Points</a></li>
+<li class="chapter" data-level="9.2" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>9.2</b> Lines</a></li>
+<li class="chapter" data-level="9.3" data-path="graphics.html"><a href="graphics.html#text"><i class="fa fa-check"></i><b>9.3</b> Text</a></li>
+<li class="chapter" data-level="9.4" data-path="graphics.html"><a href="graphics.html#rectangles"><i class="fa fa-check"></i><b>9.4</b> Rectangles</a></li>
+<li class="chapter" data-level="9.5" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>9.5</b> Links</a></li>
+<li class="chapter" data-level="9.6" data-path="create-plotting-regions-for-genomic-data.html"><a href="create-plotting-regions-for-genomic-data.html#mixed-use-of-general-circlize-functions"><i class="fa fa-check"></i><b>9.6</b> Mixed use of general circlize functions</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>10</b> modes for <code>circos.genomicTrack()</code></a><ul>
+<li class="chapter" data-level="10.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>10.1</b> Normal mode</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame"><i class="fa fa-check"></i><b>10.1.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="10.1.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames"><i class="fa fa-check"></i><b>10.1.2</b> Input is a list of data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>10.2</b> Stack mode</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame-1"><i class="fa fa-check"></i><b>10.2.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="10.2.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames-1"><i class="fa fa-check"></i><b>10.2.2</b> Input is a list of data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>10.3</b> Applications</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="modes-of-input.html"><a href="modes-of-input.html#points-1"><i class="fa fa-check"></i><b>10.3.1</b> Points</a></li>
+<li class="chapter" data-level="10.3.2" data-path="modes-of-input.html"><a href="modes-of-input.html#lines-1"><i class="fa fa-check"></i><b>10.3.2</b> Lines</a></li>
+<li class="chapter" data-level="10.3.3" data-path="modes-of-input.html"><a href="modes-of-input.html#rectangles-1"><i class="fa fa-check"></i><b>10.3.3</b> Rectangles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>11</b> High-level genomic functions</a><ul>
+<li class="chapter" data-level="11.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>11.1</b> Ideograms</a></li>
+<li class="chapter" data-level="11.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>11.2</b> Heatmaps</a></li>
+<li class="chapter" data-level="11.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>11.3</b> Labels</a></li>
+<li class="chapter" data-level="11.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>11.4</b> Genomic density and Rainfall plot</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>12</b> Nested zooming</a><ul>
+<li class="chapter" data-level="12.1" data-path="nested-zooming.html"><a href="nested-zooming.html#basic-idea"><i class="fa fa-check"></i><b>12.1</b> Basic idea</a></li>
+<li class="chapter" data-level="12.2" data-path="nested-zooming.html"><a href="nested-zooming.html#visualization-of-dmrs-from-tagmentation-based-wgbs"><i class="fa fa-check"></i><b>12.2</b> visualization of DMRs from tagmentation-based WGBS</a></li>
+</ul></li>
 <li class="part"><span><b>III Visualize Relations</b></span></li>
-<li class="chapter" data-level="12" data-path="we-go-back-to-the-first-track-and-customize-sector-labels.html"><a href="we-go-back-to-the-first-track-and-customize-sector-labels.html"><i class="fa fa-check"></i><b>12</b> we go back to the first track and customize sector labels</a></li>
-<li class="chapter" data-level="13" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>13</b> Make fun of the package</a></li>
+<li class="chapter" data-level="13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>13</b> The <code>chordDiagram()</code> function</a><ul>
+<li class="chapter" data-level="13.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>13.1</b> Basic usage</a></li>
+<li class="chapter" data-level="13.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>13.2</b> Adjust by <code>circos.par()</code></a></li>
+<li class="chapter" data-level="13.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#colors"><i class="fa fa-check"></i><b>13.3</b> Colors</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#set-grid-colors"><i class="fa fa-check"></i><b>13.3.1</b> Set grid colors</a></li>
+<li class="chapter" data-level="13.3.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-color"><i class="fa fa-check"></i><b>13.3.2</b> Set link colors</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-border"><i class="fa fa-check"></i><b>13.4</b> Link border</a></li>
+<li class="chapter" data-level="13.5" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#highlight-links"><i class="fa fa-check"></i><b>13.5</b> Highlight links</a></li>
+<li class="chapter" data-level="13.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>13.6</b> Orders of links</a><ul>
+<li class="chapter" data-level="13.6.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-on-positions-on-sectors"><i class="fa fa-check"></i><b>13.6.1</b> Orders on positions on sectors</a></li>
+<li class="chapter" data-level="13.6.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#order-of-adding-links"><i class="fa fa-check"></i><b>13.6.2</b> Order of adding links</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#self-links"><i class="fa fa-check"></i><b>13.7</b> Self-links</a></li>
+<li class="chapter" data-level="13.8" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#symmetric-matrix"><i class="fa fa-check"></i><b>13.8</b> Symmetric matrix</a></li>
+<li class="chapter" data-level="13.9" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#directional-relations"><i class="fa fa-check"></i><b>13.9</b> Directional relations</a></li>
+<li class="chapter" data-level="13.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>13.10</b> Reduce</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>14</b> Advanced usage of <code>chordDiagram()</code></a><ul>
+<li class="chapter" data-level="14.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>14.1</b> Organization of tracks</a></li>
+<li class="chapter" data-level="14.2" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-labels"><i class="fa fa-check"></i><b>14.2</b> Customize sector labels</a></li>
+<li class="chapter" data-level="14.3" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-axes"><i class="fa fa-check"></i><b>14.3</b> Customize sector axes</a></li>
+<li class="chapter" data-level="14.4" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#put-horizontally-or-vertically-symmetric"><i class="fa fa-check"></i><b>14.4</b> Put horizontally or vertically symmetric</a></li>
+<li class="chapter" data-level="14.5" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#compare-two-chord-diagrams"><i class="fa fa-check"></i><b>14.5</b> Compare two Chord diagrams</a></li>
+<li class="chapter" data-level="14.6" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#multiple-group-chord-diagram"><i class="fa fa-check"></i><b>14.6</b> Multiple-group Chord diagram</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>15</b> A complex example of Chord diagram</a></li>
+<li class="part"><span><b>IV Others</b></span></li>
+<li class="chapter" data-level="16" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>16</b> Make fun of the package</a><ul>
+<li class="chapter" data-level="16.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>16.1</b> A clock</a></li>
+<li class="chapter" data-level="16.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>16.2</b> A dartboard</a></li>
+<li class="chapter" data-level="16.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>16.3</b> Ba-Gua and Tai-Ji</a></li>
+<li class="chapter" data-level="16.4" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#circular-doodle"><i class="fa fa-check"></i><b>16.4</b> Circular doodle</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>17</b> Session info</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -145,24 +250,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="high-level-genomic-functions" class="section level1">
-<h1><span class="header-section-number">Chapter 10</span> High-level genomic functions</h1>
+<h1><span class="header-section-number">Chapter 11</span> High-level genomic functions</h1>
 <p>In this chapter, several high-level functions which create tracks are introduced.</p>
 <div id="ideograms" class="section level2">
-<h2><span class="header-section-number">10.1</span> Ideograms</h2>
-<p><code>circos.initializeWithIdeogram()</code> initializes the circular plot and adds ideogram track if the cytoband data is available. Actually, the ideograms are drawn by <code>circos.genomicIdeogram()</code>. <code>circos.genomicIdeogram()</code> creates a thin track of ideograms and can be used anywhere in the circle. By default it adds ideograms for human genome hg19 (Figure <a href="high-level-genomic-functions.html#fig:ideogram">10.1</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;axis&quot;</span>))
+<h2><span class="header-section-number">11.1</span> Ideograms</h2>
+<p><code>circos.initializeWithIdeogram()</code> initializes the circular plot and adds ideogram track if the cytoband data is available. Actually, the ideograms are drawn by <code>circos.genomicIdeogram()</code>. <code>circos.genomicIdeogram()</code> creates a thin track of ideograms and can be used anywhere in the circle. By default it adds ideograms for human genome hg19 (Figure <a href="high-level-genomic-functions.html#fig:ideogram">11.1</a>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="kw">c</span>(<span class="st">&quot;labels&quot;</span>, <span class="st">&quot;axis&quot;</span>))
 <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
 <span class="kw">circos.genomicIdeogram</span>() <span class="co"># put ideogram as the third track</span>
 <span class="kw">circos.genomicIdeogram</span>(<span class="dt">track.height =</span> <span class="fl">0.2</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:ideogram"></span>
-<img src="circlize-book_files/figure-html/ideogram-1.png" alt="Circular ideograms." width="384" />
+<img src="11-high-level-genomic-functions_files/figure-html/ideogram-1.svg" alt="Circular ideograms." width="384" />
 <p class="caption">
-Figure 10.1: Circular ideograms.
+Figure 11.1: Circular ideograms.
 </p>
 </div>
 </div>
-<div id="heatmaps" class="section level2">
-<h2><span class="header-section-number">10.2</span> Heatmaps</h2>
+<div id="genomic-heatmap" class="section level2">
+<h2><span class="header-section-number">11.2</span> Heatmaps</h2>
 <p>Matrix which corresponds to genomic regions can be visualized as heatmaps. Heatmaps complete fill the track and there are connection lines connect heatmaps and positions in the genome. `circos.genomicHeamtap() draws connection lines and heatmaps as two tracks and combines them as a integrated track.</p>
 <p>Generally, all numeric columns (excluding the first three columns) in the input data frame are used to make the heatmap. Colors can be specfied as a color matrix or a color mapping function generated by <code>colorRamp2()</code>.</p>
 <p>The height of the connection line track and the heatmap track can be set by <code>connection_height</code> and <code>heatmap_height</code> arguments. Also parameters for the styles of lines and rectangle borders can be adjusted, please check the help page of <code>circos.genomicHeatmap()</code>.</p>
@@ -171,21 +276,21 @@ bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span cl
 col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))
 <span class="kw">circos.genomicHeatmap</span>(bed, <span class="dt">col =</span> col_fun, <span class="dt">side =</span> <span class="st">&quot;inside&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)
 <span class="kw">circos.clear</span>()</code></pre></div>
-<p>In the left figure in Figure <a href="high-level-genomic-functions.html#fig:genomic-heatmap">10.2</a>, the heatmaps are put inside the normal genomic track. Heatmaps are also be put outside the normal genomic track by setting <code>side = &quot;outside&quot;</code> (Figure <a href="high-level-genomic-functions.html#fig:genomic-heatmap">10.2</a>, right).</p>
+<p>In the left figure in Figure <a href="high-level-genomic-functions.html#fig:genomic-heatmap">11.2</a>, the heatmaps are put inside the normal genomic track. Heatmaps are also be put outside the normal genomic track by setting <code>side = &quot;outside&quot;</code> (Figure <a href="high-level-genomic-functions.html#fig:genomic-heatmap">11.2</a>, right).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)
 <span class="kw">circos.genomicHeatmap</span>(bed, <span class="dt">col =</span> col_fun, <span class="dt">side =</span> <span class="st">&quot;outside&quot;</span>,
     <span class="dt">line_col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])))
 <span class="kw">circos.genomicIdeogram</span>()
 <span class="kw">circos.clear</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-heatmap"></span>
-<img src="circlize-book_files/figure-html/genomic-heatmap-1.png" alt="Genomic heamtaps." width="768" />
+<img src="11-high-level-genomic-functions_files/figure-html/genomic-heatmap-1.svg" alt="Genomic heamtaps." width="768" />
 <p class="caption">
-Figure 10.2: Genomic heamtaps.
+Figure 11.2: Genomic heamtaps.
 </p>
 </div>
 </div>
 <div id="labels" class="section level2">
-<h2><span class="header-section-number">10.3</span> Labels</h2>
+<h2><span class="header-section-number">11.3</span> Labels</h2>
 <p><code>circos.genomicLabels()</code> adds text labels for regions specified. Positions of labels are automatically adjusted so that they do not overlap to each other.</p>
 <p>Similar as <code>circos.genomicHeatmap()</code>, <code>circos.genomicLabels()</code> also creates two tracks where one for the connection lines and one for the labels. You can set the height of the labels track to be the maximum width of labels by <code>labels_track = max(strwidth(labels))</code>. <code>padding</code> argument controls the gap between two neighbouring labels.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>()
@@ -193,21 +298,21 @@ bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span cl
 bed[<span class="dv">1</span>, <span class="dv">4</span>] =<span class="st"> &quot;aaaaa&quot;</span>
 <span class="kw">circos.genomicLabels</span>(bed, <span class="dt">labels.column =</span> <span class="dv">4</span>, <span class="dt">side =</span> <span class="st">&quot;inside&quot;</span>)
 <span class="kw">circos.clear</span>()</code></pre></div>
-<p>Similarlly, labels can be put outside of the normal genomic track (Figure <a href="high-level-genomic-functions.html#fig:genomic-labels">10.3</a> right).</p>
+<p>Similarlly, labels can be put outside of the normal genomic track (Figure <a href="high-level-genomic-functions.html#fig:genomic-labels">11.3</a> right).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)
 <span class="kw">circos.genomicLabels</span>(bed, <span class="dt">labels.column =</span> <span class="dv">4</span>, <span class="dt">side =</span> <span class="st">&quot;outside&quot;</span>,
     <span class="dt">col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])), <span class="dt">line_col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])))
 <span class="kw">circos.genomicIdeogram</span>()
 <span class="kw">circos.clear</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-labels"></span>
-<img src="circlize-book_files/figure-html/genomic-labels-1.png" alt="Genomic labels." width="768" />
+<img src="11-high-level-genomic-functions_files/figure-html/genomic-labels-1.svg" alt="Genomic labels." width="768" />
 <p class="caption">
-Figure 10.3: Genomic labels.
+Figure 11.3: Genomic labels.
 </p>
 </div>
 </div>
 <div id="genomic-density-and-rainfall-plot" class="section level2">
-<h2><span class="header-section-number">10.4</span> Genomic density and Rainfall plot</h2>
+<h2><span class="header-section-number">11.4</span> Genomic density and Rainfall plot</h2>
 <p>Rainfall plots are used to visualize the distribution of genomic regions in the genome. Rainfall plots are particularly useful to identify clusters of regions. In the rainfall plot, each dot represents a region. The x-axis corresponds to the genomic coordinate, and the y-axis corresponds to the minimal distance (log10 transformed) of the region to its two neighbouring regions. A cluster of regions will appear as a “rainfall” in the plot.</p>
 <p><code>circos.genomicRainfall()</code> calculates neighbouring distance for each region and draw as points on the plot. Since <code>circos.genomicRainfall()</code> generates data on y-direction (<code>log10(distance)</code>), it is actually a high-level function which creates a new track.</p>
 <p>The input data can be a single data frame or a list of data frames.</p>
@@ -220,9 +325,8 @@ Figure 10.3: Genomic labels.
 <span class="kw">circos.genomicDensity</span>(bed, <span class="dt">baseline =</span> <span class="dv">0</span>)
 <span class="kw">circos.genomicDensity</span>(bed, <span class="dt">window.size =</span> <span class="fl">1e6</span>)
 <span class="kw">circos.genomicDensity</span>(bedlist, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>, <span class="st">&quot;#0000FF80&quot;</span>))</code></pre></div>
-<p>Following example makes a rainfall plot for differentially methylated regions (DMR) and their genomic densities. In the plot, red corresponds to hyper-methylated DMRs (gain of methylation) and blue corresponds to hypo-methylated DMRs (loss of methylation). You may see how the combination of rainfall track and genomic density track helps to get a more precise inference of the distribution of DMRs on genome (Figure <a href="high-level-genomic-functions.html#fig:genomic-rainfall">10.4</a>).</p>
+<p>Following example makes a rainfall plot for differentially methylated regions (DMR) and their genomic densities. In the plot, red corresponds to hyper-methylated DMRs (gain of methylation) and blue corresponds to hypo-methylated DMRs (loss of methylation). You may see how the combination of rainfall track and genomic density track helps to get a more precise inference of the distribution of DMRs on genome (Figure <a href="high-level-genomic-functions.html#fig:genomic-rainfall">11.4</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="kw">system.file</span>(<span class="dt">package =</span> <span class="st">&quot;circlize&quot;</span>, <span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;DMR.RData&quot;</span>))
-<span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))
 <span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>))
 
 bed_list =<span class="st"> </span><span class="kw">list</span>(DMR_hyper, DMR_hypo)
@@ -230,9 +334,9 @@ bed_list =<span class="st"> </span><span class="kw">list</span>(DMR_hyper, DMR_h
 <span class="kw">circos.genomicDensity</span>(DMR_hyper, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>), <span class="dt">track.height =</span> <span class="fl">0.1</span>)
 <span class="kw">circos.genomicDensity</span>(DMR_hypo, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#0000FF80&quot;</span>), <span class="dt">track.height =</span> <span class="fl">0.1</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-rainfall"></span>
-<img src="circlize-book_files/figure-html/genomic-rainfall-1.png" alt="Genomic rainfall plot and densities." width="576" />
+<img src="11-high-level-genomic-functions_files/figure-html/genomic-rainfall-1.svg" alt="Genomic rainfall plot and densities." width="576" />
 <p class="caption">
-Figure 10.4: Genomic rainfall plot and densities.
+Figure 11.4: Genomic rainfall plot and densities.
 </p>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
@@ -244,8 +348,8 @@ Figure 10.4: Genomic rainfall plot and densities.
           </div>
         </div>
       </div>
-<a href="position-transformation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="revisit-zooming.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modes-of-input.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="nested-zooming.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -274,7 +378,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/12-high-level-genomic-functions.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/11-high-level-genomic-functions.Rmd",
 "text": "Edit"
 },
 "download": ["circlize-book.pdf", "circlize-book.epub"],
@@ -285,6 +389,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
