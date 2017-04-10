@@ -6,3 +6,4 @@ language:
     chapter_name: "Chapter "
     
 before_chapter_script: "_common.R"
+output_dir: "book"
