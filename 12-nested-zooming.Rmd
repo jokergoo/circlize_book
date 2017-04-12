@@ -2,7 +2,7 @@
 library(circlize)
 ```
 
-# Nested zooming
+# Nested zooming {#nested-zooming}
 
 ## Basic idea
 

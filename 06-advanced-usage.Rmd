@@ -53,8 +53,8 @@ zoom_df_b = zoom_df_b[order(zoom_df_b[, 2])[1:10], ]
 zoom_df = rbind(zoom_df_a, zoom_df_b)
 ```
 
-Note, we must change the sector name in the zoomed data frame. We just simply
-add "zoom_" prefix to the original name to show it is a "zoomed" sector. After
+Then we need to change the sector names in the zoomed data frame. Here we just simply
+add "zoom_" prefix to the original names to show that they are "zoomed" sectors. After
 that, it is attached to the original data frame.
 
 ```{r}
@@ -63,11 +63,11 @@ df2 = rbind(df, zoom_df)
 ```
 
 In this example, we will put the original cells in the left half of the circle
-and the zoomed sectors in the right. Here is where the magic thing happens. We
+and the zoomed sectors in the right. As we have already mentioned before, we
 simply normalize the width of normal sectors and normalize the width of zoomed
-sectors separately. Now the sum of the sector width for the original sectors
+sectors separately. Note now the sum of the sector width for the original sectors
 is 1 and the sum of sector width for the zoomed sectors is 1, which means
-these two types of sectors now have their own half circle.
+these two types of sectors have their own half circle.
 
 You may notice the sum of the `sector.width` is not idential to 1. This is
 fine, they will be further normalized to 1 internally.
@@ -85,8 +85,9 @@ sector.width = c(xrange[normal_sector_index] / sum(xrange[normal_sector_index]),
 sector.width
 ```
 
-Now just make the circular plot in the normal way. All the graphics in sector
-a and b will be automatically zoomed to sector "zoomed_a" and "zoomed_b".
+What to do next is just to make the circular plot in the normal way. All the
+graphics in sector a and b will be automatically zoomed to sector "zoom_a"
+and "zoom_b".
 
 In following code, since the sector names are added outside the first track, 
 `points.overflow.warning` is set to `FALSE` to turn off the warning messages.
@@ -103,7 +104,7 @@ circos.track(df2$factors, x = df2$x, y = df2$y,
 ```
 
 Adding links from original sectors to zoomed sectors is a good idea to show
-where the zooming happens (Figure \@ref(fig:circlize-zoom)). Notice that
+where the zooming occurs (Figure \@ref(fig:circlize-zoom)). Notice that
 we manually adjust the position of one end of the sector b link.
 
 ```{r circlize_zoom_2, eval = FALSE}
@@ -122,6 +123,8 @@ chunks <- knitr:::knit_code$get()
 eval(parse(text = chunks[["circlize_zoom_1"]]))
 eval(parse(text = chunks[["circlize_zoom_2"]]))
 ```
+
+Chapter \@ref(nested-zooming) introduces another type of zooming by combining two circular plots.
 
 ## Visualize part of the circle {#part-circle}
 
@@ -253,6 +256,9 @@ In Figure \@ref(fig:circlize-part2), cells both visible and invisible all belong
 a same track and they are in a same circular plot, thus they should have same
 radius. But for the example here, cells have different radius and they belong
 to different circular plot.
+
+In chapter \@ref(nested-zooming), we use this technique to implement zoomings by combining two circular plots.
+
 
 ## Arrange multiple plots {#arrange-multiple-plots}
 

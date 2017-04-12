@@ -21,12 +21,14 @@ This is the documentation of the
 [**circlize**](https://cran.r-project.org/package=circlize) package. Examples
 in the book are generated under version `r installed.packages()["circlize", "Version"]`.
 
-```{r, echo = FALSE}
-knitr::include_graphics("images/circlize_cover.jpg")
-```
-
 If you use **circlize** in your publications, I would be appreciated if you can cite:
 
 Gu, Z. (2014) circlize implements and enhances circular visualization in R.
 Bioinformatics. DOI:
 [10.1093/bioinformatics/btu393](https://doi.org/10.1093/bioinformatics/btu393)
+
+
+```{r, echo = FALSE}
+knitr::include_graphics("images/circlize_cover.jpg")
+```
+
