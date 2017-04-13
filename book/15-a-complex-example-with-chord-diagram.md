@@ -37,10 +37,10 @@ In the RData file, there are three matrix: `mat`, `meth_mat_1` and
   diagonal are the regions where the states have not been changed in the two
   groups.
 - `meth_mat_1`: mean methylation for each set of regions in group 1.
-  `meth_mat_1["TssA", "TxFlnk"]` is the mean methylation for the regions in
+  E.g. `meth_mat_1["TssA", "TxFlnk"]` is the mean methylation for the regions in
   **group 1** that have "TssA" state in group 1 and "TxFlnk" state in group 2.
 - `meth_mat_2`: mean methylation for each set of regions in group 2.
-  `meth_mat_2["TssA", "TxFlnk"]` is the mean methylation for the regions in
+  E.g. `meth_mat_2["TssA", "TxFlnk"]` is the mean methylation for the regions in
   **group 2** that have "TssA" state in group 1 and "TxFlnk" state in group 2.
 
 
@@ -110,20 +110,13 @@ to disturb the visualization of the major transitions.
 
 
 ```r
-state_col = c("TssA" = "#E41A1C",
-	          "TssAFlnk" = "#E41A1C",
-	          "TxFlnk" = "#E41A1C",
-	          "Tx" = "#E41A1C",
-	          "TxWk" = "#E41A1C",
-	          "EnhG" = "#E41A1C",
-	          "Enh" = "#E41A1C",
-	          "ZNF/Rpts" = "#E41A1C",
-	          "Het" = "#377EB8",
-	          "TssBiv" = "#377EB8",
-	          "BivFlnk" = "#377EB8",
-	          "EnhBiv" = "#377EB8",
-	          "ReprPC" = "#377EB8",
-	          "ReprPCWk" = "#377EB8",
+state_col = c("TssA" = "#E41A1C",    "TssAFlnk" = "#E41A1C",
+	          "TxFlnk" = "#E41A1C",  "Tx" = "#E41A1C",
+	          "TxWk" = "#E41A1C",    "EnhG" = "#E41A1C",
+	          "Enh" = "#E41A1C",     "ZNF/Rpts" = "#E41A1C",
+	          "Het" = "#377EB8",     "TssBiv" = "#377EB8",
+	          "BivFlnk" = "#377EB8", "EnhBiv" = "#377EB8",
+	          "ReprPC" = "#377EB8",  "ReprPCWk" = "#377EB8",
 	          "Quies" = "black")
 
 # one for rows and one for columns
@@ -152,10 +145,12 @@ circos.par(start.degree = -5, gap.after = c(rep(1, n_states-1), 10, rep(1, n_sta
 	cell.padding = c(0, 0, 0, 0), points.overflow.warning = FALSE)
 
 cdm_res = chordDiagram(mat, col = colmat, grid.col = state_col2,
-	directional = TRUE, annotationTrack = "grid", preAllocateTracks = list(track.height = 0.1))
+	directional = TRUE, annotationTrack = "grid", 
+	preAllocateTracks = list(track.height = 0.1))
 ```
 
-<img src="15-a-complex-example-with-chord-diagram_files/figure-epub3/first-1.png" style="display: block; margin: auto;" />
+<img src="15-a-complex-example-with-chord-diagram_files/figure-html/first-1.svg" width="576" style="display: block; margin: auto;" />
+
 
 ```r
 head(cdm_res)
@@ -193,14 +188,14 @@ circos.track(track.index = 2, panel.fun = function(x, y) {
 }, bg.border = NA)
 ```
 
-<img src="15-a-complex-example-with-chord-diagram_files/figure-epub3/unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-10-1.svg" width="576" style="display: block; margin: auto;" />
 
 On the top half, it is easy to see the proportion of different transitions in
 group 1 that come to every state in group 2. However, it is not
 straightforward for the states in the bottom half to see the proportion of
 different states in group 2 they transite to. This can be solved by adding
-small circular rectangles. In following example, the newly added circular
-rectangles in the bottom half shows e.g. how much the state 15 in group 1 has
+small circular rectangles to represent the proportions. In following example, the newly added circular
+rectangles in the bottom half show e.g. how much the state 15 in group 1 has
 been transited to different states in group 2.
 
 
@@ -215,12 +210,14 @@ for(i in seq_len(nrow(cdm_res))) {
 }
 ```
 
-<img src="15-a-complex-example-with-chord-diagram_files/figure-epub3/unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-11-1.svg" width="576" style="display: block; margin: auto;" />
 
 Methylation in each category is put on the most outside of the circle. On this track, we will
 put two paralle rectangles which are mean methylation and methylation difference between group 1
 and group 2. Basically, on the bottom, we show `meth_mat_2 - meth_mat_1` and on the top we show
 `meth_mat_1 - meth_mat_2`.
+
+The logic of following code is simple that it just simply adds rectangles repeatedly.
 
 
 ```r
@@ -258,19 +255,8 @@ circos.clear()
 ```
 
 
-<img src="15-a-complex-example-with-chord-diagram_files/figure-epub3/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-12-1.svg" width="576" style="display: block; margin: auto;" />
 
 Legends can be added according to instructions discussed in Section \@ref(legends).
 
-
-```
-##    rn  cn value o1 o2      x1     x2       col
-## 1 R_1 C_1     0 15 13  431200 267200 #E41A1C20
-## 2 R_2 C_1 56400 15 12  159800 267200 #E41A1CA0
-## 3 R_3 C_1     0 15 11    3600 210800 #E41A1C20
-## 4 R_4 C_1   800 15 10   34600 210800 #E41A1C20
-## 5 R_5 C_1 98200 15  9 1411600 210000 #E41A1CA0
-## 6 R_6 C_1     0 15  8  139800 111800 #E41A1C20
-```
-
-<img src="15-a-complex-example-with-chord-diagram_files/figure-epub3/unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
+<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-13-1.png" width="695.541984" style="display: block; margin: auto;" />

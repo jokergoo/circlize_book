@@ -99,7 +99,7 @@ Later, the first track is updated with adding labels with clockwise facings
 chordDiagram(mat, grid.col = grid.col, annotationTrack = "grid", 
     preAllocateTracks = list(track.height = max(strwidth(unlist(dimnames(mat))))))
 # we go back to the first track and customize sector labels
-circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
+circos.track(track.index = 1, panel.fun = function(x, y) {
     circos.text(CELL_META$xcenter, CELL_META$ylim[1], CELL_META$sector.index, 
         facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5))
 }, bg.border = NA) # here set bg.border to NA is important
@@ -129,7 +129,7 @@ set.seed(123)
 mat2 = matrix(rnorm(100), 10)
 chordDiagram(mat2, annotationTrack = "grid", 
     preAllocateTracks = list(track.height = max(strwidth(unlist(dimnames(mat))))))
-circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
+circos.track(track.index = 1, panel.fun = function(x, y) {
     xlim = get.cell.meta.data("xlim")
     xplot = get.cell.meta.data("xplot")
     ylim = get.cell.meta.data("ylim")
@@ -179,7 +179,7 @@ In `panel.fun`, if the sector is less than 30 degree, the break for the axis is 
 
 ```{r chord_diagram_axes_two2, eval = FALSE}
 # the second axis as well as the sector labels are added in this track
-circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
+circos.track(track.index = 1, panel.fun = function(x, y) {
     xlim = get.cell.meta.data("xlim")
     ylim = get.cell.meta.data("ylim")
     sector.name = get.cell.meta.data("sector.index")

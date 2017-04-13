@@ -10,20 +10,20 @@ the same object; third, it easily demonstrates relations between elements. It
 provides an efficient way to arrange information on the circle and it is
 beautiful.
 
-[**Circos**](http://circos.ca) is a pioneer tool widely used for circular layout
-representations implemented in _Perl_. It greatly enhances the visualization of
-scientific results. Thus, plots with circular layout are normally named as
-**"circos plot"**. Here the **circlize** package aims to
-implement **Circos** in R. One important advantage for the implementation
-in R is that R is an ideal environment which provides seamless connection
-between data analysis and data visualization. **circlize** is not a front-end
-wrapper to generate configuration files for **Circos**, while completely
-coded in R style by using R's elegant statistical and graphic engine. We aim
-to keep the flexibility and configurability of **Circos**, but also make the
-package more straightforward to use and enhance it to support more types of
-graphics.
+[**Circos**](http://circos.ca) is a pioneer tool widely used for circular
+layout representations implemented in _Perl_. It greatly enhances the
+visualization of scientific results (especially in Genomics field). Thus,
+plots with circular layout are normally named as **"circos plot"**. Here the
+**circlize** package aims to implement **Circos** in R. One important
+advantage for the implementation in R is that R is an ideal environment which
+provides seamless connection between data analysis and data visualization.
+**circlize** is not a front-end wrapper to generate configuration files for
+**Circos**, while completely coded in R style by using R's elegant statistical
+and graphic engine. We aim to keep the flexibility and configurability of
+**Circos**, but also make the package more straightforward to use and enhance
+it to support more types of graphics.
 
-In this book, chapters in Part I give a detailed overview of the general **circlize**
+In this book, chapters in Part I give detailed overviews of the general **circlize**
 functionalities. Part II introduces functions specifically designed for
 visualizing genomic datasets. Part III gives comprehensive guilds on
 visualizing relationships by Chord diagram.
@@ -51,21 +51,22 @@ adding graphics. The usage is very similar to the functions without `circos.`
 prefix from the base graphic engine, except there are some enhancement
 specifically designed for circular visualization.
 
-- `circos.points()`: add points in a cell.
-- `circos.lines()`: add lines in a cell.
-- `circos.segments()`: add segments in a cell.
-- `circos.rect()`: add rectangles in a cell.
-- `circos.polygon()`: add polygons in a cell.
-- `circos.text()`: add text in a cell.
-- `circos.axis()` and `circos.yaxis()`: add axis in a cell.
+- `circos.points()`: adds points in a cell.
+- `circos.lines()`: adds lines in a cell.
+- `circos.segments()`: adds segments in a cell.
+- `circos.rect()`: adds rectangles in a cell.
+- `circos.polygon()`: adds polygons in a cell.
+- `circos.text()`: adds text in a cell.
+- `circos.axis()` ands `circos.yaxis()`: add axis in a cell.
 
 Following functions arrange the circular layout.
 
-- `circos.track()`: create plotting regions for cells in one single track.
-- `circos.update()`: update an existed cell.
+- `circos.initialize()`: allocates sectors on the circle.
+- `circos.track()`: creates plotting regions for cells in one single track.
+- `circos.update()`: updates an existed cell.
 - `circos.par()`: graphic parameters.
-- `circos.info()`: print general parameters of current circular plot.
-- `circos.clear()`: reset graphic parameters and internal variables.
+- `circos.info()`: prints general parameters of current circular plot.
+- `circos.clear()`: resets graphic parameters and internal variables.
 
 Thus, theoretically, you are able to draw most kinds of circular figures by
 the above functionalities. Figure \@ref(fig:circlize-example) lists several
@@ -98,19 +99,9 @@ First we initialize the circular layout. The circle is split into sectors
 based on the data range on x-axes in each category. In following code, `df$x`
 is split by `df$factors` and the width of sectors are automatically calculated
 based on data ranges in each category. Be default, sectors are positioned
-started from $\theta = 0$ (in the polar coordinate) and go along the circle
+started from $\theta = 0$ (in the polar coordinate system) and go along the circle
 clock-wisely. You may not see anything after running following code because no
 track has been added yet.
-
-We set a global parameter `track.height` to 0.1 by the option function
-`circis.par()` so that all tracks which will be added have a default height of
-0.1. The circle always has a radius of 1, so a height of 0.1 means 10% of the
-circle radius.
-
-Note that the allocation of sectors only needs values on x direction (or
-circular direction), the values on y direction (radical direction) will be used
-in the step of creating tracks.
-
 
 
 ```r
@@ -118,6 +109,15 @@ library(circlize)
 circos.par("track.height" = 0.1)
 circos.initialize(factors = df$factors, x = df$x)
 ```
+
+We set a global parameter `track.height` to 0.1 by the option function
+`circis.par()` so that all tracks which will be added have a default height of
+0.1. The circle used by **circlize** always has a radius of 1, so a height of
+0.1 means 10% of the circle radius.
+
+Note that the allocation of sectors only needs values on x direction (or
+on the circular direction), the values on y direction (radical direction) will be used
+in the step of creating tracks.
 
 After the circular layout is initialized, graphics can be added to the plot in
 a track-by-track manner. Before drawing anything, we need to know that all
@@ -130,7 +130,7 @@ here we only need to specify the y ranges for each cell. The y ranges can be
 specified by `y` argument as a numeric vector (so that y ranges will be
 automatically extracted and calculated in each cell) or `ylim` argument as a
 vector of length two. In principle, y ranges should be same for all cells in a
-same track. (See Figure \@ref(fig:circlize-glance) A)
+same track. (See Figure \@ref(fig:circlize-glance-track-1))
 
 
 ```r
@@ -138,21 +138,26 @@ circos.track(factors = df$factors, y = df$y,
     panel.fun = function(x, y) {
         circos.text(CELL_META$xcenter, CELL_META$cell.ylim[2] + uy(5, "mm"), 
             CELL_META$sector.index)
-        circos.axis()
+        circos.axis(labels.cex = 0.6)
 })
 col = rep(c("#FF0000", "#00FF00"), 4)
 circos.trackPoints(df$factors, df$x, df$y, col = col, pch = 16, cex = 0.5)
 circos.text(-1, 0.5, "text", sector.index = "a", track.index = 1)
 ```
 
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-html/circlize-glance-track-1-1.svg" alt="First example of circlize, add the first track." width="384" />
+<p class="caption">(\#fig:circlize-glance-track-1)First example of circlize, add the first track.</p>
+</div>
+
 Axes for the circular plot are normally drawn on the most outside of the
 circle. Here we add axes in the first track by putting `circos.axis()` inside
-the self-defined function `panel.fun` (see code above). `circos.track()`
+the self-defined function `panel.fun` (see the code above). `circos.track()`
 creates plotting region in a cell-by-cell manner and the `panel.fun` is
 actually executed immediately after the plotting region for a certain cell is
 created. Thus, `panel.fun` actually means adding graphics in the "current
-cell" (Functionality of `panel.fun` is further discussed in Section \@ref
-(panel-fun)). Without specifying any arguments, `circos.axis()` draws x-axes
+cell" (Usage of `panel.fun` is further discussed in Section \@ref(panel-fun)). 
+Without specifying any arguments, `circos.axis()` draws x-axes
 on the top of each cell (or the outside of each cell).
 
 Also, we add sector name outside the first track by using `circos.text()`.
@@ -163,7 +168,8 @@ drawn outside the cells and you may see warning messages saying data points
 exceeding the plotting regions. That is total fine and no worry about it. You
 can also add sector names by creating an empty track without borders as the
 first track and add sector names in it (like what
-`circos.initializeWithIdeogram()` and `chordDiagram()` do).
+`circos.initializeWithIdeogram()` and `chordDiagram()` do, after you go through
+following chapters).
 
 When specifying the position of text on the y direction, an offset of `uy(5,
 "mm")` is added to the y position of the text. In `circos.text()`, x and y
@@ -188,11 +194,11 @@ track may not be what you want. If the graphics are directly added to the
 track which are most recently created, `track.index` can be ommitted because
 this track is just marked as the "current" track.
 
-We add histograms to the second track. Here `circos.trackHist()` is a high-
+OK, now we add histograms to the second track. Here `circos.trackHist()` is a high-
 level function which means it creates a new track (as you can imagin `hist()`
 is also a high-level function). `bin.size` is explicitly set so that the bin
 size for histograms in all cells are the same and can be compared to each
-other. (See Figure \@ref(fig:circlize-glance) B)
+other. (See Figure \@ref(fig:circlize-glance-track-2))
 
 
 ```r
@@ -200,12 +206,18 @@ bgcol = rep(c("#EFEFEF", "#CCCCCC"), 4)
 circos.trackHist(df$factors, df$x, bin.size = 0.2, bg.col = bgcol, col = NA)
 ```
 
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-html/circlize-glance-track-2-1.svg" alt="First example of circlize, add the second track." width="384" />
+<p class="caption">(\#fig:circlize-glance-track-2)First example of circlize, add the second track.</p>
+</div>
+
 In the third track and in `panel.fun`, we randomly picked 10 data points in
 each cell, sort them and connect them with lines. In following code, when
 `factors`, `x` and `y` arguments are set in `circos.track()`, x values and y
 values are split by `df$factors` and corresponding subset of x and y values
 are sent to `panel.fun` through `panel.fun`'s `x` and `y` arguments. Thus, `x`
-an `y` in `panel.fun` are exactly values in the "current" cell. (See Figure \@ref(fig:circlize-glance) C)
+an `y` in `panel.fun` are exactly the values in the "current" cell. 
+(See Figure \@ref(fig:circlize-glance-track-3))
 
 
 ```r
@@ -219,6 +231,11 @@ circos.track(factors = df$factors, x = df$x, y = df$y,
 })
 ```
 
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-html/circlize-glance-track-3-1.svg" alt="First example of circlize, add the third track." width="384" />
+<p class="caption">(\#fig:circlize-glance-track-3)First example of circlize, add the third track.</p>
+</div>
+
 Now we go back to the second track and update the cell in sector "d".
 This is done by `circos.updatePlotRegion()` or the short version
 `circos.update()`. The function erases graphics which have been added.
@@ -228,7 +245,7 @@ to explicitly specify the sector index and track index unless the "current"
 cell is what you want to update. After the calling of `circos.update()`,
 the "current" cell is redirected to the cell you just specified and you
 can use low-level graphic functions to add graphics directly into it. 
-(See Figure \@ref(fig:circlize-glance) D)
+(See Figure \@ref(fig:circlize-glance-track-update))
 
 
 ```r
@@ -238,6 +255,11 @@ circos.points(x = -2:2, y = rep(0.5, 5), col = "white")
 circos.text(CELL_META$xcenter, CELL_META$ycenter, "updated", col = "white")
 ```
 
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-html/circlize-glance-track-update-1.svg" alt="First example of circlize, update the second track." width="384" />
+<p class="caption">(\#fig:circlize-glance-track-update)First example of circlize, update the second track.</p>
+</div>
+
 Next we continue to create new tracks. Although we have gone back to the
 second track, when creating a new track, the new track is still created after
 the track which is most inside. In this new track, we add heatmaps by
@@ -245,7 +267,7 @@ the track which is most inside. In this new track, we add heatmaps by
 `ylim` argument because heatmaps just fill the whole cell from the most left
 to right and from bottom to top. Also the exact value of `ylim` is not
 important and `x`, `y` in `panel.fun()` are not used (actually they are both
-`NULL`). (See Figure \@ref(fig:circlize-glance) E)
+`NULL`). (See Figure \@ref(fig:circlize-glance-track-4))
 
 
 ```r
@@ -260,9 +282,14 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 })
 ```
 
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-html/circlize-glance-track-4-1.svg" alt="First example of circlize, add the fourth track." width="384" />
+<p class="caption">(\#fig:circlize-glance-track-4)First example of circlize, add the fourth track.</p>
+</div>
+
 In the most inside of the circle, links or ribbons are added. There can be links
 from single point to point, point to interval or interval to interval. Section \@ref(links)
-gives detailed usage of links. (See Figure \@ref(fig:circlize-glance) F)
+gives detailed usage of links. (See Figure \@ref(fig:circlize-glance-track-links))
 
 
 ```r
@@ -272,6 +299,11 @@ circos.link("c", c(-0.5, 0.5), "d", c(-0.5,0.5), col = "red",
 circos.link("e", 0, "g", c(-1,1), col = "green", border = "black", lwd = 2, lty = 2)
 ```
 
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-html/circlize-glance-track-links-1.svg" alt="First example of circlize, add links." width="384" />
+<p class="caption">(\#fig:circlize-glance-track-links)First example of circlize, add links.</p>
+</div>
+
 Finally we need to reset the graphic parameters and internal variables, so
 that it will not mess up your next plot.
 
@@ -279,8 +311,3 @@ that it will not mess up your next plot.
 ```r
 circos.clear()
 ```
-
-<div class="figure" style="text-align: center">
-<img src="01-introduction_files/figure-epub3/circlize-glance-1.png" alt="A step-by-step example"  />
-<p class="caption">(\#fig:circlize-glance)A step-by-step example</p>
-</div>

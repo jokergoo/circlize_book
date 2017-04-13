@@ -17,8 +17,8 @@ identify positions on chromosomes.
 ### Basic usage
 
 If you work on human genome, the most straightforward way is to directly use
-`circos.initializeWithIdeogram()` (Figure \@ref(fig:genomic-initialize-
-ideogram) A). By default, the function creates a track with chromosome name
+`circos.initializeWithIdeogram()` (Figure \@ref(fig:genomic-initialize-ideogram-default)). 
+By default, the function creates a track with chromosome name
 and axes, and a track of ideograms.
 
 Although chromosome names added to the plot are pure numeric, actually the
@@ -28,6 +28,33 @@ chromosome names should also have "chr" index.
 
 ```r
 circos.initializeWithIdeogram()
+text(0, 0, "default", cex = 1)
+```
+
+<div class="figure" style="text-align: center">
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-default-1.svg" alt="Initialize genomic plot, default." width="384" />
+<p class="caption">(\#fig:genomic-initialize-ideogram-default)Initialize genomic plot, default.</p>
+</div>
+
+```r
+circos.info()
+```
+
+```
+## All your sectors:
+##  [1] "chr1"  "chr2"  "chr3"  "chr4"  "chr5"  "chr6"  "chr7"  "chr8" 
+##  [9] "chr9"  "chr10" "chr11" "chr12" "chr13" "chr14" "chr15" "chr16"
+## [17] "chr17" "chr18" "chr19" "chr20" "chr21" "chr22" "chrX"  "chrY" 
+## 
+## All your tracks:
+## [1] 1 2
+## 
+## Your current sector.index is chrY
+## Your current track.index is 2
+```
+
+```r
+circos.clear()
 ```
 
 By default, `circos.initializeWithIdeogram()` initializes the plot with
@@ -66,20 +93,30 @@ If you read cytoband data directly from file, please explicitly specify
 reason is since positions are represented as integers, `read.table` would
 treat those numbers as `integer` by default. In initialization of circular
 plot, **circlize** needs to calculate the summation of all chromosome lengths.
-The sumation of such large integers would throw error of integer overflow.
+The summation of such large integers would throw error of integer overflow.
 
 By default, `circos.intializeWithIdeogram()` uses all chromosomes which are
 available in cytoband data to initialize the circular plot. Users can
 choose a subset of chromosomes by specifying `chromosome.index`. This
-argument is also for ordering chromosomes (Figure \@ref(fig:genomic-initialize-ideogram) B).
+argument is also for ordering chromosomes (Figure \@ref(fig:genomic-initialize-ideogram-subset)).
 
 
 ```r
 circos.initializeWithIdeogram(chromosome.index = paste0("chr", c(3,5,2,8)))
+text(0, 0, "subset of chromosomes", cex = 1)
 ```
 
-When there is no cytoband data for the specified species, and chromInfo data
-is used instead, they may be many many extra short contigs. `chromosome.index`
+<div class="figure" style="text-align: center">
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-subset-1.svg" alt="Initialize genomic plot, subset chromosomes." width="384" />
+<p class="caption">(\#fig:genomic-initialize-ideogram-subset)Initialize genomic plot, subset chromosomes.</p>
+</div>
+
+```r
+circos.clear()
+```
+
+When there is no cytoband data for the specified species, and when chromInfo data
+is used instead, there may be many many extra short contigs. `chromosome.index`
 can also be useful to remove unnecessary contigs.
 
 ### Pre-defined tracks
@@ -88,33 +125,50 @@ After the initialization of the circular plot,
 `circos.initializeWithIdeogram()` additionally creates a track where there are
 genomic axes and chromosome names, and create another track where there is an
 ideogram (depends on whether cytoband data is available). `plotType` argument
-is used to control which type of tracks to add. (figure Figure \@ref(fig:genomic-initialize-ideogram) C, D).
+is used to control which type of tracks to add. (figure Figure \@ref(fig:genomic-initialize-ideogram-track)).
 
 
 ```r
 circos.initializeWithIdeogram(plotType = c("axis", "labels"))
+text(0, 0, "plotType = c('axis', 'labels')", cex = 1)
+circos.clear()
+
 circos.initializeWithIdeogram(plotType = NULL)
+text(0, 0, "plotType = NULL", cex = 1)
+```
+
+<div class="figure" style="text-align: center">
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-track-1.svg" alt="Initialize genomic plot, control tracks." width="768" />
+<p class="caption">(\#fig:genomic-initialize-ideogram-track)Initialize genomic plot, control tracks.</p>
+</div>
+
+```r
+circos.clear()
 ```
 
 ### Other general settings
 
 Similar as general circular plot, the parameters for the layout can be
-controlled by `circos.par()` (Figure \@ref(fig:genomic-initialize-ideogram) E,
-F).
+controlled by `circos.par()` (Figure \@ref(fig:genomic-initialize-ideogram-par)).
+Do remember when you explicitly set `circos.par()`, you need to call `circos.clear()`
+to finish the plotting.
 
 
 ```r
 circos.par("start.degree" = 90)
 circos.initializeWithIdeogram()
 circos.clear()
+text(0, 0, "'start.degree' = 90", cex = 1)
+
 circos.par("gap.degree" = rep(c(2, 4), 12))
 circos.initializeWithIdeogram()
 circos.clear()
+text(0, 0, "'gap.degree' = rep(c(2, 4), 12)", cex = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-initialize-ideogram-1.png" alt="Initialize genomic plot."  />
-<p class="caption">(\#fig:genomic-initialize-ideogram)Initialize genomic plot.</p>
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-par-1.svg" alt="Initialize genomic plot, control layout." width="768" />
+<p class="caption">(\#fig:genomic-initialize-ideogram-par)Initialize genomic plot, control layout.</p>
 </div>
 
 ## Customize chromosome track
@@ -142,7 +196,7 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-customize-chromosome-1.png" alt="Customize chromosome track."  />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-customize-chromosome-1.svg" alt="Customize chromosome track." width="384" />
 <p class="caption">(\#fig:genomic-customize-chromosome)Customize chromosome track.</p>
 </div>
 
@@ -206,8 +260,7 @@ circos.track(ylim = c(0, 1),
 
 Next, we put transcripts one after the other for each gene. It is simply to
 add lines and rectangles. The usage of `circos.genomicTrack()` and
-`circos.genomicRect()` will be discussed in Sector \@ref(genomic-plotting-
-region).
+`circos.genomicRect()` will be discussed in Chapter \@ref(genomic-plotting-region).
 
 
 ```r
@@ -230,12 +283,12 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-gene-model-1.png" alt="Circular representation of alternative transcripts for genes."  />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-gene-model-1.svg" alt="Circular representation of alternative transcripts for genes." width="576" />
 <p class="caption">(\#fig:genomic-gene-model)Circular representation of alternative transcripts for genes.</p>
 </div>
 
 In Figure \@ref(fig:genomic-gene-model), you may notice the start of axes
-becomes "0KB" while not the correct values. It is just an adjustment of the
+becomes "0KB" while not the original values. It is just an adjustment of the
 axes labels to reflect the relative distance to the start of each gene, while
 the coordinate in the cells are still using the original values. Set
 `tickLabelsStartFromZero` to `FALSE` to recover axes labels to the original
@@ -256,7 +309,7 @@ extend_chromosomes = function(bed, chromosome, prefix = "zoom_") {
 }
 ```
 
-`read.cytoband()` downloads and reads cytoband data from UCSC. In following,
+We use `read.cytoband()` to download and read cytoband data from UCSC. In following,
 x ranges for normal chromosomes and zoomed chromosomes are normalized separetely.
 
 
@@ -276,7 +329,7 @@ sector.width = c(xrange[normal_chr_index] / sum(xrange[normal_chr_index]),
 
 The extended cytoband data which is in form of a data frame is sent to
 `circos.initializeWithIdeogram()`. You can see the ideograms for chromosome 1
-and 2 are zoomed.
+and 2 are zoomed (Figure \@ref(fig:genomic-zoom)).
 
 
 ```r
@@ -307,6 +360,6 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-zoom-1.png" alt="Zoom chromosomes."  />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-zoom-1.svg" alt="Zoom chromosomes." width="576" />
 <p class="caption">(\#fig:genomic-zoom)Zoom chromosomes.</p>
 </div>

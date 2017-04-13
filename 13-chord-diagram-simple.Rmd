@@ -386,12 +386,12 @@ useful for detecting potential features. `link.sort` and `link.decreasing` can
 be set to control the order of positioning links on sectors 
 (Figure \@ref(fig:chord-diagram-link-order1)).
 
-```{r chord-diagram-link-order1, echo = c(2, 4), fig.width = 8, fig.height = 4, fig.cap = "Order of positioning links on sectors."}
+```{r chord-diagram-link-order1, echo = -1, fig.width = 8, fig.height = 4, fig.cap = "Order of positioning links on sectors."}
 par(mfrow = c(1, 2))
 chordDiagram(mat, grid.col = grid.col, link.sort = TRUE, link.decreasing = TRUE)
-title("link.sort = TRUE, link.decreasing = TRUE")
+title("link.sort = TRUE, link.decreasing = TRUE", cex = 0.8)
 chordDiagram(mat, grid.col = grid.col, link.sort = TRUE, link.decreasing = FALSE)
-title("link.sort = TRUE, link.decreasing = FALSE")
+title("link.sort = TRUE, link.decreasing = FALSE", cex = 0.8)
 ```
 
 ### Order of adding links
@@ -469,7 +469,7 @@ correct feeling, you can set `diffHeight` to a negative value.
 ```{r chord-diagram-directional-simple, fig.width = 8, fig.height = 8/3, fig.cap = "Represent directions by different height of link ends."}
 par(mfrow = c(1, 3))
 chordDiagram(mat, grid.col = grid.col, directional = 1)
-chordDiagram(mat, grid.col = grid.col, directional = 1, diffHeight = 0.08)
+chordDiagram(mat, grid.col = grid.col, directional = 1, diffHeight = uh(5, "mm"))
 chordDiagram(mat, grid.col = grid.col, directional = -1)
 ```
 
@@ -488,7 +488,7 @@ mat2
 chordDiagram(mat2, grid.col = 1:7, directional = 1, row.col = 1:5)
 ```
 
-If you don't need self-link for which two ends of a link are in a same sector, 
+If you do not need self-link for which two ends of a link are in a same sector, 
 just set corresponding values to 0 in the matrix (Figure \@ref(fig:chord-diagram-directional-non-selfloop)).
 
 ```{r}
@@ -544,7 +544,7 @@ the other ends (Figure \@ref(fig:chord-diagram-directional-arrow4)).
 
 ```{r chord-diagram-directional-arrow4, fig.cap = "Use big arrows to represent directions in Chord diagram."}
 chordDiagram(matx, directional = 1, direction.type = c("diffHeight", "arrows"),
-    link.arr.type = "big.arrow", diffHeight = -0.04)
+    link.arr.type = "big.arrow", diffHeight = -uh(2, "mm"))
 ```
 
 It is almost the same to visualize directional Chord diagram form a adjacency list.

@@ -54,8 +54,8 @@ zoom_df_b = zoom_df_b[order(zoom_df_b[, 2])[1:10], ]
 zoom_df = rbind(zoom_df_a, zoom_df_b)
 ```
 
-Note, we must change the sector name in the zoomed data frame. We just simply
-add "zoom_" prefix to the original name to show it is a "zoomed" sector. After
+Then we need to change the sector names in the zoomed data frame. Here we just simply
+add "zoom_" prefix to the original names to show that they are "zoomed" sectors. After
 that, it is attached to the original data frame.
 
 
@@ -65,11 +65,11 @@ df2 = rbind(df, zoom_df)
 ```
 
 In this example, we will put the original cells in the left half of the circle
-and the zoomed sectors in the right. Here is where the magic thing happens. We
+and the zoomed sectors in the right. As we have already mentioned before, we
 simply normalize the width of normal sectors and normalize the width of zoomed
-sectors separately. Now the sum of the sector width for the original sectors
+sectors separately. Note now the sum of the sector width for the original sectors
 is 1 and the sum of sector width for the zoomed sectors is 1, which means
-these two types of sectors now have their own half circle.
+these two types of sectors have their own half circle.
 
 You may notice the sum of the `sector.width` is not idential to 1. This is
 fine, they will be further normalized to 1 internally.
@@ -95,8 +95,9 @@ sector.width
 ## 0.1902877
 ```
 
-Now just make the circular plot in the normal way. All the graphics in sector
-a and b will be automatically zoomed to sector "zoomed_a" and "zoomed_b".
+What to do next is just to make the circular plot in the normal way. All the
+graphics in sector a and b will be automatically zoomed to sector "zoom_a"
+and "zoom_b".
 
 In following code, since the sector names are added outside the first track, 
 `points.overflow.warning` is set to `FALSE` to turn off the warning messages.
@@ -114,7 +115,7 @@ circos.track(df2$factors, x = df2$x, y = df2$y,
 ```
 
 Adding links from original sectors to zoomed sectors is a good idea to show
-where the zooming happens (Figure \@ref(fig:circlize-zoom)). Notice that
+where the zooming occurs (Figure \@ref(fig:circlize-zoom)). Notice that
 we manually adjust the position of one end of the sector b link.
 
 
@@ -130,9 +131,11 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-zoom-1.png" alt="Zoom sectors."  />
+<img src="06-advanced-usage_files/figure-html/circlize-zoom-1.svg" alt="Zoom sectors." width="384" />
 <p class="caption">(\#fig:circlize-zoom)Zoom sectors.</p>
 </div>
+
+Chapter \@ref(nested-zooming) introduces another type of zooming by combining two circular plots.
 
 ## Visualize part of the circle {#part-circle}
 
@@ -146,7 +149,7 @@ top part, then only sectors between 0 to 90 degree are visible
 
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-part-1.png" alt="One quarter of the circle."  />
+<img src="06-advanced-usage_files/figure-html/circlize-part-1.svg" alt="One quarter of the circle." width="768" />
 <p class="caption">(\#fig:circlize-part)One quarter of the circle.</p>
 </div>
 
@@ -195,7 +198,7 @@ circos.track(factors = factors, ylim = c(0, 1))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-part2-1.png" alt="Show subset of cells in tracks."  />
+<img src="06-advanced-usage_files/figure-html/circlize-part2-1.svg" alt="Show subset of cells in tracks." width="384" />
 <p class="caption">(\#fig:circlize-part2)Show subset of cells in tracks.</p>
 </div>
 
@@ -236,7 +239,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-nested-1.png" alt="Nested circular plots."  />
+<img src="06-advanced-usage_files/figure-html/circlize-nested-1.svg" alt="Nested circular plots." width="768" />
 <p class="caption">(\#fig:circlize-nested)Nested circular plots.</p>
 </div>
 
@@ -245,10 +248,10 @@ two circular plots separate from each other. You can use technique introduced
 in Section \@ref(part-circle) to only show part of the circle, select proper
 `canvas.xlim` and `canvas.ylim`, and finally arrange the two plots into one
 page. The source code for generating Figure \@ref(fig:circlize-separated) is
-at [src/intro-20-separated.R](src/intro-20-separated.R).
+at https://github.com/jokergoo/circlize_book/blob/master/src/intro-20-separated.R.
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-separated-1.png" alt="Two separated circular plots"  />
+<img src="06-advanced-usage_files/figure-html/circlize-separated-1.svg" alt="Two separated circular plots" width="768" />
 <p class="caption">(\#fig:circlize-separated)Two separated circular plots</p>
 </div>
 
@@ -275,7 +278,7 @@ par(new = FALSE)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-diff-radius-1.png" alt="Cells with differnet radius."  />
+<img src="06-advanced-usage_files/figure-html/circlize-diff-radius-1.svg" alt="Cells with differnet radius." width="384" />
 <p class="caption">(\#fig:circlize-diff-radius)Cells with differnet radius.</p>
 </div>
 
@@ -284,6 +287,9 @@ In Figure \@ref(fig:circlize-part2), cells both visible and invisible all belong
 a same track and they are in a same circular plot, thus they should have same
 radius. But for the example here, cells have different radius and they belong
 to different circular plot.
+
+In chapter \@ref(nested-zooming), we use this technique to implement zoomings by combining two circular plots.
+
 
 ## Arrange multiple plots {#arrange-multiple-plots}
 
@@ -299,7 +305,7 @@ for(i in 1:9) {
     par(mar = c(0.5, 0.5, 0.5, 0.5))
     circos.par(cell.padding = c(0, 0, 0, 0))
     circos.initialize(factors, xlim = c(0, 1))
-    circos.trackPlotRegion(ylim = c(0, 1), track.height = 0.05,
+    circos.track(ylim = c(0, 1), track.height = 0.05,
         bg.col = rand_color(8), bg.border = NA)
     for(i in 1:20) {
         se = sample(1:8, 2)
@@ -311,7 +317,7 @@ for(i in 1:9) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-multiple-layout-1.png" alt="Arrange multiple circular plots."  />
+<img src="06-advanced-usage_files/figure-html/circlize-multiple-layout-1.svg" alt="Arrange multiple circular plots." width="768" />
 <p class="caption">(\#fig:circlize-multiple-layout)Arrange multiple circular plots.</p>
 </div>
 

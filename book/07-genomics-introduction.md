@@ -9,9 +9,9 @@
 Circular visualization is popular in Genomics and related omics fields. It is
 efficient in revealing associations in high dimensional genomic data. In genomic
 plots, categories are usually chromosomes and data on x axes are genomic
-positions.
+positions, but it can also be any kind of general genomic categories.
 
-To make is easy for genomics analysis, **circlize** package particularly
+To make is easy for Genomics analysis, **circlize** package particularly
 provides functions which focus on genomic plots. These functions are
 synonymous to the basic graphic functions but expect special format of input
 data:
@@ -31,7 +31,7 @@ be mixed with the basic circlize functions.
 
 Genomic data is usually stored as a table where the first three columns
 define the genomic regions and following columns are values associated with
-the corresponding regions. Each genomic region are composed by three elements:
+the corresponding regions. Each genomic region is composed by three elements:
 genomic category (in most case, it is the chromosome), start position on the
 genomic category and the end position. Such data structure is known as 
 [_BED_](https://genome.ucsc.edu/FAQ/FAQformat#format1)

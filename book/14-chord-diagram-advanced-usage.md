@@ -47,7 +47,7 @@ chordDiagram(mat, grid.col = grid.col, annotationTrack = NULL)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-default-track-1.png" alt="Track organization in `chordDiagram()`."  />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-default-track-1.svg" alt="Track organization in `chordDiagram()`." width="768" />
 <p class="caption">(\#fig:chord-diagram-default-track)Track organization in `chordDiagram()`.</p>
 </div>
 
@@ -113,22 +113,27 @@ In `chordDiagram()`, there is no argument to control the style of sector
 labels, but this can be done by first pre-allocating an empty track and
 customizing the labels in it later. In the following example, one track is
 firstly allocated and a Chord diagram is added without label track and axes.
-Later, the first track is updated adding labels with clock wise facings
-(Figure \@ref(fig:chord-diagram-labels) A).
+Later, the first track is updated with adding labels with clockwise facings
+(Figure \@ref(fig:chord-diagram-labels-show)).
 
 
 ```r
 chordDiagram(mat, grid.col = grid.col, annotationTrack = "grid", 
     preAllocateTracks = list(track.height = max(strwidth(unlist(dimnames(mat))))))
 # we go back to the first track and customize sector labels
-circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
+circos.track(track.index = 1, panel.fun = function(x, y) {
     circos.text(CELL_META$xcenter, CELL_META$ylim[1], CELL_META$sector.index, 
         facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5))
 }, bg.border = NA) # here set bg.border to NA is important
 ```
 
-In the following example, the labels are put on the grids (Figure \@ref(fig:chord-diagram-labels) B). 
-Please not `circos.text()` and
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-show-1.svg" alt="Change label directions." width="384" />
+<p class="caption">(\#fig:chord-diagram-labels-show)Change label directions.</p>
+</div>
+
+In the following example, the labels are put on the grids (Figure \@ref(fig:chord-diagram-labels-inside)). 
+Please note `circos.text()` and
 `get.cell.meta.data()` can be used outside `panel.fun` if the sector index and
 track index are specified explicitly.
 
@@ -144,8 +149,13 @@ for(si in get.all.sector.index()) {
 }
 ```
 
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-inside-1.svg" alt="Put sector labels to the grid." width="384" />
+<p class="caption">(\#fig:chord-diagram-labels-inside)Put sector labels to the grid.</p>
+</div>
+
 For the last example in this section, if the width of the sector is less than
-20 degree, the labels are added in the radical direction (Figure \@ref(fig:chord-diagram-labels) C).
+20 degree, the labels are added in the radical direction (Figure \@ref(fig:chord-diagram-labels-multile-style)).
 
 
 ```r
@@ -153,7 +163,7 @@ set.seed(123)
 mat2 = matrix(rnorm(100), 10)
 chordDiagram(mat2, annotationTrack = "grid", 
     preAllocateTracks = list(track.height = max(strwidth(unlist(dimnames(mat))))))
-circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
+circos.track(track.index = 1, panel.fun = function(x, y) {
     xlim = get.cell.meta.data("xlim")
     xplot = get.cell.meta.data("xplot")
     ylim = get.cell.meta.data("ylim")
@@ -170,8 +180,8 @@ circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-labels-1.png" alt="Customize sector labels in Chord diagram."  />
-<p class="caption">(\#fig:chord-diagram-labels)Customize sector labels in Chord diagram.</p>
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-multile-style-1.svg" alt="Adjust label direction according to the width of sectors." width="384" />
+<p class="caption">(\#fig:chord-diagram-labels-multile-style)Adjust label direction according to the width of sectors.</p>
 </div>
 
 When you set direction of sector labels as radical (`clockwise` or
@@ -210,7 +220,7 @@ In `panel.fun`, if the sector is less than 30 degree, the break for the axis is 
 
 ```r
 # the second axis as well as the sector labels are added in this track
-circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
+circos.track(track.index = 1, panel.fun = function(x, y) {
     xlim = get.cell.meta.data("xlim")
     ylim = get.cell.meta.data("ylim")
     sector.name = get.cell.meta.data("sector.index")
@@ -229,7 +239,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-axes-1.png" alt="Customize sector axes for Chord diagram."  />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-axes-1.svg" alt="Customize sector axes for Chord diagram." width="576" />
 <p class="caption">(\#fig:chord-diagram-axes)Customize sector axes for Chord diagram.</p>
 </div>
 
@@ -249,7 +259,7 @@ row_sum = sum(rowSums(abs(mat)))
 col_sum = sum(colSums(abs(mat)))
 ```
 
-Small gaps between sectors are set to 1 degree and big gaps between row and
+Assume small gaps between sectors are set to 1 degree and big gaps between row and
 column sectors are set to 20 degree.
 
 
@@ -306,7 +316,7 @@ abline(h = 0, lty = 2, col = "#00000080")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-sym-1.png" alt="Rotate Chord diagram."  />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-sym-1.svg" alt="Rotate Chord diagram." width="768" />
 <p class="caption">(\#fig:chord-diagram-sym)Rotate Chord diagram.</p>
 </div>
 
@@ -366,11 +376,11 @@ chordDiagram(mat2, directional = 1, grid.col = rep(1:5, 2), transparency = 0.5)
 circos.clear()
 ```
 
-Now the scale of the two Chord diagrams (figure \ref{fig:chord-diagram-compare}) are the 
+Now the scale of the two Chord diagrams (Figure \@ref(fig:chord-diagram-compare)) are the 
 same if you compare the scale of axes in the two diagrams.
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-compare-1.png" alt="Compare two Chord Diagrams in a same scale."  />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-compare-1.svg" alt="Compare two Chord Diagrams in a same scale." width="768" />
 <p class="caption">(\#fig:chord-diagram-compare)Compare two Chord Diagrams in a same scale.</p>
 </div>
 
@@ -451,14 +461,14 @@ circos.track(track.index = 2, panel.fun = function(x, y) {
 }, bg.border = NA)
 
 highlight.sector(rownames(mat1), track.index = 1, col = "red", 
-    text = "A", cex = 0.8, niceFacing = TRUE)
+    text = "A", cex = 0.8, text.col = "white", niceFacing = TRUE)
 highlight.sector(colnames(mat1), track.index = 1, col = "green", 
-    text = "B", cex = 0.8,  niceFacing = TRUE)
+    text = "B", cex = 0.8, text.col = "white", niceFacing = TRUE)
 highlight.sector(colnames(mat2), track.index = 1, col = "blue", 
-    text = "C", cex = 0.8, niceFacing = TRUE)
+    text = "C", cex = 0.8, text.col = "white", niceFacing = TRUE)
 ```
 
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/unnamed-chunk-14-1.png" style="display: block; margin: auto;" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/unnamed-chunk-14-1.svg" width="384" style="display: block; margin: auto;" />
 
 ```r
 circos.clear()

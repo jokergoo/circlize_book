@@ -1,6 +1,6 @@
 
 
-# Create plotting regions for genomic data
+# Create plotting regions for genomic data {#genomic-plotting-region}
 
 Tracks are created and graphics are added by
 `circos.genomicTrackPlotRegions()`, or the short version
@@ -44,9 +44,9 @@ head(bed, n = 2)
 ```
 
 ```
-##    chr  start    end     value1     value2
-## 1 chr1  38889  67599 0.55143649 -1.1729170
-## 2 chr1 449201 687615 0.07335723  0.2867543
+##    chr  start    end     value1      value2
+## 1 chr1  60697 430948 -0.5237647 -0.12220203
+## 2 chr1 540820 564603 -0.7733248 -0.09433989
 ```
 
 ```r
@@ -61,17 +61,17 @@ circos.genomicTrackPlotRegion(bed, panel.fun = function(region, value, ...) {
 
 ```
 ##    start    end
-## 1  38889  67599
-## 2 449201 687615
-##       value1     value2
-## 1 0.55143649 -1.1729170
-## 2 0.07335723  0.2867543
+## 1  60697 430948
+## 2 540820 564603
+##       value1      value2
+## 1 -0.5237647 -0.12220203
+## 2 -0.7733248 -0.09433989
 ```
 
 Since `circos.genomicTrack()` creates a new track, it needs values to
 calculate data ranges on y direction. Users can either specify the index of
 numeric columns in `data` by `numeric.column` (named index or numeric index,
-can be a vector with more than one columns) or directly set `ylim`. If none of
+it can also be a vector with more than one columns) or directly set `ylim`. If none of
 them are set, the function will try to look for all numeric columns in `data`
 (of course, excluding the first three columns), and set them as
 `numeric.column`.
@@ -101,14 +101,14 @@ introduce more usages of these functions, which are especially designed for
 genomic regions measured at multiple conditions. Example plots are shown together in
 Chapter \@ref(modes-of-input).
 
-## Points
+## Points {#genomic-points}
 
 Usage of `circos.genomicPoints()` is similar as `circos.points()`.
-`circos.genomicPoints()` expects a data frame which contains genomic regions
+`circos.genomicPoints()` expects a two-column data frame which contains genomic regions
 and a data frame containing corresponding values. Points are always drawn at
 the middle of each region. The data column of the y values for plotting should
 be specified by `numeric.column`. If `numeric.column` has length larger than
-one, all the specified columns will be used to add points.
+one, all the specified columns will be used for adding points.
 
 If the function is called inside `circos.genomicTrack()` and users have been
 already set `numeric.column` in `circos.genomicTrack()`, proper value of
@@ -133,7 +133,7 @@ circos.genomicPoints(region, value, cex, pch)
 circos.genomicPoints(region, value, sector.index, track.index)
 circos.genomicTrack(data, numeric.column = 4, 
     panel.fun = function(region, value, ...) {
-        # numeric.column is changed to 1
+        # numeric.column is automatically passed to `circos.genomicPoints()`
         circos.genomicPoints(region, value, ...)
 })
 ```
@@ -153,12 +153,14 @@ idea of the implementation is shown as following code, so, if you don't like the
 ```r
 circos.genomicPoints = function(region, value, numeric.column = 1, ...) {
     x = (region[[2]] + region[[1]])/2
-    y = value[[numeric.column]]
-    circos.points(x, y, ...)
+    for(i in numeric.column) {
+        y = value[[i]]
+        circos.points(x, y, ...)
+    }
 }
 ```
 
-## Lines
+## Lines {#genomic-lines}
 
 `circos.genomicLines()` is similar as `circos.lines()`. The setting of
 graphical parameters is similar as `circos.genomicPoints()`.
@@ -172,14 +174,15 @@ circos.genomicLines(region, value, sector.index, track.index)
 ```
 
 **circlize** additionally provides a new option `segment` for `lty` by
-which each genomic regions represent as 'horizontal' lines at y positions.
+which each genomic regions represent as 'horizontal' lines at y positions
+(see Figure \@ref(fig:genomic-application-lines), track H).
 
 
 ```r
 circos.genomicLines(region, value, lwd, lty = "segment")
 ```
 
-## Text
+## Text {#genomic-text}
 
 For `circos.genomicText()`, the position of text can be specified either by `numeric.column`
 or a separated vector `y`. The labels of text can be specified either by `labels.column`
@@ -194,7 +197,7 @@ circos.genomicText(region, value, facing, niceFacing, adj)
 circos.genomicText(region, value, sector.index, track.index)
 ```
 
-## Rectangles
+## Rectangles {#genomic-rectangles}
 
 For `circos.genomicRect()`, Since the left and right of the rectangles are
 already determined by the start and end of the genomic regions, we only need
@@ -208,7 +211,7 @@ circos.genomicRect(region, value, ytop.column = 2, ybottom = 0)
 circos.genomicRect(region, value, col, border)
 ```
 
-## Links
+## Links {#genomic-links}
 
 `circos.genomicLink()` expects two data frames and it adds links from genomic
 regions in the first data frame to corresponding genomic regions in the second
@@ -228,7 +231,7 @@ circos.genomicLink(bed1, bed2, col = rand_color(nrow(bed1), transparency = 0.5),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="09-create-plotting-regions_files/figure-epub3/genomic-links-1.png" alt="Add links from two sets of genomic regions."  />
+<img src="09-create-plotting-regions_files/figure-html/genomic-links-1.svg" alt="Add links from two sets of genomic regions." width="576" />
 <p class="caption">(\#fig:genomic-links)Add links from two sets of genomic regions.</p>
 </div>
 

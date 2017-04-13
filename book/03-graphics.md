@@ -83,7 +83,7 @@ same length as `x`. Figure \@ref(fig:circlize-lines) illustrates supported `lty`
 settings and `area`/`baseline` settings.
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/circlize-lines-1.png" alt="Line styles and areas supported in `circos.lines()`"  />
+<img src="03-graphics_files/figure-html/circlize-lines-1.svg" alt="Line styles and areas supported in `circos.lines()`" width="576" />
 <p class="caption">(\#fig:circlize-lines)Line styles and areas supported in `circos.lines()`</p>
 </div>
 
@@ -100,7 +100,7 @@ actually you don't need to segment the lines such as radical lines, then you can
 set `straight` argument to `TRUE` to get rid of unnecessary segmentations.
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/circlize-linecurve-1.png" alt="Transformation of straight lines into curves in the circle."  />
+<img src="03-graphics_files/figure-html/circlize-linecurve-1.svg" alt="Transformation of straight lines into curves in the circle." width="768" />
 <p class="caption">(\#fig:circlize-linecurve)Transformation of straight lines into curves in the circle.</p>
 </div>
 
@@ -139,7 +139,7 @@ each line by `circos.text()` separately. The different facings are illustrated
 in figure \@ref(fig:circlize-text).
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/circlize-text-1.png" alt="Text facings."  />
+<img src="03-graphics_files/figure-html/circlize-text-1.svg" alt="Text facings." width="384" />
 <p class="caption">(\#fig:circlize-text)Text facings.</p>
 </div>
 
@@ -154,7 +154,7 @@ circos.text(x, y, labels, facing, niceFacing, adj, cex, col, font)
 
 If, e.g., `facing` is set to `inside`, text which is on the bottom half of the
 circle is still facing to the top and hard to read. To make text more easy to
-read and not to hurt users' neck too much, `circos.text()` provides
+read and not to hurt readers' neck too much, `circos.text()` provides
 `niceFacing` option which automatically adjust text facing according to their
 positions in the circle. `niceFacing` only works for `facing` value of
 `inside`, `outside`, `clockwise`, `reverse.clockwise`, `bending.inside` and
@@ -165,7 +165,7 @@ facings. Figure \@ref(fig:circlize-text-easy) illustrates text positions under
 different settings of `adj` and `facing`. The red dots are the positions of the texts.
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/circlize-text-easy-1.png" alt="Human easy text facing."  />
+<img src="03-graphics_files/figure-html/circlize-text-easy-1.svg" alt="Human easy text facing." width="768" />
 <p class="caption">(\#fig:circlize-text-easy)Human easy text facing.</p>
 </div>
 
@@ -194,7 +194,7 @@ circos.text(x + ux(2, "mm"), y + uy(2, "mm"), labels)
 
 Theoretically, circular rectangles and polygons are all polygons. If you imagine
 the plotting region in a cell as Cartesian coordinate, then `circos.rect()`
-draws rectangles. In the circle, the up and bottom edge become two arcs. This
+draws rectangles. In the circle, the up and bottom edge become two arcs. Note this
 function can be vectorized.
 
 
@@ -205,7 +205,7 @@ circos.rect(xleft, ybottom, xright, ytop, col, border, lty, lwd)
 ```
 
 `circos.polygon()` draws a polygon through a series of points in a cell.
-Please note the first data point shoud overlap to the last data point.
+Please note the first data point must overlap to the last data point.
 
 
 ```r
@@ -218,7 +218,7 @@ smoothed line is drawn by `circos.polygon()`. Source code can be found in the
 **Examples** section of the `circos.polygon()` help page.
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/circlize-errorline-1.png" alt="Area of standard deviation of the smoothed line."  />
+<img src="03-graphics_files/figure-html/circlize-errorline-1.svg" alt="Area of standard deviation of the smoothed line." width="384" />
 <p class="caption">(\#fig:circlize-errorline)Area of standard deviation of the smoothed line.</p>
 </div>
 
@@ -252,13 +252,13 @@ explanations are as follows:
   is longer. Facing of tick labels is set to `clockwise`.
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/circlize-xaxis-1.png" alt="X-axes"  />
+<img src="03-graphics_files/figure-html/circlize-xaxis-1.svg" alt="X-axes" width="384" />
 <p class="caption">(\#fig:circlize-xaxis)X-axes</p>
 </div>
 
-As you can notice in the above figure, when the first and last axis labels
+As you may notice in the above figure, when the first and last axis labels
 exceed data ranges on x-axis in the corresponding cell, their positions are
-automatically adjusted to be shifted towards in the cell.
+automatically adjusted to be shifted inwards in the cell.
 
 Possible usage of `circos.axis()` is as follows. Note `h` can be `bottom`, `top`
 or a numeric value.
@@ -286,7 +286,7 @@ circos.yaxis(at, labels, sector.index, track.index)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/circlize-yaxis-1.png" alt="Y-axes"  />
+<img src="03-graphics_files/figure-html/circlize-yaxis-1.svg" alt="Y-axes" width="384" />
 <p class="caption">(\#fig:circlize-yaxis)Y-axes</p>
 </div>
 
@@ -298,7 +298,7 @@ used to represent relations or interactions between sectors. In **circlize**,
 four mandatory arguments which are index for the first sector, positions on
 the first sector, index for the second sector and positions on the second
 sector. If the positions on the two sectors are all single points, the link
-represents a line. If the positions on the two sectors are intervals, the link
+represents as a line. If the positions on the two sectors are intervals, the link
 represents as a robbon (Figure \@ref(fig:link-example)). Possible usage for
 `circos.link()` is as follows.
 
@@ -311,7 +311,7 @@ circos.link(sector.index1, c(0, 1), sector.index2, 0, col, lwd, lty, border)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/link-example-1.png" alt="Different types of links."  />
+<img src="03-graphics_files/figure-html/link-example-1.svg" alt="Different types of links." width="384" />
 <p class="caption">(\#fig:link-example)Different types of links.</p>
 </div>
 
@@ -319,7 +319,7 @@ The position of link end is controlled by `rou`. By default, it is the bottom
 of the most inside track and normally, you don't need to care about
 this setting. The two ends of the link are located in a same circle by default. The
 positions of two ends can be adjusted with different values for `rou1` and
-`rou2` arguments. See Figure \@ref(fig:link-height).
+`rou2` arguments. See Figure \@ref(fig:link-end).
 
 
 ```r
@@ -328,8 +328,8 @@ circos.link(sector.index1, 0, sector.index2, 0, rou1, rou2)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/unnamed-chunk-17-1.png" alt="Positions of link ends."  />
-<p class="caption">(\#fig:unnamed-chunk-17)Positions of link ends.</p>
+<img src="03-graphics_files/figure-html/link-end-1.svg" alt="Positions of link ends." width="384" />
+<p class="caption">(\#fig:link-end)Positions of link ends.</p>
 </div>
 
 The height of the link is controlled by `h` argument. In most cases, you don't
@@ -350,7 +350,7 @@ circos.link(sector.index1, 0, sector.index2, 0, h, h2)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/link-height-1.png" alt="Adjust link heights."  />
+<img src="03-graphics_files/figure-html/link-height-1.svg" alt="Adjust link heights." width="384" />
 <p class="caption">(\#fig:link-height)Adjust link heights.</p>
 </div>
 
@@ -367,7 +367,7 @@ circos.link(sector.index1, 0, sector.index2, 0, w, w2)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/link-shape-1.png" alt="Different link shapes."  />
+<img src="03-graphics_files/figure-html/link-shape-1.svg" alt="Different link shapes." width="384" />
 <p class="caption">(\#fig:link-shape)Different link shapes.</p>
 </div>
 
@@ -375,7 +375,7 @@ When the links represent as ribbons and the two ends overlap, the links will
 be de-generated as a 'hill' (Figure \@ref(fig:link-hill)).
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/link-hill-1.png" alt="Link as a hill."  />
+<img src="03-graphics_files/figure-html/link-hill-1.svg" alt="Link as a hill." width="384" />
 <p class="caption">(\#fig:link-hill)Link as a hill.</p>
 </div>
 
@@ -389,7 +389,7 @@ directions. See Figure \@ref(fig:link-arrow).
 Type of arrows is controlled by `arr.type` argument and it is actually passed
 to `Arrowhead()` defined in **shape** package. Besides the arrow types
 supported in **shape** package, there is an additional arrow type `big.arrow`
-which turns the robbon into a big arrow.
+which turns the robbon into a big arrow (Figure \@ref(fig:link-arrow)).
 
 Unequal height of the link ends can also represent directions which we will
 discuss more with the `chordDiagram()` function.
@@ -401,7 +401,7 @@ circos.link(sector.index1, c(0, 1), sector.index2, c(0, 1), directional = -1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/link-arrow-1.png" alt="Link with arrows."  />
+<img src="03-graphics_files/figure-html/link-arrow-1.svg" alt="Link with arrows." width="384" />
 <p class="caption">(\#fig:link-arrow)Link with arrows.</p>
 </div>
 
@@ -444,7 +444,7 @@ draw.sector(0, 360, rou1 = 0.7, rou2 = 0.6, col = "#0000FF80")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/draw-sector-general-1.png" alt="General usage of `draw.sector()`."  />
+<img src="03-graphics_files/figure-html/draw-sector-general-1.svg" alt="General usage of `draw.sector()`." width="384" />
 <p class="caption">(\#fig:draw-sector-general)General usage of `draw.sector()`.</p>
 </div>
 
@@ -512,7 +512,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/circlize-highlight-1.png" alt="Highlight sectors and tracks."  />
+<img src="03-graphics_files/figure-html/circlize-highlight-1.svg" alt="Highlight sectors and tracks." width="384" />
 <p class="caption">(\#fig:circlize-highlight)Highlight sectors and tracks.</p>
 </div>
 
@@ -522,10 +522,10 @@ sectors and tracks that you want to to highlight. Paddings of the highligted
 regions can be set by `padding` argument which should contain four values
 representing ratios of the width or height of the highlighted region (Figure \@ref(fig:circlize-highlight-sector)).
 
-One advantage of `highlight.sector()` is that it supports to add text for the
+One advantage of `highlight.sector()` is that it supports to add text in the
 highlighted regions. By default, the text is drawn at that center of the
 highlighted region. The position on the radical direction can be set by
-`text.vjust` argument either by a numeric value or a string in a form of "2 inches" or "-1.2cm".
+`text.vjust` argument either by a numeric value or a string in form of `"2 inches"`` or `"-1.2cm"`.
 
 
 ```r
@@ -547,7 +547,7 @@ highlight.sector(factors, col = "#FFFF0040", track.index = 4)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/circlize-highlight-sector-1.png" alt="Highlight sectors."  />
+<img src="03-graphics_files/figure-html/circlize-highlight-sector-1.svg" alt="Highlight sectors." width="384" />
 <p class="caption">(\#fig:circlize-highlight-sector)Highlight sectors.</p>
 </div>
 
@@ -555,7 +555,7 @@ highlight.sector(factors, col = "#FFFF0040", track.index = 4)
 circos.clear()
 ```
 
-## Work with the base graphic system {#work-with-base-graphic-system}
+## Work together with the base graphic system {#work-with-base-graphic-system}
 
 **circlize** is built on the base R graphic system, then, of course the base graphic
 functions can be used in combination with circlize functions. On the other hand,
@@ -581,7 +581,7 @@ title("This is the title")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-epub3/circlize-base-1.png" alt="Work with base graphic functions."  />
+<img src="03-graphics_files/figure-html/circlize-base-1.svg" alt="Work with base graphic functions." width="384" />
 <p class="caption">(\#fig:circlize-base)Work with base graphic functions.</p>
 </div>
 

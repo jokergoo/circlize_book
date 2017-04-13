@@ -525,6 +525,35 @@ The transformation between polar coordinate and canvas coordinate is simple.
 **circlize** has a `circlize:::polar2Cartesian()` function but this function
 is not exported.
 
+Following example (Figure \@ref(fig:circular-pokemon)) adds raster image to the circular plot. The raster image is added
+by `rasterImage()` which is applied in the canvas coordinate. Note how we change
+coordinate from data coordinate to canvas coordinate by using `circlize()`
+and `circlize:::polar2Cartesian()`.
+
+```{r circular-pokemon, fig.width = 6, fig.height = 6, fig.cap = "Add raster image to the circular plot."}
+library(yaml)
+data = yaml.load_file("https://raw.githubusercontent.com/Templarian/slack-emoji-pokemon/master/pokemon.yaml")
+set.seed(123)
+pokemon_list = data$emojis[sample(length(data$emojis), 40)]
+pokemon_name = sapply(pokemon_list, function(x) x$name)
+pokemon_src = sapply(pokemon_list, function(x) x$src)
+
+library(EBImage)
+circos.par("points.overflow.warning" = FALSE)
+circos.initialize(pokemon_name, xlim = c(0, 1))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    pos = circlize:::polar2Cartesian(circlize(CELL_META$xcenter, CELL_META$ycenter))
+    image = EBImage::readImage(pokemon_src[CELL_META$sector.numeric.index])
+    circos.text(CELL_META$xcenter, CELL_META$cell.ylim[1] - uy(2, "mm"),
+        CELL_META$sector.index, facing = "clockwise", niceFacing = TRUE,
+        adj = c(1, 0.5), cex = 0.6)
+    rasterImage(image, 
+        xleft = pos[1, 1] - 0.05, ybottom = pos[1, 2] - 0.05,
+        xright = pos[1, 1] + 0.05, ytop = pos[1, 2]+ 0.05)
+}, bg.border = 1, track.height = 0.15)
+circos.clear()
+```
+
 ### The convert functions {#convert-functions}
 
 For the functions in **circlize** package, they needs arguments which are

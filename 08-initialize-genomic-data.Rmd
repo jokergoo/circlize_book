@@ -269,7 +269,7 @@ Add a new track.
 
 ```{r genomic_zoom_2, eval = FALSE}
 bed = generateRandomBed(500)
-circos.genomicTrackPlotRegion(extend_chromosomes(bed, c("chr1", "chr2")),
+circos.genomicTrack(extend_chromosomes(bed, c("chr1", "chr2")),
     panel.fun = function(region, value, ...) {
         circos.genomicPoints(region, value, pch = 16, cex = 0.3)
 })

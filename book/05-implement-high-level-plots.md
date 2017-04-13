@@ -1,6 +1,6 @@
 
 
-# Implement high-level plots {#high-level-plots}
+# Implement high-level circular plots {#high-level-plots}
 
 In this chapter, we show several examples which combine low-level graphic
 functions to construct complicated graphics for specific purposes. 
@@ -38,7 +38,7 @@ circos.track(ylim = c(0.5, length(percent)+0.5), track.height = 0.8,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-implement-high-level-plots_files/figure-epub3/circular-barplot-1.png" alt="A circular barplot."  />
+<img src="05-implement-high-level-plots_files/figure-html/circular-barplot-1.svg" alt="A circular barplot." width="384" />
 <p class="caption">(\#fig:circular-barplot)A circular barplot.</p>
 </div>
 
@@ -92,7 +92,7 @@ circos.trackHist(factors = factors, x = x, draw.density = TRUE,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-implement-high-level-plots_files/figure-epub3/circular-histograms-1.png" alt="Histograms on circular layout."  />
+<img src="05-implement-high-level-plots_files/figure-html/circular-histograms-1.svg" alt="Histograms on circular layout." width="384" />
 <p class="caption">(\#fig:circular-histograms)Histograms on circular layout.</p>
 </div>
 
@@ -157,7 +157,7 @@ circos.track(ylim = c(0, 1), bg.border = NA, track.height = 0.3,
 In the above code, setting `xlim` to `c(0, n)` is very important because the
 leaves of the dendrogram are drawn at `x = seq(0.5, n - 0.5)`.
 
-In the second track, we plot the circular dendrogram by `circos.dendrogram()` (Figure \@ref(fig:phylogenetic_tree) left).
+In the second track, we plot the circular dendrogram by `circos.dendrogram()` (Figure \@ref(fig:phylogenetic-tree) left).
 You can render the dendrogram by **dendextend** package.
 
 
@@ -185,7 +185,7 @@ circos.dendrogram(dend, facing = "inside")
 
 
 <div class="figure" style="text-align: center">
-<img src="05-implement-high-level-plots_files/figure-epub3/phylogenetic-tree-1.png" alt="A circular phylogenetic tree."  />
+<img src="05-implement-high-level-plots_files/figure-html/phylogenetic-tree-1.svg" alt="A circular phylogenetic tree." width="768" />
 <p class="caption">(\#fig:phylogenetic-tree)A circular phylogenetic tree.</p>
 </div>
 
@@ -259,6 +259,6 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-implement-high-level-plots_files/figure-epub3/circular-heatmap-1.png" alt="Circular heatmaps."  />
+<img src="05-implement-high-level-plots_files/figure-html/circular-heatmap-1.svg" alt="Circular heatmaps." width="384" />
 <p class="caption">(\#fig:circular-heatmap)Circular heatmaps.</p>
 </div>

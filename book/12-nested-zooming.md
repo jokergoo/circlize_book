@@ -1,15 +1,15 @@
 
 
 
-# Nested zooming
+# Nested zooming {#nested-zooming}
 
 ## Basic idea
 
 In Section \@ref(zooming-of-sectors) we introduced how to zoom sectors to the same circle
 in the same track. This works fine if there are only a few regions that need to be zoomed.
-However, when the regions that need to be zoomed is too many, the method will not work,
-and in this chapter, we introduce another zooming method which put zoomed regions in a different
-circle.
+However, when the regions that need to be zoomed is too many, the method will not work efficiently.
+In this chapter, we introduce another zooming method which puts zoomed regions in a different
+circular plot.
 
 To illustrate the basic idea, we first generate a random data set.
 
@@ -70,10 +70,11 @@ head(data, n = 4)
 ## 4    a 0.05819180 0.7151335
 ```
 
-In `sector`, we randomly sampled several intervals which will be used for zooming. The zoomed
-intervals are stored in `zoom_sector`. In the zooming track, each interval is treated as an
-independent track, thus, the name for each zoomed interval uses combination of the original
-sector name and the interval itself, just for easily reading.
+In `sector`, we randomly sampled several intervals which will be used for
+zooming. The zoomed intervals are stored in `zoom_sector`. In the zooming
+track, each interval is treated as an independent sector, thus, the name for
+each zoomed interval uses combination of the original sector name and the
+interval itself, just for easily reading.
 
 
 ```r
@@ -103,9 +104,9 @@ head(zoom_data, n = 4)
 ## 19 a:(0.4,0.6] 0.4498025 0.96864117
 ```
 
-The correspondance between the original sectors and the zoomed intervals are in `correspondance`.
-The value is a data frame with six columns. The value is the position of the intervals
-in the second circular plot in the first plot.
+The correspondance between the original sectors and the zoomed intervals are
+in `correspondance`. The value is a data frame with six columns. The value is
+the position of the intervals in the second circular plot in the first plot.
 
 
 ```r
@@ -120,12 +121,14 @@ head(correspondance, n = 4)
 ## 64    b   0.4 0.6 b:(0.4,0.6]     0.4   0.6
 ```
 
-The zooming is actually composed of two circulat plots where one for the original track and one for the
-zoomed intervals, and one connection track which identifies which intervals that are zoomed belong to which 
-sector. The `circos.nested()` function in **circlize** puts the two circular plots together, arranges
-and rotates them.
+The zooming is actually composed of two circulat plots where one for the
+original track and one for the zoomed intervals. There is an additional connection track
+which identifies which intervals that are zoomed belong to which sector. The
+`circos.nested()` function in **circlize** puts the two circular plots
+together, arranges them and automatically draws the connection lines.
 
-To define "the circular plot", the code for generating the plot needs to be wrapped into a function.
+To define "the circular plot", the code for generating the plot needs to be
+wrapped into a function.
 
 
 ```r
@@ -148,43 +151,56 @@ f2 = function() {
 }
 ```
 
-In above, `f1()` is the code for generating the original plot and `f2()` is the code
-for generating the zoomed plot.
+In above, `f1()` is the code for generating the original plot and `f2()` is
+the code for generating the zoomed plot.
 
-To combine the two plots, simply put `f1()`, `f2()` and `corresponance` together to `circos.nested()`
-(Figure \@ref(fig:nested) left).
+To combine the two plots, simply put `f1()`, `f2()` and `corresponance` to
+`circos.nested()` (Figure \@ref(fig:nested-normal)).
 
 
 ```r
 circos.nested(f1, f2, correspondance)
 ```
 
-In the plot, the zoomed circle is put inside the original circle and the start degree for the second
-plot is automatically adjusted.
+<div class="figure" style="text-align: center">
+<img src="12-nested-zooming_files/figure-html/nested-normal-1.svg" alt="Nested zooming between two circular plots." width="384" />
+<p class="caption">(\#fig:nested-normal)Nested zooming between two circular plots.</p>
+</div>
 
-Zoomed circle can also be put outside by swtiching `f1()` and `f2()`. Actually, for `circos.nested()`,
-It doesn't care which one is zoomed or not, they are just two circular plots (Figure \@ref(fig:nested) middle).
+In the plot, the zoomed circle is put inside the original circle and the start
+degree for the second plot is automatically adjusted.
+
+Zoomed circle can also be put outside by swtiching `f1()` and `f2()`.
+Actually, for `circos.nested()`, It doesn't care which one is zoomed or not,
+they are just two circular plots and a correspondance (Figure \@ref(fig:nested2)).
 
 
 ```r
 circos.nested(f2, f1, correspondance[, c(4:6, 1:3)])
 ```
 
-There are some notes which doing nested zoomings:
+<div class="figure" style="text-align: center">
+<img src="12-nested-zooming_files/figure-html/nested2-1.svg" alt="Nested zooming between two circular plots, zoomed plot is put outside." width="384" />
+<p class="caption">(\#fig:nested2)Nested zooming between two circular plots, zoomed plot is put outside.</p>
+</div>
 
-1. it can only be applied to the full circle.
-2. if `canvas.xlim` and `canvas.ylim` are adjusted in the first plot, same value should be set
-   to the second plot.
-3. By default the start degree of the second plot is automatically adjusted to make 
-   the difference between two plots to a minimal. However, users can also manually adjusted
-   the start degree for the second plot by setting `circos.par("start.degree" = ...)` and 
+There are some points that need to be noted while doing nested zoomings:
+
+1. It can only be applied to the full circle.
+2. If `canvas.xlim` and `canvas.ylim` are adjusted in the first plot, same
+   value should be set to the second plot.
+3. By default the start degree of the second plot is automatically adjusted to
+   make the difference between the original positions and zoomed sectors to a
+   minimal. However, users can also manually adjusted the start degree for the
+   second plot by setting `circos.par("start.degree" = ...)` and
    `adjust_start_degree` must be set to `TRUE` in `circos.nested()`.
-4. Since the function needs to know some information for the two circulat plots, do not
-   put `circos.clear()` at the end of each plot. They will be added internally.
+4. Since the function needs to know some information for the two circular
+   plots, do not put `circos.clear()` at the end of each plot. They will be
+   added internally.
 
 
-`f1()` and `f2()` are just normal code for implementing circular plot. It is no problem
-to make it more complex (Figure \@ref(fig:nested) right).
+`f1()` and `f2()` are just normal code for implementing circular plot. There is no problem
+to make it more complex (Figure \@ref(fig:nested-complex)).
 
 
 ```r
@@ -205,8 +221,8 @@ f1 = function() {
 				}
 			}
 			circos.points(x, y, pch = 16, cex = 0.5)
-			circos.text(CELL_META$xcenter, CELL_META$ylim[2] + uy(2, "mm"), CELL_META$sector.index, 
-				niceFacing = TRUE, adj = c(0.5, 0))
+			circos.text(CELL_META$xcenter, CELL_META$ylim[2] + uy(2, "mm"), 
+				CELL_META$sector.index, niceFacing = TRUE, adj = c(0.5, 0))
 	})
 }
 
@@ -223,21 +239,19 @@ circos.nested(f1, f2, correspondance, connection_col = sector_col[correspondance
 ```
 
 <div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-epub3/nested-1.png" alt="Nested zooming between two circular plots."  />
-<p class="caption">(\#fig:nested)Nested zooming between two circular plots.</p>
+<img src="12-nested-zooming_files/figure-html/nested-complex-1.svg" alt="Nested zooming between two circular plots, slightly complex plots." width="384" />
+<p class="caption">(\#fig:nested-complex)Nested zooming between two circular plots, slightly complex plots.</p>
 </div>
 
-## visualization of DMRs from tagmentation-based WGBS
+## Visualization of DMRs from tagmentation-based WGBS
 
 [Tagmentation-based whole-genome bisulfite sequencing](http://www.nature.com/nprot/journal/v8/n10/full/nprot.2013.118.html) 
-(T-WGBS) is a technology which can examine only a minor fraction of methylome of interest.
-Circular plot can be used to [visualize genome-wide distribution of differentially methylation
-regions (DMRs)](http://jokergoo.github.io/circlize/example/railfallplot.html). 
+(T-WGBS) is a technology which can examine only a minor fraction of methylome of interest. 
 In this section, we demonstrate how to visualize DMRs which are detected from T-WGBS data in a circular plot by **circlize** package.
 
 In the example data loaded, `tagments` contains regions which are sequenced, 
 `DMR1` contains DMRs for one patient detectd in tagment regions. Correspondance between tagment regions
-and DMRs can be checked by row names of `tagments` and `tagment` column in `DMR1`.
+and original genome is stored in `correspondance`.
 
 
 ```r
@@ -277,7 +291,8 @@ head(correspondance, n = 4)
 ## 4 chr2  46387184  46477385   chr2-46387184-46477385  46387184  46477385
 ```
 
-Figure \@ref(fig:dmr).
+In Figure \@ref(fig:dmr), the tagment regions are actually zoomed from the genome. In following code,
+`f1()` only makes a circular plot with whole genome and `f2()` makes circular plot for the tagment regions.
 
 
 ```r
@@ -293,14 +308,16 @@ f1 = function() {
 f2 = function() {
 	circos.par(cell.padding = c(0, 0, 0, 0), gap.after = c(rep(1, nrow(tagments)-1), 10))
 	circos.genomicInitialize(tagments, plotType = NULL)
-	circos.genomicTrack(DMR1, ylim = c(-0.6, 0.6), panel.fun = function(region, value, ...) {
-		for(h in seq(-0.6, 0.6, by = 0.2)) {
-	        circos.lines(CELL_META$cell.xlim, c(h, h), lty = 3, col = "#AAAAAA")
-	    }
-	    circos.lines(CELL_META$cell.xlim, c(0, 0), lty = 3, col = "#888888")
-    
-		circos.genomicPoints(region, value, col = ifelse(value[[1]] > 0, "#E41A1C", "#377EB8"), 
-			pch = 16, cex = 0.5)
+	circos.genomicTrack(DMR1, ylim = c(-0.6, 0.6), 
+		panel.fun = function(region, value, ...) {
+			for(h in seq(-0.6, 0.6, by = 0.2)) {
+		        circos.lines(CELL_META$cell.xlim, c(h, h), lty = 3, col = "#AAAAAA")
+		    }
+		    circos.lines(CELL_META$cell.xlim, c(0, 0), lty = 3, col = "#888888")
+	    
+			circos.genomicPoints(region, value, 
+				col = ifelse(value[[1]] > 0, "#E41A1C", "#377EB8"), 
+				pch = 16, cex = 0.5)
 	}, bg.col = chr_bg_color[tagments$chr], track.margin = c(0.02, 0))
 	circos.yaxis(side = "left", at = seq(-0.6, 0.6, by = 0.3), 
 		sector.index = get.all.sector.index()[1], labels.cex = 0.4)
@@ -312,6 +329,6 @@ circos.nested(f1, f2, correspondance, connection_col = chr_bg_color[correspondan
 ```
 
 <div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-epub3/dmr-1.png" alt="Visualization of DMRs."  />
+<img src="12-nested-zooming_files/figure-html/dmr-1.svg" alt="Visualization of DMRs." width="576" />
 <p class="caption">(\#fig:dmr)Visualization of DMRs.</p>
 </div>

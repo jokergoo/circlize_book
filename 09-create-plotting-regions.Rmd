@@ -153,7 +153,7 @@ circos.genomicLines(region, value, sector.index, track.index)
 
 **circlize** additionally provides a new option `segment` for `lty` by
 which each genomic regions represent as 'horizontal' lines at y positions
-(see Figure \@ref(genomic-application-lines), track H).
+(see Figure \@ref(fig:genomic-application-lines), track H).
 
 ```{r, eval = FALSE}
 circos.genomicLines(region, value, lwd, lty = "segment")
@@ -213,7 +213,7 @@ For example, some horizontal lines and texts are added to each cell and axes
 are put on top of each cell.
 
 ```{r, eval = FALSE}
-circos.genomicTrackPlotRegion(bed, ylim = c(-1, 1),
+circos.genomicTrack(bed, ylim = c(-1, 1),
     panel.fun = function(region, value, ...) {
         circos.genomicPoints(region, value, ...)
         

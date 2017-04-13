@@ -134,7 +134,7 @@ circos.track(factors = df$factors, y = df$y,
     panel.fun = function(x, y) {
         circos.text(CELL_META$xcenter, CELL_META$cell.ylim[2] + uy(5, "mm"), 
             CELL_META$sector.index)
-        circos.axis()
+        circos.axis(labels.cex = 0.6)
 })
 col = rep(c("#FF0000", "#00FF00"), 4)
 circos.trackPoints(df$factors, df$x, df$y, col = col, pch = 16, cex = 0.5)

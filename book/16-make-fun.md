@@ -21,7 +21,7 @@ the help page of `circos.axis()`.
 ```r
 circos.par(gap.degree = 0, cell.padding = c(0, 0, 0, 0), start.degree = 90)
 circos.initialize(factors = "a", xlim = c(0, 12))
-circos.trackPlotRegion(ylim = c(0, 1), bg.border = NA)
+circos.track(ylim = c(0, 1), bg.border = NA)
 circos.axis(major.at = 0:12, labels = NULL, direction = "inside", 
     major.tick.length = uy(2, "mm"))
 circos.text(1:12, rep(1, 12) - uy(6, "mm"), 1:12, facing = "downward")
@@ -42,7 +42,7 @@ arrows(0, 0, cos(hour.degree/180*pi)*0.4, sin(hour.degree/180*pi)*0.4, lwd = 2)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="16-make-fun_files/figure-epub3/clock-1.png" alt="A clock."  />
+<img src="16-make-fun_files/figure-html/clock-1.svg" alt="A clock." width="384" />
 <p class="caption">(\#fig:clock)A clock.</p>
 </div>
 
@@ -87,7 +87,7 @@ draw.sector(center = c(0, 0), start.degree = 0, end.degree = 360,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="16-make-fun_files/figure-epub3/dartboard-1.png" alt="A dartboard."  />
+<img src="16-make-fun_files/figure-html/dartboard-1.svg" alt="A dartboard." width="384" />
 <p class="caption">(\#fig:dartboard)A dartboard.</p>
 </div>
 
@@ -136,19 +136,19 @@ add_yin_yao = function() {
     circos.rect(0,0,0.45,1, col = "black")
     circos.rect(0.55,0,1,1, col = "black")
 }
-circos.trackPlotRegion(ylim = c(0, 1), factors = factors, bg.border = NA,
+circos.track(ylim = c(0, 1), factors = factors, bg.border = NA,
     panel.fun = function(x, y) {
         i = get.cell.meta.data("sector.numeric.index")
         if(i %in% c(2, 5, 7, 8)) add_yang_yao() else add_yin_yao()
 }, track.height = 0.1)
 
-circos.trackPlotRegion(ylim = c(0, 1), factors = factors, bg.border = NA,
+circos.track(ylim = c(0, 1), factors = factors, bg.border = NA,
     panel.fun = function(x, y) {
         i = get.cell.meta.data("sector.numeric.index")
         if(i %in% c(1, 6, 7, 8)) add_yang_yao() else add_yin_yao()
     }, track.height = 0.1)
 
-circos.trackPlotRegion(ylim = c(0, 1), factors = factors, bg.border = NA, 
+circos.track(ylim = c(0, 1), factors = factors, bg.border = NA, 
     panel.fun = function(x, y) {
         i = get.cell.meta.data("sector.numeric.index")
         if(i %in% c(4, 5, 6, 7)) add_yang_yao() else add_yin_yao()
@@ -172,7 +172,7 @@ draw.sector(center = c(0, -r/2), start.degree = 0, end.degree = 360,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="16-make-fun_files/figure-epub3/bagua-1.png" alt="Ba-Gua and Tai-Ji."  />
+<img src="16-make-fun_files/figure-html/bagua-1.svg" alt="Ba-Gua and Tai-Ji." width="384" />
 <p class="caption">(\#fig:bagua)Ba-Gua and Tai-Ji.</p>
 </div>
 
@@ -189,7 +189,7 @@ tiny rectangles into the circle. Source code for generating the figure can be
 found at http://jokergoo.github.io/circlize/example/doodle.html (note this implementation is quite slow to run).
 
 <div class="figure" style="text-align: center">
-<img src="images/doodle.jpeg" alt="Keith Haring doodle in circular layout." width="800" />
+<img src="images/doodle.jpeg" alt="Keith Haring doodle in circular layout." width="400" />
 <p class="caption">(\#fig:doodle)Keith Haring doodle in circular layout.</p>
 </div>
 
