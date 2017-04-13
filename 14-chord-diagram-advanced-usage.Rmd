@@ -92,10 +92,10 @@ In `chordDiagram()`, there is no argument to control the style of sector
 labels, but this can be done by first pre-allocating an empty track and
 customizing the labels in it later. In the following example, one track is
 firstly allocated and a Chord diagram is added without label track and axes.
-Later, the first track is updated adding labels with clock wise facings
-(Figure \@ref(fig:chord-diagram-labels) A).
+Later, the first track is updated with adding labels with clockwise facings
+(Figure \@ref(fig:chord-diagram-labels-show)).
 
-```{r chord_diagram_labels_show, eval = FALSE}
+```{r chord-diagram-labels-show, fig.cap = "Change label directions."}
 chordDiagram(mat, grid.col = grid.col, annotationTrack = "grid", 
     preAllocateTracks = list(track.height = max(strwidth(unlist(dimnames(mat))))))
 # we go back to the first track and customize sector labels
@@ -105,12 +105,12 @@ circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
 }, bg.border = NA) # here set bg.border to NA is important
 ```
 
-In the following example, the labels are put on the grids (Figure \@ref(fig:chord-diagram-labels) B). 
-Please not `circos.text()` and
+In the following example, the labels are put on the grids (Figure \@ref(fig:chord-diagram-labels-inside)). 
+Please note `circos.text()` and
 `get.cell.meta.data()` can be used outside `panel.fun` if the sector index and
 track index are specified explicitly.
 
-```{r chord_diagram_labels_inside, eval = FALSE}
+```{r chord-diagram-labels-inside, fig.cap = "Put sector labels to the grid."}
 chordDiagram(mat, grid.col = grid.col, 
     annotationTrack = c("grid", "axis"), annotationTrackHeight = uh(5, "mm"))
 for(si in get.all.sector.index()) {
@@ -122,9 +122,9 @@ for(si in get.all.sector.index()) {
 ```
 
 For the last example in this section, if the width of the sector is less than
-20 degree, the labels are added in the radical direction (Figure \@ref(fig:chord-diagram-labels) C).
+20 degree, the labels are added in the radical direction (Figure \@ref(fig:chord-diagram-labels-multile-style)).
 
-```{r chord_diagram_labels_multile_style, eval = FALSE}
+```{r chord-diagram-labels-multile-style, fig.cap = "Adjust label direction according to the width of sectors."}
 set.seed(123)
 mat2 = matrix(rnorm(100), 10)
 chordDiagram(mat2, annotationTrack = "grid", 
@@ -143,18 +143,6 @@ circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
             niceFacing = TRUE, adj = c(0.5, 0), col= "blue")
     }
 }, bg.border = NA)
-```
-
-```{r chord-diagram-labels, echo = FALSE, fig.width = 8, fig.height = 8, fig.cap = "Customize sector labels in Chord diagram."}
-chunks <- knitr:::knit_code$get()
-par(mfrow = c(2, 2))
-eval(parse(text = chunks[["chord_diagram_labels_show"]]))
-text(-0.9, 0.9, "A", cex = 1.5)
-eval(parse(text = chunks[["chord_diagram_labels_inside"]]))
-text(-0.9, 0.9, "B", cex = 1.5)
-eval(parse(text = chunks[["chord_diagram_labels_multile_style"]]))
-circos.clear()
-text(-0.9, 0.9, "C", cex = 1.5)
 ```
 
 When you set direction of sector labels as radical (`clockwise` or
@@ -209,7 +197,7 @@ circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
 circos.clear()
 ```
 
-```{r chord-diagram-axes, echo = FALSE, fig.cap = "Customize sector axes for Chord diagram."}
+```{r chord-diagram-axes, echo = FALSE, fig.width = 6, fig.height = 6, fig.cap = "Customize sector axes for Chord diagram."}
 chunks <- knitr:::knit_code$get()
 eval(parse(text = chunks[["chord_diagram_axes_two"]]))
 eval(parse(text = chunks[["chord_diagram_axes_two2"]]))
@@ -230,7 +218,7 @@ row_sum = sum(rowSums(abs(mat)))
 col_sum = sum(colSums(abs(mat)))
 ```
 
-Small gaps between sectors are set to 1 degree and big gaps between row and
+Assume small gaps between sectors are set to 1 degree and big gaps between row and
 column sectors are set to 20 degree.
 
 ```{r}
@@ -253,7 +241,7 @@ row_sector_degree = (360 - small_gap*(n_sector - 2) - big_gap*2) * (row_sum/(row
 If the row sectors are put in the right of the circle, we can calculate the "start degree" for the circle.
 Note `chordDiagram()` always draw row sectors first and by default the circle goes clock-wisely.
 
-```{r}                   
+```{r}
 start_degree = 90 - (180 - row_sector_degree)/2
 ```
 
@@ -342,7 +330,7 @@ chordDiagram(mat2, directional = 1, grid.col = rep(1:5, 2), transparency = 0.5)
 circos.clear()
 ```
 
-Now the scale of the two Chord diagrams (figure \ref{fig:chord-diagram-compare}) are the 
+Now the scale of the two Chord diagrams (Figure \@ref(fig:chord-diagram-compare)) are the 
 same if you compare the scale of axes in the two diagrams.
 
 ```{r chord-diagram-compare, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Compare two Chord Diagrams in a same scale."}
@@ -413,11 +401,11 @@ circos.track(track.index = 2, panel.fun = function(x, y) {
 }, bg.border = NA)
 
 highlight.sector(rownames(mat1), track.index = 1, col = "red", 
-    text = "A", cex = 0.8, niceFacing = TRUE)
+    text = "A", cex = 0.8, text.col = "white", niceFacing = TRUE)
 highlight.sector(colnames(mat1), track.index = 1, col = "green", 
-    text = "B", cex = 0.8,  niceFacing = TRUE)
+    text = "B", cex = 0.8, text.col = "white", niceFacing = TRUE)
 highlight.sector(colnames(mat2), track.index = 1, col = "blue", 
-    text = "C", cex = 0.8, niceFacing = TRUE)
+    text = "C", cex = 0.8, text.col = "white", niceFacing = TRUE)
 circos.clear()
 ```
 

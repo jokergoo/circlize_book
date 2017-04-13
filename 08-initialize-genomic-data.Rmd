@@ -18,19 +18,19 @@ identify positions on chromosomes.
 ### Basic usage
 
 If you work on human genome, the most straightforward way is to directly use
-`circos.initializeWithIdeogram()` (Figure \@ref(fig:genomic-initialize-
-ideogram) A). By default, the function creates a track with chromosome name
+`circos.initializeWithIdeogram()` (Figure \@ref(fig:genomic-initialize-ideogram-default)). 
+By default, the function creates a track with chromosome name
 and axes, and a track of ideograms.
 
 Although chromosome names added to the plot are pure numeric, actually the
 internally names have the "chr" index. When you adding more tracks, the
 chromosome names should also have "chr" index.
 
-```{r genomic_initialize_ideogram_1, eval = FALSE, echo = 1}
+```{r genomic-initialize-ideogram-default, fig.cap = "Initialize genomic plot, default."}
 circos.initializeWithIdeogram()
 text(0, 0, "default", cex = 1)
-text(-0.9, 0.9, "A", cex = 1.5)
-# circos.info()
+circos.info()
+circos.clear()
 ```
 
 By default, `circos.initializeWithIdeogram()` initializes the plot with
@@ -67,21 +67,21 @@ If you read cytoband data directly from file, please explicitly specify
 reason is since positions are represented as integers, `read.table` would
 treat those numbers as `integer` by default. In initialization of circular
 plot, **circlize** needs to calculate the summation of all chromosome lengths.
-The sumation of such large integers would throw error of integer overflow.
+The summation of such large integers would throw error of integer overflow.
 
 By default, `circos.intializeWithIdeogram()` uses all chromosomes which are
 available in cytoband data to initialize the circular plot. Users can
 choose a subset of chromosomes by specifying `chromosome.index`. This
-argument is also for ordering chromosomes (Figure \@ref(fig:genomic-initialize-ideogram) B).
+argument is also for ordering chromosomes (Figure \@ref(fig:genomic-initialize-ideogram-subset)).
 
-```{r genomic_initialize_ideogram_2, eval = FALSE, echo = 1}
+```{r genomic-initialize-ideogram-subset, fig.cap = "Initialize genomic plot, subset chromosomes."}
 circos.initializeWithIdeogram(chromosome.index = paste0("chr", c(3,5,2,8)))
 text(0, 0, "subset of chromosomes", cex = 1)
-text(-0.9, 0.9, "B", cex = 1.5)
+circos.clear()
 ```
 
-When there is no cytoband data for the specified species, and chromInfo data
-is used instead, they may be many many extra short contigs. `chromosome.index`
+When there is no cytoband data for the specified species, and when chromInfo data
+is used instead, there may be many many extra short contigs. `chromosome.index`
 can also be useful to remove unnecessary contigs.
 
 ### Pre-defined tracks
@@ -90,47 +90,37 @@ After the initialization of the circular plot,
 `circos.initializeWithIdeogram()` additionally creates a track where there are
 genomic axes and chromosome names, and create another track where there is an
 ideogram (depends on whether cytoband data is available). `plotType` argument
-is used to control which type of tracks to add. (figure Figure \@ref(fig:genomic-initialize-ideogram) C, D).
+is used to control which type of tracks to add. (figure Figure \@ref(fig:genomic-initialize-ideogram-track)).
 
-```{r genomic_initialize_ideogram_4, eval = FALSE, echo = c(1, 4)}
+```{r genomic-initialize-ideogram-track, echo = -1, fig.width = 8, fig.height = 4, fig.cap = "Initialize genomic plot, control tracks."}
+par(mfrow = c(1, 2))
 circos.initializeWithIdeogram(plotType = c("axis", "labels"))
 text(0, 0, "plotType = c('axis', 'labels')", cex = 1)
-text(-0.9, 0.9, "C", cex = 1.5)
+circos.clear()
+
 circos.initializeWithIdeogram(plotType = NULL)
 text(0, 0, "plotType = NULL", cex = 1)
-text(-0.9, 0.9, "D", cex = 1.5)
 circos.clear()
 ```
 
 ### Other general settings
 
 Similar as general circular plot, the parameters for the layout can be
-controlled by `circos.par()` (Figure \@ref(fig:genomic-initialize-ideogram) E,
-F).
+controlled by `circos.par()` (Figure \@ref(fig:genomic-initialize-ideogram-par)).
+Do remember when you explicitly set `circos.par()`, you need to call `circos.clear()`
+to finish the plotting.
 
-```{r genomic_initialize_ideogram_5, eval = FALSE, echo = c(1:3, 7:9)}
+```{r genomic-initialize-ideogram-par, echo = -1, fig.width = 8, fig.height = 4, fig.cap = "Initialize genomic plot, control layout."}
+par(mfrow = c(1, 2));
 circos.par("start.degree" = 90)
 circos.initializeWithIdeogram()
 circos.clear()
 text(0, 0, "'start.degree' = 90", cex = 1)
-text(-0.9, 0.9, "E", cex = 1.5)
 
 circos.par("gap.degree" = rep(c(2, 4), 12))
 circos.initializeWithIdeogram()
 circos.clear()
 text(0, 0, "'gap.degree' = rep(c(2, 4), 12)", cex = 1)
-text(-0.9, 0.9, "F", cex = 1.5)
-```
-
-```{r genomic-initialize-ideogram, echo = FALSE, fig.width = 8, fig.height = 8*2/3, fig.cap = "Initialize genomic plot."}
-chunks <- knitr:::knit_code$get()
-
-par(mfrow = c(2, 3))
-
-eval(parse(text = chunks[["genomic_initialize_ideogram_1"]]))
-eval(parse(text = chunks[["genomic_initialize_ideogram_2"]]))
-eval(parse(text = chunks[["genomic_initialize_ideogram_4"]]))
-eval(parse(text = chunks[["genomic_initialize_ideogram_5"]]))
 ```
 
 ## Customize chromosome track
@@ -200,8 +190,7 @@ circos.track(ylim = c(0, 1),
 
 Next, we put transcripts one after the other for each gene. It is simply to
 add lines and rectangles. The usage of `circos.genomicTrack()` and
-`circos.genomicRect()` will be discussed in Sector \@ref(genomic-plotting-
-region).
+`circos.genomicRect()` will be discussed in Chapter \@ref(genomic-plotting-region).
 
 ```{r genomic_gene_model_2, eval = FALSE}
 n = max(tapply(tp_family$transcript, tp_family$gene, function(x) length(unique(x))))
@@ -222,14 +211,14 @@ circos.genomicTrack(tp_family, ylim = c(0.5, n + 0.5),
 circos.clear()
 ```
 
-```{r genomic-gene-model, echo = FALSE, fig.cap = "Circular representation of alternative transcripts for genes."}
+```{r genomic-gene-model, echo = FALSE,fig.width = 6, fig.height = 6, fig.cap = "Circular representation of alternative transcripts for genes."}
 chunks <- knitr:::knit_code$get()
 eval(parse(text = chunks[["genomic_gene_model_1"]]))
 eval(parse(text = chunks[["genomic_gene_model_2"]]))
 ```
 
 In Figure \@ref(fig:genomic-gene-model), you may notice the start of axes
-becomes "0KB" while not the correct values. It is just an adjustment of the
+becomes "0KB" while not the original values. It is just an adjustment of the
 axes labels to reflect the relative distance to the start of each gene, while
 the coordinate in the cells are still using the original values. Set
 `tickLabelsStartFromZero` to `FALSE` to recover axes labels to the original
@@ -249,7 +238,7 @@ extend_chromosomes = function(bed, chromosome, prefix = "zoom_") {
 }
 ```
 
-`read.cytoband()` downloads and reads cytoband data from UCSC. In following,
+We use `read.cytoband()` to download and read cytoband data from UCSC. In following,
 x ranges for normal chromosomes and zoomed chromosomes are normalized separetely.
 
 ```{r}
@@ -268,7 +257,7 @@ sector.width = c(xrange[normal_chr_index] / sum(xrange[normal_chr_index]),
 
 The extended cytoband data which is in form of a data frame is sent to
 `circos.initializeWithIdeogram()`. You can see the ideograms for chromosome 1
-and 2 are zoomed.
+and 2 are zoomed (Figure \@ref(fig:genomic-zoom)).
 
 ```{r genomic_zoom_1, eval = FALSE}
 circos.par(start.degree = 90)
@@ -295,7 +284,7 @@ circos.link("chr1", get.cell.meta.data("cell.xlim", sector.index = "chr1"),
 circos.clear()
 ```
 
-```{r genomic-zoom, echo = FALSE, fig.cap = "Zoom chromosomes."}
+```{r genomic-zoom, echo = FALSE, fig.width = 6, fig.height = 6, fig.cap = "Zoom chromosomes."}
 chunks <- knitr:::knit_code$get()
 eval(parse(text = chunks[["genomic_zoom_1"]]))
 eval(parse(text = chunks[["genomic_zoom_2"]]))

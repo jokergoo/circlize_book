@@ -40,7 +40,7 @@ circos.genomicTrack(data, numeric.column = 4,
 
 If input data is a list of data frames, `panel.fun` is applied on each
 data frame iteratively to the current cell. Under such condition, `region` and `value`
-will contain corresponding data in the current data frame. The index for the
+will contain corresponding data in the current data frame and in the current chromosome. The index for the
 current data frame can be get by `getI(...)`. Note `getI(...)` can only be used
 inside `panel.fun` and `...` argument is mandatory.
 
@@ -68,8 +68,7 @@ circos.genomicTrack(bed_list, numeric.column = c(4, 5),
 ## Stack mode
 
 `circos.genomicTrack()` also supports a `stack` mode by setting `stack =
-TRUE`. Under `stack` mode, Graphics are vertically or radically arranged line
-by line for each dataset. `ylim` is re-defined inside the function and the
+TRUE`. Under `stack` mode, `ylim` is re-defined inside the function and the
 y-axis is splitted into several bins with equal height and graphics are put
 onto "horizontal" bins (with position `y = 1, 2, ...`).
 
@@ -106,7 +105,7 @@ number of data frames. `panel.fun` will be applied iteratively on each data
 frame. In each iteration, in `panel.fun`, `region` is still the genomic
 regions in current chromosome, and `value` contains columns in current data
 frame excluding the first three columns. Graphics by low-level genomic
-functions will be added on the `horizontal' lines.
+functions will be added on the `horizontal' bins.
 
 ```{r, eval = FALSE}
 bed_list = list(generateRandomBed(), generateRandomBed())
@@ -118,16 +117,16 @@ circos.genomicTrackPlotRegion(bed_list, stack = TRUE,
 ```
 
 Under `stack` mode, if using a data frame with multiple numeric columns,
-graphics on all horizontal lines share the same genomic positions while if
+graphics on all horizontal bins share the same genomic positions while if
 using a list of data frames, the genomic positions can be different.
 
 ## Applications
 
-In this section, we will show several real examples of making genomic plots
+In this section, we will show several real examples of adding genomic graphics
 under different modes. Again, if you are not happy with these functionalities,
 you can simply re-implement your plot with the basic circlize functions.
 
-### Points
+### Points {#modes-points}
 
 To make plots more clear to look at, we only add graphics in the first quarter
 of the circle and initialize the plot only with chromosome 1.
@@ -185,7 +184,7 @@ text(0, mean(pos), "C", adj = c(1.1, 0.5))
 ```
 
 In track D, the list of data frames is plotted under `stack` mode. Graphics
-corresponding to each data frame is added to a horizontal line.
+corresponding to each data frame are added to a horizontal line.
 
 ```{r genomic_application_points_D, eval = FALSE, echo = 1:6}
 circos.genomicTrack(bed_list, stack = TRUE, 
@@ -240,7 +239,7 @@ eval(parse(text = chunks[["genomic_application_points_E"]]))
 eval(parse(text = chunks[["genomic_application_points_F"]]))
 ```
 
-### Lines
+### Lines {#modes-lines}
 
 Similar as previous figure, only the first quarter in the circle is
 visualized. Examples are shown in Figure \@ref(fig:genomic-application-lines).
@@ -371,7 +370,7 @@ eval(parse(text = chunks[["genomic_application_lines_G"]]))
 eval(parse(text = chunks[["genomic_application_lines_H"]]))
 ```
 
-### Rectangles
+### Rectangles {#modes-rectangles}
 
 Again, only the first quarter of the circle is initialized. For rectangles,
 the filled colors  are always used to represent numeric values. Here we define
