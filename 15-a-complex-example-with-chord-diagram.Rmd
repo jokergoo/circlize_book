@@ -231,7 +231,7 @@ circos.clear()
 
 Legends can be added according to instructions discussed in Section \@ref(legends).
 
-```{r, echo = FALSE, fig.height = 6, fig.width = 6 + 1.165229 + 0.08}
+```{r, echo = FALSE, fig.height = 6, fig.width = 6 + 1.165229 + 0.08, dev = "png"}
 library(grid)
 library(gridBase)
 plot.new()
