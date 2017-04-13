@@ -92,7 +92,7 @@ obtained by `getI(...)`.
 
 ```r
 data = generateRandomBed(nc = 2)
-circos.genomicTrackPlotRegion(data, stack = TRUE,
+circos.genomicTrack(data, stack = TRUE,
     panel.fun = function(region, value, ...) {
         i = getI(...)
         circos.genomicPoints(region, value, col = i, ...)
@@ -112,7 +112,7 @@ functions will be added on the `horizontal' bins.
 
 ```r
 bed_list = list(generateRandomBed(), generateRandomBed())
-circos.genomicTrackPlotRegion(bed_list, stack = TRUE,
+circos.genomicTrack(bed_list, stack = TRUE,
     panel.fun = function(region, value, ...) {
         i = getI(...)
         circos.genomicPoints(region, value, ...)
@@ -177,7 +177,7 @@ iterately on each data frame. The index of "current" index can be obtained by `g
 bed1 = generateRandomBed(nr = 300)
 bed2 = generateRandomBed(nr = 300)
 bed_list = list(bed1, bed2)
-circos.genomicTrackPlotRegion(bed_list, 
+circos.genomicTrack(bed_list, 
     panel.fun = function(region, value, ...) {
         i = getI(...)
         circos.genomicPoints(region, value, pch = 16, cex = 0.5, col = i, ...)
@@ -227,7 +227,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-modes-of-input_files/figure-html/genomic-application-points-1.svg" alt="Add points under different modes." width="384" />
+<img src="10-modes-of-input_files/figure-epub3/genomic-application-points-1.svg" alt="Add points under different modes."  />
 <p class="caption">(\#fig:genomic-application-points)Add points under different modes.</p>
 </div>
 
@@ -343,7 +343,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-modes-of-input_files/figure-html/genomic-application-lines-1.svg" alt="Add lines under different modes." width="384" />
+<img src="10-modes-of-input_files/figure-epub3/genomic-application-lines-1.svg" alt="Add lines under different modes."  />
 <p class="caption">(\#fig:genomic-application-lines)Add lines under different modes.</p>
 </div>
 
@@ -428,6 +428,6 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-modes-of-input_files/figure-html/genomic-application-rect-1.svg" alt="Add rectangles under different modes." width="384" />
+<img src="10-modes-of-input_files/figure-epub3/genomic-application-rect-1.svg" alt="Add rectangles under different modes."  />
 <p class="caption">(\#fig:genomic-application-rect)Add rectangles under different modes.</p>
 </div>

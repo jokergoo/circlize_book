@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{last revised on 2017-04-09}
+  \date{last revised on 2017-04-13}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -160,14 +160,14 @@ This is the documentation of the
 \href{https://cran.r-project.org/package=circlize}{\textbf{circlize}}
 package. Examples in the book are generated under version 0.4.0.
 
-\begin{center}\includegraphics[width=34.44in]{images/circlize_cover} \end{center}
-
 If you use \textbf{circlize} in your publications, I would be
 appreciated if you can cite:
 
 Gu, Z. (2014) circlize implements and enhances circular visualization in
 R. Bioinformatics. DOI:
 \href{https://doi.org/10.1093/bioinformatics/btu393}{10.1093/bioinformatics/btu393}
+
+\begin{center}\includegraphics[width=34.44in]{images/circlize_cover} \end{center}
 
 \part{General
 Functionality}\label{part-general-functionality}
@@ -183,19 +183,20 @@ information on the circle and it is beautiful.
 
 \href{http://circos.ca}{\textbf{Circos}} is a pioneer tool widely used
 for circular layout representations implemented in \emph{Perl}. It
-greatly enhances the visualization of scientific results. Thus, plots
-with circular layout are normally named as \textbf{``circos plot''}.
-Here the \textbf{circlize} package aims to implement \textbf{Circos} in
-R. One important advantage for the implementation in R is that R is an
-ideal environment which provides seamless connection between data
-analysis and data visualization. \textbf{circlize} is not a front-end
-wrapper to generate configuration files for \textbf{Circos}, while
-completely coded in R style by using R's elegant statistical and graphic
-engine. We aim to keep the flexibility and configurability of
-\textbf{Circos}, but also make the package more straightforward to use
-and enhance it to support more types of graphics.
+greatly enhances the visualization of scientific results (especially in
+Genomics field). Thus, plots with circular layout are normally named as
+\textbf{``circos plot''}. Here the \textbf{circlize} package aims to
+implement \textbf{Circos} in R. One important advantage for the
+implementation in R is that R is an ideal environment which provides
+seamless connection between data analysis and data visualization.
+\textbf{circlize} is not a front-end wrapper to generate configuration
+files for \textbf{Circos}, while completely coded in R style by using
+R's elegant statistical and graphic engine. We aim to keep the
+flexibility and configurability of \textbf{Circos}, but also make the
+package more straightforward to use and enhance it to support more types
+of graphics.
 
-In this book, chapters in Part I give a detailed overview of the general
+In this book, chapters in Part I give detailed overviews of the general
 \textbf{circlize} functionalities. Part II introduces functions
 specifically designed for visualizing genomic datasets. Part III gives
 comprehensive guilds on visualizing relationships by Chord diagram.
@@ -228,19 +229,19 @@ visualization.
 \begin{itemize}
 \tightlist
 \item
-  \texttt{circos.points()}: add points in a cell.
+  \texttt{circos.points()}: adds points in a cell.
 \item
-  \texttt{circos.lines()}: add lines in a cell.
+  \texttt{circos.lines()}: adds lines in a cell.
 \item
-  \texttt{circos.segments()}: add segments in a cell.
+  \texttt{circos.segments()}: adds segments in a cell.
 \item
-  \texttt{circos.rect()}: add rectangles in a cell.
+  \texttt{circos.rect()}: adds rectangles in a cell.
 \item
-  \texttt{circos.polygon()}: add polygons in a cell.
+  \texttt{circos.polygon()}: adds polygons in a cell.
 \item
-  \texttt{circos.text()}: add text in a cell.
+  \texttt{circos.text()}: adds text in a cell.
 \item
-  \texttt{circos.axis()} and \texttt{circos.yaxis()}: add axis in a
+  \texttt{circos.axis()} ands \texttt{circos.yaxis()}: add axis in a
   cell.
 \end{itemize}
 
@@ -249,17 +250,19 @@ Following functions arrange the circular layout.
 \begin{itemize}
 \tightlist
 \item
-  \texttt{circos.track()}: create plotting regions for cells in one
+  \texttt{circos.initialize()}: allocates sectors on the circle.
+\item
+  \texttt{circos.track()}: creates plotting regions for cells in one
   single track.
 \item
-  \texttt{circos.update()}: update an existed cell.
+  \texttt{circos.update()}: updates an existed cell.
 \item
   \texttt{circos.par()}: graphic parameters.
 \item
-  \texttt{circos.info()}: print general parameters of current circular
+  \texttt{circos.info()}: prints general parameters of current circular
   plot.
 \item
-  \texttt{circos.clear()}: reset graphic parameters and internal
+  \texttt{circos.clear()}: resets graphic parameters and internal
   variables.
 \end{itemize}
 
@@ -301,18 +304,9 @@ sectors based on the data range on x-axes in each category. In following
 code, \texttt{df\$x} is split by \texttt{df\$factors} and the width of
 sectors are automatically calculated based on data ranges in each
 category. Be default, sectors are positioned started from \(\theta = 0\)
-(in the polar coordinate) and go along the circle clock-wisely. You may
-not see anything after running following code because no track has been
-added yet.
-
-We set a global parameter \texttt{track.height} to 0.1 by the option
-function \texttt{circis.par()} so that all tracks which will be added
-have a default height of 0.1. The circle always has a radius of 1, so a
-height of 0.1 means 10\% of the circle radius.
-
-Note that the allocation of sectors only needs values on x direction (or
-circular direction), the values on y direction (radical direction) will
-be used in the step of creating tracks.
+(in the polar coordinate system) and go along the circle clock-wisely.
+You may not see anything after running following code because no track
+has been added yet.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -321,6 +315,16 @@ be used in the step of creating tracks.
 \KeywordTok{circos.initialize}\NormalTok{(}\DataTypeTok{factors =}\NormalTok{ df}\OperatorTok{$}\NormalTok{factors, }\DataTypeTok{x =}\NormalTok{ df}\OperatorTok{$}\NormalTok{x)}
 \end{Highlighting}
 \end{Shaded}
+
+We set a global parameter \texttt{track.height} to 0.1 by the option
+function \texttt{circis.par()} so that all tracks which will be added
+have a default height of 0.1. The circle used by \textbf{circlize}
+always has a radius of 1, so a height of 0.1 means 10\% of the circle
+radius.
+
+Note that the allocation of sectors only needs values on x direction (or
+on the circular direction), the values on y direction (radical
+direction) will be used in the step of creating tracks.
 
 After the circular layout is initialized, graphics can be added to the
 plot in a track-by-track manner. Before drawing anything, we need to
@@ -336,7 +340,7 @@ to specify the y ranges for each cell. The y ranges can be specified by
 automatically extracted and calculated in each cell) or \texttt{ylim}
 argument as a vector of length two. In principle, y ranges should be
 same for all cells in a same track. (See Figure
-\ref{fig:circlize-glance} A)
+\ref{fig:circlize-glance-track-1})
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -344,7 +348,7 @@ same for all cells in a same track. (See Figure
     \DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
         \KeywordTok{circos.text}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{cell.ylim[}\DecValTok{2}\NormalTok{] }\OperatorTok{+}\StringTok{ }\KeywordTok{uy}\NormalTok{(}\DecValTok{5}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }
 \NormalTok{            CELL_META}\OperatorTok{$}\NormalTok{sector.index)}
-        \KeywordTok{circos.axis}\NormalTok{()}
+        \KeywordTok{circos.axis}\NormalTok{(}\DataTypeTok{labels.cex =} \FloatTok{0.6}\NormalTok{)}
 \NormalTok{\})}
 \NormalTok{col =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"#FF0000"}\NormalTok{, }\StringTok{"#00FF00"}\NormalTok{), }\DecValTok{4}\NormalTok{)}
 \KeywordTok{circos.trackPoints}\NormalTok{(df}\OperatorTok{$}\NormalTok{factors, df}\OperatorTok{$}\NormalTok{x, df}\OperatorTok{$}\NormalTok{y, }\DataTypeTok{col =}\NormalTok{ col, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{)}
@@ -352,17 +356,26 @@ same for all cells in a same track. (See Figure
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-1-1} 
+
+}
+
+\caption{First example of circlize, add the first track.}\label{fig:circlize-glance-track-1}
+\end{figure}
+
 Axes for the circular plot are normally drawn on the most outside of the
 circle. Here we add axes in the first track by putting
 \texttt{circos.axis()} inside the self-defined function
-\texttt{panel.fun} (see code above). \texttt{circos.track()} creates
+\texttt{panel.fun} (see the code above). \texttt{circos.track()} creates
 plotting region in a cell-by-cell manner and the \texttt{panel.fun} is
 actually executed immediately after the plotting region for a certain
 cell is created. Thus, \texttt{panel.fun} actually means adding graphics
-in the ``current cell'' (Functionality of \texttt{panel.fun} is further
-discussed in Section @ref (panel-fun)). Without specifying any
-arguments, \texttt{circos.axis()} draws x-axes on the top of each cell
-(or the outside of each cell).
+in the ``current cell'' (Usage of \texttt{panel.fun} is further
+discussed in Section \ref{panel-fun}). Without specifying any arguments,
+\texttt{circos.axis()} draws x-axes on the top of each cell (or the
+outside of each cell).
 
 Also, we add sector name outside the first track by using
 \texttt{circos.text()}. \texttt{CELL\_META} provides ``meta
@@ -373,8 +386,8 @@ outside the cells and you may see warning messages saying data points
 exceeding the plotting regions. That is total fine and no worry about
 it. You can also add sector names by creating an empty track without
 borders as the first track and add sector names in it (like what
-\texttt{circos.initializeWithIdeogram()} and \texttt{chordDiagram()}
-do).
+\texttt{circos.initializeWithIdeogram()} and \texttt{chordDiagram()} do,
+after you go through following chapters).
 
 When specifying the position of text on the y direction, an offset of
 \texttt{uy(5,\ "mm")} is added to the y position of the text. In
@@ -403,12 +416,12 @@ be what you want. If the graphics are directly added to the track which
 are most recently created, \texttt{track.index} can be ommitted because
 this track is just marked as the ``current'' track.
 
-We add histograms to the second track. Here \texttt{circos.trackHist()}
-is a high- level function which means it creates a new track (as you can
-imagin \texttt{hist()} is also a high-level function). \texttt{bin.size}
-is explicitly set so that the bin size for histograms in all cells are
-the same and can be compared to each other. (See Figure
-\ref{fig:circlize-glance} B)
+OK, now we add histograms to the second track. Here
+\texttt{circos.trackHist()} is a high- level function which means it
+creates a new track (as you can imagin \texttt{hist()} is also a
+high-level function). \texttt{bin.size} is explicitly set so that the
+bin size for histograms in all cells are the same and can be compared to
+each other. (See Figure \ref{fig:circlize-glance-track-2})
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -417,6 +430,15 @@ the same and can be compared to each other. (See Figure
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-2-1} 
+
+}
+
+\caption{First example of circlize, add the second track.}\label{fig:circlize-glance-track-2}
+\end{figure}
+
 In the third track and in \texttt{panel.fun}, we randomly picked 10 data
 points in each cell, sort them and connect them with lines. In following
 code, when \texttt{factors}, \texttt{x} and \texttt{y} arguments are set
@@ -424,8 +446,8 @@ in \texttt{circos.track()}, x values and y values are split by
 \texttt{df\$factors} and corresponding subset of x and y values are sent
 to \texttt{panel.fun} through \texttt{panel.fun}'s \texttt{x} and
 \texttt{y} arguments. Thus, \texttt{x} an \texttt{y} in
-\texttt{panel.fun} are exactly values in the ``current'' cell. (See
-Figure \ref{fig:circlize-glance} C)
+\texttt{panel.fun} are exactly the values in the ``current'' cell. (See
+Figure \ref{fig:circlize-glance-track-3})
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -440,6 +462,15 @@ Figure \ref{fig:circlize-glance} C)
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-3-1} 
+
+}
+
+\caption{First example of circlize, add the third track.}\label{fig:circlize-glance-track-3}
+\end{figure}
+
 Now we go back to the second track and update the cell in sector ``d''.
 This is done by \texttt{circos.updatePlotRegion()} or the short version
 \texttt{circos.update()}. The function erases graphics which have been
@@ -450,7 +481,7 @@ specify the sector index and track index unless the ``current'' cell is
 what you want to update. After the calling of \texttt{circos.update()},
 the ``current'' cell is redirected to the cell you just specified and
 you can use low-level graphic functions to add graphics directly into
-it. (See Figure \ref{fig:circlize-glance} D)
+it. (See Figure \ref{fig:circlize-glance-track-update})
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -461,6 +492,15 @@ it. (See Figure \ref{fig:circlize-glance} D)
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-update-1} 
+
+}
+
+\caption{First example of circlize, update the second track.}\label{fig:circlize-glance-track-update}
+\end{figure}
+
 Next we continue to create new tracks. Although we have gone back to the
 second track, when creating a new track, the new track is still created
 after the track which is most inside. In this new track, we add heatmaps
@@ -469,7 +509,7 @@ while simply set \texttt{ylim} argument because heatmaps just fill the
 whole cell from the most left to right and from bottom to top. Also the
 exact value of \texttt{ylim} is not important and \texttt{x}, \texttt{y}
 in \texttt{panel.fun()} are not used (actually they are both
-\texttt{NULL}). (See Figure \ref{fig:circlize-glance} E)
+\texttt{NULL}). (See Figure \ref{fig:circlize-glance-track-4})
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -485,10 +525,19 @@ in \texttt{panel.fun()} are not used (actually they are both
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-4-1} 
+
+}
+
+\caption{First example of circlize, add the fourth track.}\label{fig:circlize-glance-track-4}
+\end{figure}
+
 In the most inside of the circle, links or ribbons are added. There can
 be links from single point to point, point to interval or interval to
 interval. Section \ref{links} gives detailed usage of links. (See Figure
-\ref{fig:circlize-glance} F)
+\ref{fig:circlize-glance-track-links})
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -499,6 +548,15 @@ interval. Section \ref{links} gives detailed usage of links. (See Figure
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-links-1} 
+
+}
+
+\caption{First example of circlize, add links.}\label{fig:circlize-glance-track-links}
+\end{figure}
+
 Finally we need to reset the graphic parameters and internal variables,
 so that it will not mess up your next plot.
 
@@ -507,15 +565,6 @@ so that it will not mess up your next plot.
 \KeywordTok{circos.clear}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-1} 
-
-}
-
-\caption{A step-by-step example}\label{fig:circlize-glance}
-\end{figure}
 
 \chapter{Circular layout}\label{circular-layout}
 
@@ -527,7 +576,7 @@ systems} in which ranges for x-axes and y-axes are the ranges of
 original data. Second, there is a \textbf{polar coordinate system} in
 which these coordinates are mapped onto a circle. Finally, there is a
 \textbf{canvas coordinate system} in which graphics are really drawn on
-the graphical device (figure @ref(fig:coordinate- transformation)). Each
+the graphical device (figure \ref{fig:coordinate-transformation}). Each
 cell has its own data coordinate and they are independent.
 \textbf{circlize} first transforms coordinates from data coordinate
 system to polar coordinate system and finally transforms into canvas
@@ -548,9 +597,8 @@ cell you are in and does all the transformations automatically.
 The final canvas coordinate is in fact an ordinary coordinate in the
 base R graphic system with x range in \texttt{(-1,\ 1)} and y range in
 \texttt{(-1,\ 1)} by default. It should be noted that \textbf{the
-circular plot is always (or mostly except you want to draw something out
-of the circle) drawn inside the circle which has radius of 1 (which
-means it is always a unit circle), and from outside to inside}.
+circular plot is always drawn inside the circle which has radius of 1
+(which means it is always a unit circle), and from outside to inside}.
 
 \section{Rules for making the circular
 plot}\label{rules-for-making-the-circular-plot}
@@ -627,7 +675,7 @@ As mentioned above, there are three ways to add graphics on a track.
   a \texttt{track.index} argument for both functions, however, the
   default value is the ``current'' track index and as the two functions
   are used just after \texttt{circos.track()}, the ``current'' track
-  index is what the two function expect and it can be ommited when
+  index is what the two functions expect and it can be ommited when
   calling the two functions.
 \end{enumerate}
 
@@ -683,8 +731,8 @@ As mentioned above, there are three ways to add graphics on a track.
   creates cells one by one and after the creation of a cell, and
   \texttt{panel.fun} is executed on this cell immediately. In this case,
   the ``current'' sector and ``current'' track are marked to this cell
-  that you can directly use low-level functions without specify sector
-  index and track index.
+  that you can directly use low-level functions without specifying
+  sector index and track index.
 
   If you look at following code, you will find the code inside
   \texttt{panel.fun} is as natural as using \texttt{points()} or
@@ -717,7 +765,7 @@ created or updated cell.
 
 A circular layout is composed of sectors and tracks. As illustrated in
 Figure \ref{fig:circlize-coordinate}, the red circle is one track and
-the blue represent one sector. The intersection of a sector and a track
+the blue represents one sector. The intersection of a sector and a track
 is called a cell which can be thought as an imaginary plotting region
 for data points. In this section, we introduce how to set data ranges on
 x and y directions in cells.
@@ -734,11 +782,12 @@ x and y directions in cells.
 Sectors are first allocated on the circle by
 \texttt{circos.initialize()}. There must be a categorical variable (say
 \texttt{factors}) that on the circle, each sector corresponds to one
-category. The width of sectors are proportional to the data range in
-sectors on x direction. The data range can be specified as a numeric
-vector \texttt{x} which has same length as \texttt{factors}, then
-\texttt{x} is split by \texttt{factors} and data ranges are calculated
-for each sector internally.
+category. The width of sectors (measured by degree) are proportional to
+the data range in sectors on x direction (or the circular direction).
+The data range can be specified as a numeric vector \texttt{x} which has
+same length as \texttt{factors}, then \texttt{x} is split by
+\texttt{factors} and data ranges are calculated for each sector
+internally.
 
 Data ranges can also be specified directly by \texttt{xlim} argument.
 The valid value for \texttt{xilm} is a two-column matrix with same
@@ -767,7 +816,7 @@ the input factor}. If the value for \texttt{factors} is not a factor,
 the order of sectors is \texttt{unique(factors)}. Thus, if you want to
 change the order of sectors, you can just change of the level of
 \texttt{factors} variable. The following code generates plots with
-different sector orders (Figure \ref{fig:circlize-factor}:
+different sector orders (Figure \ref{fig:circlize-factor}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -790,19 +839,22 @@ different sector orders (Figure \ref{fig:circlize-factor}:
 
 \textbf{In different tracks, cells in the same sector share the same
 data range on x-axes.} Then, for each track, we only need to specify the
-data range on y direction for cells. Similar as
-\texttt{circos.initialize()}, \texttt{circos.track()} also receives
+data range on y direction (or the radical direction) for cells. Similar
+as \texttt{circos.initialize()}, \texttt{circos.track()} also receives
 either \texttt{y} or \texttt{ylim} argument to specify the range of
 y-values. Since all cells in a same track shares a same y range,
 \texttt{ylim} is just a vector of length two if it is specified.
 
-In Section \ref{panel-fun}, we will introduce how \texttt{x} and
-\texttt{y} are sent to each cell and how the graphics are added.
+\texttt{x} can also be specified in \texttt{circos.track()}, but it is
+only used to send to \texttt{panel.fun}. In Section \ref{panel-fun}, we
+will introduce how \texttt{x} and \texttt{y} are sent to each cell and
+how the graphics are added.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{circos.track}\NormalTok{(factors, }\DataTypeTok{y =}\NormalTok{ y)}
 \KeywordTok{circos.track}\NormalTok{(factors, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\KeywordTok{circos.track}\NormalTok{(factors, }\DataTypeTok{x =}\NormalTok{ x, }\DataTypeTok{y =}\NormalTok{ y)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -811,22 +863,22 @@ allocated in the circle, if \texttt{factors} argument is not set,
 \texttt{circos.track()} would create plotting regions for all available
 sectors. Also, levels of \texttt{factors} do not need to be specified
 explicitly because the order of sectors has already be determined in the
-initialization step. If users only create cells for a part of sectors in
-the track (not all sectors), in fact, cells in remaining unspecified
+initialization step. If users only create cells for a subset of sectors
+in the track (not all sectors), in fact, cells in remaining unspecified
 sectors are created as well, but with no borders (pretending they are
 not created).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# assume `factors` only covers a subset of sectors}
-\CommentTok{# You will only see cells that are covered in `factors`}
+\CommentTok{# You will only see cells that are covered in `factors` have borders}
 \KeywordTok{circos.track}\NormalTok{(factors, }\DataTypeTok{y =}\NormalTok{ y)}
-\CommentTok{# You will see all cells are covered}
+\CommentTok{# You will see all cells have borders}
 \KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{ranges}\NormalTok{(y))}
 \end{Highlighting}
 \end{Shaded}
 
-Cells are basic units in the circular plot and are independent with each
+Cells are basic units in the circular plot and are independent from each
 other. After the creation of cells, they have self-contained meta values
 of x-lim and y-lim (data range measured in data coordinate). So if you
 are adding graphics in one cell, you do not need to consider things
@@ -855,37 +907,40 @@ circular layout.
 \item
   \texttt{start.degree}: The starting degree where the first sector is
   put. Note this degree is measured in the standard polar coordinate
-  which means it is always reverse clockwise. E.g. if it is set to 90,
-  sectors start from the top center of the circle. See Figure
+  system which means it is always reverse clockwise. E.g. if it is set
+  to 90, sectors start from the top center of the circle. See Figure
   \ref{fig:circlize-direction}.
 \item
   \texttt{gap.degree}: Gap between two neighbour sectors. It can be a
   single value which means all gaps share same degree, or a vector which
-  has same number as sectors. ** Note the first gap is after the first
-  sector.** See Figure \ref{fig:circlize-direction} and figure
+  has same number as sectors. \textbf{Note the first gap is after the
+  first sector.} See Figure \ref{fig:circlize-direction} and figure
   \ref{fig:circlize-region}.
 \item
   \texttt{gap.after}: Same as \texttt{gap.degree}, but more
   understandable. Modifying values of \texttt{gap.after} will also
   modify \texttt{gap.degree} and vice versa.
 \item
-  \texttt{track.margin}: Like \texttt{margin} in Cascading Style Sheets
-  (CSS), it is the blank area out of the plotting region, also outside
-  of the borders. Since left and right margin are controlled by
-  \texttt{gap.after}, only bottom and top margin need to be set. The
-  value for \texttt{track.margin} is the percentage to the radius of the
-  unit circle. The value can also be set by \texttt{convert\_height()}
-  or the short version \texttt{uh()} function with absolute units. See
-  figure \ref{fig:circlize-region}.
+  \texttt{track.margin}:
+  \href{https://www.w3schools.com/css/css_margin.asp}{Like
+  \texttt{margin} in Cascading Style Sheets (CSS)}, it is the blank area
+  out of the plotting region, also outside of the borders. Since left
+  and right margin are controlled by \texttt{gap.after}, only bottom and
+  top margin need to be set. The value for \texttt{track.margin} is the
+  percentage to the radius of the unit circle. The value can also be set
+  by \texttt{convert\_height()} or the short version \texttt{uh()}
+  function with absolute units. See figure \ref{fig:circlize-region}.
 \item
-  \texttt{cell.padding}: Padding of the cell. Like \texttt{padding} in
-  Cascading Style Sheets (CSS), it is the blank area around the plotting
-  regions, but within the borders. The parameter has four values, which
-  control the bottom, left, top and right padding respectively. The
-  first and the third padding values are the percentages to the radius
-  of the unit circle, and the second and fourth values are the degrees.
-  The first and the third value can be set by \texttt{uh()} with
-  absolute units. See figure @ref\{fig:circlize-region\}.
+  \texttt{cell.padding}: Padding of the cell.
+  \href{https://www.w3schools.com/css/css_padding.asp}{Like
+  \texttt{padding} in Cascading Style Sheets (CSS)}, it is the blank
+  area around the plotting regions, but within the borders. The
+  parameter has four values, which control the bottom, left, top and
+  right padding respectively. The first and the third padding values are
+  the percentages to the radius of the unit circle, and the second and
+  fourth values are the degrees. The first and the third value can be
+  set by \texttt{uh()} with absolute units. See figure
+  \ref{fig:circlize-region}.
 \item
   \texttt{unit.circle.segments}: Since curves are simulated by a series
   of straight lines, this parameter controls the amount of segments to
@@ -908,8 +963,8 @@ circular layout.
   drawing the points but with warning messages. However, in some
   circumstances, drawing something out of the plotting region is useful,
   such as adding some text annotations (like the first track in Figure
-  \ref{fig:circlize-glance} A). Set this value to \texttt{FALSE} to turn
-  off the warnings.
+  \ref{fig:circlize-glance-track-1}). Set this value to \texttt{FALSE}
+  to turn off the warnings.
 \item
   \texttt{canvas.xlim}: The ranges in the canvas coordinate in x
   direction. \textbf{circlize} is forced to put everything inside the
@@ -966,13 +1021,18 @@ the initialization of the circular layout. Thus, \texttt{start.degree},
 \texttt{cell.padding} (left and right paddings) can not be modified
 neither (or will be ignored).
 
+Similar reason, since some of the parameters are defined before the
+initialization of the circular layout, after making each plot, you need
+to call \texttt{circos.clear()} to manually reset all the parameters.
+
 \section{Create plotting regions}\label{create-plotting-regions}
 
 As described above, only after creating the plotting region can you add
-low- level graphics on it. The minimal set of arguments for this
-function is to set either \texttt{y} or \texttt{ylim} which assigns
-range of y values for this track. \texttt{circos.track()} creates tracks
-for all sectors although in some case only parts of them are visible.
+low- level graphics on it. The minimal set of arguments for
+\texttt{circos.track()} is to set either \texttt{y} or \texttt{ylim}
+which assigns range of y values for this track. \texttt{circos.track()}
+creates tracks for all sectors although in some case only parts of them
+are visible.
 
 If \texttt{factors} is not specified, all cells in the track will be
 created with the same settings. If \texttt{factors}, \texttt{x} and
@@ -984,8 +1044,9 @@ internally. Section \ref{panel-fun} explains the usage of
 
 Graphic arguments such as \texttt{bg.border} and \texttt{bg.col} can
 either be a scalar or a vector. If it is a vector, the length must be
-equal to the number of sectors. Thus, you can create plot regions with
-different styles of borders and background colors.
+equal to the number of sectors and the order corresponds to the order of
+sectors. Thus, you can create plot regions with different styles of
+borders and background colors.
 
 If you are confused with the \texttt{factors} orders, you can also
 customize the borders and background colors inside \texttt{panel.fun}.
@@ -1209,6 +1270,12 @@ default transformation is applied in the \texttt{current} cell.
 ## [1,] 1.519774 0.56
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{reverse.circlize}\NormalTok{(}\DecValTok{90}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\DataTypeTok{sector.index =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
 ##              x    y
 ## [1,] 0.5028249 0.56
@@ -1224,11 +1291,59 @@ provides a way to build more complex plots. Basically, the two circular
 plots share a same polar coordiante, then, the manipulation of
 \texttt{circlize-\textgreater{}reverse.circlize-\textgreater{}circlize}
 can transform coordinate for data points from the first circular plot to
-the second.
+the second. In Chapter \ref{nested-zooming}, we use this technique to
+combine two circular plots where one zooms subset of regions in the
+other one.
 
 The transformation between polar coordinate and canvas coordinate is
 simple. \textbf{circlize} has a \texttt{circlize:::polar2Cartesian()}
 function but this function is not exported.
+
+Following example (Figure \ref{fig:circular-pokemon}) adds raster image
+to the circular plot. The raster image is added by
+\texttt{rasterImage()} which is applied in the canvas coordinate. Note
+how we change coordinate from data coordinate to canvas coordinate by
+using \texttt{circlize()} and \texttt{circlize:::polar2Cartesian()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(yaml)}
+\NormalTok{data =}\StringTok{ }\KeywordTok{yaml.load_file}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/Templarian/slack-emoji-pokemon/master/pokemon.yaml"}\NormalTok{)}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{pokemon_list =}\StringTok{ }\NormalTok{data}\OperatorTok{$}\NormalTok{emojis[}\KeywordTok{sample}\NormalTok{(}\KeywordTok{length}\NormalTok{(data}\OperatorTok{$}\NormalTok{emojis), }\DecValTok{40}\NormalTok{)]}
+\NormalTok{pokemon_name =}\StringTok{ }\KeywordTok{sapply}\NormalTok{(pokemon_list, }\ControlFlowTok{function}\NormalTok{(x) x}\OperatorTok{$}\NormalTok{name)}
+\NormalTok{pokemon_src =}\StringTok{ }\KeywordTok{sapply}\NormalTok{(pokemon_list, }\ControlFlowTok{function}\NormalTok{(x) x}\OperatorTok{$}\NormalTok{src)}
+
+\KeywordTok{library}\NormalTok{(EBImage)}
+\KeywordTok{circos.par}\NormalTok{(}\StringTok{"points.overflow.warning"}\NormalTok{ =}\StringTok{ }\OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{circos.initialize}\NormalTok{(pokemon_name, }\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+\NormalTok{    pos =}\StringTok{ }\NormalTok{circlize}\OperatorTok{:::}\KeywordTok{polar2Cartesian}\NormalTok{(}\KeywordTok{circlize}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{ycenter))}
+\NormalTok{    image =}\StringTok{ }\NormalTok{EBImage}\OperatorTok{::}\KeywordTok{readImage}\NormalTok{(pokemon_src[CELL_META}\OperatorTok{$}\NormalTok{sector.numeric.index])}
+    \KeywordTok{circos.text}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{cell.ylim[}\DecValTok{1}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{uy}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{),}
+\NormalTok{        CELL_META}\OperatorTok{$}\NormalTok{sector.index, }\DataTypeTok{facing =} \StringTok{"clockwise"}\NormalTok{, }\DataTypeTok{niceFacing =} \OtherTok{TRUE}\NormalTok{,}
+        \DataTypeTok{adj =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.5}\NormalTok{), }\DataTypeTok{cex =} \FloatTok{0.6}\NormalTok{)}
+    \KeywordTok{rasterImage}\NormalTok{(image, }
+        \DataTypeTok{xleft =}\NormalTok{ pos[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{] }\OperatorTok{-}\StringTok{ }\FloatTok{0.05}\NormalTok{, }\DataTypeTok{ybottom =}\NormalTok{ pos[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\FloatTok{0.05}\NormalTok{,}
+        \DataTypeTok{xright =}\NormalTok{ pos[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\FloatTok{0.05}\NormalTok{, }\DataTypeTok{ytop =}\NormalTok{ pos[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{]}\OperatorTok{+}\StringTok{ }\FloatTok{0.05}\NormalTok{)}
+\NormalTok{\}, }\DataTypeTok{bg.border =} \DecValTok{1}\NormalTok{, }\DataTypeTok{track.height =} \FloatTok{0.15}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{02-circlize-layout_files/figure-latex/circular-pokemon-1} 
+
+}
+
+\caption{Add raster image to the circular plot.}\label{fig:circular-pokemon}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{The convert functions}\label{convert-functions}
 
@@ -1265,12 +1380,13 @@ function has another name \texttt{convert\_height()}, or the short name
 \texttt{convert\_x()} and \texttt{convert\_y()}, or the short version
 \texttt{ux()} and \texttt{uy()} (\emph{unit x} and \emph{unit y}),
 convert absolute units to the data coordinate. By default, the
-conversion is applied in the ``current'' cell, but it can still be
-specified by \texttt{sector.index} and \texttt{track.index} arguments.
-Since the width of the cell is not the same from the top to the bottom
-in the cell, for \texttt{convert\_x()} or \texttt{ux()} function, the
-position on y direction where the convert is applied needs to be
-specified. By default it is at the middle point on y-axis.
+conversion is applied in the ``current'' cell, but it can still be used
+in other cells by specifying \texttt{sector.index} and
+\texttt{track.index} arguments. Since the width of the cell is not
+identical from the top to the bottom in the cell, for
+\texttt{convert\_x()} or \texttt{ux()} function, the position on y
+direction where the convert is applied needs to be specified. By default
+it is at the middle point on y-axis.
 
 Following plot (Figure \ref{fig:unit-convert}) is an example of setting
 absolute units.
@@ -1319,7 +1435,7 @@ absolute units.
 \texttt{circos.clear()}}{circos.info() and circos.clear()}}\label{circos-info-and-circos-clear}
 
 You can get basic information of your current circular plot by
-\texttt{circos.info()}. The function can be called any time.
+\texttt{circos.info()}. The function can be called at any time.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1365,7 +1481,8 @@ You can get basic information of your current circular plot by
 \end{Highlighting}
 \end{Shaded}
 
-It can also add labels to cells by \texttt{circos.info(plot\ =\ TRUE)}.
+It can also add labels to all cells by
+\texttt{circos.info(plot\ =\ TRUE)}.
 
 You should always call \texttt{circos.clear()} at the end of every
 circular plot. There are several parameters for circular plot which can
@@ -1559,7 +1676,7 @@ Possible usage for \texttt{circos.text()} is:
 
 If, e.g., \texttt{facing} is set to \texttt{inside}, text which is on
 the bottom half of the circle is still facing to the top and hard to
-read. To make text more easy to read and not to hurt users' neck too
+read. To make text more easy to read and not to hurt readers' neck too
 much, \texttt{circos.text()} provides \texttt{niceFacing} option which
 automatically adjust text facing according to their positions in the
 circle. \texttt{niceFacing} only works for \texttt{facing} value of
@@ -1609,7 +1726,7 @@ the data coordinate. An absolute offset can be set by using
 Theoretically, circular rectangles and polygons are all polygons. If you
 imagine the plotting region in a cell as Cartesian coordinate, then
 \texttt{circos.rect()} draws rectangles. In the circle, the up and
-bottom edge become two arcs. This function can be vectorized.
+bottom edge become two arcs. Note this function can be vectorized.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1620,7 +1737,7 @@ bottom edge become two arcs. This function can be vectorized.
 \end{Shaded}
 
 \texttt{circos.polygon()} draws a polygon through a series of points in
-a cell. Please note the first data point shoud overlap to the last data
+a cell. Please note the first data point must overlap to the last data
 point.
 
 \begin{Shaded}
@@ -1696,9 +1813,9 @@ x-axes. The explanations are as follows:
 \caption{X-axes}\label{fig:circlize-xaxis}
 \end{figure}
 
-As you can notice in the above figure, when the first and last axis
+As you may notice in the above figure, when the first and last axis
 labels exceed data ranges on x-axis in the corresponding cell, their
-positions are automatically adjusted to be shifted towards in the cell.
+positions are automatically adjusted to be shifted inwards in the cell.
 
 Possible usage of \texttt{circos.axis()} is as follows. Note \texttt{h}
 can be \texttt{bottom}, \texttt{top} or a numeric value.
@@ -1745,7 +1862,7 @@ are used to represent relations or interactions between sectors. In
 points and intervals. There are four mandatory arguments which are index
 for the first sector, positions on the first sector, index for the
 second sector and positions on the second sector. If the positions on
-the two sectors are all single points, the link represents a line. If
+the two sectors are all single points, the link represents as a line. If
 the positions on the two sectors are intervals, the link represents as a
 robbon (Figure \ref{fig:link-example}). Possible usage for
 \texttt{circos.link()} is as follows.
@@ -1773,7 +1890,7 @@ is the bottom of the most inside track and normally, you don't need to
 care about this setting. The two ends of the link are located in a same
 circle by default. The positions of two ends can be adjusted with
 different values for \texttt{rou1} and \texttt{rou2} arguments. See
-Figure \ref{fig:link-height}.
+Figure \ref{fig:link-end}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1784,11 +1901,11 @@ Figure \ref{fig:link-height}.
 
 \begin{figure}
 
-{\centering \includegraphics{03-graphics_files/figure-latex/unnamed-chunk-17-1} 
+{\centering \includegraphics{03-graphics_files/figure-latex/link-end-1} 
 
 }
 
-\caption{Positions of link ends.}\label{fig:unnamed-chunk-17}
+\caption{Positions of link ends.}\label{fig:link-end}
 \end{figure}
 
 The height of the link is controlled by \texttt{h} argument. In most
@@ -1866,7 +1983,7 @@ Type of arrows is controlled by \texttt{arr.type} argument and it is
 actually passed to \texttt{Arrowhead()} defined in \textbf{shape}
 package. Besides the arrow types supported in \textbf{shape} package,
 there is an additional arrow type \texttt{big.arrow} which turns the
-robbon into a big arrow.
+robbon into a big arrow (Figure \ref{fig:link-arrow}).
 
 Unequal height of the link ends can also represent directions which we
 will discuss more with the \texttt{chordDiagram()} function.
@@ -2028,10 +2145,11 @@ should contain four values representing ratios of the width or height of
 the highlighted region (Figure \ref{fig:circlize-highlight-sector}).
 
 One advantage of \texttt{highlight.sector()} is that it supports to add
-text for the highlighted regions. By default, the text is drawn at that
+text in the highlighted regions. By default, the text is drawn at that
 center of the highlighted region. The position on the radical direction
 can be set by \texttt{text.vjust} argument either by a numeric value or
-a string in a form of ``2 inches'' or ``-1.2cm''.
+a string in form of
+\texttt{"2\ inches"\textasciigrave{}\textasciigrave{}\ or}``-1.2cm''`.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2068,7 +2186,7 @@ a string in a form of ``2 inches'' or ``-1.2cm''.
 \end{Highlighting}
 \end{Shaded}
 
-\section{Work with the base graphic
+\section{Work together with the base graphic
 system}\label{work-with-base-graphic-system}
 
 \textbf{circlize} is built on the base R graphic system, then, of course
@@ -2121,9 +2239,9 @@ is completely blind to users' data so that one important thing is
 missing for the visualization which is the legend.
 
 Although legends cannot be automatically generated by \textbf{circlize},
-by using functionality from other R packages, it is just a few more work
-to really implement it. Here I will demonstrate how to customize legends
-and arrange to the circular plot.
+by using functionality from other R packages, it is just a few more
+lines to really implement it. Here I will demonstrate how to customize
+legends and arrange to the circular plot.
 
 As an example, a circular plot which contains two tracks and links
 inside the circle is generated. The first track will have a legend that
@@ -2227,7 +2345,7 @@ layers but drawn on a same graphic device.)
 
 In Figure \ref{fig:directly-add}, the whole image region corresponds to
 the circular plot and the legend layer is drawn just on top of it.
-Actually you can see that one big problem is if there are many legends
+Actually you can see that one big problem is when there are many legends
 that the size for the legends is too big, they may overap to the circle.
 One solution is to split the legends into several parts and add each
 part to different corners in the plot (Figure \ref{fig:two-legends}).
@@ -2270,7 +2388,7 @@ legends.
 To mix grid graphics and base graphics, ther are two important packages
 to use: the \textbf{grid} package and \textbf{gridBase} package.
 \textbf{grid} is the base for making grid graphics as well as arranging
-plotting regions (or, viewport in \textbf{grid} term), and
+plotting regions (or, \emph{viewports} in \textbf{grid} term), and
 \textbf{gridBase} makes it easy to integrate base graphics into grid
 system.
 
@@ -2351,7 +2469,7 @@ Similar code to arrange viewports.
 
 \begin{center}\includegraphics{04-legends_files/figure-latex/bottom-legend-1} \end{center}
 
-\chapter{Implement high-level plots}\label{high-level-plots}
+\chapter{Implement high-level circular plots}\label{high-level-plots}
 
 In this chapter, we show several examples which combine low-level
 graphic functions to construct complicated graphics for specific
@@ -2532,7 +2650,7 @@ important because the leaves of the dendrogram are drawn at
 \texttt{x\ =\ seq(0.5,\ n\ -\ 0.5)}.
 
 In the second track, we plot the circular dendrogram by
-\texttt{circos.dendrogram()} (Figure @ref(fig:phylogenetic\_tree) left).
+\texttt{circos.dendrogram()} (Figure \ref{fig:phylogenetic-tree} left).
 You can render the dendrogram by \textbf{dendextend} package.
 
 \begin{Shaded}
@@ -2708,10 +2826,10 @@ extract these data and format as a new data frame.
 \end{Highlighting}
 \end{Shaded}
 
-Note, we must change the sector name in the zoomed data frame. We just
-simply add ``zoom\_'' prefix to the original name to show it is a
-``zoomed'' sector. After that, it is attached to the original data
-frame.
+Then we need to change the sector names in the zoomed data frame. Here
+we just simply add ``zoom\_'' prefix to the original names to show that
+they are ``zoomed'' sectors. After that, it is attached to the original
+data frame.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2721,12 +2839,12 @@ frame.
 \end{Shaded}
 
 In this example, we will put the original cells in the left half of the
-circle and the zoomed sectors in the right. Here is where the magic
-thing happens. We simply normalize the width of normal sectors and
-normalize the width of zoomed sectors separately. Now the sum of the
-sector width for the original sectors is 1 and the sum of sector width
-for the zoomed sectors is 1, which means these two types of sectors now
-have their own half circle.
+circle and the zoomed sectors in the right. As we have already mentioned
+before, we simply normalize the width of normal sectors and normalize
+the width of zoomed sectors separately. Note now the sum of the sector
+width for the original sectors is 1 and the sum of sector width for the
+zoomed sectors is 1, which means these two types of sectors have their
+own half circle.
 
 You may notice the sum of the \texttt{sector.width} is not idential to
 1. This is fine, they will be further normalized to 1 internally.
@@ -2753,9 +2871,9 @@ degree, but the real value is quite close to it.
 ## 0.1902877
 \end{verbatim}
 
-Now just make the circular plot in the normal way. All the graphics in
-sector a and b will be automatically zoomed to sector ``zoomed\_a'' and
-``zoomed\_b''.
+What to do next is just to make the circular plot in the normal way. All
+the graphics in sector a and b will be automatically zoomed to sector
+``zoom\_a'' and ``zoom\_b''.
 
 In following code, since the sector names are added outside the first
 track, \texttt{points.overflow.warning} is set to \texttt{FALSE} to turn
@@ -2775,7 +2893,7 @@ off the warning messages.
 \end{Shaded}
 
 Adding links from original sectors to zoomed sectors is a good idea to
-show where the zooming happens (Figure \ref{fig:circlize-zoom}). Notice
+show where the zooming occurs (Figure \ref{fig:circlize-zoom}). Notice
 that we manually adjust the position of one end of the sector b link.
 
 \begin{Shaded}
@@ -2799,6 +2917,9 @@ that we manually adjust the position of one end of the sector b link.
 
 \caption{Zoom sectors.}\label{fig:circlize-zoom}
 \end{figure}
+
+Chapter \ref{nested-zooming} introduces another type of zooming by
+combining two circular plots.
 
 \section{Visualize part of the circle}\label{part-circle}
 
@@ -2931,7 +3052,7 @@ introduced in Section \ref{part-circle} to only show part of the circle,
 select proper \texttt{canvas.xlim} and \texttt{canvas.ylim}, and finally
 arrange the two plots into one page. The source code for generating
 Figure \ref{fig:circlize-separated} is at
-\url{src/intro-20-separated.R}.
+\url{https://github.com/jokergoo/circlize_book/blob/master/src/intro-20-separated.R}.
 
 \begin{figure}
 
@@ -2981,6 +3102,9 @@ circular plot, thus they should have same radius. But for the example
 here, cells have different radius and they belong to different circular
 plot.
 
+In chapter \ref{nested-zooming}, we use this technique to implement
+zoomings by combining two circular plots.
+
 \section{Arrange multiple plots}\label{arrange-multiple-plots}
 
 \textbf{circlize} is implemented in the base R graphic system, thus, you
@@ -2996,7 +3120,7 @@ multiple circular plots in one page (Figure
     \KeywordTok{par}\NormalTok{(}\DataTypeTok{mar =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{))}
     \KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{cell.padding =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{))}
     \KeywordTok{circos.initialize}\NormalTok{(factors, }\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
-    \KeywordTok{circos.trackPlotRegion}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{track.height =} \FloatTok{0.05}\NormalTok{,}
+    \KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{track.height =} \FloatTok{0.05}\NormalTok{,}
         \DataTypeTok{bg.col =} \KeywordTok{rand_color}\NormalTok{(}\DecValTok{8}\NormalTok{), }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{)}
     \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{20}\NormalTok{) \{}
 \NormalTok{        se =}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{8}\NormalTok{, }\DecValTok{2}\NormalTok{)}
@@ -3025,9 +3149,10 @@ Genomics}\label{part-applications-in-genomics}
 Circular visualization is popular in Genomics and related omics fields.
 It is efficient in revealing associations in high dimensional genomic
 data. In genomic plots, categories are usually chromosomes and data on x
-axes are genomic positions.
+axes are genomic positions, but it can also be any kind of general
+genomic categories.
 
-To make is easy for genomics analysis, \textbf{circlize} package
+To make is easy for Genomics analysis, \textbf{circlize} package
 particularly provides functions which focus on genomic plots. These
 functions are synonymous to the basic graphic functions but expect
 special format of input data:
@@ -3057,9 +3182,9 @@ genomic functions can be mixed with the basic circlize functions.
 
 Genomic data is usually stored as a table where the first three columns
 define the genomic regions and following columns are values associated
-with the corresponding regions. Each genomic region are composed by
-three elements: genomic category (in most case, it is the chromosome),
-start position on the genomic category and the end position. Such data
+with the corresponding regions. Each genomic region is composed by three
+elements: genomic category (in most case, it is the chromosome), start
+position on the genomic category and the end position. Such data
 structure is known as
 \href{https://genome.ucsc.edu/FAQ/FAQformat\#format1}{\emph{BED}} format
 and is broadly used in genomic research.
@@ -3140,7 +3265,7 @@ annotation to help to identify positions on chromosomes.
 
 If you work on human genome, the most straightforward way is to directly
 use \texttt{circos.initializeWithIdeogram()} (Figure
-@ref(fig:genomic-initialize- ideogram) A). By default, the function
+\ref{fig:genomic-initialize-ideogram-default}). By default, the function
 creates a track with chromosome name and axes, and a track of ideograms.
 
 Although chromosome names added to the plot are pure numeric, actually
@@ -3150,6 +3275,41 @@ tracks, the chromosome names should also have ``chr'' index.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{circos.initializeWithIdeogram}\NormalTok{()}
+\KeywordTok{text}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\StringTok{"default"}\NormalTok{, }\DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-initialize-ideogram-default-1} 
+
+}
+
+\caption{Initialize genomic plot, default.}\label{fig:genomic-initialize-ideogram-default}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.info}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## All your sectors:
+##  [1] "chr1"  "chr2"  "chr3"  "chr4"  "chr5"  "chr6"  "chr7"  "chr8" 
+##  [9] "chr9"  "chr10" "chr11" "chr12" "chr13" "chr14" "chr15" "chr16"
+## [17] "chr17" "chr18" "chr19" "chr20" "chr21" "chr22" "chrX"  "chrY" 
+## 
+## All your tracks:
+## [1] 1 2
+## 
+## Your current sector.index is chrY
+## Your current track.index is 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3195,25 +3355,41 @@ If you read cytoband data directly from file, please explicitly specify
 integers, \texttt{read.table} would treat those numbers as
 \texttt{integer} by default. In initialization of circular plot,
 \textbf{circlize} needs to calculate the summation of all chromosome
-lengths. The sumation of such large integers would throw error of
+lengths. The summation of such large integers would throw error of
 integer overflow.
 
 By default, \texttt{circos.intializeWithIdeogram()} uses all chromosomes
 which are available in cytoband data to initialize the circular plot.
 Users can choose a subset of chromosomes by specifying
 \texttt{chromosome.index}. This argument is also for ordering
-chromosomes (Figure \ref{fig:genomic-initialize-ideogram} B).
+chromosomes (Figure \ref{fig:genomic-initialize-ideogram-subset}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{circos.initializeWithIdeogram}\NormalTok{(}\DataTypeTok{chromosome.index =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"chr"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{8}\NormalTok{)))}
+\KeywordTok{text}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\StringTok{"subset of chromosomes"}\NormalTok{, }\DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-When there is no cytoband data for the specified species, and chromInfo
-data is used instead, they may be many many extra short contigs.
-\texttt{chromosome.index} can also be useful to remove unnecessary
-contigs.
+\begin{figure}
+
+{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-initialize-ideogram-subset-1} 
+
+}
+
+\caption{Initialize genomic plot, subset chromosomes.}\label{fig:genomic-initialize-ideogram-subset}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+When there is no cytoband data for the specified species, and when
+chromInfo data is used instead, there may be many many extra short
+contigs. \texttt{chromosome.index} can also be useful to remove
+unnecessary contigs.
 
 \subsection{Pre-defined tracks}\label{pre-defined-tracks}
 
@@ -3222,13 +3398,32 @@ After the initialization of the circular plot,
 where there are genomic axes and chromosome names, and create another
 track where there is an ideogram (depends on whether cytoband data is
 available). \texttt{plotType} argument is used to control which type of
-tracks to add. (figure Figure \ref{fig:genomic-initialize-ideogram} C,
-D).
+tracks to add. (figure Figure
+\ref{fig:genomic-initialize-ideogram-track}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{circos.initializeWithIdeogram}\NormalTok{(}\DataTypeTok{plotType =} \KeywordTok{c}\NormalTok{(}\StringTok{"axis"}\NormalTok{, }\StringTok{"labels"}\NormalTok{))}
+\KeywordTok{text}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\StringTok{"plotType = c('axis', 'labels')"}\NormalTok{, }\DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{circos.clear}\NormalTok{()}
+
 \KeywordTok{circos.initializeWithIdeogram}\NormalTok{(}\DataTypeTok{plotType =} \OtherTok{NULL}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\StringTok{"plotType = NULL"}\NormalTok{, }\DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-initialize-ideogram-track-1} 
+
+}
+
+\caption{Initialize genomic plot, control tracks.}\label{fig:genomic-initialize-ideogram-track}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3236,26 +3431,31 @@ D).
 
 Similar as general circular plot, the parameters for the layout can be
 controlled by \texttt{circos.par()} (Figure
-\ref{fig:genomic-initialize-ideogram} E, F).
+\ref{fig:genomic-initialize-ideogram-par}). Do remember when you
+explicitly set \texttt{circos.par()}, you need to call
+\texttt{circos.clear()} to finish the plotting.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{circos.par}\NormalTok{(}\StringTok{"start.degree"}\NormalTok{ =}\StringTok{ }\DecValTok{90}\NormalTok{)}
 \KeywordTok{circos.initializeWithIdeogram}\NormalTok{()}
 \KeywordTok{circos.clear}\NormalTok{()}
+\KeywordTok{text}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\StringTok{"'start.degree' = 90"}\NormalTok{, }\DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
+
 \KeywordTok{circos.par}\NormalTok{(}\StringTok{"gap.degree"}\NormalTok{ =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{), }\DecValTok{12}\NormalTok{))}
 \KeywordTok{circos.initializeWithIdeogram}\NormalTok{()}
 \KeywordTok{circos.clear}\NormalTok{()}
+\KeywordTok{text}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\StringTok{"'gap.degree' = rep(c(2, 4), 12)"}\NormalTok{, }\DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
 
-{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-initialize-ideogram-1} 
+{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-initialize-ideogram-par-1} 
 
 }
 
-\caption{Initialize genomic plot.}\label{fig:genomic-initialize-ideogram}
+\caption{Initialize genomic plot, control layout.}\label{fig:genomic-initialize-ideogram-par}
 \end{figure}
 
 \section{Customize chromosome track}\label{customize-chromosome-track}
@@ -3363,8 +3563,8 @@ genes.
 
 Next, we put transcripts one after the other for each gene. It is simply
 to add lines and rectangles. The usage of \texttt{circos.genomicTrack()}
-and \texttt{circos.genomicRect()} will be discussed in Sector
-@ref(genomic-plotting- region).
+and \texttt{circos.genomicRect()} will be discussed in Chapter
+\ref{genomic-plotting-region}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3397,7 +3597,7 @@ and \texttt{circos.genomicRect()} will be discussed in Sector
 \end{figure}
 
 In Figure \ref{fig:genomic-gene-model}, you may notice the start of axes
-becomes ``0KB'' while not the correct values. It is just an adjustment
+becomes ``0KB'' while not the original values. It is just an adjustment
 of the axes labels to reflect the relative distance to the start of each
 gene, while the coordinate in the cells are still using the original
 values. Set \texttt{tickLabelsStartFromZero} to \texttt{FALSE} to
@@ -3420,9 +3620,9 @@ into the original data frame.
 \end{Highlighting}
 \end{Shaded}
 
-\texttt{read.cytoband()} downloads and reads cytoband data from UCSC. In
-following, x ranges for normal chromosomes and zoomed chromosomes are
-normalized separetely.
+We use \texttt{read.cytoband()} to download and read cytoband data from
+UCSC. In following, x ranges for normal chromosomes and zoomed
+chromosomes are normalized separetely.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3442,7 +3642,7 @@ normalized separetely.
 
 The extended cytoband data which is in form of a data frame is sent to
 \texttt{circos.initializeWithIdeogram()}. You can see the ideograms for
-chromosome 1 and 2 are zoomed.
+chromosome 1 and 2 are zoomed (Figure \ref{fig:genomic-zoom}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3457,7 +3657,7 @@ Add a new track.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{bed =}\StringTok{ }\KeywordTok{generateRandomBed}\NormalTok{(}\DecValTok{500}\NormalTok{)}
-\KeywordTok{circos.genomicTrackPlotRegion}\NormalTok{(}\KeywordTok{extend_chromosomes}\NormalTok{(bed, }\KeywordTok{c}\NormalTok{(}\StringTok{"chr1"}\NormalTok{, }\StringTok{"chr2"}\NormalTok{)),}
+\KeywordTok{circos.genomicTrack}\NormalTok{(}\KeywordTok{extend_chromosomes}\NormalTok{(bed, }\KeywordTok{c}\NormalTok{(}\StringTok{"chr1"}\NormalTok{, }\StringTok{"chr2"}\NormalTok{)),}
     \DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(region, value, ...) \{}
         \KeywordTok{circos.genomicPoints}\NormalTok{(region, value, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.3}\NormalTok{)}
 \NormalTok{\})}
@@ -3486,7 +3686,7 @@ Add a link from original chromosome to the zoomed chromosome (Figure
 \end{figure}
 
 \chapter{Create plotting regions for genomic
-data}\label{create-plotting-regions-for-genomic-data}
+data}\label{genomic-plotting-region}
 
 Tracks are created and graphics are added by
 \texttt{circos.genomicTrackPlotRegions()}, or the short version
@@ -3537,9 +3737,9 @@ Following code demonstrates the values for \texttt{region} and
 \end{Shaded}
 
 \begin{verbatim}
-##    chr  start    end      value1    value2
-## 1 chr1 219934 283082 -0.06978513 0.3899233
-## 2 chr1 359777 406208 -0.08276002 0.3339521
+##    chr  start    end     value1      value2
+## 1 chr1 182890 251297 -0.5886239  0.07762566
+## 2 chr1 403265 439148 -0.5304047 -0.12501464
 \end{verbatim}
 
 \begin{Shaded}
@@ -3556,18 +3756,18 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    start    end
-## 1 219934 283082
-## 2 359777 406208
-##        value1    value2
-## 1 -0.06978513 0.3899233
-## 2 -0.08276002 0.3339521
+## 1 182890 251297
+## 2 403265 439148
+##       value1      value2
+## 1 -0.5886239  0.07762566
+## 2 -0.5304047 -0.12501464
 \end{verbatim}
 
 Since \texttt{circos.genomicTrack()} creates a new track, it needs
 values to calculate data ranges on y direction. Users can either specify
 the index of numeric columns in \texttt{data} by \texttt{numeric.column}
-(named index or numeric index, can be a vector with more than one
-columns) or directly set \texttt{ylim}. If none of them are set, the
+(named index or numeric index, it can also be a vector with more than
+one columns) or directly set \texttt{ylim}. If none of them are set, the
 function will try to look for all numeric columns in \texttt{data} (of
 course, excluding the first three columns), and set them as
 \texttt{numeric.column}.
@@ -3601,15 +3801,16 @@ functions, which are especially designed for genomic regions measured at
 multiple conditions. Example plots are shown together in Chapter
 \ref{modes-of-input}.
 
-\section{Points}\label{points}
+\section{Points}\label{genomic-points}
 
 Usage of \texttt{circos.genomicPoints()} is similar as
-\texttt{circos.points()}. \texttt{circos.genomicPoints()} expects a data
-frame which contains genomic regions and a data frame containing
-corresponding values. Points are always drawn at the middle of each
-region. The data column of the y values for plotting should be specified
-by \texttt{numeric.column}. If \texttt{numeric.column} has length larger
-than one, all the specified columns will be used to add points.
+\texttt{circos.points()}. \texttt{circos.genomicPoints()} expects a
+two-column data frame which contains genomic regions and a data frame
+containing corresponding values. Points are always drawn at the middle
+of each region. The data column of the y values for plotting should be
+specified by \texttt{numeric.column}. If \texttt{numeric.column} has
+length larger than one, all the specified columns will be used for
+adding points.
 
 If the function is called inside \texttt{circos.genomicTrack()} and
 users have been already set \texttt{numeric.column} in
@@ -3638,7 +3839,7 @@ Possible usages of \texttt{circos.genomicPoints()} are as follows.
 \KeywordTok{circos.genomicPoints}\NormalTok{(region, value, sector.index, track.index)}
 \KeywordTok{circos.genomicTrack}\NormalTok{(data, }\DataTypeTok{numeric.column =} \DecValTok{4}\NormalTok{, }
     \DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(region, value, ...) \{}
-        \CommentTok{# numeric.column is changed to 1}
+        \CommentTok{# numeric.column is automatically passed to `circos.genomicPoints()`}
         \KeywordTok{circos.genomicPoints}\NormalTok{(region, value, ...)}
 \NormalTok{\})}
 \end{Highlighting}
@@ -3661,13 +3862,15 @@ functions, it would not be difficult to directly use the
 \begin{Highlighting}[]
 \NormalTok{circos.genomicPoints =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(region, value, }\DataTypeTok{numeric.column =} \DecValTok{1}\NormalTok{, ...) \{}
 \NormalTok{    x =}\StringTok{ }\NormalTok{(region[[}\DecValTok{2}\NormalTok{]] }\OperatorTok{+}\StringTok{ }\NormalTok{region[[}\DecValTok{1}\NormalTok{]])}\OperatorTok{/}\DecValTok{2}
-\NormalTok{    y =}\StringTok{ }\NormalTok{value[[numeric.column]]}
-    \KeywordTok{circos.points}\NormalTok{(x, y, ...)}
+    \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in}\NormalTok{ numeric.column) \{}
+\NormalTok{        y =}\StringTok{ }\NormalTok{value[[i]]}
+        \KeywordTok{circos.points}\NormalTok{(x, y, ...)}
+\NormalTok{    \}}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
-\section{Lines}\label{lines}
+\section{Lines}\label{genomic-lines}
 
 \texttt{circos.genomicLines()} is similar as \texttt{circos.lines()}.
 The setting of graphical parameters is similar as
@@ -3684,7 +3887,8 @@ The setting of graphical parameters is similar as
 
 \textbf{circlize} additionally provides a new option \texttt{segment}
 for \texttt{lty} by which each genomic regions represent as `horizontal'
-lines at y positions.
+lines at y positions (see Figure \ref{fig:genomic-application-lines},
+track H).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3692,7 +3896,7 @@ lines at y positions.
 \end{Highlighting}
 \end{Shaded}
 
-\section{Text}\label{text}
+\section{Text}\label{genomic-text}
 
 For \texttt{circos.genomicText()}, the position of text can be specified
 either by \texttt{numeric.column} or a separated vector \texttt{y}. The
@@ -3709,7 +3913,7 @@ vector \texttt{labels}.
 \end{Highlighting}
 \end{Shaded}
 
-\section{Rectangles}\label{rectangles}
+\section{Rectangles}\label{genomic-rectangles}
 
 For \texttt{circos.genomicRect()}, Since the left and right of the
 rectangles are already determined by the start and end of the genomic
@@ -3725,7 +3929,7 @@ rectangles by specifying \texttt{ytop}, \texttt{ybottom} or
 \end{Highlighting}
 \end{Shaded}
 
-\section{Links}\label{links}
+\section{Links}\label{genomic-links}
 
 \texttt{circos.genomicLink()} expects two data frames and it adds links
 from genomic regions in the first data frame to corresponding genomic
@@ -3771,7 +3975,7 @@ each cell and axes are put on top of each cell.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{circos.genomicTrackPlotRegion}\NormalTok{(bed, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+\KeywordTok{circos.genomicTrack}\NormalTok{(bed, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{),}
     \DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(region, value, ...) \{}
         \KeywordTok{circos.genomicPoints}\NormalTok{(region, value, ...)}
         
@@ -3828,9 +4032,10 @@ frames}\label{input-is-a-list-of-data-frames}
 If input data is a list of data frames, \texttt{panel.fun} is applied on
 each data frame iteratively to the current cell. Under such condition,
 \texttt{region} and \texttt{value} will contain corresponding data in
-the current data frame. The index for the current data frame can be get
-by \texttt{getI(...)}. Note \texttt{getI(...)} can only be used inside
-\texttt{panel.fun} and \texttt{...} argument is mandatory.
+the current data frame and in the current chromosome. The index for the
+current data frame can be get by \texttt{getI(...)}. Note
+\texttt{getI(...)} can only be used inside \texttt{panel.fun} and
+\texttt{...} argument is mandatory.
 
 When \texttt{numeric.column} is specified in
 \texttt{circos.genomicTrack()}, the length of \texttt{numeric.column}
@@ -3859,8 +4064,7 @@ specified, the first numeric column in each data frame is used.
 \section{Stack mode}\label{stack-mode}
 
 \texttt{circos.genomicTrack()} also supports a \texttt{stack} mode by
-setting \texttt{stack\ =\ TRUE}. Under \texttt{stack} mode, Graphics are
-vertically or radically arranged line by line for each dataset.
+setting \texttt{stack\ =\ TRUE}. Under \texttt{stack} mode,
 \texttt{ylim} is re-defined inside the function and the y-axis is
 splitted into several bins with equal height and graphics are put onto
 ``horizontal'' bins (with position \texttt{y\ =\ 1,\ 2,\ ...}).
@@ -3887,7 +4091,7 @@ index of ``current'' numeric column can be obtained by
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{data =}\StringTok{ }\KeywordTok{generateRandomBed}\NormalTok{(}\DataTypeTok{nc =} \DecValTok{2}\NormalTok{)}
-\KeywordTok{circos.genomicTrackPlotRegion}\NormalTok{(data, }\DataTypeTok{stack =} \OtherTok{TRUE}\NormalTok{,}
+\KeywordTok{circos.genomicTrack}\NormalTok{(data, }\DataTypeTok{stack =} \OtherTok{TRUE}\NormalTok{,}
     \DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(region, value, ...) \{}
 \NormalTok{        i =}\StringTok{ }\KeywordTok{getI}\NormalTok{(...)}
         \KeywordTok{circos.genomicPoints}\NormalTok{(region, value, }\DataTypeTok{col =}\NormalTok{ i, ...)}
@@ -3906,12 +4110,12 @@ frame. In each iteration, in \texttt{panel.fun}, \texttt{region} is
 still the genomic regions in current chromosome, and \texttt{value}
 contains columns in current data frame excluding the first three
 columns. Graphics by low-level genomic functions will be added on the
-`horizontal' lines.
+`horizontal' bins.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{bed_list =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\KeywordTok{generateRandomBed}\NormalTok{(), }\KeywordTok{generateRandomBed}\NormalTok{())}
-\KeywordTok{circos.genomicTrackPlotRegion}\NormalTok{(bed_list, }\DataTypeTok{stack =} \OtherTok{TRUE}\NormalTok{,}
+\KeywordTok{circos.genomicTrack}\NormalTok{(bed_list, }\DataTypeTok{stack =} \OtherTok{TRUE}\NormalTok{,}
     \DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(region, value, ...) \{}
 \NormalTok{        i =}\StringTok{ }\KeywordTok{getI}\NormalTok{(...)}
         \KeywordTok{circos.genomicPoints}\NormalTok{(region, value, ...)}
@@ -3920,18 +4124,18 @@ columns. Graphics by low-level genomic functions will be added on the
 \end{Shaded}
 
 Under \texttt{stack} mode, if using a data frame with multiple numeric
-columns, graphics on all horizontal lines share the same genomic
+columns, graphics on all horizontal bins share the same genomic
 positions while if using a list of data frames, the genomic positions
 can be different.
 
 \section{Applications}\label{applications}
 
-In this section, we will show several real examples of making genomic
-plots under different modes. Again, if you are not happy with these
+In this section, we will show several real examples of adding genomic
+graphics under different modes. Again, if you are not happy with these
 functionalities, you can simply re-implement your plot with the basic
 circlize functions.
 
-\subsection{Points}\label{points-1}
+\subsection{Points}\label{modes-points}
 
 To make plots more clear to look at, we only add graphics in the first
 quarter of the circle and initialize the plot only with chromosome 1.
@@ -3984,7 +4188,7 @@ In track C, the input data is a list of two data frames.
 \NormalTok{bed1 =}\StringTok{ }\KeywordTok{generateRandomBed}\NormalTok{(}\DataTypeTok{nr =} \DecValTok{300}\NormalTok{)}
 \NormalTok{bed2 =}\StringTok{ }\KeywordTok{generateRandomBed}\NormalTok{(}\DataTypeTok{nr =} \DecValTok{300}\NormalTok{)}
 \NormalTok{bed_list =}\StringTok{ }\KeywordTok{list}\NormalTok{(bed1, bed2)}
-\KeywordTok{circos.genomicTrackPlotRegion}\NormalTok{(bed_list, }
+\KeywordTok{circos.genomicTrack}\NormalTok{(bed_list, }
     \DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(region, value, ...) \{}
 \NormalTok{        i =}\StringTok{ }\KeywordTok{getI}\NormalTok{(...)}
         \KeywordTok{circos.genomicPoints}\NormalTok{(region, value, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{col =}\NormalTok{ i, ...)}
@@ -3993,8 +4197,8 @@ In track C, the input data is a list of two data frames.
 \end{Shaded}
 
 In track D, the list of data frames is plotted under \texttt{stack}
-mode. Graphics corresponding to each data frame is added to a horizontal
-line.
+mode. Graphics corresponding to each data frame are added to a
+horizontal line.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4048,7 +4252,7 @@ column (which is the current numeric column).
 \caption{Add points under different modes.}\label{fig:genomic-application-points}
 \end{figure}
 
-\subsection{Lines}\label{lines-1}
+\subsection{Lines}\label{modes-lines}
 
 Similar as previous figure, only the first quarter in the circle is
 visualized. Examples are shown in Figure
@@ -4182,7 +4386,7 @@ position defined in the numeric column.
 \caption{Add lines under different modes.}\label{fig:genomic-application-lines}
 \end{figure}
 
-\subsection{Rectangles}\label{rectangles-1}
+\subsection{Rectangles}\label{modes-rectangles}
 
 Again, only the first quarter of the circle is initialized. For
 rectangles, the filled colors are always used to represent numeric
@@ -4292,7 +4496,7 @@ introduced.
 \texttt{circos.initializeWithIdeogram()} initializes the circular plot
 and adds ideogram track if the cytoband data is available. Actually, the
 ideograms are drawn by \texttt{circos.genomicIdeogram()}.
-\texttt{circos.genomicIdeogram()} creates a thin track of ideograms and
+\texttt{circos.genomicIdeogram()} creates a small track of ideograms and
 can be used anywhere in the circle. By default it adds ideograms for
 human genome hg19 (Figure \ref{fig:ideogram}).
 
@@ -4317,15 +4521,16 @@ human genome hg19 (Figure \ref{fig:ideogram}).
 \section{Heatmaps}\label{genomic-heatmap}
 
 Matrix which corresponds to genomic regions can be visualized as
-heatmaps. Heatmaps complete fill the track and there are connection
-lines connect heatmaps and positions in the genome.
-`circos.genomicHeamtap() draws connection lines and heatmaps as two
-tracks and combines them as a integrated track.
+heatmaps. Heatmaps completely fill the track and there are connection
+lines connecting heatmaps and original positions in the genome.
+`circos.genomicHeamtap()`` draws connection lines and heatmaps as two
+tracks and combines them as an integrated track.
 
 Generally, all numeric columns (excluding the first three columns) in
-the input data frame are used to make the heatmap. Colors can be
-specfied as a color matrix or a color mapping function generated by
-\texttt{colorRamp2()}.
+the input data frame are used to make the heatmap. Columns can also be
+specified by \texttt{numeric.column} which is either an numeric vector
+or a character vector. Colors can be specfied as a color matrix or a
+color mapping function generated by \texttt{colorRamp2()}.
 
 The height of the connection line track and the heatmap track can be set
 by \texttt{connection\_height} and \texttt{heatmap\_height} arguments.
@@ -4369,15 +4574,15 @@ the normal genomic track by setting \texttt{side\ =\ "outside"} (Figure
 
 \section{Labels}\label{labels}
 
-\texttt{circos.genomicLabels()} adds text labels for regions specified.
-Positions of labels are automatically adjusted so that they do not
-overlap to each other.
+\texttt{circos.genomicLabels()} adds text labels for regions that are
+specified. Positions of labels are automatically adjusted so that they
+do not overlap to each other.
 
 Similar as \texttt{circos.genomicHeatmap()},
 \texttt{circos.genomicLabels()} also creates two tracks where one for
 the connection lines and one for the labels. You can set the height of
 the labels track to be the maximum width of labels by
-\texttt{labels\_track\ =\ max(strwidth(labels))}. \texttt{padding}
+\texttt{labels\_height\ =\ max(strwidth(labels))}. \texttt{padding}
 argument controls the gap between two neighbouring labels.
 
 \begin{Shaded}
@@ -4494,6 +4699,41 @@ more precise inference of the distribution of DMRs on genome (Figure
 \end{Highlighting}
 \end{Shaded}
 
+Internally, \texttt{rainfallTransform()} and \texttt{genomicDensity()}
+are used to the neighbrouing distance and the genomic density values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{rainfallTransform}\NormalTok{(DMR_hyper))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      chr   start     end  dist
+## 70  chr1  933445  934443 35323
+## 104 chr1  969766  970362  4909
+## 105 chr1  975271  976767  4909
+## 154 chr1 1108819 1109923 31522
+## 155 chr1 1141445 1142405 31522
+## 157 chr1 1181550 1182782 39145
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{genomicDensity}\NormalTok{(DMR_hyper, }\DataTypeTok{window.size =} \FloatTok{1e6}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    chr   start     end      pct
+## 1 chr1       1 1000000 0.003093
+## 2 chr1  500001 1500000 0.007592
+## 3 chr1 1000001 2000000 0.008848
+## 4 chr1 1500001 2500000 0.010155
+## 5 chr1 2000001 3000000 0.011674
+## 6 chr1 2500001 3500000 0.007783
+\end{verbatim}
+
 \chapter{Nested zooming}\label{nested-zooming}
 
 \section{Basic idea}\label{basic-idea}
@@ -4501,9 +4741,9 @@ more precise inference of the distribution of DMRs on genome (Figure
 In Section \ref{zooming-of-sectors} we introduced how to zoom sectors to
 the same circle in the same track. This works fine if there are only a
 few regions that need to be zoomed. However, when the regions that need
-to be zoomed is too many, the method will not work, and in this chapter,
-we introduce another zooming method which put zoomed regions in a
-different circle.
+to be zoomed is too many, the method will not work efficiently. In this
+chapter, we introduce another zooming method which puts zoomed regions
+in a different circular plot.
 
 To illustrate the basic idea, we first generate a random data set.
 
@@ -4570,7 +4810,7 @@ Following variables are used for downstream visualization.
 In \texttt{sector}, we randomly sampled several intervals which will be
 used for zooming. The zoomed intervals are stored in
 \texttt{zoom\_sector}. In the zooming track, each interval is treated as
-an independent track, thus, the name for each zoomed interval uses
+an independent sector, thus, the name for each zoomed interval uses
 combination of the original sector name and the interval itself, just
 for easily reading.
 
@@ -4624,10 +4864,11 @@ circular plot in the first plot.
 \end{verbatim}
 
 The zooming is actually composed of two circulat plots where one for the
-original track and one for the zoomed intervals, and one connection
-track which identifies which intervals that are zoomed belong to which
-sector. The \texttt{circos.nested()} function in \textbf{circlize} puts
-the two circular plots together, arranges and rotates them.
+original track and one for the zoomed intervals. There is an additional
+connection track which identifies which intervals that are zoomed belong
+to which sector. The \texttt{circos.nested()} function in
+\textbf{circlize} puts the two circular plots together, arranges them
+and automatically draws the connection lines.
 
 To define ``the circular plot'', the code for generating the plot needs
 to be wrapped into a function.
@@ -4658,8 +4899,8 @@ In above, \texttt{f1()} is the code for generating the original plot and
 \texttt{f2()} is the code for generating the zoomed plot.
 
 To combine the two plots, simply put \texttt{f1()}, \texttt{f2()} and
-\texttt{corresponance} together to \texttt{circos.nested()} (Figure
-\ref{fig:nested} left).
+\texttt{corresponance} to \texttt{circos.nested()} (Figure
+\ref{fig:nested-normal}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4667,13 +4908,22 @@ To combine the two plots, simply put \texttt{f1()}, \texttt{f2()} and
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{12-nested-zooming_files/figure-latex/nested-normal-1} 
+
+}
+
+\caption{Nested zooming between two circular plots.}\label{fig:nested-normal}
+\end{figure}
+
 In the plot, the zoomed circle is put inside the original circle and the
 start degree for the second plot is automatically adjusted.
 
 Zoomed circle can also be put outside by swtiching \texttt{f1()} and
 \texttt{f2()}. Actually, for \texttt{circos.nested()}, It doesn't care
-which one is zoomed or not, they are just two circular plots (Figure
-\ref{fig:nested} middle).
+which one is zoomed or not, they are just two circular plots and a
+correspondance (Figure \ref{fig:nested2}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4681,32 +4931,42 @@ which one is zoomed or not, they are just two circular plots (Figure
 \end{Highlighting}
 \end{Shaded}
 
-There are some notes which doing nested zoomings:
+\begin{figure}
+
+{\centering \includegraphics{12-nested-zooming_files/figure-latex/nested2-1} 
+
+}
+
+\caption{Nested zooming between two circular plots, zoomed plot is put outside.}\label{fig:nested2}
+\end{figure}
+
+There are some points that need to be noted while doing nested zoomings:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  it can only be applied to the full circle.
+  It can only be applied to the full circle.
 \item
-  if \texttt{canvas.xlim} and \texttt{canvas.ylim} are adjusted in the
+  If \texttt{canvas.xlim} and \texttt{canvas.ylim} are adjusted in the
   first plot, same value should be set to the second plot.
 \item
   By default the start degree of the second plot is automatically
-  adjusted to make the difference between two plots to a minimal.
-  However, users can also manually adjusted the start degree for the
-  second plot by setting \texttt{circos.par("start.degree"\ =\ ...)} and
+  adjusted to make the difference between the original positions and
+  zoomed sectors to a minimal. However, users can also manually adjusted
+  the start degree for the second plot by setting
+  \texttt{circos.par("start.degree"\ =\ ...)} and
   \texttt{adjust\_start\_degree} must be set to \texttt{TRUE} in
   \texttt{circos.nested()}.
 \item
-  Since the function needs to know some information for the two circulat
+  Since the function needs to know some information for the two circular
   plots, do not put \texttt{circos.clear()} at the end of each plot.
   They will be added internally.
 \end{enumerate}
 
 \texttt{f1()} and \texttt{f2()} are just normal code for implementing
-circular plot. It is no problem to make it more complex (Figure
-\ref{fig:nested} right).
+circular plot. There is no problem to make it more complex (Figure
+\ref{fig:nested-complex}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4727,8 +4987,8 @@ circular plot. It is no problem to make it more complex (Figure
 \NormalTok{                \}}
 \NormalTok{            \}}
             \KeywordTok{circos.points}\NormalTok{(x, y, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{)}
-            \KeywordTok{circos.text}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{ylim[}\DecValTok{2}\NormalTok{] }\OperatorTok{+}\StringTok{ }\KeywordTok{uy}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{), CELL_META}\OperatorTok{$}\NormalTok{sector.index, }
-                \DataTypeTok{niceFacing =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{adj =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+            \KeywordTok{circos.text}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{ylim[}\DecValTok{2}\NormalTok{] }\OperatorTok{+}\StringTok{ }\KeywordTok{uy}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }
+\NormalTok{                CELL_META}\OperatorTok{$}\NormalTok{sector.index, }\DataTypeTok{niceFacing =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{adj =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{0}\NormalTok{))}
 \NormalTok{    \})}
 \NormalTok{\}}
 
@@ -4747,30 +5007,26 @@ circular plot. It is no problem to make it more complex (Figure
 
 \begin{figure}
 
-{\centering \includegraphics{12-nested-zooming_files/figure-latex/nested-1} 
+{\centering \includegraphics{12-nested-zooming_files/figure-latex/nested-complex-1} 
 
 }
 
-\caption{Nested zooming between two circular plots.}\label{fig:nested}
+\caption{Nested zooming between two circular plots, slightly complex plots.}\label{fig:nested-complex}
 \end{figure}
 
-\section{visualization of DMRs from tagmentation-based
+\section{Visualization of DMRs from tagmentation-based
 WGBS}\label{visualization-of-dmrs-from-tagmentation-based-wgbs}
 
 \href{http://www.nature.com/nprot/journal/v8/n10/full/nprot.2013.118.html}{Tagmentation-based
 whole-genome bisulfite sequencing} (T-WGBS) is a technology which can
-examine only a minor fraction of methylome of interest. Circular plot
-can be used to
-\href{http://jokergoo.github.io/circlize/example/railfallplot.html}{visualize
-genome-wide distribution of differentially methylation regions (DMRs)}.
-In this section, we demonstrate how to visualize DMRs which are detected
-from T-WGBS data in a circular plot by \textbf{circlize} package.
+examine only a minor fraction of methylome of interest. In this section,
+we demonstrate how to visualize DMRs which are detected from T-WGBS data
+in a circular plot by \textbf{circlize} package.
 
 In the example data loaded, \texttt{tagments} contains regions which are
 sequenced, \texttt{DMR1} contains DMRs for one patient detectd in
-tagment regions. Correspondance between tagment regions and DMRs can be
-checked by row names of \texttt{tagments} and \texttt{tagment} column in
-\texttt{DMR1}.
+tagment regions. Correspondance between tagment regions and original
+genome is stored in \texttt{correspondance}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4815,7 +5071,10 @@ checked by row names of \texttt{tagments} and \texttt{tagment} column in
 ## 4 chr2  46387184  46477385   chr2-46387184-46477385  46387184  46477385
 \end{verbatim}
 
-Figure \ref{fig:dmr}.
+In Figure \ref{fig:dmr}, the tagment regions are actually zoomed from
+the genome. In following code, \texttt{f1()} only makes a circular plot
+with whole genome and \texttt{f2()} makes circular plot for the tagment
+regions.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4831,14 +5090,16 @@ Figure \ref{fig:dmr}.
 \NormalTok{f2 =}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
     \KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{cell.padding =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DataTypeTok{gap.after =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{nrow}\NormalTok{(tagments)}\OperatorTok{-}\DecValTok{1}\NormalTok{), }\DecValTok{10}\NormalTok{))}
     \KeywordTok{circos.genomicInitialize}\NormalTok{(tagments, }\DataTypeTok{plotType =} \OtherTok{NULL}\NormalTok{)}
-    \KeywordTok{circos.genomicTrack}\NormalTok{(DMR1, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.6}\NormalTok{), }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(region, value, ...) \{}
-        \ControlFlowTok{for}\NormalTok{(h }\ControlFlowTok{in} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.6}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.2}\NormalTok{)) \{}
-            \KeywordTok{circos.lines}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{cell.xlim, }\KeywordTok{c}\NormalTok{(h, h), }\DataTypeTok{lty =} \DecValTok{3}\NormalTok{, }\DataTypeTok{col =} \StringTok{"#AAAAAA"}\NormalTok{)}
-\NormalTok{        \}}
-        \KeywordTok{circos.lines}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{cell.xlim, }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DataTypeTok{lty =} \DecValTok{3}\NormalTok{, }\DataTypeTok{col =} \StringTok{"#888888"}\NormalTok{)}
-    
-        \KeywordTok{circos.genomicPoints}\NormalTok{(region, value, }\DataTypeTok{col =} \KeywordTok{ifelse}\NormalTok{(value[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, }\StringTok{"#E41A1C"}\NormalTok{, }\StringTok{"#377EB8"}\NormalTok{), }
-            \DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{)}
+    \KeywordTok{circos.genomicTrack}\NormalTok{(DMR1, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.6}\NormalTok{), }
+        \DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(region, value, ...) \{}
+            \ControlFlowTok{for}\NormalTok{(h }\ControlFlowTok{in} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.6}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.2}\NormalTok{)) \{}
+                \KeywordTok{circos.lines}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{cell.xlim, }\KeywordTok{c}\NormalTok{(h, h), }\DataTypeTok{lty =} \DecValTok{3}\NormalTok{, }\DataTypeTok{col =} \StringTok{"#AAAAAA"}\NormalTok{)}
+\NormalTok{            \}}
+            \KeywordTok{circos.lines}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{cell.xlim, }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DataTypeTok{lty =} \DecValTok{3}\NormalTok{, }\DataTypeTok{col =} \StringTok{"#888888"}\NormalTok{)}
+        
+            \KeywordTok{circos.genomicPoints}\NormalTok{(region, value, }
+                \DataTypeTok{col =} \KeywordTok{ifelse}\NormalTok{(value[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, }\StringTok{"#E41A1C"}\NormalTok{, }\StringTok{"#377EB8"}\NormalTok{), }
+                \DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{)}
 \NormalTok{    \}, }\DataTypeTok{bg.col =}\NormalTok{ chr_bg_color[tagments}\OperatorTok{$}\NormalTok{chr], }\DataTypeTok{track.margin =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.02}\NormalTok{, }\DecValTok{0}\NormalTok{))}
     \KeywordTok{circos.yaxis}\NormalTok{(}\DataTypeTok{side =} \StringTok{"left"}\NormalTok{, }\DataTypeTok{at =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.6}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.3}\NormalTok{), }
         \DataTypeTok{sector.index =} \KeywordTok{get.all.sector.index}\NormalTok{()[}\DecValTok{1}\NormalTok{], }\DataTypeTok{labels.cex =} \FloatTok{0.4}\NormalTok{)}
@@ -4869,7 +5130,7 @@ relations between objects by links. See examples in
 \url{http://circos.ca/intro/tabular_visualization/}. The name of such
 plot is called \href{http://en.wikipedia.org/wiki/Chord_diagram}{Chord
 diagram}. In \textbf{circlize}, it is easy to plot Chord diagram in a
-straightforward or customized way.
+straightforward or in a highly customized way.
 
 There are two data formats that represent relations, either adjacency
 matrix or adjacency list. In adjacency matrix, value in \(i^{th}\) row
@@ -4923,9 +5184,9 @@ Chord diagram shows the information of the relation from several levels.
 1. the links are straightforward to show the relations between objects;
 2. width of links are proportional to the strength of the relation which
 is more illustrative than other graphic mappings; 3. colors of links can
-be another graphic mapping for categorize relations; 4. width of sectors
-represents total strength for a link which connects to other objects or
-is connected from other objects. You can find an interesting example of
+be another graphic mapping for relations; 4. width of sectors represents
+total strength for an object which connects to other objects or is
+connected from other objects. You can find an interesting example of
 using Chord diagram to visualize leagues system of players clubs by
 their national team from
 \url{https://gjabel.wordpress.com/2014/06/05/world-cup-players-representation-by-league-system/}
@@ -5005,11 +5266,25 @@ list.
 \end{verbatim}
 
 The most simple usage is just calling \texttt{chordDiagram()} with
-\texttt{mat} (Figure \ref{fig:chord-diagram-basic} left).
+\texttt{mat} (Figure \ref{fig:chord-diagram-basic}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{chordDiagram}\NormalTok{(mat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-basic-1} 
+
+}
+
+\caption{Basic usages of `chordDiagram()`.}\label{fig:chord-diagram-basic}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{circos.clear}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -5030,8 +5305,8 @@ circle. The order of sectors is the order of
 \texttt{union(rownames(mat),\ colnames(mat))} or
 \texttt{union(df{[}{[}1{]}{]},\ df{[}{[}2{]}{]})} if input is a data
 frame. The order of sectors can be controlled by \texttt{order} argument
-(Figure \ref{fig:chord-diagram-basic} right). Of course, the length of
-\texttt{order} vector should be same as the number of sectors.
+(Figure \ref{fig:chord-diagram-basic-order} right). Of course, the
+length of \texttt{order} vector should be same as the number of sectors.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5041,16 +5316,23 @@ frame. The order of sectors can be controlled by \texttt{order} argument
 
 \begin{figure}
 
-{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-basic-1} 
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-basic-order-1} 
 
 }
 
-\caption{Basic usages of `chordDiagram()`.}\label{fig:chord-diagram-basic}
+\caption{Adjust sector orders in Chord diagram.}\label{fig:chord-diagram-basic-order}
 \end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 
 Under default settings, the grid colors which represent sectors are
 randomly generated, and the link colors are same as grid colors which
-correspond to rows but with 50\% transparency.
+correspond to rows (or the first column if the input is an adjacency
+list) but with 50\% transparency.
 
 \section{\texorpdfstring{Adjust by
 \texttt{circos.par()}}{Adjust by circos.par()}}\label{adjust-by-circos.par}
@@ -5061,15 +5343,29 @@ normal circular plot, the layout can be customized by
 
 The gaps between sectors can be set by
 \texttt{circos.par(gap.after\ =\ ...)} (Figure
-\ref{fig:chord-diagram-par}, left). It is useful when rows and columns
-belong to different categories. Please note since you change default
-graphical settings, you need to use \texttt{circos.clear()} in the end
-of the plot to reset it.
+\ref{fig:chord-diagram-basic-gap-after}). It is useful when you want to
+distinguish sectors between rows and columns. Please note since you
+change default graphical settings, you need to use
+\texttt{circos.clear()} in the end of the plot to reset it.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{gap.after =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{, }\KeywordTok{nrow}\NormalTok{(mat)}\OperatorTok{-}\DecValTok{1}\NormalTok{), }\DecValTok{15}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{, }\KeywordTok{ncol}\NormalTok{(mat)}\OperatorTok{-}\DecValTok{1}\NormalTok{), }\DecValTok{15}\NormalTok{))}
 \KeywordTok{chordDiagram}\NormalTok{(mat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-basic-gap-after-1} 
+
+}
+
+\caption{Set gaps in Chord diagram.}\label{fig:chord-diagram-basic-gap-after}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{circos.clear}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -5087,30 +5383,35 @@ If the input is a data frame:
 
 Similar to a normal circular plot, the first sector (which is the first
 row in the adjacency matrix or the first row in the adjacency list)
-starts from right center of the circle and sectors are arranged clock
-wise. The start degree for the first sector can be set by
+starts from right center of the circle and sectors are arranged
+clock-wisely. The start degree for the first sector can be set by
 \texttt{circos.par(start.degree\ =\ ...)} and the direction can be set
 by \texttt{circos.par(clock.wise\ =\ ...)} (Figure
-\ref{fig:chord-diagram-par}, right).
+\ref{fig:chord-diagram-basic-start-degree}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{start.degree =} \DecValTok{90}\NormalTok{, }\DataTypeTok{clock.wise =} \OtherTok{FALSE}\NormalTok{)}
 \KeywordTok{chordDiagram}\NormalTok{(mat)}
-\KeywordTok{circos.clear}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
 
-{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-par-1} 
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-basic-start-degree-1} 
 
 }
 
-\caption{Control `chordDiagram()` by `circos.par()`.}\label{fig:chord-diagram-par}
+\caption{Change position and orientation of Chord diagram.}\label{fig:chord-diagram-basic-start-degree}
 \end{figure}
 
-\section{Colors}\label{colors}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Colors}\label{chord-diagram-colors}
 
 \subsection{Set grid colors}\label{set-grid-colors}
 
@@ -5150,9 +5451,9 @@ is assumed to have the same order as sectors (Figure
 \subsection{Set link colors}\label{chord-diagram-link-color}
 
 Transparency of link colors can be set by \texttt{transparency} argument
-(Figure \ref{fig:chord-diagram-color} A). The value should between 0 to
-1 in which 0 means no transparency and 1 means full transparency.
-Default transparency is 0.5.
+(Figure \ref{fig:chord-diagram-color-transparency}). The value should
+between 0 to 1 in which 0 means no transparency and 1 means full
+transparency. Default transparency is 0.5.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5160,11 +5461,20 @@ Default transparency is 0.5.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-color-transparency-1} 
+
+}
+
+\caption{Transparency for links in Chord diagram.}\label{fig:chord-diagram-color-transparency}
+\end{figure}
+
 For adjacecy matrix, colors for links can be customized by providing a
 matrix of colors. In the following example, we use
 \texttt{rand\_color()} to generate a random color matrix. Note since
 \texttt{col\_mat} already contains transparency, \texttt{transparency}
-will be ignored if it is set (Figure \ref{fig:chord-diagram-color} B).
+will be ignored if it is set (Figure \ref{fig:chord-diagram-color-mat}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5173,6 +5483,15 @@ will be ignored if it is set (Figure \ref{fig:chord-diagram-color} B).
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{col =}\NormalTok{ col_mat)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-color-mat-1} 
+
+}
+
+\caption{Set a color matrix for links in Chord diagram.}\label{fig:chord-diagram-color-mat}
+\end{figure}
 
 While for ajacency list, colors for links can be customized as a vector.
 
@@ -5186,8 +5505,8 @@ While for ajacency list, colors for links can be customized as a vector.
 When the strength of the relation (e.g.~correlations) represents as
 continuous values, \texttt{col} can also be specified as a self-defined
 color mapping function. \texttt{chordDiagram()} accepts a color mapping
-generated by \texttt{colorRamp2()} (Figure \ref{fig:chord-diagram-color}
-C).
+generated by \texttt{colorRamp2()} (Figure
+\ref{fig:chord-diagram-color-fun}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5196,9 +5515,18 @@ C).
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-color-fun-1} 
+
+}
+
+\caption{Set a color mapping function for links in Chord diagram.}\label{fig:chord-diagram-color-fun}
+\end{figure}
+
 The color mapping function also works for adjacency list, but it will be
 applied to the third column in the data frame, so you need to make sure
-the third column has the correct values.
+the third column has the proper values.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5209,9 +5537,9 @@ the third column has the correct values.
 When the input is a matrix, sometimes you don't need to generate the
 whole color matrix. You can just provide colors which correspond to rows
 or columns so that links from a same row/column will have the same color
-(Figure \ref{fig:chord-diagram-color} D, E). Here note values of colors
-can be set as numbers, color names or hex code, same as in the base R
-graphics.
+(Figure \ref{fig:chord-diagram-color-row-col}). Here note values of
+colors can be set as numbers, color names or hex code, same as in the
+base R graphics.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5219,6 +5547,15 @@ graphics.
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{column.col =} \DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-color-row-col-1} 
+
+}
+
+\caption{Set link colors same as row sectors or column sectors in Chord diagram.}\label{fig:chord-diagram-color-row-col}
+\end{figure}
 
 \texttt{row.col} and \texttt{column.col} is specifically designed for
 matrix. There is no similar settings for ajacency list.
@@ -5230,15 +5567,6 @@ is already set there, \texttt{transparency} argument will be ignored.
 In Section \ref{highlight-links}, we will introduce how to highlight
 subset of links by only assigning colors to them.
 
-\begin{figure}
-
-{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-color-1} 
-
-}
-
-\caption{Control colors for Chord diagram.}\label{fig:chord-diagram-color}
-\end{figure}
-
 \section{Link border}\label{chord-diagram-link-border}
 
 \texttt{link.lwd}, \texttt{link.lty} and \texttt{link.border} control
@@ -5247,7 +5575,7 @@ these three parameters can be set either a single scalar or a matrix if
 the input is adjacency matrix.
 
 If it is set as a single scalar, it means all links share the same style
-(Figure \ref{fig:chord-diagram-border} A).
+(Figure \ref{fig:chord-diagram-style-scalar}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5255,8 +5583,17 @@ If it is set as a single scalar, it means all links share the same style
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-style-scalar-1} 
+
+}
+
+\caption{Line style for Chord diagram.}\label{fig:chord-diagram-style-scalar}
+\end{figure}
+
 If it is set as a matrix, it should have same dimension as \texttt{mat}
-(Figure \ref{fig:chord-diagram-border} B).
+(Figure \ref{fig:chord-diagram-style-fullmat}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5268,11 +5605,21 @@ If it is set as a matrix, it should have same dimension as \texttt{mat}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-style-fullmat-1} 
+
+}
+
+\caption{Set line style as a matrix.}\label{fig:chord-diagram-style-fullmat}
+\end{figure}
+
 The matrix is not necessary to have same dimensions as in \texttt{mat}.
-It can also be a sub matrix (Figure \ref{fig:chord-diagram-border} C).
-For rows or columns of which the corresponding values are not specified
-in the matrix, default values are filled in. It must have row names and
-column names so that the settings can be mapped to the correct links.
+It can also be a sub matrix (Figure
+\ref{fig:chord-diagram-style-submatrix}). For rows or columns of which
+the corresponding values are not specified in the matrix, default values
+are filled in. It must have row names and column names so that the
+settings can be mapped to the correct links.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5283,10 +5630,19 @@ column names so that the settings can be mapped to the correct links.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-style-submatrix-1} 
+
+}
+
+\caption{Set line style as a sub matrix.}\label{fig:chord-diagram-style-submatrix}
+\end{figure}
+
 To be more convenient, graphic parameters can be set as a three-column
 data frame in which the first two columns correspond to row names and
 column names in the matrix, and the third column corresponds to the
-graphic parameters (Figure \ref{fig:chord-diagram-border} D).
+graphic parameters (Figure \ref{fig:chord-diagram-style-dataframe}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5298,6 +5654,15 @@ graphic parameters (Figure \ref{fig:chord-diagram-border} D).
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-style-dataframe-1} 
+
+}
+
+\caption{Set line style as a data frame.}\label{fig:chord-diagram-style-dataframe}
+\end{figure}
+
 It is much easier if the input is a data frame, you only need to set
 graphic settings as a vecotr.
 
@@ -5307,15 +5672,6 @@ graphic settings as a vecotr.
     \DataTypeTok{link.lwd =} \KeywordTok{runif}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(df))}\OperatorTok{*}\DecValTok{2}\NormalTok{, }\DataTypeTok{link.border =} \KeywordTok{sample}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{, }\KeywordTok{nrow}\NormalTok{(df), }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-border-1} 
-
-}
-
-\caption{Control borders for Chord Diagram.}\label{fig:chord-diagram-border}
-\end{figure}
 
 \section{Highlight links}\label{highlight-links}
 
@@ -5327,10 +5683,10 @@ highlighting by colors.
 THere are two ways to highlight links, one is to set different
 transparency to different links and the other is to only draw links that
 needs to be highlighted. Based on this rule and ways to assign colors to
-links (introduced in Section \ref{chord-diagram-link-color}), We can
+links (introduced in Section \ref{chord-diagram-link-color}), we can
 highlight links which come from a same sector by assigning colors with
 different transparency by \texttt{row.col} argument (Figure
-\ref{fig:chord-diagram-highlight} A).
+\ref{fig:chord-diagram-highlight-row}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5338,15 +5694,24 @@ different transparency by \texttt{row.col} argument (Figure
 \end{Highlighting}
 \end{Shaded}
 
-We can also highlight links with values larger than a cutoff (Figure
-\ref{fig:chord-diagram-highlight} B). There are at least three ways to
-do it. First, construct a color matrix and set links with small values
-to full transparency.
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-highlight-row-1} 
+
+}
+
+\caption{Highlight links by transparency.}\label{fig:chord-diagram-highlight-row}
+\end{figure}
+
+We can also highlight links with values larger than a cutoff. There are
+at least three ways to do it. First, construct a color matrix and set
+links with small values to full transparency.
 
 Since link colors can be specified as a matrix, we can set the
 transparency of those links to a high value or even set to full
-transparency. In following example, links with value less then 12 is set
-to \texttt{\#00000000}.
+transparency (Figure \ref{fig:chord-diagram-highlight-mat}). In
+following example, links with value less than 12 is set to
+\texttt{\#00000000}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5354,6 +5719,15 @@ to \texttt{\#00000000}.
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{col =}\NormalTok{ col_mat) }
 \end{Highlighting}
 \end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-highlight-mat-1} 
+
+}
+
+\caption{Highlight links by color matrix.}\label{fig:chord-diagram-highlight-mat}
+\end{figure}
 
 Following code demonstrates using a color mapping function to map values
 to different transparency. Note this is also workable for adjacency
@@ -5370,8 +5744,8 @@ For both color matrix and color mapping function, actually all links are
 all drawn and the reason why you cannot see some of them is they are
 assigned with full transparency. If a three-column data frame is used to
 assign colors to links of interest, links which are not defined in
-\texttt{col\_df} are not drawn (Figure \ref{fig:chord-diagram-highlight}
-C).
+\texttt{col\_df} are not drawn (Figure
+\ref{fig:chord-diagram-highlight-df}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5380,6 +5754,15 @@ C).
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{col =}\NormalTok{ col_df)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-highlight-df-1} 
+
+}
+
+\caption{Highlight links by data frame.}\label{fig:chord-diagram-highlight-df}
+\end{figure}
 
 Highlighting links is relatively simple for adjacency list that you only
 need to construct a vector of colors according to what links you want to
@@ -5397,7 +5780,7 @@ The \texttt{link.visible} argument is recently introduced to
 \textbf{circlize} package which may provide a simple to control the
 visibility of links. The value can be set as an logical matrix for
 adjacency matrix or a logical vector for adjacency list (Figure
-\ref{fig:chord-diagram-highlight} D).
+\ref{fig:chord-diagram-link-visible}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5408,17 +5791,17 @@ adjacency matrix or a logical vector for adjacency list (Figure
 
 \begin{figure}
 
-{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-highlight-1} 
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-link-visible-1} 
 
 }
 
-\caption{Highlight links by colors.}\label{fig:chord-diagram-highlight}
+\caption{Highlight links by setting `link.visible`.}\label{fig:chord-diagram-link-visible}
 \end{figure}
 
 \section{Orders of links}\label{orders-of-links}
 
-\subsection{Orders on positions on
-sectors}\label{orders-on-positions-on-sectors}
+\subsection{Orders of positions on
+sectors}\label{orders-of-positions-on-sectors}
 
 Orders of links on every sector are adjusted automatically to make them
 look nice. But sometimes sorting links according to the width on the
@@ -5430,7 +5813,9 @@ positioning links on sectors (Figure
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{link.sort =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{link.decreasing =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"link.sort = TRUE, link.decreasing = TRUE"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{)}
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{link.sort =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{link.decreasing =} \OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"link.sort = TRUE, link.decreasing = FALSE"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5457,7 +5842,6 @@ added later (Figure \ref{fig:chord-diagram-link-order2}).
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{transparency =} \DecValTok{0}\NormalTok{)}
-\KeywordTok{text}\NormalTok{(}\OperatorTok{-}\FloatTok{0.9}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{1.5}\NormalTok{)}
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{transparency =} \DecValTok{0}\NormalTok{, }\DataTypeTok{link.rank =} \KeywordTok{rank}\NormalTok{(mat))}
 \end{Highlighting}
 \end{Shaded}
@@ -5519,6 +5903,8 @@ only lower triangular matrix without the diagonal will be used (Figure
 \NormalTok{col_fun =}\StringTok{ }\KeywordTok{colorRamp2}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{, }\StringTok{"white"}\NormalTok{, }\StringTok{"red"}\NormalTok{))}
 \KeywordTok{chordDiagram}\NormalTok{(cor_mat, }\DataTypeTok{grid.col =} \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{symmetric =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{col =}\NormalTok{ col_fun)}
 \KeywordTok{title}\NormalTok{(}\StringTok{"symmetric = TRUE"}\NormalTok{)}
+\KeywordTok{chordDiagram}\NormalTok{(cor_mat, }\DataTypeTok{grid.col =} \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{col =}\NormalTok{ col_fun)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"symmetric = FALSE"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5544,23 +5930,33 @@ second column to the first column for the adjacency list). A value of
 \texttt{2} means bi-directional.
 
 By default, the two ends of links have unequal height (Figure
-\ref{fig:chord-diagram-directional} A, B, C) to represent the
-directions. The position of starting end of the link is shorter than the
-other end to give users the feeling that the link is moving out. If this
-is not what your correct feeling, you can set \texttt{diffHeight} to a
-negative value.
+\ref{fig:chord-diagram-directional-simple}) to represent the directions.
+The position of starting end of the link is shorter than the other end
+to give users the feeling that the link is moving out. If this is not
+what your correct feeling, you can set \texttt{diffHeight} to a negative
+value.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{))}
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{directional =} \DecValTok{1}\NormalTok{)}
-\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{directional =} \DecValTok{1}\NormalTok{, }\DataTypeTok{diffHeight =} \FloatTok{0.08}\NormalTok{)}
+\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{directional =} \DecValTok{1}\NormalTok{, }\DataTypeTok{diffHeight =} \KeywordTok{uh}\NormalTok{(}\DecValTok{5}\NormalTok{, }\StringTok{"mm"}\NormalTok{))}
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{directional =} \OperatorTok{-}\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-directional-simple-1} 
+
+}
+
+\caption{Represent directions by different height of link ends.}\label{fig:chord-diagram-directional-simple}
+\end{figure}
+
 Row names and column names in \texttt{mat} can also overlap. In this
 case, showing direction of the link is important to distinguish them
-(Figure @ref(fig :chord-diagram-directional) D).
+(Figure \ref{fig:chord-diagram-directional-overlap}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5586,9 +5982,18 @@ case, showing direction of the link is important to distinguish them
 \end{Highlighting}
 \end{Shaded}
 
-If you don't need self-link for which two ends of a link are in a same
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-directional-overlap-1} 
+
+}
+
+\caption{CHord diagram where row names and column names overlap.}\label{fig:chord-diagram-directional-overlap}
+\end{figure}
+
+If you do not need self-link for which two ends of a link are in a same
 sector, just set corresponding values to 0 in the matrix (Figure
-\ref{fig:chord-diagram-directional} E).
+\ref{fig:chord-diagram-directional-non-selfloop}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5615,12 +6020,21 @@ sector, just set corresponding values to 0 in the matrix (Figure
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-directional-non-selfloop-1} 
+
+}
+
+\caption{Directional Chord diagram without self links.}\label{fig:chord-diagram-directional-non-selfloop}
+\end{figure}
+
 Links can have arrows to represent directions (Figure
-\ref{fig:chord-diagram-directional} F). When \texttt{direction.type} is
-set to \texttt{arrows}, Arrows are added at the center of links. Similar
-as other graphics parameters for links, the parameters for drawing
-arrows such as arrow color and line type can either be a scalar, a
-matrix, or a three-column data frame.
+\ref{fig:chord-diagram-directional-arrow}). When \texttt{direction.type}
+is set to \texttt{arrows}, Arrows are added at the center of links.
+Similar as other graphics parameters for links, the parameters for
+drawing arrows such as arrow color and line type can either be a scalar,
+a matrix, or a three-column data frame.
 
 If \texttt{link.arr.col} is set as a data frame, only links specified in
 the data frame will have arrows. Pleast note this is the only way to
@@ -5635,8 +6049,18 @@ draw arrows to subset of links.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-directional-arrow-1} 
+
+}
+
+\caption{Use arrows to represent directions in Chord diagram.}\label{fig:chord-diagram-directional-arrow}
+\end{figure}
+
 If combining both \texttt{arrows} and \texttt{diffHeight}, it will give
-you better visualization (Figure \ref{fig:chord-diagram-directional} G).
+you better visualization (Figure
+\ref{fig:chord-diagram-directional-arrow2}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5648,9 +6072,18 @@ you better visualization (Figure \ref{fig:chord-diagram-directional} G).
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-directional-arrow2-1} 
+
+}
+
+\caption{Use both arrows and link height to represent directions in Chord diagram.}\label{fig:chord-diagram-directional-arrow2}
+\end{figure}
+
 There is another arrow type: \texttt{big.arrow} which is efficient to
 visualize arrows when there are too many links (Figure
-\ref{fig:chord-diagram-directional} H)
+\ref{fig:chord-diagram-directional-arrow3}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5660,35 +6093,43 @@ visualize arrows when there are too many links (Figure
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-directional-arrow3-1} 
+
+}
+
+\caption{Use big arrows to represent directions in Chord diagram.}\label{fig:chord-diagram-directional-arrow3}
+\end{figure}
+
 If \texttt{diffHeight} is set to a negative value, the start ends are
-longer than the other ends (Figure \ref{fig:chord-diagram-directional}
-I)
+longer than the other ends (Figure
+\ref{fig:chord-diagram-directional-arrow4}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{chordDiagram}\NormalTok{(matx, }\DataTypeTok{directional =} \DecValTok{1}\NormalTok{, }\DataTypeTok{direction.type =} \KeywordTok{c}\NormalTok{(}\StringTok{"diffHeight"}\NormalTok{, }\StringTok{"arrows"}\NormalTok{),}
-    \DataTypeTok{link.arr.type =} \StringTok{"big.arrow"}\NormalTok{, }\DataTypeTok{diffHeight =} \OperatorTok{-}\FloatTok{0.04}\NormalTok{)}
+    \DataTypeTok{link.arr.type =} \StringTok{"big.arrow"}\NormalTok{, }\DataTypeTok{diffHeight =} \OperatorTok{-}\KeywordTok{uh}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-directional-arrow4-1} 
+
+}
+
+\caption{Use big arrows to represent directions in Chord diagram.}\label{fig:chord-diagram-directional-arrow4}
+\end{figure}
 
 It is almost the same to visualize directional Chord diagram form a
 adjacency list.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# code is not run when building the vignette}
 \KeywordTok{chordDiagram}\NormalTok{(df, }\DataTypeTok{directional =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-directional-1} 
-
-}
-
-\caption{Visualization of directional matrix.}\label{fig:chord-diagram-directional}
-\end{figure}
 
 \section{Reduce}\label{reduce}
 
@@ -5726,11 +6167,6 @@ third column will be removed.
 ## 
 ## Your current sector.index is C6
 ## Your current track.index is 2
-\end{verbatim}
-
-\begin{verbatim}
-## pdf 
-##   2
 \end{verbatim}
 
 The \texttt{reduce} argument controls the size of sectors to be removed.
@@ -5877,25 +6313,36 @@ In \texttt{chordDiagram()}, there is no argument to control the style of
 sector labels, but this can be done by first pre-allocating an empty
 track and customizing the labels in it later. In the following example,
 one track is firstly allocated and a Chord diagram is added without
-label track and axes. Later, the first track is updated adding labels
-with clock wise facings (Figure \ref{fig:chord-diagram-labels} A).
+label track and axes. Later, the first track is updated with adding
+labels with clockwise facings (Figure
+\ref{fig:chord-diagram-labels-show}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{annotationTrack =} \StringTok{"grid"}\NormalTok{, }
     \DataTypeTok{preAllocateTracks =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{track.height =} \KeywordTok{max}\NormalTok{(}\KeywordTok{strwidth}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{dimnames}\NormalTok{(mat))))))}
 \CommentTok{# we go back to the first track and customize sector labels}
-\KeywordTok{circos.trackPlotRegion}\NormalTok{(}\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{, }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{, }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
     \KeywordTok{circos.text}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{ylim[}\DecValTok{1}\NormalTok{], CELL_META}\OperatorTok{$}\NormalTok{sector.index, }
         \DataTypeTok{facing =} \StringTok{"clockwise"}\NormalTok{, }\DataTypeTok{niceFacing =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{adj =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.5}\NormalTok{))}
 \NormalTok{\}, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{) }\CommentTok{# here set bg.border to NA is important}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/chord-diagram-labels-show-1} 
+
+}
+
+\caption{Change label directions.}\label{fig:chord-diagram-labels-show}
+\end{figure}
+
 In the following example, the labels are put on the grids (Figure
-\ref{fig:chord-diagram-labels} B). Please not \texttt{circos.text()} and
-\texttt{get.cell.meta.data()} can be used outside \texttt{panel.fun} if
-the sector index and track index are specified explicitly.
+\ref{fig:chord-diagram-labels-inside}). Please note
+\texttt{circos.text()} and \texttt{get.cell.meta.data()} can be used
+outside \texttt{panel.fun} if the sector index and track index are
+specified explicitly.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5910,9 +6357,18 @@ the sector index and track index are specified explicitly.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+
+{\centering \includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/chord-diagram-labels-inside-1} 
+
+}
+
+\caption{Put sector labels to the grid.}\label{fig:chord-diagram-labels-inside}
+\end{figure}
+
 For the last example in this section, if the width of the sector is less
 than 20 degree, the labels are added in the radical direction (Figure
-\ref{fig:chord-diagram-labels} C).
+\ref{fig:chord-diagram-labels-multile-style}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5920,7 +6376,7 @@ than 20 degree, the labels are added in the radical direction (Figure
 \NormalTok{mat2 =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{), }\DecValTok{10}\NormalTok{)}
 \KeywordTok{chordDiagram}\NormalTok{(mat2, }\DataTypeTok{annotationTrack =} \StringTok{"grid"}\NormalTok{, }
     \DataTypeTok{preAllocateTracks =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{track.height =} \KeywordTok{max}\NormalTok{(}\KeywordTok{strwidth}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{dimnames}\NormalTok{(mat))))))}
-\KeywordTok{circos.trackPlotRegion}\NormalTok{(}\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{, }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{, }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
 \NormalTok{    xlim =}\StringTok{ }\KeywordTok{get.cell.meta.data}\NormalTok{(}\StringTok{"xlim"}\NormalTok{)}
 \NormalTok{    xplot =}\StringTok{ }\KeywordTok{get.cell.meta.data}\NormalTok{(}\StringTok{"xplot"}\NormalTok{)}
 \NormalTok{    ylim =}\StringTok{ }\KeywordTok{get.cell.meta.data}\NormalTok{(}\StringTok{"ylim"}\NormalTok{)}
@@ -5939,11 +6395,11 @@ than 20 degree, the labels are added in the radical direction (Figure
 
 \begin{figure}
 
-{\centering \includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/chord-diagram-labels-1} 
+{\centering \includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/chord-diagram-labels-multile-style-1} 
 
 }
 
-\caption{Customize sector labels in Chord diagram.}\label{fig:chord-diagram-labels}
+\caption{Adjust label direction according to the width of sectors.}\label{fig:chord-diagram-labels-multile-style}
 \end{figure}
 
 When you set direction of sector labels as radical (\texttt{clockwise}
@@ -5985,7 +6441,7 @@ degree, the break for the axis is set to 0.5 (Figure
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# the second axis as well as the sector labels are added in this track}
-\KeywordTok{circos.trackPlotRegion}\NormalTok{(}\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{, }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{, }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
 \NormalTok{    xlim =}\StringTok{ }\KeywordTok{get.cell.meta.data}\NormalTok{(}\StringTok{"xlim"}\NormalTok{)}
 \NormalTok{    ylim =}\StringTok{ }\KeywordTok{get.cell.meta.data}\NormalTok{(}\StringTok{"ylim"}\NormalTok{)}
 \NormalTok{    sector.name =}\StringTok{ }\KeywordTok{get.cell.meta.data}\NormalTok{(}\StringTok{"sector.index"}\NormalTok{)}
@@ -6033,8 +6489,8 @@ column sectors.
 \end{Highlighting}
 \end{Shaded}
 
-Small gaps between sectors are set to 1 degree and big gaps between row
-and column sectors are set to 20 degree.
+Assume small gaps between sectors are set to 1 degree and big gaps
+between row and column sectors are set to 20 degree.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6168,7 +6624,7 @@ Since now we have the additional blank gap, we can set it to
 \end{Highlighting}
 \end{Shaded}
 
-Now the scale of the two Chord diagrams (figure
+Now the scale of the two Chord diagrams (Figure
 \ref{fig:chord-diagram-compare}) are the same if you compare the scale
 of axes in the two diagrams.
 
@@ -6265,11 +6721,11 @@ visual effect of different groups.
 \NormalTok{\}, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{)}
 
 \KeywordTok{highlight.sector}\NormalTok{(}\KeywordTok{rownames}\NormalTok{(mat1), }\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{, }
-    \DataTypeTok{text =} \StringTok{"A"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{niceFacing =} \OtherTok{TRUE}\NormalTok{)}
+    \DataTypeTok{text =} \StringTok{"A"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{text.col =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{niceFacing =} \OtherTok{TRUE}\NormalTok{)}
 \KeywordTok{highlight.sector}\NormalTok{(}\KeywordTok{colnames}\NormalTok{(mat1), }\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{, }\DataTypeTok{col =} \StringTok{"green"}\NormalTok{, }
-    \DataTypeTok{text =} \StringTok{"B"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{,  }\DataTypeTok{niceFacing =} \OtherTok{TRUE}\NormalTok{)}
+    \DataTypeTok{text =} \StringTok{"B"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{text.col =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{niceFacing =} \OtherTok{TRUE}\NormalTok{)}
 \KeywordTok{highlight.sector}\NormalTok{(}\KeywordTok{colnames}\NormalTok{(mat2), }\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{, }\DataTypeTok{col =} \StringTok{"blue"}\NormalTok{, }
-    \DataTypeTok{text =} \StringTok{"C"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{niceFacing =} \OtherTok{TRUE}\NormalTok{)}
+    \DataTypeTok{text =} \StringTok{"C"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{text.col =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{niceFacing =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6346,12 +6802,12 @@ In the RData file, there are three matrix: \texttt{mat},
   regions where the states have not been changed in the two groups.
 \item
   \texttt{meth\_mat\_1}: mean methylation for each set of regions in
-  group 1. \texttt{meth\_mat\_1{[}"TssA",\ "TxFlnk"{]}} is the mean
+  group 1. E.g. \texttt{meth\_mat\_1{[}"TssA",\ "TxFlnk"{]}} is the mean
   methylation for the regions in \textbf{group 1} that have ``TssA''
   state in group 1 and ``TxFlnk'' state in group 2.
 \item
   \texttt{meth\_mat\_2}: mean methylation for each set of regions in
-  group 2. \texttt{meth\_mat\_2{[}"TssA",\ "TxFlnk"{]}} is the mean
+  group 2. E.g. \texttt{meth\_mat\_2{[}"TssA",\ "TxFlnk"{]}} is the mean
   methylation for the regions in \textbf{group 2} that have ``TssA''
   state in group 1 and ``TxFlnk'' state in group 2.
 \end{itemize}
@@ -6432,20 +6888,13 @@ of the major transitions.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{state_col =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"TssA"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
-              \StringTok{"TssAFlnk"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
-              \StringTok{"TxFlnk"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
-              \StringTok{"Tx"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
-              \StringTok{"TxWk"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
-              \StringTok{"EnhG"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
-              \StringTok{"Enh"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
-              \StringTok{"ZNF/Rpts"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
-              \StringTok{"Het"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{,}
-              \StringTok{"TssBiv"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{,}
-              \StringTok{"BivFlnk"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{,}
-              \StringTok{"EnhBiv"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{,}
-              \StringTok{"ReprPC"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{,}
-              \StringTok{"ReprPCWk"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{,}
+\NormalTok{state_col =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"TssA"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,    }\StringTok{"TssAFlnk"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
+              \StringTok{"TxFlnk"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,  }\StringTok{"Tx"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
+              \StringTok{"TxWk"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,    }\StringTok{"EnhG"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
+              \StringTok{"Enh"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,     }\StringTok{"ZNF/Rpts"}\NormalTok{ =}\StringTok{ "#E41A1C"}\NormalTok{,}
+              \StringTok{"Het"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{,     }\StringTok{"TssBiv"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{,}
+              \StringTok{"BivFlnk"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{, }\StringTok{"EnhBiv"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{,}
+              \StringTok{"ReprPC"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{,  }\StringTok{"ReprPCWk"}\NormalTok{ =}\StringTok{ "#377EB8"}\NormalTok{,}
               \StringTok{"Quies"}\NormalTok{ =}\StringTok{ "black"}\NormalTok{)}
 
 \CommentTok{# one for rows and one for columns}
@@ -6477,7 +6926,8 @@ for all links.
     \DataTypeTok{cell.padding =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DataTypeTok{points.overflow.warning =} \OtherTok{FALSE}\NormalTok{)}
 
 \NormalTok{cdm_res =}\StringTok{ }\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{col =}\NormalTok{ colmat, }\DataTypeTok{grid.col =}\NormalTok{ state_col2,}
-    \DataTypeTok{directional =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{annotationTrack =} \StringTok{"grid"}\NormalTok{, }\DataTypeTok{preAllocateTracks =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{track.height =} \FloatTok{0.1}\NormalTok{))}
+    \DataTypeTok{directional =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{annotationTrack =} \StringTok{"grid"}\NormalTok{, }
+    \DataTypeTok{preAllocateTracks =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{track.height =} \FloatTok{0.1}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6521,16 +6971,16 @@ pre-allocated track, the circular rectangles are in the second track
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-10-1} \end{center}
 
 On the top half, it is easy to see the proportion of different
 transitions in group 1 that come to every state in group 2. However, it
 is not straightforward for the states in the bottom half to see the
 proportion of different states in group 2 they transite to. This can be
-solved by adding small circular rectangles. In following example, the
-newly added circular rectangles in the bottom half shows e.g.~how much
-the state 15 in group 1 has been transited to different states in group
-2.
+solved by adding small circular rectangles to represent the proportions.
+In following example, the newly added circular rectangles in the bottom
+half show e.g.~how much the state 15 in group 1 has been transited to
+different states in group 2.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6545,13 +6995,16 @@ the state 15 in group 1 has been transited to different states in group
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-10-1} \end{center}
+\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-11-1} \end{center}
 
 Methylation in each category is put on the most outside of the circle.
 On this track, we will put two paralle rectangles which are mean
 methylation and methylation difference between group 1 and group 2.
 Basically, on the bottom, we show \texttt{meth\_mat\_2\ -\ meth\_mat\_1}
 and on the top we show \texttt{meth\_mat\_1\ -\ meth\_mat\_2}.
+
+The logic of following code is simple that it just simply adds
+rectangles repeatedly.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6589,22 +7042,12 @@ and on the top we show \texttt{meth\_mat\_1\ -\ meth\_mat\_2}.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-11-1} \end{center}
+\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-12-1} \end{center}
 
 Legends can be added according to instructions discussed in Section
 \ref{legends}.
 
-\begin{verbatim}
-##    rn  cn value o1 o2      x1     x2       col
-## 1 R_1 C_1     0 15 13  431200 267200 #E41A1C20
-## 2 R_2 C_1 56400 15 12  159800 267200 #E41A1CA0
-## 3 R_3 C_1     0 15 11    3600 210800 #E41A1C20
-## 4 R_4 C_1   800 15 10   34600 210800 #E41A1C20
-## 5 R_5 C_1 98200 15  9 1411600 210000 #E41A1CA0
-## 6 R_6 C_1     0 15  8  139800 111800 #E41A1C20
-\end{verbatim}
-
-\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
 \part{Others}\label{part-others}
 
@@ -6627,7 +7070,7 @@ section in the help page of \texttt{circos.axis()}.
 \begin{Highlighting}[]
 \KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{gap.degree =} \DecValTok{0}\NormalTok{, }\DataTypeTok{cell.padding =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DataTypeTok{start.degree =} \DecValTok{90}\NormalTok{)}
 \KeywordTok{circos.initialize}\NormalTok{(}\DataTypeTok{factors =} \StringTok{"a"}\NormalTok{, }\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{12}\NormalTok{))}
-\KeywordTok{circos.trackPlotRegion}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{)}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{)}
 \KeywordTok{circos.axis}\NormalTok{(}\DataTypeTok{major.at =} \DecValTok{0}\OperatorTok{:}\DecValTok{12}\NormalTok{, }\DataTypeTok{labels =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{direction =} \StringTok{"inside"}\NormalTok{, }
     \DataTypeTok{major.tick.length =} \KeywordTok{uy}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{))}
 \KeywordTok{circos.text}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{12}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{12}\NormalTok{) }\OperatorTok{-}\StringTok{ }\KeywordTok{uy}\NormalTok{(}\DecValTok{6}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DecValTok{1}\OperatorTok{:}\DecValTok{12}\NormalTok{, }\DataTypeTok{facing =} \StringTok{"downward"}\NormalTok{)}
@@ -6762,19 +7205,19 @@ you look at the world.
     \KeywordTok{circos.rect}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.45}\NormalTok{,}\DecValTok{1}\NormalTok{, }\DataTypeTok{col =} \StringTok{"black"}\NormalTok{)}
     \KeywordTok{circos.rect}\NormalTok{(}\FloatTok{0.55}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{, }\DataTypeTok{col =} \StringTok{"black"}\NormalTok{)}
 \NormalTok{\}}
-\KeywordTok{circos.trackPlotRegion}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{factors =}\NormalTok{ factors, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{,}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{factors =}\NormalTok{ factors, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{,}
     \DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
 \NormalTok{        i =}\StringTok{ }\KeywordTok{get.cell.meta.data}\NormalTok{(}\StringTok{"sector.numeric.index"}\NormalTok{)}
         \ControlFlowTok{if}\NormalTok{(i }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{)) }\KeywordTok{add_yang_yao}\NormalTok{() }\ControlFlowTok{else} \KeywordTok{add_yin_yao}\NormalTok{()}
 \NormalTok{\}, }\DataTypeTok{track.height =} \FloatTok{0.1}\NormalTok{)}
 
-\KeywordTok{circos.trackPlotRegion}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{factors =}\NormalTok{ factors, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{,}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{factors =}\NormalTok{ factors, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{,}
     \DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
 \NormalTok{        i =}\StringTok{ }\KeywordTok{get.cell.meta.data}\NormalTok{(}\StringTok{"sector.numeric.index"}\NormalTok{)}
         \ControlFlowTok{if}\NormalTok{(i }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{)) }\KeywordTok{add_yang_yao}\NormalTok{() }\ControlFlowTok{else} \KeywordTok{add_yin_yao}\NormalTok{()}
 \NormalTok{    \}, }\DataTypeTok{track.height =} \FloatTok{0.1}\NormalTok{)}
 
-\KeywordTok{circos.trackPlotRegion}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{factors =}\NormalTok{ factors, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{, }
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{factors =}\NormalTok{ factors, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{, }
     \DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
 \NormalTok{        i =}\StringTok{ }\KeywordTok{get.cell.meta.data}\NormalTok{(}\StringTok{"sector.numeric.index"}\NormalTok{)}
         \ControlFlowTok{if}\NormalTok{(i }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{)) }\KeywordTok{add_yang_yao}\NormalTok{() }\ControlFlowTok{else} \KeywordTok{add_yin_yao}\NormalTok{()}
@@ -6832,59 +7275,6 @@ implementation is quite slow to run).
 
 \caption{Keith Haring doodle in circular layout.}\label{fig:doodle}
 \end{figure}
-
-\chapter{Session info}\label{session-info}
-
-This book is built under following system settings.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{session_info}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Session info --------------------------------------------------------------
-\end{verbatim}
-
-\begin{verbatim}
-##  setting  value                       
-##  version  R version 3.3.2 (2016-10-31)
-##  system   x86_64, darwin13.4.0        
-##  ui       X11                         
-##  language (EN)                        
-##  collate  C                           
-##  tz       Europe/Berlin               
-##  date     2017-04-09
-\end{verbatim}
-
-\begin{verbatim}
-## Packages ------------------------------------------------------------------
-\end{verbatim}
-
-\begin{verbatim}
-##  package       * version date       source                           
-##  GlobalOptions   0.0.12  2017-03-25 CRAN (R 3.3.2)                   
-##  Rcpp            0.12.9  2017-01-14 CRAN (R 3.3.2)                   
-##  backports       1.0.5   2017-01-18 cran (@1.0.5)                    
-##  bookdown        0.3.16  2017-03-27 Github (rstudio/bookdown@0b4527c)
-##  circlize      * 0.4.0   2017-03-10 CRAN (R 3.3.2)                   
-##  colorspace      1.3-2   2016-12-14 cran (@1.3-2)                    
-##  devtools        1.12.0  2016-06-24 CRAN (R 3.3.0)                   
-##  digest          0.6.12  2017-01-27 cran (@0.6.12)                   
-##  evaluate        0.10    2016-10-11 cran (@0.10)                     
-##  htmltools       0.3.5   2016-03-21 cran (@0.3.5)                    
-##  knitr           1.15.16 2017-03-27 Github (yihui/knitr@9f6a1c2)     
-##  magrittr        1.5     2014-11-22 CRAN (R 3.3.0)                   
-##  memoise         1.0.0   2016-01-29 CRAN (R 3.3.0)                   
-##  rmarkdown       1.4     2017-03-24 cran (@1.4)                      
-##  rprojroot       1.2     2017-01-16 cran (@1.2)                      
-##  shape           1.4.2   2014-11-05 CRAN (R 3.3.0)                   
-##  stringi         1.1.2   2016-10-01 cran (@1.1.2)                    
-##  stringr         1.2.0   2017-02-18 CRAN (R 3.3.2)                   
-##  withr           1.0.2   2016-06-20 CRAN (R 3.3.0)                   
-##  yaml            2.1.14  2016-11-12 cran (@2.1.14)
-\end{verbatim}
 
 \bibliography{book.bib}
 

@@ -437,7 +437,7 @@ sector.width =<span class="st"> </span><span class="kw">c</span>(xrange[normal_c
     <span class="dt">sector.width =</span> sector.width)</code></pre></div>
 <p>Add a new track.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dv">500</span>)
-<span class="kw">circos.genomicTrackPlotRegion</span>(<span class="kw">extend_chromosomes</span>(bed, <span class="kw">c</span>(<span class="st">&quot;chr1&quot;</span>, <span class="st">&quot;chr2&quot;</span>)),
+<span class="kw">circos.genomicTrack</span>(<span class="kw">extend_chromosomes</span>(bed, <span class="kw">c</span>(<span class="st">&quot;chr1&quot;</span>, <span class="st">&quot;chr2&quot;</span>)),
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.3</span>)
 })</code></pre></div>

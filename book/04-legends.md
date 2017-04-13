@@ -102,7 +102,7 @@ upViewport()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="04-legends_files/figure-html/directly-add-1.png" alt="Directly add grid graphics." width="384" />
+<img src="04-legends_files/figure-epub3/directly-add-1.png" alt="Directly add grid graphics."  />
 <p class="caption">(\#fig:directly-add)Directly add grid graphics.</p>
 </div>
 
@@ -134,7 +134,7 @@ upViewport()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="04-legends_files/figure-html/two-legends-1.png" alt="Split into two legends." width="384" />
+<img src="04-legends_files/figure-epub3/two-legends-1.png" alt="Split into two legends."  />
 <p class="caption">(\#fig:two-legends)Split into two legends.</p>
 </div>
 
@@ -176,7 +176,7 @@ grid.draw(lgd_list_vertical)
 upViewport()
 ```
 
-<img src="04-legends_files/figure-html/right-legend-1.png" width="446.150971128609" style="display: block; margin: auto;" />
+<img src="04-legends_files/figure-epub3/right-legend-1.png" style="display: block; margin: auto;" />
 
 The legends can also be put at the bottom of the circular plot and it is just
 a matter how users arrange the grid viewports. In this case, all legends are
@@ -218,5 +218,5 @@ grid.draw(lgd_list_horizontal)
 upViewport()
 ```
 
-<img src="04-legends_files/figure-html/bottom-legend-1.png" width="384" style="display: block; margin: auto;" />
+<img src="04-legends_files/figure-epub3/bottom-legend-1.png" style="display: block; margin: auto;" />
 

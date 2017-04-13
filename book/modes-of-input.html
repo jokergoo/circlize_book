@@ -293,7 +293,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Under <code>stack</code> mode, when input data is a single data frame containing one or more numeric columns, each numeric column defined in <code>numeric.column</code> will be treated as a single unit (recall that when <code>numeric.column</code> is not specified, all numeric columns are used). <code>ylim</code> is re-defined to <code>c(0.5, n+0.5)</code> in which <code>n</code> is number of numeric columns specified. <code>panel.fun</code> is applied iteratively on each numeric column and add graphics to the horizontal line <code>y = i</code>. In this case, actually <code>value</code> in e.g. <code>circos.genomicPoints()</code> doesn’t used for mapping the y positions, while replaced with <code>y = i</code> internally.</p>
 <p>In each iteration, in <code>panel.fun</code>, <code>region</code> is still the genomic regions in current chromosome, but <code>value</code> only contains current numeric column plus all non-numeric columns. The value of the index of “current” numeric column can be obtained by <code>getI(...)</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)
-<span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">stack =</span> <span class="ot">TRUE</span>,
+<span class="kw">circos.genomicTrack</span>(data, <span class="dt">stack =</span> <span class="ot">TRUE</span>,
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         i =<span class="st"> </span><span class="kw">getI</span>(...)
         <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">col =</span> i, ...)
@@ -303,7 +303,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">10.2.2</span> Input is a list of data frames</h3>
 <p>When input data is a list of data frames, each data frame will be treated as a single unit. <code>ylim</code> is re-defined to <code>c(0.5, n+0.5)</code> in which <code>n</code> is the number of data frames. <code>panel.fun</code> will be applied iteratively on each data frame. In each iteration, in <code>panel.fun</code>, <code>region</code> is still the genomic regions in current chromosome, and <code>value</code> contains columns in current data frame excluding the first three columns. Graphics by low-level genomic functions will be added on the `horizontal’ bins.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed_list =<span class="st"> </span><span class="kw">list</span>(<span class="kw">generateRandomBed</span>(), <span class="kw">generateRandomBed</span>())
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>,
+<span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>,
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         i =<span class="st"> </span><span class="kw">getI</span>(...)
         <span class="kw">circos.genomicPoints</span>(region, value, ...)
@@ -338,7 +338,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>)
 bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>)
 bed_list =<span class="st"> </span><span class="kw">list</span>(bed1, bed2)
-<span class="kw">circos.genomicTrackPlotRegion</span>(bed_list, 
+<span class="kw">circos.genomicTrack</span>(bed_list, 
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
         i =<span class="st"> </span><span class="kw">getI</span>(...)
         <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> i, ...)
