@@ -10,7 +10,7 @@ One unique feature of circular layout is the circular visualization of
 relations between objects by links. See examples in
 http://circos.ca/intro/tabular_visualization/. The name of such plot is called
 [Chord diagram](http://en.wikipedia.org/wiki/Chord_diagram). In **circlize**,
-it is easy to plot Chord diagram in a straightforward or customized way.
+it is easy to plot Chord diagram in a straightforward or in a highly customized way.
 
 There are two data formats that represent relations, either adjacency matrix
 or adjacency list. In adjacency matrix, value in $i^{th}$ row and $j^{th}$
@@ -45,8 +45,8 @@ Chord diagram shows the information of the relation from several levels. 1.
 the links are straightforward to show the relations between objects; 2. width
 of links are proportional to the strength of the relation which is more
 illustrative than other graphic mappings; 3. colors of links can be another
-graphic mapping for categorize relations; 4. width of sectors represents total
-strength for a link which connects to other objects or is connected from other
+graphic mapping for relations; 4. width of sectors represents total
+strength for an object which connects to other objects or is connected from other
 objects. You can find an interesting example of using Chord diagram to visualize
 leagues system of players clubs by their national team from https://gjabel.wordpress.com/2014/06/05/world-cup-players-representation-by-league-system/ and the adapted code is at
 http://jokergoo.github.io/circlize/example/wc2014.html.
@@ -88,9 +88,9 @@ df
 ```
 
 The most simple usage is just calling `chordDiagram()` with 
-`mat` (Figure \@ref(fig:chord-diagram-basic) left).
+`mat` (Figure \@ref(fig:chord-diagram-basic)).
 
-```{r chord_diagram_basic_simple, eval = FALSE}
+```{r chord-diagram-basic, fig.cap = "Basic usages of `chordDiagram()`."}
 chordDiagram(mat)
 circos.clear()
 ```
@@ -107,36 +107,33 @@ axes, and links. Sectors which correspond to rows in the matrix locate at the
 bottom half of the circle. The order of sectors is the order of
 `union(rownames(mat), colnames(mat))` or `union(df[[1]], df[[2]])` if input is
 a data frame. The order of sectors can be controlled by `order` argument
-(Figure \@ref(fig:chord-diagram-basic) right). Of course, the length of
+(Figure \@ref(fig:chord-diagram-basic-order) right). Of course, the length of
 `order` vector should be same as the number of sectors.
 
-```{r chord_diagram_basic_order, eval = FALSE}
+```{r chord-diagram-basic-order, fig.cap = "Adjust sector orders in Chord diagram."}
 chordDiagram(mat, order = c("S1", "E1", "E2", "S2", "E3", "E4", "S3", "E5", "E6"))
+circos.clear()
 ```
 
-```{r chord-diagram-basic, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Basic usages of `chordDiagram()`."}
+```{r, echo = FALSE}
 chunks <- knitr:::knit_code$get()
-par(mfrow = c(1, 2))
-eval(parse(text = chunks[["chord_diagram_basic_simple"]]))
-eval(parse(text = chunks[["chord_diagram_basic_order"]]))
 ```
 
 Under default settings, the grid colors which represent sectors are randomly
 generated, and the link colors are same as grid colors which correspond to
-rows but with 50% transparency.
+rows (or the first column if the input is an adjacency list) but with 50% transparency.
 
 ## Adjust by `circos.par()`
 
 Since Chord Diagram is implemented by basic circlize functions, like normal circular plot,
 the layout can be customized by `circos.par()`.
 
-The gaps between sectors can be set by `circos.par(gap.after = ...)` (Figure \@ref(fig:chord-diagram-par), left). 
-It is useful when rows and columns belong to different categories. 
+The gaps between sectors can be set by `circos.par(gap.after = ...)` (Figure \@ref(fig:chord-diagram-basic-gap-after)). 
+It is useful when you want to distinguish sectors between rows and columns. 
 Please note since you change default graphical settings, you need to 
 use `circos.clear()` in the end of the plot to reset it.
 
-```{r chord_diagram_basic_gap_after, eval = FALSE, echo = -1}
-circos.clear()
+```{r chord-diagram-basic-gap-after, fig.cap = "Set gaps in Chord diagram."}
 circos.par(gap.after = c(rep(5, nrow(mat)-1), 15, rep(5, ncol(mat)-1), 15))
 chordDiagram(mat)
 circos.clear()
@@ -153,24 +150,17 @@ circos.clear()
 
 Similar to a normal circular plot, the first sector (which is the first row in
 the adjacency matrix or the first row in the adjacency list) starts from right
-center of the circle and sectors are arranged clock wise. The start degree for
+center of the circle and sectors are arranged clock-wisely. The start degree for
 the first sector can be set by `circos.par(start.degree = ...)` and the
-direction can be set by `circos.par(clock.wise = ...)` (Figure \@ref(fig:chord-diagram-par), right).
+direction can be set by `circos.par(clock.wise = ...)` (Figure \@ref(fig:chord-diagram-basic-start-degree)).
 
-```{r chord_diagram_basic_start_degree, eval = FALSE}
+```{r chord-diagram-basic-start-degree, fig.cap = "Change position and orientation of Chord diagram."}
 circos.par(start.degree = 90, clock.wise = FALSE)
 chordDiagram(mat)
 circos.clear()
 ```
 
-```{r chord-diagram-par, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Control `chordDiagram()` by `circos.par()`."}
-chunks <- knitr:::knit_code$get()
-par(mfrow = c(1, 2))
-eval(parse(text = chunks[["chord_diagram_basic_gap_after"]]))
-eval(parse(text = chunks[["chord_diagram_basic_start_degree"]]))
-```
-
-## Colors
+## Colors {#chord-diagram-colors}
 
 ### Set grid colors
 
@@ -197,25 +187,23 @@ chordDiagram(t(mat), grid.col = grid.col)
 
 ### Set link colors {#chord-diagram-link-color}
 
-Transparency of link colors can be set by `transparency` argument (Figure \ref{fig:chord-diagram-color} A). 
+Transparency of link colors can be set by `transparency` argument (Figure \@ref(fig:chord-diagram-color-transparency)). 
 The value should between 0 to 1 in which 0 means no transparency and 1 means full transparency.
 Default transparency is 0.5.
 
-```{r chord_diagram_color_transparency, eval = FALSE, echo = 1}
+```{r chord-diagram-color-transparency, fig.cap = "Transparency for links in Chord diagram."}
 chordDiagram(mat, grid.col = grid.col, transparency = 0)
-text(-0.9, 0.9, "A", cex = 1.5)
 ```
 
 For adjacecy matrix, colors for links can be customized by providing a matrix
 of colors. In the following example, we use `rand_color()` to generate a
 random color matrix. Note since `col_mat` already contains transparency,
-`transparency` will be ignored if it is set (Figure \ref{fig:chord-diagram-color} B).
+`transparency` will be ignored if it is set (Figure \@ref(fig:chord-diagram-color-mat)).
 
-```{r chord_diagram_color_mat, eval = FALSE, echo = 1:3}
+```{r chord-diagram-color-mat, fig.cap = "Set a color matrix for links in Chord diagram."}
 col_mat = rand_color(length(mat), transparency = 0.5)
 dim(col_mat) = dim(mat)  # to make sure it is a matrix
 chordDiagram(mat, grid.col = grid.col, col = col_mat)
-text(-0.9, 0.9, "B", cex = 1.5)
 ```
 
 While for ajacency list, colors for links can be customized as a vector.
@@ -227,17 +215,16 @@ chordDiagram(df, grid.col = grid.col, col = col)
 
 When the strength of the relation (e.g. correlations) represents as continuous values,
 `col` can also be specified as a self-defined color mapping function. `chordDiagram()`
-accepts a color mapping generated by `colorRamp2()` (Figure \ref{fig:chord-diagram-color} C). 
+accepts a color mapping generated by `colorRamp2()` (Figure \@ref(fig:chord-diagram-color-fun)). 
 
-```{r chord_diagram_color_fun, eval = FALSE, echo = 1:2}
+```{r chord-diagram-color-fun, fig.cap = "Set a color mapping function for links in Chord diagram."}
 col_fun = colorRamp2(range(mat), c("#FFEEEE", "#FF0000"), transparency = 0.5)
 chordDiagram(mat, grid.col = grid.col, col = col_fun)
-text(-0.9, 0.9, "C", cex = 1.5)
 ```
 
 The color mapping function also works for adjacency list, but it will be
 applied to the third column in the data frame, so you need to make sure the
-third column has the correct values.
+third column has the proper values.
 
 ```{r, eval = FALSE}
 chordDiagram(df, grid.col = grid.col, col = col_fun)
@@ -245,15 +232,14 @@ chordDiagram(df, grid.col = grid.col, col = col_fun)
 
 When the input is a matrix, sometimes you don't need to generate the whole
 color matrix. You can just provide colors which correspond to rows or columns
-so that links from a same row/column will have the same color (Figure \ref{fig:chord-diagram-color} D, E). 
+so that links from a same row/column will have the same color (Figure \@ref(fig:chord-diagram-color-row-col)). 
 Here note values of colors can be set as numbers,
 color names or hex code, same as in the base R graphics.
 
-```{r chord_diagram_color_row_col, eval = FALSE, echo = c(1, 3)}
+```{r chord-diagram-color-row-col, fig.width = 8, fig.height = 4, echo = -1, fig.cap = "Set link colors same as row sectors or column sectors in Chord diagram."}
+par(mfrow = c(1, 2))
 chordDiagram(mat, grid.col = grid.col, row.col = 1:3)
-text(-0.9, 0.9, "D", cex = 1.5)
 chordDiagram(mat, grid.col = grid.col, column.col = 1:6)
-text(-0.9, 0.9, "E", cex = 1.5)
 ```
 
 `row.col` and `column.col` is specifically designed for matrix. There is no
@@ -266,31 +252,22 @@ will be ignored.
 In Section \@ref(highlight-links), we will introduce how to highlight subset
 of links by only assigning colors to them.
 
-```{r chord-diagram-color, echo = FALSE, fig.width = 8, fig.height = 8*2/3, fig.cap = "Control colors for Chord diagram."}
-chunks <- knitr:::knit_code$get()
-par(mfrow = c(2, 3))
-eval(parse(text = chunks[["chord_diagram_color_transparency"]]))
-eval(parse(text = chunks[["chord_diagram_color_mat"]]))
-eval(parse(text = chunks[["chord_diagram_color_fun"]]))
-eval(parse(text = chunks[["chord_diagram_color_row_col"]]))
-```
-
 ## Link border {#chord-diagram-link-border}
 
 `link.lwd`, `link.lty` and `link.border` control the line width, the line
 style and the color of the link border. All these three parameters can be set
 either a single scalar or a matrix if the input is adjacency matrix.
 
-If it is set as a single scalar, it means all links share the same style (Figure \@ref(fig:chord-diagram-border) A).
+If it is set as a single scalar, it means all links share the same style (Figure \@ref(fig:chord-diagram-style-scalar)).
 
-```{r chord_diagram_style_scalar, eval = FALSE}
+```{r chord-diagram-style-scalar, fig.cap = "Line style for Chord diagram."}
 chordDiagram(mat, grid.col = grid.col, link.lwd = 2, link.lty = 2, link.border = "red")
 ```
 
 If it is set as a matrix, it should have same dimension as `mat`
-(Figure \@ref(fig:chord-diagram-border) B). 
+(Figure \@ref(fig:chord-diagram-style-fullmat)). 
 
-```{r chord_diagram_style_fullmat, eval = FALSE}
+```{r chord-diagram-style-fullmat, fig.cap = "Set line style as a matrix."}
 lwd_mat = matrix(1, nrow = nrow(mat), ncol = ncol(mat))
 lwd_mat[mat > 12] = 2
 border_mat = matrix(NA, nrow = nrow(mat), ncol = ncol(mat))
@@ -299,12 +276,12 @@ chordDiagram(mat, grid.col = grid.col, link.lwd = lwd_mat, link.border = border_
 ```
 
 The matrix is not necessary to have same dimensions as in `mat`. It can also
-be a sub matrix (Figure \@ref(fig:chord-diagram-border) C). For rows or
+be a sub matrix (Figure \@ref(fig:chord-diagram-style-submatrix)). For rows or
 columns of which the corresponding values are not specified in the matrix,
 default values are filled in. It must have row names and column names so that
 the settings can be mapped to the correct links.
 
-```{r chord_diagram_style_submatrix, eval = FALSE}
+```{r chord-diagram-style-submatrix, fig.cap = "Set line style as a sub matrix."}
 border_mat2 = matrix("black", nrow = 1, ncol = ncol(mat))
 rownames(border_mat2) = rownames(mat)[2]
 colnames(border_mat2) = colnames(mat)
@@ -314,9 +291,9 @@ chordDiagram(mat, grid.col = grid.col, link.lwd = 2, link.border = border_mat2)
 To be more convenient, graphic parameters can be set as a three-column data
 frame in which the first two columns correspond to row names and column names
 in the matrix, and the third column corresponds to the graphic parameters
-(Figure \@ref(fig:chord-diagram-border) D).
+(Figure \@ref(fig:chord-diagram-style-dataframe)).
 
-```{r chord_diagram_style_dataframe, eval = FALSE}
+```{r chord-diagram-style-dataframe, fig.cap = "Set line style as a data frame."}
 lty_df = data.frame(c("S1", "S2", "S3"), c("E5", "E6", "E4"), c(1, 2, 3))
 lwd_df = data.frame(c("S1", "S2", "S3"), c("E5", "E6", "E4"), c(2, 2, 2))
 border_df = data.frame(c("S1", "S2", "S3"), c("E5", "E6", "E4"), c(1, 1, 1))
@@ -332,19 +309,6 @@ chordDiagram(df, grid.col = grid.col, link.lty = sample(1:3, nrow(df), replace =
     link.lwd = runif(nrow(df))*2, link.border = sample(0:1, nrow(df), replace = TRUE))
 ```
 
-```{r chord-diagram-border, echo = FALSE, fig.width = 8, fig.height = 8, fig.cap = "Control borders for Chord Diagram."}
-chunks <- knitr:::knit_code$get()
-par(mfrow = c(2, 2))
-eval(parse(text = chunks[["chord_diagram_style_scalar"]]))
-text(-0.9, 0.9, "A", cex = 1.5)
-eval(parse(text = chunks[["chord_diagram_style_fullmat"]]))
-text(-0.9, 0.9, "B", cex = 1.5)
-eval(parse(text = chunks[["chord_diagram_style_submatrix"]]))
-text(-0.9, 0.9, "C", cex = 1.5)
-eval(parse(text = chunks[["chord_diagram_style_dataframe"]]))
-text(-0.9, 0.9, "D", cex = 1.5)
-```
-
 ## Highlight links
 
 Sometimes we want to highlight some links to emphasize the importance of such relations.
@@ -353,22 +317,23 @@ and here we focus on highlighting by colors.
 
 THere are two ways to highlight links, one is to set different transparency to different links
 and the other is to only draw links that needs to be highlighted. Based on this rule and 
-ways to assign colors to links (introduced in Section \@ref(chord-diagram-link-color)), We can
+ways to assign colors to links (introduced in Section \@ref(chord-diagram-link-color)), we can
 highlight links which come from a same sector by assigning colors with different transparency
-by `row.col` argument (Figure \@ref(fig:chord-diagram-highlight) A).
+by `row.col` argument (Figure \@ref(fig:chord-diagram-highlight-row)).
 
-```{r chord_diagram_highlight_row, eval = FALSE}
+```{r chord-diagram-highlight-row, fig.cap = "Highlight links by transparency."}
 chordDiagram(mat, grid.col = grid.col, row.col = c("#FF000080", "#00FF0010", "#0000FF10"))
 ```
 
-We can also highlight links with values larger than a cutoff (Figure \@ref(fig:chord-diagram-highlight) B). 
+We can also highlight links with values larger than a cutoff. 
 There are at least three ways to do it. First, construct a color matrix and set links
 with small values to full transparency.
 
-Since link colors can be specified as a matrix, we can set the transparency of those links to a high value
-or even set to full transparency. In following example, links with value less then 12 is set to `#00000000`.
+Since link colors can be specified as a matrix, we can set the transparency of
+those links to a high value or even set to full transparency (Figure \@ref(fig:chord-diagram-highlight-mat)). 
+In following example, links with value less than 12 is set to `#00000000`.
 
-```{r chord_diagram_highlight_mat, eval = FALSE}
+```{r chord-diagram-highlight-mat, fig.cap = "Highlight links by color matrix."}
 col_mat[mat < 12] = "#00000000"
 chordDiagram(mat, grid.col = grid.col, col = col_mat) 
 ```
@@ -384,9 +349,9 @@ chordDiagram(mat, grid.col = grid.col, col = col_fun)
 For both color matrix and color mapping function, actually all links are all
 drawn and the reason why you cannot see some of them is they are assigned with
 full transparency. If a three-column data frame is used to assign colors to
-links of interest, links which are not defined in `col_df` are not drawn (Figure \@ref(fig:chord-diagram-highlight) C).
+links of interest, links which are not defined in `col_df` are not drawn (Figure \@ref(fig:chord-diagram-highlight-df)).
 
-```{r chord_diagram_highlight_df, eval = FALSE}
+```{r chord-diagram-highlight-df, fig.cap = "Highlight links by data frame."}
 col_df = data.frame(c("S1", "S2", "S3"), c("E5", "E6", "E4"), 
     c("#FF000080", "#00FF0080", "#0000FF80"))
 chordDiagram(mat, grid.col = grid.col, col = col_df)
@@ -404,29 +369,16 @@ chordDiagram(df, grid.col = grid.col, col = col)
 The `link.visible` argument is recently introduced to **circlize** package
 which may provide a simple to control the visibility of links. The value can
 be set as an logical matrix for adjacency matrix or a logical vector for
-adjacency list (Figure \@ref(fig:chord-diagram-highlight) D).
+adjacency list (Figure \@ref(fig:chord-diagram-link-visible)).
 
-```{r chord_diagram_visible, eval = FALSE}
+```{r chord-diagram-link-visible, fig.cap = "Highlight links by setting `link.visible`."}
 col = rand_color(nrow(df))
 chordDiagram(df, grid.col = grid.col, link.visible = df[[3]] >= 10)
 ```
 
-```{r chord-diagram-highlight, echo = FALSE, fig.width = 8, fig.height = 8, fig.cap = "Highlight links by colors."}
-chunks <- knitr:::knit_code$get()
-par(mfrow = c(2, 2))
-eval(parse(text = chunks[["chord_diagram_highlight_row"]]))
-text(-0.9, 0.9, "A", cex = 1.5)
-eval(parse(text = chunks[["chord_diagram_highlight_mat"]]))
-text(-0.9, 0.9, "B", cex = 1.5)
-eval(parse(text = chunks[["chord_diagram_highlight_df"]]))
-text(-0.9, 0.9, "C", cex = 1.5)
-eval(parse(text = chunks[["chord_diagram_visible"]]))
-text(-0.9, 0.9, "D", cex = 1.5)
-```
-
 ## Orders of links
 
-### Orders on positions on sectors
+### Orders of positions on sectors
 
 Orders of links on every sector are adjusted automatically to make them look
 nice. But sometimes sorting links according to the width on the sector is
@@ -437,9 +389,9 @@ be set to control the order of positioning links on sectors
 ```{r chord-diagram-link-order1, echo = c(2, 4), fig.width = 8, fig.height = 4, fig.cap = "Order of positioning links on sectors."}
 par(mfrow = c(1, 2))
 chordDiagram(mat, grid.col = grid.col, link.sort = TRUE, link.decreasing = TRUE)
-text(-0.9, 0.9, "A", cex = 1.5)
+title("link.sort = TRUE, link.decreasing = TRUE")
 chordDiagram(mat, grid.col = grid.col, link.sort = TRUE, link.decreasing = FALSE)
-text(-0.9, 0.9, "B", cex = 1.5)
+title("link.sort = TRUE, link.decreasing = FALSE")
 ```
 
 ### Order of adding links
@@ -452,12 +404,10 @@ forward and to put small links more backward in the plot. This can be set by
 `link.rank` argument which defines the order of adding links. Larger value
 means the corresponding link is added later (Figure \@ref(fig:chord-diagram-link-order2)).
 
-```{r chord-diagram-link-order2, echo = c(2:4, 6), fig.width = 8, fig.height = 4, fig.cap = "Order of adding links."}
+```{r chord-diagram-link-order2, echo = -1, fig.width = 8, fig.height = 4, fig.cap = "Order of adding links."}
 par(mfrow = c(1, 2))
 chordDiagram(mat, grid.col = grid.col, transparency = 0)
-text(-0.9, 0.9, "A", cex = 1.5)
 chordDiagram(mat, grid.col = grid.col, transparency = 0, link.rank = rank(mat))
-text(-0.9, 0.9, "B", cex = 1.5)
 ```
 
 Similar code if the input is a data frame.
@@ -486,7 +436,7 @@ title("self.link = 2")
 When the matrix is symmetric, by setting `symmetric = TRUE`, only lower
 triangular matrix without the diagonal will be used (Figure \@ref(fig:chord-diagram-symmetric)).
 
-```{r chord-diagram-symmetric, echo = 2:7, fig.width = 8, fig.height = 4, fig.cap = "Symmetric matrix for Chord diagram."}
+```{r chord-diagram-symmetric, echo = -1, fig.width = 8, fig.height = 4, fig.cap = "Symmetric matrix for Chord diagram."}
 par(mfrow = c(1, 2))
 mat3 = matrix(rnorm(25), 5)
 colnames(mat3) = letters[1:5]
@@ -510,24 +460,22 @@ the second column to the first column for the adjacency list). A value of `2` me
 bi-directional.
 
 By default, the two ends of links have unequal height (Figure
-\@ref(fig:chord-diagram-directional) A, B, C) to represent the directions.
+\@ref(fig:chord-diagram-directional-simple)) to represent the directions.
 The position of starting end of the link is shorter than the other end to give
 users the feeling that the link is moving out. If this is not what your
 correct feeling, you can set `diffHeight` to a negative value.
 
 
-```{r chord_diagram_directional_simple, eval = FALSE, echo = c(1, 3, 5)}
+```{r chord-diagram-directional-simple, fig.width = 8, fig.height = 8/3, fig.cap = "Represent directions by different height of link ends."}
+par(mfrow = c(1, 3))
 chordDiagram(mat, grid.col = grid.col, directional = 1)
-text(-0.9, 0.9, "A", cex = 1.5)
 chordDiagram(mat, grid.col = grid.col, directional = 1, diffHeight = 0.08)
-text(-0.9, 0.9, "B", cex = 1.5)
 chordDiagram(mat, grid.col = grid.col, directional = -1)
-text(-0.9, 0.9, "C", cex = 1.5)
 ```
 
 Row names and column names in `mat` can also overlap. In this case, showing
-direction of the link is important to distinguish them (Figure \@ref(fig
-:chord-diagram-directional) D).
+direction of the link is important to distinguish them 
+(Figure \@ref(fig:chord-diagram-directional-overlap)).
 
 ```{r}
 mat2 = matrix(sample(100, 35), nrow = 5)
@@ -536,12 +484,12 @@ colnames(mat2) = letters[1:7]
 mat2
 ```
 
-```{r chord_diagram_directional_overlap, eval = FALSE}
+```{r chord-diagram-directional-overlap, fig.cap = "CHord diagram where row names and column names overlap."}
 chordDiagram(mat2, grid.col = 1:7, directional = 1, row.col = 1:5)
 ```
 
 If you don't need self-link for which two ends of a link are in a same sector, 
-just set corresponding values to 0 in the matrix (Figure \@ref(fig:chord-diagram-directional) E).
+just set corresponding values to 0 in the matrix (Figure \@ref(fig:chord-diagram-directional-non-selfloop)).
 
 ```{r}
 mat3 = mat2
@@ -551,11 +499,11 @@ for(cn in intersect(rownames(mat3), colnames(mat3))) {
 mat3
 ```
 
-```{r chord_diagram_directional_non_selfloop, eval = FALSE}
+```{r chord-diagram-directional-non-selfloop, fig.cap = "Directional Chord diagram without self links."}
 chordDiagram(mat3, grid.col = 1:7, directional = 1, row.col = 1:5)
 ```
 
-Links can have arrows to represent directions (Figure \@ref(fig:chord-diagram-directional) F). 
+Links can have arrows to represent directions (Figure \@ref(fig:chord-diagram-directional-arrow)). 
 When `direction.type` is set to `arrows`, Arrows are added at
 the center of links. Similar as other graphics parameters for links, the
 parameters for drawing arrows such as arrow color and line type can either be
@@ -564,7 +512,7 @@ a scalar, a matrix, or a three-column data frame.
 If `link.arr.col` is set as a data frame, only links specified in the data frame
 will have arrows. Pleast note this is the only way to draw arrows to subset of links.
 
-```{r chord_diagram_directional_arrow, eval = FALSE}
+```{r chord-diagram-directional-arrow, fig.cap = "Use arrows to represent directions in Chord diagram."}
 arr.col = data.frame(c("S1", "S2", "S3"), c("E5", "E6", "E4"), 
     c("black", "black", "black"))
 chordDiagram(mat, grid.col = grid.col, directional = 1, direction.type = "arrows",
@@ -572,9 +520,9 @@ chordDiagram(mat, grid.col = grid.col, directional = 1, direction.type = "arrows
 ```
 
 If combining both `arrows` and `diffHeight`, it will give you better visualization 
-(Figure \@ref(fig:chord-diagram-directional) G).
+(Figure \@ref(fig:chord-diagram-directional-arrow2)).
 
-```{r chord_diagram_directional_arrow2, eval = FALSE}
+```{r chord-diagram-directional-arrow2, fig.cap = "Use both arrows and link height to represent directions in Chord diagram."}
 arr.col = data.frame(c("S1", "S2", "S3"), c("E5", "E6", "E4"), 
     c("black", "black", "black"))
 chordDiagram(mat, grid.col = grid.col, directional = 1, 
@@ -583,18 +531,18 @@ chordDiagram(mat, grid.col = grid.col, directional = 1,
 ```
 
 There is another arrow type: `big.arrow` which is efficient to visualize
-arrows when there are too many links (Figure \@ref(fig:chord-diagram-directional) H)
+arrows when there are too many links (Figure \@ref(fig:chord-diagram-directional-arrow3)).
 
-```{r chord_diagram_directional_arrow3, eval = FALSE}
+```{r chord-diagram-directional-arrow3, fig.cap = "Use big arrows to represent directions in Chord diagram."}
 matx = matrix(rnorm(64), 8)
 chordDiagram(matx, directional = 1, direction.type = c("diffHeight", "arrows"),
     link.arr.type = "big.arrow")
 ```
 
 If `diffHeight` is set to a negative value, the start ends are longer than
-the other ends (Figure \@ref(fig:chord-diagram-directional) I)
+the other ends (Figure \@ref(fig:chord-diagram-directional-arrow4)).
 
-```{r chord_diagram_directional_arrow4, eval = FALSE}
+```{r chord-diagram-directional-arrow4, fig.cap = "Use big arrows to represent directions in Chord diagram."}
 chordDiagram(matx, directional = 1, direction.type = c("diffHeight", "arrows"),
     link.arr.type = "big.arrow", diffHeight = -0.04)
 ```
@@ -602,19 +550,7 @@ chordDiagram(matx, directional = 1, direction.type = c("diffHeight", "arrows"),
 It is almost the same to visualize directional Chord diagram form a adjacency list.
 
 ```{r, eval = FALSE}
-# code is not run when building the vignette
 chordDiagram(df, directional = 1)
-```
-
-```{r chord-diagram-directional, echo = FALSE, fig.width = 8, fig.height = 8, fig.cap = "Visualization of directional matrix."}
-par(mfrow = c(3, 3))
-eval(parse(text = chunks[["chord_diagram_directional_simple"]]))
-eval(parse(text = chunks[["chord_diagram_directional_overlap"]]))
-eval(parse(text = chunks[["chord_diagram_directional_non_selfloop"]]))
-eval(parse(text = chunks[["chord_diagram_directional_arrow"]]))
-eval(parse(text = chunks[["chord_diagram_directional_arrow2"]]))
-eval(parse(text = chunks[["chord_diagram_directional_arrow3"]]))
-eval(parse(text = chunks[["chord_diagram_directional_arrow4"]]))
 ```
 
 
@@ -635,11 +571,11 @@ mat[, 3] = 1e-10
 In the Chord Diagram, categories corresponding to the second row and the third column will
 be removed.
 
-```{r, echo = 2:3}
+```{r, echo = 2:3, result = "none"}
 pdf(NULL)
 chordDiagram(mat)
 circos.info()
-dev.off()
+invisible(dev.off())
 ```
 
 The `reduce` argument controls the size of sectors to be removed. The value is
