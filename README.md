@@ -1,5 +1,3 @@
-This is a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown).
-
-The book is available at https://bookdown.org/jokergoo/circlize-book/ or http://jokergoo.github.io/circlize_book/book.
+This book gives comprehensive overviews of circular visualization in R by using the [**circlize**](https://github.com/jokergoo/circlize) package. The book is available at http://jokergoo.github.io/circlize_book/book.
 
 <img src="http://zuguang.de/circlize_book/book/images/circlize_cover.jpg" width="500" />
