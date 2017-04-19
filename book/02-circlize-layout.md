@@ -504,6 +504,30 @@ circos.track(ylim = ylim, panel.fun = function(x, y) {
 Please note `CELL_META` only extracts information for the "current" cell, thus,
 it is recommended to use only in `panel.fun`.
 
+Nevertheless, if you have several lines of code which need to be executed out of `panel.fun`,
+you can flag the specified cell as the "current" cell by `set.current.cell()`, which can save you from typing
+too many `sector.index = ..., track.index = ...`. E.g. following code 
+
+
+```r
+circos.text(get.cell.meta.data("xcenter", sector.index, track.index),
+            get.cell.meta.data("ycenter", sector.index, track.index),
+            get.cell.meta.data("sector.index", sector.index, track.index),
+            sector.index, track.index)
+```
+
+can be simplified to:
+
+
+```r
+set.current.cell(sector.index, track.index)
+circos.text(get.cell.meta.data("xcenter"),
+            get.cell.meta.data("ycenter"),
+            get.cell.meta.data("sector.index"))
+# or more simple
+circos.text(CELL_META$xcenter, CELL_META$ycenter, CELL_META$sector.index)
+```
+
 ## Other utilities {#other-utilities}
 
 ### `circlize()` and `reverse.circlize()` {#circlize_and_reverse_circlize}
