@@ -494,6 +494,18 @@ y =<span class="st"> </span><span class="dv">5</span><span class="op">:</span><s
         CELL_META<span class="op">$</span>sector.index)
 })</code></pre></div>
 <p>Please note <code>CELL_META</code> only extracts information for the “current” cell, thus, it is recommended to use only in <code>panel.fun</code>.</p>
+<p>Nevertheless, if you have several lines of code which need to be executed out of <code>panel.fun</code>, you can flag the specified cell as the “current” cell by <code>set.current.cell()</code>, which can save you from typing too many <code>sector.index = ..., track.index = ...</code>. E.g. following code</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.text</span>(<span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xcenter&quot;</span>, sector.index, track.index),
+            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ycenter&quot;</span>, sector.index, track.index),
+            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>, sector.index, track.index),
+            sector.index, track.index)</code></pre></div>
+<p>can be simplified to:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.current.cell</span>(sector.index, track.index)
+<span class="kw">circos.text</span>(<span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xcenter&quot;</span>),
+            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ycenter&quot;</span>),
+            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>))
+<span class="co"># or more simple</span>
+<span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, CELL_META<span class="op">$</span>sector.index)</code></pre></div>
 </div>
 <div id="other-utilities" class="section level2">
 <h2><span class="header-section-number">2.8</span> Other utilities</h2>
