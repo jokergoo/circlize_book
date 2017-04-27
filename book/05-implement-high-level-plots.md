@@ -38,7 +38,7 @@ circos.track(ylim = c(0.5, length(percent)+0.5), track.height = 0.8,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-implement-high-level-plots_files/figure-html/circular-barplot-1.svg" alt="A circular barplot." width="384" />
+<img src="05-implement-high-level-plots_files/figure-epub3/circular-barplot-1.svg" alt="A circular barplot."  />
 <p class="caption">(\#fig:circular-barplot)A circular barplot.</p>
 </div>
 
@@ -92,7 +92,7 @@ circos.trackHist(factors = factors, x = x, draw.density = TRUE,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-implement-high-level-plots_files/figure-html/circular-histograms-1.svg" alt="Histograms on circular layout." width="384" />
+<img src="05-implement-high-level-plots_files/figure-epub3/circular-histograms-1.svg" alt="Histograms on circular layout."  />
 <p class="caption">(\#fig:circular-histograms)Histograms on circular layout.</p>
 </div>
 
@@ -185,7 +185,7 @@ circos.dendrogram(dend, facing = "inside")
 
 
 <div class="figure" style="text-align: center">
-<img src="05-implement-high-level-plots_files/figure-html/phylogenetic-tree-1.svg" alt="A circular phylogenetic tree." width="768" />
+<img src="05-implement-high-level-plots_files/figure-epub3/phylogenetic-tree-1.svg" alt="A circular phylogenetic tree."  />
 <p class="caption">(\#fig:phylogenetic-tree)A circular phylogenetic tree.</p>
 </div>
 
@@ -259,6 +259,6 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-implement-high-level-plots_files/figure-html/circular-heatmap-1.svg" alt="Circular heatmaps." width="384" />
+<img src="05-implement-high-level-plots_files/figure-epub3/circular-heatmap-1.svg" alt="Circular heatmaps."  />
 <p class="caption">(\#fig:circular-heatmap)Circular heatmaps.</p>
 </div>

@@ -18,7 +18,7 @@ are ranges of data in that cell. **circlize** knows which cell you are in and
 does all the transformations automatically.
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/coordinate-transformation-1.svg" alt="Transformation between different coordinates" width="768" />
+<img src="02-circlize-layout_files/figure-epub3/coordinate-transformation-1.svg" alt="Transformation between different coordinates"  />
 <p class="caption">(\#fig:coordinate-transformation)Transformation between different coordinates</p>
 </div>
 
@@ -36,7 +36,7 @@ Graphics can be added at any time as long as the tracks are created.
 Details are shown in Figure \@ref(fig:circlize-order) and as follows:
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/circlize-order-1.svg" alt="Order of drawing circular layout." width="768" />
+<img src="02-circlize-layout_files/figure-epub3/circlize-order-1.svg" alt="Order of drawing circular layout."  />
 <p class="caption">(\#fig:circlize-order)Order of drawing circular layout.</p>
 </div>
 
@@ -153,7 +153,7 @@ can be thought as an imaginary plotting region for data points. In this
 section, we introduce how to set data ranges on x and y directions in cells.
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/circlize-coordinate-1.svg" alt="Sectors and tracks in circular layout." width="384" />
+<img src="02-circlize-layout_files/figure-epub3/circlize-coordinate-1.svg" alt="Sectors and tracks in circular layout."  />
 <p class="caption">(\#fig:circlize-coordinate)Sectors and tracks in circular layout.</p>
 </div>
 
@@ -198,7 +198,7 @@ circos.initialize(factors = f2, xlim = c(0, 1))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/circlize-factor-1.svg" alt="Different sector orders." width="768" />
+<img src="02-circlize-layout_files/figure-epub3/circlize-factor-1.svg" alt="Different sector orders."  />
 <p class="caption">(\#fig:circlize-factor)Different sector orders.</p>
 </div>
 
@@ -246,7 +246,7 @@ also you do not need to consider you are in the circle. Just pretending it is
 normal rectangle region with its own coordinate.
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/circlize-direction-1.svg" alt="Sector directions." width="768" />
+<img src="02-circlize-layout_files/figure-epub3/circlize-direction-1.svg" alt="Sector directions."  />
 <p class="caption">(\#fig:circlize-direction)Sector directions.</p>
 </div>
 
@@ -313,7 +313,7 @@ modified before the initialization of the circular layout.
   always from inside to outside in the circle.**
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/circlize-region-1.svg" alt="Regions in a cell." width="384" />
+<img src="02-circlize-layout_files/figure-epub3/circlize-region-1.svg" alt="Regions in a cell."  />
 <p class="caption">(\#fig:circlize-region)Regions in a cell.</p>
 </div>
 
@@ -617,7 +617,7 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/circular-pokemon-1.svg" alt="Add raster image to the circular plot." width="576" />
+<img src="02-circlize-layout_files/figure-epub3/circular-pokemon-1.svg" alt="Add raster image to the circular plot."  />
 <p class="caption">(\#fig:circular-pokemon)Add raster image to the circular plot.</p>
 </div>
 
@@ -687,7 +687,7 @@ circos.track(ylim = c(0, 1), track.height = uh(1, "inches"),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/unit-convert-1.svg" alt="Setting absolute units" width="576" />
+<img src="02-circlize-layout_files/figure-epub3/unit-convert-1.svg" alt="Setting absolute units"  />
 <p class="caption">(\#fig:unit-convert)Setting absolute units</p>
 </div>
 

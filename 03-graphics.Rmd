@@ -363,7 +363,7 @@ for(i in 1:100) {
 		h.ratio = 0.7)
 }
 circos.clear()
-title("h.ratio = 0.7")
+text(-1, 1, "h.ratio = 0.7", adj = c(0, 1))
 circos.initialize(factors = factors, xlim = c(0, 10))
 circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
 for(i in 1:100) {
@@ -371,7 +371,7 @@ for(i in 1:100) {
 		h.ratio = 0.5)
 }
 circos.clear()
-title("h.ratio = 0.5 (default)")
+text(-1, 1, "h.ratio = 0.5\ndefault", adj = c(0, 1))
 circos.initialize(factors = factors, xlim = c(0, 10))
 circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
 for(i in 1:100) {
@@ -379,7 +379,7 @@ for(i in 1:100) {
 		h.ratio = 0.3)
 }
 circos.clear()
-title("h.ratio = 0.3")
+text(-1, 1, "h.ratio = 0.3", adj = c(0, 1))
 ```
 
 The border of link (if it is a ribbon) or the link itself (if it is a line) is

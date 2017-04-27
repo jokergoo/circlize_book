@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{last revised on 2017-04-21}
+  \date{last revised on 2017-04-27}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -1964,6 +1964,19 @@ border by \texttt{h} and \texttt{h2} (Figure \ref{fig:link-height}).
 \caption{Adjust link heights.}\label{fig:link-height}
 \end{figure}
 
+When there are many links, the height of all links can be systematically
+adjusted by \texttt{h.ratio} (Figure \ref{fig:link-ratio}). The value is
+between 0 and 1.
+
+\begin{figure}
+
+{\centering \includegraphics{03-graphics_files/figure-latex/link-ratio-1} 
+
+}
+
+\caption{Adjust link heights by `h.ratio`.}\label{fig:link-ratio}
+\end{figure}
+
 The border of link (if it is a ribbon) or the link itself (if it is a
 line) is in fact a quadratic Bezier curve, thus you can control the
 shape of the link by \texttt{w} and \texttt{w2} (\texttt{w2} controls
@@ -3765,9 +3778,9 @@ Following code demonstrates the values for \texttt{region} and
 \end{Shaded}
 
 \begin{verbatim}
-##    chr  start    end     value1     value2
-## 1 chr1 163277 294144  0.5386638  0.3651696
-## 2 chr1 452511 661253 -0.3929324 -0.3594867
+##    chr  start    end     value1      value2
+## 1 chr1  39913 293918  0.6188539  0.07115116
+## 2 chr1 333125 387791 -1.0251465 -1.01541848
 \end{verbatim}
 
 \begin{Shaded}
@@ -3784,11 +3797,11 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    start    end
-## 1 163277 294144
-## 2 452511 661253
-##       value1     value2
-## 1  0.5386638  0.3651696
-## 2 -0.3929324 -0.3594867
+## 1  39913 293918
+## 2 333125 387791
+##       value1      value2
+## 1  0.6188539  0.07115116
+## 2 -1.0251465 -1.01541848
 \end{verbatim}
 
 Since \texttt{circos.genomicTrack()} creates a new track, it needs

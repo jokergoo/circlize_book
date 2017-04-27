@@ -42,7 +42,7 @@ arrows(0, 0, cos(hour.degree/180*pi)*0.4, sin(hour.degree/180*pi)*0.4, lwd = 2)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="16-make-fun_files/figure-html/clock-1.svg" alt="A clock." width="384" />
+<img src="16-make-fun_files/figure-epub3/clock-1.svg" alt="A clock."  />
 <p class="caption">(\#fig:clock)A clock.</p>
 </div>
 
@@ -87,7 +87,7 @@ draw.sector(center = c(0, 0), start.degree = 0, end.degree = 360,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="16-make-fun_files/figure-html/dartboard-1.svg" alt="A dartboard." width="384" />
+<img src="16-make-fun_files/figure-epub3/dartboard-1.svg" alt="A dartboard."  />
 <p class="caption">(\#fig:dartboard)A dartboard.</p>
 </div>
 
@@ -172,7 +172,7 @@ draw.sector(center = c(0, -r/2), start.degree = 0, end.degree = 360,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="16-make-fun_files/figure-html/bagua-1.svg" alt="Ba-Gua and Tai-Ji." width="384" />
+<img src="16-make-fun_files/figure-epub3/bagua-1.svg" alt="Ba-Gua and Tai-Ji."  />
 <p class="caption">(\#fig:bagua)Ba-Gua and Tai-Ji.</p>
 </div>
 
@@ -189,7 +189,7 @@ tiny rectangles into the circle. Source code for generating the figure can be
 found at http://jokergoo.github.io/circlize/example/doodle.html (note this implementation is quite slow to run).
 
 <div class="figure" style="text-align: center">
-<img src="images/doodle.jpeg" alt="Keith Haring doodle in circular layout." width="400" />
+<img src="images/doodle.jpeg" alt="Keith Haring doodle in circular layout." width="800" />
 <p class="caption">(\#fig:doodle)Keith Haring doodle in circular layout.</p>
 </div>
 
