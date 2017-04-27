@@ -146,7 +146,7 @@ circos.text(-1, 0.5, "text", sector.index = "a", track.index = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="01-introduction_files/figure-epub3/circlize-glance-track-1-1.svg" alt="First example of circlize, add the first track."  />
+<img src="01-introduction_files/figure-html/circlize-glance-track-1-1.svg" alt="First example of circlize, add the first track." width="384" />
 <p class="caption">(\#fig:circlize-glance-track-1)First example of circlize, add the first track.</p>
 </div>
 
@@ -207,7 +207,7 @@ circos.trackHist(df$factors, df$x, bin.size = 0.2, bg.col = bgcol, col = NA)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="01-introduction_files/figure-epub3/circlize-glance-track-2-1.svg" alt="First example of circlize, add the second track."  />
+<img src="01-introduction_files/figure-html/circlize-glance-track-2-1.svg" alt="First example of circlize, add the second track." width="384" />
 <p class="caption">(\#fig:circlize-glance-track-2)First example of circlize, add the second track.</p>
 </div>
 
@@ -232,7 +232,7 @@ circos.track(factors = df$factors, x = df$x, y = df$y,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="01-introduction_files/figure-epub3/circlize-glance-track-3-1.svg" alt="First example of circlize, add the third track."  />
+<img src="01-introduction_files/figure-html/circlize-glance-track-3-1.svg" alt="First example of circlize, add the third track." width="384" />
 <p class="caption">(\#fig:circlize-glance-track-3)First example of circlize, add the third track.</p>
 </div>
 
@@ -256,7 +256,7 @@ circos.text(CELL_META$xcenter, CELL_META$ycenter, "updated", col = "white")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="01-introduction_files/figure-epub3/circlize-glance-track-update-1.svg" alt="First example of circlize, update the second track."  />
+<img src="01-introduction_files/figure-html/circlize-glance-track-update-1.svg" alt="First example of circlize, update the second track." width="384" />
 <p class="caption">(\#fig:circlize-glance-track-update)First example of circlize, update the second track.</p>
 </div>
 
@@ -283,7 +283,7 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="01-introduction_files/figure-epub3/circlize-glance-track-4-1.svg" alt="First example of circlize, add the fourth track."  />
+<img src="01-introduction_files/figure-html/circlize-glance-track-4-1.svg" alt="First example of circlize, add the fourth track." width="384" />
 <p class="caption">(\#fig:circlize-glance-track-4)First example of circlize, add the fourth track.</p>
 </div>
 
@@ -300,7 +300,7 @@ circos.link("e", 0, "g", c(-1,1), col = "green", border = "black", lwd = 2, lty 
 ```
 
 <div class="figure" style="text-align: center">
-<img src="01-introduction_files/figure-epub3/circlize-glance-track-links-1.svg" alt="First example of circlize, add links."  />
+<img src="01-introduction_files/figure-html/circlize-glance-track-links-1.svg" alt="First example of circlize, add links." width="384" />
 <p class="caption">(\#fig:circlize-glance-track-links)First example of circlize, add links.</p>
 </div>
 

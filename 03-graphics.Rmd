@@ -351,6 +351,37 @@ circos.text(1, -3, "h = 0.5\nh2 = 0.2", adj = c(0, 0.5), sector.index = "e", fac
 circos.clear()
 ```
 
+When there are many links, the height of all links can be systematically adjusted by `h.ratio` (Figure \@ref(fig:link-ratio)). 
+The value is between 0 and 1.
+
+```{r link-ratio, echo = FALSE, fig.width = 8, fig.height = 8/3, fig.cap = "Adjust link heights by `h.ratio`."}
+par(mfrow = c(1, 3))
+circos.initialize(factors = factors, xlim = c(0, 10))
+circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+for(i in 1:100) {
+	circos.link(sample(factors, 1), runif(1, max = 10), sample(factors, 1), runif(1, max = 10),
+		h.ratio = 0.7)
+}
+circos.clear()
+title("h.ratio = 0.7")
+circos.initialize(factors = factors, xlim = c(0, 10))
+circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+for(i in 1:100) {
+	circos.link(sample(factors, 1), runif(1, max = 10), sample(factors, 1), runif(1, max = 10),
+		h.ratio = 0.5)
+}
+circos.clear()
+title("h.ratio = 0.5 (default)")
+circos.initialize(factors = factors, xlim = c(0, 10))
+circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+for(i in 1:100) {
+	circos.link(sample(factors, 1), runif(1, max = 10), sample(factors, 1), runif(1, max = 10),
+		h.ratio = 0.3)
+}
+circos.clear()
+title("h.ratio = 0.3")
+```
+
 The border of link (if it is a ribbon) or the link itself (if it is a line) is
 in fact a quadratic Bezier curve, thus you can control the shape of the link
 by `w` and `w2` (`w2` controls the shape of bottom border). See Figure

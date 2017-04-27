@@ -414,31 +414,38 @@ Figure 3.9: Positions of link ends.
 Figure 3.10: Adjust link heights.
 </p>
 </div>
-<p>The border of link (if it is a ribbon) or the link itself (if it is a line) is in fact a quadratic Bezier curve, thus you can control the shape of the link by <code>w</code> and <code>w2</code> (<code>w2</code> controls the shape of bottom border). See Figure <a href="graphics.html#fig:link-shape">3.11</a> for examples. For more explanation of <code>w</code>, please refer to <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#Rational_B.C3.A9zier_curves">http://en.wikipedia.org/wiki/B%C3%A9zier_curve#Rational_B.C3.A9zier_curves</a>.</p>
+<p>When there are many links, the height of all links can be systematically adjusted by <code>h.ratio</code> (Figure <a href="graphics.html#fig:link-ratio">3.11</a>). The value is between 0 and 1.</p>
+<div class="figure" style="text-align: center"><span id="fig:link-ratio"></span>
+<img src="03-graphics_files/figure-html/link-ratio-1.svg" alt="Adjust link heights by `h.ratio`." width="768" />
+<p class="caption">
+Figure 3.11: Adjust link heights by <code>h.ratio</code>.
+</p>
+</div>
+<p>The border of link (if it is a ribbon) or the link itself (if it is a line) is in fact a quadratic Bezier curve, thus you can control the shape of the link by <code>w</code> and <code>w2</code> (<code>w2</code> controls the shape of bottom border). See Figure <a href="graphics.html#fig:link-shape">3.12</a> for examples. For more explanation of <code>w</code>, please refer to <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#Rational_B.C3.A9zier_curves">http://en.wikipedia.org/wiki/B%C3%A9zier_curve#Rational_B.C3.A9zier_curves</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, w)
 <span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, w, w2)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:link-shape"></span>
 <img src="03-graphics_files/figure-html/link-shape-1.svg" alt="Different link shapes." width="384" />
 <p class="caption">
-Figure 3.11: Different link shapes.
+Figure 3.12: Different link shapes.
 </p>
 </div>
-<p>When the links represent as ribbons and the two ends overlap, the links will be de-generated as a ‘hill’ (Figure <a href="graphics.html#fig:link-hill">3.12</a>).</p>
+<p>When the links represent as ribbons and the two ends overlap, the links will be de-generated as a ‘hill’ (Figure <a href="graphics.html#fig:link-hill">3.13</a>).</p>
 <div class="figure" style="text-align: center"><span id="fig:link-hill"></span>
 <img src="03-graphics_files/figure-html/link-hill-1.svg" alt="Link as a hill." width="384" />
 <p class="caption">
-Figure 3.12: Link as a hill.
+Figure 3.13: Link as a hill.
 </p>
 </div>
-<p>Links can have arrows to represent the directions. The <code>directional</code> argument controls how to add arrows. A value of <code>0</code> means there is no direction, <code>1</code> means the direction is from end 1 to end 2, <code>-1</code> means the direction is from end 2 to end 1, and <code>2</code> means bi-direction. If the link represents as a ribbon, a line with arrow will be added in the center of the link to represent directions. See Figure <a href="graphics.html#fig:link-arrow">3.13</a>.</p>
-<p>Type of arrows is controlled by <code>arr.type</code> argument and it is actually passed to <code>Arrowhead()</code> defined in <strong>shape</strong> package. Besides the arrow types supported in <strong>shape</strong> package, there is an additional arrow type <code>big.arrow</code> which turns the robbon into a big arrow (Figure <a href="graphics.html#fig:link-arrow">3.13</a>).</p>
+<p>Links can have arrows to represent the directions. The <code>directional</code> argument controls how to add arrows. A value of <code>0</code> means there is no direction, <code>1</code> means the direction is from end 1 to end 2, <code>-1</code> means the direction is from end 2 to end 1, and <code>2</code> means bi-direction. If the link represents as a ribbon, a line with arrow will be added in the center of the link to represent directions. See Figure <a href="graphics.html#fig:link-arrow">3.14</a>.</p>
+<p>Type of arrows is controlled by <code>arr.type</code> argument and it is actually passed to <code>Arrowhead()</code> defined in <strong>shape</strong> package. Besides the arrow types supported in <strong>shape</strong> package, there is an additional arrow type <code>big.arrow</code> which turns the robbon into a big arrow (Figure <a href="graphics.html#fig:link-arrow">3.14</a>).</p>
 <p>Unequal height of the link ends can also represent directions which we will discuss more with the <code>chordDiagram()</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, <span class="dt">directional =</span> <span class="dv">1</span>)
 <span class="kw">circos.link</span>(sector.index1, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), sector.index2, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">directional =</span> <span class="op">-</span><span class="dv">1</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:link-arrow"></span>
 <img src="03-graphics_files/figure-html/link-arrow-1.svg" alt="Link with arrows." width="384" />
 <p class="caption">
-Figure 3.13: Link with arrows.
+Figure 3.14: Link with arrows.
 </p>
 </div>
 </div>
@@ -451,7 +458,7 @@ Figure 3.13: Link with arrows.
 <span class="kw">draw.sector</span>(start.degree, end.degree, rou1, rou2, center, col, border, lwd, lty)</code></pre></div>
 <p>Directions from <code>start.degree</code> and <code>end.degree</code> is important for drawing sectors. By default, it is clock wise.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">draw.sector</span>(start.degree, end.degree, <span class="dt">clock.wise =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p>Following code shows examples of <code>draw.sector()</code> (Figure <a href="graphics.html#fig:draw-sector-general">3.14</a>).</p>
+<p>Following code shows examples of <code>draw.sector()</code> (Figure <a href="graphics.html#fig:draw-sector-general">3.15</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))
 <span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">ann =</span> <span class="ot">FALSE</span>, <span class="dt">asp =</span> <span class="dv">1</span>)
 <span class="kw">draw.sector</span>(<span class="dv">20</span>, <span class="dv">0</span>)
@@ -462,7 +469,7 @@ Figure 3.13: Link with arrows.
 <div class="figure" style="text-align: center"><span id="fig:draw-sector-general"></span>
 <img src="03-graphics_files/figure-html/draw-sector-general-1.svg" alt="General usage of `draw.sector()`." width="384" />
 <p class="caption">
-Figure 3.14: General usage of <code>draw.sector()</code>.
+Figure 3.15: General usage of <code>draw.sector()</code>.
 </p>
 </div>
 <p>In order to highlight cells in the circular plot, we can use <code>get.cell.meta.data()</code> to get the information of positions of cells. E.g. the start degree and end degree can be obtained through <code>cell.start.degree</code> and <code>cell.end.degree</code>, and the position of the top border and bottom border can be obtained through <code>cell.top.radius</code> and <code>cell.bottom.radius</code>. Following code shows several examples to highlight sectors and tracks.</p>
@@ -473,23 +480,23 @@ Figure 3.14: General usage of <code>draw.sector()</code>.
     <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
 }
 <span class="kw">circos.info</span>(<span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>If we want to highlight sector a (Figure <a href="graphics.html#fig:circlize-highlight">3.15</a>):</p>
+<p>If we want to highlight sector a (Figure <a href="graphics.html#fig:circlize-highlight">3.16</a>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">draw.sector</span>(<span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.start.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>),
             <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.end.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>),
             <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>), 
             <span class="dt">col =</span> <span class="st">&quot;#FF000040&quot;</span>)</code></pre></div>
-<p>If we want to highlight track 1 (Figure <a href="graphics.html#fig:circlize-highlight">3.15</a>):</p>
+<p>If we want to highlight track 1 (Figure <a href="graphics.html#fig:circlize-highlight">3.16</a>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">draw.sector</span>(<span class="dv">0</span>, <span class="dv">360</span>, 
     <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>),
     <span class="dt">rou2 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.bottom.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>),
     <span class="dt">col =</span> <span class="st">&quot;#00FF0040&quot;</span>)           </code></pre></div>
-<p>If we want to highlight track 2 and 3 in sector e and f (Figure <a href="graphics.html#fig:circlize-highlight">3.15</a>):</p>
+<p>If we want to highlight track 2 and 3 in sector e and f (Figure <a href="graphics.html#fig:circlize-highlight">3.16</a>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">draw.sector</span>(<span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.start.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;e&quot;</span>),
             <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.end.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;f&quot;</span>),
             <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">2</span>),
             <span class="dt">rou2 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.bottom.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">3</span>),
             <span class="dt">col =</span> <span class="st">&quot;#0000FF40&quot;</span>)</code></pre></div>
-<p>If we want to highlight specific regions such as a small region inside cell <code>h:2</code>, we can use <code>circlize()</code> to calculate the positions in the polar coordinate. But always keep in mind that x-axis in the cell are always clock wise. See Figure <a href="graphics.html#fig:circlize-highlight">3.15</a>.</p>
+<p>If we want to highlight specific regions such as a small region inside cell <code>h:2</code>, we can use <code>circlize()</code> to calculate the positions in the polar coordinate. But always keep in mind that x-axis in the cell are always clock wise. See Figure <a href="graphics.html#fig:circlize-highlight">3.16</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pos =<span class="st"> </span><span class="kw">circlize</span>(<span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>), <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>), <span class="dt">sector.index =</span> <span class="st">&quot;h&quot;</span>, <span class="dt">track.index =</span> <span class="dv">2</span>)
 <span class="kw">draw.sector</span>(pos[<span class="dv">1</span>, <span class="st">&quot;theta&quot;</span>], pos[<span class="dv">2</span>, <span class="st">&quot;theta&quot;</span>], pos[<span class="dv">1</span>, <span class="st">&quot;rou&quot;</span>], pos[<span class="dv">2</span>, <span class="st">&quot;rou&quot;</span>], 
     <span class="dt">clock.wise =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;#00FFFF40&quot;</span>)
@@ -497,10 +504,10 @@ Figure 3.14: General usage of <code>draw.sector()</code>.
 <div class="figure" style="text-align: center"><span id="fig:circlize-highlight"></span>
 <img src="03-graphics_files/figure-html/circlize-highlight-1.svg" alt="Highlight sectors and tracks." width="384" />
 <p class="caption">
-Figure 3.15: Highlight sectors and tracks.
+Figure 3.16: Highlight sectors and tracks.
 </p>
 </div>
-<p>If the purpose is to simply highlight complete cells, there is a helper function <code>highlight.sector()</code> for which you only need to specify index for sectors and tracks that you want to to highlight. Paddings of the highligted regions can be set by <code>padding</code> argument which should contain four values representing ratios of the width or height of the highlighted region (Figure <a href="graphics.html#fig:circlize-highlight-sector">3.16</a>).</p>
+<p>If the purpose is to simply highlight complete cells, there is a helper function <code>highlight.sector()</code> for which you only need to specify index for sectors and tracks that you want to to highlight. Paddings of the highligted regions can be set by <code>padding</code> argument which should contain four values representing ratios of the width or height of the highlighted region (Figure <a href="graphics.html#fig:circlize-highlight-sector">3.17</a>).</p>
 <p>One advantage of <code>highlight.sector()</code> is that it supports to add text in the highlighted regions. By default, the text is drawn at that center of the highlighted region. The position on the radical direction can be set by <code>text.vjust</code> argument either by a numeric value or a string in form of <code>&quot;2 inches&quot;`` or</code>“-1.2cm”`.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>]
 <span class="kw">circos.initialize</span>(factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
@@ -520,7 +527,7 @@ Figure 3.15: Highlight sectors and tracks.
 <div class="figure" style="text-align: center"><span id="fig:circlize-highlight-sector"></span>
 <img src="03-graphics_files/figure-html/circlize-highlight-sector-1.svg" alt="Highlight sectors." width="384" />
 <p class="caption">
-Figure 3.16: Highlight sectors.
+Figure 3.17: Highlight sectors.
 </p>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
@@ -528,7 +535,7 @@ Figure 3.16: Highlight sectors.
 <div id="work-with-base-graphic-system" class="section level2">
 <h2><span class="header-section-number">3.9</span> Work together with the base graphic system</h2>
 <p><strong>circlize</strong> is built on the base R graphic system, then, of course the base graphic functions can be used in combination with circlize functions. On the other hand, <code>circlize()</code> converts data points from the data coordinates to the canvas coordinates where the base graphic function can be directly applied.</p>
-<p>Normally, the base functions such as <code>title()</code>, <code>text()</code>, <code>legend()</code> can be used to add extra information on the plot (Figure <a href="graphics.html#fig:circlize-base">3.17</a>).</p>
+<p>Normally, the base functions such as <code>title()</code>, <code>text()</code>, <code>legend()</code> can be used to add extra information on the plot (Figure <a href="graphics.html#fig:circlize-base">3.18</a>).</p>
 <p>Sometimes, when the text or other graphics are far from the circle, you may set <code>par(xpd = NA)</code> so that the plotting is not clipped.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
 <span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
@@ -541,7 +548,7 @@ Figure 3.16: Highlight sectors.
 <div class="figure" style="text-align: center"><span id="fig:circlize-base"></span>
 <img src="03-graphics_files/figure-html/circlize-base-1.svg" alt="Work with base graphic functions." width="384" />
 <p class="caption">
-Figure 3.17: Work with base graphic functions.
+Figure 3.18: Work with base graphic functions.
 </p>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>

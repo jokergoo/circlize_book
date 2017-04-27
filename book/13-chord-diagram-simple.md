@@ -143,7 +143,7 @@ chordDiagram(mat)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-basic-1.svg" alt="Basic usages of `chordDiagram()`."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-1.svg" alt="Basic usages of `chordDiagram()`." width="384" />
 <p class="caption">(\#fig:chord-diagram-basic)Basic usages of `chordDiagram()`.</p>
 </div>
 
@@ -173,7 +173,7 @@ chordDiagram(mat, order = c("S1", "E1", "E2", "S2", "E3", "E4", "S3", "E5", "E6"
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-basic-order-1.svg" alt="Adjust sector orders in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-order-1.svg" alt="Adjust sector orders in Chord diagram." width="384" />
 <p class="caption">(\#fig:chord-diagram-basic-order)Adjust sector orders in Chord diagram.</p>
 </div>
 
@@ -204,7 +204,7 @@ chordDiagram(mat)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-basic-gap-after-1.svg" alt="Set gaps in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-gap-after-1.svg" alt="Set gaps in Chord diagram." width="384" />
 <p class="caption">(\#fig:chord-diagram-basic-gap-after)Set gaps in Chord diagram.</p>
 </div>
 
@@ -235,7 +235,7 @@ chordDiagram(mat)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-basic-start-degree-1.svg" alt="Change position and orientation of Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-start-degree-1.svg" alt="Change position and orientation of Chord diagram." width="384" />
 <p class="caption">(\#fig:chord-diagram-basic-start-degree)Change position and orientation of Chord diagram.</p>
 </div>
 
@@ -269,7 +269,7 @@ chordDiagram(t(mat), grid.col = grid.col)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-grid-color-1.svg" alt="Set grid colors in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-grid-color-1.svg" alt="Set grid colors in Chord diagram." width="768" />
 <p class="caption">(\#fig:chord-diagram-grid-color)Set grid colors in Chord diagram.</p>
 </div>
 
@@ -285,7 +285,7 @@ chordDiagram(mat, grid.col = grid.col, transparency = 0)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-color-transparency-1.svg" alt="Transparency for links in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-color-transparency-1.svg" alt="Transparency for links in Chord diagram." width="384" />
 <p class="caption">(\#fig:chord-diagram-color-transparency)Transparency for links in Chord diagram.</p>
 </div>
 
@@ -302,7 +302,7 @@ chordDiagram(mat, grid.col = grid.col, col = col_mat)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-color-mat-1.svg" alt="Set a color matrix for links in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-color-mat-1.svg" alt="Set a color matrix for links in Chord diagram." width="384" />
 <p class="caption">(\#fig:chord-diagram-color-mat)Set a color matrix for links in Chord diagram.</p>
 </div>
 
@@ -325,7 +325,7 @@ chordDiagram(mat, grid.col = grid.col, col = col_fun)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-color-fun-1.svg" alt="Set a color mapping function for links in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-color-fun-1.svg" alt="Set a color mapping function for links in Chord diagram." width="384" />
 <p class="caption">(\#fig:chord-diagram-color-fun)Set a color mapping function for links in Chord diagram.</p>
 </div>
 
@@ -351,7 +351,7 @@ chordDiagram(mat, grid.col = grid.col, column.col = 1:6)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-color-row-col-1.svg" alt="Set link colors same as row sectors or column sectors in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-color-row-col-1.svg" alt="Set link colors same as row sectors or column sectors in Chord diagram." width="768" />
 <p class="caption">(\#fig:chord-diagram-color-row-col)Set link colors same as row sectors or column sectors in Chord diagram.</p>
 </div>
 
@@ -379,7 +379,7 @@ chordDiagram(mat, grid.col = grid.col, link.lwd = 2, link.lty = 2, link.border =
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-style-scalar-1.svg" alt="Line style for Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-scalar-1.svg" alt="Line style for Chord diagram." width="384" />
 <p class="caption">(\#fig:chord-diagram-style-scalar)Line style for Chord diagram.</p>
 </div>
 
@@ -396,7 +396,7 @@ chordDiagram(mat, grid.col = grid.col, link.lwd = lwd_mat, link.border = border_
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-style-fullmat-1.svg" alt="Set line style as a matrix."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-fullmat-1.svg" alt="Set line style as a matrix." width="384" />
 <p class="caption">(\#fig:chord-diagram-style-fullmat)Set line style as a matrix.</p>
 </div>
 
@@ -415,7 +415,7 @@ chordDiagram(mat, grid.col = grid.col, link.lwd = 2, link.border = border_mat2)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-style-submatrix-1.svg" alt="Set line style as a sub matrix."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-submatrix-1.svg" alt="Set line style as a sub matrix." width="384" />
 <p class="caption">(\#fig:chord-diagram-style-submatrix)Set line style as a sub matrix.</p>
 </div>
 
@@ -434,7 +434,7 @@ chordDiagram(mat, grid.col = grid.col, link.lty = lty_df, link.lwd = lwd_df,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-style-dataframe-1.svg" alt="Set line style as a data frame."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-dataframe-1.svg" alt="Set line style as a data frame." width="384" />
 <p class="caption">(\#fig:chord-diagram-style-dataframe)Set line style as a data frame.</p>
 </div>
 
@@ -465,7 +465,7 @@ chordDiagram(mat, grid.col = grid.col, row.col = c("#FF000080", "#00FF0010", "#0
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-highlight-row-1.svg" alt="Highlight links by transparency."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-highlight-row-1.svg" alt="Highlight links by transparency." width="384" />
 <p class="caption">(\#fig:chord-diagram-highlight-row)Highlight links by transparency.</p>
 </div>
 
@@ -484,7 +484,7 @@ chordDiagram(mat, grid.col = grid.col, col = col_mat)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-highlight-mat-1.svg" alt="Highlight links by color matrix."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-highlight-mat-1.svg" alt="Highlight links by color matrix." width="384" />
 <p class="caption">(\#fig:chord-diagram-highlight-mat)Highlight links by color matrix.</p>
 </div>
 
@@ -510,7 +510,7 @@ chordDiagram(mat, grid.col = grid.col, col = col_df)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-highlight-df-1.svg" alt="Highlight links by data frame."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-highlight-df-1.svg" alt="Highlight links by data frame." width="384" />
 <p class="caption">(\#fig:chord-diagram-highlight-df)Highlight links by data frame.</p>
 </div>
 
@@ -536,7 +536,7 @@ chordDiagram(df, grid.col = grid.col, link.visible = df[[3]] >= 10)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-link-visible-1.svg" alt="Highlight links by setting `link.visible`."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-link-visible-1.svg" alt="Highlight links by setting `link.visible`." width="384" />
 <p class="caption">(\#fig:chord-diagram-link-visible)Highlight links by setting `link.visible`.</p>
 </div>
 
@@ -559,7 +559,7 @@ title("link.sort = TRUE, link.decreasing = FALSE", cex = 0.8)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-link-order1-1.svg" alt="Order of positioning links on sectors."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-link-order1-1.svg" alt="Order of positioning links on sectors." width="768" />
 <p class="caption">(\#fig:chord-diagram-link-order1)Order of positioning links on sectors.</p>
 </div>
 
@@ -580,7 +580,7 @@ chordDiagram(mat, grid.col = grid.col, transparency = 0, link.rank = rank(mat))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-link-order2-1.svg" alt="Order of adding links."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-link-order2-1.svg" alt="Order of adding links." width="768" />
 <p class="caption">(\#fig:chord-diagram-link-order2)Order of adding links.</p>
 </div>
 
@@ -607,7 +607,7 @@ title("self.link = 2")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-self-link-1.svg" alt="Self-links in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-self-link-1.svg" alt="Self-links in Chord diagram." width="768" />
 <p class="caption">(\#fig:chord-diagram-self-link)Self-links in Chord diagram.</p>
 </div>
 
@@ -629,7 +629,7 @@ title("symmetric = FALSE")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-symmetric-1.svg" alt="Symmetric matrix for Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-symmetric-1.svg" alt="Symmetric matrix for Chord diagram." width="768" />
 <p class="caption">(\#fig:chord-diagram-symmetric)Symmetric matrix for Chord diagram.</p>
 </div>
 
@@ -660,7 +660,7 @@ chordDiagram(mat, grid.col = grid.col, directional = -1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-directional-simple-1.svg" alt="Represent directions by different height of link ends."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-simple-1.svg" alt="Represent directions by different height of link ends." width="768" />
 <p class="caption">(\#fig:chord-diagram-directional-simple)Represent directions by different height of link ends.</p>
 </div>
 
@@ -691,7 +691,7 @@ chordDiagram(mat2, grid.col = 1:7, directional = 1, row.col = 1:5)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-directional-overlap-1.svg" alt="CHord diagram where row names and column names overlap."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-overlap-1.svg" alt="CHord diagram where row names and column names overlap." width="384" />
 <p class="caption">(\#fig:chord-diagram-directional-overlap)CHord diagram where row names and column names overlap.</p>
 </div>
 
@@ -722,7 +722,7 @@ chordDiagram(mat3, grid.col = 1:7, directional = 1, row.col = 1:5)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-directional-non-selfloop-1.svg" alt="Directional Chord diagram without self links."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-non-selfloop-1.svg" alt="Directional Chord diagram without self links." width="384" />
 <p class="caption">(\#fig:chord-diagram-directional-non-selfloop)Directional Chord diagram without self links.</p>
 </div>
 
@@ -744,7 +744,7 @@ chordDiagram(mat, grid.col = grid.col, directional = 1, direction.type = "arrows
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-directional-arrow-1.svg" alt="Use arrows to represent directions in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow-1.svg" alt="Use arrows to represent directions in Chord diagram." width="384" />
 <p class="caption">(\#fig:chord-diagram-directional-arrow)Use arrows to represent directions in Chord diagram.</p>
 </div>
 
@@ -761,7 +761,7 @@ chordDiagram(mat, grid.col = grid.col, directional = 1,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-directional-arrow2-1.svg" alt="Use both arrows and link height to represent directions in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow2-1.svg" alt="Use both arrows and link height to represent directions in Chord diagram." width="384" />
 <p class="caption">(\#fig:chord-diagram-directional-arrow2)Use both arrows and link height to represent directions in Chord diagram.</p>
 </div>
 
@@ -776,7 +776,7 @@ chordDiagram(matx, directional = 1, direction.type = c("diffHeight", "arrows"),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-directional-arrow3-1.svg" alt="Use big arrows to represent directions in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow3-1.svg" alt="Use big arrows to represent directions in Chord diagram." width="384" />
 <p class="caption">(\#fig:chord-diagram-directional-arrow3)Use big arrows to represent directions in Chord diagram.</p>
 </div>
 
@@ -790,7 +790,7 @@ chordDiagram(matx, directional = 1, direction.type = c("diffHeight", "arrows"),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-directional-arrow4-1.svg" alt="Use big arrows to represent directions in Chord diagram."  />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow4-1.svg" alt="Use big arrows to represent directions in Chord diagram." width="384" />
 <p class="caption">(\#fig:chord-diagram-directional-arrow4)Use big arrows to represent directions in Chord diagram.</p>
 </div>
 
