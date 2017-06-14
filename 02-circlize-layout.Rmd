@@ -576,6 +576,9 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 circos.clear()
 ```
 
+In **circlize** package, there is a `circos.raster()` function which directly
+adds raster images. It is introduced in Section \@ref{raster-image}.
+
 ### The convert functions {#convert-functions}
 
 For the functions in **circlize** package, they needs arguments which are

@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{last revised on 2017-04-27}
+  \date{last revised on 2017-06-14}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -158,7 +158,7 @@
 
 This is the documentation of the
 \href{https://cran.r-project.org/package=circlize}{\textbf{circlize}}
-package. Examples in the book are generated under version 0.4.0.
+package. Examples in the book are generated under version 0.4.1.
 
 If you use \textbf{circlize} in your publications, I would be
 appreciated if you can cite:
@@ -1373,6 +1373,10 @@ using \texttt{circlize()} and \texttt{circlize:::polar2Cartesian()}.
 \end{Highlighting}
 \end{Shaded}
 
+In \textbf{circlize} package, there is a \texttt{circos.raster()}
+function which directly adds raster images. It is introduced in Section
+@ref\{raster-image\}.
+
 \subsection{The convert functions}\label{convert-functions}
 
 For the functions in \textbf{circlize} package, they needs arguments
@@ -1880,6 +1884,99 @@ users need to manually adjust \texttt{gap.degree} in
 }
 
 \caption{Y-axes}\label{fig:circlize-yaxis}
+\end{figure}
+
+\section{Raster image}\label{raster-image}
+
+\texttt{circos.raster()} is used to add a raster image at a certain
+position in the circle with proper rotation. The first input variable
+should be a \texttt{raster} object or an object that can be converted by
+\texttt{as.raster()}. Facing of the image is controlled by
+\texttt{facing} and \texttt{niceFacing} arguments which are similar as
+in \texttt{circos.text()}. When value of \texttt{facing} is one of
+\texttt{inside}, \texttt{outside}, \texttt{reverse.clockwise},
+\texttt{clockwise} and \texttt{downward}, the size of raster image
+should have absolute values which should be specified in the form of
+\texttt{number-unit} such as \texttt{20mm}, \texttt{1.2cm} or
+\texttt{0.5inche}. If only one of \texttt{width} and \texttt{height} is
+specified, the other one is automatically calculated by using the aspect
+ratio of the original image. Following example shows five types of
+facings of the raster image (figure @ref\{fig:raster-normal\}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(png)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: png
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{image =}\StringTok{ }\KeywordTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"Rlogo.png"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"circlize"}\NormalTok{)}
+\NormalTok{image =}\StringTok{ }\KeywordTok{as.raster}\NormalTok{(}\KeywordTok{readPNG}\NormalTok{(image))}
+\KeywordTok{circos.initialize}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{], }\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\NormalTok{all_facing_options =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"inside"}\NormalTok{, }\StringTok{"outside"}\NormalTok{, }\StringTok{"reverse.clockwise"}\NormalTok{, }\StringTok{"clockwise"}\NormalTok{, }\StringTok{"downward"}\NormalTok{)}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+    \KeywordTok{circos.raster}\NormalTok{(image, CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{ycenter, }\DataTypeTok{width =} \StringTok{"2cm"}\NormalTok{, }
+        \DataTypeTok{facing =}\NormalTok{ all_facing_options[CELL_META}\OperatorTok{$}\NormalTok{sector.numeric.index])}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{03-graphics_files/figure-latex/raster-normal-1} 
+
+}
+
+\caption{Five facings of raster image.}\label{fig:raster-normal}
+\end{figure}
+
+Also \texttt{facing} can be set to \texttt{bending.inside} and
+\texttt{bending.outside} that the image is filled to a circular
+rectangle. The strategy is to plot each original pixel as a small
+circular rectangle by \texttt{circos.rect()}, thus, the plotting is
+quite slow. If the original image is too huge, \texttt{scaling} argument
+can be set to reduce the size of the original image.
+
+Following code draws the image of the cover of this book which is a
+circular style of
+\href{https://en.wikipedia.org/wiki/Keith_Haring}{Keith Haring}'s doodle
+(Figure \ref{fig:raster-doodle}). The original source of the plot is
+from
+\url{http://www.thegreenhead.com/imgs/keith-haring-double-retrospect-worlds-largest-jigsaw-puzzle-2.jpg}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{load}\NormalTok{(}\KeywordTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"doodle.RData"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"circlize"}\NormalTok{))}
+\KeywordTok{circos.par}\NormalTok{(}\StringTok{"cell.padding"}\NormalTok{ =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\KeywordTok{circos.initialize}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{16}\NormalTok{], }\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+\NormalTok{    img =}\StringTok{ }\NormalTok{img_list[[CELL_META}\OperatorTok{$}\NormalTok{sector.numeric.index]]}
+    \KeywordTok{circos.raster}\NormalTok{(img, CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{ycenter, }
+        \DataTypeTok{width =}\NormalTok{ CELL_META}\OperatorTok{$}\NormalTok{xrange, }\DataTypeTok{height =}\NormalTok{ CELL_META}\OperatorTok{$}\NormalTok{yrange, }
+        \DataTypeTok{facing =} \StringTok{"bending.inside"}\NormalTok{)}
+\NormalTok{\}, }\DataTypeTok{track.height =} \FloatTok{0.25}\NormalTok{, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{)}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+\NormalTok{    img =}\StringTok{ }\NormalTok{img_list[[CELL_META}\OperatorTok{$}\NormalTok{sector.numeric.index }\OperatorTok{+}\StringTok{ }\DecValTok{16}\NormalTok{]]}
+    \KeywordTok{circos.raster}\NormalTok{(img, CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{ycenter, }
+        \DataTypeTok{width =}\NormalTok{ CELL_META}\OperatorTok{$}\NormalTok{xrange, }\DataTypeTok{height =}\NormalTok{ CELL_META}\OperatorTok{$}\NormalTok{yrange, }
+        \DataTypeTok{facing =} \StringTok{"bending.inside"}\NormalTok{)}
+\NormalTok{\}, }\DataTypeTok{track.height =} \FloatTok{0.25}\NormalTok{, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{)}
+\KeywordTok{circos.clear}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=11.11in]{images/doodle} 
+
+}
+
+\caption{Fill raster image to the cell.}\label{fig:raster-doodle}
 \end{figure}
 
 \section{Links}\label{links}
@@ -3778,9 +3875,9 @@ Following code demonstrates the values for \texttt{region} and
 \end{Shaded}
 
 \begin{verbatim}
-##    chr  start    end     value1      value2
-## 1 chr1  39913 293918  0.6188539  0.07115116
-## 2 chr1 333125 387791 -1.0251465 -1.01541848
+##    chr  start    end     value1     value2
+## 1 chr1 204736 296052 -0.5818710  0.8809219
+## 2 chr1 351073 356903  0.6287007 -0.3188041
 \end{verbatim}
 
 \begin{Shaded}
@@ -3797,11 +3894,11 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    start    end
-## 1  39913 293918
-## 2 333125 387791
-##       value1      value2
-## 1  0.6188539  0.07115116
-## 2 -1.0251465 -1.01541848
+## 1 204736 296052
+## 2 351073 356903
+##       value1     value2
+## 1 -0.5818710  0.8809219
+## 2  0.6287007 -0.3188041
 \end{verbatim}
 
 Since \texttt{circos.genomicTrack()} creates a new track, it needs
@@ -7296,26 +7393,6 @@ you look at the world.
 \KeywordTok{circos.clear}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
-
-\section{Circular doodle}\label{circular-doodle}
-
-Figure \ref{fig:doodle} is a circular style of
-\href{https://en.wikipedia.org/wiki/Keith_Haring}{Keith Haring}'s
-doodle. The circular transformation is as follows: 1. use \textbf{jpeg}
-package to read RGB values in the original figure; 2. use
-\texttt{circos.rect()} to draw every pixel as tiny rectangles into the
-circle. Source code for generating the figure can be found at
-\url{http://jokergoo.github.io/circlize/example/doodle.html} (note this
-implementation is quite slow to run).
-
-\begin{figure}
-
-{\centering \includegraphics[width=11.11in]{images/doodle} 
-
-}
-
-\caption{Keith Haring doodle in circular layout.}\label{fig:doodle}
-\end{figure}
 
 \bibliography{book.bib}
 

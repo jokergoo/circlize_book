@@ -290,6 +290,77 @@ circos.yaxis(at, labels, sector.index, track.index)
 <p class="caption">(\#fig:circlize-yaxis)Y-axes</p>
 </div>
 
+## Raster image {#raster-image}
+
+`circos.raster()` is used to add a raster image at a certain position in the circle with
+proper rotation. The first input variable should be a `raster` object or an object that
+can be converted by `as.raster()`. Facing of the image is controlled by `facing` and `niceFacing`
+arguments which are similar as in `circos.text()`. When value of `facing` is one of 
+`inside`, `outside`, `reverse.clockwise`, `clockwise` and `downward`, the size of raster image
+should have absolute values which should be specified in the form of `number-unit` such as `20mm`,
+`1.2cm` or `0.5inche`. If only one of `width` and `height` is specified, the other one is 
+automatically calculated by using the aspect ratio of the original image. Following example shows
+five types of facings of the raster image (figure \@ref{fig:raster-normal}).
+
+
+```r
+require(png)
+```
+
+```
+## Loading required package: png
+```
+
+```r
+image = system.file("extdata", "Rlogo.png", package = "circlize")
+image = as.raster(readPNG(image))
+circos.initialize(letters[1:5], xlim = c(0, 1))
+all_facing_options = c("inside", "outside", "reverse.clockwise", "clockwise", "downward")
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    circos.raster(image, CELL_META$xcenter, CELL_META$ycenter, width = "2cm", 
+        facing = all_facing_options[CELL_META$sector.numeric.index])
+})
+```
+
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/raster-normal-1.svg" alt="Five facings of raster image."  />
+<p class="caption">(\#fig:raster-normal)Five facings of raster image.</p>
+</div>
+
+Also `facing` can be set to `bending.inside` and `bending.outside` that the image is filled to
+a circular rectangle. The strategy is to plot each original pixel as a small circular rectangle
+by `circos.rect()`, thus, the plotting is quite slow. If the original image is too huge, `scaling`
+argument can be set to reduce the size of the original image.
+
+Following code draws the image of the cover of this book which is a circular style 
+of [Keith Haring](https://en.wikipedia.org/wiki/Keith_Haring)'s doodle (Figure \@ref(fig:raster-doodle)).
+The original source of the plot is from http://www.thegreenhead.com/imgs/keith-haring-double-retrospect-worlds-largest-jigsaw-puzzle-2.jpg.
+
+
+```r
+load(system.file("extdata", "doodle.RData", package = "circlize"))
+circos.par("cell.padding" = c(0, 0, 0, 0))
+circos.initialize(letters[1:16], xlim = c(0, 1))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    img = img_list[[CELL_META$sector.numeric.index]]
+    circos.raster(img, CELL_META$xcenter, CELL_META$ycenter, 
+        width = CELL_META$xrange, height = CELL_META$yrange, 
+        facing = "bending.inside")
+}, track.height = 0.25, bg.border = NA)
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    img = img_list[[CELL_META$sector.numeric.index + 16]]
+    circos.raster(img, CELL_META$xcenter, CELL_META$ycenter, 
+        width = CELL_META$xrange, height = CELL_META$yrange, 
+        facing = "bending.inside")
+}, track.height = 0.25, bg.border = NA)
+circos.clear()
+```
+
+<div class="figure" style="text-align: center">
+<img src="images/doodle.jpeg" alt="Fill raster image to the cell." width="800" />
+<p class="caption">(\#fig:raster-doodle)Fill raster image to the cell.</p>
+</div>
+
 ## Links {#links}
 
 Links or ribbons are important part for the circular visualization. They are

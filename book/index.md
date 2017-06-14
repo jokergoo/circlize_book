@@ -2,7 +2,7 @@
 --- 
 title: "Circular Visualization in R"
 author: "Zuguang Gu"
-date: "last revised on 2017-04-27"
+date: "last revised on 2017-06-14"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -20,7 +20,7 @@ description: "This book provides a comprehensive overview of implementing circul
 
 This is the documentation of the
 [**circlize**](https://cran.r-project.org/package=circlize) package. Examples
-in the book are generated under version 0.4.0.
+in the book are generated under version 0.4.1.
 
 If you use **circlize** in your publications, I would be appreciated if you can cite:
 

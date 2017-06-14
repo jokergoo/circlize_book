@@ -180,16 +180,4 @@ draw.sector(center = c(0, -r/2), start.degree = 0, end.degree = 360,
 circos.clear()
 ```
 
-## Circular doodle
-
-Figure \@ref(fig:doodle) is a circular style of [Keith Haring](https://en.wikipedia.org/wiki/Keith_Haring)'s doodle. The
-circular transformation is as follows: 1. use **jpeg** package to read RGB
-values in the original figure; 2. use `circos.rect()` to draw every pixel as
-tiny rectangles into the circle. Source code for generating the figure can be
-found at http://jokergoo.github.io/circlize/example/doodle.html (note this implementation is quite slow to run).
-
-<div class="figure" style="text-align: center">
-<img src="images/doodle.jpeg" alt="Keith Haring doodle in circular layout." width="800" />
-<p class="caption">(\#fig:doodle)Keith Haring doodle in circular layout.</p>
-</div>
 
