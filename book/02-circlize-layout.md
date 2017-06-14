@@ -626,7 +626,7 @@ circos.clear()
 ```
 
 In **circlize** package, there is a `circos.raster()` function which directly
-adds raster images. It is introduced in Section \@ref{raster-image}.
+adds raster images. It is introduced in Section \@ref(raster-image).
 
 ### The convert functions {#convert-functions}
 

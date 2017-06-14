@@ -260,9 +260,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Following code demonstrates the values for <code>region</code> and <code>value</code> when used inside <code>panel.fun</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)
 <span class="kw">head</span>(bed, <span class="dt">n =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>##    chr  start     end    value1      value2
-## 1 chr1 170141  356596 0.4727398  0.01453168
-## 2 chr1 484554 1018306 0.4818304 -0.92385877</code></pre>
+<pre><code>##    chr  start    end     value1     value2
+## 1 chr1 209853 297661 -0.1356658 -0.4128071
+## 2 chr1 309945 885952  0.3183978  0.3321957</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)
 <span class="kw">circos.genomicTrackPlotRegion</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
     <span class="cf">if</span>(CELL_META<span class="op">$</span>sector.index <span class="op">==</span><span class="st"> &quot;chr1&quot;</span>) {
@@ -270,12 +270,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         <span class="kw">print</span>(<span class="kw">head</span>(value, <span class="dt">n =</span> <span class="dv">2</span>))
     }
 })</code></pre></div>
-<pre><code>##    start     end
-## 1 170141  356596
-## 2 484554 1018306
-##      value1      value2
-## 1 0.4727398  0.01453168
-## 2 0.4818304 -0.92385877</code></pre>
+<pre><code>##    start    end
+## 1 209853 297661
+## 2 309945 885952
+##       value1     value2
+## 1 -0.1356658 -0.4128071
+## 2  0.3183978  0.3321957</code></pre>
 <p>Since <code>circos.genomicTrack()</code> creates a new track, it needs values to calculate data ranges on y direction. Users can either specify the index of numeric columns in <code>data</code> by <code>numeric.column</code> (named index or numeric index, it can also be a vector with more than one columns) or directly set <code>ylim</code>. If none of them are set, the function will try to look for all numeric columns in <code>data</code> (of course, excluding the first three columns), and set them as <code>numeric.column</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {

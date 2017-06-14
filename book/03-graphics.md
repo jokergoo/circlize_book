@@ -300,25 +300,22 @@ arguments which are similar as in `circos.text()`. When value of `facing` is one
 should have absolute values which should be specified in the form of `number-unit` such as `20mm`,
 `1.2cm` or `0.5inche`. If only one of `width` and `height` is specified, the other one is 
 automatically calculated by using the aspect ratio of the original image. Following example shows
-five types of facings of the raster image (figure \@ref{fig:raster-normal}).
+five types of facings of the raster image (figure \@ref(fig:raster-normal)).
 
 
 ```r
-require(png)
-```
-
-```
-## Loading required package: png
-```
-
-```r
+library(png)
 image = system.file("extdata", "Rlogo.png", package = "circlize")
 image = as.raster(readPNG(image))
+circos.par(start.degree = 90)
 circos.initialize(letters[1:5], xlim = c(0, 1))
 all_facing_options = c("inside", "outside", "reverse.clockwise", "clockwise", "downward")
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
-    circos.raster(image, CELL_META$xcenter, CELL_META$ycenter, width = "2cm", 
+    circos.raster(image, CELL_META$xcenter, CELL_META$ycenter, width = "1cm", 
         facing = all_facing_options[CELL_META$sector.numeric.index])
+    circos.text(CELL_META$xcenter, CELL_META$ycenter, 
+        all_facing_options[CELL_META$sector.numeric.index],
+        facing = "inside", niceFacing = TRUE)
 })
 ```
 

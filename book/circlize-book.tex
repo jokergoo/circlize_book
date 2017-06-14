@@ -1375,7 +1375,7 @@ using \texttt{circlize()} and \texttt{circlize:::polar2Cartesian()}.
 
 In \textbf{circlize} package, there is a \texttt{circos.raster()}
 function which directly adds raster images. It is introduced in Section
-@ref\{raster-image\}.
+\ref{raster-image}.
 
 \subsection{The convert functions}\label{convert-functions}
 
@@ -1901,27 +1901,22 @@ should have absolute values which should be specified in the form of
 \texttt{0.5inche}. If only one of \texttt{width} and \texttt{height} is
 specified, the other one is automatically calculated by using the aspect
 ratio of the original image. Following example shows five types of
-facings of the raster image (figure @ref\{fig:raster-normal\}).
+facings of the raster image (figure \ref{fig:raster-normal}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{require}\NormalTok{(png)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Loading required package: png
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(png)}
 \NormalTok{image =}\StringTok{ }\KeywordTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"Rlogo.png"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"circlize"}\NormalTok{)}
 \NormalTok{image =}\StringTok{ }\KeywordTok{as.raster}\NormalTok{(}\KeywordTok{readPNG}\NormalTok{(image))}
+\KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{start.degree =} \DecValTok{90}\NormalTok{)}
 \KeywordTok{circos.initialize}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{], }\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
 \NormalTok{all_facing_options =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"inside"}\NormalTok{, }\StringTok{"outside"}\NormalTok{, }\StringTok{"reverse.clockwise"}\NormalTok{, }\StringTok{"clockwise"}\NormalTok{, }\StringTok{"downward"}\NormalTok{)}
 \KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
-    \KeywordTok{circos.raster}\NormalTok{(image, CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{ycenter, }\DataTypeTok{width =} \StringTok{"2cm"}\NormalTok{, }
+    \KeywordTok{circos.raster}\NormalTok{(image, CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{ycenter, }\DataTypeTok{width =} \StringTok{"1cm"}\NormalTok{, }
         \DataTypeTok{facing =}\NormalTok{ all_facing_options[CELL_META}\OperatorTok{$}\NormalTok{sector.numeric.index])}
+    \KeywordTok{circos.text}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{ycenter, }
+\NormalTok{        all_facing_options[CELL_META}\OperatorTok{$}\NormalTok{sector.numeric.index],}
+        \DataTypeTok{facing =} \StringTok{"inside"}\NormalTok{, }\DataTypeTok{niceFacing =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{\})}
 \end{Highlighting}
 \end{Shaded}
@@ -3876,8 +3871,8 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    chr  start    end     value1     value2
-## 1 chr1 204736 296052 -0.5818710  0.8809219
-## 2 chr1 351073 356903  0.6287007 -0.3188041
+## 1 chr1  26342 104066 -0.2616720 -0.3741055
+## 2 chr1 230014 277733 -0.1935331 -0.6537824
 \end{verbatim}
 
 \begin{Shaded}
@@ -3894,11 +3889,11 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    start    end
-## 1 204736 296052
-## 2 351073 356903
+## 1  26342 104066
+## 2 230014 277733
 ##       value1     value2
-## 1 -0.5818710  0.8809219
-## 2  0.6287007 -0.3188041
+## 1 -0.2616720 -0.3741055
+## 2 -0.1935331 -0.6537824
 \end{verbatim}
 
 Since \texttt{circos.genomicTrack()} creates a new track, it needs
