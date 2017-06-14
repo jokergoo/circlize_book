@@ -1,3 +1,4 @@
+
 # Circular layout {#circular-layout}
 
 ## Coordinate transformation {#coordinate-transformation}
@@ -16,9 +17,10 @@ normal rectangular plotting region (data coordinate) in which x-lim and y-lim
 are ranges of data in that cell. **circlize** knows which cell you are in and
 does all the transformations automatically.
 
-```{r coordinate-transformation, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Transformation between different coordinates"}
-source("src/intro-03-transformation.R")
-```
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/coordinate-transformation-1.svg" alt="Transformation between different coordinates"  />
+<p class="caption">(\#fig:coordinate-transformation)Transformation between different coordinates</p>
+</div>
 
 The final canvas coordinate is in fact an ordinary coordinate in the base R
 graphic system with x range in `(-1, 1)` and y range in `(-1, 1)` by default.
@@ -33,9 +35,10 @@ The rule for making the circular plot is rather simple. It follows the sequence 
 Graphics can be added at any time as long as the tracks are created.
 Details are shown in Figure \@ref(fig:circlize-order) and as follows:
 
-```{r circlize-order, echo = FALSE, fig.width = 8, fig.height = 7, fig.cap = "Order of drawing circular layout."}
-source("src/intro-02-order.R")
-```
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circlize-order-1.svg" alt="Order of drawing circular layout."  />
+<p class="caption">(\#fig:circlize-order)Order of drawing circular layout.</p>
+</div>
 
 1. Initialize the layout using `circos.initialize()`. Since circular layout in
    fact visualizes data which is in categories, there must be at least a
@@ -78,7 +81,8 @@ As mentioned above, there are three ways to add graphics on a track.
      `circos.track()`, the "current" track index is what the two functions
      expect and it can be ommited when calling the two functions.
 
-```{r, eval = FALSE}
+
+```r
 circos.initialize(factors, xlim)
 circos.track(factors, ylim)
 for(sector.index in all.sector.index) {
@@ -101,7 +105,8 @@ for(sector.index in all.sector.index) {
      called just after `circos.track()`, the graphics are added in the newly
      created track right away.
 
-```{r, eval = FALSE}
+
+```r
 circos.initialize(factors, xlim)
 circos.track(factors, ylim)
 circos.trackPoints(factors, x, y)
@@ -121,7 +126,8 @@ circos.trackLines(factors, x, y)
      system. This is a way to help you think a cell is an "imaginary
      rectangular plotting region".
 
-```{r, eval = FALSE}
+
+```r
 circos.initialize(factors, xlim)
 circos.track(factors, all_x, all_y, ylim,
     panel.fun = function(x, y) {
@@ -146,9 +152,10 @@ one sector. The intersection of a sector and a track is called a cell which
 can be thought as an imaginary plotting region for data points. In this
 section, we introduce how to set data ranges on x and y directions in cells.
 
-```{r circlize-coordinate, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Sectors and tracks in circular layout."}
-source("src/intro-04-coordinate.R")
-```
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circlize-coordinate-1.svg" alt="Sectors and tracks in circular layout."  />
+<p class="caption">(\#fig:circlize-coordinate)Sectors and tracks in circular layout.</p>
+</div>
 
 Sectors are first allocated on the circle by `circos.initialize()`. There must
 be a categorical variable (say `factors`) that on the circle, each sector
@@ -163,7 +170,8 @@ sectors that each row in `xlim` corresponds to one sector. If `xlim` has row
 names which already cover sector names, row order of `xlim` is automatically
 adjusted. If `xlim` is a vector of length two, all sectors have the same x range.
 
-```{r, eval = FALSE}
+
+```r
 circos.initialize(factors, x = x)
 circos.initialize(factors, xlim = xlim)
 ```
@@ -180,7 +188,8 @@ you want to change the order of sectors, you can just change of the level of
 `factors` variable. The following code generates plots with different
 sector orders (Figure \@ref(fig:circlize-factor)).
 
-```{r, eval = FALSE}
+
+```r
 fa = c("d", "f", "e", "c", "g", "b", "a")
 f1 = factor(fa)
 circos.initialize(factors = f1, xlim = c(0, 1))
@@ -188,9 +197,10 @@ f2 = factor(fa, levels = fa)
 circos.initialize(factors = f2, xlim = c(0, 1))
 ```
 
-```{r circlize-factor, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Different sector orders."}
-source("src/intro-05-factor.R")
-```
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circlize-factor-1.svg" alt="Different sector orders."  />
+<p class="caption">(\#fig:circlize-factor)Different sector orders.</p>
+</div>
 
 **In different tracks, cells in the same sector share the same data range on
 x-axes.** Then, for each track, we only need to specify the data range on y
@@ -203,7 +213,8 @@ length two if it is specified.
 `panel.fun`. In Section \@ref(panel-fun), we will introduce how `x` and `y`
 are sent to each cell and how the graphics are added.
 
-```{r, eval = FALSE}
+
+```r
 circos.track(factors, y = y)
 circos.track(factors, ylim = c(0, 1))
 circos.track(factors, x = x, y = y)
@@ -218,7 +229,8 @@ of sectors in the track (not all sectors), in fact, cells in remaining
 unspecified sectors are created as well, but with no borders (pretending they
 are not created).
 
-```{r, eval = FALSE}
+
+```r
 # assume `factors` only covers a subset of sectors
 # You will only see cells that are covered in `factors` have borders
 circos.track(factors, y = y)
@@ -233,9 +245,10 @@ graphics in one cell, you do not need to consider things outside the cell and
 also you do not need to consider you are in the circle. Just pretending it is
 normal rectangle region with its own coordinate.
 
-```{r circlize-direction, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Sector directions."}
-source("src/intro-07-direction.R")
-```
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circlize-direction-1.svg" alt="Sector directions."  />
+<p class="caption">(\#fig:circlize-direction)Sector directions.</p>
+</div>
 
 ## Graphic parameters {#graphic-parameters}
 
@@ -299,9 +312,10 @@ modified before the initialization of the circular layout.
   cell, the direction of x-axis is always clockwise and direction of y-axis is
   always from inside to outside in the circle.**
 
-```{r circlize-region, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Regions in a cell."}
-source("src/intro-06-region.R")
-```
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circlize-region-1.svg" alt="Regions in a cell."  />
+<p class="caption">(\#fig:circlize-region)Regions in a cell.</p>
+</div>
 
 Default values for graphic parameters are listed in following table.
 
@@ -367,7 +381,8 @@ track. In this case, coordinates on y directions can be re-defined, but
 settings related to the positions of the track such as the height of the track
 can not be modified.
 
-```{r, eval = FALSE}
+
+```r
 circos.track(factors, ylim = c(0, 1), track.index = 1, ...)
 ```
 
@@ -375,7 +390,8 @@ For a single cell, `circos.update()` can be used to erase all graphics that
 have been already added in the cell. However, the data coordinate in the cell
 keeps unchanged.
 
-```{r, eval = FALSE}
+
+```r
 circos.update(sector.index, track.index)
 circos.points(x, y, sector.index, track.index)
 ```
@@ -391,7 +407,8 @@ following example, inside `panel.fun`, in sector `a`, the value of `x` is
 `1:3` and in sector `b`, value of `x` is `4:5`. If `x` or `y` in
 `circos.track()` is `NULL`, then `x` or `y` inside `panel.fun` is also `NULL`.
 
-```{r, eval = FALSE}
+
+```r
 factors = c("a", "a", "a", "b", "b")
 x = 1:5
 y = 5:1
@@ -419,7 +436,8 @@ Inside `panel.fun`, information of the 'current' cell can be obtained through
 `get.cell.meta.data()`. Also this function takes the 'current' sector and
 'current' track by default.
 
-```{r, eval = FALSE}
+
+```r
 get.cell.meta.data(name)
 get.cell.meta.data(name, sector.index, track.index)
 ```
@@ -454,7 +472,8 @@ Information that can be extracted by `get.cell.meta.data()` are:
 Following example code uses `get.cell.meta.data()` to add sector index in the
 center of each cell.
 
-```{r, eval = FALSE}
+
+```r
 circos.track(ylim = ylim, panel.fun = function(x, y) {
     sector.index = get.cell.meta.data("sector.index")
     xcenter = get.cell.meta.data("xcenter")
@@ -474,7 +493,8 @@ write. Actually, the value of `CELL_META` itself is meaningless, but e.g.
 `get.cell.meta.data("sector.index")`. Following code rewrites above example
 code with `CELL_META`.
 
-```{r, eval = FALSE}
+
+```r
 circos.track(ylim = ylim, panel.fun = function(x, y) {
     circos.text(CELL_META$xcenter, CELL_META$ycenter, 
         CELL_META$sector.index)
@@ -488,7 +508,8 @@ Nevertheless, if you have several lines of code which need to be executed out of
 you can flag the specified cell as the "current" cell by `set.current.cell()`, which can save you from typing
 too many `sector.index = ..., track.index = ...`. E.g. following code 
 
-```{r, eval = FALSE}
+
+```r
 circos.text(get.cell.meta.data("xcenter", sector.index, track.index),
             get.cell.meta.data("ycenter", sector.index, track.index),
             get.cell.meta.data("sector.index", sector.index, track.index),
@@ -497,7 +518,8 @@ circos.text(get.cell.meta.data("xcenter", sector.index, track.index),
 
 can be simplified to:
 
-```{r, eval = FALSE}
+
+```r
 set.current.cell(sector.index, track.index)
 circos.text(get.cell.meta.data("xcenter"),
             get.cell.meta.data("ycenter"),
@@ -516,19 +538,37 @@ coordinate (coordinate in the cell) to the polar coordinate and its companion
 `reverse.circlize()` transforms from polar coordinate to a specified data coordinate. The
 default transformation is applied in the `current` cell.
 
-```{r, echo = 3:10}
-library(circlize)
-pdf(NULL)
+
+```r
 factors = c("a", "b")
 circos.initialize(factors, xlim = c(0, 1))
 circos.track(ylim = c(0, 1))
 # x = 0.5, y = 0.5 in sector a and track 1
 circlize(0.5, 0.5, sector.index = "a", track.index = 1)
+```
+
+```
+##      theta  rou
+## [1,] 270.5 0.89
+```
+
+```r
 # theta = 90, rou = 0.9 in the polar coordinate
 reverse.circlize(90, 0.9, sector.index = "a", track.index = 1)
+```
+
+```
+##             x    y
+## [1,] 1.519774 0.56
+```
+
+```r
 reverse.circlize(90, 0.9, sector.index = "b", track.index = 1)
-circos.clear()
-invisible(dev.off())
+```
+
+```
+##              x    y
+## [1,] 0.5028249 0.56
 ```
 
 You can see the results are different for two `reverse.circlize()` calls
@@ -552,7 +592,8 @@ by `rasterImage()` which is applied in the canvas coordinate. Note how we change
 coordinate from data coordinate to canvas coordinate by using `circlize()`
 and `circlize:::polar2Cartesian()`.
 
-```{r circular-pokemon, fig.width = 6, fig.height = 6, fig.cap = "Add raster image to the circular plot."}
+
+```r
 library(yaml)
 data = yaml.load_file("https://raw.githubusercontent.com/Templarian/slack-emoji-pokemon/master/pokemon.yaml")
 set.seed(123)
@@ -573,6 +614,14 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
         xleft = pos[1, 1] - 0.05, ybottom = pos[1, 2] - 0.05,
         xright = pos[1, 1] + 0.05, ytop = pos[1, 2]+ 0.05)
 }, bg.border = 1, track.height = 0.15)
+```
+
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circular-pokemon-1.svg" alt="Add raster image to the circular plot."  />
+<p class="caption">(\#fig:circular-pokemon)Add raster image to the circular plot.</p>
+</div>
+
+```r
 circos.clear()
 ```
 
@@ -597,7 +646,8 @@ of `convert_length()` is straightforward, supported units are `mm`, `cm` and
 `inches`. If users want to convert a string height or width to the canvas coordinate,
 directly use `strheight()` or `strwidth()` functions.
 
-```{r, eval = FALSE}
+
+```r
 convert_length(2, "mm")
 ```
 
@@ -615,7 +665,8 @@ is at the middle point on y-axis.
 
 Following plot (Figure \@ref(fig:unit-convert)) is an example of setting absolute units.
 
-```{r unit-convert, fig.width = 6, fig.height = 6, fig.cap = "Setting absolute units"}
+
+```r
 fa = letters[1:10]
 circos.par(cell.padding = c(0, 0, 0, 0), track.margin = c(0, 0))
 circos.initialize(fa, xlim = cbind(rep(0, 10), runif(10, 0.5, 1.5)))
@@ -636,6 +687,14 @@ circos.track(ylim = c(0, 1), track.height = uh(1, "inches"),
         line_length_on_y = uy(1*sqrt(2)/2, "cm")
         circos.lines(c(0, line_length_on_x), c(0, line_length_on_y), col = "orange")
     })
+```
+
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/unit-convert-1.svg" alt="Setting absolute units"  />
+<p class="caption">(\#fig:unit-convert)Setting absolute units</p>
+</div>
+
+```r
 circos.clear()
 ```
 
@@ -644,15 +703,43 @@ circos.clear()
 You can get basic information of your current circular plot by
 `circos.info()`. The function can be called at any time.
 
-```{r, echo = 2:7}
-pdf(NULL)
+
+```r
 factors = letters[1:3]
 circos.initialize(factors = factors, xlim = c(1, 2))
 circos.info()
+```
+
+```
+## All your sectors:
+## [1] "a" "b" "c"
+## 
+## No track has been created
+```
+
+```r
 circos.track(ylim = c(0, 1))
 circos.info(sector.index = "a", track.index = 1)
+```
+
+```
+## sector index: 'a'
+## track index: 1
+## xlim: [1, 2]
+## ylim: [0, 1]
+## cell.xlim: [0.991453, 2.008547]
+## cell.ylim: [-0.1, 1.1]
+## xplot (degree): [0, 241]
+## yplot (radius): [0.79, 0.99]
+## track.margin: c(0.01, 0.01)
+## cell.padding: c(0.02, 1, 0.02, 1)
+## 
+## Your current sector.index is c
+## Your current track.index is 1
+```
+
+```r
 circos.clear()
-invisible(dev.off())
 ```
 
 It can also add labels to all cells by `circos.info(plot = TRUE)`.
