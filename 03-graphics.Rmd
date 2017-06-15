@@ -276,8 +276,8 @@ proper rotation. The first input variable should be a `raster` object or an obje
 can be converted by `as.raster()`. Facing of the image is controlled by `facing` and `niceFacing`
 arguments which are similar as in `circos.text()`. When value of `facing` is one of 
 `inside`, `outside`, `reverse.clockwise`, `clockwise` and `downward`, the size of raster image
-should have absolute values which should be specified in the form of `number-unit` such as `20mm`,
-`1.2cm` or `0.5inche`. If only one of `width` and `height` is specified, the other one is 
+should have absolute values which should be specified in the form of `number-unit` such as `"20mm"`,
+`"1.2cm"` or `"0.5inche"`. If only one of `width` and `height` is specified, the other one is 
 automatically calculated by using the aspect ratio of the original image. Following example shows
 five types of facings of the raster image (figure \@ref(fig:raster-normal)).
 
@@ -295,6 +295,7 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
         all_facing_options[CELL_META$sector.numeric.index],
         facing = "inside", niceFacing = TRUE)
 })
+circos.clear()
 ```
 
 Also `facing` can be set to `bending.inside` and `bending.outside` that the image is filled to

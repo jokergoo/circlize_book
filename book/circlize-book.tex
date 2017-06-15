@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{last revised on 2017-06-14}
+  \date{last revised on 2017-06-15}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -1897,11 +1897,11 @@ in \texttt{circos.text()}. When value of \texttt{facing} is one of
 \texttt{inside}, \texttt{outside}, \texttt{reverse.clockwise},
 \texttt{clockwise} and \texttt{downward}, the size of raster image
 should have absolute values which should be specified in the form of
-\texttt{number-unit} such as \texttt{20mm}, \texttt{1.2cm} or
-\texttt{0.5inche}. If only one of \texttt{width} and \texttt{height} is
-specified, the other one is automatically calculated by using the aspect
-ratio of the original image. Following example shows five types of
-facings of the raster image (figure \ref{fig:raster-normal}).
+\texttt{number-unit} such as \texttt{"20mm"}, \texttt{"1.2cm"} or
+\texttt{"0.5inche"}. If only one of \texttt{width} and \texttt{height}
+is specified, the other one is automatically calculated by using the
+aspect ratio of the original image. Following example shows five types
+of facings of the raster image (figure \ref{fig:raster-normal}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1929,6 +1929,12 @@ facings of the raster image (figure \ref{fig:raster-normal}).
 
 \caption{Five facings of raster image.}\label{fig:raster-normal}
 \end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 
 Also \texttt{facing} can be set to \texttt{bending.inside} and
 \texttt{bending.outside} that the image is filled to a circular
@@ -3871,8 +3877,8 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    chr  start    end     value1     value2
-## 1 chr1  26342 104066 -0.2616720 -0.3741055
-## 2 chr1 230014 277733 -0.1935331 -0.6537824
+## 1 chr1 344291 517725 -0.2619958 -0.1969597
+## 2 chr1 540783 986115  0.2248124 -0.1128319
 \end{verbatim}
 
 \begin{Shaded}
@@ -3889,11 +3895,11 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    start    end
-## 1  26342 104066
-## 2 230014 277733
+## 1 344291 517725
+## 2 540783 986115
 ##       value1     value2
-## 1 -0.2616720 -0.3741055
-## 2 -0.1935331 -0.6537824
+## 1 -0.2619958 -0.1969597
+## 2  0.2248124 -0.1128319
 \end{verbatim}
 
 Since \texttt{circos.genomicTrack()} creates a new track, it needs

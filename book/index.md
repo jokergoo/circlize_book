@@ -2,7 +2,7 @@
 --- 
 title: "Circular Visualization in R"
 author: "Zuguang Gu"
-date: "last revised on 2017-06-14"
+date: "last revised on 2017-06-15"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
