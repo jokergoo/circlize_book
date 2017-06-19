@@ -1942,8 +1942,8 @@ genome} or \href{https://en.wikipedia.org/wiki/Plasmid}{plasmid genome}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{cell_cycle =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{phase =} \KeywordTok{factor}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"M"}\NormalTok{, }\StringTok{"G1"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"G2"}\NormalTok{), }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"M"}\NormalTok{, }\StringTok{"G1"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"G2"}\NormalTok{)),}
-                        \DataTypeTok{hour =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\NormalTok{cell_cycle =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{phase =} \KeywordTok{factor}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"G1"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"G2"}\NormalTok{, }\StringTok{"M"}\NormalTok{), }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"G1"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"G2"}\NormalTok{, }\StringTok{"M"}\NormalTok{)),}
+                        \DataTypeTok{hour =} \KeywordTok{c}\NormalTok{(}\DecValTok{11}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{))}
 \NormalTok{color =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"#66C2A5"}\NormalTok{, }\StringTok{"#FC8D62"}\NormalTok{, }\StringTok{"#8DA0CB"}\NormalTok{, }\StringTok{"#E78AC3"}\NormalTok{)}
 \KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{start.degree =} \DecValTok{90}\NormalTok{)}
 \KeywordTok{circos.initialize}\NormalTok{(cell_cycle}\OperatorTok{$}\NormalTok{phase, }\DataTypeTok{xlim =} \KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{4}\NormalTok{), cell_cycle}\OperatorTok{$}\NormalTok{hour))}
@@ -3964,9 +3964,9 @@ Following code demonstrates the values for \texttt{region} and
 \end{Shaded}
 
 \begin{verbatim}
-##    chr  start    end     value1     value2
-## 1 chr1  46684 311068  0.0305334 0.05978604
-## 2 chr1 481187 749752 -0.2489634 0.01537647
+##    chr  start    end        value1     value2
+## 1 chr1 119188 591957  4.093724e-01  0.6816757
+## 2 chr1 854924 904586 -6.444877e-05 -0.6596718
 \end{verbatim}
 
 \begin{Shaded}
@@ -3983,11 +3983,11 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    start    end
-## 1  46684 311068
-## 2 481187 749752
-##       value1     value2
-## 1  0.0305334 0.05978604
-## 2 -0.2489634 0.01537647
+## 1 119188 591957
+## 2 854924 904586
+##          value1     value2
+## 1  4.093724e-01  0.6816757
+## 2 -6.444877e-05 -0.6596718
 \end{verbatim}
 
 Since \texttt{circos.genomicTrack()} creates a new track, it needs
