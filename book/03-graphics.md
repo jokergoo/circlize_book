@@ -290,17 +290,91 @@ circos.yaxis(at, labels, sector.index, track.index)
 <p class="caption">(\#fig:circlize-yaxis)Y-axes</p>
 </div>
 
+## Circular arrows
+
+Circular arrows can be used to represent stages in a circle. `circos.arrow()`
+draws circular arrows parallel to the circle. Since the arrow is always
+parallel to the circle, on x-direction, the start and end position of the
+arrow need to be defined while on the y-direction, only the position of the
+center of arrow needs to be defined. Also `width` controls the width of the
+arrow and the length is defined by `x2 - x1`. `arrow.head.width` and
+`arrow.head.length` control the size of the arrow head, and values are
+measured in the data coordinate in corresponding cell. `tail` controls the
+shape of the arrow tail. Note for `width`, `arrow.head.width` and
+`arrow.head.length`, the value can be set by `ux()`, `uy()` with absolute
+units. See figure \@ref(fig:circular-arrow).
+
+
+
+```r
+circos.initialize(letters[1:4], xlim = c(0, 1))
+col = rand_color(4)
+tail = c("point", "normal", "point", "normal")
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    circos.arrow(x1 = 0, x2 = 1, y = 0.5, width = 0.4, 
+        arrow.head.width = 0.6, arrow.head.length = ux(1, "cm"), 
+        col = col[CELL_META$sector.numeric.index], 
+        tail = tail[CELL_META$sector.numeric.index])
+}, bg.border = NA, track.height = 0.4)
+```
+
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circular-arrow-1.svg" alt="Circular arrows."  />
+<p class="caption">(\#fig:circular-arrow)Circular arrows.</p>
+</div>
+
+```r
+circos.clear()
+```
+
+Circular arrows are useful to visualize events which happen in circular style,
+such as different phases in cell cycle. Following example code visualizes four
+phases in cell cycle where the width of sectors correspond to the hours in
+each phase (figure \@ref(fig:cell-cycle)). Also circular arrows can be used to
+visualize genes in circular genome where the arrows represent the orientation
+of the gene, such as [mitochondrial genome](https://en.wikipedia.org/wiki/Mitochondrial_DNA)
+or [plasmid genome](https://en.wikipedia.org/wiki/Plasmid).
+
+
+```r
+cell_cycle = data.frame(phase = c("M", "G1", "S", "G2"),
+                        hour = c(1, 11, 8, 4))
+color = c("#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3")
+circos.par(start.degree = 90)
+circos.initialize(cell_cycle$phase, xlim = cbind(rep(0, 4), cell_cycle$hour))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    circos.arrow(CELL_META$xlim[1], CELL_META$xlim[2], 
+        arrow.head.width = CELL_META$yrange*0.8, arrow.head.length = ux(0.5, "cm"),
+        col = color[CELL_META$sector.numeric.index])
+    circos.text(CELL_META$xcenter, CELL_META$ycenter, CELL_META$sector.index, 
+        facing = "downward")
+    circos.axis(h = 1, major.at = seq(0, round(CELL_META$xlim[2])), minor.ticks = 1,
+        labels.cex = 0.6)
+}, bg.border = NA, track.height = 0.3)
+```
+
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/cell-cycle-1.svg" alt="Cell cycle."  />
+<p class="caption">(\#fig:cell-cycle)Cell cycle.</p>
+</div>
+
+```r
+circos.clear()
+```
+
 ## Raster image {#raster-image}
 
-`circos.raster()` is used to add a raster image at a certain position in the circle with
-proper rotation. The first input variable should be a `raster` object or an object that
-can be converted by `as.raster()`. Facing of the image is controlled by `facing` and `niceFacing`
-arguments which are similar as in `circos.text()`. When value of `facing` is one of 
-`inside`, `outside`, `reverse.clockwise`, `clockwise` and `downward`, the size of raster image
-should have absolute values which should be specified in the form of `number-unit` such as `"20mm"`,
-`"1.2cm"` or `"0.5inche"`. If only one of `width` and `height` is specified, the other one is 
-automatically calculated by using the aspect ratio of the original image. Following example shows
-five types of facings of the raster image (figure \@ref(fig:raster-normal)).
+`circos.raster()` is used to add a raster image at a certain position in the
+circle with proper rotation. The first input variable should be a `raster`
+object or an object that can be converted by `as.raster()`. Facing of the
+image is controlled by `facing` and `niceFacing` arguments which are similar
+as in `circos.text()`. When value of `facing` is one of `inside`, `outside`,
+`reverse.clockwise`, `clockwise` and `downward`, the size of raster image
+should have absolute values which should be specified in the form of `number-
+unit` such as `"20mm"`, `"1.2cm"` or `"0.5inche"`. If only one of `width` and
+`height` is specified, the other one is automatically calculated by using the
+aspect ratio of the original image. Following example shows five types of
+facings of the raster image (figure \@ref(fig:raster-normal)).
 
 
 ```r
@@ -328,14 +402,16 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 circos.clear()
 ```
 
-Also `facing` can be set to `bending.inside` and `bending.outside` that the image is filled to
-a circular rectangle. The strategy is to plot each original pixel as a small circular rectangle
-by `circos.rect()`, thus, the plotting is quite slow. If the original image is too huge, `scaling`
-argument can be set to reduce the size of the original image.
+Also `facing` can be set to `bending.inside` and `bending.outside` that the
+image is filled to a circular rectangle. The strategy is to plot each original
+pixel as a small circular rectangle by `circos.rect()`, thus, the plotting is
+quite slow. If the original image is too huge, `scaling` argument can be set
+to reduce the size of the original image.
 
-Following code draws the image of the cover of this book which is a circular style 
-of [Keith Haring](https://en.wikipedia.org/wiki/Keith_Haring)'s doodle (Figure \@ref(fig:raster-doodle)).
-The original source of the plot is from http://www.thegreenhead.com/imgs/keith-haring-double-retrospect-worlds-largest-jigsaw-puzzle-2.jpg.
+Following code draws the image of the cover of this book which is a circular
+style of [Keith Haring](https://en.wikipedia.org/wiki/Keith_Haring)'s doodle
+(Figure \@ref(fig:raster-doodle)). The original source of the plot is from
+http://www.thegreenhead.com/imgs/keith-haring-double-retrospect-worlds-largest-jigsaw-puzzle-2.jpg.
 
 
 ```r

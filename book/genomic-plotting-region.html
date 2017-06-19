@@ -129,10 +129,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.4" data-path="graphics.html"><a href="graphics.html#text"><i class="fa fa-check"></i><b>3.4</b> Text</a></li>
 <li class="chapter" data-level="3.5" data-path="graphics.html"><a href="graphics.html#rectangles"><i class="fa fa-check"></i><b>3.5</b> Rectangles and polygons</a></li>
 <li class="chapter" data-level="3.6" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.6</b> Axes</a></li>
-<li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.7</b> Raster image</a></li>
-<li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.8</b> Links</a></li>
-<li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.9</b> Highlight sectors and tracks</a></li>
-<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.10</b> Work together with the base graphic system</a></li>
+<li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#circular-arrows"><i class="fa fa-check"></i><b>3.7</b> Circular arrows</a></li>
+<li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.8</b> Raster image</a></li>
+<li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.9</b> Links</a></li>
+<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.10</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.11</b> Work together with the base graphic system</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
 <li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a><ul>
@@ -260,9 +261,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Following code demonstrates the values for <code>region</code> and <code>value</code> when used inside <code>panel.fun</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)
 <span class="kw">head</span>(bed, <span class="dt">n =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>##    chr  start    end     value1     value2
-## 1 chr1  32909 321428  0.3700442 -0.1037779
-## 2 chr1 470032 875575 -0.1891553 -0.1916464</code></pre>
+<pre><code>##    chr  start    end      value1      value2
+## 1 chr1  58775 601947  0.02429018 -0.16744208
+## 2 chr1 645964 799695 -0.18883503  0.01647351</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)
 <span class="kw">circos.genomicTrackPlotRegion</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
     <span class="cf">if</span>(CELL_META<span class="op">$</span>sector.index <span class="op">==</span><span class="st"> &quot;chr1&quot;</span>) {
@@ -271,11 +272,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     }
 })</code></pre></div>
 <pre><code>##    start    end
-## 1  32909 321428
-## 2 470032 875575
-##       value1     value2
-## 1  0.3700442 -0.1037779
-## 2 -0.1891553 -0.1916464</code></pre>
+## 1  58775 601947
+## 2 645964 799695
+##        value1      value2
+## 1  0.02429018 -0.16744208
+## 2 -0.18883503  0.01647351</code></pre>
 <p>Since <code>circos.genomicTrack()</code> creates a new track, it needs values to calculate data ranges on y direction. Users can either specify the index of numeric columns in <code>data</code> by <code>numeric.column</code> (named index or numeric index, it can also be a vector with more than one columns) or directly set <code>ylim</code>. If none of them are set, the function will try to look for all numeric columns in <code>data</code> (of course, excluding the first three columns), and set them as <code>numeric.column</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
     <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {
