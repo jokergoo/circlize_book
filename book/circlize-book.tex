@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{last revised on 2017-06-15}
+  \date{last revised on 2017-06-19}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -1886,6 +1886,94 @@ users need to manually adjust \texttt{gap.degree} in
 \caption{Y-axes}\label{fig:circlize-yaxis}
 \end{figure}
 
+\section{Circular arrows}\label{circular-arrows}
+
+Circular arrows can be used to represent stages in a circle.
+\texttt{circos.arrow()} draws circular arrows parallel to the circle.
+Since the arrow is always parallel to the circle, on x-direction, the
+start and end position of the arrow need to be defined while on the
+y-direction, only the position of the center of arrow needs to be
+defined. Also \texttt{width} controls the width of the arrow and the
+length is defined by \texttt{x2\ -\ x1}. \texttt{arrow.head.width} and
+\texttt{arrow.head.length} control the size of the arrow head, and
+values are measured in the data coordinate in corresponding cell.
+\texttt{tail} controls the shape of the arrow tail. Note for
+\texttt{width}, \texttt{arrow.head.width} and
+\texttt{arrow.head.length}, the value can be set by \texttt{ux()},
+\texttt{uy()} with absolute units. See figure \ref{fig:circular-arrow}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.initialize}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{], }\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\NormalTok{col =}\StringTok{ }\KeywordTok{rand_color}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\NormalTok{tail =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"point"}\NormalTok{, }\StringTok{"normal"}\NormalTok{, }\StringTok{"point"}\NormalTok{, }\StringTok{"normal"}\NormalTok{)}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+    \KeywordTok{circos.arrow}\NormalTok{(}\DataTypeTok{x1 =} \DecValTok{0}\NormalTok{, }\DataTypeTok{x2 =} \DecValTok{1}\NormalTok{, }\DataTypeTok{y =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{width =} \FloatTok{0.4}\NormalTok{, }
+        \DataTypeTok{arrow.head.width =} \FloatTok{0.6}\NormalTok{, }\DataTypeTok{arrow.head.length =} \KeywordTok{ux}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"cm"}\NormalTok{), }
+        \DataTypeTok{col =}\NormalTok{ col[CELL_META}\OperatorTok{$}\NormalTok{sector.numeric.index], }
+        \DataTypeTok{tail =}\NormalTok{ tail[CELL_META}\OperatorTok{$}\NormalTok{sector.numeric.index])}
+\NormalTok{\}, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{, }\DataTypeTok{track.height =} \FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{03-graphics_files/figure-latex/circular-arrow-1} 
+
+}
+
+\caption{Circular arrows.}\label{fig:circular-arrow}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Circular arrows are useful to visualize events which happen in circular
+style, such as different phases in cell cycle. Following example code
+visualizes four phases in cell cycle where the width of sectors
+correspond to the hours in each phase (figure \ref{fig:cell-cycle}).
+Also circular arrows can be used to visualize genes in circular genome
+where the arrows represent the orientation of the gene, such as
+\href{https://en.wikipedia.org/wiki/Mitochondrial_DNA}{mitochondrial
+genome} or \href{https://en.wikipedia.org/wiki/Plasmid}{plasmid genome}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cell_cycle =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{phase =} \KeywordTok{factor}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"M"}\NormalTok{, }\StringTok{"G1"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"G2"}\NormalTok{), }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"M"}\NormalTok{, }\StringTok{"G1"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"G2"}\NormalTok{)),}
+                        \DataTypeTok{hour =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\NormalTok{color =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"#66C2A5"}\NormalTok{, }\StringTok{"#FC8D62"}\NormalTok{, }\StringTok{"#8DA0CB"}\NormalTok{, }\StringTok{"#E78AC3"}\NormalTok{)}
+\KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{start.degree =} \DecValTok{90}\NormalTok{)}
+\KeywordTok{circos.initialize}\NormalTok{(cell_cycle}\OperatorTok{$}\NormalTok{phase, }\DataTypeTok{xlim =} \KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{4}\NormalTok{), cell_cycle}\OperatorTok{$}\NormalTok{hour))}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+    \KeywordTok{circos.arrow}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{xlim[}\DecValTok{1}\NormalTok{], CELL_META}\OperatorTok{$}\NormalTok{xlim[}\DecValTok{2}\NormalTok{], }
+        \DataTypeTok{arrow.head.width =}\NormalTok{ CELL_META}\OperatorTok{$}\NormalTok{yrange}\OperatorTok{*}\FloatTok{0.8}\NormalTok{, }\DataTypeTok{arrow.head.length =} \KeywordTok{ux}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\StringTok{"cm"}\NormalTok{),}
+        \DataTypeTok{col =}\NormalTok{ color[CELL_META}\OperatorTok{$}\NormalTok{sector.numeric.index])}
+    \KeywordTok{circos.text}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{xcenter, CELL_META}\OperatorTok{$}\NormalTok{ycenter, CELL_META}\OperatorTok{$}\NormalTok{sector.index, }
+        \DataTypeTok{facing =} \StringTok{"downward"}\NormalTok{)}
+    \KeywordTok{circos.axis}\NormalTok{(}\DataTypeTok{h =} \DecValTok{1}\NormalTok{, }\DataTypeTok{major.at =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{round}\NormalTok{(CELL_META}\OperatorTok{$}\NormalTok{xlim[}\DecValTok{2}\NormalTok{])), }\DataTypeTok{minor.ticks =} \DecValTok{1}\NormalTok{,}
+        \DataTypeTok{labels.cex =} \FloatTok{0.6}\NormalTok{)}
+\NormalTok{\}, }\DataTypeTok{bg.border =} \OtherTok{NA}\NormalTok{, }\DataTypeTok{track.height =} \FloatTok{0.3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{03-graphics_files/figure-latex/cell-cycle-1} 
+
+}
+
+\caption{Cell cycle.}\label{fig:cell-cycle}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
 \section{Raster image}\label{raster-image}
 
 \texttt{circos.raster()} is used to add a raster image at a certain
@@ -1897,7 +1985,7 @@ in \texttt{circos.text()}. When value of \texttt{facing} is one of
 \texttt{inside}, \texttt{outside}, \texttt{reverse.clockwise},
 \texttt{clockwise} and \texttt{downward}, the size of raster image
 should have absolute values which should be specified in the form of
-\texttt{number-unit} such as \texttt{"20mm"}, \texttt{"1.2cm"} or
+\texttt{number-\ unit} such as \texttt{"20mm"}, \texttt{"1.2cm"} or
 \texttt{"0.5inche"}. If only one of \texttt{width} and \texttt{height}
 is specified, the other one is automatically calculated by using the
 aspect ratio of the original image. Following example shows five types
@@ -3877,8 +3965,8 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    chr  start    end     value1     value2
-## 1 chr1 344291 517725 -0.2619958 -0.1969597
-## 2 chr1 540783 986115  0.2248124 -0.1128319
+## 1 chr1  46684 311068  0.0305334 0.05978604
+## 2 chr1 481187 749752 -0.2489634 0.01537647
 \end{verbatim}
 
 \begin{Shaded}
@@ -3895,11 +3983,11 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    start    end
-## 1 344291 517725
-## 2 540783 986115
+## 1  46684 311068
+## 2 481187 749752
 ##       value1     value2
-## 1 -0.2619958 -0.1969597
-## 2  0.2248124 -0.1128319
+## 1  0.0305334 0.05978604
+## 2 -0.2489634 0.01537647
 \end{verbatim}
 
 Since \texttt{circos.genomicTrack()} creates a new track, it needs
