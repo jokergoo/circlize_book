@@ -552,7 +552,7 @@ by `rasterImage()` which is applied in the canvas coordinate. Note how we change
 coordinate from data coordinate to canvas coordinate by using `circlize()`
 and `circlize:::polar2Cartesian()`.
 
-```{r circular-pokemon, fig.width = 6, fig.height = 6, fig.cap = "Add raster image to the circular plot."}
+```{r circular-pokemon, fig.width = 6, fig.height = 6, dev = "png", fig.cap = "Add raster image to the circular plot."}
 library(yaml)
 data = yaml.load_file("https://raw.githubusercontent.com/Templarian/slack-emoji-pokemon/master/pokemon.yaml")
 set.seed(123)
