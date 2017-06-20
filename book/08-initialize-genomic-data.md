@@ -31,10 +31,14 @@ circos.initializeWithIdeogram()
 text(0, 0, "default", cex = 1)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-initialize-ideogram-default-1.svg" alt="Initialize genomic plot, default."  />
-<p class="caption">(\#fig:genomic-initialize-ideogram-default)Initialize genomic plot, default.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-initialize-ideogram-default-1} 
+
+}
+
+\caption{Initialize genomic plot, default.}(\#fig:genomic-initialize-ideogram-default)
+\end{figure}
 
 ```r
 circos.info()
@@ -106,10 +110,14 @@ circos.initializeWithIdeogram(chromosome.index = paste0("chr", c(3,5,2,8)))
 text(0, 0, "subset of chromosomes", cex = 1)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-initialize-ideogram-subset-1.svg" alt="Initialize genomic plot, subset chromosomes."  />
-<p class="caption">(\#fig:genomic-initialize-ideogram-subset)Initialize genomic plot, subset chromosomes.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-initialize-ideogram-subset-1} 
+
+}
+
+\caption{Initialize genomic plot, subset chromosomes.}(\#fig:genomic-initialize-ideogram-subset)
+\end{figure}
 
 ```r
 circos.clear()
@@ -137,10 +145,14 @@ circos.initializeWithIdeogram(plotType = NULL)
 text(0, 0, "plotType = NULL", cex = 1)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-initialize-ideogram-track-1.svg" alt="Initialize genomic plot, control tracks."  />
-<p class="caption">(\#fig:genomic-initialize-ideogram-track)Initialize genomic plot, control tracks.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-initialize-ideogram-track-1} 
+
+}
+
+\caption{Initialize genomic plot, control tracks.}(\#fig:genomic-initialize-ideogram-track)
+\end{figure}
 
 ```r
 circos.clear()
@@ -166,10 +178,14 @@ circos.clear()
 text(0, 0, "'gap.degree' = rep(c(2, 4), 12)", cex = 1)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-initialize-ideogram-par-1.svg" alt="Initialize genomic plot, control layout."  />
-<p class="caption">(\#fig:genomic-initialize-ideogram-par)Initialize genomic plot, control layout.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-initialize-ideogram-par-1} 
+
+}
+
+\caption{Initialize genomic plot, control layout.}(\#fig:genomic-initialize-ideogram-par)
+\end{figure}
 
 ## Customize chromosome track
 
@@ -195,10 +211,14 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 }, track.height = 0.15, bg.border = NA)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-customize-chromosome-1.svg" alt="Customize chromosome track."  />
-<p class="caption">(\#fig:genomic-customize-chromosome)Customize chromosome track.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-customize-chromosome-1} 
+
+}
+
+\caption{Customize chromosome track.}(\#fig:genomic-customize-chromosome)
+\end{figure}
 
 ```r
 circos.clear()
@@ -282,10 +302,14 @@ circos.genomicTrack(tp_family, ylim = c(0.5, n + 0.5),
 circos.clear()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-gene-model-1.svg" alt="Circular representation of alternative transcripts for genes."  />
-<p class="caption">(\#fig:genomic-gene-model)Circular representation of alternative transcripts for genes.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-gene-model-1} 
+
+}
+
+\caption{Circular representation of alternative transcripts for genes.}(\#fig:genomic-gene-model)
+\end{figure}
 
 In Figure \@ref(fig:genomic-gene-model), you may notice the start of axes
 becomes "0KB" while not the original values. It is just an adjustment of the
@@ -359,7 +383,11 @@ circos.link("chr1", get.cell.meta.data("cell.xlim", sector.index = "chr1"),
 circos.clear()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-zoom-1.svg" alt="Zoom chromosomes."  />
-<p class="caption">(\#fig:genomic-zoom)Zoom chromosomes.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{08-initialize-genomic-data_files/figure-latex/genomic-zoom-1} 
+
+}
+
+\caption{Zoom chromosomes.}(\#fig:genomic-zoom)
+\end{figure}

@@ -226,10 +226,14 @@ circos.genomicTrack(bed, stack = TRUE,
 circos.clear()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="10-modes-of-input_files/figure-epub3/genomic-application-points-1.svg" alt="Add points under different modes."  />
-<p class="caption">(\#fig:genomic-application-points)Add points under different modes.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{10-modes-of-input_files/figure-latex/genomic-application-points-1} 
+
+}
+
+\caption{Add points under different modes.}(\#fig:genomic-application-points)
+\end{figure}
 
 ### Lines {#modes-lines}
 
@@ -342,10 +346,14 @@ circos.genomicTrack(bed,
 circos.clear()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="10-modes-of-input_files/figure-epub3/genomic-application-lines-1.svg" alt="Add lines under different modes."  />
-<p class="caption">(\#fig:genomic-application-lines)Add lines under different modes.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{10-modes-of-input_files/figure-latex/genomic-application-lines-1} 
+
+}
+
+\caption{Add lines under different modes.}(\#fig:genomic-application-lines)
+\end{figure}
 
 ### Rectangles {#modes-rectangles}
 
@@ -427,7 +435,11 @@ circos.genomicTrack(bed,
 circos.clear()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="10-modes-of-input_files/figure-epub3/genomic-application-rect-1.svg" alt="Add rectangles under different modes."  />
-<p class="caption">(\#fig:genomic-application-rect)Add rectangles under different modes.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{10-modes-of-input_files/figure-latex/genomic-application-rect-1} 
+
+}
+
+\caption{Add rectangles under different modes.}(\#fig:genomic-application-rect)
+\end{figure}

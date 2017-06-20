@@ -2,7 +2,7 @@
 --- 
 title: "Circular Visualization in R"
 author: "Zuguang Gu"
-date: "last revised on 2017-06-19"
+date: "last revised on 2017-06-20"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -29,5 +29,6 @@ Bioinformatics. DOI:
 [10.1093/bioinformatics/btu393](https://doi.org/10.1093/bioinformatics/btu393)
 
 
-<img src="images/circlize_cover.jpg" width="2480" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=34.44in]{images/circlize_cover} \end{center}
 

@@ -41,10 +41,14 @@ hour.degree = 90 - hour/12 * 360 - min/60 * 360/12
 arrows(0, 0, cos(hour.degree/180*pi)*0.4, sin(hour.degree/180*pi)*0.4, lwd = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="16-make-fun_files/figure-epub3/clock-1.svg" alt="A clock."  />
-<p class="caption">(\#fig:clock)A clock.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{16-make-fun_files/figure-latex/clock-1} 
+
+}
+
+\caption{A clock.}(\#fig:clock)
+\end{figure}
 
 ```r
 circos.clear()
@@ -86,10 +90,14 @@ draw.sector(center = c(0, 0), start.degree = 0, end.degree = 360,
     rou1 = 0.05, col = "#E41A1C", border = "#EEEEEE")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="16-make-fun_files/figure-epub3/dartboard-1.svg" alt="A dartboard."  />
-<p class="caption">(\#fig:dartboard)A dartboard.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{16-make-fun_files/figure-latex/dartboard-1} 
+
+}
+
+\caption{A dartboard.}(\#fig:dartboard)
+\end{figure}
 
 ```r
 circos.clear()
@@ -171,10 +179,14 @@ draw.sector(center = c(0, -r/2), start.degree = 0, end.degree = 360,
     rou1 = r/8, col = "white", border = "white")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="16-make-fun_files/figure-epub3/bagua-1.svg" alt="Ba-Gua and Tai-Ji."  />
-<p class="caption">(\#fig:bagua)Ba-Gua and Tai-Ji.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{16-make-fun_files/figure-latex/bagua-1} 
+
+}
+
+\caption{Ba-Gua and Tai-Ji.}(\#fig:bagua)
+\end{figure}
 
 ```r
 circos.clear()

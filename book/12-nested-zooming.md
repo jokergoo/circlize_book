@@ -162,10 +162,14 @@ To combine the two plots, simply put `f1()`, `f2()` and `corresponance` to
 circos.nested(f1, f2, correspondance)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-epub3/nested-normal-1.svg" alt="Nested zooming between two circular plots."  />
-<p class="caption">(\#fig:nested-normal)Nested zooming between two circular plots.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{12-nested-zooming_files/figure-latex/nested-normal-1} 
+
+}
+
+\caption{Nested zooming between two circular plots.}(\#fig:nested-normal)
+\end{figure}
 
 In the plot, the zoomed circle is put inside the original circle and the start
 degree for the second plot is automatically adjusted.
@@ -179,10 +183,14 @@ they are just two circular plots and a correspondance (Figure \@ref(fig:nested2)
 circos.nested(f2, f1, correspondance[, c(4:6, 1:3)])
 ```
 
-<div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-epub3/nested2-1.svg" alt="Nested zooming between two circular plots, zoomed plot is put outside."  />
-<p class="caption">(\#fig:nested2)Nested zooming between two circular plots, zoomed plot is put outside.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{12-nested-zooming_files/figure-latex/nested2-1} 
+
+}
+
+\caption{Nested zooming between two circular plots, zoomed plot is put outside.}(\#fig:nested2)
+\end{figure}
 
 There are some points that need to be noted while doing nested zoomings:
 
@@ -238,10 +246,14 @@ f2 = function() {
 circos.nested(f1, f2, correspondance, connection_col = sector_col[correspondance[[1]]])
 ```
 
-<div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-epub3/nested-complex-1.svg" alt="Nested zooming between two circular plots, slightly complex plots."  />
-<p class="caption">(\#fig:nested-complex)Nested zooming between two circular plots, slightly complex plots.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{12-nested-zooming_files/figure-latex/nested-complex-1} 
+
+}
+
+\caption{Nested zooming between two circular plots, slightly complex plots.}(\#fig:nested-complex)
+\end{figure}
 
 ## Visualization of DMRs from tagmentation-based WGBS
 
@@ -328,7 +340,11 @@ f2 = function() {
 circos.nested(f1, f2, correspondance, connection_col = chr_bg_color[correspondance[[1]]])
 ```
 
-<div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-epub3/dmr-1.svg" alt="Visualization of DMRs."  />
-<p class="caption">(\#fig:dmr)Visualization of DMRs.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{12-nested-zooming_files/figure-latex/dmr-1} 
+
+}
+
+\caption{Visualization of DMRs.}(\#fig:dmr)
+\end{figure}

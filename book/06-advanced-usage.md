@@ -130,10 +130,14 @@ circos.link("b", c(zoom_df_b[1, 2], zoom_df_b[10, 2]),
 circos.clear()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-zoom-1.svg" alt="Zoom sectors."  />
-<p class="caption">(\#fig:circlize-zoom)Zoom sectors.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{06-advanced-usage_files/figure-latex/circlize-zoom-1} 
+
+}
+
+\caption{Zoom sectors.}(\#fig:circlize-zoom)
+\end{figure}
 
 Chapter \@ref(nested-zooming) introduces another type of zooming by combining two circular plots.
 
@@ -148,10 +152,14 @@ top part, then only sectors between 0 to 90 degree are visible
 (Figure \@ref(fig:circlize-part)).
 
 
-<div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-part-1.svg" alt="One quarter of the circle."  />
-<p class="caption">(\#fig:circlize-part)One quarter of the circle.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{06-advanced-usage_files/figure-latex/circlize-part-1} 
+
+}
+
+\caption{One quarter of the circle.}(\#fig:circlize-part)
+\end{figure}
 
 To make the right plot in Figure \@ref(fig:circlize-part), we only need to set
 one sector in the layout and set `gap.after` to 270. (One sector with
@@ -197,10 +205,14 @@ circos.track(factors = factors, ylim = c(0, 1))
 circos.track(factors = factors, ylim = c(0, 1))
 ```
 
-<div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-part2-1.svg" alt="Show subset of cells in tracks."  />
-<p class="caption">(\#fig:circlize-part2)Show subset of cells in tracks.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{06-advanced-usage_files/figure-latex/circlize-part2-1} 
+
+}
+
+\caption{Show subset of cells in tracks.}(\#fig:circlize-part2)
+\end{figure}
 
 ```r
 circos.clear()
@@ -238,10 +250,14 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 circos.clear()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-nested-1.svg" alt="Nested circular plots."  />
-<p class="caption">(\#fig:circlize-nested)Nested circular plots.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{06-advanced-usage_files/figure-latex/circlize-nested-1} 
+
+}
+
+\caption{Nested circular plots.}(\#fig:circlize-nested)
+\end{figure}
 
 The second example (Figure \@ref(fig:circlize-separated)) makes a plot where
 two circular plots separate from each other. You can use technique introduced
@@ -250,10 +266,14 @@ in Section \@ref(part-circle) to only show part of the circle, select proper
 page. The source code for generating Figure \@ref(fig:circlize-separated) is
 at https://github.com/jokergoo/circlize_book/blob/master/src/intro-20-separated.R.
 
-<div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-separated-1.svg" alt="Two separated circular plots"  />
-<p class="caption">(\#fig:circlize-separated)Two separated circular plots</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{06-advanced-usage_files/figure-latex/circlize-separated-1} 
+
+}
+
+\caption{Two separated circular plots}(\#fig:circlize-separated)
+\end{figure}
 
 The third example is to draw cells with different radius (Figure \@ref(fig:circlize-diff-radius)). 
 In fact, it makes four circular plots where only one
@@ -277,10 +297,14 @@ for(i in 1:4) {
 par(new = FALSE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-diff-radius-1.svg" alt="Cells with differnet radius."  />
-<p class="caption">(\#fig:circlize-diff-radius)Cells with differnet radius.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{06-advanced-usage_files/figure-latex/circlize-diff-radius-1} 
+
+}
+
+\caption{Cells with differnet radius.}(\#fig:circlize-diff-radius)
+\end{figure}
 
 Note above plot is different from the example in Figure \@ref(fig:circlize-part2).
 In Figure \@ref(fig:circlize-part2), cells both visible and invisible all belong to
@@ -316,8 +340,12 @@ for(i in 1:9) {
 }
 ```
 
-<div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-epub3/circlize-multiple-layout-1.svg" alt="Arrange multiple circular plots."  />
-<p class="caption">(\#fig:circlize-multiple-layout)Arrange multiple circular plots.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{06-advanced-usage_files/figure-latex/circlize-multiple-layout-1} 
+
+}
+
+\caption{Arrange multiple circular plots.}(\#fig:circlize-multiple-layout)
+\end{figure}
 

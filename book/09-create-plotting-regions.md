@@ -44,9 +44,9 @@ head(bed, n = 2)
 ```
 
 ```
-##    chr  start    end     value1     value2
-## 1 chr1 365045 757897  0.9282612 -0.8649923
-## 2 chr1 849011 959697 -1.3276130 -0.4877291
+##    chr  start    end      value1     value2
+## 1 chr1  20243 488304 -0.05808324 -0.2844558
+## 2 chr1 586289 674427 -0.67218094 -0.1158814
 ```
 
 ```r
@@ -61,11 +61,11 @@ circos.genomicTrackPlotRegion(bed, panel.fun = function(region, value, ...) {
 
 ```
 ##    start    end
-## 1 365045 757897
-## 2 849011 959697
-##       value1     value2
-## 1  0.9282612 -0.8649923
-## 2 -1.3276130 -0.4877291
+## 1  20243 488304
+## 2 586289 674427
+##        value1     value2
+## 1 -0.05808324 -0.2844558
+## 2 -0.67218094 -0.1158814
 ```
 
 Since `circos.genomicTrack()` creates a new track, it needs values to
@@ -230,10 +230,14 @@ circos.genomicLink(bed1, bed2, col = rand_color(nrow(bed1), transparency = 0.5),
     border = NA)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-create-plotting-regions_files/figure-epub3/genomic-links-1.svg" alt="Add links from two sets of genomic regions."  />
-<p class="caption">(\#fig:genomic-links)Add links from two sets of genomic regions.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{09-create-plotting-regions_files/figure-latex/genomic-links-1} 
+
+}
+
+\caption{Add links from two sets of genomic regions.}(\#fig:genomic-links)
+\end{figure}
 
 ```r
 circos.clear()
