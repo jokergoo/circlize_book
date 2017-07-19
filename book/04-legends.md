@@ -70,6 +70,11 @@ lgd_links = Legend(at = c(-2, -1, 0, 1, 2), col_fun = col_fun,
     title_position = "topleft", title = "Links")
 
 lgd_list_vertical = packLegend(lgd_points, lgd_lines, lgd_links)
+lgd_list_vertical
+```
+
+```
+## grob[GRID.frame.55]
 ```
 
 `lgd_points`, `lgd_lines`, `lgd_links` and `lgd_list_vertical` are all `grob`
