@@ -149,9 +149,7 @@ cdm_res = chordDiagram(mat, col = colmat, grid.col = state_col2,
 	preAllocateTracks = list(track.height = 0.1))
 ```
 
-
-
-\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/first-1} \end{center}
+<img src="15-a-complex-example-with-chord-diagram_files/figure-epub3/first-1.svg" style="display: block; margin: auto;" />
 
 
 ```r
@@ -190,8 +188,7 @@ circos.track(track.index = 2, panel.fun = function(x, y) {
 }, bg.border = NA)
 ```
 
-
-\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-10-1} \end{center}
+<img src="15-a-complex-example-with-chord-diagram_files/figure-epub3/unnamed-chunk-10-1.svg" style="display: block; margin: auto;" />
 
 On the top half, it is easy to see the proportion of different transitions in
 group 1 that come to every state in group 2. However, it is not
@@ -213,8 +210,7 @@ for(i in seq_len(nrow(cdm_res))) {
 }
 ```
 
-
-\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-11-1} \end{center}
+<img src="15-a-complex-example-with-chord-diagram_files/figure-epub3/unnamed-chunk-11-1.svg" style="display: block; margin: auto;" />
 
 Methylation in each category is put on the most outside of the circle. On this track, we will
 put two paralle rectangles which are mean methylation and methylation difference between group 1
@@ -259,10 +255,13 @@ circos.clear()
 ```
 
 
-
-\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-12-1} \end{center}
+<img src="15-a-complex-example-with-chord-diagram_files/figure-epub3/unnamed-chunk-12-1.svg" style="display: block; margin: auto;" />
 
 Legends can be added according to instructions discussed in Section \@ref(legends).
 
 
-\begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-13-1} \end{center}
+```
+## Loading required package: methods
+```
+
+<img src="15-a-complex-example-with-chord-diagram_files/figure-epub3/unnamed-chunk-13-1.png" style="display: block; margin: auto;" />

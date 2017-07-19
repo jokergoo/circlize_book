@@ -61,7 +61,7 @@ code, legends for the two tracks and links are constructed. In the end the
 three legends are packed vertically by `packLegend()`. For more detailed usage
 of `Legend()` and `packLegend()`, please refer to their help pages.
 
-```{r}
+```{r legend_list}
 library(ComplexHeatmap)
 # discrete
 lgd_points = Legend(at = c("label1", "label2"), type = "points", 
@@ -76,7 +76,6 @@ lgd_links = Legend(at = c(-2, -1, 0, 1, 2), col_fun = col_fun,
     title_position = "topleft", title = "Links")
 
 lgd_list_vertical = packLegend(lgd_points, lgd_lines, lgd_links)
-lgd_list_vertical
 ```
 
 `lgd_points`, `lgd_lines`, `lgd_links` and `lgd_list_vertical` are all `grob`

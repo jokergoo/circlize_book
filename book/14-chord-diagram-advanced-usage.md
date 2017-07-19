@@ -46,14 +46,10 @@ chordDiagram(mat, grid.col = grid.col, annotationTrack = c("name", "grid"),
 chordDiagram(mat, grid.col = grid.col, annotationTrack = NULL)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/chord-diagram-default-track-1} 
-
-}
-
-\caption{Track organization in `chordDiagram()`.}(\#fig:chord-diagram-default-track)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-default-track-1.svg" alt="Track organization in `chordDiagram()`."  />
+<p class="caption">(\#fig:chord-diagram-default-track)Track organization in `chordDiagram()`.</p>
+</div>
 
 Several empty tracks can be allocated before Chord diagram is drawn. Then self-defined graphics can
 be added to these empty tracks afterwards. The number of pre-allocated tracks can be set 
@@ -131,14 +127,10 @@ circos.track(track.index = 1, panel.fun = function(x, y) {
 }, bg.border = NA) # here set bg.border to NA is important
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/chord-diagram-labels-show-1} 
-
-}
-
-\caption{Change label directions.}(\#fig:chord-diagram-labels-show)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-labels-show-1.svg" alt="Change label directions."  />
+<p class="caption">(\#fig:chord-diagram-labels-show)Change label directions.</p>
+</div>
 
 In the following example, the labels are put on the grids (Figure \@ref(fig:chord-diagram-labels-inside)). 
 Please note `circos.text()` and
@@ -157,14 +149,10 @@ for(si in get.all.sector.index()) {
 }
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/chord-diagram-labels-inside-1} 
-
-}
-
-\caption{Put sector labels to the grid.}(\#fig:chord-diagram-labels-inside)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-labels-inside-1.svg" alt="Put sector labels to the grid."  />
+<p class="caption">(\#fig:chord-diagram-labels-inside)Put sector labels to the grid.</p>
+</div>
 
 For the last example in this section, if the width of the sector is less than
 20 degree, the labels are added in the radical direction (Figure \@ref(fig:chord-diagram-labels-multile-style)).
@@ -191,14 +179,10 @@ circos.track(track.index = 1, panel.fun = function(x, y) {
 }, bg.border = NA)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/chord-diagram-labels-multile-style-1} 
-
-}
-
-\caption{Adjust label direction according to the width of sectors.}(\#fig:chord-diagram-labels-multile-style)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-labels-multile-style-1.svg" alt="Adjust label direction according to the width of sectors."  />
+<p class="caption">(\#fig:chord-diagram-labels-multile-style)Adjust label direction according to the width of sectors.</p>
+</div>
 
 When you set direction of sector labels as radical (`clockwise` or
 `reverse.clockwise`), if the labels are too long and exceed your figure
@@ -254,14 +238,10 @@ circos.track(track.index = 1, panel.fun = function(x, y) {
 circos.clear()
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/chord-diagram-axes-1} 
-
-}
-
-\caption{Customize sector axes for Chord diagram.}(\#fig:chord-diagram-axes)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-axes-1.svg" alt="Customize sector axes for Chord diagram."  />
+<p class="caption">(\#fig:chord-diagram-axes)Customize sector axes for Chord diagram.</p>
+</div>
 
 ## Put horizontally or vertically symmetric
 
@@ -335,14 +315,10 @@ circos.clear()
 abline(h = 0, lty = 2, col = "#00000080")
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/chord-diagram-sym-1} 
-
-}
-
-\caption{Rotate Chord diagram.}(\#fig:chord-diagram-sym)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-sym-1.svg" alt="Rotate Chord diagram."  />
+<p class="caption">(\#fig:chord-diagram-sym)Rotate Chord diagram.</p>
+</div>
 
 ## Compare two Chord diagrams
 
@@ -403,14 +379,10 @@ circos.clear()
 Now the scale of the two Chord diagrams (Figure \@ref(fig:chord-diagram-compare)) are the 
 same if you compare the scale of axes in the two diagrams.
 
-\begin{figure}
-
-{\centering \includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/chord-diagram-compare-1} 
-
-}
-
-\caption{Compare two Chord Diagrams in a same scale.}(\#fig:chord-diagram-compare)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-compare-1.svg" alt="Compare two Chord Diagrams in a same scale."  />
+<p class="caption">(\#fig:chord-diagram-compare)Compare two Chord Diagrams in a same scale.</p>
+</div>
 
 ## Multiple-group Chord diagram
 
@@ -496,9 +468,7 @@ highlight.sector(colnames(mat2), track.index = 1, col = "blue",
     text = "C", cex = 0.8, text.col = "white", niceFacing = TRUE)
 ```
 
-
-
-\begin{center}\includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/unnamed-chunk-14-1} \end{center}
+<img src="14-chord-diagram-advanced-usage_files/figure-epub3/unnamed-chunk-14-1.svg" style="display: block; margin: auto;" />
 
 ```r
 circos.clear()

@@ -17,14 +17,10 @@ normal rectangular plotting region (data coordinate) in which x-lim and y-lim
 are ranges of data in that cell. **circlize** knows which cell you are in and
 does all the transformations automatically.
 
-\begin{figure}
-
-{\centering \includegraphics{02-circlize-layout_files/figure-latex/coordinate-transformation-1} 
-
-}
-
-\caption{Transformation between different coordinates}(\#fig:coordinate-transformation)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/coordinate-transformation-1.svg" alt="Transformation between different coordinates"  />
+<p class="caption">(\#fig:coordinate-transformation)Transformation between different coordinates</p>
+</div>
 
 The final canvas coordinate is in fact an ordinary coordinate in the base R
 graphic system with x range in `(-1, 1)` and y range in `(-1, 1)` by default.
@@ -39,14 +35,10 @@ The rule for making the circular plot is rather simple. It follows the sequence 
 Graphics can be added at any time as long as the tracks are created.
 Details are shown in Figure \@ref(fig:circlize-order) and as follows:
 
-\begin{figure}
-
-{\centering \includegraphics{02-circlize-layout_files/figure-latex/circlize-order-1} 
-
-}
-
-\caption{Order of drawing circular layout.}(\#fig:circlize-order)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circlize-order-1.svg" alt="Order of drawing circular layout."  />
+<p class="caption">(\#fig:circlize-order)Order of drawing circular layout.</p>
+</div>
 
 1. Initialize the layout using `circos.initialize()`. Since circular layout in
    fact visualizes data which is in categories, there must be at least a
@@ -160,14 +152,10 @@ one sector. The intersection of a sector and a track is called a cell which
 can be thought as an imaginary plotting region for data points. In this
 section, we introduce how to set data ranges on x and y directions in cells.
 
-\begin{figure}
-
-{\centering \includegraphics{02-circlize-layout_files/figure-latex/circlize-coordinate-1} 
-
-}
-
-\caption{Sectors and tracks in circular layout.}(\#fig:circlize-coordinate)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circlize-coordinate-1.svg" alt="Sectors and tracks in circular layout."  />
+<p class="caption">(\#fig:circlize-coordinate)Sectors and tracks in circular layout.</p>
+</div>
 
 Sectors are first allocated on the circle by `circos.initialize()`. There must
 be a categorical variable (say `factors`) that on the circle, each sector
@@ -209,14 +197,10 @@ f2 = factor(fa, levels = fa)
 circos.initialize(factors = f2, xlim = c(0, 1))
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{02-circlize-layout_files/figure-latex/circlize-factor-1} 
-
-}
-
-\caption{Different sector orders.}(\#fig:circlize-factor)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circlize-factor-1.svg" alt="Different sector orders."  />
+<p class="caption">(\#fig:circlize-factor)Different sector orders.</p>
+</div>
 
 **In different tracks, cells in the same sector share the same data range on
 x-axes.** Then, for each track, we only need to specify the data range on y
@@ -261,14 +245,10 @@ graphics in one cell, you do not need to consider things outside the cell and
 also you do not need to consider you are in the circle. Just pretending it is
 normal rectangle region with its own coordinate.
 
-\begin{figure}
-
-{\centering \includegraphics{02-circlize-layout_files/figure-latex/circlize-direction-1} 
-
-}
-
-\caption{Sector directions.}(\#fig:circlize-direction)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circlize-direction-1.svg" alt="Sector directions."  />
+<p class="caption">(\#fig:circlize-direction)Sector directions.</p>
+</div>
 
 ## Graphic parameters {#graphic-parameters}
 
@@ -332,14 +312,10 @@ modified before the initialization of the circular layout.
   cell, the direction of x-axis is always clockwise and direction of y-axis is
   always from inside to outside in the circle.**
 
-\begin{figure}
-
-{\centering \includegraphics{02-circlize-layout_files/figure-latex/circlize-region-1} 
-
-}
-
-\caption{Regions in a cell.}(\#fig:circlize-region)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circlize-region-1.svg" alt="Regions in a cell."  />
+<p class="caption">(\#fig:circlize-region)Regions in a cell.</p>
+</div>
 
 Default values for graphic parameters are listed in following table.
 
@@ -640,14 +616,10 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 }, bg.border = 1, track.height = 0.15)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{02-circlize-layout_files/figure-latex/circular-pokemon-1} 
-
-}
-
-\caption{Add raster image to the circular plot.}(\#fig:circular-pokemon)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/circular-pokemon-1.png" alt="Add raster image to the circular plot."  />
+<p class="caption">(\#fig:circular-pokemon)Add raster image to the circular plot.</p>
+</div>
 
 ```r
 circos.clear()
@@ -717,14 +689,10 @@ circos.track(ylim = c(0, 1), track.height = uh(1, "inches"),
     })
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{02-circlize-layout_files/figure-latex/unit-convert-1} 
-
-}
-
-\caption{Setting absolute units}(\#fig:unit-convert)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-epub3/unit-convert-1.svg" alt="Setting absolute units"  />
+<p class="caption">(\#fig:unit-convert)Setting absolute units</p>
+</div>
 
 ```r
 circos.clear()

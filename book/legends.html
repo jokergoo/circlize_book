@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
-  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
 
   <meta property="og:title" content="Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -291,9 +291,7 @@ lgd_lines =<span class="st"> </span><span class="kw">Legend</span>(<span class="
 lgd_links =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">at =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">col_fun =</span> col_fun, 
     <span class="dt">title_position =</span> <span class="st">&quot;topleft&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Links&quot;</span>)
 
-lgd_list_vertical =<span class="st"> </span><span class="kw">packLegend</span>(lgd_points, lgd_lines, lgd_links)
-lgd_list_vertical</code></pre></div>
-<pre><code>## frame[GRID.frame.65]</code></pre>
+lgd_list_vertical =<span class="st"> </span><span class="kw">packLegend</span>(lgd_points, lgd_lines, lgd_links)</code></pre></div>
 <p><code>lgd_points</code>, <code>lgd_lines</code>, <code>lgd_links</code> and <code>lgd_list_vertical</code> are all <code>grob</code> objects (graphical objects) defined by <strong>grid</strong> package, which you can think as boxes which contain all graphical elements for legends and they can be added to the plot by <code>grid.draw()</code>.</p>
 <p><strong>circlize</strong> is implemented in the base graphic system while <strong>ComplexHeatmap</strong> is implemented by <strong>grid</strong> graphic system. However, these two systems can be mixed somehow. We can directly add grid graphics to the base graphics. (Actually they are two independent layers but drawn on a same graphic device.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circlize_plot</span>()
@@ -434,7 +432,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

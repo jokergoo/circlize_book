@@ -21,14 +21,10 @@ circos.genomicIdeogram() # put ideogram as the third track
 circos.genomicIdeogram(track.height = 0.2)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{11-high-level-genomic-functions_files/figure-latex/ideogram-1} 
-
-}
-
-\caption{Circular ideograms.}(\#fig:ideogram)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="11-high-level-genomic-functions_files/figure-epub3/ideogram-1.svg" alt="Circular ideograms."  />
+<p class="caption">(\#fig:ideogram)Circular ideograms.</p>
+</div>
 
 ## Heatmaps {#genomic-heatmap}
 
@@ -69,14 +65,10 @@ circos.genomicIdeogram()
 circos.clear()
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{11-high-level-genomic-functions_files/figure-latex/genomic-heatmap-1} 
-
-}
-
-\caption{Genomic heamtaps.}(\#fig:genomic-heatmap)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="11-high-level-genomic-functions_files/figure-epub3/genomic-heatmap-1.svg" alt="Genomic heamtaps."  />
+<p class="caption">(\#fig:genomic-heatmap)Genomic heamtaps.</p>
+</div>
 
 ## Labels
 
@@ -110,14 +102,10 @@ circos.genomicIdeogram()
 circos.clear()
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{11-high-level-genomic-functions_files/figure-latex/genomic-labels-1} 
-
-}
-
-\caption{Genomic labels.}(\#fig:genomic-labels)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="11-high-level-genomic-functions_files/figure-epub3/genomic-labels-1.svg" alt="Genomic labels."  />
+<p class="caption">(\#fig:genomic-labels)Genomic labels.</p>
+</div>
 
 ## Genomic density and Rainfall plot
 
@@ -178,14 +166,10 @@ circos.genomicDensity(DMR_hyper, col = c("#FF000080"), track.height = 0.1)
 circos.genomicDensity(DMR_hypo, col = c("#0000FF80"), track.height = 0.1)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{11-high-level-genomic-functions_files/figure-latex/genomic-rainfall-1} 
-
-}
-
-\caption{Genomic rainfall plot and densities.}(\#fig:genomic-rainfall)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="11-high-level-genomic-functions_files/figure-epub3/genomic-rainfall-1.svg" alt="Genomic rainfall plot and densities."  />
+<p class="caption">(\#fig:genomic-rainfall)Genomic rainfall plot and densities.</p>
+</div>
 
 ```r
 circos.clear()

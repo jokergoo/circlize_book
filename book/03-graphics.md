@@ -82,14 +82,10 @@ is set to `"h"`, graphic parameters such as `col` can be set as a vector with
 same length as `x`. Figure \@ref(fig:circlize-lines) illustrates supported `lty`
 settings and `area`/`baseline` settings.
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/circlize-lines-1} 
-
-}
-
-\caption{Line styles and areas supported in `circos.lines()`}(\#fig:circlize-lines)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circlize-lines-1.svg" alt="Line styles and areas supported in `circos.lines()`"  />
+<p class="caption">(\#fig:circlize-lines)Line styles and areas supported in `circos.lines()`</p>
+</div>
 
 Straight lines are transformed to curves when mapping to the circular layout
 (Figure \@ref(fig:circlize-linecurve)). Normally, curves are approximated by a
@@ -103,14 +99,10 @@ unit circle (2$\pi$) divided by `unit.circle.segments`. In some scenarios,
 actually you don't need to segment the lines such as radical lines, then you can
 set `straight` argument to `TRUE` to get rid of unnecessary segmentations.
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/circlize-linecurve-1} 
-
-}
-
-\caption{Transformation of straight lines into curves in the circle.}(\#fig:circlize-linecurve)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circlize-linecurve-1.svg" alt="Transformation of straight lines into curves in the circle."  />
+<p class="caption">(\#fig:circlize-linecurve)Transformation of straight lines into curves in the circle.</p>
+</div>
 
 Possible usage for `circos.lines()` is:
 
@@ -146,14 +138,10 @@ put bended text into two lines, you need to split text into two lines and add
 each line by `circos.text()` separately. The different facings are illustrated
 in figure \@ref(fig:circlize-text).
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/circlize-text-1} 
-
-}
-
-\caption{Text facings.}(\#fig:circlize-text)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circlize-text-1.svg" alt="Text facings."  />
+<p class="caption">(\#fig:circlize-text)Text facings.</p>
+</div>
 
 Possible usage for `circos.text()` is:
 
@@ -176,14 +164,10 @@ When `niceFacing` is on, `adj` is also adjusted according to the corresponding
 facings. Figure \@ref(fig:circlize-text-easy) illustrates text positions under
 different settings of `adj` and `facing`. The red dots are the positions of the texts.
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/circlize-text-easy-1} 
-
-}
-
-\caption{Human easy text facing.}(\#fig:circlize-text-easy)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circlize-text-easy-1.svg" alt="Human easy text facing."  />
+<p class="caption">(\#fig:circlize-text-easy)Human easy text facing.</p>
+</div>
 
 `adj` is internally passed to `text()`, thus, it actually adjusts text
 positions either horizontally or vertically (in the canvas coordinate). If the
@@ -233,14 +217,10 @@ In Figure \@ref(fig:circlize-errorline), the area of standard deviation of the
 smoothed line is drawn by `circos.polygon()`. Source code can be found in the
 **Examples** section of the `circos.polygon()` help page.
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/circlize-errorline-1} 
-
-}
-
-\caption{Area of standard deviation of the smoothed line.}(\#fig:circlize-errorline)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circlize-errorline-1.svg" alt="Area of standard deviation of the smoothed line."  />
+<p class="caption">(\#fig:circlize-errorline)Area of standard deviation of the smoothed line.</p>
+</div>
 
 ## Axes {#axes}
 
@@ -271,14 +251,10 @@ explanations are as follows:
 - h: Number of minor ticks between two major ticks is set to 2. Length of ticks
   is longer. Facing of tick labels is set to `clockwise`.
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/circlize-xaxis-1} 
-
-}
-
-\caption{X-axes}(\#fig:circlize-xaxis)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circlize-xaxis-1.svg" alt="X-axes"  />
+<p class="caption">(\#fig:circlize-xaxis)X-axes</p>
+</div>
 
 As you may notice in the above figure, when the first and last axis labels
 exceed data ranges on x-axis in the corresponding cell, their positions are
@@ -309,14 +285,10 @@ circos.yaxis(side)
 circos.yaxis(at, labels, sector.index, track.index)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/circlize-yaxis-1} 
-
-}
-
-\caption{Y-axes}(\#fig:circlize-yaxis)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circlize-yaxis-1.svg" alt="Y-axes"  />
+<p class="caption">(\#fig:circlize-yaxis)Y-axes</p>
+</div>
 
 ## Circular arrows
 
@@ -346,14 +318,10 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 }, bg.border = NA, track.height = 0.4)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/circular-arrow-1} 
-
-}
-
-\caption{Circular arrows.}(\#fig:circular-arrow)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circular-arrow-1.svg" alt="Circular arrows."  />
+<p class="caption">(\#fig:circular-arrow)Circular arrows.</p>
+</div>
 
 ```r
 circos.clear()
@@ -385,14 +353,10 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 }, bg.border = NA, track.height = 0.3)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/cell-cycle-1} 
-
-}
-
-\caption{Cell cycle.}(\#fig:cell-cycle)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/cell-cycle-1.svg" alt="Cell cycle."  />
+<p class="caption">(\#fig:cell-cycle)Cell cycle.</p>
+</div>
 
 ```r
 circos.clear()
@@ -429,14 +393,10 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 })
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/raster-normal-1} 
-
-}
-
-\caption{Five facings of raster image.}(\#fig:raster-normal)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/raster-normal-1.svg" alt="Five facings of raster image."  />
+<p class="caption">(\#fig:raster-normal)Five facings of raster image.</p>
+</div>
 
 ```r
 circos.clear()
@@ -473,14 +433,10 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 circos.clear()
 ```
 
-\begin{figure}
-
-{\centering \includegraphics[width=11.11in]{images/doodle} 
-
-}
-
-\caption{Fill raster image to the cell.}(\#fig:raster-doodle)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/doodle.jpeg" alt="Fill raster image to the cell." width="800" />
+<p class="caption">(\#fig:raster-doodle)Fill raster image to the cell.</p>
+</div>
 
 ## Links {#links}
 
@@ -502,14 +458,10 @@ circos.link(sector.index1, c(0, 1), sector.index2, c(1, 2))
 circos.link(sector.index1, c(0, 1), sector.index2, 0, col, lwd, lty, border)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/link-example-1} 
-
-}
-
-\caption{Different types of links.}(\#fig:link-example)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/link-example-1.svg" alt="Different types of links."  />
+<p class="caption">(\#fig:link-example)Different types of links.</p>
+</div>
 
 The position of link end is controlled by `rou`. By default, it is the bottom
 of the most inside track and normally, you don't need to care about
@@ -523,14 +475,10 @@ circos.link(sector.index1, 0, sector.index2, 0, rou)
 circos.link(sector.index1, 0, sector.index2, 0, rou1, rou2)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/link-end-1} 
-
-}
-
-\caption{Positions of link ends.}(\#fig:link-end)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/link-end-1.svg" alt="Positions of link ends."  />
+<p class="caption">(\#fig:link-end)Positions of link ends.</p>
+</div>
 
 The height of the link is controlled by `h` argument. In most cases, you don't
 need to care about the value of `h` because they are internally calculated
@@ -549,26 +497,18 @@ circos.link(sector.index1, 0, sector.index2, 0, h)
 circos.link(sector.index1, 0, sector.index2, 0, h, h2)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/link-height-1} 
-
-}
-
-\caption{Adjust link heights.}(\#fig:link-height)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/link-height-1.svg" alt="Adjust link heights."  />
+<p class="caption">(\#fig:link-height)Adjust link heights.</p>
+</div>
 
 When there are many links, the height of all links can be systematically adjusted by `h.ratio` (Figure \@ref(fig:link-ratio)). 
 The value is between 0 and 1.
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/link-ratio-1} 
-
-}
-
-\caption{Adjust link heights by `h.ratio`.}(\#fig:link-ratio)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/link-ratio-1.svg" alt="Adjust link heights by `h.ratio`."  />
+<p class="caption">(\#fig:link-ratio)Adjust link heights by `h.ratio`.</p>
+</div>
 
 The border of link (if it is a ribbon) or the link itself (if it is a line) is
 in fact a quadratic Bezier curve, thus you can control the shape of the link
@@ -582,26 +522,18 @@ circos.link(sector.index1, 0, sector.index2, 0, w)
 circos.link(sector.index1, 0, sector.index2, 0, w, w2)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/link-shape-1} 
-
-}
-
-\caption{Different link shapes.}(\#fig:link-shape)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/link-shape-1.svg" alt="Different link shapes."  />
+<p class="caption">(\#fig:link-shape)Different link shapes.</p>
+</div>
 
 When the links represent as ribbons and the two ends overlap, the links will
 be de-generated as a 'hill' (Figure \@ref(fig:link-hill)).
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/link-hill-1} 
-
-}
-
-\caption{Link as a hill.}(\#fig:link-hill)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/link-hill-1.svg" alt="Link as a hill."  />
+<p class="caption">(\#fig:link-hill)Link as a hill.</p>
+</div>
 
 Links can have arrows to represent the directions. The `directional` argument
 controls how to add arrows. A value of `0` means there is no direction, `1`
@@ -624,14 +556,10 @@ circos.link(sector.index1, 0, sector.index2, 0, directional = 1)
 circos.link(sector.index1, c(0, 1), sector.index2, c(0, 1), directional = -1)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/link-arrow-1} 
-
-}
-
-\caption{Link with arrows.}(\#fig:link-arrow)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/link-arrow-1.svg" alt="Link with arrows."  />
+<p class="caption">(\#fig:link-arrow)Link with arrows.</p>
+</div>
 
 ## Highlight sectors and tracks {#highlight-sectors-and-tracks}
 
@@ -671,14 +599,10 @@ draw.sector(0, 180, rou1 = 0.25, center = c(-0.5, 0.5), border = 2, lwd = 2, lty
 draw.sector(0, 360, rou1 = 0.7, rou2 = 0.6, col = "#0000FF80")
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/draw-sector-general-1} 
-
-}
-
-\caption{General usage of `draw.sector()`.}(\#fig:draw-sector-general)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/draw-sector-general-1.svg" alt="General usage of `draw.sector()`."  />
+<p class="caption">(\#fig:draw-sector-general)General usage of `draw.sector()`.</p>
+</div>
 
 In order to highlight cells in the circular plot, we can use
 `get.cell.meta.data()` to get the information of positions of cells. E.g. the
@@ -743,14 +667,10 @@ draw.sector(pos[1, "theta"], pos[2, "theta"], pos[1, "rou"], pos[2, "rou"],
 circos.clear()
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/circlize-highlight-1} 
-
-}
-
-\caption{Highlight sectors and tracks.}(\#fig:circlize-highlight)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circlize-highlight-1.svg" alt="Highlight sectors and tracks."  />
+<p class="caption">(\#fig:circlize-highlight)Highlight sectors and tracks.</p>
+</div>
 
 If the purpose is to simply highlight complete cells, there is a helper
 function `highlight.sector()` for which you only need to specify index for
@@ -782,14 +702,10 @@ highlight.sector(c("f", "g"), col = NA, border = "green",
 highlight.sector(factors, col = "#FFFF0040", track.index = 4)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/circlize-highlight-sector-1} 
-
-}
-
-\caption{Highlight sectors.}(\#fig:circlize-highlight-sector)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circlize-highlight-sector-1.svg" alt="Highlight sectors."  />
+<p class="caption">(\#fig:circlize-highlight-sector)Highlight sectors.</p>
+</div>
 
 ```r
 circos.clear()
@@ -820,14 +736,10 @@ legend("bottomleft", pch = 1, legend = "This is the legend")
 title("This is the title")
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{03-graphics_files/figure-latex/circlize-base-1} 
-
-}
-
-\caption{Work with base graphic functions.}(\#fig:circlize-base)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-epub3/circlize-base-1.svg" alt="Work with base graphic functions."  />
+<p class="caption">(\#fig:circlize-base)Work with base graphic functions.</p>
+</div>
 
 ```r
 circos.clear()

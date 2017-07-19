@@ -37,14 +37,10 @@ circos.track(ylim = c(0.5, length(percent)+0.5), track.height = 0.8,
 })
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{05-implement-high-level-plots_files/figure-latex/circular-barplot-1} 
-
-}
-
-\caption{A circular barplot.}(\#fig:circular-barplot)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="05-implement-high-level-plots_files/figure-epub3/circular-barplot-1.svg" alt="A circular barplot."  />
+<p class="caption">(\#fig:circular-barplot)A circular barplot.</p>
+</div>
 
 ```r
 circos.clear()
@@ -95,14 +91,10 @@ circos.trackHist(factors = factors, x = x, draw.density = TRUE,
 	col = "#999999", border = "#999999")
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{05-implement-high-level-plots_files/figure-latex/circular-histograms-1} 
-
-}
-
-\caption{Histograms on circular layout.}(\#fig:circular-histograms)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="05-implement-high-level-plots_files/figure-epub3/circular-histograms-1.svg" alt="Histograms on circular layout."  />
+<p class="caption">(\#fig:circular-histograms)Histograms on circular layout.</p>
+</div>
 
 ```r
 circos.clear()
@@ -192,14 +184,10 @@ circos.dendrogram(dend, facing = "inside")
 
 
 
-\begin{figure}
-
-{\centering \includegraphics{05-implement-high-level-plots_files/figure-latex/phylogenetic-tree-1} 
-
-}
-
-\caption{A circular phylogenetic tree.}(\#fig:phylogenetic-tree)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="05-implement-high-level-plots_files/figure-epub3/phylogenetic-tree-1.svg" alt="A circular phylogenetic tree."  />
+<p class="caption">(\#fig:phylogenetic-tree)A circular phylogenetic tree.</p>
+</div>
 
 If you look at the souce code of `circos.dendrogram()` and replace
 `circos.lines()` to `lines()`, actually the function can correctly make a
@@ -270,11 +258,7 @@ circos.track(ylim = c(0, max_height), bg.border = NA, track.height = 0.3,
 circos.clear()
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{05-implement-high-level-plots_files/figure-latex/circular-heatmap-1} 
-
-}
-
-\caption{Circular heatmaps.}(\#fig:circular-heatmap)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="05-implement-high-level-plots_files/figure-epub3/circular-heatmap-1.svg" alt="Circular heatmaps."  />
+<p class="caption">(\#fig:circular-heatmap)Circular heatmaps.</p>
+</div>

@@ -73,14 +73,10 @@ the above functionalities. Figure \@ref(fig:circlize-example) lists several
 complex circular plots made by **circlize**. After going through this
 book, you will definitely be able to implement yours.
 
-\begin{figure}
-
-{\centering \includegraphics[width=1\linewidth]{images/ciclize_examples} 
-
-}
-
-\caption{Examples by circlize}(\#fig:circlize-example)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/ciclize_examples.jpg" alt="Examples by circlize" width="100%" />
+<p class="caption">(\#fig:circlize-example)Examples by circlize</p>
+</div>
 
 ## A quick glance {#a-qiuck-glance}
 
@@ -149,14 +145,10 @@ circos.trackPoints(df$factors, df$x, df$y, col = col, pch = 16, cex = 0.5)
 circos.text(-1, 0.5, "text", sector.index = "a", track.index = 1)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-1-1} 
-
-}
-
-\caption{First example of circlize, add the first track.}(\#fig:circlize-glance-track-1)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-epub3/circlize-glance-track-1-1.svg" alt="First example of circlize, add the first track."  />
+<p class="caption">(\#fig:circlize-glance-track-1)First example of circlize, add the first track.</p>
+</div>
 
 Axes for the circular plot are normally drawn on the most outside of the
 circle. Here we add axes in the first track by putting `circos.axis()` inside
@@ -214,14 +206,10 @@ bgcol = rep(c("#EFEFEF", "#CCCCCC"), 4)
 circos.trackHist(df$factors, df$x, bin.size = 0.2, bg.col = bgcol, col = NA)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-2-1} 
-
-}
-
-\caption{First example of circlize, add the second track.}(\#fig:circlize-glance-track-2)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-epub3/circlize-glance-track-2-1.svg" alt="First example of circlize, add the second track."  />
+<p class="caption">(\#fig:circlize-glance-track-2)First example of circlize, add the second track.</p>
+</div>
 
 In the third track and in `panel.fun`, we randomly picked 10 data points in
 each cell, sort them and connect them with lines. In following code, when
@@ -243,14 +231,10 @@ circos.track(factors = df$factors, x = df$x, y = df$y,
 })
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-3-1} 
-
-}
-
-\caption{First example of circlize, add the third track.}(\#fig:circlize-glance-track-3)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-epub3/circlize-glance-track-3-1.svg" alt="First example of circlize, add the third track."  />
+<p class="caption">(\#fig:circlize-glance-track-3)First example of circlize, add the third track.</p>
+</div>
 
 Now we go back to the second track and update the cell in sector "d".
 This is done by `circos.updatePlotRegion()` or the short version
@@ -271,14 +255,10 @@ circos.points(x = -2:2, y = rep(0.5, 5), col = "white")
 circos.text(CELL_META$xcenter, CELL_META$ycenter, "updated", col = "white")
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-update-1} 
-
-}
-
-\caption{First example of circlize, update the second track.}(\#fig:circlize-glance-track-update)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-epub3/circlize-glance-track-update-1.svg" alt="First example of circlize, update the second track."  />
+<p class="caption">(\#fig:circlize-glance-track-update)First example of circlize, update the second track.</p>
+</div>
 
 Next we continue to create new tracks. Although we have gone back to the
 second track, when creating a new track, the new track is still created after
@@ -302,14 +282,10 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 })
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-4-1} 
-
-}
-
-\caption{First example of circlize, add the fourth track.}(\#fig:circlize-glance-track-4)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-epub3/circlize-glance-track-4-1.svg" alt="First example of circlize, add the fourth track."  />
+<p class="caption">(\#fig:circlize-glance-track-4)First example of circlize, add the fourth track.</p>
+</div>
 
 In the most inside of the circle, links or ribbons are added. There can be links
 from single point to point, point to interval or interval to interval. Section \@ref(links)
@@ -323,14 +299,10 @@ circos.link("c", c(-0.5, 0.5), "d", c(-0.5,0.5), col = "red",
 circos.link("e", 0, "g", c(-1,1), col = "green", border = "black", lwd = 2, lty = 2)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{01-introduction_files/figure-latex/circlize-glance-track-links-1} 
-
-}
-
-\caption{First example of circlize, add links.}(\#fig:circlize-glance-track-links)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="01-introduction_files/figure-epub3/circlize-glance-track-links-1.svg" alt="First example of circlize, add links."  />
+<p class="caption">(\#fig:circlize-glance-track-links)First example of circlize, add links.</p>
+</div>
 
 Finally we need to reset the graphic parameters and internal variables, so
 that it will not mess up your next plot.

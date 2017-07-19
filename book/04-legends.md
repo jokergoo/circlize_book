@@ -70,11 +70,6 @@ lgd_links = Legend(at = c(-2, -1, 0, 1, 2), col_fun = col_fun,
     title_position = "topleft", title = "Links")
 
 lgd_list_vertical = packLegend(lgd_points, lgd_lines, lgd_links)
-lgd_list_vertical
-```
-
-```
-## frame[GRID.frame.65]
 ```
 
 `lgd_points`, `lgd_lines`, `lgd_links` and `lgd_list_vertical` are all `grob`
@@ -101,14 +96,10 @@ grid.draw(lgd_list_vertical)
 upViewport()
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{04-legends_files/figure-latex/directly-add-1} 
-
-}
-
-\caption{Directly add grid graphics.}(\#fig:directly-add)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-legends_files/figure-epub3/directly-add-1.png" alt="Directly add grid graphics."  />
+<p class="caption">(\#fig:directly-add)Directly add grid graphics.</p>
+</div>
 
 In Figure \@ref(fig:directly-add), the whole image region corresponds to the
 circular plot and the legend layer is drawn just on top of it. Actually you
@@ -137,14 +128,10 @@ grid.draw(lgd_links)
 upViewport()
 ```
 
-\begin{figure}
-
-{\centering \includegraphics{04-legends_files/figure-latex/two-legends-1} 
-
-}
-
-\caption{Split into two legends.}(\#fig:two-legends)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-legends_files/figure-epub3/two-legends-1.png" alt="Split into two legends."  />
+<p class="caption">(\#fig:two-legends)Split into two legends.</p>
+</div>
 
 Still it can not solve the problem and sometimes it even makes the plot so
 messed up. One better way is to split the image region into two parts where
@@ -184,9 +171,7 @@ grid.draw(lgd_list_vertical)
 upViewport()
 ```
 
-
-
-\begin{center}\includegraphics{04-legends_files/figure-latex/right-legend-1} \end{center}
+<img src="04-legends_files/figure-epub3/right-legend-1.png" style="display: block; margin: auto;" />
 
 The legends can also be put at the bottom of the circular plot and it is just
 a matter how users arrange the grid viewports. In this case, all legends are
@@ -228,7 +213,5 @@ grid.draw(lgd_list_horizontal)
 upViewport()
 ```
 
-
-
-\begin{center}\includegraphics{04-legends_files/figure-latex/bottom-legend-1} \end{center}
+<img src="04-legends_files/figure-epub3/bottom-legend-1.png" style="display: block; margin: auto;" />
 

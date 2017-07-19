@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{last revised on 2017-06-20}
+  \date{last revised on 2017-07-19}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -2527,13 +2527,8 @@ are constructed. In the end the three legends are packed vertically by
     \DataTypeTok{title_position =} \StringTok{"topleft"}\NormalTok{, }\DataTypeTok{title =} \StringTok{"Links"}\NormalTok{)}
 
 \NormalTok{lgd_list_vertical =}\StringTok{ }\KeywordTok{packLegend}\NormalTok{(lgd_points, lgd_lines, lgd_links)}
-\NormalTok{lgd_list_vertical}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## frame[GRID.frame.65]
-\end{verbatim}
 
 \texttt{lgd\_points}, \texttt{lgd\_lines}, \texttt{lgd\_links} and
 \texttt{lgd\_list\_vertical} are all \texttt{grob} objects (graphical
@@ -3965,8 +3960,8 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    chr  start    end     value1     value2
-## 1 chr1  95707 339073 -0.5294506 -0.6288372
-## 2 chr1 373124 795783 -0.1827358 -0.6683292
+## 1 chr1 368004 456461  1.1400239 -1.1114676
+## 2 chr1 475508 691318 -0.5604527 -0.3586506
 \end{verbatim}
 
 \begin{Shaded}
@@ -3983,11 +3978,11 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    start    end
-## 1  95707 339073
-## 2 373124 795783
+## 1 368004 456461
+## 2 475508 691318
 ##       value1     value2
-## 1 -0.5294506 -0.6288372
-## 2 -0.1827358 -0.6683292
+## 1  1.1400239 -1.1114676
+## 2 -0.5604527 -0.3586506
 \end{verbatim}
 
 Since \texttt{circos.genomicTrack()} creates a new track, it needs
@@ -7273,6 +7268,10 @@ rectangles repeatedly.
 
 Legends can be added according to instructions discussed in Section
 \ref{legends}.
+
+\begin{verbatim}
+## Loading required package: methods
+\end{verbatim}
 
 \begin{center}\includegraphics{15-a-complex-example-with-chord-diagram_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
