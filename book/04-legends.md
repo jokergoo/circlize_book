@@ -74,7 +74,7 @@ lgd_list_vertical
 ```
 
 ```
-## grob[GRID.frame.55]
+## frame[GRID.frame.55]
 ```
 
 `lgd_points`, `lgd_lines`, `lgd_links` and `lgd_list_vertical` are all `grob`

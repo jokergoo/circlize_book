@@ -293,7 +293,7 @@ lgd_links =<span class="st"> </span><span class="kw">Legend</span>(<span class="
 
 lgd_list_vertical =<span class="st"> </span><span class="kw">packLegend</span>(lgd_points, lgd_lines, lgd_links)
 lgd_list_vertical</code></pre></div>
-<pre><code>## grob[GRID.frame.55]</code></pre>
+<pre><code>## frame[GRID.frame.55]</code></pre>
 <p><code>lgd_points</code>, <code>lgd_lines</code>, <code>lgd_links</code> and <code>lgd_list_vertical</code> are all <code>grob</code> objects (graphical objects) defined by <strong>grid</strong> package, which you can think as boxes which contain all graphical elements for legends and they can be added to the plot by <code>grid.draw()</code>.</p>
 <p><strong>circlize</strong> is implemented in the base graphic system while <strong>ComplexHeatmap</strong> is implemented by <strong>grid</strong> graphic system. However, these two systems can be mixed somehow. We can directly add grid graphics to the base graphics. (Actually they are two independent layers but drawn on a same graphic device.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circlize_plot</span>()
