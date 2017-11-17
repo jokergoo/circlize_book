@@ -101,15 +101,15 @@
 <circle cx='256.80' cy='122.69' r='2.70pt' style='stroke-width: 0.75;' clip-path='url(#cpMTQuNHwyNzMuNnwyNzMuNnwxNC40)' />
 <circle cx='259.09' cy='131.19' r='2.70pt' style='stroke-width: 0.75;' clip-path='url(#cpMTQuNHwyNzMuNnwyNzMuNnwxNC40)' />
 <circle cx='260.73' cy='139.92' r='2.70pt' style='stroke-width: 0.75;' clip-path='url(#cpMTQuNHwyNzMuNnwyNzMuNnwxNC40)' />
-<g clip-path='url(#cpMTQuNHwyNzMuNnwyNzMuNnwxNC40)'><text x='118.00' y='139.65' style='font-size: 18.00px; font-family: Arial;' textLength='52.00px' lengthAdjust='spacingAndGlyphs'>This is</text></g>
-<g clip-path='url(#cpMTQuNHwyNzMuNnwyNzMuNnwxNC40)'><text x='103.97' y='161.25' style='font-size: 18.00px; font-family: Arial;' textLength='80.05px' lengthAdjust='spacingAndGlyphs'>the center</text></g>
+<g clip-path='url(#cpMTQuNHwyNzMuNnwyNzMuNnwxNC40)'><text x='118.00' y='139.64' style='font-size: 18.00px; font-family: Arial;' textLength='52.00px' lengthAdjust='spacingAndGlyphs'>This is</text></g>
+<g clip-path='url(#cpMTQuNHwyNzMuNnwyNzMuNnwxNC40)'><text x='103.97' y='161.24' style='font-size: 18.00px; font-family: Arial;' textLength='80.05px' lengthAdjust='spacingAndGlyphs'>the center</text></g>
 <rect x='14.40' y='244.80' width='121.04' height='28.80' style='stroke-width: 0.75;' clip-path='url(#cpMTQuNHwyNzMuNnwyNzMuNnwxNC40)' />
 <circle cx='25.20' cy='259.20' r='2.70pt' style='stroke-width: 0.75;' clip-path='url(#cpMTQuNHwyNzMuNnwyNzMuNnwxNC40)' />
-<g clip-path='url(#cpMTQuNHwyNzMuNnwyNzMuNnwxNC40)'><text x='36.00' y='263.50' style='font-size: 12.00px; font-family: Arial;' textLength='94.05px' lengthAdjust='spacingAndGlyphs'>This is the legend</text></g>
+<g clip-path='url(#cpMTQuNHwyNzMuNnwyNzMuNnwxNC40)'><text x='36.00' y='263.49' style='font-size: 12.00px; font-family: Arial;' textLength='94.05px' lengthAdjust='spacingAndGlyphs'>This is the legend</text></g>
 <defs>
   <clipPath id='cpMHwyODh8Mjg4fDA='>
     <rect x='0.00' y='0.00' width='288.00' height='288.00' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpMHwyODh8Mjg4fDA=)'><text x='94.99' y='12.21' style='font-size: 14.40px; font-weight: bold; font-family: Arial;' textLength='98.01px' lengthAdjust='spacingAndGlyphs'>This is the title</text></g>
+<g clip-path='url(#cpMHwyODh8Mjg4fDA=)'><text x='93.59' y='12.35' style='font-size: 14.40px; font-weight: bold; font-family: Arial;' textLength='100.81px' lengthAdjust='spacingAndGlyphs'>This is the title</text></g>
 </svg>

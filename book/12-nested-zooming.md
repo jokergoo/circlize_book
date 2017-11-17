@@ -179,6 +179,16 @@ they are just two circular plots and a correspondance (Figure \@ref(fig:nested2)
 circos.nested(f2, f1, correspondance[, c(4:6, 1:3)])
 ```
 
+```
+## Warning: non-unique values when setting 'row.names': 'a', 'b', 'c', 'd',
+## 'f', 'g', 'h'
+```
+
+```
+## Warning in circos.nested(f2, f1, correspondance[, c(4:6, 1:3)]): Sector order in `f2()` should be the same as in `f1()`, or else
+## connection lines may overlap.
+```
+
 <div class="figure" style="text-align: center">
 <img src="12-nested-zooming_files/figure-epub3/nested2-1.svg" alt="Nested zooming between two circular plots, zoomed plot is put outside."  />
 <p class="caption">(\#fig:nested2)Nested zooming between two circular plots, zoomed plot is put outside.</p>

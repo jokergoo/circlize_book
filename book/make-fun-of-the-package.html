@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -262,8 +262,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="dt">major.tick.length =</span> <span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>))
 <span class="kw">circos.text</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">12</span>) <span class="op">-</span><span class="st"> </span><span class="kw">uy</span>(<span class="dv">6</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>)
 
-current.time =<span class="st"> </span><span class="kw">as.POSIXlt</span>(<span class="kw">Sys.time</span>())
-sec =<span class="st"> </span><span class="kw">ceiling</span>(current.time<span class="op">$</span>sec)
+current.time =<span class="st"> </span><span class="kw">as.POSIXlt</span>(<span class="kw">Sys.time</span>())</code></pre></div>
+<pre><code>## Warning in as.POSIXlt.POSIXct(Sys.time()): unknown timezone &#39;default/
+## Europe/Berlin&#39;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sec =<span class="st"> </span><span class="kw">ceiling</span>(current.time<span class="op">$</span>sec)
 min =<span class="st"> </span>current.time<span class="op">$</span>min
 hour =<span class="st"> </span>current.time<span class="op">$</span>hour
 
@@ -398,7 +400,7 @@ Figure 16.3: Ba-Gua and Tai-Ji.
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,

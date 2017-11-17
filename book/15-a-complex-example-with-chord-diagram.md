@@ -259,9 +259,4 @@ circos.clear()
 
 Legends can be added according to instructions discussed in Section \@ref(legends).
 
-
-```
-## Loading required package: methods
-```
-
 <img src="15-a-complex-example-with-chord-diagram_files/figure-epub3/unnamed-chunk-13-1.png" style="display: block; margin: auto;" />
