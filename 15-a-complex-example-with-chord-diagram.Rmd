@@ -162,9 +162,9 @@ been transited to different states in group 2.
 
 ```{r third, eval = FALSE}
 for(i in seq_len(nrow(cdm_res))) {
-	if(cdm_res$value[i] > 0) {
+	if(cdm_res$value1[i] > 0) {
 		circos.rect(cdm_res[i, "x1"], -uy(1, "mm"), 
-			cdm_res[i, "x1"] - abs(cdm_res[i, "value"]), -uy(2, "mm"), 
+			cdm_res[i, "x1"] - abs(cdm_res[i, "value1"]), -uy(2, "mm"), 
 			col = state_col2[cdm_res$cn[i]], border = state_col2[cdm_res$cn[i]],
 			sector.index = cdm_res$rn[i], track.index = 2)
 	}
@@ -194,23 +194,23 @@ ylim = get.cell.meta.data("ylim", sector.index = rownames(mat)[1], track.index =
 y1 = ylim[1] + (ylim[2] - ylim[1])*0.4
 y2 = ylim[2]
 for(i in seq_len(nrow(cdm_res))) {
-	if(cdm_res$value[i] > 0) {
-		circos.rect(cdm_res[i, "x1"], y1, cdm_res[i, "x1"] - abs(cdm_res[i, "value"]), y1 + (y2-y1)*0.45, 
+	if(cdm_res$value1[i] > 0) {
+		circos.rect(cdm_res[i, "x1"], y1, cdm_res[i, "x1"] - abs(cdm_res[i, "value1"]), y1 + (y2-y1)*0.45, 
 			col = col_fun(meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]]), 
 			border = col_fun(meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]]),
 			sector.index = cdm_res$rn[i], track.index = 1)
 
-		circos.rect(cdm_res[i, "x1"], y1 + (y2-y1)*0.55, cdm_res[i, "x1"] - abs(cdm_res[i, "value"]), y2, 
+		circos.rect(cdm_res[i, "x1"], y1 + (y2-y1)*0.55, cdm_res[i, "x1"] - abs(cdm_res[i, "value1"]), y2, 
 			col = col_fun2(meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]] - meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]]), 
 			border = col_fun2(meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]] - meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]]),
 			sector.index = cdm_res$rn[i], track.index = 1)
 
-		circos.rect(cdm_res[i, "x2"], y1, cdm_res[i, "x2"] - abs(cdm_res[i, "value"]), y1 + (y2-y1)*0.45, 
+		circos.rect(cdm_res[i, "x2"], y1, cdm_res[i, "x2"] - abs(cdm_res[i, "value1"]), y1 + (y2-y1)*0.45, 
 			col = col_fun(meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]]), 
 			border = col_fun(meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]]),
 			sector.index = cdm_res$cn[i], track.index = 1)
 
-		circos.rect(cdm_res[i, "x2"], y1 + (y2-y1)*0.55, cdm_res[i, "x2"] - abs(cdm_res[i, "value"]), y2, 
+		circos.rect(cdm_res[i, "x2"], y1 + (y2-y1)*0.55, cdm_res[i, "x2"] - abs(cdm_res[i, "value1"]), y2, 
 			col = col_fun2(meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]] - meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]]), 
 			border = col_fun2(meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]] - meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]]),
 			sector.index = cdm_res$cn[i], track.index = 1)
@@ -248,13 +248,13 @@ upViewport()
 
 library(ComplexHeatmap)
 lgd_list_vertical = packLegend(
-	Legend(at = 1:n_states, labels = names(state_col), pch = as.character(1:n_states),, 
+	Legend(at = 1:n_states, labels = names(state_col), pch = as.character(1:n_states),
 		legend_gp = gpar(col = "white", fontsize = 8), background = state_col, type = "points", 
-		title = "Chromatin States"),
+		title = "Chromatin States", grid_width = unit(6, "mm")),
 	Legend(at = c(0.1, 0.3, 0.5, 0.7, 0.9), col_fun = col_fun, title = "Mean Methylation"),
 	Legend(at = c(-0.4, -0.2, 0, 0.2, 0.4), col_fun = col_fun2, title = "Mean Difference"))
-pushViewport(viewport(x = circle_size, y = 0.5, width = grobWidth(lgd_list_vertical), 
-    height = grobHeight(lgd_list_vertical), just = c("left", "center")))
+pushViewport(viewport(x = circle_size, y = 0.5, width = ComplexHeatmap:::width(lgd_list_vertical), 
+    height = ComplexHeatmap:::height(lgd_list_vertical), just = c("left", "center")))
 grid.draw(lgd_list_vertical)
 upViewport()
 ```

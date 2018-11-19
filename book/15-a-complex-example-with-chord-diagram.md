@@ -157,13 +157,13 @@ head(cdm_res)
 ```
 
 ```
-##    rn  cn value o1 o2      x1     x2       col
-## 1 R_1 C_1     0 15 13  431200 267200 #E41A1C20
-## 2 R_2 C_1 56400 15 12  159800 267200 #E41A1CA0
-## 3 R_3 C_1     0 15 11    3600 210800 #E41A1C20
-## 4 R_4 C_1   800 15 10   34600 210800 #E41A1C20
-## 5 R_5 C_1 98200 15  9 1411600 210000 #E41A1CA0
-## 6 R_6 C_1     0 15  8  139800 111800 #E41A1C20
+##    rn  cn value1 value2 o1 o2      x1     x2       col
+## 1 R_1 C_1      0      0 15 13  431200 267200 #E41A1C20
+## 2 R_2 C_1  56400  56400 15 12  159800 267200 #E41A1CA0
+## 3 R_3 C_1      0      0 15 11    3600 210800 #E41A1C20
+## 4 R_4 C_1    800    800 15 10   34600 210800 #E41A1C20
+## 5 R_5 C_1  98200  98200 15  9 1411600 210000 #E41A1CA0
+## 6 R_6 C_1      0      0 15  8  139800 111800 #E41A1C20
 ```
 
 
@@ -201,9 +201,9 @@ been transited to different states in group 2.
 
 ```r
 for(i in seq_len(nrow(cdm_res))) {
-	if(cdm_res$value[i] > 0) {
+	if(cdm_res$value1[i] > 0) {
 		circos.rect(cdm_res[i, "x1"], -uy(1, "mm"), 
-			cdm_res[i, "x1"] - abs(cdm_res[i, "value"]), -uy(2, "mm"), 
+			cdm_res[i, "x1"] - abs(cdm_res[i, "value1"]), -uy(2, "mm"), 
 			col = state_col2[cdm_res$cn[i]], border = state_col2[cdm_res$cn[i]],
 			sector.index = cdm_res$rn[i], track.index = 2)
 	}
@@ -229,23 +229,23 @@ ylim = get.cell.meta.data("ylim", sector.index = rownames(mat)[1], track.index =
 y1 = ylim[1] + (ylim[2] - ylim[1])*0.4
 y2 = ylim[2]
 for(i in seq_len(nrow(cdm_res))) {
-	if(cdm_res$value[i] > 0) {
-		circos.rect(cdm_res[i, "x1"], y1, cdm_res[i, "x1"] - abs(cdm_res[i, "value"]), y1 + (y2-y1)*0.45, 
+	if(cdm_res$value1[i] > 0) {
+		circos.rect(cdm_res[i, "x1"], y1, cdm_res[i, "x1"] - abs(cdm_res[i, "value1"]), y1 + (y2-y1)*0.45, 
 			col = col_fun(meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]]), 
 			border = col_fun(meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]]),
 			sector.index = cdm_res$rn[i], track.index = 1)
 
-		circos.rect(cdm_res[i, "x1"], y1 + (y2-y1)*0.55, cdm_res[i, "x1"] - abs(cdm_res[i, "value"]), y2, 
+		circos.rect(cdm_res[i, "x1"], y1 + (y2-y1)*0.55, cdm_res[i, "x1"] - abs(cdm_res[i, "value1"]), y2, 
 			col = col_fun2(meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]] - meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]]), 
 			border = col_fun2(meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]] - meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]]),
 			sector.index = cdm_res$rn[i], track.index = 1)
 
-		circos.rect(cdm_res[i, "x2"], y1, cdm_res[i, "x2"] - abs(cdm_res[i, "value"]), y1 + (y2-y1)*0.45, 
+		circos.rect(cdm_res[i, "x2"], y1, cdm_res[i, "x2"] - abs(cdm_res[i, "value1"]), y1 + (y2-y1)*0.45, 
 			col = col_fun(meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]]), 
 			border = col_fun(meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]]),
 			sector.index = cdm_res$cn[i], track.index = 1)
 
-		circos.rect(cdm_res[i, "x2"], y1 + (y2-y1)*0.55, cdm_res[i, "x2"] - abs(cdm_res[i, "value"]), y2, 
+		circos.rect(cdm_res[i, "x2"], y1 + (y2-y1)*0.55, cdm_res[i, "x2"] - abs(cdm_res[i, "value1"]), y2, 
 			col = col_fun2(meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]] - meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]]), 
 			border = col_fun2(meth_mat_1[cdm_res$rn[i], cdm_res$cn[i]] - meth_mat_2[cdm_res$rn[i], cdm_res$cn[i]]),
 			sector.index = cdm_res$cn[i], track.index = 1)

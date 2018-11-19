@@ -616,6 +616,29 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 }, bg.border = 1, track.height = 0.15)
 ```
 
+```
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+```
+
 <div class="figure" style="text-align: center">
 <img src="02-circlize-layout_files/figure-epub3/circular-pokemon-1.png" alt="Add raster image to the circular plot."  />
 <p class="caption">(\#fig:circular-pokemon)Add raster image to the circular plot.</p>

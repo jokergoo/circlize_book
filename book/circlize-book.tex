@@ -116,15 +116,16 @@
 }
 
 \setlength{\droptitle}{-2em}
+
   \title{Circular Visualization in R}
-  \pretitle{\vspace{\droptitle}\centering\huge}
+    \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{Zuguang Gu}
-  \preauthor{\centering\large\emph}
+    \author{Zuguang Gu}
+    \preauthor{\centering\large\emph}
   \postauthor{\par}
-  \predate{\centering\large\emph}
+      \predate{\centering\large\emph}
   \postdate{\par}
-  \date{last revised on 2017-11-17}
+    \date{last revised on 2018-11-19}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -161,7 +162,7 @@
 
 This is the documentation of the
 \href{https://cran.r-project.org/package=circlize}{\textbf{circlize}}
-package. Examples in the book are generated under version 0.4.2.
+package. Examples in the book are generated under version 0.4.5.
 
 If you use \textbf{circlize} in your publications, I would be
 appreciated if you can cite:
@@ -1361,6 +1362,29 @@ using \texttt{circlize()} and \texttt{circlize:::polar2Cartesian()}.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB
+## profile
+\end{verbatim}
+
 \begin{figure}
 
 {\centering \includegraphics{02-circlize-layout_files/figure-latex/circular-pokemon-1} 
@@ -2507,7 +2531,7 @@ is wrapped into a function so that it can be used repeatedly.
 \end{Highlighting}
 \end{Shaded}
 
-In \textbf{ComplexHeatmap} package with version higher than 1.13.2,
+In \textbf{ComplexHeatmap} package with version higher than 1.99.0,
 there is a \texttt{Legend()} function which customizes legends with
 various styles. In following code, legends for the two tracks and links
 are constructed. In the end the three legends are packed vertically by
@@ -2535,7 +2559,7 @@ are constructed. In the end the three legends are packed vertically by
 \end{Shaded}
 
 \begin{verbatim}
-## frame[GRID.frame.55]
+## A pack of 3 legends
 \end{verbatim}
 
 \texttt{lgd\_points}, \texttt{lgd\_lines}, \texttt{lgd\_links} and
@@ -2555,12 +2579,8 @@ layers but drawn on a same graphic device.)
 \KeywordTok{circlize_plot}\NormalTok{()}
 \CommentTok{# next the grid graphics are added directly to the plot}
 \CommentTok{# where circlize has created.}
-\KeywordTok{pushViewport}\NormalTok{(}\KeywordTok{viewport}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DataTypeTok{y =} \KeywordTok{unit}\NormalTok{(}\DecValTok{4}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }
-    \DataTypeTok{width =} \KeywordTok{grobWidth}\NormalTok{(lgd_list_vertical), }
-    \DataTypeTok{height =} \KeywordTok{grobHeight}\NormalTok{(lgd_list_vertical), }
-    \DataTypeTok{just =} \KeywordTok{c}\NormalTok{(}\StringTok{"left"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{)))}
-\KeywordTok{grid.draw}\NormalTok{(lgd_list_vertical)}
-\KeywordTok{upViewport}\NormalTok{()}
+
+\KeywordTok{draw}\NormalTok{(lgd_list_vertical, }\DataTypeTok{x =} \KeywordTok{unit}\NormalTok{(}\DecValTok{4}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DataTypeTok{y =} \KeywordTok{unit}\NormalTok{(}\DecValTok{4}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DataTypeTok{just =} \KeywordTok{c}\NormalTok{(}\StringTok{"left"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2586,18 +2606,9 @@ part to different corners in the plot (Figure \ref{fig:two-legends}).
 \KeywordTok{circlize_plot}\NormalTok{()}
 \CommentTok{# next the grid graphics are added directly to the plot}
 \CommentTok{# where circlize has created.}
-\KeywordTok{pushViewport}\NormalTok{(}\KeywordTok{viewport}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DataTypeTok{y =} \KeywordTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }
-    \DataTypeTok{width =} \KeywordTok{grobWidth}\NormalTok{(lgd_list_vertical2), }
-    \DataTypeTok{height =} \KeywordTok{grobHeight}\NormalTok{(lgd_list_vertical2), }
-    \DataTypeTok{just =} \KeywordTok{c}\NormalTok{(}\StringTok{"left"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{)))}
-\KeywordTok{grid.draw}\NormalTok{(lgd_list_vertical2)}
-\KeywordTok{upViewport}\NormalTok{()}
-\KeywordTok{pushViewport}\NormalTok{(}\KeywordTok{viewport}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{unit}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"npc"}\NormalTok{) }\OperatorTok{-}\StringTok{ }\KeywordTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DataTypeTok{y =} \KeywordTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }
-    \DataTypeTok{width =} \KeywordTok{grobWidth}\NormalTok{(lgd_links), }
-    \DataTypeTok{height =} \KeywordTok{grobHeight}\NormalTok{(lgd_links), }
-    \DataTypeTok{just =} \KeywordTok{c}\NormalTok{(}\StringTok{"right"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{)))}
-\KeywordTok{grid.draw}\NormalTok{(lgd_links)}
-\KeywordTok{upViewport}\NormalTok{()}
+\KeywordTok{draw}\NormalTok{(lgd_list_vertical2, }\DataTypeTok{x =} \KeywordTok{unit}\NormalTok{(}\DecValTok{4}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DataTypeTok{y =} \KeywordTok{unit}\NormalTok{(}\DecValTok{4}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DataTypeTok{just =} \KeywordTok{c}\NormalTok{(}\StringTok{"left"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{))}
+\KeywordTok{draw}\NormalTok{(lgd_links, }\DataTypeTok{x =} \KeywordTok{unit}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"npc"}\NormalTok{) }\OperatorTok{-}\StringTok{ }\KeywordTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DataTypeTok{y =} \KeywordTok{unit}\NormalTok{(}\DecValTok{4}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }
+    \DataTypeTok{just =} \KeywordTok{c}\NormalTok{(}\StringTok{"right"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2646,10 +2657,7 @@ building a \textbf{knitr} document.
 \KeywordTok{circlize_plot}\NormalTok{()}
 \KeywordTok{upViewport}\NormalTok{()}
 
-\KeywordTok{pushViewport}\NormalTok{(}\KeywordTok{viewport}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ circle_size, }\DataTypeTok{y =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{width =} \KeywordTok{grobWidth}\NormalTok{(lgd_list_vertical), }
-    \DataTypeTok{height =} \KeywordTok{grobHeight}\NormalTok{(lgd_list_vertical), }\DataTypeTok{just =} \KeywordTok{c}\NormalTok{(}\StringTok{"left"}\NormalTok{, }\StringTok{"center"}\NormalTok{)))}
-\KeywordTok{grid.draw}\NormalTok{(lgd_list_vertical)}
-\KeywordTok{upViewport}\NormalTok{()}
+\KeywordTok{draw}\NormalTok{(lgd_list_vertical, }\DataTypeTok{x =}\NormalTok{ circle_size, }\DataTypeTok{just =} \StringTok{"left"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2689,11 +2697,7 @@ Similar code to arrange viewports.
 \KeywordTok{circlize_plot}\NormalTok{()}
 \KeywordTok{upViewport}\NormalTok{()}
 
-\KeywordTok{pushViewport}\NormalTok{(}\KeywordTok{viewport}\NormalTok{(}\DataTypeTok{x =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{y =} \KeywordTok{unit}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"npc"}\NormalTok{) }\OperatorTok{-}\StringTok{ }\NormalTok{circle_size, }
-    \DataTypeTok{width =} \KeywordTok{grobWidth}\NormalTok{(lgd_list_horizontal), }\DataTypeTok{height =} \KeywordTok{grobHeight}\NormalTok{(lgd_list_horizontal), }
-    \DataTypeTok{just =} \KeywordTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{, }\StringTok{"top"}\NormalTok{)))}
-\KeywordTok{grid.draw}\NormalTok{(lgd_list_horizontal)}
-\KeywordTok{upViewport}\NormalTok{()}
+\KeywordTok{draw}\NormalTok{(lgd_list_horizontal, }\DataTypeTok{y =} \KeywordTok{unit}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"npc"}\NormalTok{) }\OperatorTok{-}\StringTok{ }\NormalTok{circle_size, }\DataTypeTok{just =} \StringTok{"top"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3967,9 +3971,9 @@ Following code demonstrates the values for \texttt{region} and
 \end{Shaded}
 
 \begin{verbatim}
-##    chr  start    end     value1     value2
-## 1 chr1 328358 515251  0.2792602 -0.1679226
-## 2 chr1 785289 797387 -0.4002915  0.1096555
+##    chr  start    end    value1     value2
+## 1 chr1   4240 480335 0.2304324  0.2609187
+## 2 chr1 541591 541670 0.2890124 -0.1841605
 \end{verbatim}
 
 \begin{Shaded}
@@ -3986,11 +3990,11 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    start    end
-## 1 328358 515251
-## 2 785289 797387
-##       value1     value2
-## 1  0.2792602 -0.1679226
-## 2 -0.4002915  0.1096555
+## 1   4240 480335
+## 2 541591 541670
+##      value1     value2
+## 1 0.2304324  0.2609187
+## 2 0.2890124 -0.1841605
 \end{verbatim}
 
 Since \texttt{circos.genomicTrack()} creates a new track, it needs
@@ -4753,8 +4757,8 @@ human genome hg19 (Figure \ref{fig:ideogram}).
 Matrix which corresponds to genomic regions can be visualized as
 heatmaps. Heatmaps completely fill the track and there are connection
 lines connecting heatmaps and original positions in the genome.
-`circos.genomicHeamtap()`` draws connection lines and heatmaps as two
-tracks and combines them as an integrated track.
+\texttt{circos.genomicHeamtap()} draws connection lines and heatmaps as
+two tracks and combines them as an integrated track.
 
 Generally, all numeric columns (excluding the first three columns) in
 the input data frame are used to make the heatmap. Columns can also be
@@ -7180,13 +7184,13 @@ for all links.
 \end{Shaded}
 
 \begin{verbatim}
-##    rn  cn value o1 o2      x1     x2       col
-## 1 R_1 C_1     0 15 13  431200 267200 #E41A1C20
-## 2 R_2 C_1 56400 15 12  159800 267200 #E41A1CA0
-## 3 R_3 C_1     0 15 11    3600 210800 #E41A1C20
-## 4 R_4 C_1   800 15 10   34600 210800 #E41A1C20
-## 5 R_5 C_1 98200 15  9 1411600 210000 #E41A1CA0
-## 6 R_6 C_1     0 15  8  139800 111800 #E41A1C20
+##    rn  cn value1 value2 o1 o2      x1     x2       col
+## 1 R_1 C_1      0      0 15 13  431200 267200 #E41A1C20
+## 2 R_2 C_1  56400  56400 15 12  159800 267200 #E41A1CA0
+## 3 R_3 C_1      0      0 15 11    3600 210800 #E41A1C20
+## 4 R_4 C_1    800    800 15 10   34600 210800 #E41A1C20
+## 5 R_5 C_1  98200  98200 15  9 1411600 210000 #E41A1CA0
+## 6 R_6 C_1      0      0 15  8  139800 111800 #E41A1C20
 \end{verbatim}
 
 Now the axes are added in the second track, also, the index of states
@@ -7225,9 +7229,9 @@ different states in group 2.
 \begin{Shaded}
 \begin{Highlighting}[]
 \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{seq_len}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(cdm_res))) \{}
-    \ControlFlowTok{if}\NormalTok{(cdm_res}\OperatorTok{$}\NormalTok{value[i] }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
+    \ControlFlowTok{if}\NormalTok{(cdm_res}\OperatorTok{$}\NormalTok{value1[i] }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
         \KeywordTok{circos.rect}\NormalTok{(cdm_res[i, }\StringTok{"x1"}\NormalTok{], }\OperatorTok{-}\KeywordTok{uy}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }
-\NormalTok{            cdm_res[i, }\StringTok{"x1"}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{abs}\NormalTok{(cdm_res[i, }\StringTok{"value"}\NormalTok{]), }\OperatorTok{-}\KeywordTok{uy}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }
+\NormalTok{            cdm_res[i, }\StringTok{"x1"}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{abs}\NormalTok{(cdm_res[i, }\StringTok{"value1"}\NormalTok{]), }\OperatorTok{-}\KeywordTok{uy}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }
             \DataTypeTok{col =}\NormalTok{ state_col2[cdm_res}\OperatorTok{$}\NormalTok{cn[i]], }\DataTypeTok{border =}\NormalTok{ state_col2[cdm_res}\OperatorTok{$}\NormalTok{cn[i]],}
             \DataTypeTok{sector.index =}\NormalTok{ cdm_res}\OperatorTok{$}\NormalTok{rn[i], }\DataTypeTok{track.index =} \DecValTok{2}\NormalTok{)}
 \NormalTok{    \}}
@@ -7256,23 +7260,23 @@ rectangles repeatedly.
 \NormalTok{y1 =}\StringTok{ }\NormalTok{ylim[}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{(ylim[}\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{ylim[}\DecValTok{1}\NormalTok{])}\OperatorTok{*}\FloatTok{0.4}
 \NormalTok{y2 =}\StringTok{ }\NormalTok{ylim[}\DecValTok{2}\NormalTok{]}
 \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{seq_len}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(cdm_res))) \{}
-    \ControlFlowTok{if}\NormalTok{(cdm_res}\OperatorTok{$}\NormalTok{value[i] }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
-        \KeywordTok{circos.rect}\NormalTok{(cdm_res[i, }\StringTok{"x1"}\NormalTok{], y1, cdm_res[i, }\StringTok{"x1"}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{abs}\NormalTok{(cdm_res[i, }\StringTok{"value"}\NormalTok{]), y1 }\OperatorTok{+}\StringTok{ }\NormalTok{(y2}\OperatorTok{-}\NormalTok{y1)}\OperatorTok{*}\FloatTok{0.45}\NormalTok{, }
+    \ControlFlowTok{if}\NormalTok{(cdm_res}\OperatorTok{$}\NormalTok{value1[i] }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
+        \KeywordTok{circos.rect}\NormalTok{(cdm_res[i, }\StringTok{"x1"}\NormalTok{], y1, cdm_res[i, }\StringTok{"x1"}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{abs}\NormalTok{(cdm_res[i, }\StringTok{"value1"}\NormalTok{]), y1 }\OperatorTok{+}\StringTok{ }\NormalTok{(y2}\OperatorTok{-}\NormalTok{y1)}\OperatorTok{*}\FloatTok{0.45}\NormalTok{, }
             \DataTypeTok{col =} \KeywordTok{col_fun}\NormalTok{(meth_mat_}\DecValTok{1}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]]), }
             \DataTypeTok{border =} \KeywordTok{col_fun}\NormalTok{(meth_mat_}\DecValTok{1}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]]),}
             \DataTypeTok{sector.index =}\NormalTok{ cdm_res}\OperatorTok{$}\NormalTok{rn[i], }\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{)}
 
-        \KeywordTok{circos.rect}\NormalTok{(cdm_res[i, }\StringTok{"x1"}\NormalTok{], y1 }\OperatorTok{+}\StringTok{ }\NormalTok{(y2}\OperatorTok{-}\NormalTok{y1)}\OperatorTok{*}\FloatTok{0.55}\NormalTok{, cdm_res[i, }\StringTok{"x1"}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{abs}\NormalTok{(cdm_res[i, }\StringTok{"value"}\NormalTok{]), y2, }
+        \KeywordTok{circos.rect}\NormalTok{(cdm_res[i, }\StringTok{"x1"}\NormalTok{], y1 }\OperatorTok{+}\StringTok{ }\NormalTok{(y2}\OperatorTok{-}\NormalTok{y1)}\OperatorTok{*}\FloatTok{0.55}\NormalTok{, cdm_res[i, }\StringTok{"x1"}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{abs}\NormalTok{(cdm_res[i, }\StringTok{"value1"}\NormalTok{]), y2, }
             \DataTypeTok{col =} \KeywordTok{col_fun2}\NormalTok{(meth_mat_}\DecValTok{2}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]] }\OperatorTok{-}\StringTok{ }\NormalTok{meth_mat_}\DecValTok{1}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]]), }
             \DataTypeTok{border =} \KeywordTok{col_fun2}\NormalTok{(meth_mat_}\DecValTok{2}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]] }\OperatorTok{-}\StringTok{ }\NormalTok{meth_mat_}\DecValTok{1}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]]),}
             \DataTypeTok{sector.index =}\NormalTok{ cdm_res}\OperatorTok{$}\NormalTok{rn[i], }\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{)}
 
-        \KeywordTok{circos.rect}\NormalTok{(cdm_res[i, }\StringTok{"x2"}\NormalTok{], y1, cdm_res[i, }\StringTok{"x2"}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{abs}\NormalTok{(cdm_res[i, }\StringTok{"value"}\NormalTok{]), y1 }\OperatorTok{+}\StringTok{ }\NormalTok{(y2}\OperatorTok{-}\NormalTok{y1)}\OperatorTok{*}\FloatTok{0.45}\NormalTok{, }
+        \KeywordTok{circos.rect}\NormalTok{(cdm_res[i, }\StringTok{"x2"}\NormalTok{], y1, cdm_res[i, }\StringTok{"x2"}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{abs}\NormalTok{(cdm_res[i, }\StringTok{"value1"}\NormalTok{]), y1 }\OperatorTok{+}\StringTok{ }\NormalTok{(y2}\OperatorTok{-}\NormalTok{y1)}\OperatorTok{*}\FloatTok{0.45}\NormalTok{, }
             \DataTypeTok{col =} \KeywordTok{col_fun}\NormalTok{(meth_mat_}\DecValTok{2}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]]), }
             \DataTypeTok{border =} \KeywordTok{col_fun}\NormalTok{(meth_mat_}\DecValTok{2}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]]),}
             \DataTypeTok{sector.index =}\NormalTok{ cdm_res}\OperatorTok{$}\NormalTok{cn[i], }\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{)}
 
-        \KeywordTok{circos.rect}\NormalTok{(cdm_res[i, }\StringTok{"x2"}\NormalTok{], y1 }\OperatorTok{+}\StringTok{ }\NormalTok{(y2}\OperatorTok{-}\NormalTok{y1)}\OperatorTok{*}\FloatTok{0.55}\NormalTok{, cdm_res[i, }\StringTok{"x2"}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{abs}\NormalTok{(cdm_res[i, }\StringTok{"value"}\NormalTok{]), y2, }
+        \KeywordTok{circos.rect}\NormalTok{(cdm_res[i, }\StringTok{"x2"}\NormalTok{], y1 }\OperatorTok{+}\StringTok{ }\NormalTok{(y2}\OperatorTok{-}\NormalTok{y1)}\OperatorTok{*}\FloatTok{0.55}\NormalTok{, cdm_res[i, }\StringTok{"x2"}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{abs}\NormalTok{(cdm_res[i, }\StringTok{"value1"}\NormalTok{]), y2, }
             \DataTypeTok{col =} \KeywordTok{col_fun2}\NormalTok{(meth_mat_}\DecValTok{1}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]] }\OperatorTok{-}\StringTok{ }\NormalTok{meth_mat_}\DecValTok{2}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]]), }
             \DataTypeTok{border =} \KeywordTok{col_fun2}\NormalTok{(meth_mat_}\DecValTok{1}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]] }\OperatorTok{-}\StringTok{ }\NormalTok{meth_mat_}\DecValTok{2}\NormalTok{[cdm_res}\OperatorTok{$}\NormalTok{rn[i], cdm_res}\OperatorTok{$}\NormalTok{cn[i]]),}
             \DataTypeTok{sector.index =}\NormalTok{ cdm_res}\OperatorTok{$}\NormalTok{cn[i], }\DataTypeTok{track.index =} \DecValTok{1}\NormalTok{)}
@@ -7316,16 +7320,6 @@ section in the help page of \texttt{circos.axis()}.
 \KeywordTok{circos.text}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{12}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{12}\NormalTok{) }\OperatorTok{-}\StringTok{ }\KeywordTok{uy}\NormalTok{(}\DecValTok{6}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DecValTok{1}\OperatorTok{:}\DecValTok{12}\NormalTok{, }\DataTypeTok{facing =} \StringTok{"downward"}\NormalTok{)}
 
 \NormalTok{current.time =}\StringTok{ }\KeywordTok{as.POSIXlt}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning in as.POSIXlt.POSIXct(Sys.time()): unknown timezone 'default/
-## Europe/Berlin'
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{sec =}\StringTok{ }\KeywordTok{ceiling}\NormalTok{(current.time}\OperatorTok{$}\NormalTok{sec)}
 \NormalTok{min =}\StringTok{ }\NormalTok{current.time}\OperatorTok{$}\NormalTok{min}
 \NormalTok{hour =}\StringTok{ }\NormalTok{current.time}\OperatorTok{$}\NormalTok{hour}

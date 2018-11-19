@@ -48,7 +48,7 @@ circlize_plot = function() {
 }
 ```
 
-In **ComplexHeatmap** package with version higher than 1.13.2, there is a
+In **ComplexHeatmap** package with version higher than 1.99.0, there is a
 `Legend()` function which customizes legends with various styles. In following
 code, legends for the two tracks and links are constructed. In the end the
 three legends are packed vertically by `packLegend()`. For more detailed usage
@@ -74,7 +74,7 @@ lgd_list_vertical
 ```
 
 ```
-## frame[GRID.frame.55]
+## A pack of 3 legends
 ```
 
 `lgd_points`, `lgd_lines`, `lgd_links` and `lgd_list_vertical` are all `grob`
@@ -93,12 +93,8 @@ graphic device.)
 circlize_plot()
 # next the grid graphics are added directly to the plot
 # where circlize has created.
-pushViewport(viewport(x = unit(2, "mm"), y = unit(4, "mm"), 
-    width = grobWidth(lgd_list_vertical), 
-    height = grobHeight(lgd_list_vertical), 
-    just = c("left", "bottom")))
-grid.draw(lgd_list_vertical)
-upViewport()
+
+draw(lgd_list_vertical, x = unit(4, "mm"), y = unit(4, "mm"), just = c("left", "bottom"))
 ```
 
 <div class="figure" style="text-align: center">
@@ -119,18 +115,9 @@ lgd_list_vertical2 = packLegend(lgd_points, lgd_lines)
 circlize_plot()
 # next the grid graphics are added directly to the plot
 # where circlize has created.
-pushViewport(viewport(x = unit(2, "mm"), y = unit(2, "mm"), 
-    width = grobWidth(lgd_list_vertical2), 
-    height = grobHeight(lgd_list_vertical2), 
-    just = c("left", "bottom")))
-grid.draw(lgd_list_vertical2)
-upViewport()
-pushViewport(viewport(x = unit(1, "npc") - unit(2, "mm"), y = unit(2, "mm"), 
-    width = grobWidth(lgd_links), 
-    height = grobHeight(lgd_links), 
-    just = c("right", "bottom")))
-grid.draw(lgd_links)
-upViewport()
+draw(lgd_list_vertical2, x = unit(4, "mm"), y = unit(4, "mm"), just = c("left", "bottom"))
+draw(lgd_links, x = unit(1, "npc") - unit(2, "mm"), y = unit(4, "mm"), 
+    just = c("right", "bottom"))
 ```
 
 <div class="figure" style="text-align: center">
@@ -170,10 +157,7 @@ par(omi = gridOMI(), new = TRUE)
 circlize_plot()
 upViewport()
 
-pushViewport(viewport(x = circle_size, y = 0.5, width = grobWidth(lgd_list_vertical), 
-    height = grobHeight(lgd_list_vertical), just = c("left", "center")))
-grid.draw(lgd_list_vertical)
-upViewport()
+draw(lgd_list_vertical, x = circle_size, just = "left")
 ```
 
 <img src="04-legends_files/figure-epub3/right-legend-1.png" style="display: block; margin: auto;" />
@@ -211,11 +195,7 @@ par(omi = gridOMI(), new = TRUE)
 circlize_plot()
 upViewport()
 
-pushViewport(viewport(x = 0.5, y = unit(1, "npc") - circle_size, 
-    width = grobWidth(lgd_list_horizontal), height = grobHeight(lgd_list_horizontal), 
-    just = c("center", "top")))
-grid.draw(lgd_list_horizontal)
-upViewport()
+draw(lgd_list_horizontal, y = unit(1, "npc") - circle_size, just = "top")
 ```
 
 <img src="04-legends_files/figure-epub3/bottom-legend-1.png" style="display: block; margin: auto;" />

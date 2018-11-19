@@ -27,14 +27,6 @@ circos.axis(major.at = 0:12, labels = NULL, direction = "inside",
 circos.text(1:12, rep(1, 12) - uy(6, "mm"), 1:12, facing = "downward")
 
 current.time = as.POSIXlt(Sys.time())
-```
-
-```
-## Warning in as.POSIXlt.POSIXct(Sys.time()): unknown timezone 'default/
-## Europe/Berlin'
-```
-
-```r
 sec = ceiling(current.time$sec)
 min = current.time$min
 hour = current.time$hour

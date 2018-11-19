@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -319,13 +319,13 @@ cdm_res =<span class="st"> </span><span class="kw">chordDiagram</span>(mat, <spa
     <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.1</span>))</code></pre></div>
 <p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/first-1.svg" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(cdm_res)</code></pre></div>
-<pre><code>##    rn  cn value o1 o2      x1     x2       col
-## 1 R_1 C_1     0 15 13  431200 267200 #E41A1C20
-## 2 R_2 C_1 56400 15 12  159800 267200 #E41A1CA0
-## 3 R_3 C_1     0 15 11    3600 210800 #E41A1C20
-## 4 R_4 C_1   800 15 10   34600 210800 #E41A1C20
-## 5 R_5 C_1 98200 15  9 1411600 210000 #E41A1CA0
-## 6 R_6 C_1     0 15  8  139800 111800 #E41A1C20</code></pre>
+<pre><code>##    rn  cn value1 value2 o1 o2      x1     x2       col
+## 1 R_1 C_1      0      0 15 13  431200 267200 #E41A1C20
+## 2 R_2 C_1  56400  56400 15 12  159800 267200 #E41A1CA0
+## 3 R_3 C_1      0      0 15 11    3600 210800 #E41A1C20
+## 4 R_4 C_1    800    800 15 10   34600 210800 #E41A1C20
+## 5 R_5 C_1  98200  98200 15  9 1411600 210000 #E41A1CA0
+## 6 R_6 C_1      0      0 15  8  139800 111800 #E41A1C20</code></pre>
 <p>Now the axes are added in the second track, also, the index of states are added at the center of the grids in the second track, if the degree for a sector is larger than 3 degrees. Note since there is already one pre-allocated track, the circular rectangles are in the second track (<code>track.index = 2</code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">2</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
     <span class="cf">if</span>(<span class="kw">abs</span>(CELL_META<span class="op">$</span>cell.start.degree <span class="op">-</span><span class="st"> </span>CELL_META<span class="op">$</span>cell.end.degree) <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) {
@@ -341,9 +341,9 @@ cdm_res =<span class="st"> </span><span class="kw">chordDiagram</span>(mat, <spa
 <p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-10-1.svg" width="576" style="display: block; margin: auto;" /></p>
 <p>On the top half, it is easy to see the proportion of different transitions in group 1 that come to every state in group 2. However, it is not straightforward for the states in the bottom half to see the proportion of different states in group 2 they transite to. This can be solved by adding small circular rectangles to represent the proportions. In following example, the newly added circular rectangles in the bottom half show e.g. how much the state 15 in group 1 has been transited to different states in group 2.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(cdm_res))) {
-    <span class="cf">if</span>(cdm_res<span class="op">$</span>value[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
+    <span class="cf">if</span>(cdm_res<span class="op">$</span>value1[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
         <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], <span class="op">-</span><span class="kw">uy</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), 
-            cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value&quot;</span>]), <span class="op">-</span><span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), 
+            cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), <span class="op">-</span><span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), 
             <span class="dt">col =</span> state_col2[cdm_res<span class="op">$</span>cn[i]], <span class="dt">border =</span> state_col2[cdm_res<span class="op">$</span>cn[i]],
             <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">2</span>)
     }
@@ -359,23 +359,23 @@ ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span 
 y1 =<span class="st"> </span>ylim[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(ylim[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ylim[<span class="dv">1</span>])<span class="op">*</span><span class="fl">0.4</span>
 y2 =<span class="st"> </span>ylim[<span class="dv">2</span>]
 <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(cdm_res))) {
-    <span class="cf">if</span>(cdm_res<span class="op">$</span>value[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
-        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, 
+    <span class="cf">if</span>(cdm_res<span class="op">$</span>value1[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
+        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, 
             <span class="dt">col =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), 
             <span class="dt">border =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),
             <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)
 
-        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value&quot;</span>]), y2, 
+        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y2, 
             <span class="dt">col =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), 
             <span class="dt">border =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),
             <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)
 
-        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, 
+        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, 
             <span class="dt">col =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), 
             <span class="dt">border =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),
             <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>cn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)
 
-        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value&quot;</span>]), y2, 
+        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y2, 
             <span class="dt">col =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), 
             <span class="dt">border =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),
             <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>cn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)
@@ -414,10 +414,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -441,9 +442,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

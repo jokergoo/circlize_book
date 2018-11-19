@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -277,7 +277,7 @@ circlize_plot =<span class="st"> </span><span class="cf">function</span>() {
     }
     <span class="kw">circos.clear</span>()
 }</code></pre></div>
-<p>In <strong>ComplexHeatmap</strong> package with version higher than 1.13.2, there is a <code>Legend()</code> function which customizes legends with various styles. In following code, legends for the two tracks and links are constructed. In the end the three legends are packed vertically by <code>packLegend()</code>. For more detailed usage of <code>Legend()</code> and <code>packLegend()</code>, please refer to their help pages.</p>
+<p>In <strong>ComplexHeatmap</strong> package with version higher than 1.99.0, there is a <code>Legend()</code> function which customizes legends with various styles. In following code, legends for the two tracks and links are constructed. In the end the three legends are packed vertically by <code>packLegend()</code>. For more detailed usage of <code>Legend()</code> and <code>packLegend()</code>, please refer to their help pages.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ComplexHeatmap)
 <span class="co"># discrete</span>
 lgd_points =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">at =</span> <span class="kw">c</span>(<span class="st">&quot;label1&quot;</span>, <span class="st">&quot;label2&quot;</span>), <span class="dt">type =</span> <span class="st">&quot;points&quot;</span>, 
@@ -293,18 +293,14 @@ lgd_links =<span class="st"> </span><span class="kw">Legend</span>(<span class="
 
 lgd_list_vertical =<span class="st"> </span><span class="kw">packLegend</span>(lgd_points, lgd_lines, lgd_links)
 lgd_list_vertical</code></pre></div>
-<pre><code>## frame[GRID.frame.55]</code></pre>
+<pre><code>## A pack of 3 legends</code></pre>
 <p><code>lgd_points</code>, <code>lgd_lines</code>, <code>lgd_links</code> and <code>lgd_list_vertical</code> are all <code>grob</code> objects (graphical objects) defined by <strong>grid</strong> package, which you can think as boxes which contain all graphical elements for legends and they can be added to the plot by <code>grid.draw()</code>.</p>
 <p><strong>circlize</strong> is implemented in the base graphic system while <strong>ComplexHeatmap</strong> is implemented by <strong>grid</strong> graphic system. However, these two systems can be mixed somehow. We can directly add grid graphics to the base graphics. (Actually they are two independent layers but drawn on a same graphic device.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circlize_plot</span>()
 <span class="co"># next the grid graphics are added directly to the plot</span>
 <span class="co"># where circlize has created.</span>
-<span class="kw">pushViewport</span>(<span class="kw">viewport</span>(<span class="dt">x =</span> <span class="kw">unit</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), 
-    <span class="dt">width =</span> <span class="kw">grobWidth</span>(lgd_list_vertical), 
-    <span class="dt">height =</span> <span class="kw">grobHeight</span>(lgd_list_vertical), 
-    <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>)))
-<span class="kw">grid.draw</span>(lgd_list_vertical)
-<span class="kw">upViewport</span>()</code></pre></div>
+
+<span class="kw">draw</span>(lgd_list_vertical, <span class="dt">x =</span> <span class="kw">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:directly-add"></span>
 <img src="04-legends_files/figure-html/directly-add-1.png" alt="Directly add grid graphics." width="384" />
 <p class="caption">
@@ -316,18 +312,9 @@ Figure 4.1: Directly add grid graphics.
 <span class="kw">circlize_plot</span>()
 <span class="co"># next the grid graphics are added directly to the plot</span>
 <span class="co"># where circlize has created.</span>
-<span class="kw">pushViewport</span>(<span class="kw">viewport</span>(<span class="dt">x =</span> <span class="kw">unit</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), 
-    <span class="dt">width =</span> <span class="kw">grobWidth</span>(lgd_list_vertical2), 
-    <span class="dt">height =</span> <span class="kw">grobHeight</span>(lgd_list_vertical2), 
-    <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>)))
-<span class="kw">grid.draw</span>(lgd_list_vertical2)
-<span class="kw">upViewport</span>()
-<span class="kw">pushViewport</span>(<span class="kw">viewport</span>(<span class="dt">x =</span> <span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;npc&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">unit</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), 
-    <span class="dt">width =</span> <span class="kw">grobWidth</span>(lgd_links), 
-    <span class="dt">height =</span> <span class="kw">grobHeight</span>(lgd_links), 
-    <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>)))
-<span class="kw">grid.draw</span>(lgd_links)
-<span class="kw">upViewport</span>()</code></pre></div>
+<span class="kw">draw</span>(lgd_list_vertical2, <span class="dt">x =</span> <span class="kw">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))
+<span class="kw">draw</span>(lgd_links, <span class="dt">x =</span> <span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;npc&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">unit</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), 
+    <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:two-legends"></span>
 <img src="04-legends_files/figure-html/two-legends-1.png" alt="Split into two legends." width="384" />
 <p class="caption">
@@ -348,10 +335,7 @@ circle_size =<span class="st"> </span><span class="kw">unit</span>(<span class="
 <span class="kw">circlize_plot</span>()
 <span class="kw">upViewport</span>()
 
-<span class="kw">pushViewport</span>(<span class="kw">viewport</span>(<span class="dt">x =</span> circle_size, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">width =</span> <span class="kw">grobWidth</span>(lgd_list_vertical), 
-    <span class="dt">height =</span> <span class="kw">grobHeight</span>(lgd_list_vertical), <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;center&quot;</span>)))
-<span class="kw">grid.draw</span>(lgd_list_vertical)
-<span class="kw">upViewport</span>()</code></pre></div>
+<span class="kw">draw</span>(lgd_list_vertical, <span class="dt">x =</span> circle_size, <span class="dt">just =</span> <span class="st">&quot;left&quot;</span>)</code></pre></div>
 <p><img src="04-legends_files/figure-html/right-legend-1.png" width="446.150971128609" style="display: block; margin: auto;" /></p>
 <p>The legends can also be put at the bottom of the circular plot and it is just a matter how users arrange the grid viewports. In this case, all legends are changed to horizontal style, and three legends are packed horizontally as well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lgd_points =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">at =</span> <span class="kw">c</span>(<span class="st">&quot;label1&quot;</span>, <span class="st">&quot;label2&quot;</span>), <span class="dt">type =</span> <span class="st">&quot;points&quot;</span>, 
@@ -375,11 +359,7 @@ lgd_list_horizontal =<span class="st"> </span><span class="kw">packLegend</span>
 <span class="kw">circlize_plot</span>()
 <span class="kw">upViewport</span>()
 
-<span class="kw">pushViewport</span>(<span class="kw">viewport</span>(<span class="dt">x =</span> <span class="fl">0.5</span>, <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;npc&quot;</span>) <span class="op">-</span><span class="st"> </span>circle_size, 
-    <span class="dt">width =</span> <span class="kw">grobWidth</span>(lgd_list_horizontal), <span class="dt">height =</span> <span class="kw">grobHeight</span>(lgd_list_horizontal), 
-    <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;top&quot;</span>)))
-<span class="kw">grid.draw</span>(lgd_list_horizontal)
-<span class="kw">upViewport</span>()</code></pre></div>
+<span class="kw">draw</span>(lgd_list_horizontal, <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;npc&quot;</span>) <span class="op">-</span><span class="st"> </span>circle_size, <span class="dt">just =</span> <span class="st">&quot;top&quot;</span>)</code></pre></div>
 <p><img src="04-legends_files/figure-html/bottom-legend-1.png" width="384" style="display: block; margin: auto;" /></p>
 
 </div>
@@ -407,10 +387,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -434,9 +415,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
