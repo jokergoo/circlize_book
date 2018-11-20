@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{last revised on 2018-11-19}
+    \date{last revised on 2018-11-20}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -170,8 +170,6 @@ appreciated if you can cite:
 Gu, Z. (2014) circlize implements and enhances circular visualization in
 R. Bioinformatics. DOI:
 \href{https://doi.org/10.1093/bioinformatics/btu393}{10.1093/bioinformatics/btu393}
-
-\begin{center}\includegraphics[width=34.44in]{images/circlize_cover} \end{center}
 
 \part{General
 Functionality}\label{part-general-functionality}
@@ -3972,8 +3970,8 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    chr  start    end    value1     value2
-## 1 chr1   4240 480335 0.2304324  0.2609187
-## 2 chr1 541591 541670 0.2890124 -0.1841605
+## 1 chr1 144086 345347 0.1807029 -0.4380688
+## 2 chr1 373571 574369 1.0302986 -0.6204587
 \end{verbatim}
 
 \begin{Shaded}
@@ -3990,11 +3988,11 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    start    end
-## 1   4240 480335
-## 2 541591 541670
+## 1 144086 345347
+## 2 373571 574369
 ##      value1     value2
-## 1 0.2304324  0.2609187
-## 2 0.2890124 -0.1841605
+## 1 0.1807029 -0.4380688
+## 2 1.0302986 -0.6204587
 \end{verbatim}
 
 Since \texttt{circos.genomicTrack()} creates a new track, it needs
@@ -4851,6 +4849,44 @@ Similarlly, labels can be put outside of the normal genomic track
 \caption{Genomic labels.}\label{fig:genomic-labels}
 \end{figure}
 
+\section{Genomic axes}\label{genomic-axes}
+
+The genomic axes are not really high-level graphics, but it is better to
+also introduce here. For \texttt{circos.initializeWithIdeogram()}, by
+default it draws axes with tick labels properly formatted. The axes are
+internally implemented by \texttt{circos.genomicAxis()} and it can be
+used to add genomic axes at any track (Figure \ref{fig:genomic-axis}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.initializeWithIdeogram}\NormalTok{(}\DataTypeTok{plotType =} \OtherTok{NULL}\NormalTok{)}
+\KeywordTok{circos.genomicIdeogram}\NormalTok{()}
+\CommentTok{# still work on the ideogram track}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{track.index =} \KeywordTok{get.current.track.index}\NormalTok{(), }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+    \KeywordTok{circos.genomicAxis}\NormalTok{(}\DataTypeTok{h =} \StringTok{"top"}\NormalTok{)}
+\NormalTok{\})}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{track.height =} \FloatTok{0.1}\NormalTok{)}
+\KeywordTok{circos.track}\NormalTok{(}\DataTypeTok{track.index =} \KeywordTok{get.current.track.index}\NormalTok{(), }\DataTypeTok{panel.fun =} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+    \KeywordTok{circos.genomicAxis}\NormalTok{(}\DataTypeTok{h =} \StringTok{"bottom"}\NormalTok{, }\DataTypeTok{direction =} \StringTok{"inside"}\NormalTok{)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{11-high-level-genomic-functions_files/figure-latex/genomic-axis-1} 
+
+}
+
+\caption{Add genomic axes.}\label{fig:genomic-axis}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
 \section{Genomic density and Rainfall
 plot}\label{genomic-density-and-rainfall-plot}
 
@@ -5552,9 +5588,15 @@ frame. The order of sectors can be controlled by \texttt{order} argument
 (Figure \ref{fig:chord-diagram-basic-order} right). Of course, the
 length of \texttt{order} vector should be same as the number of sectors.
 
+In following code, \texttt{S1}, \texttt{S2} and \texttt{S3} should
+better be put together since they belong to a same group, which is same
+for \texttt{E*} sectors. Of course, you can give a order which mix
+\texttt{S*} and \texttt{E*}, but it is not recommended because it is bad
+for reading the plot.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{order =} \KeywordTok{c}\NormalTok{(}\StringTok{"S1"}\NormalTok{, }\StringTok{"E1"}\NormalTok{, }\StringTok{"E2"}\NormalTok{, }\StringTok{"S2"}\NormalTok{, }\StringTok{"E3"}\NormalTok{, }\StringTok{"E4"}\NormalTok{, }\StringTok{"S3"}\NormalTok{, }\StringTok{"E5"}\NormalTok{, }\StringTok{"E6"}\NormalTok{))}
+\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{order =} \KeywordTok{c}\NormalTok{(}\StringTok{"S2"}\NormalTok{, }\StringTok{"S1"}\NormalTok{, }\StringTok{"S3"}\NormalTok{, }\StringTok{"E4"}\NormalTok{, }\StringTok{"E1"}\NormalTok{, }\StringTok{"E5"}\NormalTok{, }\StringTok{"E2"}\NormalTok{, }\StringTok{"E6"}\NormalTok{, }\StringTok{"E3"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5624,6 +5666,43 @@ If the input is a data frame:
 \KeywordTok{circos.clear}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+To make it simple, users can directly set \texttt{big.gap} in
+\texttt{chordDiagram()} (Figure \ref{fig:chord-diagram-basic-big-gap}).
+The value of \texttt{big.gap} corresponds to the gap between row sectors
+and column sectors (or first-column sectors and second-column sectors in
+the input is a data frame). Internally a proper \texttt{gap.after} is
+assigned to \texttt{circos.par()}. Note it will only work when there is
+no overlap between row sectors and column sectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{big.gap =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-basic-big-gap-1} 
+
+}
+
+\caption{Directly set big.gap in chordDiagram().}\label{fig:chord-diagram-basic-big-gap}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{small.gap} argument controls the gap between sectors
+corresponding to either matrix rows or columns. The default value is 1
+degree and normally you don't need to set it.
+
+For Chord diagrams of which row sectors and column sectors have no
+overlap, by default the \texttt{big.gap} is set to 10 degrees unless you
+set \texttt{circos.par(gap.after\ =\ ...)} beforehand.
 
 Similar to a normal circular plot, the first sector (which is the first
 row in the adjacency matrix or the first row in the adjacency list)
@@ -6213,11 +6292,11 @@ case, showing direction of the link is important to distinguish them
 
 \begin{verbatim}
 ##    a  b  c  d  e  f  g
-## a 55 20 84 16 14 97 57
-## b 82 44 78 45 54 63 31
-## c 77  3 99 76 86  8 18
-## d 70 40  6 43 39 67 60
-## e 79 12 25 17 10 93 30
+## a 11 25 13 50 32  9 97
+## b 92 84 34 41  8 66 47
+## c  4 42 67 96 86 83 65
+## d 79 54 52 71 87 28 99
+## e 43 95 73 36 37 18  7
 \end{verbatim}
 
 \begin{Shaded}
@@ -6251,11 +6330,11 @@ sector, just set corresponding values to 0 in the matrix (Figure
 
 \begin{verbatim}
 ##    a  b  c  d  e  f  g
-## a  0 20 84 16 14 97 57
-## b 82  0 78 45 54 63 31
-## c 77  3  0 76 86  8 18
-## d 70 40  6  0 39 67 60
-## e 79 12 25 17  0 93 30
+## a  0 25 13 50 32  9 97
+## b 92  0 34 41  8 66 47
+## c  4 42  0 96 86 83 65
+## d 79 54 52  0 87 28 99
+## e 43 95 73 36  0 18  7
 \end{verbatim}
 
 \begin{Shaded}
@@ -6375,6 +6454,44 @@ adjacency list.
 \end{Highlighting}
 \end{Shaded}
 
+\section{Scaling}\label{scaling}
+
+The link on Chord diagram represents the ``absolute value'' of the
+relations. Sometimes for a certain sector, we might want to see
+relatively, how much of it goes to other sectors. In this case,
+\texttt{scale} argument can be set to \texttt{TRUE} so that on each
+sector, the value represents the fraction of the interaction going to
+one other sector (Figure \ref{fig:chord-diagram-scale}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{999}\NormalTok{)}
+\NormalTok{mat =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{sample}\NormalTok{(}\DecValTok{18}\NormalTok{, }\DecValTok{18}\NormalTok{), }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{) }
+\KeywordTok{rownames}\NormalTok{(mat) =}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"S"}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(mat) =}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"E"}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{)}
+
+\NormalTok{grid.col =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DataTypeTok{S1 =} \StringTok{"red"}\NormalTok{, }\DataTypeTok{S2 =} \StringTok{"green"}\NormalTok{, }\DataTypeTok{S3 =} \StringTok{"blue"}\NormalTok{,}
+    \DataTypeTok{E1 =} \StringTok{"grey"}\NormalTok{, }\DataTypeTok{E2 =} \StringTok{"grey"}\NormalTok{, }\DataTypeTok{E3 =} \StringTok{"grey"}\NormalTok{, }\DataTypeTok{E4 =} \StringTok{"grey"}\NormalTok{, }\DataTypeTok{E5 =} \StringTok{"grey"}\NormalTok{, }\DataTypeTok{E6 =} \StringTok{"grey"}\NormalTok{)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Default"}\NormalTok{)}
+\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{scale =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"scale = TRUE"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-scale-1} 
+
+}
+
+\caption{Scaling on sectors.}\label{fig:chord-diagram-scale}
+\end{figure}
+
+After scaling, all sectors have the same size and the data range of each
+sector are all \texttt{c(0,\ 1)}.
+
 \section{Reduce}\label{reduce}
 
 If a sector in Chord Diagram is too small, it will be removed from the
@@ -6429,6 +6546,142 @@ to 0.
 
 All parameters for sectors such as colors or gaps between sectors are
 also reduced accordingly by the function.
+
+\section{Input as a data frame}\label{input-as-a-data-frame}
+
+As mentioned before, both matrix and data frame can be used to represent
+relations between two sets of features. In previous examples, we mainly
+demonstrate the use of \texttt{chordDiagram()} with matrix as input.
+Also we show the code with data frame as input for each functionality.
+Here we will go through these functionality again with data frames and
+we also show some unique features which is only usable for data frames.
+
+When the input is a data frame, number of rows in the data frame
+corresponds to the number of links on the Chord diagram. Many arguments
+can be set as a vector which have the same length as the number of rows
+of the input data frame. They are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{transparency}
+\item
+  \texttt{col}. Note, \texttt{col} can also be a color mapping function
+  generated from \texttt{colorRamp2()}.
+\item
+  \texttt{link.border}
+\item
+  \texttt{link.lwd}
+\item
+  \texttt{link.lty}
+\item
+  \texttt{link.arr.length}
+\item
+  \texttt{link.arr.width}
+\item
+  \texttt{link.arr.type}
+\item
+  \texttt{link.arr.lwd}
+\item
+  \texttt{link.arr.lty}
+\item
+  \texttt{link.arr.col}
+\item
+  \texttt{link.visible}
+\item
+  \texttt{link.rank}
+\end{itemize}
+
+Since all of them are already demonstrated in previous sections, we
+won't show them again here.
+
+\subsection{Multiple links}\label{multiple-links}
+
+If the input is a matrix, there can only be one link from sector A to B,
+but for the data frame, there can be mulitple links for a same pair of
+sectors. In following example, each pair of sectors have two links, one
+for positive value and the other for negative value.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df =}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{], LETTERS[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{])}
+\NormalTok{df1 =}\StringTok{ }\NormalTok{df}
+\NormalTok{df1}\OperatorTok{$}\NormalTok{value =}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{10}\NormalTok{, }\KeywordTok{nrow}\NormalTok{(df), }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{df2 =}\StringTok{ }\NormalTok{df}
+\NormalTok{df2}\OperatorTok{$}\NormalTok{value =}\StringTok{ }\OperatorTok{-}\KeywordTok{sample}\NormalTok{(}\DecValTok{10}\NormalTok{, }\KeywordTok{nrow}\NormalTok{(df), }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{df =}\StringTok{ }\KeywordTok{rbind}\NormalTok{(df1, df2)}
+\NormalTok{grid.col =}\StringTok{ }\KeywordTok{structure}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{7}\NormalTok{, }\DataTypeTok{names =} \KeywordTok{c}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{], LETTERS[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{]))}
+\KeywordTok{chordDiagram}\NormalTok{(df, }\DataTypeTok{col =} \KeywordTok{ifelse}\NormalTok{(df}\OperatorTok{$}\NormalTok{value }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{), }\DataTypeTok{grid.col =}\NormalTok{ grid.col)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-multiple-link-1} 
+
+}
+
+\caption{Multiple links for a same pair of sectors.}\label{fig:chord-diagram-multiple-link}
+\end{figure}
+
+This functionality is useful when you want to visualize Figure
+\ref{fig:chord-diagram-multiple-link} as two Chord diagrams, one for
+positive values and one for negative values, but still correspond the
+size of sector to the sum of both positive and negative values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\KeywordTok{chordDiagram}\NormalTok{(df, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{, }\DataTypeTok{link.visible =}\NormalTok{ df}\OperatorTok{$}\NormalTok{value }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, }\DataTypeTok{grid.col =}\NormalTok{ grid.col)}
+\KeywordTok{chordDiagram}\NormalTok{(df, }\DataTypeTok{col =} \StringTok{"green"}\NormalTok{, }\DataTypeTok{link.visible =}\NormalTok{ df}\OperatorTok{$}\NormalTok{value }\OperatorTok{<}\StringTok{ }\DecValTok{0}\NormalTok{, }\DataTypeTok{grid.col =}\NormalTok{ grid.col)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-multiple-link-split-1} 
+
+}
+
+\caption{Split positive links and negative links.}\label{fig:chord-diagram-multiple-link-split}
+\end{figure}
+
+\subsection{Unequal width of the link
+ends}\label{unequal-width-of-the-link-ends}
+
+Almost all of the Chord diagrams shown in this chapter (except Figure
+\ref{fig:chord-diagram-scale}), the width of the two ends of a link is
+always the same. This means same amount of information comes from one
+sector and goes to the other sector. However, for some cases, this is
+not always true. For example, when do scaling on sectors, the link
+actually has unequal width of the two ends (Figure
+\ref{fig:chord-diagram-scale} right).
+
+Since the two ends have different width, now the data frame needs two
+numeric columns which correspond to the two ends of the links. Check
+following example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df =}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{], LETTERS[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{])}
+\NormalTok{df}\OperatorTok{$}\NormalTok{value =}\StringTok{ }\DecValTok{1}
+\NormalTok{df}\OperatorTok{$}\NormalTok{value2 =}\StringTok{ }\DecValTok{3}  \CommentTok{# the names of the two columns do not matter}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\KeywordTok{chordDiagram}\NormalTok{(df[, }\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{], }\DataTypeTok{grid.col =}\NormalTok{ grid.col)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"one column of values"}\NormalTok{)}
+\KeywordTok{chordDiagram}\NormalTok{(df[, }\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{], }\DataTypeTok{grid.col =}\NormalTok{ grid.col)  }\CommentTok{# note we use two value-columns here}
+\KeywordTok{title}\NormalTok{(}\StringTok{"two columns of values"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{13-chord-diagram-simple_files/figure-latex/chord-diagram-unequal-end-width-1} 
+
+}
+
+\caption{Unequal width of the link ends.}\label{fig:chord-diagram-unequal-end-width}
+\end{figure}
 
 \chapter{\texorpdfstring{Advanced usage of
 \texttt{chordDiagram()}}{Advanced usage of chordDiagram()}}\label{advanced-usage-of-chorddiagram}
@@ -6719,81 +6972,19 @@ symmetric}\label{put-horizontally-or-vertically-symmetric}
 In Chord diagram, when there are two groups (which correspond to rows
 and columns if the input is an adjacency matrix), it is always visually
 beautiful to rotate the diagram to be symmetric on horizontal direction
-or vertical direction. Actually it is quite easy to calculate a proper
-degree that needs to be rotated for the circle.
-
-In the Chord diagram, the total width of row sectors corresponds to the
-sum of row sum of the matrix with absolute values and so is for the
-column sectors.
+or vertical direction. See following example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{row_sum =}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{rowSums}\NormalTok{(}\KeywordTok{abs}\NormalTok{(mat)))}
-\NormalTok{col_sum =}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{colSums}\NormalTok{(}\KeywordTok{abs}\NormalTok{(mat)))}
-\end{Highlighting}
-\end{Shaded}
-
-Assume small gaps between sectors are set to 1 degree and big gaps
-between row and column sectors are set to 20 degree.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{small_gap =}\StringTok{ }\DecValTok{1}
-\NormalTok{big_gap =}\StringTok{ }\DecValTok{20}
-\end{Highlighting}
-\end{Shaded}
-
-In the circle, there are regions which are covered by small gaps, big
-gaps and sectors. Since the width of sectors are proportional to the row
-sums and/or column sums of the matrix, it is easy to calculate how much
-degrees are hold by the row sectors:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{nr =}\StringTok{ }\KeywordTok{nrow}\NormalTok{(mat)}
-\NormalTok{nc =}\StringTok{ }\KeywordTok{ncol}\NormalTok{(mat)}
-\NormalTok{n_sector =}\StringTok{ }\NormalTok{nr }\OperatorTok{+}\StringTok{ }\NormalTok{nc}
-\NormalTok{row_sector_degree =}\StringTok{ }\NormalTok{(}\DecValTok{360} \OperatorTok{-}\StringTok{ }\NormalTok{small_gap}\OperatorTok{*}\NormalTok{(n_sector }\OperatorTok{-}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{-}\StringTok{ }\NormalTok{big_gap}\OperatorTok{*}\DecValTok{2}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(row_sum}\OperatorTok{/}\NormalTok{(row_sum }\OperatorTok{+}\StringTok{ }\NormalTok{col_sum)) }\OperatorTok{+}\StringTok{ }
-\StringTok{                    }\NormalTok{small_gap}\OperatorTok{*}\NormalTok{(nr}\OperatorTok{-}\DecValTok{1}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-If the row sectors are put in the right of the circle, we can calculate
-the ``start degree'' for the circle. Note \texttt{chordDiagram()} always
-draw row sectors first and by default the circle goes clock-wisely.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{start_degree =}\StringTok{ }\DecValTok{90} \OperatorTok{-}\StringTok{ }\NormalTok{(}\DecValTok{180} \OperatorTok{-}\StringTok{ }\NormalTok{row_sector_degree)}\OperatorTok{/}\DecValTok{2}
-\end{Highlighting}
-\end{Shaded}
-
-When there are small gaps and big gaps between sectors, the
-\texttt{gap.after} in \texttt{circos.par()} should be set as a vector.
-We also added a vertical line which assists to see the symmetry (Figure
-\ref{fig:chord-diagram-sym} left).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{gaps =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(small_gap, }\KeywordTok{nrow}\NormalTok{(mat) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{), big_gap, }\KeywordTok{rep}\NormalTok{(small_gap, }\KeywordTok{ncol}\NormalTok{(mat) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{), big_gap)}
-\KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{gap.after =}\NormalTok{ gaps, }\DataTypeTok{start.degree =}\NormalTok{ start_degree)}
-\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col)}
-\KeywordTok{circos.clear}\NormalTok{()}
-\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =} \DecValTok{0}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{col =} \StringTok{"#00000080"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Similarly we can adjust the ``start degree'' to let the circle looks
-horizonally symmetric (Figure \ref{fig:chord-diagram-sym} right).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{start_degree =}\StringTok{ }\DecValTok{0} \OperatorTok{-}\StringTok{ }\NormalTok{(}\DecValTok{180} \OperatorTok{-}\StringTok{ }\NormalTok{row_sector_degree)}\OperatorTok{/}\DecValTok{2}
-\NormalTok{gaps =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(small_gap, }\KeywordTok{nrow}\NormalTok{(mat) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{), big_gap, }\KeywordTok{rep}\NormalTok{(small_gap, }\KeywordTok{ncol}\NormalTok{(mat) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{), big_gap)}
-\KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{gap.after =}\NormalTok{ gaps, }\DataTypeTok{start.degree =}\NormalTok{ start_degree)}
-\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col)}
-\KeywordTok{circos.clear}\NormalTok{()}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{start.degree =} \DecValTok{0}\NormalTok{)}
+\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{big.gap =} \DecValTok{20}\NormalTok{)}
 \KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \DecValTok{0}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{col =} \StringTok{"#00000080"}\NormalTok{)}
+\KeywordTok{circos.clear}\NormalTok{()}
+
+\KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{start.degree =} \DecValTok{90}\NormalTok{)}
+\KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{grid.col =}\NormalTok{ grid.col, }\DataTypeTok{big.gap =} \DecValTok{20}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =} \DecValTok{0}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{col =} \StringTok{"#00000080"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6806,6 +6997,12 @@ horizonally symmetric (Figure \ref{fig:chord-diagram-sym} right).
 \caption{Rotate Chord diagram.}\label{fig:chord-diagram-sym}
 \end{figure}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{circos.clear}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
 \section{Compare two Chord diagrams}\label{compare-two-chord-diagrams}
 
 Normally, in Chord diagram, values in \texttt{mat} are normalized to the
@@ -6813,19 +7010,15 @@ summation of the absolute values in the matrix, which means the width
 for links only represents relative values. Then, when comparing two
 Chord diagrams, it is necessary that unit width of links in the two
 plots should be represented in a same scale. This problem can be solved
-by adding more blank gaps to the Chord diagram which has smaller matrix.
+by adding larger gaps to the Chord diagram which has smaller matrix.
 
-First, let's plot a Chord diagram. In this Chord diagram, we set larger
-gaps between rows and columns for better visualization. Axis on the grid
-illustrates scale of the values.
+First we make the ``big'' Chord diagram.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{mat1 =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{sample}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{), }\DecValTok{5}\NormalTok{)}
-\NormalTok{gap.after =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{), }\DecValTok{10}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{), }\DecValTok{10}\NormalTok{)}
-\KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{gap.after =}\NormalTok{ gap.after, }\DataTypeTok{start.degree =} \OperatorTok{-}\DecValTok{10}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\KeywordTok{chordDiagram}\NormalTok{(mat1, }\DataTypeTok{directional =} \DecValTok{1}\NormalTok{, }\DataTypeTok{grid.col =} \KeywordTok{rep}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{))}
-\KeywordTok{circos.clear}\NormalTok{()}
+\KeywordTok{chordDiagram}\NormalTok{(mat1, }\DataTypeTok{directional =} \DecValTok{1}\NormalTok{, }\DataTypeTok{grid.col =} \KeywordTok{rep}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{), }\DataTypeTok{transparency =} \FloatTok{0.5}\NormalTok{,}
+    \DataTypeTok{big.gap =} \DecValTok{10}\NormalTok{, }\DataTypeTok{small.gap =} \DecValTok{1}\NormalTok{) }\CommentTok{# 10 and 1 are default values for the two arguments}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6837,34 +7030,14 @@ The second matrix only has half the values in \texttt{mat1}.
 \end{Highlighting}
 \end{Shaded}
 
-If the second Chord diagram is plotted in the way as the first one, the
-two diagrams will looks exactly the same (except the axes) which makes
-the comparison impossible. However, we can adjust the gaps between
-sectors to make the scale of the two plots same.
-
-First we calculate the percentage of \texttt{mat2} in \texttt{mat1}. And
-then we calculate the degree which corresponds to the difference. In the
-following code, \texttt{360\ -\ sum(gap.after)} is the total degree for
-values in \texttt{mat1} (excluding the gaps) and \texttt{blank.degree}
-corresponds the difference between \texttt{mat1} and \texttt{mat2}.
+\texttt{calc\_gap()} can be used to calculate the gap for the second
+Chord diagram to make the scale of the two Chord diagram the same.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{percent =}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{abs}\NormalTok{(mat2)) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{abs}\NormalTok{(mat1))}
-\NormalTok{blank.degree =}\StringTok{ }\NormalTok{(}\DecValTok{360} \OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{(gap.after)) }\OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{percent)}
-\end{Highlighting}
-\end{Shaded}
-
-Since now we have the additional blank gap, we can set it to
-\texttt{circos.par()} and plot the second Chord Diagram.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{big.gap =}\StringTok{ }\NormalTok{(blank.degree }\OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{8}\NormalTok{)))}\OperatorTok{/}\DecValTok{2}
-\NormalTok{gap.after =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{), big.gap, }\KeywordTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{), big.gap)}
-\KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{gap.after =}\NormalTok{ gap.after, }\DataTypeTok{start.degree =} \OperatorTok{-}\NormalTok{big.gap}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\KeywordTok{chordDiagram}\NormalTok{(mat2, }\DataTypeTok{directional =} \DecValTok{1}\NormalTok{, }\DataTypeTok{grid.col =} \KeywordTok{rep}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{), }\DataTypeTok{transparency =} \FloatTok{0.5}\NormalTok{)}
-\KeywordTok{circos.clear}\NormalTok{()}
+\NormalTok{gap =}\StringTok{ }\KeywordTok{calc_gap}\NormalTok{(mat1, mat2, }\DataTypeTok{big.gap =} \DecValTok{10}\NormalTok{, }\DataTypeTok{small.gap =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{chordDiagram}\NormalTok{(mat2, }\DataTypeTok{directional =} \DecValTok{1}\NormalTok{, }\DataTypeTok{grid.col =} \KeywordTok{rep}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{), }\DataTypeTok{transparency =} \FloatTok{0.5}\NormalTok{,}
+    \DataTypeTok{big.gap =}\NormalTok{ gap, }\DataTypeTok{small.gap =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6880,6 +7053,10 @@ of axes in the two diagrams.
 
 \caption{Compare two Chord Diagrams in a same scale.}\label{fig:chord-diagram-compare}
 \end{figure}
+
+To correctly use the functionality of \texttt{calc\_gap()}, the two
+Chord diagram should have same value for \texttt{small.gap} and there
+should be no overlap between the two sets of the sectors.
 
 \section{Multiple-group Chord
 diagram}\label{multiple-group-chord-diagram}
@@ -6952,6 +7129,16 @@ visual effect of different groups.
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(circlize)}
 \KeywordTok{circos.par}\NormalTok{(}\DataTypeTok{gap.after =} \KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{), }\DecValTok{8}\NormalTok{), }\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in warning_wrap("'gap.degree' can only be modified before `circos.initialize`, or maybe you forgot to call `circos.clear` in your last plot."): 'gap.degree' can only be modified before `circos.initialize`, or
+## maybe you forgot to call `circos.clear` in your last plot.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{chordDiagram}\NormalTok{(mat, }\DataTypeTok{annotationTrack =} \KeywordTok{c}\NormalTok{(}\StringTok{"grid"}\NormalTok{, }\StringTok{"axis"}\NormalTok{),}
     \DataTypeTok{preAllocateTracks =} \KeywordTok{list}\NormalTok{(}
         \DataTypeTok{track.height =} \KeywordTok{uh}\NormalTok{(}\DecValTok{4}\NormalTok{, }\StringTok{"mm"}\NormalTok{),}
@@ -6973,7 +7160,7 @@ visual effect of different groups.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/unnamed-chunk-14-1} \end{center}
+\begin{center}\includegraphics{14-chord-diagram-advanced-usage_files/figure-latex/unnamed-chunk-10-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]

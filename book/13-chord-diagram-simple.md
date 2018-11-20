@@ -167,9 +167,13 @@ a data frame. The order of sectors can be controlled by `order` argument
 (Figure \@ref(fig:chord-diagram-basic-order) right). Of course, the length of
 `order` vector should be same as the number of sectors.
 
+In following code, `S1`, `S2` and `S3` should better be put together since they belong to a same group,
+which is same for `E*` sectors. Of course, you can give a order which mix `S*` and `E*`, but it is
+not recommended because it is bad for reading the plot. 
+
 
 ```r
-chordDiagram(mat, order = c("S1", "E1", "E2", "S2", "E3", "E4", "S3", "E5", "E6"))
+chordDiagram(mat, order = c("S2", "S1", "S3", "E4", "E1", "E5", "E2", "E6", "E3"))
 ```
 
 <div class="figure" style="text-align: center">
@@ -221,6 +225,34 @@ circos.par(gap.after = c(rep(5, length(unique(df[[1]]))-1), 15,
 chordDiagram(df)
 circos.clear()
 ```
+
+To make it simple, users can directly set `big.gap` in `chordDiagram()` (Figure \@ref(fig:chord-diagram-basic-big-gap)).
+The value of `big.gap` corresponds to the gap between row sectors and
+column sectors (or first-column sectors and second-column sectors in the input
+is a data frame). Internally a proper `gap.after` is assigned to
+`circos.par()`. Note it will only work when there is no overlap between row
+sectors and column sectors.
+
+
+
+```r
+chordDiagram(mat, big.gap = 10)
+```
+
+<div class="figure" style="text-align: center">
+<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-basic-big-gap-1.svg" alt="Directly set big.gap in chordDiagram()."  />
+<p class="caption">(\#fig:chord-diagram-basic-big-gap)Directly set big.gap in chordDiagram().</p>
+</div>
+
+```r
+circos.clear()
+```
+
+`small.gap` argument controls the gap between sectors corresponding to either matrix rows or columns.
+The default value is 1 degree and normally you don't need to set it.
+
+For Chord diagrams of which row sectors and column sectors have no overlap, by default
+the `big.gap` is set to 10 degrees unless you set `circos.par(gap.after = ...)` beforehand.
 
 Similar to a normal circular plot, the first sector (which is the first row in
 the adjacency matrix or the first row in the adjacency list) starts from right
@@ -678,11 +710,11 @@ mat2
 
 ```
 ##    a  b  c  d  e  f  g
-## a 55 20 84 16 14 97 57
-## b 82 44 78 45 54 63 31
-## c 77  3 99 76 86  8 18
-## d 70 40  6 43 39 67 60
-## e 79 12 25 17 10 93 30
+## a 11 25 13 50 32  9 97
+## b 92 84 34 41  8 66 47
+## c  4 42 67 96 86 83 65
+## d 79 54 52 71 87 28 99
+## e 43 95 73 36 37 18  7
 ```
 
 
@@ -709,11 +741,11 @@ mat3
 
 ```
 ##    a  b  c  d  e  f  g
-## a  0 20 84 16 14 97 57
-## b 82  0 78 45 54 63 31
-## c 77  3  0 76 86  8 18
-## d 70 40  6  0 39 67 60
-## e 79 12 25 17  0 93 30
+## a  0 25 13 50 32  9 97
+## b 92  0 34 41  8 66 47
+## c  4 42  0 96 86 83 65
+## d 79 54 52  0 87 28 99
+## e 43 95 73 36  0 18  7
 ```
 
 
@@ -801,6 +833,37 @@ It is almost the same to visualize directional Chord diagram form a adjacency li
 chordDiagram(df, directional = 1)
 ```
 
+## Scaling
+
+The link on Chord diagram represents the "absolute value" of the relations. Sometimes
+for a certain sector, we might want to see relatively, how much of it goes to other
+sectors. In this case, `scale` argument can be set to `TRUE` so that on each sector, the 
+value represents the fraction of the interaction going to one other sector (Figure \@ref(fig:chord-diagram-scale)). 
+
+
+```r
+set.seed(999)
+mat = matrix(sample(18, 18), 3, 6) 
+rownames(mat) = paste0("S", 1:3)
+colnames(mat) = paste0("E", 1:6)
+
+grid.col = c(S1 = "red", S2 = "green", S3 = "blue",
+    E1 = "grey", E2 = "grey", E3 = "grey", E4 = "grey", E5 = "grey", E6 = "grey")
+par(mfrow = c(1, 2))
+chordDiagram(mat, grid.col = grid.col)
+title("Default")
+chordDiagram(mat, grid.col = grid.col, scale = TRUE)
+title("scale = TRUE")
+```
+
+<div class="figure" style="text-align: center">
+<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-scale-1.svg" alt="Scaling on sectors."  />
+<p class="caption">(\#fig:chord-diagram-scale)Scaling on sectors.</p>
+</div>
+
+After scaling, all sectors have the same size and the data range of each sector 
+are all `c(0, 1)`.
+
 
 ## Reduce
 
@@ -850,4 +913,104 @@ mat[, 3] = 0
 
 All parameters for sectors such as colors or gaps between sectors are also
 reduced accordingly by the function.
+
+
+## Input as a data frame
+
+As mentioned before, both matrix and data frame can be used to represent relations
+between two sets of features. In previous examples, we mainly demonstrate the use
+of `chordDiagram()` with matrix as input. Also we show the code with data frame as
+input for each functionality. Here we will go through these functionality again 
+with data frames and we also show some unique features which is only usable for 
+data frames.
+
+When the input is a data frame, number of rows in the data frame corresponds to
+the number of links on the Chord diagram. Many arguments can be set as a vector
+which have the same length as the number of rows of the input data frame. They are:
+
+- `transparency`
+- `col`. Note, `col` can also be a color mapping function generated from `colorRamp2()`.
+- `link.border`
+- `link.lwd`
+- `link.lty`
+- `link.arr.length`
+- `link.arr.width`
+- `link.arr.type`
+- `link.arr.lwd`
+- `link.arr.lty`
+- `link.arr.col`
+- `link.visible`
+- `link.rank`
+
+Since all of them are already demonstrated in previous sections, we won't show them again here.
+
+### Multiple links
+
+If the input is a matrix, there can only be one link from sector A to B, but
+for the data frame, there can be mulitple links for a same pair of sectors. In
+following example, each pair of sectors have two links, one for positive value
+and the other for negative value.
+
+
+```r
+df = expand.grid(letters[1:3], LETTERS[1:4])
+df1 = df
+df1$value = sample(10, nrow(df), replace = TRUE)
+df2 = df
+df2$value = -sample(10, nrow(df), replace = TRUE)
+df = rbind(df1, df2)
+grid.col = structure(1:7, names = c(letters[1:3], LETTERS[1:4]))
+chordDiagram(df, col = ifelse(df$value > 0, "red", "green"), grid.col = grid.col)
+```
+
+<div class="figure" style="text-align: center">
+<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-multiple-link-1.svg" alt="Multiple links for a same pair of sectors."  />
+<p class="caption">(\#fig:chord-diagram-multiple-link)Multiple links for a same pair of sectors.</p>
+</div>
+
+This functionality is useful when you want to visualize Figure
+\@ref(fig:chord-diagram-multiple-link) as two Chord diagrams, one for positive
+values and one for negative values, but still correspond the size of sector to
+the sum of both positive and negative values.
+
+
+```r
+par(mfrow = c(1, 2))
+chordDiagram(df, col = "red", link.visible = df$value > 0, grid.col = grid.col)
+chordDiagram(df, col = "green", link.visible = df$value < 0, grid.col = grid.col)
+```
+
+<div class="figure" style="text-align: center">
+<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-multiple-link-split-1.svg" alt="Split positive links and negative links."  />
+<p class="caption">(\#fig:chord-diagram-multiple-link-split)Split positive links and negative links.</p>
+</div>
+
+### Unequal width of the link ends
+
+Almost all of the Chord diagrams shown in this chapter (except Figure
+\@ref(fig:chord-diagram-scale)), the width of the two ends of a link is always the
+same. This means same amount of information comes from one sector and goes to
+the other sector. However, for some cases, this is not always true. For example,
+when do scaling on sectors, the link actually has unequal width of the two ends (Figure
+\@ref(fig:chord-diagram-scale) right). 
+
+Since the two ends have different width, now the data frame needs two numeric columns
+which correspond to the two ends of the links. Check following example:
+
+
+```r
+df = expand.grid(letters[1:3], LETTERS[1:4])
+df$value = 1
+df$value2 = 3  # the names of the two columns do not matter
+par(mfrow = c(1, 2))
+chordDiagram(df[, 1:3], grid.col = grid.col)
+title("one column of values")
+chordDiagram(df[, 1:4], grid.col = grid.col)  # note we use two value-columns here
+title("two columns of values")
+```
+
+<div class="figure" style="text-align: center">
+<img src="13-chord-diagram-simple_files/figure-epub3/chord-diagram-unequal-end-width-1.svg" alt="Unequal width of the link ends."  />
+<p class="caption">(\#fig:chord-diagram-unequal-end-width)Unequal width of the link ends.</p>
+</div>
 

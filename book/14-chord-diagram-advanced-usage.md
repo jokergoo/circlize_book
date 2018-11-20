@@ -247,72 +247,19 @@ circos.clear()
 
 In Chord diagram, when there are two groups (which correspond to rows and columns
 if the input is an adjacency matrix), it is always visually beautiful to rotate the diagram
-to be symmetric on horizontal direction or vertical direction. Actually it is quite easy
-to calculate a proper degree that needs to be rotated for the circle. 
-
-In the Chord diagram, the total width of row sectors corresponds to the sum of
-row sum of the matrix with absolute values and so is for the column sectors.
+to be symmetric on horizontal direction or vertical direction. See following example:
 
 
 ```r
-row_sum = sum(rowSums(abs(mat)))
-col_sum = sum(colSums(abs(mat)))
-```
-
-Assume small gaps between sectors are set to 1 degree and big gaps between row and
-column sectors are set to 20 degree.
-
-
-```r
-small_gap = 1
-big_gap = 20
-```
-
-In the circle, there are regions which are covered by small gaps, big gaps and sectors. Since the width of
-sectors are proportional to the row sums and/or column sums of the matrix, it is easy to calculate how much
-degrees are hold by the row sectors:
-
-
-```r
-nr = nrow(mat)
-nc = ncol(mat)
-n_sector = nr + nc
-row_sector_degree = (360 - small_gap*(n_sector - 2) - big_gap*2) * (row_sum/(row_sum + col_sum)) + 
-                    small_gap*(nr-1)
-```
-
-If the row sectors are put in the right of the circle, we can calculate the "start degree" for the circle.
-Note `chordDiagram()` always draw row sectors first and by default the circle goes clock-wisely.
-
-
-```r
-start_degree = 90 - (180 - row_sector_degree)/2
-```
-
-When there are small gaps and big gaps between sectors, the `gap.after` in
-`circos.par()` should be set as a vector. We also added a vertical line which
-assists to see the symmetry (Figure \@ref(fig:chord-diagram-sym) left).
-
-
-```r
-gaps = c(rep(small_gap, nrow(mat) - 1), big_gap, rep(small_gap, ncol(mat) - 1), big_gap)
-circos.par(gap.after = gaps, start.degree = start_degree)
-chordDiagram(mat, grid.col = grid.col)
-circos.clear()
-abline(v = 0, lty = 2, col = "#00000080")
-```
-
-Similarly we can adjust the "start degree" to let the circle looks horizonally
-symmetric (Figure \@ref(fig:chord-diagram-sym) right).
-
-
-```r
-start_degree = 0 - (180 - row_sector_degree)/2
-gaps = c(rep(small_gap, nrow(mat) - 1), big_gap, rep(small_gap, ncol(mat) - 1), big_gap)
-circos.par(gap.after = gaps, start.degree = start_degree)
-chordDiagram(mat, grid.col = grid.col)
-circos.clear()
+par(mfrow = c(1, 2))
+circos.par(start.degree = 0)
+chordDiagram(mat, grid.col = grid.col, big.gap = 20)
 abline(h = 0, lty = 2, col = "#00000080")
+circos.clear()
+
+circos.par(start.degree = 90)
+chordDiagram(mat, grid.col = grid.col, big.gap = 20)
+abline(v = 0, lty = 2, col = "#00000080")
 ```
 
 <div class="figure" style="text-align: center">
@@ -320,25 +267,26 @@ abline(h = 0, lty = 2, col = "#00000080")
 <p class="caption">(\#fig:chord-diagram-sym)Rotate Chord diagram.</p>
 </div>
 
+```r
+circos.clear()
+```
+
 ## Compare two Chord diagrams
 
 Normally, in Chord diagram, values in `mat` are normalized to the summation of
 the absolute values in the matrix, which means the width for links only
 represents relative values. Then, when comparing two Chord diagrams, it is
 necessary that unit width of links in the two plots should be represented in a
-same scale. This problem can be solved by adding more blank gaps to the Chord
+same scale. This problem can be solved by adding larger gaps to the Chord
 diagram which has smaller matrix.
 
-First, let's plot a Chord diagram. In this Chord diagram, we set larger gaps between rows
-and columns for better visualization. Axis on the grid illustrates scale of the values.
+First we make the "big" Chord diagram.
 
 
 ```r
 mat1 = matrix(sample(20, 25, replace = TRUE), 5)
-gap.after = c(rep(2, 4), 10, rep(2, 4), 10)
-circos.par(gap.after = gap.after, start.degree = -10/2)
-chordDiagram(mat1, directional = 1, grid.col = rep(1:5, 2))
-circos.clear()
+chordDiagram(mat1, directional = 1, grid.col = rep(1:5, 2), transparency = 0.5,
+    big.gap = 10, small.gap = 1) # 10 and 1 are default values for the two arguments
 ```
 
 The second matrix only has half the values in `mat1`.
@@ -348,32 +296,14 @@ The second matrix only has half the values in `mat1`.
 mat2 = mat1 / 2
 ```
 
-If the second Chord diagram is plotted in the way as the first one, the two
-diagrams will looks exactly the same (except the axes) which makes the
-comparison impossible. However, we can adjust the gaps between sectors to make
-the scale of the two plots same.
-
-First we calculate the percentage of `mat2` in `mat1`. And then we calculate
-the degree which corresponds to the difference. In the following code, `360 -
-sum(gap.after)` is the total degree for values in `mat1` (excluding the gaps)
-and `blank.degree` corresponds the difference between `mat1` and `mat2`.
+`calc_gap()` can be used to calculate the gap for the second Chord diagram
+to make the scale of the two Chord diagram the same.
 
 
 ```r
-percent = sum(abs(mat2)) / sum(abs(mat1))
-blank.degree = (360 - sum(gap.after)) * (1 - percent)
-```
-
-Since now we have the additional blank gap, we can set it to `circos.par()`
-and plot the second Chord Diagram.
-
-
-```r
-big.gap = (blank.degree - sum(rep(2, 8)))/2
-gap.after = c(rep(2, 4), big.gap, rep(2, 4), big.gap)
-circos.par(gap.after = gap.after, start.degree = -big.gap/2)
-chordDiagram(mat2, directional = 1, grid.col = rep(1:5, 2), transparency = 0.5)
-circos.clear()
+gap = calc_gap(mat1, mat2, big.gap = 10, small.gap = 1)
+chordDiagram(mat2, directional = 1, grid.col = rep(1:5, 2), transparency = 0.5,
+    big.gap = gap, small.gap = 1)
 ```
 
 Now the scale of the two Chord diagrams (Figure \@ref(fig:chord-diagram-compare)) are the 
@@ -383,6 +313,10 @@ same if you compare the scale of axes in the two diagrams.
 <img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-compare-1.svg" alt="Compare two Chord Diagrams in a same scale."  />
 <p class="caption">(\#fig:chord-diagram-compare)Compare two Chord Diagrams in a same scale.</p>
 </div>
+
+To correctly use the functionality of `calc_gap()`, the two Chord diagram should
+have same value for `small.gap` and there should be no overlap between the two
+sets of the sectors.
 
 ## Multiple-group Chord diagram
 
@@ -448,6 +382,14 @@ Also we add an additional track in which we add lines to enhance the visual effe
 ```r
 library(circlize)
 circos.par(gap.after = rep(c(rep(1, 4), 8), 3))
+```
+
+```
+## Warning in warning_wrap("'gap.degree' can only be modified before `circos.initialize`, or maybe you forgot to call `circos.clear` in your last plot."): 'gap.degree' can only be modified before `circos.initialize`, or
+## maybe you forgot to call `circos.clear` in your last plot.
+```
+
+```r
 chordDiagram(mat, annotationTrack = c("grid", "axis"),
     preAllocateTracks = list(
         track.height = uh(4, "mm"),
@@ -468,7 +410,7 @@ highlight.sector(colnames(mat2), track.index = 1, col = "blue",
     text = "C", cex = 0.8, text.col = "white", niceFacing = TRUE)
 ```
 
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/unnamed-chunk-14-1.svg" style="display: block; margin: auto;" />
+<img src="14-chord-diagram-advanced-usage_files/figure-epub3/unnamed-chunk-10-1.svg" style="display: block; margin: auto;" />
 
 ```r
 circos.clear()

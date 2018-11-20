@@ -27,8 +27,4 @@ Gu, Z. (2014) circlize implements and enhances circular visualization in R.
 Bioinformatics. DOI:
 [10.1093/bioinformatics/btu393](https://doi.org/10.1093/bioinformatics/btu393)
 
-
-```{r, echo = FALSE}
-knitr::include_graphics("images/circlize_cover.jpg")
-```
-
+<img src="images/circlize_cover.jpg" style="width:500px;border:2px solid black;" />

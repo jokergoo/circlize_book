@@ -2,7 +2,7 @@
 --- 
 title: "Circular Visualization in R"
 author: "Zuguang Gu"
-date: "last revised on 2018-11-19"
+date: "last revised on 2018-11-20"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -28,6 +28,4 @@ Gu, Z. (2014) circlize implements and enhances circular visualization in R.
 Bioinformatics. DOI:
 [10.1093/bioinformatics/btu393](https://doi.org/10.1093/bioinformatics/btu393)
 
-
-<img src="images/circlize_cover.jpg" width="2480" style="display: block; margin: auto;" />
-
+<img src="images/circlize_cover.jpg" style="width:500px;border:2px solid black;" />

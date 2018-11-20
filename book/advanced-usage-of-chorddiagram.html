@@ -189,7 +189,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>11.1</b> Ideograms</a></li>
 <li class="chapter" data-level="11.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>11.2</b> Heatmaps</a></li>
 <li class="chapter" data-level="11.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>11.3</b> Labels</a></li>
-<li class="chapter" data-level="11.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>11.4</b> Genomic density and Rainfall plot</a></li>
+<li class="chapter" data-level="11.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>11.4</b> Genomic axes</a></li>
+<li class="chapter" data-level="11.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>11.5</b> Genomic density and Rainfall plot</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>12</b> Nested zooming</a><ul>
 <li class="chapter" data-level="12.1" data-path="nested-zooming.html"><a href="nested-zooming.html#basic-idea"><i class="fa fa-check"></i><b>12.1</b> Basic idea</a></li>
@@ -212,7 +213,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.7" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#self-links"><i class="fa fa-check"></i><b>13.7</b> Self-links</a></li>
 <li class="chapter" data-level="13.8" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#symmetric-matrix"><i class="fa fa-check"></i><b>13.8</b> Symmetric matrix</a></li>
 <li class="chapter" data-level="13.9" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#directional-relations"><i class="fa fa-check"></i><b>13.9</b> Directional relations</a></li>
-<li class="chapter" data-level="13.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>13.10</b> Reduce</a></li>
+<li class="chapter" data-level="13.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#scaling"><i class="fa fa-check"></i><b>13.10</b> Scaling</a></li>
+<li class="chapter" data-level="13.11" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>13.11</b> Reduce</a></li>
+<li class="chapter" data-level="13.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>13.12</b> Input as a data frame</a><ul>
+<li class="chapter" data-level="13.12.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#multiple-links"><i class="fa fa-check"></i><b>13.12.1</b> Multiple links</a></li>
+<li class="chapter" data-level="13.12.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#unequal-width-of-the-link-ends"><i class="fa fa-check"></i><b>13.12.2</b> Unequal width of the link ends</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>14</b> Advanced usage of <code>chordDiagram()</code></a><ul>
 <li class="chapter" data-level="14.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>14.1</b> Organization of tracks</a></li>
@@ -400,62 +406,37 @@ Figure 14.5: Customize sector axes for Chord diagram.
 </div>
 <div id="put-horizontally-or-vertically-symmetric" class="section level2">
 <h2><span class="header-section-number">14.4</span> Put horizontally or vertically symmetric</h2>
-<p>In Chord diagram, when there are two groups (which correspond to rows and columns if the input is an adjacency matrix), it is always visually beautiful to rotate the diagram to be symmetric on horizontal direction or vertical direction. Actually it is quite easy to calculate a proper degree that needs to be rotated for the circle.</p>
-<p>In the Chord diagram, the total width of row sectors corresponds to the sum of row sum of the matrix with absolute values and so is for the column sectors.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">row_sum =<span class="st"> </span><span class="kw">sum</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(mat)))
-col_sum =<span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(<span class="kw">abs</span>(mat)))</code></pre></div>
-<p>Assume small gaps between sectors are set to 1 degree and big gaps between row and column sectors are set to 20 degree.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">small_gap =<span class="st"> </span><span class="dv">1</span>
-big_gap =<span class="st"> </span><span class="dv">20</span></code></pre></div>
-<p>In the circle, there are regions which are covered by small gaps, big gaps and sectors. Since the width of sectors are proportional to the row sums and/or column sums of the matrix, it is easy to calculate how much degrees are hold by the row sectors:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nr =<span class="st"> </span><span class="kw">nrow</span>(mat)
-nc =<span class="st"> </span><span class="kw">ncol</span>(mat)
-n_sector =<span class="st"> </span>nr <span class="op">+</span><span class="st"> </span>nc
-row_sector_degree =<span class="st"> </span>(<span class="dv">360</span> <span class="op">-</span><span class="st"> </span>small_gap<span class="op">*</span>(n_sector <span class="op">-</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span>big_gap<span class="op">*</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>(row_sum<span class="op">/</span>(row_sum <span class="op">+</span><span class="st"> </span>col_sum)) <span class="op">+</span><span class="st"> </span>
-<span class="st">                    </span>small_gap<span class="op">*</span>(nr<span class="op">-</span><span class="dv">1</span>)</code></pre></div>
-<p>If the row sectors are put in the right of the circle, we can calculate the “start degree” for the circle. Note <code>chordDiagram()</code> always draw row sectors first and by default the circle goes clock-wisely.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">180</span> <span class="op">-</span><span class="st"> </span>row_sector_degree)<span class="op">/</span><span class="dv">2</span></code></pre></div>
-<p>When there are small gaps and big gaps between sectors, the <code>gap.after</code> in <code>circos.par()</code> should be set as a vector. We also added a vertical line which assists to see the symmetry (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-sym">14.6</a> left).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gaps =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(small_gap, <span class="kw">nrow</span>(mat) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), big_gap, <span class="kw">rep</span>(small_gap, <span class="kw">ncol</span>(mat) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), big_gap)
-<span class="kw">circos.par</span>(<span class="dt">gap.after =</span> gaps, <span class="dt">start.degree =</span> start_degree)
-<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col)
+<p>In Chord diagram, when there are two groups (which correspond to rows and columns if the input is an adjacency matrix), it is always visually beautiful to rotate the diagram to be symmetric on horizontal direction or vertical direction. See following example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">0</span>)
+<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">big.gap =</span> <span class="dv">20</span>)
+<span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000080&quot;</span>)
 <span class="kw">circos.clear</span>()
+
+<span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>)
+<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">big.gap =</span> <span class="dv">20</span>)
 <span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000080&quot;</span>)</code></pre></div>
-<p>Similarly we can adjust the “start degree” to let the circle looks horizonally symmetric (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-sym">14.6</a> right).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_degree =<span class="st"> </span><span class="dv">0</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">180</span> <span class="op">-</span><span class="st"> </span>row_sector_degree)<span class="op">/</span><span class="dv">2</span>
-gaps =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(small_gap, <span class="kw">nrow</span>(mat) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), big_gap, <span class="kw">rep</span>(small_gap, <span class="kw">ncol</span>(mat) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), big_gap)
-<span class="kw">circos.par</span>(<span class="dt">gap.after =</span> gaps, <span class="dt">start.degree =</span> start_degree)
-<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col)
-<span class="kw">circos.clear</span>()
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000080&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-sym"></span>
 <img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-sym-1.svg" alt="Rotate Chord diagram." width="768" />
 <p class="caption">
 Figure 14.6: Rotate Chord diagram.
 </p>
 </div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
 </div>
 <div id="compare-two-chord-diagrams" class="section level2">
 <h2><span class="header-section-number">14.5</span> Compare two Chord diagrams</h2>
-<p>Normally, in Chord diagram, values in <code>mat</code> are normalized to the summation of the absolute values in the matrix, which means the width for links only represents relative values. Then, when comparing two Chord diagrams, it is necessary that unit width of links in the two plots should be represented in a same scale. This problem can be solved by adding more blank gaps to the Chord diagram which has smaller matrix.</p>
-<p>First, let’s plot a Chord diagram. In this Chord diagram, we set larger gaps between rows and columns for better visualization. Axis on the grid illustrates scale of the values.</p>
+<p>Normally, in Chord diagram, values in <code>mat</code> are normalized to the summation of the absolute values in the matrix, which means the width for links only represents relative values. Then, when comparing two Chord diagrams, it is necessary that unit width of links in the two plots should be represented in a same scale. This problem can be solved by adding larger gaps to the Chord diagram which has smaller matrix.</p>
+<p>First we make the “big” Chord diagram.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat1 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">20</span>, <span class="dv">25</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dv">5</span>)
-gap.after =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="dv">10</span>, <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="dv">10</span>)
-<span class="kw">circos.par</span>(<span class="dt">gap.after =</span> gap.after, <span class="dt">start.degree =</span> <span class="op">-</span><span class="dv">10</span><span class="op">/</span><span class="dv">2</span>)
-<span class="kw">chordDiagram</span>(mat1, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>))
-<span class="kw">circos.clear</span>()</code></pre></div>
+<span class="kw">chordDiagram</span>(mat1, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">transparency =</span> <span class="fl">0.5</span>,
+    <span class="dt">big.gap =</span> <span class="dv">10</span>, <span class="dt">small.gap =</span> <span class="dv">1</span>) <span class="co"># 10 and 1 are default values for the two arguments</span></code></pre></div>
 <p>The second matrix only has half the values in <code>mat1</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat2 =<span class="st"> </span>mat1 <span class="op">/</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
-<p>If the second Chord diagram is plotted in the way as the first one, the two diagrams will looks exactly the same (except the axes) which makes the comparison impossible. However, we can adjust the gaps between sectors to make the scale of the two plots same.</p>
-<p>First we calculate the percentage of <code>mat2</code> in <code>mat1</code>. And then we calculate the degree which corresponds to the difference. In the following code, <code>360 - sum(gap.after)</code> is the total degree for values in <code>mat1</code> (excluding the gaps) and <code>blank.degree</code> corresponds the difference between <code>mat1</code> and <code>mat2</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">percent =<span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(mat2)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(mat1))
-blank.degree =<span class="st"> </span>(<span class="dv">360</span> <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(gap.after)) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>percent)</code></pre></div>
-<p>Since now we have the additional blank gap, we can set it to <code>circos.par()</code> and plot the second Chord Diagram.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big.gap =<span class="st"> </span>(blank.degree <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">8</span>)))<span class="op">/</span><span class="dv">2</span>
-gap.after =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), big.gap, <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), big.gap)
-<span class="kw">circos.par</span>(<span class="dt">gap.after =</span> gap.after, <span class="dt">start.degree =</span> <span class="op">-</span>big.gap<span class="op">/</span><span class="dv">2</span>)
-<span class="kw">chordDiagram</span>(mat2, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">transparency =</span> <span class="fl">0.5</span>)
-<span class="kw">circos.clear</span>()</code></pre></div>
+<p><code>calc_gap()</code> can be used to calculate the gap for the second Chord diagram to make the scale of the two Chord diagram the same.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap =<span class="st"> </span><span class="kw">calc_gap</span>(mat1, mat2, <span class="dt">big.gap =</span> <span class="dv">10</span>, <span class="dt">small.gap =</span> <span class="dv">1</span>)
+<span class="kw">chordDiagram</span>(mat2, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">transparency =</span> <span class="fl">0.5</span>,
+    <span class="dt">big.gap =</span> gap, <span class="dt">small.gap =</span> <span class="dv">1</span>)</code></pre></div>
 <p>Now the scale of the two Chord diagrams (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-compare">14.7</a>) are the same if you compare the scale of axes in the two diagrams.</p>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-compare"></span>
 <img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-compare-1.svg" alt="Compare two Chord Diagrams in a same scale." width="768" />
@@ -463,6 +444,7 @@ gap.after =<span class="st"> </span><span class="kw">c</span>(<span class="kw">r
 Figure 14.7: Compare two Chord Diagrams in a same scale.
 </p>
 </div>
+<p>To correctly use the functionality of <code>calc_gap()</code>, the two Chord diagram should have same value for <code>small.gap</code> and there should be no overlap between the two sets of the sectors.</p>
 </div>
 <div id="multiple-group-chord-diagram" class="section level2">
 <h2><span class="header-section-number">14.6</span> Multiple-group Chord diagram</h2>
@@ -502,8 +484,10 @@ mat</code></pre></div>
 <p>When making the chord diagram, we set larger gaps between groups to identify different groups. Here we manually adjust <code>gap.after</code> in <code>circos.par()</code>.</p>
 <p>Also we add an additional track in which we add lines to enhance the visual effect of different groups.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(circlize)
-<span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="dv">8</span>), <span class="dv">3</span>))
-<span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;grid&quot;</span>, <span class="st">&quot;axis&quot;</span>),
+<span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="dv">8</span>), <span class="dv">3</span>))</code></pre></div>
+<pre><code>## Warning in warning_wrap(&quot;&#39;gap.degree&#39; can only be modified before `circos.initialize`, or maybe you forgot to call `circos.clear` in your last plot.&quot;): &#39;gap.degree&#39; can only be modified before `circos.initialize`, or
+## maybe you forgot to call `circos.clear` in your last plot.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;grid&quot;</span>, <span class="st">&quot;axis&quot;</span>),
     <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(
         <span class="dt">track.height =</span> <span class="kw">uh</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>),
         <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="kw">uh</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">0</span>)
@@ -521,7 +505,7 @@ mat</code></pre></div>
     <span class="dt">text =</span> <span class="st">&quot;B&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">text.col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
 <span class="kw">highlight.sector</span>(<span class="kw">colnames</span>(mat2), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, 
     <span class="dt">text =</span> <span class="st">&quot;C&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">text.col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="14-chord-diagram-advanced-usage_files/figure-html/unnamed-chunk-14-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="14-chord-diagram-advanced-usage_files/figure-html/unnamed-chunk-10-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
 <p>If row names and column names in the big matrix are not grouped, the sector order can be manually adjusted by <code>order</code> argument.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">order =</span> <span class="kw">c</span>(<span class="kw">paset0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paset0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paset0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)))</code></pre></div>

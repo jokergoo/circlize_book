@@ -107,6 +107,36 @@ circos.clear()
 <p class="caption">(\#fig:genomic-labels)Genomic labels.</p>
 </div>
 
+## Genomic axes
+
+The genomic axes are not really high-level graphics, but it is better to also introduce
+here. For `circos.initializeWithIdeogram()`, by default it draws axes with tick labels properly 
+formatted. The axes are internally implemented by `circos.genomicAxis()` and it can be
+used to add genomic axes at any track (Figure \@ref(fig:genomic-axis)).
+
+
+```r
+circos.initializeWithIdeogram(plotType = NULL)
+circos.genomicIdeogram()
+# still work on the ideogram track
+circos.track(track.index = get.current.track.index(), panel.fun = function(x, y) {
+	circos.genomicAxis(h = "top")
+})
+circos.track(ylim = c(0, 1), track.height = 0.1)
+circos.track(track.index = get.current.track.index(), panel.fun = function(x, y) {
+	circos.genomicAxis(h = "bottom", direction = "inside")
+})
+```
+
+<div class="figure" style="text-align: center">
+<img src="11-high-level-genomic-functions_files/figure-epub3/genomic-axis-1.svg" alt="Add genomic axes."  />
+<p class="caption">(\#fig:genomic-axis)Add genomic axes.</p>
+</div>
+
+```r
+circos.clear()
+```
+
 ## Genomic density and Rainfall plot
 
 Rainfall plots are used to visualize the distribution of genomic regions in the genome.
