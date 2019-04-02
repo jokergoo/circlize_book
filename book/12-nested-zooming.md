@@ -185,6 +185,11 @@ circos.nested(f2, f1, correspondance[, c(4:6, 1:3)])
 ```
 
 ```
+## Error in `row.names<-.data.frame`(`*tmp*`, value = value) : 
+##   duplicate 'row.names' are not allowed
+```
+
+```
 ## Warning in circos.nested(f2, f1, correspondance[, c(4:6, 1:3)]): Sector order in `f2()` should be the same as in `f1()`, or else
 ## connection lines may overlap.
 ```

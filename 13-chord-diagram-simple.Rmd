@@ -107,7 +107,7 @@ axes, and links. Sectors which correspond to rows in the matrix locate at the
 bottom half of the circle. The order of sectors is the order of
 `union(rownames(mat), colnames(mat))` or `union(df[[1]], df[[2]])` if input is
 a data frame. The order of sectors can be controlled by `order` argument
-(Figure \@ref(fig:chord-diagram-basic-order) right). Of course, the length of
+(Figure \@ref(fig:chord-diagram-basic-order)). Of course, the length of
 `order` vector should be same as the number of sectors.
 
 In following code, `S1`, `S2` and `S3` should better be put together since they belong to a same group,

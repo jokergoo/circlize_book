@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Circular Visualization in R</title>
+  <title>Chapter 13 The chordDiagram() function | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Circular Visualization in R" />
+  <meta property="og:title" content="Chapter 13 The chordDiagram() function | Circular Visualization in R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/jokergoo/circlize-book/" />
   <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/images/circlize_cover.jpg" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="jokergoo/circlize_book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Circular Visualization in R" />
+  <meta name="twitter:title" content="Chapter 13 The chordDiagram() function | Circular Visualization in R" />
   
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/images/circlize_cover.jpg" />
@@ -35,6 +35,7 @@
 <link rel="next" href="advanced-usage-of-chorddiagram.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -327,7 +328,7 @@ Figure 13.1: Basic usages of <code>chordDiagram()</code>.
 <p>or call with <code>df</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(df)
 <span class="kw">circos.clear</span>()</code></pre></div>
-<p>The default Chord Diagram consists of a track of labels, a track of grids (or you call it lines) with axes, and links. Sectors which correspond to rows in the matrix locate at the bottom half of the circle. The order of sectors is the order of <code>union(rownames(mat), colnames(mat))</code> or <code>union(df[[1]], df[[2]])</code> if input is a data frame. The order of sectors can be controlled by <code>order</code> argument (Figure <a href="the-chorddiagram-function.html#fig:chord-diagram-basic-order">13.2</a> right). Of course, the length of <code>order</code> vector should be same as the number of sectors.</p>
+<p>The default Chord Diagram consists of a track of labels, a track of grids (or you call it lines) with axes, and links. Sectors which correspond to rows in the matrix locate at the bottom half of the circle. The order of sectors is the order of <code>union(rownames(mat), colnames(mat))</code> or <code>union(df[[1]], df[[2]])</code> if input is a data frame. The order of sectors can be controlled by <code>order</code> argument (Figure <a href="the-chorddiagram-function.html#fig:chord-diagram-basic-order">13.2</a>). Of course, the length of <code>order</code> vector should be same as the number of sectors.</p>
 <p>In following code, <code>S1</code>, <code>S2</code> and <code>S3</code> should better be put together since they belong to a same group, which is same for <code>E*</code> sectors. Of course, you can give a order which mix <code>S*</code> and <code>E*</code>, but it is not recommended because it is bad for reading the plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">order =</span> <span class="kw">c</span>(<span class="st">&quot;S2&quot;</span>, <span class="st">&quot;S1&quot;</span>, <span class="st">&quot;S3&quot;</span>, <span class="st">&quot;E4&quot;</span>, <span class="st">&quot;E1&quot;</span>, <span class="st">&quot;E5&quot;</span>, <span class="st">&quot;E2&quot;</span>, <span class="st">&quot;E6&quot;</span>, <span class="st">&quot;E3&quot;</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-basic-order"></span>
@@ -847,7 +848,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -859,6 +860,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/jokergoo/circlize_book/edit/master/13-chord-diagram-simple.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["circlize-book.pdf", "circlize-book.epub"],
 "toc": {
@@ -874,7 +879,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
