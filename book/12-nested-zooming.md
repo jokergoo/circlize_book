@@ -40,7 +40,7 @@ sector_col = structure(rand_color(8, transparency = 0.5), names = letters[1:8])
 ```
 
 Following variables are used for downstream visualization. `sector` contains sector names
-and coordinate at the x direction:
+and coordinates at the x direction:
 
 
 ```r
@@ -74,7 +74,7 @@ In `sector`, we randomly sampled several intervals which will be used for
 zooming. The zoomed intervals are stored in `zoom_sector`. In the zooming
 track, each interval is treated as an independent sector, thus, the name for
 each zoomed interval uses combination of the original sector name and the
-interval itself, just for easily reading.
+interval itself, just for easy reading.
 
 
 ```r
@@ -152,7 +152,7 @@ f2 = function() {
 ```
 
 In above, `f1()` is the code for generating the original plot and `f2()` is
-the code for generating the zoomed plot.
+the code for generating the zoomed plot. They can be executed independently.
 
 To combine the two plots, simply put `f1()`, `f2()` and `corresponance` to
 `circos.nested()` (Figure \@ref(fig:nested-normal)).
@@ -177,21 +177,6 @@ they are just two circular plots and a correspondance (Figure \@ref(fig:nested2)
 
 ```r
 circos.nested(f2, f1, correspondance[, c(4:6, 1:3)])
-```
-
-```
-## Warning: non-unique values when setting 'row.names': 'a', 'b', 'c', 'd',
-## 'f', 'g', 'h'
-```
-
-```
-## Error in `row.names<-.data.frame`(`*tmp*`, value = value) : 
-##   duplicate 'row.names' are not allowed
-```
-
-```
-## Warning in circos.nested(f2, f1, correspondance[, c(4:6, 1:3)]): Sector order in `f2()` should be the same as in `f1()`, or else
-## connection lines may overlap.
 ```
 
 <div class="figure" style="text-align: center">

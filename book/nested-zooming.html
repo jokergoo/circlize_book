@@ -284,7 +284,7 @@ data =<span class="st"> </span>df[, <span class="dv">1</span><span class="op">:<
 sector =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">cate =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>], <span class="dt">start =</span> <span class="dv">0</span>, <span class="dt">end =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
 
 sector_col =<span class="st"> </span><span class="kw">structure</span>(<span class="kw">rand_color</span>(<span class="dv">8</span>, <span class="dt">transparency =</span> <span class="fl">0.5</span>), <span class="dt">names =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>])</code></pre></div>
-<p>Following variables are used for downstream visualization. <code>sector</code> contains sector names and coordinate at the x direction:</p>
+<p>Following variables are used for downstream visualization. <code>sector</code> contains sector names and coordinates at the x direction:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sector, <span class="dt">n =</span> <span class="dv">4</span>)</code></pre></div>
 <pre><code>##   cate start end
 ## 1    a     0   1
@@ -298,7 +298,7 @@ sector_col =<span class="st"> </span><span class="kw">structure</span>(<span cla
 ## 2    a 0.04210805 0.8112373
 ## 3    a 0.04953844 0.3809037
 ## 4    a 0.05819180 0.7151335</code></pre>
-<p>In <code>sector</code>, we randomly sampled several intervals which will be used for zooming. The zoomed intervals are stored in <code>zoom_sector</code>. In the zooming track, each interval is treated as an independent sector, thus, the name for each zoomed interval uses combination of the original sector name and the interval itself, just for easily reading.</p>
+<p>In <code>sector</code>, we randomly sampled several intervals which will be used for zooming. The zoomed intervals are stored in <code>zoom_sector</code>. In the zooming track, each interval is treated as an independent sector, thus, the name for each zoomed interval uses combination of the original sector name and the interval itself, just for easy reading.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(zoom_sector, <span class="dt">n =</span> <span class="dv">4</span>)</code></pre></div>
 <pre><code>##           name start end cate
 ## 16 a:(0.4,0.6]   0.4 0.6    a
@@ -338,7 +338,7 @@ f2 =<span class="st"> </span><span class="cf">function</span>() {
             <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)
         })
 }</code></pre></div>
-<p>In above, <code>f1()</code> is the code for generating the original plot and <code>f2()</code> is the code for generating the zoomed plot.</p>
+<p>In above, <code>f1()</code> is the code for generating the original plot and <code>f2()</code> is the code for generating the zoomed plot. They can be executed independently.</p>
 <p>To combine the two plots, simply put <code>f1()</code>, <code>f2()</code> and <code>corresponance</code> to <code>circos.nested()</code> (Figure <a href="nested-zooming.html#fig:nested-normal">12.1</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.nested</span>(f1, f2, correspondance)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:nested-normal"></span>
@@ -350,12 +350,6 @@ Figure 12.1: Nested zooming between two circular plots.
 <p>In the plot, the zoomed circle is put inside the original circle and the start degree for the second plot is automatically adjusted.</p>
 <p>Zoomed circle can also be put outside by swtiching <code>f1()</code> and <code>f2()</code>. Actually, for <code>circos.nested()</code>, It doesn’t care which one is zoomed or not, they are just two circular plots and a correspondance (Figure <a href="nested-zooming.html#fig:nested2">12.2</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.nested</span>(f2, f1, correspondance[, <span class="kw">c</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)])</code></pre></div>
-<pre><code>## Warning: non-unique values when setting &#39;row.names&#39;: &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;,
-## &#39;f&#39;, &#39;g&#39;, &#39;h&#39;</code></pre>
-<pre><code>## Error in `row.names&lt;-.data.frame`(`*tmp*`, value = value) : 
-##   duplicate &#39;row.names&#39; are not allowed</code></pre>
-<pre><code>## Warning in circos.nested(f2, f1, correspondance[, c(4:6, 1:3)]): Sector order in `f2()` should be the same as in `f1()`, or else
-## connection lines may overlap.</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:nested2"></span>
 <img src="12-nested-zooming_files/figure-html/nested2-1.svg" alt="Nested zooming between two circular plots, zoomed plot is put outside." width="384" />
 <p class="caption">

@@ -486,7 +486,7 @@ mat</code></pre></div>
 <p>Also we add an additional track in which we add lines to enhance the visual effect of different groups.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(circlize)
 <span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="dv">8</span>), <span class="dv">3</span>))</code></pre></div>
-<pre><code>## Warning in warning_wrap(&quot;&#39;gap.degree&#39; can only be modified before `circos.initialize`, or maybe you forgot to call `circos.clear` in your last plot.&quot;): &#39;gap.degree&#39; can only be modified before `circos.initialize`, or
+<pre><code>## Warning: &#39;gap.degree&#39; can only be modified before `circos.initialize`, or
 ## maybe you forgot to call `circos.clear` in your last plot.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;grid&quot;</span>, <span class="st">&quot;axis&quot;</span>),
     <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(

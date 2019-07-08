@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{last revised on 2019-04-13}
+    \date{last revised on 2019-07-08}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -3955,9 +3955,9 @@ Following code demonstrates the values for \texttt{region} and
 \end{Shaded}
 
 \begin{verbatim}
-##    chr  start    end    value1    value2
-## 1 chr1 122902 300071 0.7916323 0.5985833
-## 2 chr1 400755 606549 0.5358842 0.6374187
+##    chr  start    end    value1     value2
+## 1 chr1 282266 311812 0.0410906 -0.2147912
+## 2 chr1 402417 512352 0.6712349 -0.3090208
 \end{verbatim}
 
 \begin{Shaded}
@@ -3974,11 +3974,11 @@ Following code demonstrates the values for \texttt{region} and
 
 \begin{verbatim}
 ##    start    end
-## 1 122902 300071
-## 2 400755 606549
-##      value1    value2
-## 1 0.7916323 0.5985833
-## 2 0.5358842 0.6374187
+## 1 282266 311812
+## 2 402417 512352
+##      value1     value2
+## 1 0.0410906 -0.2147912
+## 2 0.6712349 -0.3090208
 \end{verbatim}
 
 Since \texttt{circos.genomicTrack()} creates a new track, it needs
@@ -5031,7 +5031,8 @@ To illustrate the basic idea, we first generate a random data set.
 \end{Shaded}
 
 Following variables are used for downstream visualization.
-\texttt{sector} contains sector names and coordinate at the x direction:
+\texttt{sector} contains sector names and coordinates at the x
+direction:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5068,7 +5069,7 @@ used for zooming. The zoomed intervals are stored in
 \texttt{zoom\_sector}. In the zooming track, each interval is treated as
 an independent sector, thus, the name for each zoomed interval uses
 combination of the original sector name and the interval itself, just
-for easily reading.
+for easy reading.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5152,7 +5153,8 @@ to be wrapped into a function.
 \end{Shaded}
 
 In above, \texttt{f1()} is the code for generating the original plot and
-\texttt{f2()} is the code for generating the zoomed plot.
+\texttt{f2()} is the code for generating the zoomed plot. They can be
+executed independently.
 
 To combine the two plots, simply put \texttt{f1()}, \texttt{f2()} and
 \texttt{corresponance} to \texttt{circos.nested()} (Figure
@@ -5186,21 +5188,6 @@ correspondance (Figure \ref{fig:nested2}).
 \KeywordTok{circos.nested}\NormalTok{(f2, f1, correspondance[, }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\OperatorTok{:}\DecValTok{6}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{)])}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Warning: non-unique values when setting 'row.names': 'a', 'b', 'c', 'd',
-## 'f', 'g', 'h'
-\end{verbatim}
-
-\begin{verbatim}
-## Error in `row.names<-.data.frame`(`*tmp*`, value = value) : 
-##   duplicate 'row.names' are not allowed
-\end{verbatim}
-
-\begin{verbatim}
-## Warning in circos.nested(f2, f1, correspondance[, c(4:6, 1:3)]): Sector order in `f2()` should be the same as in `f1()`, or else
-## connection lines may overlap.
-\end{verbatim}
 
 \begin{figure}
 
@@ -7124,7 +7111,7 @@ visual effect of different groups.
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in warning_wrap("'gap.degree' can only be modified before `circos.initialize`, or maybe you forgot to call `circos.clear` in your last plot."): 'gap.degree' can only be modified before `circos.initialize`, or
+## Warning: 'gap.degree' can only be modified before `circos.initialize`, or
 ## maybe you forgot to call `circos.clear` in your last plot.
 \end{verbatim}
 

@@ -41,7 +41,7 @@ sector_col = structure(rand_color(8, transparency = 0.5), names = letters[1:8])
 ```
 
 Following variables are used for downstream visualization. `sector` contains sector names
-and coordinate at the x direction:
+and coordinates at the x direction:
 
 ```{r}
 head(sector, n = 4)
@@ -57,7 +57,7 @@ In `sector`, we randomly sampled several intervals which will be used for
 zooming. The zoomed intervals are stored in `zoom_sector`. In the zooming
 track, each interval is treated as an independent sector, thus, the name for
 each zoomed interval uses combination of the original sector name and the
-interval itself, just for easily reading.
+interval itself, just for easy reading.
 
 ```{r}
 head(zoom_sector, n = 4)
@@ -107,7 +107,7 @@ f2 = function() {
 ```
 
 In above, `f1()` is the code for generating the original plot and `f2()` is
-the code for generating the zoomed plot.
+the code for generating the zoomed plot. They can be executed independently.
 
 To combine the two plots, simply put `f1()`, `f2()` and `corresponance` to
 `circos.nested()` (Figure \@ref(fig:nested-normal)).

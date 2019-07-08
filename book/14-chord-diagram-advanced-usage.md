@@ -385,7 +385,7 @@ circos.par(gap.after = rep(c(rep(1, 4), 8), 3))
 ```
 
 ```
-## Warning in warning_wrap("'gap.degree' can only be modified before `circos.initialize`, or maybe you forgot to call `circos.clear` in your last plot."): 'gap.degree' can only be modified before `circos.initialize`, or
+## Warning: 'gap.degree' can only be modified before `circos.initialize`, or
 ## maybe you forgot to call `circos.clear` in your last plot.
 ```
 
