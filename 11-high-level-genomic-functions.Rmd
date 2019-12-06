@@ -180,6 +180,17 @@ circos.genomicDensity(DMR_hypo, col = c("#0000FF80"), track.height = 0.1)
 circos.clear()
 ```
 
+
+`circos.genomicDensity()` also supports to calculate the overlap as the **number** of the regions
+that overlap to each window by setting `count_by = "number"`.
+
+```{r genomic-rainfall2, fig.width = 6, fig.height = 6, fig.cap = "Genomic densities."}
+circos.initializeWithIdeogram(chromosome.index = paste0("chr", 1:22))
+circos.genomicDensity(DMR_hyper, col = c("#FF000080"), track.height = 0.1)
+circos.genomicDensity(DMR_hyper, col = c("#FF000080"), count_by = "number", track.height = 0.1)
+circos.clear()
+```
+
 Internally, `rainfallTransform()` and `genomicDensity()` are used to the neighbrouing distance
 and the genomic density values.
 

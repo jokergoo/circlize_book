@@ -22,7 +22,7 @@ circos.genomicIdeogram(track.height = 0.2)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="11-high-level-genomic-functions_files/figure-epub3/ideogram-1.svg" alt="Circular ideograms."  />
+<img src="11-high-level-genomic-functions_files/figure-html/ideogram-1.svg" alt="Circular ideograms." width="384" />
 <p class="caption">(\#fig:ideogram)Circular ideograms.</p>
 </div>
 
@@ -66,7 +66,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="11-high-level-genomic-functions_files/figure-epub3/genomic-heatmap-1.svg" alt="Genomic heamtaps."  />
+<img src="11-high-level-genomic-functions_files/figure-html/genomic-heatmap-1.svg" alt="Genomic heamtaps." width="768" />
 <p class="caption">(\#fig:genomic-heatmap)Genomic heamtaps.</p>
 </div>
 
@@ -103,7 +103,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="11-high-level-genomic-functions_files/figure-epub3/genomic-labels-1.svg" alt="Genomic labels."  />
+<img src="11-high-level-genomic-functions_files/figure-html/genomic-labels-1.svg" alt="Genomic labels." width="768" />
 <p class="caption">(\#fig:genomic-labels)Genomic labels.</p>
 </div>
 
@@ -129,7 +129,7 @@ circos.track(track.index = get.current.track.index(), panel.fun = function(x, y)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="11-high-level-genomic-functions_files/figure-epub3/genomic-axis-1.svg" alt="Add genomic axes."  />
+<img src="11-high-level-genomic-functions_files/figure-html/genomic-axis-1.svg" alt="Add genomic axes." width="384" />
 <p class="caption">(\#fig:genomic-axis)Add genomic axes.</p>
 </div>
 
@@ -197,8 +197,28 @@ circos.genomicDensity(DMR_hypo, col = c("#0000FF80"), track.height = 0.1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="11-high-level-genomic-functions_files/figure-epub3/genomic-rainfall-1.svg" alt="Genomic rainfall plot and densities."  />
+<img src="11-high-level-genomic-functions_files/figure-html/genomic-rainfall-1.svg" alt="Genomic rainfall plot and densities." width="576" />
 <p class="caption">(\#fig:genomic-rainfall)Genomic rainfall plot and densities.</p>
+</div>
+
+```r
+circos.clear()
+```
+
+
+`circos.genomicDensity()` also supports to calculate the overlap as the **number** of the regions
+that overlap to each window by setting `count_by = "number"`.
+
+
+```r
+circos.initializeWithIdeogram(chromosome.index = paste0("chr", 1:22))
+circos.genomicDensity(DMR_hyper, col = c("#FF000080"), track.height = 0.1)
+circos.genomicDensity(DMR_hyper, col = c("#FF000080"), count_by = "number", track.height = 0.1)
+```
+
+<div class="figure" style="text-align: center">
+<img src="11-high-level-genomic-functions_files/figure-html/genomic-rainfall2-1.svg" alt="Genomic densities." width="576" />
+<p class="caption">(\#fig:genomic-rainfall2)Genomic densities.</p>
 </div>
 
 ```r
@@ -228,7 +248,7 @@ head(genomicDensity(DMR_hyper, window.size = 1e6))
 ```
 
 ```
-##    chr   start     end      pct
+##    chr   start     end    value
 ## 1 chr1       1 1000000 0.003093
 ## 2 chr1  500001 1500000 0.007592
 ## 3 chr1 1000001 2000000 0.008848

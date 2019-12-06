@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 Nested zooming | Circular Visualization in R</title>
-  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 Nested zooming | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -22,17 +21,17 @@
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
 
-<meta name="author" content="Zuguang Gu">
+<meta name="author" content="Zuguang Gu" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="high-level-genomic-functions.html">
-<link rel="next" href="the-chorddiagram-function.html">
+<link rel="prev" href="high-level-genomic-functions.html"/>
+<link rel="next" href="the-chorddiagram-function.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -294,31 +296,31 @@ sector_col =<span class="st"> </span><span class="kw">structure</span>(<span cla
 <p><code>data</code> contains data points for a track.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(data, <span class="dt">n =</span> <span class="dv">4</span>)</code></pre></div>
 <pre><code>##   cate          x         y
-## 1    a 0.02552670 0.5546818
-## 2    a 0.04210805 0.8112373
-## 3    a 0.04953844 0.3809037
-## 4    a 0.05819180 0.7151335</code></pre>
+## 1    a 0.02314449 0.2170480
+## 2    a 0.03978064 0.8062479
+## 3    a 0.06893260 0.6284048
+## 4    a 0.07997291 0.5835629</code></pre>
 <p>In <code>sector</code>, we randomly sampled several intervals which will be used for zooming. The zoomed intervals are stored in <code>zoom_sector</code>. In the zooming track, each interval is treated as an independent sector, thus, the name for each zoomed interval uses combination of the original sector name and the interval itself, just for easy reading.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(zoom_sector, <span class="dt">n =</span> <span class="dv">4</span>)</code></pre></div>
 <pre><code>##           name start end cate
-## 16 a:(0.4,0.6]   0.4 0.6    a
-## 37   a:(0.8,1]   0.8 1.0    a
-## 43   b:(0,0.2]   0.0 0.2    b
-## 64 b:(0.4,0.6]   0.4 0.6    b</code></pre>
+## 17 a:(0.4,0.6]   0.4 0.6    a
+## 48   a:(0.8,1]   0.8 1.0    a
+## 57   b:(0,0.2]   0.0 0.2    b
+## 76 b:(0.4,0.6]   0.4 0.6    b</code></pre>
 <p>And the subset of data which are in the zoomed intervals.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(zoom_data, <span class="dt">n =</span> <span class="dv">4</span>)</code></pre></div>
-<pre><code>##           name         x          y
-## 16 a:(0.4,0.6] 0.4122831 0.28695762
-## 17 a:(0.4,0.6] 0.4286131 0.28869011
-## 18 a:(0.4,0.6] 0.4361300 0.04236068
-## 19 a:(0.4,0.6] 0.4498025 0.96864117</code></pre>
+<pre><code>##           name         x         y
+## 17 a:(0.4,0.6] 0.4072693 0.3972460
+## 18 a:(0.4,0.6] 0.4186692 0.2021846
+## 19 a:(0.4,0.6] 0.4481431 0.3554347
+## 20 a:(0.4,0.6] 0.4597852 0.6696035</code></pre>
 <p>The correspondance between the original sectors and the zoomed intervals are in <code>correspondance</code>. The value is a data frame with six columns. The value is the position of the intervals in the second circular plot in the first plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(correspondance, <span class="dt">n =</span> <span class="dv">4</span>)</code></pre></div>
 <pre><code>##    cate start end        name start.1 end.1
-## 16    a   0.4 0.6 a:(0.4,0.6]     0.4   0.6
-## 37    a   0.8 1.0   a:(0.8,1]     0.8   1.0
-## 43    b   0.0 0.2   b:(0,0.2]     0.0   0.2
-## 64    b   0.4 0.6 b:(0.4,0.6]     0.4   0.6</code></pre>
+## 17    a   0.4 0.6 a:(0.4,0.6]     0.4   0.6
+## 48    a   0.8 1.0   a:(0.8,1]     0.8   1.0
+## 57    b   0.0 0.2   b:(0,0.2]     0.0   0.2
+## 76    b   0.4 0.6 b:(0.4,0.6]     0.4   0.6</code></pre>
 <p>The zooming is actually composed of two circulat plots where one for the original track and one for the zoomed intervals. There is an additional connection track which identifies which intervals that are zoomed belong to which sector. The <code>circos.nested()</code> function in <strong>circlize</strong> puts the two circular plots together, arranges them and automatically draws the connection lines.</p>
 <p>To define “the circular plot”, the code for generating the plot needs to be wrapped into a function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 =<span class="st"> </span><span class="cf">function</span>() {
@@ -480,11 +482,13 @@ Figure 12.4: Visualization of DMRs.
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -492,12 +496,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -509,6 +512,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -527,8 +534,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

@@ -44,9 +44,9 @@ head(bed, n = 2)
 ```
 
 ```
-##    chr  start    end      value1     value2
-## 1 chr1 180098 243518 -0.01841035 0.29383837
-## 2 chr1 394232 909875 -0.19225737 0.04714116
+##    chr  start    end    value1     value2
+## 1 chr1  89193 151090 0.7404945 -0.3726059
+## 2 chr1 205728 367776 0.1433729 -0.2113739
 ```
 
 ```r
@@ -61,11 +61,11 @@ circos.genomicTrackPlotRegion(bed, panel.fun = function(region, value, ...) {
 
 ```
 ##    start    end
-## 1 180098 243518
-## 2 394232 909875
-##        value1     value2
-## 1 -0.01841035 0.29383837
-## 2 -0.19225737 0.04714116
+## 1  89193 151090
+## 2 205728 367776
+##      value1     value2
+## 1 0.7404945 -0.3726059
+## 2 0.1433729 -0.2113739
 ```
 
 Since `circos.genomicTrack()` creates a new track, it needs values to
@@ -231,7 +231,7 @@ circos.genomicLink(bed1, bed2, col = rand_color(nrow(bed1), transparency = 0.5),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="09-create-plotting-regions_files/figure-epub3/genomic-links-1.svg" alt="Add links from two sets of genomic regions."  />
+<img src="09-create-plotting-regions_files/figure-html/genomic-links-1.svg" alt="Add links from two sets of genomic regions." width="576" />
 <p class="caption">(\#fig:genomic-links)Add links from two sets of genomic regions.</p>
 </div>
 

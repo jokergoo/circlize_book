@@ -32,7 +32,7 @@ text(0, 0, "default", cex = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-initialize-ideogram-default-1.svg" alt="Initialize genomic plot, default."  />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-default-1.svg" alt="Initialize genomic plot, default." width="384" />
 <p class="caption">(\#fig:genomic-initialize-ideogram-default)Initialize genomic plot, default.</p>
 </div>
 
@@ -42,9 +42,9 @@ circos.info()
 
 ```
 ## All your sectors:
-##  [1] "chr1"  "chr2"  "chr3"  "chr4"  "chr5"  "chr6"  "chr7"  "chr8" 
-##  [9] "chr9"  "chr10" "chr11" "chr12" "chr13" "chr14" "chr15" "chr16"
-## [17] "chr17" "chr18" "chr19" "chr20" "chr21" "chr22" "chrX"  "chrY" 
+##  [1] "chr1"  "chr2"  "chr3"  "chr4"  "chr5"  "chr6"  "chr7"  "chr8"  "chr9" 
+## [10] "chr10" "chr11" "chr12" "chr13" "chr14" "chr15" "chr16" "chr17" "chr18"
+## [19] "chr19" "chr20" "chr21" "chr22" "chrX"  "chrY" 
 ## 
 ## All your tracks:
 ## [1] 1 2
@@ -107,7 +107,7 @@ text(0, 0, "subset of chromosomes", cex = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-initialize-ideogram-subset-1.svg" alt="Initialize genomic plot, subset chromosomes."  />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-subset-1.svg" alt="Initialize genomic plot, subset chromosomes." width="384" />
 <p class="caption">(\#fig:genomic-initialize-ideogram-subset)Initialize genomic plot, subset chromosomes.</p>
 </div>
 
@@ -138,7 +138,7 @@ text(0, 0, "plotType = NULL", cex = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-initialize-ideogram-track-1.svg" alt="Initialize genomic plot, control tracks."  />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-track-1.svg" alt="Initialize genomic plot, control tracks." width="768" />
 <p class="caption">(\#fig:genomic-initialize-ideogram-track)Initialize genomic plot, control tracks.</p>
 </div>
 
@@ -167,7 +167,7 @@ text(0, 0, "'gap.degree' = rep(c(2, 4), 12)", cex = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-initialize-ideogram-par-1.svg" alt="Initialize genomic plot, control layout."  />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-par-1.svg" alt="Initialize genomic plot, control layout." width="768" />
 <p class="caption">(\#fig:genomic-initialize-ideogram-par)Initialize genomic plot, control layout.</p>
 </div>
 
@@ -196,7 +196,7 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-customize-chromosome-1.svg" alt="Customize chromosome track."  />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-customize-chromosome-1.svg" alt="Customize chromosome track." width="384" />
 <p class="caption">(\#fig:genomic-customize-chromosome)Customize chromosome track.</p>
 </div>
 
@@ -283,7 +283,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-gene-model-1.svg" alt="Circular representation of alternative transcripts for genes."  />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-gene-model-1.svg" alt="Circular representation of alternative transcripts for genes." width="576" />
 <p class="caption">(\#fig:genomic-gene-model)Circular representation of alternative transcripts for genes.</p>
 </div>
 
@@ -360,6 +360,6 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-epub3/genomic-zoom-1.svg" alt="Zoom chromosomes."  />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-zoom-1.svg" alt="Zoom chromosomes." width="576" />
 <p class="caption">(\#fig:genomic-zoom)Zoom chromosomes.</p>
 </div>

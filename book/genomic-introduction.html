@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Introduction | Circular Visualization in R</title>
-  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Introduction | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -22,17 +21,17 @@
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
 
-<meta name="author" content="Zuguang Gu">
+<meta name="author" content="Zuguang Gu" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="advanced-layout.html">
-<link rel="next" href="initialize-genomic-plot.html">
+<link rel="prev" href="advanced-layout.html"/>
+<link rel="next" href="initialize-genomic-plot.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -276,25 +278,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">999</span>)
 bed =<span class="st"> </span><span class="kw">generateRandomBed</span>()
 <span class="kw">head</span>(bed)</code></pre></div>
-<pre><code>##    chr   start     end     value1
-## 1 chr1   39485  159163 -0.1887635
-## 2 chr1  897195 1041959 -0.2435220
-## 3 chr1 1161957 1177159  0.3749953
-## 4 chr1 1201513 1481406 -0.2600839
-## 5 chr1 1487402 1531773 -0.4633990
-## 6 chr1 1769949 2736215 -0.8159909</code></pre>
+<pre><code>##    chr   start     end       value1
+## 1 chr1  118750  451929 -0.367702502
+## 2 chr1  472114  805024 -0.001764946
+## 3 chr1  807013  914103 -0.668379255
+## 4 chr1 1058915 1081590  0.390291705
+## 5 chr1 1194426 1341960 -1.305901261
+## 6 chr1 1670402 2048723  0.340227447</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>, <span class="dt">nc =</span> <span class="dv">4</span>)
 <span class="kw">nrow</span>(bed)</code></pre></div>
 <pre><code>## [1] 205</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>, <span class="dt">fun =</span> <span class="cf">function</span>(k) <span class="kw">sample</span>(letters, k, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
 <span class="kw">head</span>(bed)</code></pre></div>
 <pre><code>##    chr   start     end value1 value2
-## 1 chr1   98740  566688      e      e
-## 2 chr1  769960  887938      b      q
-## 3 chr1  906851  933021      u      o
-## 4 chr1 1241911 1243537      k      f
-## 5 chr1 1385344 1410947      v      x
-## 6 chr1 1498302 1585389      u      v</code></pre>
+## 1 chr1  275067  349212      q      e
+## 2 chr1  350892  658970      u      f
+## 3 chr1  674620  875538      y      r
+## 4 chr1 1053255 1115056      p      e
+## 5 chr1 1127139 1545066      a      s
+## 6 chr1 1864092 1973553      x      u</code></pre>
 <p>All genomic functions in <strong>circlize</strong> expect input variable as a data frame which contains genomic data or a list of data frames which contains genomic data in different conditions.</p>
 
 </div>
@@ -310,11 +312,13 @@ bed =<span class="st"> </span><span class="kw">generateRandomBed</span>()
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -322,12 +326,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -339,6 +342,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -357,8 +364,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

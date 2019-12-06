@@ -47,7 +47,7 @@ chordDiagram(mat, grid.col = grid.col, annotationTrack = NULL)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-default-track-1.svg" alt="Track organization in `chordDiagram()`."  />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-default-track-1.svg" alt="Track organization in `chordDiagram()`." width="768" />
 <p class="caption">(\#fig:chord-diagram-default-track)Track organization in `chordDiagram()`.</p>
 </div>
 
@@ -128,7 +128,7 @@ circos.track(track.index = 1, panel.fun = function(x, y) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-labels-show-1.svg" alt="Change label directions."  />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-show-1.svg" alt="Change label directions." width="384" />
 <p class="caption">(\#fig:chord-diagram-labels-show)Change label directions.</p>
 </div>
 
@@ -150,7 +150,7 @@ for(si in get.all.sector.index()) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-labels-inside-1.svg" alt="Put sector labels to the grid."  />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-inside-1.svg" alt="Put sector labels to the grid." width="384" />
 <p class="caption">(\#fig:chord-diagram-labels-inside)Put sector labels to the grid.</p>
 </div>
 
@@ -180,7 +180,7 @@ circos.track(track.index = 1, panel.fun = function(x, y) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-labels-multile-style-1.svg" alt="Adjust label direction according to the width of sectors."  />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-multile-style-1.svg" alt="Adjust label direction according to the width of sectors." width="384" />
 <p class="caption">(\#fig:chord-diagram-labels-multile-style)Adjust label direction according to the width of sectors.</p>
 </div>
 
@@ -239,7 +239,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-axes-1.svg" alt="Customize sector axes for Chord diagram."  />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-axes-1.svg" alt="Customize sector axes for Chord diagram." width="576" />
 <p class="caption">(\#fig:chord-diagram-axes)Customize sector axes for Chord diagram.</p>
 </div>
 
@@ -263,7 +263,7 @@ abline(v = 0, lty = 2, col = "#00000080")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-sym-1.svg" alt="Rotate Chord diagram."  />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-sym-1.svg" alt="Rotate Chord diagram." width="768" />
 <p class="caption">(\#fig:chord-diagram-sym)Rotate Chord diagram.</p>
 </div>
 
@@ -310,7 +310,7 @@ Now the scale of the two Chord diagrams (Figure \@ref(fig:chord-diagram-compare)
 same if you compare the scale of axes in the two diagrams.
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/chord-diagram-compare-1.svg" alt="Compare two Chord Diagrams in a same scale."  />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-compare-1.svg" alt="Compare two Chord Diagrams in a same scale." width="768" />
 <p class="caption">(\#fig:chord-diagram-compare)Compare two Chord Diagrams in a same scale.</p>
 </div>
 
@@ -360,17 +360,17 @@ mat
 ```
 
 ```
-##       B1    B2     B3    B4    B5     C1    C2      C3     C4    C5
-## A1 -0.26  0.90 -0.048  0.85 -1.83 -0.019 -0.33  2.1960  0.786  1.80
-## A2 -0.75 -1.26 -2.399 -0.71 -1.81  0.362 -0.28 -0.2047 -2.102 -0.81
-## A3  0.44  0.84 -0.019  1.07  1.37  2.011  0.31  0.9751 -0.042  1.90
-## A4 -1.28 -2.35 -0.089 -0.54 -0.56 -1.178  1.84 -0.8676 -0.405  0.71
-## A5  1.18  0.61 -1.595  0.54  0.97 -0.755 -0.98 -0.5012 -0.113  0.74
-## B1  0.00  0.00  0.000  0.00  0.00  1.366 -0.71 -0.1262 -0.870  0.32
-## B2  0.00  0.00  0.000  0.00  0.00 -0.576 -1.28 -1.3884 -0.463 -0.28
-## B3  0.00  0.00  0.000  0.00  0.00 -0.805  2.38  0.4699 -1.911  1.09
-## B4  0.00  0.00  0.000  0.00  0.00 -0.535 -1.09  0.9604  0.370  0.16
-## B5  0.00  0.00  0.000  0.00  0.00  0.792  0.19 -0.0051 -0.462  2.71
+##       B1    B2     B3     B4    B5     C1     C2    C3    C4    C5
+## A1  0.98  3.24  0.517  2.128  0.44 -0.866  0.754 -0.90 -0.61  0.54
+## A2 -0.37 -0.42  0.369 -0.741 -0.46 -0.236 -0.499 -1.31 -1.19 -0.41
+## A3  1.05  0.30 -0.215 -1.096 -1.06 -0.197  0.214  2.00  2.20 -0.48
+## A4 -1.05  0.64  0.065  0.038  1.26  1.110 -0.325  0.60  1.31 -0.79
+## A5 -1.26 -0.48 -0.034  0.310 -0.35  0.085  0.095 -1.25 -0.27 -0.59
+## B1  0.00  0.00  0.000  0.000  0.00  1.651 -0.516 -1.24  0.71  0.88
+## B2  0.00  0.00  0.000  0.000  0.00 -0.054 -0.993 -1.28 -0.36 -1.02
+## B3  0.00  0.00  0.000  0.000  0.00  0.119  1.676 -0.57  0.06  1.96
+## B4  0.00  0.00  0.000  0.000  0.00  0.244 -0.441  0.62 -0.70 -0.09
+## B5  0.00  0.00  0.000  0.000  0.00  1.232 -0.723  1.11 -0.72  0.21
 ```
 
 When making the chord diagram, we set larger gaps between groups to identify different groups.
@@ -385,8 +385,8 @@ circos.par(gap.after = rep(c(rep(1, 4), 8), 3))
 ```
 
 ```
-## Warning: 'gap.degree' can only be modified before `circos.initialize`, or
-## maybe you forgot to call `circos.clear` in your last plot.
+## Warning: 'gap.degree' can only be modified before `circos.initialize`, or maybe
+## you forgot to call `circos.clear` in your last plot.
 ```
 
 ```r
@@ -410,7 +410,7 @@ highlight.sector(colnames(mat2), track.index = 1, col = "blue",
     text = "C", cex = 0.8, text.col = "white", niceFacing = TRUE)
 ```
 
-<img src="14-chord-diagram-advanced-usage_files/figure-epub3/unnamed-chunk-10-1.svg" style="display: block; margin: auto;" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/unnamed-chunk-10-1.svg" width="384" style="display: block; margin: auto;" />
 
 ```r
 circos.clear()

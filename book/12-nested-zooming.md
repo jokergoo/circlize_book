@@ -64,10 +64,10 @@ head(data, n = 4)
 
 ```
 ##   cate          x         y
-## 1    a 0.02552670 0.5546818
-## 2    a 0.04210805 0.8112373
-## 3    a 0.04953844 0.3809037
-## 4    a 0.05819180 0.7151335
+## 1    a 0.02314449 0.2170480
+## 2    a 0.03978064 0.8062479
+## 3    a 0.06893260 0.6284048
+## 4    a 0.07997291 0.5835629
 ```
 
 In `sector`, we randomly sampled several intervals which will be used for
@@ -83,10 +83,10 @@ head(zoom_sector, n = 4)
 
 ```
 ##           name start end cate
-## 16 a:(0.4,0.6]   0.4 0.6    a
-## 37   a:(0.8,1]   0.8 1.0    a
-## 43   b:(0,0.2]   0.0 0.2    b
-## 64 b:(0.4,0.6]   0.4 0.6    b
+## 17 a:(0.4,0.6]   0.4 0.6    a
+## 48   a:(0.8,1]   0.8 1.0    a
+## 57   b:(0,0.2]   0.0 0.2    b
+## 76 b:(0.4,0.6]   0.4 0.6    b
 ```
 
 And the subset of data which are in the zoomed intervals.
@@ -97,11 +97,11 @@ head(zoom_data, n = 4)
 ```
 
 ```
-##           name         x          y
-## 16 a:(0.4,0.6] 0.4122831 0.28695762
-## 17 a:(0.4,0.6] 0.4286131 0.28869011
-## 18 a:(0.4,0.6] 0.4361300 0.04236068
-## 19 a:(0.4,0.6] 0.4498025 0.96864117
+##           name         x         y
+## 17 a:(0.4,0.6] 0.4072693 0.3972460
+## 18 a:(0.4,0.6] 0.4186692 0.2021846
+## 19 a:(0.4,0.6] 0.4481431 0.3554347
+## 20 a:(0.4,0.6] 0.4597852 0.6696035
 ```
 
 The correspondance between the original sectors and the zoomed intervals are
@@ -115,10 +115,10 @@ head(correspondance, n = 4)
 
 ```
 ##    cate start end        name start.1 end.1
-## 16    a   0.4 0.6 a:(0.4,0.6]     0.4   0.6
-## 37    a   0.8 1.0   a:(0.8,1]     0.8   1.0
-## 43    b   0.0 0.2   b:(0,0.2]     0.0   0.2
-## 64    b   0.4 0.6 b:(0.4,0.6]     0.4   0.6
+## 17    a   0.4 0.6 a:(0.4,0.6]     0.4   0.6
+## 48    a   0.8 1.0   a:(0.8,1]     0.8   1.0
+## 57    b   0.0 0.2   b:(0,0.2]     0.0   0.2
+## 76    b   0.4 0.6 b:(0.4,0.6]     0.4   0.6
 ```
 
 The zooming is actually composed of two circulat plots where one for the
@@ -163,7 +163,7 @@ circos.nested(f1, f2, correspondance)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-epub3/nested-normal-1.svg" alt="Nested zooming between two circular plots."  />
+<img src="12-nested-zooming_files/figure-html/nested-normal-1.svg" alt="Nested zooming between two circular plots." width="384" />
 <p class="caption">(\#fig:nested-normal)Nested zooming between two circular plots.</p>
 </div>
 
@@ -180,7 +180,7 @@ circos.nested(f2, f1, correspondance[, c(4:6, 1:3)])
 ```
 
 <div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-epub3/nested2-1.svg" alt="Nested zooming between two circular plots, zoomed plot is put outside."  />
+<img src="12-nested-zooming_files/figure-html/nested2-1.svg" alt="Nested zooming between two circular plots, zoomed plot is put outside." width="384" />
 <p class="caption">(\#fig:nested2)Nested zooming between two circular plots, zoomed plot is put outside.</p>
 </div>
 
@@ -239,7 +239,7 @@ circos.nested(f1, f2, correspondance, connection_col = sector_col[correspondance
 ```
 
 <div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-epub3/nested-complex-1.svg" alt="Nested zooming between two circular plots, slightly complex plots."  />
+<img src="12-nested-zooming_files/figure-html/nested-complex-1.svg" alt="Nested zooming between two circular plots, slightly complex plots." width="384" />
 <p class="caption">(\#fig:nested-complex)Nested zooming between two circular plots, slightly complex plots.</p>
 </div>
 
@@ -329,6 +329,6 @@ circos.nested(f1, f2, correspondance, connection_col = chr_bg_color[correspondan
 ```
 
 <div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-epub3/dmr-1.svg" alt="Visualization of DMRs."  />
+<img src="12-nested-zooming_files/figure-html/dmr-1.svg" alt="Visualization of DMRs." width="576" />
 <p class="caption">(\#fig:dmr)Visualization of DMRs.</p>
 </div>
