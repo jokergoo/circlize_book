@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 Advanced usage of chordDiagram() | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 14 Advanced usage of chordDiagram() | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -52,41 +52,68 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -260,13 +287,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="advanced-usage-of-chorddiagram" class="section level1">
 <h1><span class="header-section-number">Chapter 14</span> Advanced usage of <code>chordDiagram()</code></h1>
-<p>The default style of <code>chordDiagram()</code> is somehow enough for most visualization tasks, still you can have more configurations on the plot.</p>
-<p>The usage is same for both ajacency matrix and ajacency list, so we only demonstrate with the matrix.</p>
+<p>The default style of <code>chordDiagram()</code> is somehow enough for most visualization
+tasks, still you can have more configurations on the plot.</p>
+<p>The usage is same for both ajacency matrix and ajacency list, so we only
+demonstrate with the matrix.</p>
 <div id="organization-of-tracks" class="section level2">
 <h2><span class="header-section-number">14.1</span> Organization of tracks</h2>
-<p>By default, <code>chordDiagram()</code> creates two tracks, one track for labels and one track for grids with axes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat)
-<span class="kw">circos.info</span>()</code></pre></div>
+<p>By default, <code>chordDiagram()</code> creates two tracks, one track for labels and one
+track for grids with axes.</p>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat)</a>
+<a class="sourceLine" id="cb285-2" data-line-number="2"><span class="kw">circos.info</span>()</a></code></pre></div>
 <pre><code>## All your sectors:
 ## [1] &quot;S1&quot; &quot;S2&quot; &quot;S3&quot; &quot;E1&quot; &quot;E2&quot; &quot;E3&quot; &quot;E4&quot; &quot;E5&quot; &quot;E6&quot;
 ## 
@@ -275,20 +305,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 
 ## Your current sector.index is E6
 ## Your current track.index is 2</code></pre>
-<p>These two tracks can be controlled by <code>annotationTrack</code> argument. Available values for this argument are <code>grid</code>, <code>name</code> and <code>axis</code>. The height of annotation tracks can be set by <code>annotationTrackHeight</code> which is the percentage to the radius of unit circle and can be set by <code>uh()</code> function with an absolute unit. Axes are only added if <code>grid</code> is set in <code>annotationTrack</code> (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-default-track">14.1</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>)
-<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;grid&quot;</span>),
-    <span class="dt">annotationTrackHeight =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.01</span>))
-<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>)</code></pre></div>
+<p>These two tracks can be controlled by <code>annotationTrack</code> argument. Available
+values for this argument are <code>grid</code>, <code>name</code> and <code>axis</code>. The height of
+annotation tracks can be set by <code>annotationTrackHeight</code> which is the
+percentage to the radius of unit circle and can be set by <code>uh()</code> function with
+an absolute unit. Axes are only added if <code>grid</code> is set in <code>annotationTrack</code>
+(Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-default-track">14.1</a>).</p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>)</a>
+<a class="sourceLine" id="cb287-2" data-line-number="2"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;grid&quot;</span>),</a>
+<a class="sourceLine" id="cb287-3" data-line-number="3">    <span class="dt">annotationTrackHeight =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.01</span>))</a>
+<a class="sourceLine" id="cb287-4" data-line-number="4"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-default-track"></span>
 <img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-default-track-1.svg" alt="Track organization in `chordDiagram()`." width="768" />
 <p class="caption">
 Figure 14.1: Track organization in <code>chordDiagram()</code>.
 </p>
 </div>
-<p>Several empty tracks can be allocated before Chord diagram is drawn. Then self-defined graphics can be added to these empty tracks afterwards. The number of pre-allocated tracks can be set through <code>preAllocateTracks</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">preAllocateTracks =</span> <span class="dv">2</span>)
-<span class="kw">circos.info</span>()</code></pre></div>
+<p>Several empty tracks can be allocated before Chord diagram is drawn. Then self-defined graphics can
+be added to these empty tracks afterwards. The number of pre-allocated tracks can be set
+through <code>preAllocateTracks</code>.</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">preAllocateTracks =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb288-2" data-line-number="2"><span class="kw">circos.info</span>()</a></code></pre></div>
 <pre><code>## All your sectors:
 ## [1] &quot;S1&quot; &quot;S2&quot; &quot;S3&quot; &quot;E1&quot; &quot;E2&quot; &quot;E3&quot; &quot;E4&quot; &quot;E5&quot; &quot;E6&quot;
 ## 
@@ -298,108 +335,131 @@ Figure 14.1: Track organization in <code>chordDiagram()</code>.
 ## Your current sector.index is E6
 ## Your current track.index is 4</code></pre>
 <p>The default settings for pre-allocated tracks are:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
-     <span class="dt">track.height =</span> <span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span>),
-     <span class="dt">bg.col =</span> <span class="ot">NA</span>,
-     <span class="dt">bg.border =</span> <span class="ot">NA</span>,
-     <span class="dt">bg.lty =</span> <span class="kw">par</span>(<span class="st">&quot;lty&quot;</span>),
-     <span class="dt">bg.lwd =</span> <span class="kw">par</span>(<span class="st">&quot;lwd&quot;</span>))</code></pre></div>
-<p>The default settings for pre-allocated tracks can be overwritten by specifying <code>preAllocateTracks</code> as a list.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>,
-    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.3</span>))</code></pre></div>
-<p>If more than one tracks need to be pre-allocated, just specify <code>preAllocateTracks</code> as a list which contains settings for each track:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>,
-    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.1</span>),
-                             <span class="kw">list</span>(<span class="dt">bg.border =</span> <span class="st">&quot;black&quot;</span>)))</code></pre></div>
-<p>By default <code>chordDiagram()</code> provides poor supports for customization of sector labels and axes, but with <code>preAllocateTracks</code> it is rather easy to customize them. Such customization will be introduced in next section.</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1"><span class="kw">list</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb290-2" data-line-number="2">     <span class="dt">track.height =</span> <span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span>),</a>
+<a class="sourceLine" id="cb290-3" data-line-number="3">     <span class="dt">bg.col =</span> <span class="ot">NA</span>,</a>
+<a class="sourceLine" id="cb290-4" data-line-number="4">     <span class="dt">bg.border =</span> <span class="ot">NA</span>,</a>
+<a class="sourceLine" id="cb290-5" data-line-number="5">     <span class="dt">bg.lty =</span> <span class="kw">par</span>(<span class="st">&quot;lty&quot;</span>),</a>
+<a class="sourceLine" id="cb290-6" data-line-number="6">     <span class="dt">bg.lwd =</span> <span class="kw">par</span>(<span class="st">&quot;lwd&quot;</span>))</a></code></pre></div>
+<p>The default settings for pre-allocated tracks can be overwritten by specifying <code>preAllocateTracks</code>
+as a list.</p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb291-2" data-line-number="2">    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.3</span>))</a></code></pre></div>
+<p>If more than one tracks need to be pre-allocated, just specify <code>preAllocateTracks</code>
+as a list which contains settings for each track:</p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb292-2" data-line-number="2">    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.1</span>),</a>
+<a class="sourceLine" id="cb292-3" data-line-number="3">                             <span class="kw">list</span>(<span class="dt">bg.border =</span> <span class="st">&quot;black&quot;</span>)))</a></code></pre></div>
+<p>By default <code>chordDiagram()</code> provides poor supports for customization of sector
+labels and axes, but with <code>preAllocateTracks</code> it is rather easy to customize
+them. Such customization will be introduced in next section.</p>
 </div>
 <div id="customize-sector-labels" class="section level2">
 <h2><span class="header-section-number">14.2</span> Customize sector labels</h2>
-<p>In <code>chordDiagram()</code>, there is no argument to control the style of sector labels, but this can be done by first pre-allocating an empty track and customizing the labels in it later. In the following example, one track is firstly allocated and a Chord diagram is added without label track and axes. Later, the first track is updated with adding labels with clockwise facings (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels-show">14.2</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, 
-    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">max</span>(<span class="kw">strwidth</span>(<span class="kw">unlist</span>(<span class="kw">dimnames</span>(mat))))))
-<span class="co"># we go back to the first track and customize sector labels</span>
-<span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ylim[<span class="dv">1</span>], CELL_META<span class="op">$</span>sector.index, 
-        <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>))
-}, <span class="dt">bg.border =</span> <span class="ot">NA</span>) <span class="co"># here set bg.border to NA is important</span></code></pre></div>
+<p>In <code>chordDiagram()</code>, there is no argument to control the style of sector
+labels, but this can be done by first pre-allocating an empty track and
+customizing the labels in it later. In the following example, one track is
+firstly allocated and a Chord diagram is added without label track and axes.
+Later, the first track is updated with adding labels with clockwise facings
+(Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels-show">14.2</a>).</p>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, </a>
+<a class="sourceLine" id="cb293-2" data-line-number="2">    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">max</span>(<span class="kw">strwidth</span>(<span class="kw">unlist</span>(<span class="kw">dimnames</span>(mat))))))</a>
+<a class="sourceLine" id="cb293-3" data-line-number="3"><span class="co"># we go back to the first track and customize sector labels</span></a>
+<a class="sourceLine" id="cb293-4" data-line-number="4"><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb293-5" data-line-number="5">    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ylim[<span class="dv">1</span>], CELL_META<span class="op">$</span>sector.index, </a>
+<a class="sourceLine" id="cb293-6" data-line-number="6">        <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb293-7" data-line-number="7">}, <span class="dt">bg.border =</span> <span class="ot">NA</span>) <span class="co"># here set bg.border to NA is important</span></a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-labels-show"></span>
-<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-show-1.svg" alt="Change label directions." width="384" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-show-1.svg" alt="Change label directions." width="672" />
 <p class="caption">
 Figure 14.2: Change label directions.
 </p>
 </div>
-<p>In the following example, the labels are put on the grids (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels-inside">14.3</a>). Please note <code>circos.text()</code> and <code>get.cell.meta.data()</code> can be used outside <code>panel.fun</code> if the sector index and track index are specified explicitly.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, 
-    <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;grid&quot;</span>, <span class="st">&quot;axis&quot;</span>), <span class="dt">annotationTrackHeight =</span> <span class="kw">uh</span>(<span class="dv">5</span>, <span class="st">&quot;mm&quot;</span>))
-<span class="cf">for</span>(si <span class="cf">in</span> <span class="kw">get.all.sector.index</span>()) {
-    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>)
-    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>)
-    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="kw">mean</span>(ylim), si, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>, 
-        <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>)
-}</code></pre></div>
+<p>In the following example, the labels are put on the grids (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels-inside">14.3</a>).
+Please note <code>circos.text()</code> and
+<code>get.cell.meta.data()</code> can be used outside <code>panel.fun</code> if the sector index and
+track index are specified explicitly.</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, </a>
+<a class="sourceLine" id="cb294-2" data-line-number="2">    <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;grid&quot;</span>, <span class="st">&quot;axis&quot;</span>), <span class="dt">annotationTrackHeight =</span> <span class="kw">uh</span>(<span class="dv">5</span>, <span class="st">&quot;mm&quot;</span>))</a>
+<a class="sourceLine" id="cb294-3" data-line-number="3"><span class="cf">for</span>(si <span class="cf">in</span> <span class="kw">get.all.sector.index</span>()) {</a>
+<a class="sourceLine" id="cb294-4" data-line-number="4">    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb294-5" data-line-number="5">    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb294-6" data-line-number="6">    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="kw">mean</span>(ylim), si, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb294-7" data-line-number="7">        <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>)</a>
+<a class="sourceLine" id="cb294-8" data-line-number="8">}</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-labels-inside"></span>
-<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-inside-1.svg" alt="Put sector labels to the grid." width="384" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-inside-1.svg" alt="Put sector labels to the grid." width="672" />
 <p class="caption">
 Figure 14.3: Put sector labels to the grid.
 </p>
 </div>
-<p>For the last example in this section, if the width of the sector is less than 20 degree, the labels are added in the radical direction (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels-multile-style">14.4</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
-mat2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>), <span class="dv">10</span>)
-<span class="kw">chordDiagram</span>(mat2, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, 
-    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">max</span>(<span class="kw">strwidth</span>(<span class="kw">unlist</span>(<span class="kw">dimnames</span>(mat))))))
-<span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>)
-    xplot =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xplot&quot;</span>)
-    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>)
-    sector.name =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)
-
-    <span class="cf">if</span>(<span class="kw">abs</span>(xplot[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xplot[<span class="dv">1</span>]) <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>) {
-        <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), ylim[<span class="dv">1</span>], sector.name, <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>,
-            <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)
-    } <span class="cf">else</span> {
-        <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), ylim[<span class="dv">1</span>], sector.name, <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>, 
-            <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>), <span class="dt">col=</span> <span class="st">&quot;blue&quot;</span>)
-    }
-}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</code></pre></div>
+<p>For the last example in this section, if the width of the sector is less than
+20 degree, the labels are added in the radical direction (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels-multile-style">14.4</a>).</p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb295-2" data-line-number="2">mat2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>), <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb295-3" data-line-number="3"><span class="kw">chordDiagram</span>(mat2, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, </a>
+<a class="sourceLine" id="cb295-4" data-line-number="4">    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">max</span>(<span class="kw">strwidth</span>(<span class="kw">unlist</span>(<span class="kw">dimnames</span>(mat))))))</a>
+<a class="sourceLine" id="cb295-5" data-line-number="5"><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb295-6" data-line-number="6">    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>)</a>
+<a class="sourceLine" id="cb295-7" data-line-number="7">    xplot =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xplot&quot;</span>)</a>
+<a class="sourceLine" id="cb295-8" data-line-number="8">    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>)</a>
+<a class="sourceLine" id="cb295-9" data-line-number="9">    sector.name =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)</a>
+<a class="sourceLine" id="cb295-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb295-11" data-line-number="11">    <span class="cf">if</span>(<span class="kw">abs</span>(xplot[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xplot[<span class="dv">1</span>]) <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>) {</a>
+<a class="sourceLine" id="cb295-12" data-line-number="12">        <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), ylim[<span class="dv">1</span>], sector.name, <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>,</a>
+<a class="sourceLine" id="cb295-13" data-line-number="13">            <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb295-14" data-line-number="14">    } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb295-15" data-line-number="15">        <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), ylim[<span class="dv">1</span>], sector.name, <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>, </a>
+<a class="sourceLine" id="cb295-16" data-line-number="16">            <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>), <span class="dt">col=</span> <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb295-17" data-line-number="17">    }</a>
+<a class="sourceLine" id="cb295-18" data-line-number="18">}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-labels-multile-style"></span>
-<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-multile-style-1.svg" alt="Adjust label direction according to the width of sectors." width="384" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-multile-style-1.svg" alt="Adjust label direction according to the width of sectors." width="672" />
 <p class="caption">
 Figure 14.4: Adjust label direction according to the width of sectors.
 </p>
 </div>
-<p>When you set direction of sector labels as radical (<code>clockwise</code> or <code>reverse.clockwise</code>), if the labels are too long and exceed your figure region, you can either decrease the size of the font or set <code>canvas.xlim</code> and <code>canvas.ylim</code> parameters in <code>circos.par()</code> to wider intervals.</p>
+<p>When you set direction of sector labels as radical (<code>clockwise</code> or
+<code>reverse.clockwise</code>), if the labels are too long and exceed your figure
+region, you can either decrease the size of the font or set <code>canvas.xlim</code> and
+<code>canvas.ylim</code> parameters in <code>circos.par()</code> to wider intervals.</p>
 </div>
 <div id="customize-sector-axes" class="section level2">
 <h2><span class="header-section-number">14.3</span> Customize sector axes</h2>
-<p>Axes are helpful to correspond to the absolute values of links. By default <code>chordDiagram()</code> adds axes on the grid track. But it is easy to customize one with self-defined code.</p>
-<p>In following example code, we draw another type of axes which show relative percent on sectors. We first pre-allocate an empty track by <code>preAllocateTracks</code> and come back to this track to add axes later.</p>
-<p>You may see we add the first axes to the top of second track. You can also put them to the bottom of the first track.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># similar as the previous example, but we only plot the grid track</span>
-<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, 
-    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">uh</span>(<span class="dv">5</span>, <span class="st">&quot;mm&quot;</span>)))
-<span class="cf">for</span>(si <span class="cf">in</span> <span class="kw">get.all.sector.index</span>()) {
-    <span class="kw">circos.axis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>, <span class="dt">labels.cex =</span> <span class="fl">0.3</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">2</span>)
-}</code></pre></div>
-<p>Now we go back to the first track to add the second type of axes and sector names. In <code>panel.fun</code>, if the sector is less than 30 degree, the break for the axis is set to 0.5 (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-axes">14.5</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the second axis as well as the sector labels are added in this track</span>
-<span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>)
-    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>)
-    sector.name =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)
-    xplot =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xplot&quot;</span>)
-    
-    <span class="kw">circos.lines</span>(xlim, <span class="kw">c</span>(<span class="kw">mean</span>(ylim), <span class="kw">mean</span>(ylim)), <span class="dt">lty =</span> <span class="dv">3</span>) <span class="co"># dotted line</span>
-    by =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">abs</span>(xplot[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xplot[<span class="dv">1</span>]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>)
-    <span class="cf">for</span>(p <span class="cf">in</span> <span class="kw">seq</span>(by, <span class="dv">1</span>, <span class="dt">by =</span> by)) {
-        <span class="kw">circos.text</span>(p<span class="op">*</span>(xlim[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xlim[<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span>xlim[<span class="dv">1</span>], <span class="kw">mean</span>(ylim) <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span>, 
-            <span class="kw">paste0</span>(p<span class="op">*</span><span class="dv">100</span>, <span class="st">&quot;%&quot;</span>), <span class="dt">cex =</span> <span class="fl">0.3</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>), <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
-    }
-    
-    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="dv">1</span>, sector.name, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>))
-}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)
-<span class="kw">circos.clear</span>()</code></pre></div>
+<p>Axes are helpful to correspond to the absolute values of links. By default
+<code>chordDiagram()</code> adds axes on the grid track. But it is easy to customize one
+with self-defined code.</p>
+<p>In following example code, we draw another type of axes which show relative
+percent on sectors. We first pre-allocate an empty track by
+<code>preAllocateTracks</code> and come back to this track to add axes later.</p>
+<p>You may see we add the first axes to the top of second track. You can also
+put them to the bottom of the first track.</p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" data-line-number="1"><span class="co"># similar as the previous example, but we only plot the grid track</span></a>
+<a class="sourceLine" id="cb296-2" data-line-number="2"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, </a>
+<a class="sourceLine" id="cb296-3" data-line-number="3">    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">uh</span>(<span class="dv">5</span>, <span class="st">&quot;mm&quot;</span>)))</a>
+<a class="sourceLine" id="cb296-4" data-line-number="4"><span class="cf">for</span>(si <span class="cf">in</span> <span class="kw">get.all.sector.index</span>()) {</a>
+<a class="sourceLine" id="cb296-5" data-line-number="5">    <span class="kw">circos.axis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>, <span class="dt">labels.cex =</span> <span class="fl">0.3</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb296-6" data-line-number="6">}</a></code></pre></div>
+<p>Now we go back to the first track to add the second type of axes and sector names.
+In <code>panel.fun</code>, if the sector is less than 30 degree, the break for the axis is set to 0.5
+(Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-axes">14.5</a>).</p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" data-line-number="1"><span class="co"># the second axis as well as the sector labels are added in this track</span></a>
+<a class="sourceLine" id="cb297-2" data-line-number="2"><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb297-3" data-line-number="3">    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>)</a>
+<a class="sourceLine" id="cb297-4" data-line-number="4">    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>)</a>
+<a class="sourceLine" id="cb297-5" data-line-number="5">    sector.name =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)</a>
+<a class="sourceLine" id="cb297-6" data-line-number="6">    xplot =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xplot&quot;</span>)</a>
+<a class="sourceLine" id="cb297-7" data-line-number="7">    </a>
+<a class="sourceLine" id="cb297-8" data-line-number="8">    <span class="kw">circos.lines</span>(xlim, <span class="kw">c</span>(<span class="kw">mean</span>(ylim), <span class="kw">mean</span>(ylim)), <span class="dt">lty =</span> <span class="dv">3</span>) <span class="co"># dotted line</span></a>
+<a class="sourceLine" id="cb297-9" data-line-number="9">    by =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">abs</span>(xplot[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xplot[<span class="dv">1</span>]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb297-10" data-line-number="10">    <span class="cf">for</span>(p <span class="cf">in</span> <span class="kw">seq</span>(by, <span class="dv">1</span>, <span class="dt">by =</span> by)) {</a>
+<a class="sourceLine" id="cb297-11" data-line-number="11">        <span class="kw">circos.text</span>(p<span class="op">*</span>(xlim[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xlim[<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span>xlim[<span class="dv">1</span>], <span class="kw">mean</span>(ylim) <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span>, </a>
+<a class="sourceLine" id="cb297-12" data-line-number="12">            <span class="kw">paste0</span>(p<span class="op">*</span><span class="dv">100</span>, <span class="st">&quot;%&quot;</span>), <span class="dt">cex =</span> <span class="fl">0.3</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>), <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb297-13" data-line-number="13">    }</a>
+<a class="sourceLine" id="cb297-14" data-line-number="14">    </a>
+<a class="sourceLine" id="cb297-15" data-line-number="15">    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="dv">1</span>, sector.name, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb297-16" data-line-number="16">}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb297-17" data-line-number="17"><span class="kw">circos.clear</span>()</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-axes"></span>
 <img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-axes-1.svg" alt="Customize sector axes for Chord diagram." width="576" />
 <p class="caption">
@@ -409,70 +469,87 @@ Figure 14.5: Customize sector axes for Chord diagram.
 </div>
 <div id="put-horizontally-or-vertically-symmetric" class="section level2">
 <h2><span class="header-section-number">14.4</span> Put horizontally or vertically symmetric</h2>
-<p>In Chord diagram, when there are two groups (which correspond to rows and columns if the input is an adjacency matrix), it is always visually beautiful to rotate the diagram to be symmetric on horizontal direction or vertical direction. See following example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
-<span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">0</span>)
-<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">big.gap =</span> <span class="dv">20</span>)
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000080&quot;</span>)
-<span class="kw">circos.clear</span>()
-
-<span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>)
-<span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">big.gap =</span> <span class="dv">20</span>)
-<span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000080&quot;</span>)</code></pre></div>
+<p>In Chord diagram, when there are two groups (which correspond to rows and columns
+if the input is an adjacency matrix), it is always visually beautiful to rotate the diagram
+to be symmetric on horizontal direction or vertical direction. See following example:</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb298-2" data-line-number="2"><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb298-3" data-line-number="3"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">big.gap =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb298-4" data-line-number="4"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000080&quot;</span>)</a>
+<a class="sourceLine" id="cb298-5" data-line-number="5"><span class="kw">circos.clear</span>()</a>
+<a class="sourceLine" id="cb298-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb298-7" data-line-number="7"><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>)</a>
+<a class="sourceLine" id="cb298-8" data-line-number="8"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">big.gap =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb298-9" data-line-number="9"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000080&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-sym"></span>
 <img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-sym-1.svg" alt="Rotate Chord diagram." width="768" />
 <p class="caption">
 Figure 14.6: Rotate Chord diagram.
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
 </div>
 <div id="compare-two-chord-diagrams" class="section level2">
 <h2><span class="header-section-number">14.5</span> Compare two Chord diagrams</h2>
-<p>Normally, in Chord diagram, values in <code>mat</code> are normalized to the summation of the absolute values in the matrix, which means the width for links only represents relative values. Then, when comparing two Chord diagrams, it is necessary that unit width of links in the two plots should be represented in a same scale. This problem can be solved by adding larger gaps to the Chord diagram which has smaller matrix.</p>
+<p>Normally, in Chord diagram, values in <code>mat</code> are normalized to the summation of
+the absolute values in the matrix, which means the width for links only
+represents relative values. Then, when comparing two Chord diagrams, it is
+necessary that unit width of links in the two plots should be represented in a
+same scale. This problem can be solved by adding larger gaps to the Chord
+diagram which has smaller matrix.</p>
 <p>First we make the “big” Chord diagram.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat1 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">20</span>, <span class="dv">25</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dv">5</span>)
-<span class="kw">chordDiagram</span>(mat1, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">transparency =</span> <span class="fl">0.5</span>,
-    <span class="dt">big.gap =</span> <span class="dv">10</span>, <span class="dt">small.gap =</span> <span class="dv">1</span>) <span class="co"># 10 and 1 are default values for the two arguments</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" data-line-number="1">mat1 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">20</span>, <span class="dv">25</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb300-2" data-line-number="2"><span class="kw">chordDiagram</span>(mat1, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">transparency =</span> <span class="fl">0.5</span>,</a>
+<a class="sourceLine" id="cb300-3" data-line-number="3">    <span class="dt">big.gap =</span> <span class="dv">10</span>, <span class="dt">small.gap =</span> <span class="dv">1</span>) <span class="co"># 10 and 1 are default values for the two arguments</span></a></code></pre></div>
 <p>The second matrix only has half the values in <code>mat1</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat2 =<span class="st"> </span>mat1 <span class="op">/</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
-<p><code>calc_gap()</code> can be used to calculate the gap for the second Chord diagram to make the scale of the two Chord diagram the same.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap =<span class="st"> </span><span class="kw">calc_gap</span>(mat1, mat2, <span class="dt">big.gap =</span> <span class="dv">10</span>, <span class="dt">small.gap =</span> <span class="dv">1</span>)
-<span class="kw">chordDiagram</span>(mat2, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">transparency =</span> <span class="fl">0.5</span>,
-    <span class="dt">big.gap =</span> gap, <span class="dt">small.gap =</span> <span class="dv">1</span>)</code></pre></div>
-<p>Now the scale of the two Chord diagrams (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-compare">14.7</a>) are the same if you compare the scale of axes in the two diagrams.</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" data-line-number="1">mat2 =<span class="st"> </span>mat1 <span class="op">/</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<p><code>calc_gap()</code> can be used to calculate the gap for the second Chord diagram
+to make the scale of the two Chord diagram the same.</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" data-line-number="1">gap =<span class="st"> </span><span class="kw">calc_gap</span>(mat1, mat2, <span class="dt">big.gap =</span> <span class="dv">10</span>, <span class="dt">small.gap =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb302-2" data-line-number="2"><span class="kw">chordDiagram</span>(mat2, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">transparency =</span> <span class="fl">0.5</span>,</a>
+<a class="sourceLine" id="cb302-3" data-line-number="3">    <span class="dt">big.gap =</span> gap, <span class="dt">small.gap =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p>Now the scale of the two Chord diagrams (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-compare">14.7</a>) are the
+same if you compare the scale of axes in the two diagrams.</p>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-compare"></span>
 <img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-compare-1.svg" alt="Compare two Chord Diagrams in a same scale." width="768" />
 <p class="caption">
 Figure 14.7: Compare two Chord Diagrams in a same scale.
 </p>
 </div>
-<p>To correctly use the functionality of <code>calc_gap()</code>, the two Chord diagram should have same value for <code>small.gap</code> and there should be no overlap between the two sets of the sectors.</p>
+<p>To correctly use the functionality of <code>calc_gap()</code>, the two Chord diagram should
+have same value for <code>small.gap</code> and there should be no overlap between the two
+sets of the sectors.</p>
 </div>
 <div id="multiple-group-chord-diagram" class="section level2">
 <h2><span class="header-section-number">14.6</span> Multiple-group Chord diagram</h2>
-<p>Generally <code>chordDiagram()</code> function visualizes relations between two groups (i.e. from rows to columns if the input is an adjacency matrix or from column 1 to column 2 if the input is an adjacency list), however, for <code>chordDiagram()</code>, it actually doesn’t need any grouping information. The visual effect of grouping is just enhanced by setting different gap degrees. In this case, it is easy to make a Chord diagram with more than two groups.</p>
+<p>Generally <code>chordDiagram()</code> function visualizes relations between two groups
+(i.e. from rows to columns if the input is an adjacency matrix or from column
+1 to column 2 if the input is an adjacency list), however, for
+<code>chordDiagram()</code>, it actually doesn’t need any grouping information. The
+visual effect of grouping is just enhanced by setting different gap degrees.
+In this case, it is easy to make a Chord diagram with more than two groups.</p>
 <p>First let’s generate three matrix which contain pairwise relations from three groups:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">digits =</span> <span class="dv">2</span>)
-mat1 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)
-<span class="kw">rownames</span>(mat1) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
-<span class="kw">colnames</span>(mat1) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
-
-mat2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)
-<span class="kw">rownames</span>(mat2) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
-<span class="kw">colnames</span>(mat2) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
-
-mat3 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)
-<span class="kw">rownames</span>(mat3) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
-<span class="kw">colnames</span>(mat3) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre></div>
-<p>Since <code>chordDiagram()</code> only accepts one single matrix, here the three matrix are merged into one big matrix.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> <span class="dv">10</span>, <span class="dt">ncol =</span> <span class="dv">10</span>)
-<span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rownames</span>(mat2), <span class="kw">rownames</span>(mat3))
-<span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">colnames</span>(mat1), <span class="kw">colnames</span>(mat2))
-mat[<span class="kw">rownames</span>(mat1), <span class="kw">colnames</span>(mat1)] =<span class="st"> </span>mat1
-mat[<span class="kw">rownames</span>(mat2), <span class="kw">colnames</span>(mat2)] =<span class="st"> </span>mat2
-mat[<span class="kw">rownames</span>(mat3), <span class="kw">colnames</span>(mat3)] =<span class="st"> </span>mat3
-mat</code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" data-line-number="1"><span class="kw">options</span>(<span class="dt">digits =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb303-2" data-line-number="2">mat1 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb303-3" data-line-number="3"><span class="kw">rownames</span>(mat1) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb303-4" data-line-number="4"><span class="kw">colnames</span>(mat1) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb303-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb303-6" data-line-number="6">mat2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb303-7" data-line-number="7"><span class="kw">rownames</span>(mat2) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb303-8" data-line-number="8"><span class="kw">colnames</span>(mat2) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb303-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb303-10" data-line-number="10">mat3 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb303-11" data-line-number="11"><span class="kw">rownames</span>(mat3) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb303-12" data-line-number="12"><span class="kw">colnames</span>(mat3) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
+<p>Since <code>chordDiagram()</code> only accepts one single matrix, here the three
+matrix are merged into one big matrix.</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" data-line-number="1">mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> <span class="dv">10</span>, <span class="dt">ncol =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb304-2" data-line-number="2"><span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rownames</span>(mat2), <span class="kw">rownames</span>(mat3))</a>
+<a class="sourceLine" id="cb304-3" data-line-number="3"><span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">colnames</span>(mat1), <span class="kw">colnames</span>(mat2))</a>
+<a class="sourceLine" id="cb304-4" data-line-number="4">mat[<span class="kw">rownames</span>(mat1), <span class="kw">colnames</span>(mat1)] =<span class="st"> </span>mat1</a>
+<a class="sourceLine" id="cb304-5" data-line-number="5">mat[<span class="kw">rownames</span>(mat2), <span class="kw">colnames</span>(mat2)] =<span class="st"> </span>mat2</a>
+<a class="sourceLine" id="cb304-6" data-line-number="6">mat[<span class="kw">rownames</span>(mat3), <span class="kw">colnames</span>(mat3)] =<span class="st"> </span>mat3</a>
+<a class="sourceLine" id="cb304-7" data-line-number="7">mat</a></code></pre></div>
 <pre><code>##       B1    B2     B3     B4    B5     C1     C2    C3    C4    C5
 ## A1  0.98  3.24  0.517  2.128  0.44 -0.866  0.754 -0.90 -0.61  0.54
 ## A2 -0.37 -0.42  0.369 -0.741 -0.46 -0.236 -0.499 -1.31 -1.19 -0.41
@@ -484,38 +561,40 @@ mat</code></pre></div>
 ## B3  0.00  0.00  0.000  0.000  0.00  0.119  1.676 -0.57  0.06  1.96
 ## B4  0.00  0.00  0.000  0.000  0.00  0.244 -0.441  0.62 -0.70 -0.09
 ## B5  0.00  0.00  0.000  0.000  0.00  1.232 -0.723  1.11 -0.72  0.21</code></pre>
-<p>When making the chord diagram, we set larger gaps between groups to identify different groups. Here we manually adjust <code>gap.after</code> in <code>circos.par()</code>.</p>
+<p>When making the chord diagram, we set larger gaps between groups to identify different groups.
+Here we manually adjust <code>gap.after</code> in <code>circos.par()</code>.</p>
 <p>Also we add an additional track in which we add lines to enhance the visual effect of different groups.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(circlize)
-<span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="dv">8</span>), <span class="dv">3</span>))</code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" data-line-number="1"><span class="kw">library</span>(circlize)</a>
+<a class="sourceLine" id="cb306-2" data-line-number="2"><span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="dv">8</span>), <span class="dv">3</span>))</a></code></pre></div>
 <pre><code>## Warning: &#39;gap.degree&#39; can only be modified before `circos.initialize`, or maybe
 ## you forgot to call `circos.clear` in your last plot.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;grid&quot;</span>, <span class="st">&quot;axis&quot;</span>),
-    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(
-        <span class="dt">track.height =</span> <span class="kw">uh</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>),
-        <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="kw">uh</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">0</span>)
-))
-<span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">2</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    sector.index =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)
-    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>)
-    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>)
-    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="kw">mean</span>(ylim), sector.index, <span class="dt">cex =</span> <span class="fl">0.6</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
-}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)
-
-<span class="kw">highlight.sector</span>(<span class="kw">rownames</span>(mat1), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, 
-    <span class="dt">text =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">text.col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
-<span class="kw">highlight.sector</span>(<span class="kw">colnames</span>(mat1), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>, 
-    <span class="dt">text =</span> <span class="st">&quot;B&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">text.col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
-<span class="kw">highlight.sector</span>(<span class="kw">colnames</span>(mat2), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, 
-    <span class="dt">text =</span> <span class="st">&quot;C&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">text.col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="14-chord-diagram-advanced-usage_files/figure-html/unnamed-chunk-10-1.svg" width="384" style="display: block; margin: auto;" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
-<p>If row names and column names in the big matrix are not grouped, the sector order can be manually adjusted by <code>order</code> argument.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chordDiagram</span>(mat, <span class="dt">order =</span> <span class="kw">c</span>(<span class="kw">paset0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paset0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paset0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)))</code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;grid&quot;</span>, <span class="st">&quot;axis&quot;</span>),</a>
+<a class="sourceLine" id="cb308-2" data-line-number="2">    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb308-3" data-line-number="3">        <span class="dt">track.height =</span> <span class="kw">uh</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>),</a>
+<a class="sourceLine" id="cb308-4" data-line-number="4">        <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="kw">uh</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb308-5" data-line-number="5">))</a>
+<a class="sourceLine" id="cb308-6" data-line-number="6"><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">2</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb308-7" data-line-number="7">    sector.index =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)</a>
+<a class="sourceLine" id="cb308-8" data-line-number="8">    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>)</a>
+<a class="sourceLine" id="cb308-9" data-line-number="9">    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>)</a>
+<a class="sourceLine" id="cb308-10" data-line-number="10">    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="kw">mean</span>(ylim), sector.index, <span class="dt">cex =</span> <span class="fl">0.6</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb308-11" data-line-number="11">}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb308-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb308-13" data-line-number="13"><span class="kw">highlight.sector</span>(<span class="kw">rownames</span>(mat1), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, </a>
+<a class="sourceLine" id="cb308-14" data-line-number="14">    <span class="dt">text =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">text.col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb308-15" data-line-number="15"><span class="kw">highlight.sector</span>(<span class="kw">colnames</span>(mat1), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>, </a>
+<a class="sourceLine" id="cb308-16" data-line-number="16">    <span class="dt">text =</span> <span class="st">&quot;B&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">text.col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb308-17" data-line-number="17"><span class="kw">highlight.sector</span>(<span class="kw">colnames</span>(mat2), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, </a>
+<a class="sourceLine" id="cb308-18" data-line-number="18">    <span class="dt">text =</span> <span class="st">&quot;C&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">text.col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="14-chord-diagram-advanced-usage_files/figure-html/unnamed-chunk-9-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
+<p>If row names and column names in the big matrix are not grouped, the sector order
+can be manually adjusted by <code>order</code> argument.</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">order =</span> <span class="kw">c</span>(<span class="kw">paset0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paset0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paset0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)))</a></code></pre></div>
 <p>It is similar way to construct a multiple-group Chord diagram with data frame as input.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape2)
-df2 =<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="kw">list</span>(<span class="kw">melt</span>(mat1), <span class="kw">melt</span>(mat2), <span class="kw">melt</span>(mat3)))
-<span class="kw">chordDiagram</span>(df2, <span class="dt">order =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paste0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)))</code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" data-line-number="1"><span class="kw">library</span>(reshape2)</a>
+<a class="sourceLine" id="cb311-2" data-line-number="2">df2 =<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="kw">list</span>(<span class="kw">melt</span>(mat1), <span class="kw">melt</span>(mat2), <span class="kw">melt</span>(mat3)))</a>
+<a class="sourceLine" id="cb311-3" data-line-number="3"><span class="kw">chordDiagram</span>(df2, <span class="dt">order =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paste0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)))</a></code></pre></div>
 
 </div>
 </div>
@@ -580,7 +659,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

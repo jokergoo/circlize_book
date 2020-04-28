@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Advanced layout | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Advanced layout | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -52,41 +52,68 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -262,59 +289,89 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 6</span> Advanced layout</h1>
 <div id="zooming-of-sectors" class="section level2">
 <h2><span class="header-section-number">6.1</span> Zooming of sectors</h2>
-<p>In this section, we will introduce how to zoom sectors and put the zoomed sectors at the same track as the original sectors.</p>
-<p>Under the default settings, width of sectors are calculated according to the data range in corresponding categories. Normally it is not a good idea to manually modify the default sector width since it reflects useful information of your data. However, sometimes manually modifying the width of sectors can make more advanced plots, e.g. zoomings.</p>
-<p>The basic idea for zooming is to put original sectors on part of the circle and put the zoomed sectors on the other part, so that in the original sectors, widths are still proportional to their data ranges, and in the zoomed sectors, the widths are also proportional to the data ranges in the zoomed sectors.</p>
-<p>This type of zooming is rather simple to implement. All we need to do is to copy the data which corresponds to the zoomed sectors, assign new category names to them and append to the original data. The good thing is since the data in the zoomed sectors is exactly the same as the original sectors, if you treat them as normal categories, the graphics will be exactly the same as in the original sectors, but with x direction zoomed.</p>
-<p>Following example shows more clearly the basic idea of this “horizontal” zooming.</p>
+<p>In this section, we will introduce how to zoom sectors and put the zoomed sectors
+at the same track as the original sectors.</p>
+<p>Under the default settings, width of sectors are calculated according to the
+data range in corresponding categories. Normally it is not a good idea to
+manually modify the default sector width since it reflects useful information
+of your data. However, sometimes manually modifying the width of sectors can
+make more advanced plots, e.g. zoomings.</p>
+<p>The basic idea for zooming is to put original sectors on part of the circle and
+put the zoomed sectors on the other part, so that in the original sectors, widths
+are still proportional to their data ranges, and in the zoomed sectors, the
+widths are also proportional to the data ranges in the zoomed sectors.</p>
+<p>This type of zooming is rather simple to implement. All we need to do is to
+copy the data which corresponds to the zoomed sectors, assign new category names
+to them and append to the original data. The good thing is since the data in
+the zoomed sectors is exactly the same as the original sectors, if you treat them
+as normal categories, the graphics will be exactly the same as in the original
+sectors, but with x direction zoomed.</p>
+<p>Following example shows more clearly the basic idea of this “horizontal”
+zooming.</p>
 <p>We first generate a data frame with six categories.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
-df =<span class="st"> </span><span class="kw">data.frame</span>(
-    <span class="dt">factors =</span> <span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>], <span class="dv">400</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>),
-    <span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">400</span>),
-    <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">400</span>),
-    <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>
-)</code></pre></div>
-<p>We want to zoom sector a and the first 10 points in sector b. First we extract these data and format as a new data frame.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zoom_df_a =<span class="st"> </span>df[df<span class="op">$</span>factors <span class="op">==</span><span class="st"> &quot;a&quot;</span>, ]
-zoom_df_b =<span class="st"> </span>df[df<span class="op">$</span>factors <span class="op">==</span><span class="st"> &quot;b&quot;</span>, ]
-zoom_df_b =<span class="st"> </span>zoom_df_b[<span class="kw">order</span>(zoom_df_b[, <span class="dv">2</span>])[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], ]
-zoom_df =<span class="st"> </span><span class="kw">rbind</span>(zoom_df_a, zoom_df_b)</code></pre></div>
-<p>Then we need to change the sector names in the zoomed data frame. Here we just simply add “zoom_” prefix to the original names to show that they are “zoomed” sectors. After that, it is attached to the original data frame.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zoom_df<span class="op">$</span>factors =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;zoom_&quot;</span>, zoom_df<span class="op">$</span>factors)
-df2 =<span class="st"> </span><span class="kw">rbind</span>(df, zoom_df)</code></pre></div>
-<p>In this example, we will put the original cells in the left half of the circle and the zoomed sectors in the right. As we have already mentioned before, we simply normalize the width of normal sectors and normalize the width of zoomed sectors separately. Note now the sum of the sector width for the original sectors is 1 and the sum of sector width for the zoomed sectors is 1, which means these two types of sectors have their own half circle.</p>
-<p>You may notice the sum of the <code>sector.width</code> is not idential to 1. This is fine, they will be further normalized to 1 internally.</p>
-<p>Strictly speaking, since the gaps between sectors are not taken into consideration, the width of the original sectors are not exactly 180 degree, but the real value is quite close to it.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xrange =<span class="st"> </span><span class="kw">tapply</span>(df2<span class="op">$</span>x, df2<span class="op">$</span>factors, <span class="cf">function</span>(x) <span class="kw">max</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x))
-normal_sector_index =<span class="st"> </span><span class="kw">unique</span>(df<span class="op">$</span>factors)
-zoomed_sector_index =<span class="st"> </span><span class="kw">unique</span>(zoom_df<span class="op">$</span>factors)
-sector.width =<span class="st"> </span><span class="kw">c</span>(xrange[normal_sector_index] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(xrange[normal_sector_index]), 
-                 xrange[zoomed_sector_index] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(xrange[zoomed_sector_index]))
-sector.width</code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb102-2" data-line-number="2">df =<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb102-3" data-line-number="3">    <span class="dt">factors =</span> <span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>], <span class="dv">400</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb102-4" data-line-number="4">    <span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">400</span>),</a>
+<a class="sourceLine" id="cb102-5" data-line-number="5">    <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">400</span>),</a>
+<a class="sourceLine" id="cb102-6" data-line-number="6">    <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb102-7" data-line-number="7">)</a></code></pre></div>
+<p>We want to zoom sector a and the first 10 points in sector b. First we extract
+these data and format as a new data frame.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1">zoom_df_a =<span class="st"> </span>df[df<span class="op">$</span>factors <span class="op">==</span><span class="st"> &quot;a&quot;</span>, ]</a>
+<a class="sourceLine" id="cb103-2" data-line-number="2">zoom_df_b =<span class="st"> </span>df[df<span class="op">$</span>factors <span class="op">==</span><span class="st"> &quot;b&quot;</span>, ]</a>
+<a class="sourceLine" id="cb103-3" data-line-number="3">zoom_df_b =<span class="st"> </span>zoom_df_b[<span class="kw">order</span>(zoom_df_b[, <span class="dv">2</span>])[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], ]</a>
+<a class="sourceLine" id="cb103-4" data-line-number="4">zoom_df =<span class="st"> </span><span class="kw">rbind</span>(zoom_df_a, zoom_df_b)</a></code></pre></div>
+<p>Then we need to change the sector names in the zoomed data frame. Here we just simply
+add “zoom_” prefix to the original names to show that they are “zoomed” sectors. After
+that, it is attached to the original data frame.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">zoom_df<span class="op">$</span>factors =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;zoom_&quot;</span>, zoom_df<span class="op">$</span>factors)</a>
+<a class="sourceLine" id="cb104-2" data-line-number="2">df2 =<span class="st"> </span><span class="kw">rbind</span>(df, zoom_df)</a></code></pre></div>
+<p>In this example, we will put the original cells in the left half of the circle
+and the zoomed sectors in the right. As we have already mentioned before, we
+simply normalize the width of normal sectors and normalize the width of zoomed
+sectors separately. Note now the sum of the sector width for the original sectors
+is 1 and the sum of sector width for the zoomed sectors is 1, which means
+these two types of sectors have their own half circle.</p>
+<p>You may notice the sum of the <code>sector.width</code> is not idential to 1. This is
+fine, they will be further normalized to 1 internally.</p>
+<p>Strictly speaking, since the gaps between sectors are not taken into
+consideration, the width of the original sectors are not exactly 180 degree,
+but the real value is quite close to it.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1">xrange =<span class="st"> </span><span class="kw">tapply</span>(df2<span class="op">$</span>x, df2<span class="op">$</span>factors, <span class="cf">function</span>(x) <span class="kw">max</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x))</a>
+<a class="sourceLine" id="cb105-2" data-line-number="2">normal_sector_index =<span class="st"> </span><span class="kw">unique</span>(df<span class="op">$</span>factors)</a>
+<a class="sourceLine" id="cb105-3" data-line-number="3">zoomed_sector_index =<span class="st"> </span><span class="kw">unique</span>(zoom_df<span class="op">$</span>factors)</a>
+<a class="sourceLine" id="cb105-4" data-line-number="4">sector.width =<span class="st"> </span><span class="kw">c</span>(xrange[normal_sector_index] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(xrange[normal_sector_index]), </a>
+<a class="sourceLine" id="cb105-5" data-line-number="5">                 xrange[zoomed_sector_index] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(xrange[zoomed_sector_index]))</a>
+<a class="sourceLine" id="cb105-6" data-line-number="6">sector.width</a></code></pre></div>
 <pre><code>##         c         f         b         e         d         a    zoom_a    zoom_b 
 ## 0.1774352 0.1649639 0.1685275 0.1662047 0.1668505 0.1560182 0.7237996 0.2762004</code></pre>
-<p>What to do next is just to make the circular plot in the normal way. All the graphics in sector a and b will be automatically zoomed to sector “zoom_a” and “zoom_b”.</p>
-<p>In following code, since the sector names are added outside the first track, <code>points.overflow.warning</code> is set to <code>FALSE</code> to turn off the warning messages.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>, <span class="dt">points.overflow.warning =</span> <span class="ot">FALSE</span>)
-<span class="kw">circos.initialize</span>(df2<span class="op">$</span>factors, <span class="dt">x =</span> df2<span class="op">$</span>x, <span class="dt">sector.width =</span> sector.width)
-<span class="kw">circos.track</span>(df2<span class="op">$</span>factors, <span class="dt">x =</span> df2<span class="op">$</span>x, <span class="dt">y =</span> df2<span class="op">$</span>y, 
-    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    <span class="kw">circos.points</span>(x, y, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)
-    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), 
-        CELL_META<span class="op">$</span>sector.index, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
-})</code></pre></div>
-<p>Adding links from original sectors to zoomed sectors is a good idea to show where the zooming occurs (Figure <a href="advanced-layout.html#fig:circlize-zoom">6.1</a>). Notice that we manually adjust the position of one end of the sector b link.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.link</span>(<span class="st">&quot;a&quot;</span>, <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>),
-    <span class="st">&quot;zoom_a&quot;</span>, <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;zoom_a&quot;</span>),
-    <span class="dt">border =</span> <span class="ot">NA</span>, <span class="dt">col =</span> <span class="st">&quot;#00000020&quot;</span>)
-<span class="kw">circos.link</span>(<span class="st">&quot;b&quot;</span>, <span class="kw">c</span>(zoom_df_b[<span class="dv">1</span>, <span class="dv">2</span>], zoom_df_b[<span class="dv">10</span>, <span class="dv">2</span>]),
-    <span class="st">&quot;zoom_b&quot;</span>, <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;zoom_b&quot;</span>),
-    <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;b&quot;</span>),
-    <span class="dt">border =</span> <span class="ot">NA</span>, <span class="dt">col =</span> <span class="st">&quot;#00000020&quot;</span>)
-<span class="kw">circos.clear</span>()</code></pre></div>
+<p>What to do next is just to make the circular plot in the normal way. All the
+graphics in sector a and b will be automatically zoomed to sector “zoom_a”
+and “zoom_b”.</p>
+<p>In following code, since the sector names are added outside the first track,
+<code>points.overflow.warning</code> is set to <code>FALSE</code> to turn off the warning messages.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>, <span class="dt">points.overflow.warning =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb107-2" data-line-number="2"><span class="kw">circos.initialize</span>(df2<span class="op">$</span>factors, <span class="dt">x =</span> df2<span class="op">$</span>x, <span class="dt">sector.width =</span> sector.width)</a>
+<a class="sourceLine" id="cb107-3" data-line-number="3"><span class="kw">circos.track</span>(df2<span class="op">$</span>factors, <span class="dt">x =</span> df2<span class="op">$</span>x, <span class="dt">y =</span> df2<span class="op">$</span>y, </a>
+<a class="sourceLine" id="cb107-4" data-line-number="4">    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb107-5" data-line-number="5">    <span class="kw">circos.points</span>(x, y, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb107-6" data-line-number="6">    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), </a>
+<a class="sourceLine" id="cb107-7" data-line-number="7">        CELL_META<span class="op">$</span>sector.index, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb107-8" data-line-number="8">})</a></code></pre></div>
+<p>Adding links from original sectors to zoomed sectors is a good idea to show
+where the zooming occurs (Figure <a href="advanced-layout.html#fig:circlize-zoom">6.1</a>). Notice that
+we manually adjust the position of one end of the sector b link.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="kw">circos.link</span>(<span class="st">&quot;a&quot;</span>, <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>),</a>
+<a class="sourceLine" id="cb108-2" data-line-number="2">    <span class="st">&quot;zoom_a&quot;</span>, <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;zoom_a&quot;</span>),</a>
+<a class="sourceLine" id="cb108-3" data-line-number="3">    <span class="dt">border =</span> <span class="ot">NA</span>, <span class="dt">col =</span> <span class="st">&quot;#00000020&quot;</span>)</a>
+<a class="sourceLine" id="cb108-4" data-line-number="4"><span class="kw">circos.link</span>(<span class="st">&quot;b&quot;</span>, <span class="kw">c</span>(zoom_df_b[<span class="dv">1</span>, <span class="dv">2</span>], zoom_df_b[<span class="dv">10</span>, <span class="dv">2</span>]),</a>
+<a class="sourceLine" id="cb108-5" data-line-number="5">    <span class="st">&quot;zoom_b&quot;</span>, <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;zoom_b&quot;</span>),</a>
+<a class="sourceLine" id="cb108-6" data-line-number="6">    <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;b&quot;</span>),</a>
+<a class="sourceLine" id="cb108-7" data-line-number="7">    <span class="dt">border =</span> <span class="ot">NA</span>, <span class="dt">col =</span> <span class="st">&quot;#00000020&quot;</span>)</a>
+<a class="sourceLine" id="cb108-8" data-line-number="8"><span class="kw">circos.clear</span>()</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-zoom"></span>
-<img src="06-advanced-usage_files/figure-html/circlize-zoom-1.svg" alt="Zoom sectors." width="384" />
+<img src="06-advanced-usage_files/figure-html/circlize-zoom-1.svg" alt="Zoom sectors." width="672" />
 <p class="caption">
 Figure 6.1: Zoom sectors.
 </p>
@@ -323,121 +380,155 @@ Figure 6.1: Zoom sectors.
 </div>
 <div id="part-circle" class="section level2">
 <h2><span class="header-section-number">6.2</span> Visualize part of the circle</h2>
-<p><code>canvas.xlim</code> and <code>canvas.ylim</code> parameters in <code>circos.par()</code> are useful to generate plots only in part of the circle. As mentioned in previews chapters, the circular plot is always drawn in a canvas where x values range from -1 to 1 and y values range from -1 to 1. Thus, if <code>canvas.xlim</code> and <code>canvas.ylim</code> are all set to <code>c(0, 1)</code>, which means, the canvas is restricted to the right top part, then only sectors between 0 to 90 degree are visible (Figure <a href="advanced-layout.html#fig:circlize-part">6.2</a>).</p>
+<p><code>canvas.xlim</code> and <code>canvas.ylim</code> parameters in <code>circos.par()</code> are useful to
+generate plots only in part of the circle. As mentioned in previews chapters,
+the circular plot is always drawn in a canvas where x values range from -1 to
+1 and y values range from -1 to 1. Thus, if <code>canvas.xlim</code> and <code>canvas.ylim</code>
+are all set to <code>c(0, 1)</code>, which means, the canvas is restricted to the right
+top part, then only sectors between 0 to 90 degree are visible
+(Figure <a href="advanced-layout.html#fig:circlize-part">6.2</a>).</p>
 <div class="figure" style="text-align: center"><span id="fig:circlize-part"></span>
 <img src="06-advanced-usage_files/figure-html/circlize-part-1.svg" alt="One quarter of the circle." width="768" />
 <p class="caption">
 Figure 6.2: One quarter of the circle.
 </p>
 </div>
-<p>To make the right plot in Figure <a href="advanced-layout.html#fig:circlize-part">6.2</a>, we only need to set one sector in the layout and set <code>gap.after</code> to 270. (One sector with <code>gap.after</code> of 270 degree means the width of this sector is exactly 90 degree.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="st">&quot;canvas.ylim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
-    <span class="st">&quot;start.degree&quot;</span> =<span class="st"> </span><span class="dv">90</span>, <span class="st">&quot;gap.after&quot;</span> =<span class="st"> </span><span class="dv">270</span>)
-factors =<span class="st"> &quot;a&quot;</span> <span class="co"># this is the name of your sector</span>
-<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> ...)
-...</code></pre></div>
-<p>Similar idea can be applied to the circle where in some tracks, only a subset of cells are needed. Gererally there are two ways. The first way is to create the track and add graphics with subset of data that only corresponds to the cells that are needed. And the second way is to create an empty track first and customize the cells by <code>circos.update()</code>. Following code illustrates the two methods (Figure <a href="advanced-layout.html#fig:circlize-part2">6.3</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
-<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-
-<span class="co"># directly specify the subset of data</span>
-df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">factors =</span> <span class="kw">rep</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">100</span>),
-                <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">100</span>),
-                <span class="dt">y =</span> <span class="kw">runif</span>(<span class="dv">100</span>))
-<span class="kw">circos.track</span>(df<span class="op">$</span>factors, <span class="dt">x =</span> df<span class="op">$</span>x, <span class="dt">y =</span> df<span class="op">$</span>y, 
-    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-        <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)
-})
-
-<span class="co"># create empty track first then fill graphics in the cell</span>
-<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">range</span>(df<span class="op">$</span>y), <span class="dt">bg.border =</span> <span class="ot">NA</span>)
-<span class="kw">circos.update</span>(<span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">bg.border =</span> <span class="st">&quot;black&quot;</span>)
-<span class="kw">circos.points</span>(df<span class="op">$</span>x, df<span class="op">$</span>y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)
-
-<span class="kw">circos.track</span>(<span class="dt">factors =</span> factors, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-<span class="kw">circos.track</span>(<span class="dt">factors =</span> factors, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</code></pre></div>
+<p>To make the right plot in Figure <a href="advanced-layout.html#fig:circlize-part">6.2</a>, we only need to set
+one sector in the layout and set <code>gap.after</code> to 270. (One sector with
+<code>gap.after</code> of 270 degree means the width of this sector is exactly 90
+degree.)</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="kw">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="st">&quot;canvas.ylim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb109-2" data-line-number="2">    <span class="st">&quot;start.degree&quot;</span> =<span class="st"> </span><span class="dv">90</span>, <span class="st">&quot;gap.after&quot;</span> =<span class="st"> </span><span class="dv">270</span>)</a>
+<a class="sourceLine" id="cb109-3" data-line-number="3">factors =<span class="st"> &quot;a&quot;</span> <span class="co"># this is the name of your sector</span></a>
+<a class="sourceLine" id="cb109-4" data-line-number="4"><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> ...)</a>
+<a class="sourceLine" id="cb109-5" data-line-number="5">...</a></code></pre></div>
+<p>Similar idea can be applied to the circle where in some tracks,
+only a subset of cells are needed. Gererally there are two ways.
+The first way is to create the track and add graphics with subset of data that
+only corresponds to the cells that are needed. And the second way
+is to create an empty track first and customize the cells by <code>circos.update()</code>.
+Following code illustrates the two methods (Figure <a href="advanced-layout.html#fig:circlize-part2">6.3</a>).</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb110-2" data-line-number="2"><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb110-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb110-4" data-line-number="4"><span class="co"># directly specify the subset of data</span></a>
+<a class="sourceLine" id="cb110-5" data-line-number="5">df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">factors =</span> <span class="kw">rep</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb110-6" data-line-number="6">                <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb110-7" data-line-number="7">                <span class="dt">y =</span> <span class="kw">runif</span>(<span class="dv">100</span>))</a>
+<a class="sourceLine" id="cb110-8" data-line-number="8"><span class="kw">circos.track</span>(df<span class="op">$</span>factors, <span class="dt">x =</span> df<span class="op">$</span>x, <span class="dt">y =</span> df<span class="op">$</span>y, </a>
+<a class="sourceLine" id="cb110-9" data-line-number="9">    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb110-10" data-line-number="10">        <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb110-11" data-line-number="11">})</a>
+<a class="sourceLine" id="cb110-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb110-13" data-line-number="13"><span class="co"># create empty track first then fill graphics in the cell</span></a>
+<a class="sourceLine" id="cb110-14" data-line-number="14"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">range</span>(df<span class="op">$</span>y), <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb110-15" data-line-number="15"><span class="kw">circos.update</span>(<span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">bg.border =</span> <span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb110-16" data-line-number="16"><span class="kw">circos.points</span>(df<span class="op">$</span>x, df<span class="op">$</span>y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb110-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb110-18" data-line-number="18"><span class="kw">circos.track</span>(<span class="dt">factors =</span> factors, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb110-19" data-line-number="19"><span class="kw">circos.track</span>(<span class="dt">factors =</span> factors, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-part2"></span>
-<img src="06-advanced-usage_files/figure-html/circlize-part2-1.svg" alt="Show subset of cells in tracks." width="384" />
+<img src="06-advanced-usage_files/figure-html/circlize-part2-1.svg" alt="Show subset of cells in tracks." width="672" />
 <p class="caption">
 Figure 6.3: Show subset of cells in tracks.
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
 </div>
 <div id="combine-circular-plots" class="section level2">
 <h2><span class="header-section-number">6.3</span> Combine multiple circular plots</h2>
-<p><strong>circlize</strong> finally makes the circular plot in the base R graphic system. Seperated circular plots actually can be put in a same page by some tricks from the base graphic system. Here the key is <code>par(new = TRUE)</code> which allows to draw a new figure as a new layer directly on the previous canvas region. By setting different <code>canvas.xlim</code> and <code>canvas.ylim</code>, it allows to make more complex plots which include more than one circular plots.</p>
-<p>Folowing code shows how the two independent circualr plots are added and nested. Figure <a href="advanced-layout.html#fig:circlize-nested">6.4</a> illustrates the invisible canvas coordinate and how the two circular plots overlap.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
-<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    <span class="kw">circos.text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;outer circos&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
-})
-<span class="kw">circos.clear</span>()
-
-<span class="kw">par</span>(<span class="dt">new =</span> <span class="ot">TRUE</span>) <span class="co"># &lt;- magic</span>
-<span class="kw">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="st">&quot;canvas.ylim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>))
-factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]
-<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    <span class="kw">circos.text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;inner circos&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
-})
-<span class="kw">circos.clear</span>()</code></pre></div>
+<p><strong>circlize</strong> finally makes the circular plot in the base R graphic system.
+Seperated circular plots actually can be put in a same page by some tricks
+from the base graphic system. Here the key is <code>par(new = TRUE)</code> which allows
+to draw a new figure as a new layer directly on the previous canvas region. By
+setting different <code>canvas.xlim</code> and <code>canvas.ylim</code>, it allows to make more
+complex plots which include more than one circular plots.</p>
+<p>Folowing code shows how the two independent circualr plots are added and
+nested. Figure <a href="advanced-layout.html#fig:circlize-nested">6.4</a> illustrates the invisible canvas
+coordinate and how the two circular plots overlap.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb112-2" data-line-number="2"><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb112-3" data-line-number="3"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb112-4" data-line-number="4">    <span class="kw">circos.text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;outer circos&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb112-5" data-line-number="5">})</a>
+<a class="sourceLine" id="cb112-6" data-line-number="6"><span class="kw">circos.clear</span>()</a>
+<a class="sourceLine" id="cb112-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb112-8" data-line-number="8"><span class="kw">par</span>(<span class="dt">new =</span> <span class="ot">TRUE</span>) <span class="co"># &lt;- magic</span></a>
+<a class="sourceLine" id="cb112-9" data-line-number="9"><span class="kw">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="st">&quot;canvas.ylim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb112-10" data-line-number="10">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb112-11" data-line-number="11"><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb112-12" data-line-number="12"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb112-13" data-line-number="13">    <span class="kw">circos.text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;inner circos&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb112-14" data-line-number="14">})</a>
+<a class="sourceLine" id="cb112-15" data-line-number="15"><span class="kw">circos.clear</span>()</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-nested"></span>
 <img src="06-advanced-usage_files/figure-html/circlize-nested-1.svg" alt="Nested circular plots." width="768" />
 <p class="caption">
 Figure 6.4: Nested circular plots.
 </p>
 </div>
-<p>The second example (Figure <a href="advanced-layout.html#fig:circlize-separated">6.5</a>) makes a plot where two circular plots separate from each other. You can use technique introduced in Section <a href="advanced-layout.html#part-circle">6.2</a> to only show part of the circle, select proper <code>canvas.xlim</code> and <code>canvas.ylim</code>, and finally arrange the two plots into one page. The source code for generating Figure <a href="advanced-layout.html#fig:circlize-separated">6.5</a> is at <a href="https://github.com/jokergoo/circlize_book/blob/master/src/intro-20-separated.R" class="uri">https://github.com/jokergoo/circlize_book/blob/master/src/intro-20-separated.R</a>.</p>
+<p>The second example (Figure <a href="advanced-layout.html#fig:circlize-separated">6.5</a>) makes a plot where
+two circular plots separate from each other. You can use technique introduced
+in Section <a href="advanced-layout.html#part-circle">6.2</a> to only show part of the circle, select proper
+<code>canvas.xlim</code> and <code>canvas.ylim</code>, and finally arrange the two plots into one
+page. The source code for generating Figure <a href="advanced-layout.html#fig:circlize-separated">6.5</a> is
+at <a href="https://github.com/jokergoo/circlize_book/blob/master/src/intro-20-separated.R" class="uri">https://github.com/jokergoo/circlize_book/blob/master/src/intro-20-separated.R</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:circlize-separated"></span>
 <img src="06-advanced-usage_files/figure-html/circlize-separated-1.svg" alt="Two separated circular plots" width="768" />
 <p class="caption">
 Figure 6.5: Two separated circular plots
 </p>
 </div>
-<p>The third example is to draw cells with different radius (Figure <a href="advanced-layout.html#fig:circlize-diff-radius">6.6</a>). In fact, it makes four circular plots where only one sector for each plot is plotted.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
-lim =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>)
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {
-    <span class="kw">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span>lim[i], lim[i]), 
-        <span class="st">&quot;canvas.ylim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span>lim[i], lim[i]), 
-        <span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.4</span>)
-    <span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>)
-    <span class="kw">circos.update</span>(<span class="dt">sector.index =</span> factors[i], <span class="dt">bg.border =</span> <span class="st">&quot;black&quot;</span>)
-    <span class="kw">circos.points</span>(<span class="kw">runif</span>(<span class="dv">10</span>), <span class="kw">runif</span>(<span class="dv">10</span>), <span class="dt">pch =</span> <span class="dv">16</span>)
-    <span class="kw">circos.clear</span>()
-    <span class="kw">par</span>(<span class="dt">new =</span> <span class="ot">TRUE</span>)
-}
-<span class="kw">par</span>(<span class="dt">new =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>The third example is to draw cells with different radius (Figure <a href="advanced-layout.html#fig:circlize-diff-radius">6.6</a>).
+In fact, it makes four circular plots where only one
+sector for each plot is plotted.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb113-2" data-line-number="2">lim =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>)</a>
+<a class="sourceLine" id="cb113-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {</a>
+<a class="sourceLine" id="cb113-4" data-line-number="4">    <span class="kw">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span>lim[i], lim[i]), </a>
+<a class="sourceLine" id="cb113-5" data-line-number="5">        <span class="st">&quot;canvas.ylim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span>lim[i], lim[i]), </a>
+<a class="sourceLine" id="cb113-6" data-line-number="6">        <span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.4</span>)</a>
+<a class="sourceLine" id="cb113-7" data-line-number="7">    <span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb113-8" data-line-number="8">    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb113-9" data-line-number="9">    <span class="kw">circos.update</span>(<span class="dt">sector.index =</span> factors[i], <span class="dt">bg.border =</span> <span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb113-10" data-line-number="10">    <span class="kw">circos.points</span>(<span class="kw">runif</span>(<span class="dv">10</span>), <span class="kw">runif</span>(<span class="dv">10</span>), <span class="dt">pch =</span> <span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb113-11" data-line-number="11">    <span class="kw">circos.clear</span>()</a>
+<a class="sourceLine" id="cb113-12" data-line-number="12">    <span class="kw">par</span>(<span class="dt">new =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb113-13" data-line-number="13">}</a>
+<a class="sourceLine" id="cb113-14" data-line-number="14"><span class="kw">par</span>(<span class="dt">new =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-diff-radius"></span>
-<img src="06-advanced-usage_files/figure-html/circlize-diff-radius-1.svg" alt="Cells with differnet radius." width="384" />
+<img src="06-advanced-usage_files/figure-html/circlize-diff-radius-1.svg" alt="Cells with differnet radius." width="672" />
 <p class="caption">
 Figure 6.6: Cells with differnet radius.
 </p>
 </div>
-<p>Note above plot is different from the example in Figure <a href="advanced-layout.html#fig:circlize-part2">6.3</a>. In Figure <a href="advanced-layout.html#fig:circlize-part2">6.3</a>, cells both visible and invisible all belong to a same track and they are in a same circular plot, thus they should have same radius. But for the example here, cells have different radius and they belong to different circular plot.</p>
+<p>Note above plot is different from the example in Figure <a href="advanced-layout.html#fig:circlize-part2">6.3</a>.
+In Figure <a href="advanced-layout.html#fig:circlize-part2">6.3</a>, cells both visible and invisible all belong to
+a same track and they are in a same circular plot, thus they should have same
+radius. But for the example here, cells have different radius and they belong
+to different circular plot.</p>
 <p>In chapter <a href="nested-zooming.html#nested-zooming">12</a>, we use this technique to implement zoomings by combining two circular plots.</p>
 </div>
 <div id="arrange-multiple-plots" class="section level2">
 <h2><span class="header-section-number">6.4</span> Arrange multiple plots</h2>
-<p><strong>circlize</strong> is implemented in the base R graphic system, thus, you can use <code>layout()</code> or <code>par(mforw, mfcol)</code> to arrange multiple circular plots in one page (Figure <a href="advanced-layout.html#fig:circlize-multiple-layout">6.7</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">3</span>))
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) {
-    factors =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">8</span>
-    <span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>))
-    <span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))
-    <span class="kw">circos.initialize</span>(factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="fl">0.05</span>,
-        <span class="dt">bg.col =</span> <span class="kw">rand_color</span>(<span class="dv">8</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>)
-    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>) {
-        se =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="dv">2</span>)
-        <span class="kw">circos.link</span>(se[<span class="dv">1</span>], <span class="kw">runif</span>(<span class="dv">2</span>), se[<span class="dv">2</span>], <span class="kw">runif</span>(<span class="dv">2</span>), 
-            <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="dv">1</span>, <span class="dt">transparency =</span> <span class="fl">0.4</span>), <span class="dt">border =</span> <span class="ot">NA</span>)
-    }
-    <span class="kw">circos.clear</span>()
-}</code></pre></div>
+<p><strong>circlize</strong> is implemented in the base R graphic system, thus, you can use
+<code>layout()</code> or <code>par(mforw, mfcol)</code> to arrange multiple circular plots in one page
+(Figure <a href="advanced-layout.html#fig:circlize-multiple-layout">6.7</a>).</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb114-2" data-line-number="2"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) {</a>
+<a class="sourceLine" id="cb114-3" data-line-number="3">    factors =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">8</span></a>
+<a class="sourceLine" id="cb114-4" data-line-number="4">    <span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb114-5" data-line-number="5">    <span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb114-6" data-line-number="6">    <span class="kw">circos.initialize</span>(factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb114-7" data-line-number="7">    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="fl">0.05</span>,</a>
+<a class="sourceLine" id="cb114-8" data-line-number="8">        <span class="dt">bg.col =</span> <span class="kw">rand_color</span>(<span class="dv">8</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb114-9" data-line-number="9">    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>) {</a>
+<a class="sourceLine" id="cb114-10" data-line-number="10">        se =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb114-11" data-line-number="11">        <span class="kw">circos.link</span>(se[<span class="dv">1</span>], <span class="kw">runif</span>(<span class="dv">2</span>), se[<span class="dv">2</span>], <span class="kw">runif</span>(<span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb114-12" data-line-number="12">            <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="dv">1</span>, <span class="dt">transparency =</span> <span class="fl">0.4</span>), <span class="dt">border =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb114-13" data-line-number="13">    }</a>
+<a class="sourceLine" id="cb114-14" data-line-number="14">    <span class="kw">circos.clear</span>()</a>
+<a class="sourceLine" id="cb114-15" data-line-number="15">}</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-multiple-layout"></span>
 <img src="06-advanced-usage_files/figure-html/circlize-multiple-layout-1.svg" alt="Arrange multiple circular plots." width="768" />
 <p class="caption">
@@ -511,7 +602,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Graphics | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Graphics | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -52,41 +52,68 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -260,39 +287,79 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="graphics" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Graphics</h1>
-<p>In this chapter, we will introduce low-level functions that add graphics to the circle. Usages of most of these functions are similar as normal graphic functions (e.g. <code>points()</code>, <code>lines()</code>). Combination use of these functions can generate very complex circular plots.</p>
-<p>All low-level functions accept <code>sector.index</code> and <code>track.index</code> arguments which indicate which cell the graphics are added in. By default the graphics are added in the “current” sector and “current” track, so it is recommended to use them directly inside <code>panel.fun</code> function. However, they can also be used in other places with explicitly specifying sector and track index. Following code shows an example of using <code>ciros.points()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(..., <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    <span class="kw">circos.points</span>(x, y)
-})
-<span class="kw">circos.points</span>(x, y, sector.index, track.index)</code></pre></div>
-<p>In this chapter, we will also discuss how to customize links and how to highlight regions in the circle.</p>
+<p>In this chapter, we will introduce low-level functions that add graphics to
+the circle. Usages of most of these functions are similar as normal graphic
+functions (e.g. <code>points()</code>, <code>lines()</code>). Combination use of these functions can
+generate very complex circular plots.</p>
+<p>All low-level functions accept <code>sector.index</code> and <code>track.index</code> arguments
+which indicate which cell the graphics are added in. By default the graphics
+are added in the “current” sector and “current” track, so it is recommended to
+use them directly inside <code>panel.fun</code> function. However, they can also be used
+in other places with explicitly specifying sector and track index. Following
+code shows an example of using <code>ciros.points()</code>.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">circos.track</span>(..., <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">    <span class="kw">circos.points</span>(x, y)</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">})</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4"><span class="kw">circos.points</span>(x, y, sector.index, track.index)</a></code></pre></div>
+<p>In this chapter, we will also discuss how to customize links and how to highlight
+regions in the circle.</p>
 <div id="points" class="section level2">
 <h2><span class="header-section-number">3.1</span> Points</h2>
-<p>Adding points by <code>circos.points()</code> is similar as <code>points()</code> function. Possible usage is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.points</span>(x, y)
-<span class="kw">circos.points</span>(x, y, sector.index, track.index)
-<span class="kw">circos.points</span>(x, y, pch, col, cex)</code></pre></div>
-<p>There is a companion function <code>circos.trackPoints()</code> which adds points to all sectors in a same track simultaneously. The input of <code>circos.trackPoints()</code> must contain a vector of categorical factors, a vector of x values and a vector of y values. X values and y values are split by the categorical variable and corresponding subset of x and y values are internally sent to <code>circos.points()</code>. <code>circos.trackPoints()</code> adds points to the “current” track by default which is the most recently created track. Other tracks can also be selected by explictly setting <code>track.index</code> argument.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(...)
-<span class="kw">circos.trackPoints</span>(fa, x, y)</code></pre></div>
-<p><code>circos.trackPoints()</code> is simply implemented by <code>circos.points()</code> with a <code>for</code> loop. However, it is more recommended to directly use <code>circos.points()</code> and <code>panel.fun</code> which provides great more flexibility. Actually following code is identical to above code.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.track</span>(fa, x, y, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    <span class="kw">circos.points</span>(x, y)
-})</code></pre></div>
-<p>Other low-level functions also have their companion <code>circos.track*()</code> function. The usage is same as <code>circos.trackPoints()</code> and they will not be further discussed in following sections.</p>
+<p>Adding points by <code>circos.points()</code> is similar as <code>points()</code> function. Possible
+usage is:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">circos.points</span>(x, y)</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw">circos.points</span>(x, y, sector.index, track.index)</a>
+<a class="sourceLine" id="cb45-3" data-line-number="3"><span class="kw">circos.points</span>(x, y, pch, col, cex)</a></code></pre></div>
+<p>There is a companion function <code>circos.trackPoints()</code> which adds points to all
+sectors in a same track simultaneously. The input of <code>circos.trackPoints()</code>
+must contain a vector of categorical factors, a vector of x values and a
+vector of y values. X values and y values are split by the categorical
+variable and corresponding subset of x and y values are internally sent to
+<code>circos.points()</code>. <code>circos.trackPoints()</code> adds points to the “current” track
+by default which is the most recently created track. Other tracks can also be
+selected by explictly setting <code>track.index</code> argument.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">circos.track</span>(...)</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">circos.trackPoints</span>(fa, x, y)</a></code></pre></div>
+<p><code>circos.trackPoints()</code> is simply implemented by <code>circos.points()</code> with a <code>for</code>
+loop. However, it is more recommended to directly use <code>circos.points()</code> and
+<code>panel.fun</code> which provides great more flexibility. Actually following code is
+identical to above code.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">circos.track</span>(fa, x, y, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2">    <span class="kw">circos.points</span>(x, y)</a>
+<a class="sourceLine" id="cb47-3" data-line-number="3">})</a></code></pre></div>
+<p>Other low-level functions also have their companion <code>circos.track*()</code>
+function. The usage is same as <code>circos.trackPoints()</code> and they will not be
+further discussed in following sections.</p>
 </div>
 <div id="lines" class="section level2">
 <h2><span class="header-section-number">3.2</span> Lines</h2>
-<p>Adding lines by <code>circos.lines()</code> is similar as <code>lines()</code> function. One additional feature is that the areas under or above the lines can be filled by specifing <code>area</code> argument to <code>TRUE</code>. Position of the baseline can be set to a pre-defined string of <code>bottom</code> or <code>top</code>, or a numeric value which is the position on y-axis. When <code>area</code> is set to <code>TRUE</code>, <code>col</code> controls the filled color and <code>border</code> controls the color for the borders.</p>
-<p><code>baseline</code> argument is also workable when <code>lty</code> is set to <code>&quot;h&quot;</code>. Note when <code>lty</code> is set to <code>&quot;h&quot;</code>, graphic parameters such as <code>col</code> can be set as a vector with same length as <code>x</code>. Figure <a href="graphics.html#fig:circlize-lines">3.1</a> illustrates supported <code>lty</code> settings and <code>area</code>/<code>baseline</code> settings.</p>
+<p>Adding lines by <code>circos.lines()</code> is similar as <code>lines()</code> function. One
+additional feature is that the areas under or above the lines can be filled by
+specifing <code>area</code> argument to <code>TRUE</code>. Position of the baseline can be set to a
+pre-defined string of <code>bottom</code> or <code>top</code>, or a numeric value which is the
+position on y-axis. When <code>area</code> is set to <code>TRUE</code>, <code>col</code> controls the filled
+color and <code>border</code> controls the color for the borders.</p>
+<p><code>baseline</code> argument is also workable when <code>lty</code> is set to <code>&quot;h&quot;</code>. Note when <code>lty</code>
+is set to <code>&quot;h&quot;</code>, graphic parameters such as <code>col</code> can be set as a vector with
+same length as <code>x</code>. Figure <a href="graphics.html#fig:circlize-lines">3.1</a> illustrates supported <code>lty</code>
+settings and <code>area</code>/<code>baseline</code> settings.</p>
 <div class="figure" style="text-align: center"><span id="fig:circlize-lines"></span>
 <img src="03-graphics_files/figure-html/circlize-lines-1.svg" alt="Line styles and areas supported in `circos.lines()`" width="576" />
 <p class="caption">
 Figure 3.1: Line styles and areas supported in <code>circos.lines()</code>
 </p>
 </div>
-<p>Straight lines are transformed to curves when mapping to the circular layout (Figure <a href="graphics.html#fig:circlize-linecurve">3.2</a>). Normally, curves are approximated by a series of segments of straight lines. With more and shorter segments, there is better approximation, but with larger size if the figures are generated into e.g. PDF files, especially for huge dataset. Default length of segments in <strong>circlize</strong> is a balance between the quality and size of the figure. You can set the length of the unit segment by <code>unit.circle.segments</code> option in <code>circos.par()</code>. The length of the segment is calculated as the length of the unit circle (2<span class="math inline">\(\pi\)</span>) divided by <code>unit.circle.segments</code>. In some scenarios, actually you don’t need to segment the lines such as radical lines, then you can set <code>straight</code> argument to <code>TRUE</code> to get rid of unnecessary segmentations.</p>
+<p>Straight lines are transformed to curves when mapping to the circular layout
+(Figure <a href="graphics.html#fig:circlize-linecurve">3.2</a>). Normally, curves are approximated by a
+series of segments of straight lines. With more and shorter segments, there is
+better approximation, but with larger size if the figures are generated into
+e.g. PDF files, especially for huge dataset. Default length of segments in
+<strong>circlize</strong> is a balance between the quality and size of the figure. You can
+set the length of the unit segment by <code>unit.circle.segments</code> option in
+<code>circos.par()</code>. The length of the segment is calculated as the length of the
+unit circle (2<span class="math inline">\(\pi\)</span>) divided by <code>unit.circle.segments</code>. In some scenarios,
+actually you don’t need to segment the lines such as radical lines, then you can
+set <code>straight</code> argument to <code>TRUE</code> to get rid of unnecessary segmentations.</p>
 <div class="figure" style="text-align: center"><span id="fig:circlize-linecurve"></span>
 <img src="03-graphics_files/figure-html/circlize-linecurve-1.svg" alt="Transformation of straight lines into curves in the circle." width="768" />
 <p class="caption">
@@ -300,53 +367,83 @@ Figure 3.2: Transformation of straight lines into curves in the circle.
 </p>
 </div>
 <p>Possible usage for <code>circos.lines()</code> is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.lines</span>(x, y)
-<span class="kw">circos.lines</span>(x, y, sector.index, track.index)
-<span class="kw">circos.lines</span>(x, y, col, lwd, lty, type, straight)
-<span class="kw">circos.lines</span>(x, y, col, area, baseline, border)</code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">circos.lines</span>(x, y)</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="kw">circos.lines</span>(x, y, sector.index, track.index)</a>
+<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="kw">circos.lines</span>(x, y, col, lwd, lty, type, straight)</a>
+<a class="sourceLine" id="cb48-4" data-line-number="4"><span class="kw">circos.lines</span>(x, y, col, area, baseline, border)</a></code></pre></div>
 </div>
 <div id="segments" class="section level2">
 <h2><span class="header-section-number">3.3</span> Segments</h2>
-<p>Line segments can be added by <code>circos.segments()</code> function. The usage is similar as <code>segments()</code>. Radical segments can be added by setting <code>straight</code> to <code>TRUE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.segments</span>(x0, y0, x1, y1)
-<span class="kw">circos.segments</span>(x0, y0, x1, y1, straight)</code></pre></div>
+<p>Line segments can be added by <code>circos.segments()</code> function. The usage is similar
+as <code>segments()</code>. Radical segments can be added by setting <code>straight</code> to <code>TRUE</code>.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">circos.segments</span>(x0, y0, x1, y1)</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="kw">circos.segments</span>(x0, y0, x1, y1, straight)</a></code></pre></div>
 </div>
 <div id="text" class="section level2">
 <h2><span class="header-section-number">3.4</span> Text</h2>
-<p>Adding text by <code>circos.text()</code> is similar as <code>text()</code> function. Text is added on the plot for human reading, thus, when putting the text on the circle, the facing of text is very important. <code>circos.text()</code> supports seven facing options which are <code>inside</code>, <code>outside</code>, <code>clockwise</code>, <code>reverse.clockwise</code>, <code>downward</code>, <code>bending.inside</code> and <code>bending.outside</code>. Please note for <code>bending.inside</code> and <code>bending.outside</code>, currently, single line text is only supported. If you want to put bended text into two lines, you need to split text into two lines and add each line by <code>circos.text()</code> separately. The different facings are illustrated in figure <a href="graphics.html#fig:circlize-text">3.3</a>.</p>
+<p>Adding text by <code>circos.text()</code> is similar as <code>text()</code> function. Text is added on
+the plot for human reading, thus, when putting the text on the circle, the
+facing of text is very important. <code>circos.text()</code> supports seven facing options
+which are <code>inside</code>, <code>outside</code>, <code>clockwise</code>, <code>reverse.clockwise</code>, <code>downward</code>,
+<code>bending.inside</code> and <code>bending.outside</code>. Please note for <code>bending.inside</code> and
+<code>bending.outside</code>, currently, single line text is only supported. If you want to
+put bended text into two lines, you need to split text into two lines and add
+each line by <code>circos.text()</code> separately. The different facings are illustrated
+in figure <a href="graphics.html#fig:circlize-text">3.3</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:circlize-text"></span>
-<img src="03-graphics_files/figure-html/circlize-text-1.svg" alt="Text facings." width="384" />
+<img src="03-graphics_files/figure-html/circlize-text-1.svg" alt="Text facings." width="672" />
 <p class="caption">
 Figure 3.3: Text facings.
 </p>
 </div>
 <p>Possible usage for <code>circos.text()</code> is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.text</span>(x, y, labels)
-<span class="kw">circos.text</span>(x, y, labels, sector.index, track.index)
-<span class="kw">circos.text</span>(x, y, labels, facing, niceFacing, adj, cex, col, font)</code></pre></div>
-<p>If, e.g., <code>facing</code> is set to <code>inside</code>, text which is on the bottom half of the circle is still facing to the top and hard to read. To make text more easy to read and not to hurt readers’ neck too much, <code>circos.text()</code> provides <code>niceFacing</code> option which automatically adjust text facing according to their positions in the circle. <code>niceFacing</code> only works for <code>facing</code> value of <code>inside</code>, <code>outside</code>, <code>clockwise</code>, <code>reverse.clockwise</code>, <code>bending.inside</code> and <code>bending.outside</code>.</p>
-<p>When <code>niceFacing</code> is on, <code>adj</code> is also adjusted according to the corresponding facings. Figure <a href="graphics.html#fig:circlize-text-easy">3.4</a> illustrates text positions under different settings of <code>adj</code> and <code>facing</code>. The red dots are the positions of the texts.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">circos.text</span>(x, y, labels)</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">circos.text</span>(x, y, labels, sector.index, track.index)</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3"><span class="kw">circos.text</span>(x, y, labels, facing, niceFacing, adj, cex, col, font)</a></code></pre></div>
+<p>If, e.g., <code>facing</code> is set to <code>inside</code>, text which is on the bottom half of the
+circle is still facing to the top and hard to read. To make text more easy to
+read and not to hurt readers’ neck too much, <code>circos.text()</code> provides
+<code>niceFacing</code> option which automatically adjust text facing according to their
+positions in the circle. <code>niceFacing</code> only works for <code>facing</code> value of
+<code>inside</code>, <code>outside</code>, <code>clockwise</code>, <code>reverse.clockwise</code>, <code>bending.inside</code> and
+<code>bending.outside</code>.</p>
+<p>When <code>niceFacing</code> is on, <code>adj</code> is also adjusted according to the corresponding
+facings. Figure <a href="graphics.html#fig:circlize-text-easy">3.4</a> illustrates text positions under
+different settings of <code>adj</code> and <code>facing</code>. The red dots are the positions of the texts.</p>
 <div class="figure" style="text-align: center"><span id="fig:circlize-text-easy"></span>
 <img src="03-graphics_files/figure-html/circlize-text-easy-1.svg" alt="Human easy text facing." width="768" />
 <p class="caption">
 Figure 3.4: Human easy text facing.
 </p>
 </div>
-<p><code>adj</code> is internally passed to <code>text()</code>, thus, it actually adjusts text positions either horizontally or vertically (in the canvas coordinate). If the direction of the offset is circular, the offset value can be set as degrees that the position of the text is adjusted by wrapping the offset by <code>degree()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.text</span>(x, y, labels, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">degree</span>(<span class="dv">5</span>)), <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>)</code></pre></div>
-<p>As <code>circos.text()</code> is applied in the data coordiante, offset can be directly added to <code>x</code> or/and <code>y</code> as a value measured in the data coordinate. An absolute offset can be set by using <code>ux()</code> (in x direction) and <code>uy()</code> (in y direction).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.text</span>(x <span class="op">+</span><span class="st"> </span><span class="kw">ux</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), y <span class="op">+</span><span class="st"> </span><span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), labels)</code></pre></div>
+<p><code>adj</code> is internally passed to <code>text()</code>, thus, it actually adjusts text
+positions either horizontally or vertically (in the canvas coordinate). If the
+direction of the offset is circular, the offset value can be set as degrees
+that the position of the text is adjusted by wrapping the offset by
+<code>degree()</code>.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">circos.text</span>(x, y, labels, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">degree</span>(<span class="dv">5</span>)), <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>)</a></code></pre></div>
+<p>As <code>circos.text()</code> is applied in the data coordiante, offset can be directly
+added to <code>x</code> or/and <code>y</code> as a value measured in the data coordinate. An absolute
+offset can be set by using <code>ux()</code> (in x direction) and <code>uy()</code> (in y
+direction).</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">circos.text</span>(x <span class="op">+</span><span class="st"> </span><span class="kw">ux</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), y <span class="op">+</span><span class="st"> </span><span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), labels)</a></code></pre></div>
 </div>
 <div id="rectangles" class="section level2">
 <h2><span class="header-section-number">3.5</span> Rectangles and polygons</h2>
-<p>Theoretically, circular rectangles and polygons are all polygons. If you imagine the plotting region in a cell as Cartesian coordinate, then <code>circos.rect()</code> draws rectangles. In the circle, the up and bottom edge become two arcs. Note this function can be vectorized.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.rect</span>(xleft, ybottom, xright, ytop)
-<span class="kw">circos.rect</span>(xleft, ybottom, xright, ytop, sector.index, track.index)
-<span class="kw">circos.rect</span>(xleft, ybottom, xright, ytop, col, border, lty, lwd)</code></pre></div>
-<p><code>circos.polygon()</code> draws a polygon through a series of points in a cell. Please note the first data point must overlap to the last data point.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.polygon</span>(x, y)
-<span class="kw">circos.polygon</span>(x, y, col, border, lty, lwd)</code></pre></div>
-<p>In Figure <a href="graphics.html#fig:circlize-errorline">3.5</a>, the area of standard deviation of the smoothed line is drawn by <code>circos.polygon()</code>. Source code can be found in the <strong>Examples</strong> section of the <code>circos.polygon()</code> help page.</p>
+<p>Theoretically, circular rectangles and polygons are all polygons. If you imagine
+the plotting region in a cell as Cartesian coordinate, then <code>circos.rect()</code>
+draws rectangles. In the circle, the up and bottom edge become two arcs. Note this
+function can be vectorized.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">circos.rect</span>(xleft, ybottom, xright, ytop)</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="kw">circos.rect</span>(xleft, ybottom, xright, ytop, sector.index, track.index)</a>
+<a class="sourceLine" id="cb53-3" data-line-number="3"><span class="kw">circos.rect</span>(xleft, ybottom, xright, ytop, col, border, lty, lwd)</a></code></pre></div>
+<p><code>circos.polygon()</code> draws a polygon through a series of points in a cell.
+Please note the first data point must overlap to the last data point.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">circos.polygon</span>(x, y)</a>
+<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="kw">circos.polygon</span>(x, y, col, border, lty, lwd)</a></code></pre></div>
+<p>In Figure <a href="graphics.html#fig:circlize-errorline">3.5</a>, the area of standard deviation of the
+smoothed line is drawn by <code>circos.polygon()</code>. Source code can be found in the
+<strong>Examples</strong> section of the <code>circos.polygon()</code> help page.</p>
 <div class="figure" style="text-align: center"><span id="fig:circlize-errorline"></span>
 <img src="03-graphics_files/figure-html/circlize-errorline-1.svg" alt="Area of standard deviation of the smoothed line." width="384" />
 <p class="caption">
@@ -356,38 +453,58 @@ Figure 3.5: Area of standard deviation of the smoothed line.
 </div>
 <div id="axes" class="section level2">
 <h2><span class="header-section-number">3.6</span> Axes</h2>
-<p>Mostly, we only draw x-axes on the circle. <code>circos.axis()</code> or <code>circos.xaxis()</code> privides options to customize x-axes which are on the circular direction. It supports basic functionalities as <code>axis()</code> such as defining the breaks and corresponding labels. Besides that, the function also supports to put x-axes to a specified position on y direction, to position the x-axes facing the center of the circle or outside of the circle, and to customize the axes ticks. The <code>at</code> and <code>labels</code> arguments can be set to a long vector that the parts which exceed the maximal value in the corresponding cell are removed automatically. The facing of labels text can be optimized by <code>labels.niceFacing</code> (by default it is <code>TRUE</code>).</p>
-<p>Figure <a href="graphics.html#fig:circlize-xaxis">3.6</a> illustrates different settings of x-axes. The explanations are as follows:</p>
+<p>Mostly, we only draw x-axes on the circle. <code>circos.axis()</code> or <code>circos.xaxis()</code>
+privides options to customize x-axes which are on the circular direction. It
+supports basic functionalities as <code>axis()</code> such as defining the breaks and
+corresponding labels. Besides that, the function also supports to put x-axes to
+a specified position on y direction, to position the x-axes facing the center of
+the circle or outside of the circle, and to customize the axes ticks. The <code>at</code>
+and <code>labels</code> arguments can be set to a long vector that the parts which exceed
+the maximal value in the corresponding cell are removed automatically. The
+facing of labels text can be optimized by <code>labels.niceFacing</code> (by default it is
+<code>TRUE</code>).</p>
+<p>Figure <a href="graphics.html#fig:circlize-xaxis">3.6</a> illustrates different settings of x-axes. The
+explanations are as follows:</p>
 <ul>
 <li>a: Major ticks are calculated automatically, other settings are defaults.</li>
-<li>b: Ticks are pointing to inside of the circle, facing of tick labels is set to <code>outside</code>.</li>
+<li>b: Ticks are pointing to inside of the circle, facing of tick labels is set to
+<code>outside</code>.</li>
 <li>c: Position of x-axis is <code>bottom</code> in the cell.</li>
-<li>d: Ticks are pointing to the inside of the circle, facing of tick labels is set to <code>reverse.clockwise</code>.</li>
+<li>d: Ticks are pointing to the inside of the circle, facing of tick labels is
+set to <code>reverse.clockwise</code>.</li>
 <li>e: manually set major ticks and also set the position of x-axis.</li>
 <li>f: replace numeric labels to characters, with no minor ticks.</li>
-<li>g: No ticks for both major and minor, facing of tick labels is set to <code>reverse.clockwise</code>.</li>
-<li>h: Number of minor ticks between two major ticks is set to 2. Length of ticks is longer. Facing of tick labels is set to <code>clockwise</code>.</li>
+<li>g: No ticks for both major and minor, facing of tick labels is set to
+<code>reverse.clockwise</code>.</li>
+<li>h: Number of minor ticks between two major ticks is set to 2. Length of ticks
+is longer. Facing of tick labels is set to <code>clockwise</code>.</li>
 </ul>
 <div class="figure" style="text-align: center"><span id="fig:circlize-xaxis"></span>
-<img src="03-graphics_files/figure-html/circlize-xaxis-1.svg" alt="X-axes" width="384" />
+<img src="03-graphics_files/figure-html/circlize-xaxis-1.svg" alt="X-axes" width="672" />
 <p class="caption">
 Figure 3.6: X-axes
 </p>
 </div>
-<p>As you may notice in the above figure, when the first and last axis labels exceed data ranges on x-axis in the corresponding cell, their positions are automatically adjusted to be shifted inwards in the cell.</p>
-<p>Possible usage of <code>circos.axis()</code> is as follows. Note <code>h</code> can be <code>bottom</code>, <code>top</code> or a numeric value.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.axis</span>(h)
-<span class="kw">circos.axis</span>(h, sector.index, track.index)
-<span class="kw">circos.axis</span>(h, major.at, labels, major.tick, direction)
-<span class="kw">circos.axis</span>(h, major.at, labels, major.tick, labels.font, labels.cex,
-            labels.facing, labels.niceFacing)
-<span class="kw">circos.axis</span>(h, major.at, labels, major.tick, minor.ticks,
-            major.tick.length, lwd)</code></pre></div>
-<p>Y-axis is also supported by <code>circos.yaxis()</code>. The usage is similar as <code>circos.axis()</code> One thing that needs to be note is users need to manually adjust <code>gap.degree</code> in <code>circos.par()</code> to make sure there are enough spaces for y-axes. (Figure <a href="graphics.html#fig:circlize-yaxis">3.7</a>)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.yaxis</span>(side)
-<span class="kw">circos.yaxis</span>(at, labels, sector.index, track.index)</code></pre></div>
+<p>As you may notice in the above figure, when the first and last axis labels
+exceed data ranges on x-axis in the corresponding cell, their positions are
+automatically adjusted to be shifted inwards in the cell.</p>
+<p>Possible usage of <code>circos.axis()</code> is as follows. Note <code>h</code> can be <code>bottom</code>, <code>top</code>
+or a numeric value.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">circos.axis</span>(h)</a>
+<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="kw">circos.axis</span>(h, sector.index, track.index)</a>
+<a class="sourceLine" id="cb55-3" data-line-number="3"><span class="kw">circos.axis</span>(h, major.at, labels, major.tick, direction)</a>
+<a class="sourceLine" id="cb55-4" data-line-number="4"><span class="kw">circos.axis</span>(h, major.at, labels, major.tick, labels.font, labels.cex,</a>
+<a class="sourceLine" id="cb55-5" data-line-number="5">            labels.facing, labels.niceFacing)</a>
+<a class="sourceLine" id="cb55-6" data-line-number="6"><span class="kw">circos.axis</span>(h, major.at, labels, major.tick, minor.ticks,</a>
+<a class="sourceLine" id="cb55-7" data-line-number="7">            major.tick.length, lwd)</a></code></pre></div>
+<p>Y-axis is also supported by <code>circos.yaxis()</code>. The usage is similar as
+<code>circos.axis()</code> One thing that needs to be note is users need to manually adjust
+<code>gap.degree</code> in <code>circos.par()</code> to make sure there are enough spaces for y-axes.
+(Figure <a href="graphics.html#fig:circlize-yaxis">3.7</a>)</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">circos.yaxis</span>(side)</a>
+<a class="sourceLine" id="cb56-2" data-line-number="2"><span class="kw">circos.yaxis</span>(at, labels, sector.index, track.index)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-yaxis"></span>
-<img src="03-graphics_files/figure-html/circlize-yaxis-1.svg" alt="Y-axes" width="384" />
+<img src="03-graphics_files/figure-html/circlize-yaxis-1.svg" alt="Y-axes" width="672" />
 <p class="caption">
 Figure 3.7: Y-axes
 </p>
@@ -395,87 +512,119 @@ Figure 3.7: Y-axes
 </div>
 <div id="circular-arrows" class="section level2">
 <h2><span class="header-section-number">3.7</span> Circular arrows</h2>
-<p>Circular arrows can be used to represent stages in a circle. <code>circos.arrow()</code> draws circular arrows parallel to the circle. Since the arrow is always parallel to the circle, on x-direction, the start and end position of the arrow need to be defined while on the y-direction, only the position of the center of arrow needs to be defined. Also <code>width</code> controls the width of the arrow and the length is defined by <code>x2 - x1</code>. <code>arrow.head.width</code> and <code>arrow.head.length</code> control the size of the arrow head, and values are measured in the data coordinate in corresponding cell. <code>tail</code> controls the shape of the arrow tail. Note for <code>width</code>, <code>arrow.head.width</code> and <code>arrow.head.length</code>, the value can be set by <code>ux()</code>, <code>uy()</code> with absolute units. See figure <a href="graphics.html#fig:circular-arrow">3.8</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.initialize</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-col =<span class="st"> </span><span class="kw">rand_color</span>(<span class="dv">4</span>)
-tail =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;normal&quot;</span>, <span class="st">&quot;point&quot;</span>, <span class="st">&quot;normal&quot;</span>)
-<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    <span class="kw">circos.arrow</span>(<span class="dt">x1 =</span> <span class="dv">0</span>, <span class="dt">x2 =</span> <span class="dv">1</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">width =</span> <span class="fl">0.4</span>, 
-        <span class="dt">arrow.head.width =</span> <span class="fl">0.6</span>, <span class="dt">arrow.head.length =</span> <span class="kw">ux</span>(<span class="dv">1</span>, <span class="st">&quot;cm&quot;</span>), 
-        <span class="dt">col =</span> col[CELL_META<span class="op">$</span>sector.numeric.index], 
-        <span class="dt">tail =</span> tail[CELL_META<span class="op">$</span>sector.numeric.index])
-}, <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.4</span>)</code></pre></div>
+<p>Circular arrows can be used to represent stages in a circle. <code>circos.arrow()</code>
+draws circular arrows parallel to the circle. Since the arrow is always
+parallel to the circle, on x-direction, the start and end position of the
+arrow need to be defined while on the y-direction, only the position of the
+center of arrow needs to be defined. Also <code>width</code> controls the width of the
+arrow and the length is defined by <code>x2 - x1</code>. <code>arrow.head.width</code> and
+<code>arrow.head.length</code> control the size of the arrow head, and values are
+measured in the data coordinate in corresponding cell. <code>tail</code> controls the
+shape of the arrow tail. Note for <code>width</code>, <code>arrow.head.width</code> and
+<code>arrow.head.length</code>, the value can be set by <code>ux()</code>, <code>uy()</code> with absolute
+units. See figure <a href="graphics.html#fig:circular-arrow">3.8</a>.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">circos.initialize</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2">col =<span class="st"> </span><span class="kw">rand_color</span>(<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb57-3" data-line-number="3">tail =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;normal&quot;</span>, <span class="st">&quot;point&quot;</span>, <span class="st">&quot;normal&quot;</span>)</a>
+<a class="sourceLine" id="cb57-4" data-line-number="4"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb57-5" data-line-number="5">    <span class="kw">circos.arrow</span>(<span class="dt">x1 =</span> <span class="dv">0</span>, <span class="dt">x2 =</span> <span class="dv">1</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">width =</span> <span class="fl">0.4</span>, </a>
+<a class="sourceLine" id="cb57-6" data-line-number="6">        <span class="dt">arrow.head.width =</span> <span class="fl">0.6</span>, <span class="dt">arrow.head.length =</span> <span class="kw">ux</span>(<span class="dv">1</span>, <span class="st">&quot;cm&quot;</span>), </a>
+<a class="sourceLine" id="cb57-7" data-line-number="7">        <span class="dt">col =</span> col[CELL_META<span class="op">$</span>sector.numeric.index], </a>
+<a class="sourceLine" id="cb57-8" data-line-number="8">        <span class="dt">tail =</span> tail[CELL_META<span class="op">$</span>sector.numeric.index])</a>
+<a class="sourceLine" id="cb57-9" data-line-number="9">}, <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.4</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circular-arrow"></span>
 <img src="03-graphics_files/figure-html/circular-arrow-1.svg" alt="Circular arrows." width="384" />
 <p class="caption">
 Figure 3.8: Circular arrows.
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
-<p>Circular arrows are useful to visualize events which happen in circular style, such as different phases in cell cycle. Following example code visualizes four phases in cell cycle where the width of sectors correspond to the hours in each phase (figure <a href="graphics.html#fig:cell-cycle">3.9</a>). Also circular arrows can be used to visualize genes in circular genome where the arrows represent the orientation of the gene, such as <a href="https://en.wikipedia.org/wiki/Mitochondrial_DNA">mitochondrial genome</a> or <a href="https://en.wikipedia.org/wiki/Plasmid">plasmid genome</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cell_cycle =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">phase =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;G1&quot;</span>, <span class="st">&quot;S&quot;</span>, <span class="st">&quot;G2&quot;</span>, <span class="st">&quot;M&quot;</span>), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;G1&quot;</span>, <span class="st">&quot;S&quot;</span>, <span class="st">&quot;G2&quot;</span>, <span class="st">&quot;M&quot;</span>)),
-                        <span class="dt">hour =</span> <span class="kw">c</span>(<span class="dv">11</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">1</span>))
-color =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#66C2A5&quot;</span>, <span class="st">&quot;#FC8D62&quot;</span>, <span class="st">&quot;#8DA0CB&quot;</span>, <span class="st">&quot;#E78AC3&quot;</span>)
-<span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>)
-<span class="kw">circos.initialize</span>(cell_cycle<span class="op">$</span>phase, <span class="dt">xlim =</span> <span class="kw">cbind</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">4</span>), cell_cycle<span class="op">$</span>hour))
-<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    <span class="kw">circos.arrow</span>(CELL_META<span class="op">$</span>xlim[<span class="dv">1</span>], CELL_META<span class="op">$</span>xlim[<span class="dv">2</span>], 
-        <span class="dt">arrow.head.width =</span> CELL_META<span class="op">$</span>yrange<span class="op">*</span><span class="fl">0.8</span>, <span class="dt">arrow.head.length =</span> <span class="kw">ux</span>(<span class="fl">0.5</span>, <span class="st">&quot;cm&quot;</span>),
-        <span class="dt">col =</span> color[CELL_META<span class="op">$</span>sector.numeric.index])
-    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, CELL_META<span class="op">$</span>sector.index, 
-        <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>)
-    <span class="kw">circos.axis</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">major.at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">round</span>(CELL_META<span class="op">$</span>xlim[<span class="dv">2</span>])), <span class="dt">minor.ticks =</span> <span class="dv">1</span>,
-        <span class="dt">labels.cex =</span> <span class="fl">0.6</span>)
-}, <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.3</span>)</code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
+<p>Circular arrows are useful to visualize events which happen in circular style,
+such as different phases in cell cycle. Following example code visualizes four
+phases in cell cycle where the width of sectors correspond to the hours in
+each phase (figure <a href="graphics.html#fig:cell-cycle">3.9</a>). Also circular arrows can be used to
+visualize genes in circular genome where the arrows represent the orientation
+of the gene, such as <a href="https://en.wikipedia.org/wiki/Mitochondrial_DNA">mitochondrial genome</a>
+or <a href="https://en.wikipedia.org/wiki/Plasmid">plasmid genome</a>.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">cell_cycle =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">phase =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;G1&quot;</span>, <span class="st">&quot;S&quot;</span>, <span class="st">&quot;G2&quot;</span>, <span class="st">&quot;M&quot;</span>), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;G1&quot;</span>, <span class="st">&quot;S&quot;</span>, <span class="st">&quot;G2&quot;</span>, <span class="st">&quot;M&quot;</span>)),</a>
+<a class="sourceLine" id="cb59-2" data-line-number="2">                        <span class="dt">hour =</span> <span class="kw">c</span>(<span class="dv">11</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb59-3" data-line-number="3">color =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#66C2A5&quot;</span>, <span class="st">&quot;#FC8D62&quot;</span>, <span class="st">&quot;#8DA0CB&quot;</span>, <span class="st">&quot;#E78AC3&quot;</span>)</a>
+<a class="sourceLine" id="cb59-4" data-line-number="4"><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>)</a>
+<a class="sourceLine" id="cb59-5" data-line-number="5"><span class="kw">circos.initialize</span>(cell_cycle<span class="op">$</span>phase, <span class="dt">xlim =</span> <span class="kw">cbind</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">4</span>), cell_cycle<span class="op">$</span>hour))</a>
+<a class="sourceLine" id="cb59-6" data-line-number="6"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb59-7" data-line-number="7">    <span class="kw">circos.arrow</span>(CELL_META<span class="op">$</span>xlim[<span class="dv">1</span>], CELL_META<span class="op">$</span>xlim[<span class="dv">2</span>], </a>
+<a class="sourceLine" id="cb59-8" data-line-number="8">        <span class="dt">arrow.head.width =</span> CELL_META<span class="op">$</span>yrange<span class="op">*</span><span class="fl">0.8</span>, <span class="dt">arrow.head.length =</span> <span class="kw">ux</span>(<span class="fl">0.5</span>, <span class="st">&quot;cm&quot;</span>),</a>
+<a class="sourceLine" id="cb59-9" data-line-number="9">        <span class="dt">col =</span> color[CELL_META<span class="op">$</span>sector.numeric.index])</a>
+<a class="sourceLine" id="cb59-10" data-line-number="10">    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, CELL_META<span class="op">$</span>sector.index, </a>
+<a class="sourceLine" id="cb59-11" data-line-number="11">        <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>)</a>
+<a class="sourceLine" id="cb59-12" data-line-number="12">    <span class="kw">circos.axis</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">major.at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">round</span>(CELL_META<span class="op">$</span>xlim[<span class="dv">2</span>])), <span class="dt">minor.ticks =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb59-13" data-line-number="13">        <span class="dt">labels.cex =</span> <span class="fl">0.6</span>)</a>
+<a class="sourceLine" id="cb59-14" data-line-number="14">}, <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.3</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:cell-cycle"></span>
 <img src="03-graphics_files/figure-html/cell-cycle-1.svg" alt="Cell cycle." width="384" />
 <p class="caption">
 Figure 3.9: Cell cycle.
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
 </div>
 <div id="raster-image" class="section level2">
 <h2><span class="header-section-number">3.8</span> Raster image</h2>
-<p><code>circos.raster()</code> is used to add a raster image at a certain position in the circle with proper rotation. The first input variable should be a <code>raster</code> object or an object that can be converted by <code>as.raster()</code>. Facing of the image is controlled by <code>facing</code> and <code>niceFacing</code> arguments which are similar as in <code>circos.text()</code>. When value of <code>facing</code> is one of <code>inside</code>, <code>outside</code>, <code>reverse.clockwise</code>, <code>clockwise</code> and <code>downward</code>, the size of raster image should have absolute values which should be specified in the form of <code>number- unit</code> such as <code>&quot;20mm&quot;</code>, <code>&quot;1.2cm&quot;</code> or <code>&quot;0.5inche&quot;</code>. If only one of <code>width</code> and <code>height</code> is specified, the other one is automatically calculated by using the aspect ratio of the original image. Following example shows five types of facings of the raster image (figure <a href="graphics.html#fig:raster-normal">3.10</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(png)
-image =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;Rlogo.png&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;circlize&quot;</span>)
-image =<span class="st"> </span><span class="kw">as.raster</span>(<span class="kw">readPNG</span>(image))
-<span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>)
-<span class="kw">circos.initialize</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-all_facing_options =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;inside&quot;</span>, <span class="st">&quot;outside&quot;</span>, <span class="st">&quot;reverse.clockwise&quot;</span>, <span class="st">&quot;clockwise&quot;</span>, <span class="st">&quot;downward&quot;</span>)
-<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    <span class="kw">circos.raster</span>(image, CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, <span class="dt">width =</span> <span class="st">&quot;1cm&quot;</span>, 
-        <span class="dt">facing =</span> all_facing_options[CELL_META<span class="op">$</span>sector.numeric.index])
-    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, 
-        all_facing_options[CELL_META<span class="op">$</span>sector.numeric.index],
-        <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)
-})</code></pre></div>
+<p><code>circos.raster()</code> is used to add a raster image at a certain position in the
+circle with proper rotation. The first input variable should be a <code>raster</code>
+object or an object that can be converted by <code>as.raster()</code>. Facing of the
+image is controlled by <code>facing</code> and <code>niceFacing</code> arguments which are similar
+as in <code>circos.text()</code>. When value of <code>facing</code> is one of <code>inside</code>, <code>outside</code>,
+<code>reverse.clockwise</code>, <code>clockwise</code> and <code>downward</code>, the size of raster image
+should have absolute values which should be specified in the form of <code>number- unit</code> such as <code>&quot;20mm&quot;</code>, <code>&quot;1.2cm&quot;</code> or <code>&quot;0.5inche&quot;</code>. If only one of <code>width</code> and
+<code>height</code> is specified, the other one is automatically calculated by using the
+aspect ratio of the original image. Following example shows five types of
+facings of the raster image (figure <a href="graphics.html#fig:raster-normal">3.10</a>).</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">library</span>(png)</a>
+<a class="sourceLine" id="cb61-2" data-line-number="2">image =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;Rlogo.png&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;circlize&quot;</span>)</a>
+<a class="sourceLine" id="cb61-3" data-line-number="3">image =<span class="st"> </span><span class="kw">as.raster</span>(<span class="kw">readPNG</span>(image))</a>
+<a class="sourceLine" id="cb61-4" data-line-number="4"><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>)</a>
+<a class="sourceLine" id="cb61-5" data-line-number="5"><span class="kw">circos.initialize</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb61-6" data-line-number="6">all_facing_options =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;inside&quot;</span>, <span class="st">&quot;outside&quot;</span>, <span class="st">&quot;reverse.clockwise&quot;</span>, <span class="st">&quot;clockwise&quot;</span>, <span class="st">&quot;downward&quot;</span>)</a>
+<a class="sourceLine" id="cb61-7" data-line-number="7"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb61-8" data-line-number="8">    <span class="kw">circos.raster</span>(image, CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, <span class="dt">width =</span> <span class="st">&quot;1cm&quot;</span>, </a>
+<a class="sourceLine" id="cb61-9" data-line-number="9">        <span class="dt">facing =</span> all_facing_options[CELL_META<span class="op">$</span>sector.numeric.index])</a>
+<a class="sourceLine" id="cb61-10" data-line-number="10">    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, </a>
+<a class="sourceLine" id="cb61-11" data-line-number="11">        all_facing_options[CELL_META<span class="op">$</span>sector.numeric.index],</a>
+<a class="sourceLine" id="cb61-12" data-line-number="12">        <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb61-13" data-line-number="13">})</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:raster-normal"></span>
 <img src="03-graphics_files/figure-html/raster-normal-1.svg" alt="Five facings of raster image." width="384" />
 <p class="caption">
 Figure 3.10: Five facings of raster image.
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
-<p>Also <code>facing</code> can be set to <code>bending.inside</code> and <code>bending.outside</code> that the image is filled to a circular rectangle. The strategy is to plot each original pixel as a small circular rectangle by <code>circos.rect()</code>, thus, the plotting is quite slow. If the original image is too huge, <code>scaling</code> argument can be set to reduce the size of the original image.</p>
-<p>Following code draws the image of the cover of this book which is a circular style of <a href="https://en.wikipedia.org/wiki/Keith_Haring">Keith Haring</a>’s doodle (Figure <a href="graphics.html#fig:raster-doodle">3.11</a>). The original source of the plot is from <a href="http://www.thegreenhead.com/imgs/keith-haring-double-retrospect-worlds-largest-jigsaw-puzzle-2.jpg" class="uri">http://www.thegreenhead.com/imgs/keith-haring-double-retrospect-worlds-largest-jigsaw-puzzle-2.jpg</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;doodle.RData&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;circlize&quot;</span>))
-<span class="kw">circos.par</span>(<span class="st">&quot;cell.padding&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))
-<span class="kw">circos.initialize</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>], <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    img =<span class="st"> </span>img_list[[CELL_META<span class="op">$</span>sector.numeric.index]]
-    <span class="kw">circos.raster</span>(img, CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, 
-        <span class="dt">width =</span> CELL_META<span class="op">$</span>xrange, <span class="dt">height =</span> CELL_META<span class="op">$</span>yrange, 
-        <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>)
-}, <span class="dt">track.height =</span> <span class="fl">0.25</span>, <span class="dt">bg.border =</span> <span class="ot">NA</span>)
-<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    img =<span class="st"> </span>img_list[[CELL_META<span class="op">$</span>sector.numeric.index <span class="op">+</span><span class="st"> </span><span class="dv">16</span>]]
-    <span class="kw">circos.raster</span>(img, CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, 
-        <span class="dt">width =</span> CELL_META<span class="op">$</span>xrange, <span class="dt">height =</span> CELL_META<span class="op">$</span>yrange, 
-        <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>)
-}, <span class="dt">track.height =</span> <span class="fl">0.25</span>, <span class="dt">bg.border =</span> <span class="ot">NA</span>)
-<span class="kw">circos.clear</span>()</code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
+<p>Also <code>facing</code> can be set to <code>bending.inside</code> and <code>bending.outside</code> that the
+image is filled to a circular rectangle. The strategy is to plot each original
+pixel as a small circular rectangle by <code>circos.rect()</code>, thus, the plotting is
+quite slow. If the original image is too huge, <code>scaling</code> argument can be set
+to reduce the size of the original image.</p>
+<p>Following code draws the image of the cover of this book which is a circular
+style of <a href="https://en.wikipedia.org/wiki/Keith_Haring">Keith Haring</a>’s doodle
+(Figure <a href="graphics.html#fig:raster-doodle">3.11</a>). The original source of the plot is from
+<a href="http://www.thegreenhead.com/imgs/keith-haring-double-retrospect-worlds-largest-jigsaw-puzzle-2.jpg" class="uri">http://www.thegreenhead.com/imgs/keith-haring-double-retrospect-worlds-largest-jigsaw-puzzle-2.jpg</a>.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">load</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;doodle.RData&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;circlize&quot;</span>))</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="kw">circos.par</span>(<span class="st">&quot;cell.padding&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3"><span class="kw">circos.initialize</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>], <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb63-4" data-line-number="4"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb63-5" data-line-number="5">    img =<span class="st"> </span>img_list[[CELL_META<span class="op">$</span>sector.numeric.index]]</a>
+<a class="sourceLine" id="cb63-6" data-line-number="6">    <span class="kw">circos.raster</span>(img, CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, </a>
+<a class="sourceLine" id="cb63-7" data-line-number="7">        <span class="dt">width =</span> CELL_META<span class="op">$</span>xrange, <span class="dt">height =</span> CELL_META<span class="op">$</span>yrange, </a>
+<a class="sourceLine" id="cb63-8" data-line-number="8">        <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>)</a>
+<a class="sourceLine" id="cb63-9" data-line-number="9">}, <span class="dt">track.height =</span> <span class="fl">0.25</span>, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb63-10" data-line-number="10"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb63-11" data-line-number="11">    img =<span class="st"> </span>img_list[[CELL_META<span class="op">$</span>sector.numeric.index <span class="op">+</span><span class="st"> </span><span class="dv">16</span>]]</a>
+<a class="sourceLine" id="cb63-12" data-line-number="12">    <span class="kw">circos.raster</span>(img, CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, </a>
+<a class="sourceLine" id="cb63-13" data-line-number="13">        <span class="dt">width =</span> CELL_META<span class="op">$</span>xrange, <span class="dt">height =</span> CELL_META<span class="op">$</span>yrange, </a>
+<a class="sourceLine" id="cb63-14" data-line-number="14">        <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>)</a>
+<a class="sourceLine" id="cb63-15" data-line-number="15">}, <span class="dt">track.height =</span> <span class="fl">0.25</span>, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb63-16" data-line-number="16"><span class="kw">circos.clear</span>()</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:raster-doodle"></span>
 <img src="images/doodle.jpeg" alt="Fill raster image to the cell." width="400" />
 <p class="caption">
@@ -485,63 +634,99 @@ Figure 3.11: Fill raster image to the cell.
 </div>
 <div id="links" class="section level2">
 <h2><span class="header-section-number">3.9</span> Links</h2>
-<p>Links or ribbons are important part for the circular visualization. They are used to represent relations or interactions between sectors. In <strong>circlize</strong>, <code>circos.link()</code> draws links between single points and intervals. There are four mandatory arguments which are index for the first sector, positions on the first sector, index for the second sector and positions on the second sector. If the positions on the two sectors are all single points, the link represents as a line. If the positions on the two sectors are intervals, the link represents as a robbon (Figure <a href="graphics.html#fig:link-example">3.12</a>). Possible usage for <code>circos.link()</code> is as follows.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>)
-<span class="kw">circos.link</span>(sector.index1, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), sector.index2, <span class="dv">0</span>)
-<span class="kw">circos.link</span>(sector.index1, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), sector.index2, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
-<span class="kw">circos.link</span>(sector.index1, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), sector.index2, <span class="dv">0</span>, col, lwd, lty, border)</code></pre></div>
+<p>Links or ribbons are important part for the circular visualization. They are
+used to represent relations or interactions between sectors. In <strong>circlize</strong>,
+<code>circos.link()</code> draws links between single points and intervals. There are
+four mandatory arguments which are index for the first sector, positions on
+the first sector, index for the second sector and positions on the second
+sector. If the positions on the two sectors are all single points, the link
+represents as a line. If the positions on the two sectors are intervals, the link
+represents as a robbon (Figure <a href="graphics.html#fig:link-example">3.12</a>). Possible usage for
+<code>circos.link()</code> is as follows.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="kw">circos.link</span>(sector.index1, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), sector.index2, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb64-3" data-line-number="3"><span class="kw">circos.link</span>(sector.index1, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), sector.index2, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb64-4" data-line-number="4"><span class="kw">circos.link</span>(sector.index1, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), sector.index2, <span class="dv">0</span>, col, lwd, lty, border)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:link-example"></span>
 <img src="03-graphics_files/figure-html/link-example-1.svg" alt="Different types of links." width="384" />
 <p class="caption">
 Figure 3.12: Different types of links.
 </p>
 </div>
-<p>The position of link end is controlled by <code>rou</code>. By default, it is the bottom of the most inside track and normally, you don’t need to care about this setting. The two ends of the link are located in a same circle by default. The positions of two ends can be adjusted with different values for <code>rou1</code> and <code>rou2</code> arguments. See Figure <a href="graphics.html#fig:link-end">3.13</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, rou)
-<span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, rou1, rou2)</code></pre></div>
+<p>The position of link end is controlled by <code>rou</code>. By default, it is the bottom
+of the most inside track and normally, you don’t need to care about
+this setting. The two ends of the link are located in a same circle by default. The
+positions of two ends can be adjusted with different values for <code>rou1</code> and
+<code>rou2</code> arguments. See Figure <a href="graphics.html#fig:link-end">3.13</a>.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, rou)</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, rou1, rou2)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:link-end"></span>
 <img src="03-graphics_files/figure-html/link-end-1.svg" alt="Positions of link ends." width="384" />
 <p class="caption">
 Figure 3.13: Positions of link ends.
 </p>
 </div>
-<p>The height of the link is controlled by <code>h</code> argument. In most cases, you don’t need to care about the value of <code>h</code> because they are internally calculated based on the width of each link. However, when the link represents as a ribbon (i.e. link from point to interval or from interval to interval), It can not always ensure that one border is always below or above the other, which means, in some extreme cases, the two borders are intersected and the link would be messed up. It happens especially when position of the two ends are too close or the width of one end is extremely large while the width of the other end is too small. In that case, users can manually set height of the top and bottom border by <code>h</code> and <code>h2</code> (Figure <a href="graphics.html#fig:link-height">3.14</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, h)
-<span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, h, h2)</code></pre></div>
+<p>The height of the link is controlled by <code>h</code> argument. In most cases, you don’t
+need to care about the value of <code>h</code> because they are internally calculated
+based on the width of each link. However, when the link represents as a ribbon
+(i.e. link from point to interval or from interval to interval), It can not
+always ensure that one border is always below or above the other, which means,
+in some extreme cases, the two borders are intersected and the link would be
+messed up. It happens especially when position of the two ends are too close
+or the width of one end is extremely large while the width of the other end is
+too small. In that case, users can manually set height of the top and bottom
+border by <code>h</code> and <code>h2</code> (Figure <a href="graphics.html#fig:link-height">3.14</a>).</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, h)</a>
+<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, h, h2)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:link-height"></span>
 <img src="03-graphics_files/figure-html/link-height-1.svg" alt="Adjust link heights." width="384" />
 <p class="caption">
 Figure 3.14: Adjust link heights.
 </p>
 </div>
-<p>When there are many links, the height of all links can be systematically adjusted by <code>h.ratio</code> (Figure <a href="graphics.html#fig:link-ratio">3.15</a>). The value is between 0 and 1.</p>
+<p>When there are many links, the height of all links can be systematically adjusted by <code>h.ratio</code> (Figure <a href="graphics.html#fig:link-ratio">3.15</a>).
+The value is between 0 and 1.</p>
 <div class="figure" style="text-align: center"><span id="fig:link-ratio"></span>
 <img src="03-graphics_files/figure-html/link-ratio-1.svg" alt="Adjust link heights by `h.ratio`." width="768" />
 <p class="caption">
 Figure 3.15: Adjust link heights by <code>h.ratio</code>.
 </p>
 </div>
-<p>The border of link (if it is a ribbon) or the link itself (if it is a line) is in fact a quadratic Bezier curve, thus you can control the shape of the link by <code>w</code> and <code>w2</code> (<code>w2</code> controls the shape of bottom border). See Figure <a href="graphics.html#fig:link-shape">3.16</a> for examples. For more explanation of <code>w</code>, please refer to <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#Rational_B.C3.A9zier_curves">http://en.wikipedia.org/wiki/B%C3%A9zier_curve#Rational_B.C3.A9zier_curves</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, w)
-<span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, w, w2)</code></pre></div>
+<p>The border of link (if it is a ribbon) or the link itself (if it is a line) is
+in fact a quadratic Bezier curve, thus you can control the shape of the link
+by <code>w</code> and <code>w2</code> (<code>w2</code> controls the shape of bottom border). See Figure
+<a href="graphics.html#fig:link-shape">3.16</a> for examples. For more explanation of <code>w</code>, please refer
+to <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#Rational_B.C3.A9zier_curves">http://en.wikipedia.org/wiki/B%C3%A9zier_curve#Rational_B.C3.A9zier_curves</a>.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, w)</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, w, w2)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:link-shape"></span>
 <img src="03-graphics_files/figure-html/link-shape-1.svg" alt="Different link shapes." width="384" />
 <p class="caption">
 Figure 3.16: Different link shapes.
 </p>
 </div>
-<p>When the links represent as ribbons and the two ends overlap, the links will be de-generated as a ‘hill’ (Figure <a href="graphics.html#fig:link-hill">3.17</a>).</p>
+<p>When the links represent as ribbons and the two ends overlap, the links will
+be de-generated as a ‘hill’ (Figure <a href="graphics.html#fig:link-hill">3.17</a>).</p>
 <div class="figure" style="text-align: center"><span id="fig:link-hill"></span>
 <img src="03-graphics_files/figure-html/link-hill-1.svg" alt="Link as a hill." width="384" />
 <p class="caption">
 Figure 3.17: Link as a hill.
 </p>
 </div>
-<p>Links can have arrows to represent the directions. The <code>directional</code> argument controls how to add arrows. A value of <code>0</code> means there is no direction, <code>1</code> means the direction is from end 1 to end 2, <code>-1</code> means the direction is from end 2 to end 1, and <code>2</code> means bi-direction. If the link represents as a ribbon, a line with arrow will be added in the center of the link to represent directions. See Figure <a href="graphics.html#fig:link-arrow">3.18</a>.</p>
-<p>Type of arrows is controlled by <code>arr.type</code> argument and it is actually passed to <code>Arrowhead()</code> defined in <strong>shape</strong> package. Besides the arrow types supported in <strong>shape</strong> package, there is an additional arrow type <code>big.arrow</code> which turns the robbon into a big arrow (Figure <a href="graphics.html#fig:link-arrow">3.18</a>).</p>
-<p>Unequal height of the link ends can also represent directions which we will discuss more with the <code>chordDiagram()</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, <span class="dt">directional =</span> <span class="dv">1</span>)
-<span class="kw">circos.link</span>(sector.index1, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), sector.index2, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">directional =</span> <span class="op">-</span><span class="dv">1</span>)</code></pre></div>
+<p>Links can have arrows to represent the directions. The <code>directional</code> argument
+controls how to add arrows. A value of <code>0</code> means there is no direction, <code>1</code>
+means the direction is from end 1 to end 2, <code>-1</code> means the direction is from
+end 2 to end 1, and <code>2</code> means bi-direction. If the link represents as a
+ribbon, a line with arrow will be added in the center of the link to represent
+directions. See Figure <a href="graphics.html#fig:link-arrow">3.18</a>.</p>
+<p>Type of arrows is controlled by <code>arr.type</code> argument and it is actually passed
+to <code>Arrowhead()</code> defined in <strong>shape</strong> package. Besides the arrow types
+supported in <strong>shape</strong> package, there is an additional arrow type <code>big.arrow</code>
+which turns the robbon into a big arrow (Figure <a href="graphics.html#fig:link-arrow">3.18</a>).</p>
+<p>Unequal height of the link ends can also represent directions which we will
+discuss more with the <code>chordDiagram()</code> function.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">circos.link</span>(sector.index1, <span class="dv">0</span>, sector.index2, <span class="dv">0</span>, <span class="dt">directional =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="kw">circos.link</span>(sector.index1, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), sector.index2, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">directional =</span> <span class="dv">-1</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:link-arrow"></span>
 <img src="03-graphics_files/figure-html/link-arrow-1.svg" alt="Link with arrows." width="384" />
 <p class="caption">
@@ -551,107 +736,132 @@ Figure 3.18: Link with arrows.
 </div>
 <div id="highlight-sectors-and-tracks" class="section level2">
 <h2><span class="header-section-number">3.10</span> Highlight sectors and tracks</h2>
-<p><code>draw.sector()</code> draws sectors, rings or their parts. This function is useful if you want to highlight some parts of your circular plot. it needs arguments of the position of circle center (by default <code>c(0, 0)</code>), the start degree and the end degree for sectors, and radius for two edges (or one edge) which are up or bottom borders. <code>draw.sector()</code> is independent from the circular plot.</p>
+<p><code>draw.sector()</code> draws sectors, rings or their parts. This function is useful
+if you want to highlight some parts of your circular plot. it needs arguments
+of the position of circle center (by default <code>c(0, 0)</code>), the start degree and
+the end degree for sectors, and radius for two edges (or one edge) which are
+up or bottom borders. <code>draw.sector()</code> is independent from the circular plot.</p>
 <p>Possible usage of <code>draw.sector()</code> is as follows.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">draw.sector</span>(start.degree, end.degree, rou1)
-<span class="kw">draw.sector</span>(start.degree, end.degree, rou1, rou2, center)
-<span class="kw">draw.sector</span>(start.degree, end.degree, rou1, rou2, center, col, border, lwd, lty)</code></pre></div>
-<p>Directions from <code>start.degree</code> and <code>end.degree</code> is important for drawing sectors. By default, it is clock wise.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">draw.sector</span>(start.degree, end.degree, <span class="dt">clock.wise =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">draw.sector</span>(start.degree, end.degree, rou1)</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="kw">draw.sector</span>(start.degree, end.degree, rou1, rou2, center)</a>
+<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="kw">draw.sector</span>(start.degree, end.degree, rou1, rou2, center, col, border, lwd, lty)</a></code></pre></div>
+<p>Directions from <code>start.degree</code> and <code>end.degree</code> is important for drawing sectors.
+By default, it is clock wise.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">draw.sector</span>(start.degree, end.degree, <span class="dt">clock.wise =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Following code shows examples of <code>draw.sector()</code> (Figure <a href="graphics.html#fig:draw-sector-general">3.19</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))
-<span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">ann =</span> <span class="ot">FALSE</span>, <span class="dt">asp =</span> <span class="dv">1</span>)
-<span class="kw">draw.sector</span>(<span class="dv">20</span>, <span class="dv">0</span>)
-<span class="kw">draw.sector</span>(<span class="dv">30</span>, <span class="dv">60</span>, <span class="dt">rou1 =</span> <span class="fl">0.8</span>, <span class="dt">rou2 =</span> <span class="fl">0.5</span>, <span class="dt">clock.wise =</span> <span class="ot">FALSE</span>, <span class="dt">col =</span> <span class="st">&quot;#FF000080&quot;</span>)
-<span class="kw">draw.sector</span>(<span class="dv">350</span>, <span class="dv">1000</span>, <span class="dt">col =</span> <span class="st">&quot;#00FF0080&quot;</span>, <span class="dt">border =</span> <span class="ot">NA</span>)
-<span class="kw">draw.sector</span>(<span class="dv">0</span>, <span class="dv">180</span>, <span class="dt">rou1 =</span> <span class="fl">0.25</span>, <span class="dt">center =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="dt">border =</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">2</span>)
-<span class="kw">draw.sector</span>(<span class="dv">0</span>, <span class="dv">360</span>, <span class="dt">rou1 =</span> <span class="fl">0.7</span>, <span class="dt">rou2 =</span> <span class="fl">0.6</span>, <span class="dt">col =</span> <span class="st">&quot;#0000FF80&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">ann =</span> <span class="ot">FALSE</span>, <span class="dt">asp =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="kw">draw.sector</span>(<span class="dv">20</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb71-4" data-line-number="4"><span class="kw">draw.sector</span>(<span class="dv">30</span>, <span class="dv">60</span>, <span class="dt">rou1 =</span> <span class="fl">0.8</span>, <span class="dt">rou2 =</span> <span class="fl">0.5</span>, <span class="dt">clock.wise =</span> <span class="ot">FALSE</span>, <span class="dt">col =</span> <span class="st">&quot;#FF000080&quot;</span>)</a>
+<a class="sourceLine" id="cb71-5" data-line-number="5"><span class="kw">draw.sector</span>(<span class="dv">350</span>, <span class="dv">1000</span>, <span class="dt">col =</span> <span class="st">&quot;#00FF0080&quot;</span>, <span class="dt">border =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb71-6" data-line-number="6"><span class="kw">draw.sector</span>(<span class="dv">0</span>, <span class="dv">180</span>, <span class="dt">rou1 =</span> <span class="fl">0.25</span>, <span class="dt">center =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="dt">border =</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb71-7" data-line-number="7"><span class="kw">draw.sector</span>(<span class="dv">0</span>, <span class="dv">360</span>, <span class="dt">rou1 =</span> <span class="fl">0.7</span>, <span class="dt">rou2 =</span> <span class="fl">0.6</span>, <span class="dt">col =</span> <span class="st">&quot;#0000FF80&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:draw-sector-general"></span>
 <img src="03-graphics_files/figure-html/draw-sector-general-1.svg" alt="General usage of `draw.sector()`." width="384" />
 <p class="caption">
 Figure 3.19: General usage of <code>draw.sector()</code>.
 </p>
 </div>
-<p>In order to highlight cells in the circular plot, we can use <code>get.cell.meta.data()</code> to get the information of positions of cells. E.g. the start degree and end degree can be obtained through <code>cell.start.degree</code> and <code>cell.end.degree</code>, and the position of the top border and bottom border can be obtained through <code>cell.top.radius</code> and <code>cell.bottom.radius</code>. Following code shows several examples to highlight sectors and tracks.</p>
+<p>In order to highlight cells in the circular plot, we can use
+<code>get.cell.meta.data()</code> to get the information of positions of cells. E.g. the
+start degree and end degree can be obtained through <code>cell.start.degree</code> and
+<code>cell.end.degree</code>, and the position of the top border and bottom border can be
+obtained through <code>cell.top.radius</code> and <code>cell.bottom.radius</code>. Following code
+shows several examples to highlight sectors and tracks.</p>
 <p>First we create a circular plot with eight sectors and three tracks.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>]
-<span class="kw">circos.initialize</span>(factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {
-    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-}
-<span class="kw">circos.info</span>(<span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>]</a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"><span class="kw">circos.initialize</span>(factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {</a>
+<a class="sourceLine" id="cb72-4" data-line-number="4">    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb72-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb72-6" data-line-number="6"><span class="kw">circos.info</span>(<span class="dt">plot =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>If we want to highlight sector a (Figure <a href="graphics.html#fig:circlize-highlight">3.20</a>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">draw.sector</span>(<span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.start.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>),
-            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.end.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>),
-            <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>), 
-            <span class="dt">col =</span> <span class="st">&quot;#FF000040&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">draw.sector</span>(<span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.start.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>),</a>
+<a class="sourceLine" id="cb73-2" data-line-number="2">            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.end.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>),</a>
+<a class="sourceLine" id="cb73-3" data-line-number="3">            <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb73-4" data-line-number="4">            <span class="dt">col =</span> <span class="st">&quot;#FF000040&quot;</span>)</a></code></pre></div>
 <p>If we want to highlight track 1 (Figure <a href="graphics.html#fig:circlize-highlight">3.20</a>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">draw.sector</span>(<span class="dv">0</span>, <span class="dv">360</span>, 
-    <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>),
-    <span class="dt">rou2 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.bottom.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>),
-    <span class="dt">col =</span> <span class="st">&quot;#00FF0040&quot;</span>)           </code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="kw">draw.sector</span>(<span class="dv">0</span>, <span class="dv">360</span>, </a>
+<a class="sourceLine" id="cb74-2" data-line-number="2">    <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb74-3" data-line-number="3">    <span class="dt">rou2 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.bottom.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb74-4" data-line-number="4">    <span class="dt">col =</span> <span class="st">&quot;#00FF0040&quot;</span>)           </a></code></pre></div>
 <p>If we want to highlight track 2 and 3 in sector e and f (Figure <a href="graphics.html#fig:circlize-highlight">3.20</a>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">draw.sector</span>(<span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.start.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;e&quot;</span>),
-            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.end.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;f&quot;</span>),
-            <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">2</span>),
-            <span class="dt">rou2 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.bottom.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">3</span>),
-            <span class="dt">col =</span> <span class="st">&quot;#0000FF40&quot;</span>)</code></pre></div>
-<p>If we want to highlight specific regions such as a small region inside cell <code>h:2</code>, we can use <code>circlize()</code> to calculate the positions in the polar coordinate. But always keep in mind that x-axis in the cell are always clock wise. See Figure <a href="graphics.html#fig:circlize-highlight">3.20</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pos =<span class="st"> </span><span class="kw">circlize</span>(<span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>), <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>), <span class="dt">sector.index =</span> <span class="st">&quot;h&quot;</span>, <span class="dt">track.index =</span> <span class="dv">2</span>)
-<span class="kw">draw.sector</span>(pos[<span class="dv">1</span>, <span class="st">&quot;theta&quot;</span>], pos[<span class="dv">2</span>, <span class="st">&quot;theta&quot;</span>], pos[<span class="dv">1</span>, <span class="st">&quot;rou&quot;</span>], pos[<span class="dv">2</span>, <span class="st">&quot;rou&quot;</span>], 
-    <span class="dt">clock.wise =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;#00FFFF40&quot;</span>)
-<span class="kw">circos.clear</span>()</code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw">draw.sector</span>(<span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.start.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;e&quot;</span>),</a>
+<a class="sourceLine" id="cb75-2" data-line-number="2">            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.end.degree&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;f&quot;</span>),</a>
+<a class="sourceLine" id="cb75-3" data-line-number="3">            <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb75-4" data-line-number="4">            <span class="dt">rou2 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.bottom.radius&quot;</span>, <span class="dt">track.index =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb75-5" data-line-number="5">            <span class="dt">col =</span> <span class="st">&quot;#0000FF40&quot;</span>)</a></code></pre></div>
+<p>If we want to highlight specific regions such as a small region inside cell
+<code>h:2</code>, we can use <code>circlize()</code> to calculate the positions in the polar
+coordinate. But always keep in mind that x-axis in the cell are always clock
+wise. See Figure <a href="graphics.html#fig:circlize-highlight">3.20</a>.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">pos =<span class="st"> </span><span class="kw">circlize</span>(<span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>), <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>), <span class="dt">sector.index =</span> <span class="st">&quot;h&quot;</span>, <span class="dt">track.index =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="kw">draw.sector</span>(pos[<span class="dv">1</span>, <span class="st">&quot;theta&quot;</span>], pos[<span class="dv">2</span>, <span class="st">&quot;theta&quot;</span>], pos[<span class="dv">1</span>, <span class="st">&quot;rou&quot;</span>], pos[<span class="dv">2</span>, <span class="st">&quot;rou&quot;</span>], </a>
+<a class="sourceLine" id="cb76-3" data-line-number="3">    <span class="dt">clock.wise =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;#00FFFF40&quot;</span>)</a>
+<a class="sourceLine" id="cb76-4" data-line-number="4"><span class="kw">circos.clear</span>()</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-highlight"></span>
 <img src="03-graphics_files/figure-html/circlize-highlight-1.svg" alt="Highlight sectors and tracks." width="384" />
 <p class="caption">
 Figure 3.20: Highlight sectors and tracks.
 </p>
 </div>
-<p>If the purpose is to simply highlight complete cells, there is a helper function <code>highlight.sector()</code> for which you only need to specify index for sectors and tracks that you want to to highlight. Paddings of the highligted regions can be set by <code>padding</code> argument which should contain four values representing ratios of the width or height of the highlighted region (Figure <a href="graphics.html#fig:circlize-highlight-sector">3.21</a>).</p>
-<p>One advantage of <code>highlight.sector()</code> is that it supports to add text in the highlighted regions. By default, the text is drawn at that center of the highlighted region. The position on the radical direction can be set by <code>text.vjust</code> argument either by a numeric value or a string in form of <code>&quot;2 inches&quot;`` or</code>“-1.2cm”`.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>]
-<span class="kw">circos.initialize</span>(factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {
-    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-}
-<span class="kw">circos.info</span>(<span class="dt">plot =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">highlight.sector</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;h&quot;</span>), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">text =</span> <span class="st">&quot;a and h belong to a same group&quot;</span>,
-    <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">text.vjust =</span> <span class="st">&quot;6mm&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)
-<span class="kw">highlight.sector</span>(<span class="st">&quot;c&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;#00FF0040&quot;</span>)
-<span class="kw">highlight.sector</span>(<span class="st">&quot;d&quot;</span>, <span class="dt">col =</span> <span class="ot">NA</span>, <span class="dt">border =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)
-<span class="kw">highlight.sector</span>(<span class="st">&quot;e&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;#0000FF40&quot;</span>, <span class="dt">track.index =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))
-<span class="kw">highlight.sector</span>(<span class="kw">c</span>(<span class="st">&quot;f&quot;</span>, <span class="st">&quot;g&quot;</span>), <span class="dt">col =</span> <span class="ot">NA</span>, <span class="dt">border =</span> <span class="st">&quot;green&quot;</span>, 
-    <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">track.index =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="dt">padding =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>))
-<span class="kw">highlight.sector</span>(factors, <span class="dt">col =</span> <span class="st">&quot;#FFFF0040&quot;</span>, <span class="dt">track.index =</span> <span class="dv">4</span>)</code></pre></div>
+<p>If the purpose is to simply highlight complete cells, there is a helper
+function <code>highlight.sector()</code> for which you only need to specify index for
+sectors and tracks that you want to to highlight. Paddings of the highligted
+regions can be set by <code>padding</code> argument which should contain four values
+representing ratios of the width or height of the highlighted region (Figure <a href="graphics.html#fig:circlize-highlight-sector">3.21</a>).</p>
+<p>One advantage of <code>highlight.sector()</code> is that it supports to add text in the
+highlighted regions. By default, the text is drawn at that center of the
+highlighted region. The position on the radical direction can be set by
+<code>text.vjust</code> argument either by a numeric value or a string in form of <code>&quot;2 inches&quot;`` or</code>“-1.2cm”`.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>]</a>
+<a class="sourceLine" id="cb77-2" data-line-number="2"><span class="kw">circos.initialize</span>(factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb77-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {</a>
+<a class="sourceLine" id="cb77-4" data-line-number="4">    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb77-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb77-6" data-line-number="6"><span class="kw">circos.info</span>(<span class="dt">plot =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb77-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb77-8" data-line-number="8"><span class="kw">highlight.sector</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;h&quot;</span>), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">text =</span> <span class="st">&quot;a and h belong to a same group&quot;</span>,</a>
+<a class="sourceLine" id="cb77-9" data-line-number="9">    <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">text.vjust =</span> <span class="st">&quot;6mm&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</a>
+<a class="sourceLine" id="cb77-10" data-line-number="10"><span class="kw">highlight.sector</span>(<span class="st">&quot;c&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;#00FF0040&quot;</span>)</a>
+<a class="sourceLine" id="cb77-11" data-line-number="11"><span class="kw">highlight.sector</span>(<span class="st">&quot;d&quot;</span>, <span class="dt">col =</span> <span class="ot">NA</span>, <span class="dt">border =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb77-12" data-line-number="12"><span class="kw">highlight.sector</span>(<span class="st">&quot;e&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;#0000FF40&quot;</span>, <span class="dt">track.index =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb77-13" data-line-number="13"><span class="kw">highlight.sector</span>(<span class="kw">c</span>(<span class="st">&quot;f&quot;</span>, <span class="st">&quot;g&quot;</span>), <span class="dt">col =</span> <span class="ot">NA</span>, <span class="dt">border =</span> <span class="st">&quot;green&quot;</span>, </a>
+<a class="sourceLine" id="cb77-14" data-line-number="14">    <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">track.index =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="dt">padding =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>))</a>
+<a class="sourceLine" id="cb77-15" data-line-number="15"><span class="kw">highlight.sector</span>(factors, <span class="dt">col =</span> <span class="st">&quot;#FFFF0040&quot;</span>, <span class="dt">track.index =</span> <span class="dv">4</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-highlight-sector"></span>
 <img src="03-graphics_files/figure-html/circlize-highlight-sector-1.svg" alt="Highlight sectors." width="384" />
 <p class="caption">
 Figure 3.21: Highlight sectors.
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
 </div>
 <div id="work-with-base-graphic-system" class="section level2">
 <h2><span class="header-section-number">3.11</span> Work together with the base graphic system</h2>
-<p><strong>circlize</strong> is built on the base R graphic system, then, of course the base graphic functions can be used in combination with circlize functions. On the other hand, <code>circlize()</code> converts data points from the data coordinates to the canvas coordinates where the base graphic function can be directly applied.</p>
-<p>Normally, the base functions such as <code>title()</code>, <code>text()</code>, <code>legend()</code> can be used to add extra information on the plot (Figure <a href="graphics.html#fig:circlize-base">3.22</a>).</p>
-<p>Sometimes, when the text or other graphics are far from the circle, you may set <code>par(xpd = NA)</code> so that the plotting is not clipped.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
-<span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
-<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {
-    <span class="kw">circos.points</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span><span class="op">/</span><span class="dv">20</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span><span class="op">/</span><span class="dv">20</span>)
-})
-<span class="kw">text</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="st">&quot;This is</span><span class="ch">\n</span><span class="st">the center&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
-<span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="dt">pch =</span> <span class="dv">1</span>, <span class="dt">legend =</span> <span class="st">&quot;This is the legend&quot;</span>)
-<span class="kw">title</span>(<span class="st">&quot;This is the title&quot;</span>)</code></pre></div>
+<p><strong>circlize</strong> is built on the base R graphic system, then, of course the base graphic
+functions can be used in combination with circlize functions. On the other hand,
+<code>circlize()</code> converts data points from the data coordinates to the canvas coordinates
+where the base graphic function can be directly applied.</p>
+<p>Normally, the base functions such as <code>title()</code>, <code>text()</code>, <code>legend()</code> can be used to
+add extra information on the plot (Figure <a href="graphics.html#fig:circlize-base">3.22</a>).</p>
+<p>Sometimes, when the text or other graphics are far from the circle, you may set <code>par(xpd = NA)</code>
+so that the plotting is not clipped.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">factors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb79-2" data-line-number="2"><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb79-3" data-line-number="3"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb79-4" data-line-number="4">    <span class="kw">circos.points</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span><span class="op">/</span><span class="dv">20</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span><span class="op">/</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb79-5" data-line-number="5">})</a>
+<a class="sourceLine" id="cb79-6" data-line-number="6"><span class="kw">text</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="st">&quot;This is</span><span class="ch">\n</span><span class="st">the center&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</a>
+<a class="sourceLine" id="cb79-7" data-line-number="7"><span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="dt">pch =</span> <span class="dv">1</span>, <span class="dt">legend =</span> <span class="st">&quot;This is the legend&quot;</span>)</a>
+<a class="sourceLine" id="cb79-8" data-line-number="8"><span class="kw">title</span>(<span class="st">&quot;This is the title&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-base"></span>
-<img src="03-graphics_files/figure-html/circlize-base-1.svg" alt="Work with base graphic functions." width="384" />
+<img src="03-graphics_files/figure-html/circlize-base-1.svg" alt="Work with base graphic functions." width="672" />
 <p class="caption">
 Figure 3.22: Work with base graphic functions.
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circos.clear</span>()</code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
 
 </div>
 </div>
@@ -716,7 +926,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

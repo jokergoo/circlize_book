@@ -1,6 +1,5 @@
 
 
-
 # A complex example of Chord diagram
 
 In this chapter, we demonstrate how to make a complex Chord diagram and how to
@@ -188,7 +187,7 @@ circos.track(track.index = 2, panel.fun = function(x, y) {
 }, bg.border = NA)
 ```
 
-<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-10-1.svg" width="576" style="display: block; margin: auto;" />
+<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-9-1.svg" width="576" style="display: block; margin: auto;" />
 
 On the top half, it is easy to see the proportion of different transitions in
 group 1 that come to every state in group 2. However, it is not
@@ -210,7 +209,7 @@ for(i in seq_len(nrow(cdm_res))) {
 }
 ```
 
-<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-11-1.svg" width="576" style="display: block; margin: auto;" />
+<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-10-1.svg" width="576" style="display: block; margin: auto;" />
 
 Methylation in each category is put on the most outside of the circle. On this track, we will
 put two paralle rectangles which are mean methylation and methylation difference between group 1
@@ -255,8 +254,8 @@ circos.clear()
 ```
 
 
-<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-12-1.svg" width="576" style="display: block; margin: auto;" />
+<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-11-1.svg" width="576" style="display: block; margin: auto;" />
 
 Legends can be added according to instructions discussed in Section \@ref(legends).
 
-<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-13-1.png" width="695.541984" style="display: block; margin: auto;" />
+<img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-12-1.png" width="695.541984" style="display: block; margin: auto;" />

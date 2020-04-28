@@ -1,7 +1,6 @@
 
 
 
-
 # High-level genomic functions
 
 In this chapter, several high-level functions which create tracks are introduced.
@@ -22,7 +21,7 @@ circos.genomicIdeogram(track.height = 0.2)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="11-high-level-genomic-functions_files/figure-html/ideogram-1.svg" alt="Circular ideograms." width="384" />
+<img src="11-high-level-genomic-functions_files/figure-html/ideogram-1.svg" alt="Circular ideograms." width="672" />
 <p class="caption">(\#fig:ideogram)Circular ideograms.</p>
 </div>
 
@@ -129,7 +128,7 @@ circos.track(track.index = get.current.track.index(), panel.fun = function(x, y)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="11-high-level-genomic-functions_files/figure-html/genomic-axis-1.svg" alt="Add genomic axes." width="384" />
+<img src="11-high-level-genomic-functions_files/figure-html/genomic-axis-1.svg" alt="Add genomic axes." width="672" />
 <p class="caption">(\#fig:genomic-axis)Add genomic axes.</p>
 </div>
 

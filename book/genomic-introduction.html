@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Introduction | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Introduction | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -52,41 +52,68 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -260,8 +287,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="genomic-introduction" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> Introduction</h1>
-<p>Circular visualization is popular in Genomics and related omics fields. It is efficient in revealing associations in high dimensional genomic data. In genomic plots, categories are usually chromosomes and data on x axes are genomic positions, but it can also be any kind of general genomic categories.</p>
-<p>To make is easy for Genomics analysis, <strong>circlize</strong> package particularly provides functions which focus on genomic plots. These functions are synonymous to the basic graphic functions but expect special format of input data:</p>
+<p>Circular visualization is popular in Genomics and related omics fields. It is
+efficient in revealing associations in high dimensional genomic data. In genomic
+plots, categories are usually chromosomes and data on x axes are genomic
+positions, but it can also be any kind of general genomic categories.</p>
+<p>To make is easy for Genomics analysis, <strong>circlize</strong> package particularly
+provides functions which focus on genomic plots. These functions are
+synonymous to the basic graphic functions but expect special format of input
+data:</p>
 <ul>
 <li><code>circos.genomicTrack()</code>: create a new track and add graphics.</li>
 <li><code>circos.genomicPoints()</code>: low-level function, add points.</li>
@@ -270,14 +303,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>circos.genomicText()</code>: low-level function, add text.</li>
 <li><code>circos.genomicLink()</code>: add links.</li>
 </ul>
-<p>The genomic functions are implemented by basic circlize functions (e.g. <code>circos.track()</code>, <code>circos.points()</code>), thus, the use of genomic functions can be mixed with the basic circlize functions.</p>
+<p>The genomic functions are implemented by basic circlize functions (e.g.
+<code>circos.track()</code>, <code>circos.points()</code>), thus, the use of genomic functions can
+be mixed with the basic circlize functions.</p>
 <div id="input-data" class="section level2">
 <h2><span class="header-section-number">7.1</span> Input data</h2>
-<p>Genomic data is usually stored as a table where the first three columns define the genomic regions and following columns are values associated with the corresponding regions. Each genomic region is composed by three elements: genomic category (in most case, it is the chromosome), start position on the genomic category and the end position. Such data structure is known as <a href="https://genome.ucsc.edu/FAQ/FAQformat#format1"><em>BED</em></a> format and is broadly used in genomic research.</p>
-<p><strong>circlize</strong> provides a simple function <code>generateRandomBed()</code> which generates random genomic data. Positions are uniformly generated from human genome and the number of regions on chromosomes approximately proportional to the length of chromosomes. In the function, <code>nr</code> and <code>nc</code> control the number of rows and numeric columns that users need. Please note <code>nr</code> are not exactly the same as the number of rows which are returned by the function. <code>fun</code> argument is a self-defined function to generate random values.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">999</span>)
-bed =<span class="st"> </span><span class="kw">generateRandomBed</span>()
-<span class="kw">head</span>(bed)</code></pre></div>
+<p>Genomic data is usually stored as a table where the first three columns
+define the genomic regions and following columns are values associated with
+the corresponding regions. Each genomic region is composed by three elements:
+genomic category (in most case, it is the chromosome), start position on the
+genomic category and the end position. Such data structure is known as
+<a href="https://genome.ucsc.edu/FAQ/FAQformat#format1"><em>BED</em></a>
+format and is broadly used in genomic research.</p>
+<p><strong>circlize</strong> provides a simple function <code>generateRandomBed()</code> which generates
+random genomic data. Positions are uniformly generated from human genome and
+the number of regions on chromosomes approximately proportional to the length
+of chromosomes. In the function, <code>nr</code> and <code>nc</code> control the number of rows and
+numeric columns that users need. Please note <code>nr</code> are not exactly the same as
+the number of rows which are returned by the function. <code>fun</code> argument is a
+self-defined function to generate random values.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">999</span>)</a>
+<a class="sourceLine" id="cb115-2" data-line-number="2">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>()</a>
+<a class="sourceLine" id="cb115-3" data-line-number="3"><span class="kw">head</span>(bed)</a></code></pre></div>
 <pre><code>##    chr   start     end       value1
 ## 1 chr1  118750  451929 -0.367702502
 ## 2 chr1  472114  805024 -0.001764946
@@ -285,11 +332,11 @@ bed =<span class="st"> </span><span class="kw">generateRandomBed</span>()
 ## 4 chr1 1058915 1081590  0.390291705
 ## 5 chr1 1194426 1341960 -1.305901261
 ## 6 chr1 1670402 2048723  0.340227447</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>, <span class="dt">nc =</span> <span class="dv">4</span>)
-<span class="kw">nrow</span>(bed)</code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb117-2" data-line-number="2"><span class="kw">nrow</span>(bed)</a></code></pre></div>
 <pre><code>## [1] 205</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>, <span class="dt">fun =</span> <span class="cf">function</span>(k) <span class="kw">sample</span>(letters, k, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
-<span class="kw">head</span>(bed)</code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>, <span class="dt">fun =</span> <span class="cf">function</span>(k) <span class="kw">sample</span>(letters, k, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb119-2" data-line-number="2"><span class="kw">head</span>(bed)</a></code></pre></div>
 <pre><code>##    chr   start     end value1 value2
 ## 1 chr1  275067  349212      q      e
 ## 2 chr1  350892  658970      u      f
@@ -297,7 +344,9 @@ bed =<span class="st"> </span><span class="kw">generateRandomBed</span>()
 ## 4 chr1 1053255 1115056      p      e
 ## 5 chr1 1127139 1545066      a      s
 ## 6 chr1 1864092 1973553      x      u</code></pre>
-<p>All genomic functions in <strong>circlize</strong> expect input variable as a data frame which contains genomic data or a list of data frames which contains genomic data in different conditions.</p>
+<p>All genomic functions in <strong>circlize</strong> expect input variable as a data frame
+which contains genomic data or a list of data frames which contains genomic
+data in different conditions.</p>
 
 </div>
 </div>
@@ -362,7 +411,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
