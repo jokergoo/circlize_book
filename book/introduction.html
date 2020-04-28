@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Introduction | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Introduction | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -408,7 +408,7 @@ same track. (See Figure <a href="introduction.html#fig:circlize-glance-track-1">
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">circos.trackPoints</span>(df<span class="op">$</span>factors, df<span class="op">$</span>x, df<span class="op">$</span>y, <span class="dt">col =</span> col, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb5-9" data-line-number="9"><span class="kw">circos.text</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="st">&quot;text&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-glance-track-1"></span>
-<img src="01-introduction_files/figure-html/circlize-glance-track-1-1.svg" alt="First example of circlize, add the first track." width="672" />
+<img src="01-introduction_files/figure-html/circlize-glance-track-1-1.svg" alt="First example of circlize, add the first track." width="384" />
 <p class="caption">
 Figure 1.2: First example of circlize, add the first track.
 </p>
@@ -459,7 +459,7 @@ other. (See Figure <a href="introduction.html#fig:circlize-glance-track-2">1.3</
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">bgcol =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#EFEFEF&quot;</span>, <span class="st">&quot;#CCCCCC&quot;</span>), <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">circos.trackHist</span>(df<span class="op">$</span>factors, df<span class="op">$</span>x, <span class="dt">bin.size =</span> <span class="fl">0.2</span>, <span class="dt">bg.col =</span> bgcol, <span class="dt">col =</span> <span class="ot">NA</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-glance-track-2"></span>
-<img src="01-introduction_files/figure-html/circlize-glance-track-2-1.svg" alt="First example of circlize, add the second track." width="672" />
+<img src="01-introduction_files/figure-html/circlize-glance-track-2-1.svg" alt="First example of circlize, add the second track." width="384" />
 <p class="caption">
 Figure 1.3: First example of circlize, add the second track.
 </p>
@@ -480,7 +480,7 @@ an <code>y</code> in <code>panel.fun</code> are exactly the values in the “cur
 <a class="sourceLine" id="cb7-7" data-line-number="7">        <span class="kw">circos.lines</span>(x2[od], y2[od])</a>
 <a class="sourceLine" id="cb7-8" data-line-number="8">})</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-glance-track-3"></span>
-<img src="01-introduction_files/figure-html/circlize-glance-track-3-1.svg" alt="First example of circlize, add the third track." width="672" />
+<img src="01-introduction_files/figure-html/circlize-glance-track-3-1.svg" alt="First example of circlize, add the third track." width="384" />
 <p class="caption">
 Figure 1.4: First example of circlize, add the third track.
 </p>
@@ -500,7 +500,7 @@ can use low-level graphic functions to add graphics directly into it.
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw">circos.points</span>(<span class="dt">x =</span> <span class="dv">-2</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">y =</span> <span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">5</span>), <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>)</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, <span class="st">&quot;updated&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-glance-track-update"></span>
-<img src="01-introduction_files/figure-html/circlize-glance-track-update-1.svg" alt="First example of circlize, update the second track." width="672" />
+<img src="01-introduction_files/figure-html/circlize-glance-track-update-1.svg" alt="First example of circlize, update the second track." width="384" />
 <p class="caption">
 Figure 1.5: First example of circlize, update the second track.
 </p>
@@ -523,7 +523,7 @@ important and <code>x</code>, <code>y</code> in <code>panel.fun()</code> are not
 <a class="sourceLine" id="cb9-8" data-line-number="8">                <span class="dt">col =</span> <span class="kw">rand_color</span>(n_breaks), <span class="dt">border =</span> <span class="ot">NA</span>)</a>
 <a class="sourceLine" id="cb9-9" data-line-number="9">})</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-glance-track-4"></span>
-<img src="01-introduction_files/figure-html/circlize-glance-track-4-1.svg" alt="First example of circlize, add the fourth track." width="672" />
+<img src="01-introduction_files/figure-html/circlize-glance-track-4-1.svg" alt="First example of circlize, add the fourth track." width="384" />
 <p class="caption">
 Figure 1.6: First example of circlize, add the fourth track.
 </p>
@@ -536,7 +536,7 @@ gives detailed usage of links. (See Figure <a href="introduction.html#fig:circli
 <a class="sourceLine" id="cb10-3" data-line-number="3">    <span class="dt">border =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">h =</span> <span class="fl">0.2</span>)</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw">circos.link</span>(<span class="st">&quot;e&quot;</span>, <span class="dv">0</span>, <span class="st">&quot;g&quot;</span>, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-glance-track-links"></span>
-<img src="01-introduction_files/figure-html/circlize-glance-track-links-1.svg" alt="First example of circlize, add links." width="672" />
+<img src="01-introduction_files/figure-html/circlize-glance-track-links-1.svg" alt="First example of circlize, add links." width="384" />
 <p class="caption">
 Figure 1.7: First example of circlize, add links.
 </p>

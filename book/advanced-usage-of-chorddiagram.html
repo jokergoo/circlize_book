@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 Advanced usage of chordDiagram() | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 14 Advanced usage of chordDiagram() | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -370,7 +370,7 @@ Later, the first track is updated with adding labels with clockwise facings
 <a class="sourceLine" id="cb293-6" data-line-number="6">        <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>))</a>
 <a class="sourceLine" id="cb293-7" data-line-number="7">}, <span class="dt">bg.border =</span> <span class="ot">NA</span>) <span class="co"># here set bg.border to NA is important</span></a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-labels-show"></span>
-<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-show-1.svg" alt="Change label directions." width="672" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-show-1.svg" alt="Change label directions." width="384" />
 <p class="caption">
 Figure 14.2: Change label directions.
 </p>
@@ -388,7 +388,7 @@ track index are specified explicitly.</p>
 <a class="sourceLine" id="cb294-7" data-line-number="7">        <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>)</a>
 <a class="sourceLine" id="cb294-8" data-line-number="8">}</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-labels-inside"></span>
-<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-inside-1.svg" alt="Put sector labels to the grid." width="672" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-inside-1.svg" alt="Put sector labels to the grid." width="384" />
 <p class="caption">
 Figure 14.3: Put sector labels to the grid.
 </p>
@@ -414,7 +414,7 @@ Figure 14.3: Put sector labels to the grid.
 <a class="sourceLine" id="cb295-17" data-line-number="17">    }</a>
 <a class="sourceLine" id="cb295-18" data-line-number="18">}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-labels-multile-style"></span>
-<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-multile-style-1.svg" alt="Adjust label direction according to the width of sectors." width="672" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-multile-style-1.svg" alt="Adjust label direction according to the width of sectors." width="384" />
 <p class="caption">
 Figure 14.4: Adjust label direction according to the width of sectors.
 </p>
@@ -586,7 +586,7 @@ Here we manually adjust <code>gap.after</code> in <code>circos.par()</code>.</p>
 <a class="sourceLine" id="cb308-16" data-line-number="16">    <span class="dt">text =</span> <span class="st">&quot;B&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">text.col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb308-17" data-line-number="17"><span class="kw">highlight.sector</span>(<span class="kw">colnames</span>(mat2), <span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, </a>
 <a class="sourceLine" id="cb308-18" data-line-number="18">    <span class="dt">text =</span> <span class="st">&quot;C&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">text.col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="14-chord-diagram-advanced-usage_files/figure-html/unnamed-chunk-9-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="14-chord-diagram-advanced-usage_files/figure-html/unnamed-chunk-10-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
 <p>If row names and column names in the big matrix are not grouped, the sector order
 can be manually adjusted by <code>order</code> argument.</p>

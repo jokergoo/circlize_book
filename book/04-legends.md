@@ -1,5 +1,6 @@
 
 
+
 # Legends {#legends}
 
 
@@ -120,7 +121,7 @@ draw(lgd_links, x = unit(1, "npc") - unit(2, "mm"), y = unit(4, "mm"),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="04-legends_files/figure-html/two-legends-1.png" alt="Split into two legends." width="672" />
+<img src="04-legends_files/figure-html/two-legends-1.png" alt="Split into two legends." width="384" />
 <p class="caption">(\#fig:two-legends)Split into two legends.</p>
 </div>
 

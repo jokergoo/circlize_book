@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 13 The chordDiagram() function | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 13 The chordDiagram() function | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -383,7 +383,7 @@ adjacency list runable.</p>
 <code>mat</code> (Figure <a href="the-chorddiagram-function.html#fig:chord-diagram-basic">13.1</a>).</p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-basic"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-1.svg" alt="Basic usages of `chordDiagram()`." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-1.svg" alt="Basic usages of `chordDiagram()`." width="384" />
 <p class="caption">
 Figure 13.1: Basic usages of <code>chordDiagram()</code>.
 </p>
@@ -404,7 +404,7 @@ which is same for <code>E*</code> sectors. Of course, you can give a order which
 not recommended because it is bad for reading the plot.</p>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">order =</span> <span class="kw">c</span>(<span class="st">&quot;S2&quot;</span>, <span class="st">&quot;S1&quot;</span>, <span class="st">&quot;S3&quot;</span>, <span class="st">&quot;E4&quot;</span>, <span class="st">&quot;E1&quot;</span>, <span class="st">&quot;E5&quot;</span>, <span class="st">&quot;E2&quot;</span>, <span class="st">&quot;E6&quot;</span>, <span class="st">&quot;E3&quot;</span>))</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-basic-order"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-order-1.svg" alt="Adjust sector orders in Chord diagram." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-order-1.svg" alt="Adjust sector orders in Chord diagram." width="384" />
 <p class="caption">
 Figure 13.2: Adjust sector orders in Chord diagram.
 </p>
@@ -425,7 +425,7 @@ use <code>circos.clear()</code> in the end of the plot to reset it.</p>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1"><span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">5</span>, <span class="kw">nrow</span>(mat)<span class="op">-</span><span class="dv">1</span>), <span class="dv">15</span>, <span class="kw">rep</span>(<span class="dv">5</span>, <span class="kw">ncol</span>(mat)<span class="op">-</span><span class="dv">1</span>), <span class="dv">15</span>))</a>
 <a class="sourceLine" id="cb235-2" data-line-number="2"><span class="kw">chordDiagram</span>(mat)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-basic-gap-after"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-gap-after-1.svg" alt="Set gaps in Chord diagram." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-gap-after-1.svg" alt="Set gaps in Chord diagram." width="384" />
 <p class="caption">
 Figure 13.3: Set gaps in Chord diagram.
 </p>
@@ -444,7 +444,7 @@ is a data frame). Internally a proper <code>gap.after</code> is assigned to
 sectors and column sectors.</p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">big.gap =</span> <span class="dv">10</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-basic-big-gap"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-big-gap-1.svg" alt="Directly set big.gap in chordDiagram()." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-big-gap-1.svg" alt="Directly set big.gap in chordDiagram()." width="384" />
 <p class="caption">
 Figure 13.4: Directly set big.gap in chordDiagram().
 </p>
@@ -462,7 +462,7 @@ direction can be set by <code>circos.par(clock.wise = ...)</code> (Figure <a hre
 <div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" data-line-number="1"><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>, <span class="dt">clock.wise =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb240-2" data-line-number="2"><span class="kw">chordDiagram</span>(mat)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-basic-start-degree"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-start-degree-1.svg" alt="Change position and orientation of Chord diagram." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-basic-start-degree-1.svg" alt="Change position and orientation of Chord diagram." width="384" />
 <p class="caption">
 Figure 13.5: Change position and orientation of Chord diagram.
 </p>
@@ -502,7 +502,7 @@ The value should between 0 to 1 in which 0 means no transparency and 1 means ful
 Default transparency is 0.5.</p>
 <div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">transparency =</span> <span class="dv">0</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-color-transparency"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-color-transparency-1.svg" alt="Transparency for links in Chord diagram." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-color-transparency-1.svg" alt="Transparency for links in Chord diagram." width="384" />
 <p class="caption">
 Figure 13.7: Transparency for links in Chord diagram.
 </p>
@@ -515,7 +515,7 @@ random color matrix. Note since <code>col_mat</code> already contains transparen
 <a class="sourceLine" id="cb244-2" data-line-number="2"><span class="kw">dim</span>(col_mat) =<span class="st"> </span><span class="kw">dim</span>(mat)  <span class="co"># to make sure it is a matrix</span></a>
 <a class="sourceLine" id="cb244-3" data-line-number="3"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">col =</span> col_mat)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-color-mat"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-color-mat-1.svg" alt="Set a color matrix for links in Chord diagram." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-color-mat-1.svg" alt="Set a color matrix for links in Chord diagram." width="384" />
 <p class="caption">
 Figure 13.8: Set a color matrix for links in Chord diagram.
 </p>
@@ -529,7 +529,7 @@ accepts a color mapping generated by <code>colorRamp2()</code> (Figure <a href="
 <div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" data-line-number="1">col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">range</span>(mat), <span class="kw">c</span>(<span class="st">&quot;#FFEEEE&quot;</span>, <span class="st">&quot;#FF0000&quot;</span>), <span class="dt">transparency =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb246-2" data-line-number="2"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">col =</span> col_fun)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-color-fun"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-color-fun-1.svg" alt="Set a color mapping function for links in Chord diagram." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-color-fun-1.svg" alt="Set a color mapping function for links in Chord diagram." width="384" />
 <p class="caption">
 Figure 13.9: Set a color mapping function for links in Chord diagram.
 </p>
@@ -568,7 +568,7 @@ either a single scalar or a matrix if the input is adjacency matrix.</p>
 <p>If it is set as a single scalar, it means all links share the same style (Figure <a href="the-chorddiagram-function.html#fig:chord-diagram-style-scalar">13.11</a>).</p>
 <div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">link.lwd =</span> <span class="dv">2</span>, <span class="dt">link.lty =</span> <span class="dv">2</span>, <span class="dt">link.border =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-style-scalar"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-scalar-1.svg" alt="Line style for Chord diagram." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-scalar-1.svg" alt="Line style for Chord diagram." width="384" />
 <p class="caption">
 Figure 13.11: Line style for Chord diagram.
 </p>
@@ -581,7 +581,7 @@ Figure 13.11: Line style for Chord diagram.
 <a class="sourceLine" id="cb250-4" data-line-number="4">border_mat[mat <span class="op">&gt;</span><span class="st"> </span><span class="dv">12</span>] =<span class="st"> &quot;red&quot;</span></a>
 <a class="sourceLine" id="cb250-5" data-line-number="5"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">link.lwd =</span> lwd_mat, <span class="dt">link.border =</span> border_mat)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-style-fullmat"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-fullmat-1.svg" alt="Set line style as a matrix." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-fullmat-1.svg" alt="Set line style as a matrix." width="384" />
 <p class="caption">
 Figure 13.12: Set line style as a matrix.
 </p>
@@ -596,7 +596,7 @@ the settings can be mapped to the correct links.</p>
 <a class="sourceLine" id="cb251-3" data-line-number="3"><span class="kw">colnames</span>(border_mat2) =<span class="st"> </span><span class="kw">colnames</span>(mat)</a>
 <a class="sourceLine" id="cb251-4" data-line-number="4"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">link.lwd =</span> <span class="dv">2</span>, <span class="dt">link.border =</span> border_mat2)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-style-submatrix"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-submatrix-1.svg" alt="Set line style as a sub matrix." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-submatrix-1.svg" alt="Set line style as a sub matrix." width="384" />
 <p class="caption">
 Figure 13.13: Set line style as a sub matrix.
 </p>
@@ -611,7 +611,7 @@ in the matrix, and the third column corresponds to the graphic parameters
 <a class="sourceLine" id="cb252-4" data-line-number="4"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">link.lty =</span> lty_df, <span class="dt">link.lwd =</span> lwd_df,</a>
 <a class="sourceLine" id="cb252-5" data-line-number="5">    <span class="dt">link.border =</span> border_df)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-style-dataframe"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-dataframe-1.svg" alt="Set line style as a data frame." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-style-dataframe-1.svg" alt="Set line style as a data frame." width="384" />
 <p class="caption">
 Figure 13.14: Set line style as a data frame.
 </p>
@@ -633,7 +633,7 @@ highlight links which come from a same sector by assigning colors with different
 by <code>row.col</code> argument (Figure <a href="the-chorddiagram-function.html#fig:chord-diagram-highlight-row">13.15</a>).</p>
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">row.col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>, <span class="st">&quot;#00FF0010&quot;</span>, <span class="st">&quot;#0000FF10&quot;</span>))</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-highlight-row"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-highlight-row-1.svg" alt="Highlight links by transparency." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-highlight-row-1.svg" alt="Highlight links by transparency." width="384" />
 <p class="caption">
 Figure 13.15: Highlight links by transparency.
 </p>
@@ -647,7 +647,7 @@ In following example, links with value less than 12 is set to <code>#00000000</c
 <div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1">col_mat[mat <span class="op">&lt;</span><span class="st"> </span><span class="dv">12</span>] =<span class="st"> &quot;#00000000&quot;</span></a>
 <a class="sourceLine" id="cb255-2" data-line-number="2"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">col =</span> col_mat) </a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-highlight-mat"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-highlight-mat-1.svg" alt="Highlight links by color matrix." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-highlight-mat-1.svg" alt="Highlight links by color matrix." width="384" />
 <p class="caption">
 Figure 13.16: Highlight links by color matrix.
 </p>
@@ -664,7 +664,7 @@ links of interest, links which are not defined in <code>col_df</code> are not dr
 <a class="sourceLine" id="cb257-2" data-line-number="2">    <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>, <span class="st">&quot;#00FF0080&quot;</span>, <span class="st">&quot;#0000FF80&quot;</span>))</a>
 <a class="sourceLine" id="cb257-3" data-line-number="3"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">col =</span> col_df)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-highlight-df"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-highlight-df-1.svg" alt="Highlight links by data frame." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-highlight-df-1.svg" alt="Highlight links by data frame." width="384" />
 <p class="caption">
 Figure 13.17: Highlight links by data frame.
 </p>
@@ -681,7 +681,7 @@ adjacency list (Figure <a href="the-chorddiagram-function.html#fig:chord-diagram
 <div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" data-line-number="1">col =<span class="st"> </span><span class="kw">rand_color</span>(<span class="kw">nrow</span>(df))</a>
 <a class="sourceLine" id="cb259-2" data-line-number="2"><span class="kw">chordDiagram</span>(df, <span class="dt">grid.col =</span> grid.col, <span class="dt">link.visible =</span> df[[<span class="dv">3</span>]] <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-link-visible"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-link-visible-1.svg" alt="Highlight links by setting `link.visible`." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-link-visible-1.svg" alt="Highlight links by setting `link.visible`." width="384" />
 <p class="caption">
 Figure 13.18: Highlight links by setting <code>link.visible</code>.
 </p>
@@ -804,7 +804,7 @@ direction of the link is important to distinguish them
 ## e  53 31  7 70 14 99 42</code></pre>
 <div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat2, <span class="dt">grid.col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">row.col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-directional-overlap"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-overlap-1.svg" alt="CHord diagram where row names and column names overlap." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-overlap-1.svg" alt="CHord diagram where row names and column names overlap." width="384" />
 <p class="caption">
 Figure 13.24: CHord diagram where row names and column names overlap.
 </p>
@@ -824,7 +824,7 @@ just set corresponding values to 0 in the matrix (Figure <a href="the-chorddiagr
 ## e 53 31  7 70  0 99 42</code></pre>
 <div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" data-line-number="1"><span class="kw">chordDiagram</span>(mat3, <span class="dt">grid.col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">row.col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-directional-non-selfloop"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-non-selfloop-1.svg" alt="Directional Chord diagram without self links." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-non-selfloop-1.svg" alt="Directional Chord diagram without self links." width="384" />
 <p class="caption">
 Figure 13.25: Directional Chord diagram without self links.
 </p>
@@ -841,7 +841,7 @@ will have arrows. Pleast note this is the only way to draw arrows to subset of l
 <a class="sourceLine" id="cb272-3" data-line-number="3"><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">direction.type =</span> <span class="st">&quot;arrows&quot;</span>,</a>
 <a class="sourceLine" id="cb272-4" data-line-number="4">    <span class="dt">link.arr.col =</span> arr.col, <span class="dt">link.arr.length =</span> <span class="fl">0.2</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-directional-arrow"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow-1.svg" alt="Use arrows to represent directions in Chord diagram." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow-1.svg" alt="Use arrows to represent directions in Chord diagram." width="384" />
 <p class="caption">
 Figure 13.26: Use arrows to represent directions in Chord diagram.
 </p>
@@ -854,7 +854,7 @@ Figure 13.26: Use arrows to represent directions in Chord diagram.
 <a class="sourceLine" id="cb273-4" data-line-number="4">    <span class="dt">direction.type =</span> <span class="kw">c</span>(<span class="st">&quot;diffHeight&quot;</span>, <span class="st">&quot;arrows&quot;</span>),</a>
 <a class="sourceLine" id="cb273-5" data-line-number="5">    <span class="dt">link.arr.col =</span> arr.col, <span class="dt">link.arr.length =</span> <span class="fl">0.2</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-directional-arrow2"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow2-1.svg" alt="Use both arrows and link height to represent directions in Chord diagram." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow2-1.svg" alt="Use both arrows and link height to represent directions in Chord diagram." width="384" />
 <p class="caption">
 Figure 13.27: Use both arrows and link height to represent directions in Chord diagram.
 </p>
@@ -865,7 +865,7 @@ arrows when there are too many links (Figure <a href="the-chorddiagram-function.
 <a class="sourceLine" id="cb274-2" data-line-number="2"><span class="kw">chordDiagram</span>(matx, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">direction.type =</span> <span class="kw">c</span>(<span class="st">&quot;diffHeight&quot;</span>, <span class="st">&quot;arrows&quot;</span>),</a>
 <a class="sourceLine" id="cb274-3" data-line-number="3">    <span class="dt">link.arr.type =</span> <span class="st">&quot;big.arrow&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-directional-arrow3"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow3-1.svg" alt="Use big arrows to represent directions in Chord diagram." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow3-1.svg" alt="Use big arrows to represent directions in Chord diagram." width="384" />
 <p class="caption">
 Figure 13.28: Use big arrows to represent directions in Chord diagram.
 </p>
@@ -875,7 +875,7 @@ the other ends (Figure <a href="the-chorddiagram-function.html#fig:chord-diagram
 <div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" data-line-number="1"><span class="kw">chordDiagram</span>(matx, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">direction.type =</span> <span class="kw">c</span>(<span class="st">&quot;diffHeight&quot;</span>, <span class="st">&quot;arrows&quot;</span>),</a>
 <a class="sourceLine" id="cb275-2" data-line-number="2">    <span class="dt">link.arr.type =</span> <span class="st">&quot;big.arrow&quot;</span>, <span class="dt">diffHeight =</span> <span class="op">-</span><span class="kw">uh</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>))</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-directional-arrow4"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow4-1.svg" alt="Use big arrows to represent directions in Chord diagram." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-directional-arrow4-1.svg" alt="Use big arrows to represent directions in Chord diagram." width="384" />
 <p class="caption">
 Figure 13.29: Use big arrows to represent directions in Chord diagram.
 </p>
@@ -982,7 +982,7 @@ and the other for negative value.</p>
 <a class="sourceLine" id="cb282-7" data-line-number="7">grid.col =<span class="st"> </span><span class="kw">structure</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="dt">names =</span> <span class="kw">c</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))</a>
 <a class="sourceLine" id="cb282-8" data-line-number="8"><span class="kw">chordDiagram</span>(df, <span class="dt">col =</span> <span class="kw">ifelse</span>(df<span class="op">$</span>value <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="dt">grid.col =</span> grid.col)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-multiple-link"></span>
-<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-multiple-link-1.svg" alt="Multiple links for a same pair of sectors." width="672" />
+<img src="13-chord-diagram-simple_files/figure-html/chord-diagram-multiple-link-1.svg" alt="Multiple links for a same pair of sectors." width="384" />
 <p class="caption">
 Figure 13.31: Multiple links for a same pair of sectors.
 </p>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Initialize with genomic data | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Initialize with genomic data | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -307,7 +307,7 @@ chromosome names should also have “chr” index.</p>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="kw">circos.initializeWithIdeogram</span>()</a>
 <a class="sourceLine" id="cb121-2" data-line-number="2"><span class="kw">text</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="st">&quot;default&quot;</span>, <span class="dt">cex =</span> <span class="dv">1</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-initialize-ideogram-default"></span>
-<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-default-1.svg" alt="Initialize genomic plot, default." width="672" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-default-1.svg" alt="Initialize genomic plot, default." width="384" />
 <p class="caption">
 Figure 8.1: Initialize genomic plot, default.
 </p>
@@ -357,7 +357,7 @@ argument is also for ordering chromosomes (Figure <a href="initialize-genomic-pl
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">8</span>)))</a>
 <a class="sourceLine" id="cb127-2" data-line-number="2"><span class="kw">text</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="st">&quot;subset of chromosomes&quot;</span>, <span class="dt">cex =</span> <span class="dv">1</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-initialize-ideogram-subset"></span>
-<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-subset-1.svg" alt="Initialize genomic plot, subset chromosomes." width="672" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-subset-1.svg" alt="Initialize genomic plot, subset chromosomes." width="384" />
 <p class="caption">
 Figure 8.2: Initialize genomic plot, subset chromosomes.
 </p>
@@ -430,7 +430,7 @@ put chromosome names in the center of each cell (Figure <a href="initialize-geno
 <a class="sourceLine" id="cb132-9" data-line-number="9">        <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb132-10" data-line-number="10">}, <span class="dt">track.height =</span> <span class="fl">0.15</span>, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-customize-chromosome"></span>
-<img src="08-initialize-genomic-data_files/figure-html/genomic-customize-chromosome-1.svg" alt="Customize chromosome track." width="672" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-customize-chromosome-1.svg" alt="Customize chromosome track." width="384" />
 <p class="caption">
 Figure 8.5: Customize chromosome track.
 </p>

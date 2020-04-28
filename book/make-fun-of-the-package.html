@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 16 Make fun of the package | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 16 Make fun of the package | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -317,7 +317,7 @@ the help page of <code>circos.axis()</code>.</p>
 <a class="sourceLine" id="cb328-19" data-line-number="19">hour.degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>hour<span class="op">/</span><span class="dv">12</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span> <span class="op">-</span><span class="st"> </span>min<span class="op">/</span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span><span class="op">/</span><span class="dv">12</span></a>
 <a class="sourceLine" id="cb328-20" data-line-number="20"><span class="kw">arrows</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">cos</span>(hour.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.4</span>, <span class="kw">sin</span>(hour.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.4</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:clock"></span>
-<img src="16-make-fun_files/figure-html/clock-1.svg" alt="A clock." width="672" />
+<img src="16-make-fun_files/figure-html/clock-1.svg" alt="A clock." width="384" />
 <p class="caption">
 Figure 16.1: A clock.
 </p>
@@ -354,7 +354,7 @@ inside green ring and red circle are plotted by <code>draw.sector()</code>.</p>
 <a class="sourceLine" id="cb330-21" data-line-number="21"><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</a>
 <a class="sourceLine" id="cb330-22" data-line-number="22">    <span class="dt">rou1 =</span> <span class="fl">0.05</span>, <span class="dt">col =</span> <span class="st">&quot;#E41A1C&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#EEEEEE&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:dartboard"></span>
-<img src="16-make-fun_files/figure-html/dartboard-1.svg" alt="A dartboard." width="672" />
+<img src="16-make-fun_files/figure-html/dartboard-1.svg" alt="A dartboard." width="384" />
 <p class="caption">
 Figure 16.2: A dartboard.
 </p>
@@ -430,7 +430,7 @@ also turn into good according to how you look at the world.</p>
 <a class="sourceLine" id="cb332-46" data-line-number="46"><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span>r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</a>
 <a class="sourceLine" id="cb332-47" data-line-number="47">    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">8</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:bagua"></span>
-<img src="16-make-fun_files/figure-html/bagua-1.svg" alt="Ba-Gua and Tai-Ji." width="672" />
+<img src="16-make-fun_files/figure-html/bagua-1.svg" alt="Ba-Gua and Tai-Ji." width="384" />
 <p class="caption">
 Figure 16.3: Ba-Gua and Tai-Ji.
 </p>

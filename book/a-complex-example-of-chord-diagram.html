@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 15 A complex example of Chord diagram | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 15 A complex example of Chord diagram | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -408,7 +408,7 @@ track, the circular rectangles are in the second track (<code>track.index = 2</c
 <a class="sourceLine" id="cb325-9" data-line-number="9">        <span class="kw">circos.axis</span>(<span class="dt">major.at =</span> breaks, <span class="dt">labels =</span> <span class="kw">paste0</span>(breaks<span class="op">/</span><span class="dv">1000</span>, <span class="st">&quot;KB&quot;</span>), <span class="dt">labels.cex =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb325-10" data-line-number="10">    }</a>
 <a class="sourceLine" id="cb325-11" data-line-number="11">}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a></code></pre></div>
-<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-9-1.svg" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-10-1.svg" width="576" style="display: block; margin: auto;" /></p>
 <p>On the top half, it is easy to see the proportion of different transitions in
 group 1 that come to every state in group 2. However, it is not
 straightforward for the states in the bottom half to see the proportion of
@@ -424,7 +424,7 @@ been transited to different states in group 2.</p>
 <a class="sourceLine" id="cb326-6" data-line-number="6">            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb326-7" data-line-number="7">    }</a>
 <a class="sourceLine" id="cb326-8" data-line-number="8">}</a></code></pre></div>
-<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-10-1.svg" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-11-1.svg" width="576" style="display: block; margin: auto;" /></p>
 <p>Methylation in each category is put on the most outside of the circle. On this track, we will
 put two paralle rectangles which are mean methylation and methylation difference between group 1
 and group 2. Basically, on the bottom, we show <code>meth_mat_2 - meth_mat_1</code> and on the top we show
@@ -461,9 +461,9 @@ and group 2. Basically, on the bottom, we show <code>meth_mat_2 - meth_mat_1</co
 <a class="sourceLine" id="cb327-29" data-line-number="29">    }</a>
 <a class="sourceLine" id="cb327-30" data-line-number="30">}</a>
 <a class="sourceLine" id="cb327-31" data-line-number="31"><span class="kw">circos.clear</span>()</a></code></pre></div>
-<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-11-1.svg" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-12-1.svg" width="576" style="display: block; margin: auto;" /></p>
 <p>Legends can be added according to instructions discussed in Section <a href="legends.html#legends">4</a>.</p>
-<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-12-1.png" width="695.541984" style="display: block; margin: auto;" /></p>
+<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-13-1.png" width="695.541984" style="display: block; margin: auto;" /></p>
 
 </div>
 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 Nested zooming | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 Nested zooming | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -389,7 +389,7 @@ the code for generating the zoomed plot. They can be executed independently.</p>
 <code>circos.nested()</code> (Figure <a href="nested-zooming.html#fig:nested-normal">12.1</a>).</p>
 <div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1"><span class="kw">circos.nested</span>(f1, f2, correspondance)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:nested-normal"></span>
-<img src="12-nested-zooming_files/figure-html/nested-normal-1.svg" alt="Nested zooming between two circular plots." width="672" />
+<img src="12-nested-zooming_files/figure-html/nested-normal-1.svg" alt="Nested zooming between two circular plots." width="384" />
 <p class="caption">
 Figure 12.1: Nested zooming between two circular plots.
 </p>
@@ -401,7 +401,7 @@ Actually, for <code>circos.nested()</code>, It doesn’t care which one is zoome
 they are just two circular plots and a correspondance (Figure <a href="nested-zooming.html#fig:nested2">12.2</a>).</p>
 <div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="kw">circos.nested</span>(f2, f1, correspondance[, <span class="kw">c</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)])</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:nested2"></span>
-<img src="12-nested-zooming_files/figure-html/nested2-1.svg" alt="Nested zooming between two circular plots, zoomed plot is put outside." width="672" />
+<img src="12-nested-zooming_files/figure-html/nested2-1.svg" alt="Nested zooming between two circular plots, zoomed plot is put outside." width="384" />
 <p class="caption">
 Figure 12.2: Nested zooming between two circular plots, zoomed plot is put outside.
 </p>
@@ -455,7 +455,7 @@ to make it more complex (Figure <a href="nested-zooming.html#fig:nested-complex"
 <a class="sourceLine" id="cb214-31" data-line-number="31">}</a>
 <a class="sourceLine" id="cb214-32" data-line-number="32"><span class="kw">circos.nested</span>(f1, f2, correspondance, <span class="dt">connection_col =</span> sector_col[correspondance[[<span class="dv">1</span>]]])</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:nested-complex"></span>
-<img src="12-nested-zooming_files/figure-html/nested-complex-1.svg" alt="Nested zooming between two circular plots, slightly complex plots." width="672" />
+<img src="12-nested-zooming_files/figure-html/nested-complex-1.svg" alt="Nested zooming between two circular plots, slightly complex plots." width="384" />
 <p class="caption">
 Figure 12.3: Nested zooming between two circular plots, slightly complex plots.
 </p>

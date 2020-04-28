@@ -1,3 +1,4 @@
+
 --- 
 title: "Circular Visualization in R"
 author: "Zuguang Gu"
@@ -36,13 +37,13 @@ sessionInfo()
 ```
 
 ```
-## R version 4.0.0 (2020-04-24)
+## R version 3.6.0 (2019-04-26)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: CentOS Linux 7 (Core)
 ## 
 ## Matrix products: default
-## BLAS:   /home/guz/soft/R-4.0.0/lib/libRblas.so
-## LAPACK: /home/guz/soft/R-4.0.0/lib/libRlapack.so
+## BLAS:   /usr/lib64/libblas.so.3.4.2
+## LAPACK: /usr/lib64/liblapack.so.3.4.2
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_GB.UTF-8       LC_NUMERIC=C              
@@ -59,11 +60,11 @@ sessionInfo()
 ## [1] circlize_0.4.9
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.4.6        bookdown_0.18       digest_0.6.25      
-##  [4] grid_4.0.0          magrittr_1.5        evaluate_0.14      
-##  [7] stringi_1.4.6       rlang_0.4.5         GlobalOptions_0.1.1
-## [10] rmarkdown_2.1       tools_4.0.0         stringr_1.4.0      
-## [13] xfun_0.13           yaml_2.2.1          compiler_4.0.0     
+##  [1] Rcpp_1.0.4          bookdown_0.17       digest_0.6.25      
+##  [4] grid_3.6.0          magrittr_1.5        evaluate_0.14      
+##  [7] rlang_0.4.5         stringi_1.4.6       GlobalOptions_0.1.1
+## [10] rmarkdown_1.18      tools_3.6.0         stringr_1.4.0      
+## [13] xfun_0.13           yaml_2.2.1          compiler_3.6.0     
 ## [16] colorspace_1.4-1    shape_1.4.4         htmltools_0.4.0    
 ## [19] knitr_1.28
 ```

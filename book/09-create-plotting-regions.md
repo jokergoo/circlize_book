@@ -1,4 +1,5 @@
 
+
 # Create plotting regions for genomic data {#genomic-plotting-region}
 
 Tracks are created and graphics are added by
@@ -43,9 +44,9 @@ head(bed, n = 2)
 ```
 
 ```
-##    chr  start    end    value1     value2
-## 1 chr1  39340  76654 0.4026923  0.4596603
-## 2 chr1 312616 377110 0.6989293 -0.1109489
+##    chr  start    end     value1     value2
+## 1 chr1  44220 400117 -0.8459003 -0.2503924
+## 2 chr1 495228 556172  0.7775366 -1.0758185
 ```
 
 ```r
@@ -60,11 +61,11 @@ circos.genomicTrackPlotRegion(bed, panel.fun = function(region, value, ...) {
 
 ```
 ##    start    end
-## 1  39340  76654
-## 2 312616 377110
-##      value1     value2
-## 1 0.4026923  0.4596603
-## 2 0.6989293 -0.1109489
+## 1  44220 400117
+## 2 495228 556172
+##       value1     value2
+## 1 -0.8459003 -0.2503924
+## 2  0.7775366 -1.0758185
 ```
 
 Since `circos.genomicTrack()` creates a new track, it needs values to

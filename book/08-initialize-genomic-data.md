@@ -1,6 +1,7 @@
 
 
 
+
 # Initialize with genomic data {#initialize-genomic-plot}
 
 **circlize** is quite flexible to initialize the circular plot
@@ -31,7 +32,7 @@ text(0, 0, "default", cex = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-default-1.svg" alt="Initialize genomic plot, default." width="672" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-default-1.svg" alt="Initialize genomic plot, default." width="384" />
 <p class="caption">(\#fig:genomic-initialize-ideogram-default)Initialize genomic plot, default.</p>
 </div>
 
@@ -106,7 +107,7 @@ text(0, 0, "subset of chromosomes", cex = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-subset-1.svg" alt="Initialize genomic plot, subset chromosomes." width="672" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-subset-1.svg" alt="Initialize genomic plot, subset chromosomes." width="384" />
 <p class="caption">(\#fig:genomic-initialize-ideogram-subset)Initialize genomic plot, subset chromosomes.</p>
 </div>
 
@@ -195,7 +196,7 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-html/genomic-customize-chromosome-1.svg" alt="Customize chromosome track." width="672" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-customize-chromosome-1.svg" alt="Customize chromosome track." width="384" />
 <p class="caption">(\#fig:genomic-customize-chromosome)Customize chromosome track.</p>
 </div>
 
