@@ -43,9 +43,9 @@ head(bed, n = 2)
 ```
 
 ```
-##    chr  start    end     value1     value2
-## 1 chr1  20184 165597 -0.3520884 -0.6556263
-## 2 chr1 351435 570550 -0.2052987 -0.5119692
+##    chr  start    end    value1     value2
+## 1 chr1  39340  76654 0.4026923  0.4596603
+## 2 chr1 312616 377110 0.6989293 -0.1109489
 ```
 
 ```r
@@ -60,11 +60,11 @@ circos.genomicTrackPlotRegion(bed, panel.fun = function(region, value, ...) {
 
 ```
 ##    start    end
-## 1  20184 165597
-## 2 351435 570550
-##       value1     value2
-## 1 -0.3520884 -0.6556263
-## 2 -0.2052987 -0.5119692
+## 1  39340  76654
+## 2 312616 377110
+##      value1     value2
+## 1 0.4026923  0.4596603
+## 2 0.6989293 -0.1109489
 ```
 
 Since `circos.genomicTrack()` creates a new track, it needs values to
