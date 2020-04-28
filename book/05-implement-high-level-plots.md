@@ -1,5 +1,4 @@
 
-
 # Implement high-level circular plots {#high-level-plots}
 
 In this chapter, we show several examples which combine low-level graphic
@@ -38,7 +37,7 @@ circos.track(ylim = c(0.5, length(percent)+0.5), track.height = 0.8,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-implement-high-level-plots_files/figure-html/circular-barplot-1.svg" alt="A circular barplot." width="384" />
+<img src="05-implement-high-level-plots_files/figure-html/circular-barplot-1.svg" alt="A circular barplot." width="672" />
 <p class="caption">(\#fig:circular-barplot)A circular barplot.</p>
 </div>
 
@@ -92,7 +91,7 @@ circos.trackHist(factors = factors, x = x, draw.density = TRUE,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-implement-high-level-plots_files/figure-html/circular-histograms-1.svg" alt="Histograms on circular layout." width="384" />
+<img src="05-implement-high-level-plots_files/figure-html/circular-histograms-1.svg" alt="Histograms on circular layout." width="672" />
 <p class="caption">(\#fig:circular-histograms)Histograms on circular layout.</p>
 </div>
 
@@ -259,6 +258,6 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="05-implement-high-level-plots_files/figure-html/circular-heatmap-1.svg" alt="Circular heatmaps." width="384" />
+<img src="05-implement-high-level-plots_files/figure-html/circular-heatmap-1.svg" alt="Circular heatmaps." width="672" />
 <p class="caption">(\#fig:circular-heatmap)Circular heatmaps.</p>
 </div>

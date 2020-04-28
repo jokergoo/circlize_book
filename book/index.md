@@ -1,4 +1,3 @@
-
 --- 
 title: "Circular Visualization in R"
 author: "Zuguang Gu"
@@ -37,21 +36,16 @@ sessionInfo()
 ```
 
 ```
-## R version 3.6.0 (2019-04-26)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: CentOS Linux 7 (Core)
+## R version 3.6.2 (2019-12-12)
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS Catalina 10.15.4
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib64/libblas.so.3.4.2
-## LAPACK: /usr/lib64/liblapack.so.3.4.2
+## BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_GB.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=en_GB.UTF-8        LC_COLLATE=en_GB.UTF-8    
-##  [5] LC_MONETARY=en_GB.UTF-8    LC_MESSAGES=en_GB.UTF-8   
-##  [7] LC_PAPER=en_GB.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=en_GB.UTF-8 LC_IDENTIFICATION=C       
+## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -60,11 +54,11 @@ sessionInfo()
 ## [1] circlize_0.4.9
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.4          bookdown_0.17       digest_0.6.25      
-##  [4] grid_3.6.0          magrittr_1.5        evaluate_0.14      
-##  [7] rlang_0.4.5         stringi_1.4.6       GlobalOptions_0.1.1
-## [10] rmarkdown_1.18      tools_3.6.0         stringr_1.4.0      
-## [13] xfun_0.13           yaml_2.2.1          compiler_3.6.0     
+##  [1] Rcpp_1.0.4.6        bookdown_0.18       digest_0.6.25      
+##  [4] grid_3.6.2          magrittr_1.5        evaluate_0.14      
+##  [7] stringi_1.4.6       rlang_0.4.5         GlobalOptions_0.1.2
+## [10] rmarkdown_2.1       tools_3.6.2         stringr_1.4.0      
+## [13] xfun_0.13           yaml_2.2.1          compiler_3.6.2     
 ## [16] colorspace_1.4-1    shape_1.4.4         htmltools_0.4.0    
 ## [19] knitr_1.28
 ```

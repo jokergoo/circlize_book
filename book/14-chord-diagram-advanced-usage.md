@@ -1,6 +1,5 @@
 
 
-
 # Advanced usage of `chordDiagram()`
 
 The default style of `chordDiagram()` is somehow enough for most visualization
@@ -128,7 +127,7 @@ circos.track(track.index = 1, panel.fun = function(x, y) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-show-1.svg" alt="Change label directions." width="384" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-show-1.svg" alt="Change label directions." width="672" />
 <p class="caption">(\#fig:chord-diagram-labels-show)Change label directions.</p>
 </div>
 
@@ -150,7 +149,7 @@ for(si in get.all.sector.index()) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-inside-1.svg" alt="Put sector labels to the grid." width="384" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-inside-1.svg" alt="Put sector labels to the grid." width="672" />
 <p class="caption">(\#fig:chord-diagram-labels-inside)Put sector labels to the grid.</p>
 </div>
 
@@ -180,7 +179,7 @@ circos.track(track.index = 1, panel.fun = function(x, y) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-multile-style-1.svg" alt="Adjust label direction according to the width of sectors." width="384" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-multile-style-1.svg" alt="Adjust label direction according to the width of sectors." width="672" />
 <p class="caption">(\#fig:chord-diagram-labels-multile-style)Adjust label direction according to the width of sectors.</p>
 </div>
 
@@ -410,7 +409,7 @@ highlight.sector(colnames(mat2), track.index = 1, col = "blue",
     text = "C", cex = 0.8, text.col = "white", niceFacing = TRUE)
 ```
 
-<img src="14-chord-diagram-advanced-usage_files/figure-html/unnamed-chunk-10-1.svg" width="384" style="display: block; margin: auto;" />
+<img src="14-chord-diagram-advanced-usage_files/figure-html/unnamed-chunk-9-1.svg" width="672" style="display: block; margin: auto;" />
 
 ```r
 circos.clear()

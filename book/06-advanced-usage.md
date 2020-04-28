@@ -1,7 +1,6 @@
 
 
 
-
 # Advanced layout {#advanced-layout}
 
 ## Zooming of sectors {#zooming-of-sectors}
@@ -129,7 +128,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-html/circlize-zoom-1.svg" alt="Zoom sectors." width="384" />
+<img src="06-advanced-usage_files/figure-html/circlize-zoom-1.svg" alt="Zoom sectors." width="672" />
 <p class="caption">(\#fig:circlize-zoom)Zoom sectors.</p>
 </div>
 
@@ -196,7 +195,7 @@ circos.track(factors = factors, ylim = c(0, 1))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-html/circlize-part2-1.svg" alt="Show subset of cells in tracks." width="384" />
+<img src="06-advanced-usage_files/figure-html/circlize-part2-1.svg" alt="Show subset of cells in tracks." width="672" />
 <p class="caption">(\#fig:circlize-part2)Show subset of cells in tracks.</p>
 </div>
 
@@ -276,7 +275,7 @@ par(new = FALSE)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-html/circlize-diff-radius-1.svg" alt="Cells with differnet radius." width="384" />
+<img src="06-advanced-usage_files/figure-html/circlize-diff-radius-1.svg" alt="Cells with differnet radius." width="672" />
 <p class="caption">(\#fig:circlize-diff-radius)Cells with differnet radius.</p>
 </div>
 

@@ -1,7 +1,6 @@
 
 
 
-
 # (PART) Applications in Genomics {-} 
 
 # Introduction {#genomic-introduction}

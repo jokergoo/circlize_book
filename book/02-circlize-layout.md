@@ -1,4 +1,3 @@
-
 # Circular layout {#circular-layout}
 
 ## Coordinate transformation {#coordinate-transformation}
@@ -614,6 +613,18 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
         xleft = pos[1, 1] - 0.05, ybottom = pos[1, 2] - 0.05,
         xright = pos[1, 1] + 0.05, ytop = pos[1, 2]+ 0.05)
 }, bg.border = 1, track.height = 0.15)
+```
+
+```
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB profile
+
+## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB profile
 ```
 
 <div class="figure" style="text-align: center">

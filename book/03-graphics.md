@@ -1,5 +1,4 @@
 
-
 # Graphics {#graphics}
 
 In this chapter, we will introduce low-level functions that add graphics to
@@ -139,7 +138,7 @@ each line by `circos.text()` separately. The different facings are illustrated
 in figure \@ref(fig:circlize-text).
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-html/circlize-text-1.svg" alt="Text facings." width="384" />
+<img src="03-graphics_files/figure-html/circlize-text-1.svg" alt="Text facings." width="672" />
 <p class="caption">(\#fig:circlize-text)Text facings.</p>
 </div>
 
@@ -252,7 +251,7 @@ explanations are as follows:
   is longer. Facing of tick labels is set to `clockwise`.
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-html/circlize-xaxis-1.svg" alt="X-axes" width="384" />
+<img src="03-graphics_files/figure-html/circlize-xaxis-1.svg" alt="X-axes" width="672" />
 <p class="caption">(\#fig:circlize-xaxis)X-axes</p>
 </div>
 
@@ -286,7 +285,7 @@ circos.yaxis(at, labels, sector.index, track.index)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-html/circlize-yaxis-1.svg" alt="Y-axes" width="384" />
+<img src="03-graphics_files/figure-html/circlize-yaxis-1.svg" alt="Y-axes" width="672" />
 <p class="caption">(\#fig:circlize-yaxis)Y-axes</p>
 </div>
 
@@ -737,7 +736,7 @@ title("This is the title")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-html/circlize-base-1.svg" alt="Work with base graphic functions." width="384" />
+<img src="03-graphics_files/figure-html/circlize-base-1.svg" alt="Work with base graphic functions." width="672" />
 <p class="caption">(\#fig:circlize-base)Work with base graphic functions.</p>
 </div>
 
