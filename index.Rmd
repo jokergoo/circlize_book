@@ -27,3 +27,9 @@ Bioinformatics. DOI:
 [10.1093/bioinformatics/btu393](https://doi.org/10.1093/bioinformatics/btu393)
 
 <img src="images/circlize_cover.jpg" style="width:500px;border:2px solid black;" />
+
+Session info:
+
+```{r}
+sessionInfo()
+```
