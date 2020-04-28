@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 15 A complex example of Chord diagram | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 15 A complex example of Chord diagram | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="advanced-usage-of-chorddiagram.html"/>
 <link rel="next" href="make-fun-of-the-package.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,27 +53,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -81,9 +81,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -134,11 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="part"><span><b>I General Functionality</b></span></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#principle-of-design"><i class="fa fa-check"></i><b>1.1</b> Principle of design</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#a-qiuck-glance"><i class="fa fa-check"></i><b>1.2</b> A quick glance</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a><ul>
+<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="circular-layout.html"><a href="circular-layout.html#coordinate-transformation"><i class="fa fa-check"></i><b>2.1</b> Coordinate transformation</a></li>
 <li class="chapter" data-level="2.2" data-path="circular-layout.html"><a href="circular-layout.html#rules-for-making-the-circular-plot"><i class="fa fa-check"></i><b>2.2</b> Rules for making the circular plot</a></li>
 <li class="chapter" data-level="2.3" data-path="circular-layout.html"><a href="circular-layout.html#sectors-and-tracks"><i class="fa fa-check"></i><b>2.3</b> Sectors and tracks</a></li>
@@ -146,13 +148,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="circular-layout.html"><a href="circular-layout.html#create-plotting-regions"><i class="fa fa-check"></i><b>2.5</b> Create plotting regions</a></li>
 <li class="chapter" data-level="2.6" data-path="circular-layout.html"><a href="circular-layout.html#update-plotting-regions"><i class="fa fa-check"></i><b>2.6</b> Update plotting regions</a></li>
 <li class="chapter" data-level="2.7" data-path="circular-layout.html"><a href="circular-layout.html#panel-fun"><i class="fa fa-check"></i><b>2.7</b> <code>panel.fun</code> argument</a></li>
-<li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a><ul>
+<li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
+<ul>
 <li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
 <li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The convert functions</a></li>
 <li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a><ul>
+<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>3.1</b> Points</a></li>
 <li class="chapter" data-level="3.2" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>3.2</b> Lines</a></li>
 <li class="chapter" data-level="3.3" data-path="graphics.html"><a href="graphics.html#segments"><i class="fa fa-check"></i><b>3.3</b> Segments</a></li>
@@ -166,24 +170,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.11</b> Work together with the base graphic system</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
-<li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a><ul>
+<li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="high-level-plots.html"><a href="high-level-plots.html#circular-barplot"><i class="fa fa-check"></i><b>5.1</b> Circular barplots</a></li>
 <li class="chapter" data-level="5.2" data-path="high-level-plots.html"><a href="high-level-plots.html#histograms"><i class="fa fa-check"></i><b>5.2</b> Histograms</a></li>
 <li class="chapter" data-level="5.3" data-path="high-level-plots.html"><a href="high-level-plots.html#phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Phylogenetic trees</a></li>
 <li class="chapter" data-level="5.4" data-path="high-level-plots.html"><a href="high-level-plots.html#heatmaps"><i class="fa fa-check"></i><b>5.4</b> Heatmaps</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>6</b> Advanced layout</a><ul>
+<li class="chapter" data-level="6" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>6</b> Advanced layout</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="advanced-layout.html"><a href="advanced-layout.html#zooming-of-sectors"><i class="fa fa-check"></i><b>6.1</b> Zooming of sectors</a></li>
 <li class="chapter" data-level="6.2" data-path="advanced-layout.html"><a href="advanced-layout.html#part-circle"><i class="fa fa-check"></i><b>6.2</b> Visualize part of the circle</a></li>
 <li class="chapter" data-level="6.3" data-path="advanced-layout.html"><a href="advanced-layout.html#combine-circular-plots"><i class="fa fa-check"></i><b>6.3</b> Combine multiple circular plots</a></li>
 <li class="chapter" data-level="6.4" data-path="advanced-layout.html"><a href="advanced-layout.html#arrange-multiple-plots"><i class="fa fa-check"></i><b>6.4</b> Arrange multiple plots</a></li>
 </ul></li>
 <li class="part"><span><b>II Applications in Genomics</b></span></li>
-<li class="chapter" data-level="7" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>7</b> Introduction</a><ul>
+<li class="chapter" data-level="7" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>7</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="genomic-introduction.html"><a href="genomic-introduction.html#input-data"><i class="fa fa-check"></i><b>7.1</b> Input data</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>8</b> Initialize with genomic data</a><ul>
-<li class="chapter" data-level="8.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>8.1</b> Initialize with cytoband data</a><ul>
+<li class="chapter" data-level="8" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>8</b> Initialize with genomic data</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>8.1</b> Initialize with cytoband data</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>8.1.1</b> Basic usage</a></li>
 <li class="chapter" data-level="8.1.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#pre-defined-tracks"><i class="fa fa-check"></i><b>8.1.2</b> Pre-defined tracks</a></li>
 <li class="chapter" data-level="8.1.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#other-general-settings"><i class="fa fa-check"></i><b>8.1.3</b> Other general settings</a></li>
@@ -192,7 +201,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>8.3</b> Initialize with general genomic category</a></li>
 <li class="chapter" data-level="8.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>8.4</b> Zooming chromosomes</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>9</b> Create plotting regions for genomic data</a><ul>
+<li class="chapter" data-level="9" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>9</b> Create plotting regions for genomic data</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-points"><i class="fa fa-check"></i><b>9.1</b> Points</a></li>
 <li class="chapter" data-level="9.2" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-lines"><i class="fa fa-check"></i><b>9.2</b> Lines</a></li>
 <li class="chapter" data-level="9.3" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-text"><i class="fa fa-check"></i><b>9.3</b> Text</a></li>
@@ -200,43 +210,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-links"><i class="fa fa-check"></i><b>9.5</b> Links</a></li>
 <li class="chapter" data-level="9.6" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#mixed-use-of-general-circlize-functions"><i class="fa fa-check"></i><b>9.6</b> Mixed use of general circlize functions</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>10</b> modes for <code>circos.genomicTrack()</code></a><ul>
-<li class="chapter" data-level="10.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>10.1</b> Normal mode</a><ul>
+<li class="chapter" data-level="10" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>10</b> modes for <code>circos.genomicTrack()</code></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>10.1</b> Normal mode</a>
+<ul>
 <li class="chapter" data-level="10.1.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame"><i class="fa fa-check"></i><b>10.1.1</b> Input is a data frame</a></li>
 <li class="chapter" data-level="10.1.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames"><i class="fa fa-check"></i><b>10.1.2</b> Input is a list of data frames</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>10.2</b> Stack mode</a><ul>
+<li class="chapter" data-level="10.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>10.2</b> Stack mode</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame-1"><i class="fa fa-check"></i><b>10.2.1</b> Input is a data frame</a></li>
 <li class="chapter" data-level="10.2.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames-1"><i class="fa fa-check"></i><b>10.2.2</b> Input is a list of data frames</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>10.3</b> Applications</a><ul>
+<li class="chapter" data-level="10.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>10.3</b> Applications</a>
+<ul>
 <li class="chapter" data-level="10.3.1" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-points"><i class="fa fa-check"></i><b>10.3.1</b> Points</a></li>
 <li class="chapter" data-level="10.3.2" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-lines"><i class="fa fa-check"></i><b>10.3.2</b> Lines</a></li>
 <li class="chapter" data-level="10.3.3" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-rectangles"><i class="fa fa-check"></i><b>10.3.3</b> Rectangles</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>11</b> High-level genomic functions</a><ul>
+<li class="chapter" data-level="11" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>11</b> High-level genomic functions</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>11.1</b> Ideograms</a></li>
 <li class="chapter" data-level="11.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>11.2</b> Heatmaps</a></li>
 <li class="chapter" data-level="11.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>11.3</b> Labels</a></li>
 <li class="chapter" data-level="11.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>11.4</b> Genomic axes</a></li>
 <li class="chapter" data-level="11.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>11.5</b> Genomic density and Rainfall plot</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>12</b> Nested zooming</a><ul>
+<li class="chapter" data-level="12" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>12</b> Nested zooming</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="nested-zooming.html"><a href="nested-zooming.html#basic-idea"><i class="fa fa-check"></i><b>12.1</b> Basic idea</a></li>
 <li class="chapter" data-level="12.2" data-path="nested-zooming.html"><a href="nested-zooming.html#visualization-of-dmrs-from-tagmentation-based-wgbs"><i class="fa fa-check"></i><b>12.2</b> Visualization of DMRs from tagmentation-based WGBS</a></li>
 </ul></li>
 <li class="part"><span><b>III Visualize Relations</b></span></li>
-<li class="chapter" data-level="13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>13</b> The <code>chordDiagram()</code> function</a><ul>
+<li class="chapter" data-level="13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>13</b> The <code>chordDiagram()</code> function</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>13.1</b> Basic usage</a></li>
 <li class="chapter" data-level="13.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>13.2</b> Adjust by <code>circos.par()</code></a></li>
-<li class="chapter" data-level="13.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>13.3</b> Colors</a><ul>
+<li class="chapter" data-level="13.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>13.3</b> Colors</a>
+<ul>
 <li class="chapter" data-level="13.3.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#set-grid-colors"><i class="fa fa-check"></i><b>13.3.1</b> Set grid colors</a></li>
 <li class="chapter" data-level="13.3.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-color"><i class="fa fa-check"></i><b>13.3.2</b> Set link colors</a></li>
 </ul></li>
 <li class="chapter" data-level="13.4" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-border"><i class="fa fa-check"></i><b>13.4</b> Link border</a></li>
 <li class="chapter" data-level="13.5" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#highlight-links"><i class="fa fa-check"></i><b>13.5</b> Highlight links</a></li>
-<li class="chapter" data-level="13.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>13.6</b> Orders of links</a><ul>
+<li class="chapter" data-level="13.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>13.6</b> Orders of links</a>
+<ul>
 <li class="chapter" data-level="13.6.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-positions-on-sectors"><i class="fa fa-check"></i><b>13.6.1</b> Orders of positions on sectors</a></li>
 <li class="chapter" data-level="13.6.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#order-of-adding-links"><i class="fa fa-check"></i><b>13.6.2</b> Order of adding links</a></li>
 </ul></li>
@@ -245,12 +264,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.9" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#directional-relations"><i class="fa fa-check"></i><b>13.9</b> Directional relations</a></li>
 <li class="chapter" data-level="13.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#scaling"><i class="fa fa-check"></i><b>13.10</b> Scaling</a></li>
 <li class="chapter" data-level="13.11" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>13.11</b> Reduce</a></li>
-<li class="chapter" data-level="13.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>13.12</b> Input as a data frame</a><ul>
+<li class="chapter" data-level="13.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>13.12</b> Input as a data frame</a>
+<ul>
 <li class="chapter" data-level="13.12.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#multiple-links"><i class="fa fa-check"></i><b>13.12.1</b> Multiple links</a></li>
 <li class="chapter" data-level="13.12.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#unequal-width-of-the-link-ends"><i class="fa fa-check"></i><b>13.12.2</b> Unequal width of the link ends</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>14</b> Advanced usage of <code>chordDiagram()</code></a><ul>
+<li class="chapter" data-level="14" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>14</b> Advanced usage of <code>chordDiagram()</code></a>
+<ul>
 <li class="chapter" data-level="14.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>14.1</b> Organization of tracks</a></li>
 <li class="chapter" data-level="14.2" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-labels"><i class="fa fa-check"></i><b>14.2</b> Customize sector labels</a></li>
 <li class="chapter" data-level="14.3" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-axes"><i class="fa fa-check"></i><b>14.3</b> Customize sector axes</a></li>
@@ -260,7 +281,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>15</b> A complex example of Chord diagram</a></li>
 <li class="part"><span><b>IV Others</b></span></li>
-<li class="chapter" data-level="16" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>16</b> Make fun of the package</a><ul>
+<li class="chapter" data-level="16" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>16</b> Make fun of the package</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>16.1</b> A clock</a></li>
 <li class="chapter" data-level="16.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>16.2</b> A dartboard</a></li>
 <li class="chapter" data-level="16.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>16.3</b> Ba-Gua and Tai-Ji</a></li>
@@ -285,7 +307,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-complex-example-of-chord-diagram" class="section level1">
+<div id="a-complex-example-of-chord-diagram" class="section level1" number="15">
 <h1><span class="header-section-number">Chapter 15</span> A complex example of Chord diagram</h1>
 <p>In this chapter, we demonstrate how to make a complex Chord diagram and how to
 customize additional tracks by visualizing chromatin state transitions as well
@@ -301,30 +323,30 @@ groups based on expression profile. In each group, a chromatin state is
 assigned to the corresponding genomic bin if it is recurrent in at least half
 of the samples in each group.</p>
 <p>The processed data can be set from <a href="http://jokergoo.github.io/data/chromatin_transition.RData" class="uri">http://jokergoo.github.io/data/chromatin_transition.RData</a>.</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&quot;data/chromatin_transition.RData&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="a-complex-example-of-chord-diagram.html#cb312-1"></a><span class="kw">load</span>(<span class="st">&quot;data/chromatin_transition.RData&quot;</span>)</span></code></pre></div>
 <p>In the RData file, there are three matrix: <code>mat</code>, <code>meth_mat_1</code> and
 <code>meth_mat_2</code> which are:</p>
 <ul>
 <li><code>mat</code>: chromatin state transition matrix. Rows correspond to states in group
 1 and columns correspond to group 2. The value in the matrix are total base
-pairs that transite from one state to the other. E.g. <code>mat[&quot;TssA&quot;, &quot;TxFlnk&quot;]</code> is the total base pairs that have “TssA” state in samples in
+pairs that transite from one state to the other. E.g. <code>mat["TssA",   "TxFlnk"]</code> is the total base pairs that have “TssA” state in samples in
 group 1 and transites to “TxFlnk” state in samples in group 2. On the
 diagonal are the regions where the states have not been changed in the two
 groups.</li>
 <li><code>meth_mat_1</code>: mean methylation for each set of regions in group 1.
-E.g. <code>meth_mat_1[&quot;TssA&quot;, &quot;TxFlnk&quot;]</code> is the mean methylation for the regions in
+E.g. <code>meth_mat_1["TssA", "TxFlnk"]</code> is the mean methylation for the regions in
 <strong>group 1</strong> that have “TssA” state in group 1 and “TxFlnk” state in group 2.</li>
 <li><code>meth_mat_2</code>: mean methylation for each set of regions in group 2.
-E.g. <code>meth_mat_2[&quot;TssA&quot;, &quot;TxFlnk&quot;]</code> is the mean methylation for the regions in
+E.g. <code>meth_mat_2["TssA", "TxFlnk"]</code> is the mean methylation for the regions in
 <strong>group 2</strong> that have “TssA” state in group 1 and “TxFlnk” state in group 2.</li>
 </ul>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" data-line-number="1">mat[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="a-complex-example-of-chord-diagram.html#cb313-1"></a>mat[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span></code></pre></div>
 <pre><code>##            TssA TssAFlnk TxFlnk     Tx
 ## TssA     497200    79600  13400   1800
 ## TssAFlnk  56400   233200   5000    800
 ## TxFlnk        0      400  43000   1800
 ## Tx          800      200    200 166400</code></pre>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" data-line-number="1">meth_mat_<span class="dv">1</span>[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="a-complex-example-of-chord-diagram.html#cb315-1"></a>meth_mat_<span class="dv">1</span>[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span></code></pre></div>
 <pre><code>##               TssA  TssAFlnk    TxFlnk        Tx
 ## TssA     0.1647232 0.1580874 0.1917435 0.2690045
 ## TssAFlnk 0.2591677 0.2689880 0.3616242 0.3411387
@@ -333,59 +355,59 @@ E.g. <code>meth_mat_2[&quot;TssA&quot;, &quot;TxFlnk&quot;]</code> is the mean m
 <p>Normally, in majority in the genome, chromatin states of regions are not
 changed in the two groups, thus, we should only look at the regions in which
 the states are changed.</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" data-line-number="1"><span class="co"># proportion of the unchanges states in the genome</span></a>
-<a class="sourceLine" id="cb317-2" data-line-number="2"><span class="kw">sum</span>(<span class="kw">diag</span>(mat))<span class="op">/</span><span class="kw">sum</span>(mat)</a></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="a-complex-example-of-chord-diagram.html#cb317-1"></a><span class="co"># proportion of the unchanges states in the genome</span></span>
+<span id="cb317-2"><a href="a-complex-example-of-chord-diagram.html#cb317-2"></a><span class="kw">sum</span>(<span class="kw">diag</span>(mat))<span class="op">/</span><span class="kw">sum</span>(mat)</span></code></pre></div>
 <pre><code>## [1] 0.6192262</code></pre>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" data-line-number="1"><span class="co"># remove the unchanged states</span></a>
-<a class="sourceLine" id="cb319-2" data-line-number="2"><span class="kw">diag</span>(mat) =<span class="st"> </span><span class="dv">0</span></a></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="a-complex-example-of-chord-diagram.html#cb319-1"></a><span class="co"># remove the unchanged states</span></span>
+<span id="cb319-2"><a href="a-complex-example-of-chord-diagram.html#cb319-2"></a><span class="kw">diag</span>(mat) =<span class="st"> </span><span class="dv">0</span></span></code></pre></div>
 <p>When making the plot, actually rows and columns are different (because one is
 from group 1 and the other is from group 2), thus we give them different names
 and the original names are stored in <code>all_states</code>.</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" data-line-number="1">all_states =<span class="st"> </span><span class="kw">rownames</span>(mat)</a>
-<a class="sourceLine" id="cb320-2" data-line-number="2">n_states =<span class="st"> </span><span class="kw">nrow</span>(mat)</a>
-<a class="sourceLine" id="cb320-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb320-4" data-line-number="4"><span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;R_&quot;</span>, <span class="kw">seq_len</span>(n_states))</a>
-<a class="sourceLine" id="cb320-5" data-line-number="5"><span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C_&quot;</span>, <span class="kw">seq_len</span>(n_states))</a>
-<a class="sourceLine" id="cb320-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb320-7" data-line-number="7"><span class="kw">dimnames</span>(meth_mat_<span class="dv">1</span>) =<span class="st"> </span><span class="kw">dimnames</span>(mat)</a>
-<a class="sourceLine" id="cb320-8" data-line-number="8"><span class="kw">dimnames</span>(meth_mat_<span class="dv">2</span>) =<span class="st"> </span><span class="kw">dimnames</span>(mat)</a></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="a-complex-example-of-chord-diagram.html#cb320-1"></a>all_states =<span class="st"> </span><span class="kw">rownames</span>(mat)</span>
+<span id="cb320-2"><a href="a-complex-example-of-chord-diagram.html#cb320-2"></a>n_states =<span class="st"> </span><span class="kw">nrow</span>(mat)</span>
+<span id="cb320-3"><a href="a-complex-example-of-chord-diagram.html#cb320-3"></a></span>
+<span id="cb320-4"><a href="a-complex-example-of-chord-diagram.html#cb320-4"></a><span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;R_&quot;</span>, <span class="kw">seq_len</span>(n_states))</span>
+<span id="cb320-5"><a href="a-complex-example-of-chord-diagram.html#cb320-5"></a><span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C_&quot;</span>, <span class="kw">seq_len</span>(n_states))</span>
+<span id="cb320-6"><a href="a-complex-example-of-chord-diagram.html#cb320-6"></a></span>
+<span id="cb320-7"><a href="a-complex-example-of-chord-diagram.html#cb320-7"></a><span class="kw">dimnames</span>(meth_mat_<span class="dv">1</span>) =<span class="st"> </span><span class="kw">dimnames</span>(mat)</span>
+<span id="cb320-8"><a href="a-complex-example-of-chord-diagram.html#cb320-8"></a><span class="kw">dimnames</span>(meth_mat_<span class="dv">2</span>) =<span class="st"> </span><span class="kw">dimnames</span>(mat)</span></code></pre></div>
 <p>Next we set the colors. <code>colmat</code> is the color of the links and the colors
 are represent as hexadecimal code. Links have more transparent (<code>A0</code>) if they
 contain few transitions (&lt; 70th percentile) because we don’t want it
 to disturb the visualization of the major transitions.</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb321-1" data-line-number="1">state_col =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;TssA&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,    <span class="st">&quot;TssAFlnk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</a>
-<a class="sourceLine" id="cb321-2" data-line-number="2">              <span class="st">&quot;TxFlnk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,  <span class="st">&quot;Tx&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</a>
-<a class="sourceLine" id="cb321-3" data-line-number="3">              <span class="st">&quot;TxWk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,    <span class="st">&quot;EnhG&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</a>
-<a class="sourceLine" id="cb321-4" data-line-number="4">              <span class="st">&quot;Enh&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,     <span class="st">&quot;ZNF/Rpts&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</a>
-<a class="sourceLine" id="cb321-5" data-line-number="5">              <span class="st">&quot;Het&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,     <span class="st">&quot;TssBiv&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,</a>
-<a class="sourceLine" id="cb321-6" data-line-number="6">              <span class="st">&quot;BivFlnk&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>, <span class="st">&quot;EnhBiv&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,</a>
-<a class="sourceLine" id="cb321-7" data-line-number="7">              <span class="st">&quot;ReprPC&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,  <span class="st">&quot;ReprPCWk&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,</a>
-<a class="sourceLine" id="cb321-8" data-line-number="8">              <span class="st">&quot;Quies&quot;</span> =<span class="st"> &quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb321-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb321-10" data-line-number="10"><span class="co"># one for rows and one for columns</span></a>
-<a class="sourceLine" id="cb321-11" data-line-number="11">state_col2 =<span class="st"> </span><span class="kw">c</span>(state_col, state_col)</a>
-<a class="sourceLine" id="cb321-12" data-line-number="12"><span class="kw">names</span>(state_col2) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rownames</span>(mat), <span class="kw">colnames</span>(mat))</a>
-<a class="sourceLine" id="cb321-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb321-14" data-line-number="14">colmat =<span class="st"> </span><span class="kw">rep</span>(state_col2[<span class="kw">rownames</span>(mat)], n_states)</a>
-<a class="sourceLine" id="cb321-15" data-line-number="15">colmat =<span class="st"> </span><span class="kw">rgb</span>(<span class="kw">t</span>(<span class="kw">col2rgb</span>(colmat)), <span class="dt">maxColorValue =</span> <span class="dv">255</span>)</a>
-<a class="sourceLine" id="cb321-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb321-17" data-line-number="17">qati =<span class="st"> </span><span class="kw">quantile</span>(mat, <span class="fl">0.7</span>)</a>
-<a class="sourceLine" id="cb321-18" data-line-number="18">colmat[mat <span class="op">&gt;</span><span class="st"> </span>qati] =<span class="st"> </span><span class="kw">paste0</span>(colmat[mat <span class="op">&gt;</span><span class="st"> </span>qati], <span class="st">&quot;A0&quot;</span>)</a>
-<a class="sourceLine" id="cb321-19" data-line-number="19">colmat[mat <span class="op">&lt;=</span><span class="st"> </span>qati] =<span class="st"> </span><span class="kw">paste0</span>(colmat[mat <span class="op">&lt;=</span><span class="st"> </span>qati], <span class="st">&quot;20&quot;</span>)</a>
-<a class="sourceLine" id="cb321-20" data-line-number="20"><span class="kw">dim</span>(colmat) =<span class="st"> </span><span class="kw">dim</span>(mat)</a></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="a-complex-example-of-chord-diagram.html#cb321-1"></a>state_col =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;TssA&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,    <span class="st">&quot;TssAFlnk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</span>
+<span id="cb321-2"><a href="a-complex-example-of-chord-diagram.html#cb321-2"></a>              <span class="st">&quot;TxFlnk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,  <span class="st">&quot;Tx&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</span>
+<span id="cb321-3"><a href="a-complex-example-of-chord-diagram.html#cb321-3"></a>              <span class="st">&quot;TxWk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,    <span class="st">&quot;EnhG&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</span>
+<span id="cb321-4"><a href="a-complex-example-of-chord-diagram.html#cb321-4"></a>              <span class="st">&quot;Enh&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,     <span class="st">&quot;ZNF/Rpts&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</span>
+<span id="cb321-5"><a href="a-complex-example-of-chord-diagram.html#cb321-5"></a>              <span class="st">&quot;Het&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,     <span class="st">&quot;TssBiv&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,</span>
+<span id="cb321-6"><a href="a-complex-example-of-chord-diagram.html#cb321-6"></a>              <span class="st">&quot;BivFlnk&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>, <span class="st">&quot;EnhBiv&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,</span>
+<span id="cb321-7"><a href="a-complex-example-of-chord-diagram.html#cb321-7"></a>              <span class="st">&quot;ReprPC&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,  <span class="st">&quot;ReprPCWk&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,</span>
+<span id="cb321-8"><a href="a-complex-example-of-chord-diagram.html#cb321-8"></a>              <span class="st">&quot;Quies&quot;</span> =<span class="st"> &quot;black&quot;</span>)</span>
+<span id="cb321-9"><a href="a-complex-example-of-chord-diagram.html#cb321-9"></a></span>
+<span id="cb321-10"><a href="a-complex-example-of-chord-diagram.html#cb321-10"></a><span class="co"># one for rows and one for columns</span></span>
+<span id="cb321-11"><a href="a-complex-example-of-chord-diagram.html#cb321-11"></a>state_col2 =<span class="st"> </span><span class="kw">c</span>(state_col, state_col)</span>
+<span id="cb321-12"><a href="a-complex-example-of-chord-diagram.html#cb321-12"></a><span class="kw">names</span>(state_col2) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rownames</span>(mat), <span class="kw">colnames</span>(mat))</span>
+<span id="cb321-13"><a href="a-complex-example-of-chord-diagram.html#cb321-13"></a></span>
+<span id="cb321-14"><a href="a-complex-example-of-chord-diagram.html#cb321-14"></a>colmat =<span class="st"> </span><span class="kw">rep</span>(state_col2[<span class="kw">rownames</span>(mat)], n_states)</span>
+<span id="cb321-15"><a href="a-complex-example-of-chord-diagram.html#cb321-15"></a>colmat =<span class="st"> </span><span class="kw">rgb</span>(<span class="kw">t</span>(<span class="kw">col2rgb</span>(colmat)), <span class="dt">maxColorValue =</span> <span class="dv">255</span>)</span>
+<span id="cb321-16"><a href="a-complex-example-of-chord-diagram.html#cb321-16"></a></span>
+<span id="cb321-17"><a href="a-complex-example-of-chord-diagram.html#cb321-17"></a>qati =<span class="st"> </span><span class="kw">quantile</span>(mat, <span class="fl">0.7</span>)</span>
+<span id="cb321-18"><a href="a-complex-example-of-chord-diagram.html#cb321-18"></a>colmat[mat <span class="op">&gt;</span><span class="st"> </span>qati] =<span class="st"> </span><span class="kw">paste0</span>(colmat[mat <span class="op">&gt;</span><span class="st"> </span>qati], <span class="st">&quot;A0&quot;</span>)</span>
+<span id="cb321-19"><a href="a-complex-example-of-chord-diagram.html#cb321-19"></a>colmat[mat <span class="op">&lt;=</span><span class="st"> </span>qati] =<span class="st"> </span><span class="kw">paste0</span>(colmat[mat <span class="op">&lt;=</span><span class="st"> </span>qati], <span class="st">&quot;20&quot;</span>)</span>
+<span id="cb321-20"><a href="a-complex-example-of-chord-diagram.html#cb321-20"></a><span class="kw">dim</span>(colmat) =<span class="st"> </span><span class="kw">dim</span>(mat)</span></code></pre></div>
 <p>Now we can use <code>chordDiagram()</code> function to make the plot. Here we set one
 pre-allocated track in which the methylation information will be added later.
 Also we only set <code>annotationTrack</code> to <code>grid</code> and the axes and sector labels
 will be customized in later code.</p>
 <p><code>chordDiagram()</code> returns a data frame which contains coordinates for all links.</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" data-line-number="1"><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">-5</span>, <span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, n_states<span class="dv">-1</span>), <span class="dv">10</span>, <span class="kw">rep</span>(<span class="dv">1</span>, n_states<span class="dv">-1</span>), <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb322-2" data-line-number="2">    <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">points.overflow.warning =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb322-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb322-4" data-line-number="4">cdm_res =<span class="st"> </span><span class="kw">chordDiagram</span>(mat, <span class="dt">col =</span> colmat, <span class="dt">grid.col =</span> state_col2,</a>
-<a class="sourceLine" id="cb322-5" data-line-number="5">    <span class="dt">directional =</span> <span class="ot">TRUE</span>, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, </a>
-<a class="sourceLine" id="cb322-6" data-line-number="6">    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.1</span>))</a></code></pre></div>
-<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/first-1.svg" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" data-line-number="1"><span class="kw">head</span>(cdm_res)</a></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="a-complex-example-of-chord-diagram.html#cb322-1"></a><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">-5</span>, <span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, n_states<span class="dv">-1</span>), <span class="dv">10</span>, <span class="kw">rep</span>(<span class="dv">1</span>, n_states<span class="dv">-1</span>), <span class="dv">10</span>),</span>
+<span id="cb322-2"><a href="a-complex-example-of-chord-diagram.html#cb322-2"></a>    <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">points.overflow.warning =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb322-3"><a href="a-complex-example-of-chord-diagram.html#cb322-3"></a></span>
+<span id="cb322-4"><a href="a-complex-example-of-chord-diagram.html#cb322-4"></a>cdm_res =<span class="st"> </span><span class="kw">chordDiagram</span>(mat, <span class="dt">col =</span> colmat, <span class="dt">grid.col =</span> state_col2,</span>
+<span id="cb322-5"><a href="a-complex-example-of-chord-diagram.html#cb322-5"></a>    <span class="dt">directional =</span> <span class="ot">TRUE</span>, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, </span>
+<span id="cb322-6"><a href="a-complex-example-of-chord-diagram.html#cb322-6"></a>    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.1</span>))</span></code></pre></div>
+<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/first-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="a-complex-example-of-chord-diagram.html#cb323-1"></a><span class="kw">head</span>(cdm_res)</span></code></pre></div>
 <pre><code>##    rn  cn value1 value2 o1 o2      x1     x2       col
 ## 1 R_1 C_1      0      0 15 13  431200 267200 #E41A1C20
 ## 2 R_2 C_1  56400  56400 15 12  159800 267200 #E41A1CA0
@@ -397,18 +419,18 @@ will be customized in later code.</p>
 added at the center of the grids in the second track, if the degree for a
 sector is larger than 3 degrees. Note since there is already one pre-allocated
 track, the circular rectangles are in the second track (<code>track.index = 2</code>).</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb325-1" data-line-number="1"><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">2</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
-<a class="sourceLine" id="cb325-2" data-line-number="2">    <span class="cf">if</span>(<span class="kw">abs</span>(CELL_META<span class="op">$</span>cell.start.degree <span class="op">-</span><span class="st"> </span>CELL_META<span class="op">$</span>cell.end.degree) <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) {</a>
-<a class="sourceLine" id="cb325-3" data-line-number="3">        sn =<span class="st"> </span>CELL_META<span class="op">$</span>sector.index</a>
-<a class="sourceLine" id="cb325-4" data-line-number="4">        i_state =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;(C|R)_&quot;</span>, <span class="st">&quot;&quot;</span>, sn))</a>
-<a class="sourceLine" id="cb325-5" data-line-number="5">        <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, i_state, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, </a>
-<a class="sourceLine" id="cb325-6" data-line-number="6">            <span class="dt">font =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.7</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb325-7" data-line-number="7">        xlim =<span class="st"> </span>CELL_META<span class="op">$</span>xlim</a>
-<a class="sourceLine" id="cb325-8" data-line-number="8">        breaks =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, xlim[<span class="dv">2</span>], <span class="dt">by =</span> <span class="fl">4e5</span>)</a>
-<a class="sourceLine" id="cb325-9" data-line-number="9">        <span class="kw">circos.axis</span>(<span class="dt">major.at =</span> breaks, <span class="dt">labels =</span> <span class="kw">paste0</span>(breaks<span class="op">/</span><span class="dv">1000</span>, <span class="st">&quot;KB&quot;</span>), <span class="dt">labels.cex =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb325-10" data-line-number="10">    }</a>
-<a class="sourceLine" id="cb325-11" data-line-number="11">}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a></code></pre></div>
-<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-10-1.svg" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="a-complex-example-of-chord-diagram.html#cb325-1"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">2</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb325-2"><a href="a-complex-example-of-chord-diagram.html#cb325-2"></a>    <span class="cf">if</span>(<span class="kw">abs</span>(CELL_META<span class="op">$</span>cell.start.degree <span class="op">-</span><span class="st"> </span>CELL_META<span class="op">$</span>cell.end.degree) <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) {</span>
+<span id="cb325-3"><a href="a-complex-example-of-chord-diagram.html#cb325-3"></a>        sn =<span class="st"> </span>CELL_META<span class="op">$</span>sector.index</span>
+<span id="cb325-4"><a href="a-complex-example-of-chord-diagram.html#cb325-4"></a>        i_state =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;(C|R)_&quot;</span>, <span class="st">&quot;&quot;</span>, sn))</span>
+<span id="cb325-5"><a href="a-complex-example-of-chord-diagram.html#cb325-5"></a>        <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, i_state, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, </span>
+<span id="cb325-6"><a href="a-complex-example-of-chord-diagram.html#cb325-6"></a>            <span class="dt">font =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.7</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb325-7"><a href="a-complex-example-of-chord-diagram.html#cb325-7"></a>        xlim =<span class="st"> </span>CELL_META<span class="op">$</span>xlim</span>
+<span id="cb325-8"><a href="a-complex-example-of-chord-diagram.html#cb325-8"></a>        breaks =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, xlim[<span class="dv">2</span>], <span class="dt">by =</span> <span class="fl">4e5</span>)</span>
+<span id="cb325-9"><a href="a-complex-example-of-chord-diagram.html#cb325-9"></a>        <span class="kw">circos.axis</span>(<span class="dt">major.at =</span> breaks, <span class="dt">labels =</span> <span class="kw">paste0</span>(breaks<span class="op">/</span><span class="dv">1000</span>, <span class="st">&quot;KB&quot;</span>), <span class="dt">labels.cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb325-10"><a href="a-complex-example-of-chord-diagram.html#cb325-10"></a>    }</span>
+<span id="cb325-11"><a href="a-complex-example-of-chord-diagram.html#cb325-11"></a>}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</span></code></pre></div>
+<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>On the top half, it is easy to see the proportion of different transitions in
 group 1 that come to every state in group 2. However, it is not
 straightforward for the states in the bottom half to see the proportion of
@@ -416,54 +438,54 @@ different states in group 2 they transite to. This can be solved by adding
 small circular rectangles to represent the proportions. In following example, the newly added circular
 rectangles in the bottom half show e.g. how much the state 15 in group 1 has
 been transited to different states in group 2.</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" data-line-number="1"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(cdm_res))) {</a>
-<a class="sourceLine" id="cb326-2" data-line-number="2">    <span class="cf">if</span>(cdm_res<span class="op">$</span>value1[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb326-3" data-line-number="3">        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], <span class="op">-</span><span class="kw">uy</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), </a>
-<a class="sourceLine" id="cb326-4" data-line-number="4">            cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), <span class="op">-</span><span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), </a>
-<a class="sourceLine" id="cb326-5" data-line-number="5">            <span class="dt">col =</span> state_col2[cdm_res<span class="op">$</span>cn[i]], <span class="dt">border =</span> state_col2[cdm_res<span class="op">$</span>cn[i]],</a>
-<a class="sourceLine" id="cb326-6" data-line-number="6">            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb326-7" data-line-number="7">    }</a>
-<a class="sourceLine" id="cb326-8" data-line-number="8">}</a></code></pre></div>
-<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-11-1.svg" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="a-complex-example-of-chord-diagram.html#cb326-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(cdm_res))) {</span>
+<span id="cb326-2"><a href="a-complex-example-of-chord-diagram.html#cb326-2"></a>    <span class="cf">if</span>(cdm_res<span class="op">$</span>value1[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb326-3"><a href="a-complex-example-of-chord-diagram.html#cb326-3"></a>        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], <span class="op">-</span><span class="kw">uy</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), </span>
+<span id="cb326-4"><a href="a-complex-example-of-chord-diagram.html#cb326-4"></a>            cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), <span class="op">-</span><span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), </span>
+<span id="cb326-5"><a href="a-complex-example-of-chord-diagram.html#cb326-5"></a>            <span class="dt">col =</span> state_col2[cdm_res<span class="op">$</span>cn[i]], <span class="dt">border =</span> state_col2[cdm_res<span class="op">$</span>cn[i]],</span>
+<span id="cb326-6"><a href="a-complex-example-of-chord-diagram.html#cb326-6"></a>            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">2</span>)</span>
+<span id="cb326-7"><a href="a-complex-example-of-chord-diagram.html#cb326-7"></a>    }</span>
+<span id="cb326-8"><a href="a-complex-example-of-chord-diagram.html#cb326-8"></a>}</span></code></pre></div>
+<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Methylation in each category is put on the most outside of the circle. On this track, we will
 put two paralle rectangles which are mean methylation and methylation difference between group 1
 and group 2. Basically, on the bottom, we show <code>meth_mat_2 - meth_mat_1</code> and on the top we show
 <code>meth_mat_1 - meth_mat_2</code>.</p>
 <p>The logic of following code is simple that it just simply adds rectangles repeatedly.</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" data-line-number="1">abs_max =<span class="st"> </span><span class="kw">quantile</span>(<span class="kw">abs</span>(<span class="kw">c</span>(meth_mat_<span class="dv">1</span>, meth_mat_<span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>), <span class="fl">0.95</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb327-2" data-line-number="2">col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="fl">0.5</span> <span class="op">-</span><span class="st"> </span>abs_max, <span class="fl">0.5</span>, <span class="fl">0.5</span> <span class="op">+</span><span class="st"> </span>abs_max), <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;red&quot;</span>))</a>
-<a class="sourceLine" id="cb327-3" data-line-number="3">col_fun2 =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span>abs_max, <span class="dv">0</span>, abs_max), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;orange&quot;</span>))</a>
-<a class="sourceLine" id="cb327-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb327-5" data-line-number="5">ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>, <span class="dt">sector.index =</span> <span class="kw">rownames</span>(mat)[<span class="dv">1</span>], <span class="dt">track.index =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb327-6" data-line-number="6">y1 =<span class="st"> </span>ylim[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(ylim[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ylim[<span class="dv">1</span>])<span class="op">*</span><span class="fl">0.4</span></a>
-<a class="sourceLine" id="cb327-7" data-line-number="7">y2 =<span class="st"> </span>ylim[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb327-8" data-line-number="8"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(cdm_res))) {</a>
-<a class="sourceLine" id="cb327-9" data-line-number="9">    <span class="cf">if</span>(cdm_res<span class="op">$</span>value1[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb327-10" data-line-number="10">        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, </a>
-<a class="sourceLine" id="cb327-11" data-line-number="11">            <span class="dt">col =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </a>
-<a class="sourceLine" id="cb327-12" data-line-number="12">            <span class="dt">border =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</a>
-<a class="sourceLine" id="cb327-13" data-line-number="13">            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb327-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb327-15" data-line-number="15">        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y2, </a>
-<a class="sourceLine" id="cb327-16" data-line-number="16">            <span class="dt">col =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </a>
-<a class="sourceLine" id="cb327-17" data-line-number="17">            <span class="dt">border =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</a>
-<a class="sourceLine" id="cb327-18" data-line-number="18">            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb327-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb327-20" data-line-number="20">        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, </a>
-<a class="sourceLine" id="cb327-21" data-line-number="21">            <span class="dt">col =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </a>
-<a class="sourceLine" id="cb327-22" data-line-number="22">            <span class="dt">border =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</a>
-<a class="sourceLine" id="cb327-23" data-line-number="23">            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>cn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb327-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb327-25" data-line-number="25">        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y2, </a>
-<a class="sourceLine" id="cb327-26" data-line-number="26">            <span class="dt">col =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </a>
-<a class="sourceLine" id="cb327-27" data-line-number="27">            <span class="dt">border =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</a>
-<a class="sourceLine" id="cb327-28" data-line-number="28">            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>cn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb327-29" data-line-number="29">    }</a>
-<a class="sourceLine" id="cb327-30" data-line-number="30">}</a>
-<a class="sourceLine" id="cb327-31" data-line-number="31"><span class="kw">circos.clear</span>()</a></code></pre></div>
-<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-12-1.svg" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="a-complex-example-of-chord-diagram.html#cb327-1"></a>abs_max =<span class="st"> </span><span class="kw">quantile</span>(<span class="kw">abs</span>(<span class="kw">c</span>(meth_mat_<span class="dv">1</span>, meth_mat_<span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>), <span class="fl">0.95</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb327-2"><a href="a-complex-example-of-chord-diagram.html#cb327-2"></a>col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="fl">0.5</span> <span class="op">-</span><span class="st"> </span>abs_max, <span class="fl">0.5</span>, <span class="fl">0.5</span> <span class="op">+</span><span class="st"> </span>abs_max), <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb327-3"><a href="a-complex-example-of-chord-diagram.html#cb327-3"></a>col_fun2 =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span>abs_max, <span class="dv">0</span>, abs_max), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;orange&quot;</span>))</span>
+<span id="cb327-4"><a href="a-complex-example-of-chord-diagram.html#cb327-4"></a></span>
+<span id="cb327-5"><a href="a-complex-example-of-chord-diagram.html#cb327-5"></a>ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>, <span class="dt">sector.index =</span> <span class="kw">rownames</span>(mat)[<span class="dv">1</span>], <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb327-6"><a href="a-complex-example-of-chord-diagram.html#cb327-6"></a>y1 =<span class="st"> </span>ylim[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(ylim[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ylim[<span class="dv">1</span>])<span class="op">*</span><span class="fl">0.4</span></span>
+<span id="cb327-7"><a href="a-complex-example-of-chord-diagram.html#cb327-7"></a>y2 =<span class="st"> </span>ylim[<span class="dv">2</span>]</span>
+<span id="cb327-8"><a href="a-complex-example-of-chord-diagram.html#cb327-8"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(cdm_res))) {</span>
+<span id="cb327-9"><a href="a-complex-example-of-chord-diagram.html#cb327-9"></a>    <span class="cf">if</span>(cdm_res<span class="op">$</span>value1[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb327-10"><a href="a-complex-example-of-chord-diagram.html#cb327-10"></a>        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, </span>
+<span id="cb327-11"><a href="a-complex-example-of-chord-diagram.html#cb327-11"></a>            <span class="dt">col =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </span>
+<span id="cb327-12"><a href="a-complex-example-of-chord-diagram.html#cb327-12"></a>            <span class="dt">border =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</span>
+<span id="cb327-13"><a href="a-complex-example-of-chord-diagram.html#cb327-13"></a>            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb327-14"><a href="a-complex-example-of-chord-diagram.html#cb327-14"></a></span>
+<span id="cb327-15"><a href="a-complex-example-of-chord-diagram.html#cb327-15"></a>        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y2, </span>
+<span id="cb327-16"><a href="a-complex-example-of-chord-diagram.html#cb327-16"></a>            <span class="dt">col =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </span>
+<span id="cb327-17"><a href="a-complex-example-of-chord-diagram.html#cb327-17"></a>            <span class="dt">border =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</span>
+<span id="cb327-18"><a href="a-complex-example-of-chord-diagram.html#cb327-18"></a>            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb327-19"><a href="a-complex-example-of-chord-diagram.html#cb327-19"></a></span>
+<span id="cb327-20"><a href="a-complex-example-of-chord-diagram.html#cb327-20"></a>        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, </span>
+<span id="cb327-21"><a href="a-complex-example-of-chord-diagram.html#cb327-21"></a>            <span class="dt">col =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </span>
+<span id="cb327-22"><a href="a-complex-example-of-chord-diagram.html#cb327-22"></a>            <span class="dt">border =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</span>
+<span id="cb327-23"><a href="a-complex-example-of-chord-diagram.html#cb327-23"></a>            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>cn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb327-24"><a href="a-complex-example-of-chord-diagram.html#cb327-24"></a></span>
+<span id="cb327-25"><a href="a-complex-example-of-chord-diagram.html#cb327-25"></a>        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y2, </span>
+<span id="cb327-26"><a href="a-complex-example-of-chord-diagram.html#cb327-26"></a>            <span class="dt">col =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </span>
+<span id="cb327-27"><a href="a-complex-example-of-chord-diagram.html#cb327-27"></a>            <span class="dt">border =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</span>
+<span id="cb327-28"><a href="a-complex-example-of-chord-diagram.html#cb327-28"></a>            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>cn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb327-29"><a href="a-complex-example-of-chord-diagram.html#cb327-29"></a>    }</span>
+<span id="cb327-30"><a href="a-complex-example-of-chord-diagram.html#cb327-30"></a>}</span>
+<span id="cb327-31"><a href="a-complex-example-of-chord-diagram.html#cb327-31"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Legends can be added according to instructions discussed in Section <a href="legends.html#legends">4</a>.</p>
-<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-13-1.png" width="695.541984" style="display: block; margin: auto;" /></p>
+<p><img src="15-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-12-1.png" width="695.541984" style="display: block; margin: auto;" /></p>
 
 </div>
 

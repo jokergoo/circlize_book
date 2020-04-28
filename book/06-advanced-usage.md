@@ -128,7 +128,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-html/circlize-zoom-1.svg" alt="Zoom sectors." width="672" />
+<img src="06-advanced-usage_files/figure-html/circlize-zoom-1.png" alt="Zoom sectors." width="672" />
 <p class="caption">(\#fig:circlize-zoom)Zoom sectors.</p>
 </div>
 
@@ -146,7 +146,7 @@ top part, then only sectors between 0 to 90 degree are visible
 
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-html/circlize-part-1.svg" alt="One quarter of the circle." width="768" />
+<img src="06-advanced-usage_files/figure-html/circlize-part-1.png" alt="One quarter of the circle." width="768" />
 <p class="caption">(\#fig:circlize-part)One quarter of the circle.</p>
 </div>
 
@@ -195,7 +195,7 @@ circos.track(factors = factors, ylim = c(0, 1))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-html/circlize-part2-1.svg" alt="Show subset of cells in tracks." width="672" />
+<img src="06-advanced-usage_files/figure-html/circlize-part2-1.png" alt="Show subset of cells in tracks." width="672" />
 <p class="caption">(\#fig:circlize-part2)Show subset of cells in tracks.</p>
 </div>
 
@@ -236,7 +236,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-html/circlize-nested-1.svg" alt="Nested circular plots." width="768" />
+<img src="06-advanced-usage_files/figure-html/circlize-nested-1.png" alt="Nested circular plots." width="768" />
 <p class="caption">(\#fig:circlize-nested)Nested circular plots.</p>
 </div>
 
@@ -248,7 +248,7 @@ page. The source code for generating Figure \@ref(fig:circlize-separated) is
 at https://github.com/jokergoo/circlize_book/blob/master/src/intro-20-separated.R.
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-html/circlize-separated-1.svg" alt="Two separated circular plots" width="768" />
+<img src="06-advanced-usage_files/figure-html/circlize-separated-1.png" alt="Two separated circular plots" width="768" />
 <p class="caption">(\#fig:circlize-separated)Two separated circular plots</p>
 </div>
 
@@ -275,7 +275,7 @@ par(new = FALSE)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-html/circlize-diff-radius-1.svg" alt="Cells with differnet radius." width="672" />
+<img src="06-advanced-usage_files/figure-html/circlize-diff-radius-1.png" alt="Cells with differnet radius." width="672" />
 <p class="caption">(\#fig:circlize-diff-radius)Cells with differnet radius.</p>
 </div>
 
@@ -314,7 +314,7 @@ for(i in 1:9) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="06-advanced-usage_files/figure-html/circlize-multiple-layout-1.svg" alt="Arrange multiple circular plots." width="768" />
+<img src="06-advanced-usage_files/figure-html/circlize-multiple-layout-1.png" alt="Arrange multiple circular plots." width="768" />
 <p class="caption">(\#fig:circlize-multiple-layout)Arrange multiple circular plots.</p>
 </div>
 

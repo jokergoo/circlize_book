@@ -162,7 +162,7 @@ circos.nested(f1, f2, correspondance)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-html/nested-normal-1.svg" alt="Nested zooming between two circular plots." width="672" />
+<img src="12-nested-zooming_files/figure-html/nested-normal-1.png" alt="Nested zooming between two circular plots." width="672" />
 <p class="caption">(\#fig:nested-normal)Nested zooming between two circular plots.</p>
 </div>
 
@@ -179,7 +179,7 @@ circos.nested(f2, f1, correspondance[, c(4:6, 1:3)])
 ```
 
 <div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-html/nested2-1.svg" alt="Nested zooming between two circular plots, zoomed plot is put outside." width="672" />
+<img src="12-nested-zooming_files/figure-html/nested2-1.png" alt="Nested zooming between two circular plots, zoomed plot is put outside." width="672" />
 <p class="caption">(\#fig:nested2)Nested zooming between two circular plots, zoomed plot is put outside.</p>
 </div>
 
@@ -238,7 +238,7 @@ circos.nested(f1, f2, correspondance, connection_col = sector_col[correspondance
 ```
 
 <div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-html/nested-complex-1.svg" alt="Nested zooming between two circular plots, slightly complex plots." width="672" />
+<img src="12-nested-zooming_files/figure-html/nested-complex-1.png" alt="Nested zooming between two circular plots, slightly complex plots." width="672" />
 <p class="caption">(\#fig:nested-complex)Nested zooming between two circular plots, slightly complex plots.</p>
 </div>
 
@@ -328,6 +328,6 @@ circos.nested(f1, f2, correspondance, connection_col = chr_bg_color[correspondan
 ```
 
 <div class="figure" style="text-align: center">
-<img src="12-nested-zooming_files/figure-html/dmr-1.svg" alt="Visualization of DMRs." width="576" />
+<img src="12-nested-zooming_files/figure-html/dmr-1.png" alt="Visualization of DMRs." width="576" />
 <p class="caption">(\#fig:dmr)Visualization of DMRs.</p>
 </div>

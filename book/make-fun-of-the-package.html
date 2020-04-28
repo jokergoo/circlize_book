@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 16 Make fun of the package | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 16 Make fun of the package | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="a-complex-example-of-chord-diagram.html"/>
 
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,27 +53,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -81,9 +81,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -134,11 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="part"><span><b>I General Functionality</b></span></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#principle-of-design"><i class="fa fa-check"></i><b>1.1</b> Principle of design</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#a-qiuck-glance"><i class="fa fa-check"></i><b>1.2</b> A quick glance</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a><ul>
+<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="circular-layout.html"><a href="circular-layout.html#coordinate-transformation"><i class="fa fa-check"></i><b>2.1</b> Coordinate transformation</a></li>
 <li class="chapter" data-level="2.2" data-path="circular-layout.html"><a href="circular-layout.html#rules-for-making-the-circular-plot"><i class="fa fa-check"></i><b>2.2</b> Rules for making the circular plot</a></li>
 <li class="chapter" data-level="2.3" data-path="circular-layout.html"><a href="circular-layout.html#sectors-and-tracks"><i class="fa fa-check"></i><b>2.3</b> Sectors and tracks</a></li>
@@ -146,13 +148,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="circular-layout.html"><a href="circular-layout.html#create-plotting-regions"><i class="fa fa-check"></i><b>2.5</b> Create plotting regions</a></li>
 <li class="chapter" data-level="2.6" data-path="circular-layout.html"><a href="circular-layout.html#update-plotting-regions"><i class="fa fa-check"></i><b>2.6</b> Update plotting regions</a></li>
 <li class="chapter" data-level="2.7" data-path="circular-layout.html"><a href="circular-layout.html#panel-fun"><i class="fa fa-check"></i><b>2.7</b> <code>panel.fun</code> argument</a></li>
-<li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a><ul>
+<li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
+<ul>
 <li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
 <li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The convert functions</a></li>
 <li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a><ul>
+<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>3.1</b> Points</a></li>
 <li class="chapter" data-level="3.2" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>3.2</b> Lines</a></li>
 <li class="chapter" data-level="3.3" data-path="graphics.html"><a href="graphics.html#segments"><i class="fa fa-check"></i><b>3.3</b> Segments</a></li>
@@ -166,24 +170,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.11</b> Work together with the base graphic system</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
-<li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a><ul>
+<li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="high-level-plots.html"><a href="high-level-plots.html#circular-barplot"><i class="fa fa-check"></i><b>5.1</b> Circular barplots</a></li>
 <li class="chapter" data-level="5.2" data-path="high-level-plots.html"><a href="high-level-plots.html#histograms"><i class="fa fa-check"></i><b>5.2</b> Histograms</a></li>
 <li class="chapter" data-level="5.3" data-path="high-level-plots.html"><a href="high-level-plots.html#phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Phylogenetic trees</a></li>
 <li class="chapter" data-level="5.4" data-path="high-level-plots.html"><a href="high-level-plots.html#heatmaps"><i class="fa fa-check"></i><b>5.4</b> Heatmaps</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>6</b> Advanced layout</a><ul>
+<li class="chapter" data-level="6" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>6</b> Advanced layout</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="advanced-layout.html"><a href="advanced-layout.html#zooming-of-sectors"><i class="fa fa-check"></i><b>6.1</b> Zooming of sectors</a></li>
 <li class="chapter" data-level="6.2" data-path="advanced-layout.html"><a href="advanced-layout.html#part-circle"><i class="fa fa-check"></i><b>6.2</b> Visualize part of the circle</a></li>
 <li class="chapter" data-level="6.3" data-path="advanced-layout.html"><a href="advanced-layout.html#combine-circular-plots"><i class="fa fa-check"></i><b>6.3</b> Combine multiple circular plots</a></li>
 <li class="chapter" data-level="6.4" data-path="advanced-layout.html"><a href="advanced-layout.html#arrange-multiple-plots"><i class="fa fa-check"></i><b>6.4</b> Arrange multiple plots</a></li>
 </ul></li>
 <li class="part"><span><b>II Applications in Genomics</b></span></li>
-<li class="chapter" data-level="7" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>7</b> Introduction</a><ul>
+<li class="chapter" data-level="7" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>7</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="genomic-introduction.html"><a href="genomic-introduction.html#input-data"><i class="fa fa-check"></i><b>7.1</b> Input data</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>8</b> Initialize with genomic data</a><ul>
-<li class="chapter" data-level="8.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>8.1</b> Initialize with cytoband data</a><ul>
+<li class="chapter" data-level="8" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>8</b> Initialize with genomic data</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>8.1</b> Initialize with cytoband data</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>8.1.1</b> Basic usage</a></li>
 <li class="chapter" data-level="8.1.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#pre-defined-tracks"><i class="fa fa-check"></i><b>8.1.2</b> Pre-defined tracks</a></li>
 <li class="chapter" data-level="8.1.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#other-general-settings"><i class="fa fa-check"></i><b>8.1.3</b> Other general settings</a></li>
@@ -192,7 +201,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>8.3</b> Initialize with general genomic category</a></li>
 <li class="chapter" data-level="8.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>8.4</b> Zooming chromosomes</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>9</b> Create plotting regions for genomic data</a><ul>
+<li class="chapter" data-level="9" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>9</b> Create plotting regions for genomic data</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-points"><i class="fa fa-check"></i><b>9.1</b> Points</a></li>
 <li class="chapter" data-level="9.2" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-lines"><i class="fa fa-check"></i><b>9.2</b> Lines</a></li>
 <li class="chapter" data-level="9.3" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-text"><i class="fa fa-check"></i><b>9.3</b> Text</a></li>
@@ -200,43 +210,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-links"><i class="fa fa-check"></i><b>9.5</b> Links</a></li>
 <li class="chapter" data-level="9.6" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#mixed-use-of-general-circlize-functions"><i class="fa fa-check"></i><b>9.6</b> Mixed use of general circlize functions</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>10</b> modes for <code>circos.genomicTrack()</code></a><ul>
-<li class="chapter" data-level="10.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>10.1</b> Normal mode</a><ul>
+<li class="chapter" data-level="10" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>10</b> modes for <code>circos.genomicTrack()</code></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>10.1</b> Normal mode</a>
+<ul>
 <li class="chapter" data-level="10.1.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame"><i class="fa fa-check"></i><b>10.1.1</b> Input is a data frame</a></li>
 <li class="chapter" data-level="10.1.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames"><i class="fa fa-check"></i><b>10.1.2</b> Input is a list of data frames</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>10.2</b> Stack mode</a><ul>
+<li class="chapter" data-level="10.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>10.2</b> Stack mode</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame-1"><i class="fa fa-check"></i><b>10.2.1</b> Input is a data frame</a></li>
 <li class="chapter" data-level="10.2.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames-1"><i class="fa fa-check"></i><b>10.2.2</b> Input is a list of data frames</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>10.3</b> Applications</a><ul>
+<li class="chapter" data-level="10.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>10.3</b> Applications</a>
+<ul>
 <li class="chapter" data-level="10.3.1" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-points"><i class="fa fa-check"></i><b>10.3.1</b> Points</a></li>
 <li class="chapter" data-level="10.3.2" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-lines"><i class="fa fa-check"></i><b>10.3.2</b> Lines</a></li>
 <li class="chapter" data-level="10.3.3" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-rectangles"><i class="fa fa-check"></i><b>10.3.3</b> Rectangles</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>11</b> High-level genomic functions</a><ul>
+<li class="chapter" data-level="11" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>11</b> High-level genomic functions</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>11.1</b> Ideograms</a></li>
 <li class="chapter" data-level="11.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>11.2</b> Heatmaps</a></li>
 <li class="chapter" data-level="11.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>11.3</b> Labels</a></li>
 <li class="chapter" data-level="11.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>11.4</b> Genomic axes</a></li>
 <li class="chapter" data-level="11.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>11.5</b> Genomic density and Rainfall plot</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>12</b> Nested zooming</a><ul>
+<li class="chapter" data-level="12" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>12</b> Nested zooming</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="nested-zooming.html"><a href="nested-zooming.html#basic-idea"><i class="fa fa-check"></i><b>12.1</b> Basic idea</a></li>
 <li class="chapter" data-level="12.2" data-path="nested-zooming.html"><a href="nested-zooming.html#visualization-of-dmrs-from-tagmentation-based-wgbs"><i class="fa fa-check"></i><b>12.2</b> Visualization of DMRs from tagmentation-based WGBS</a></li>
 </ul></li>
 <li class="part"><span><b>III Visualize Relations</b></span></li>
-<li class="chapter" data-level="13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>13</b> The <code>chordDiagram()</code> function</a><ul>
+<li class="chapter" data-level="13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>13</b> The <code>chordDiagram()</code> function</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>13.1</b> Basic usage</a></li>
 <li class="chapter" data-level="13.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>13.2</b> Adjust by <code>circos.par()</code></a></li>
-<li class="chapter" data-level="13.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>13.3</b> Colors</a><ul>
+<li class="chapter" data-level="13.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>13.3</b> Colors</a>
+<ul>
 <li class="chapter" data-level="13.3.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#set-grid-colors"><i class="fa fa-check"></i><b>13.3.1</b> Set grid colors</a></li>
 <li class="chapter" data-level="13.3.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-color"><i class="fa fa-check"></i><b>13.3.2</b> Set link colors</a></li>
 </ul></li>
 <li class="chapter" data-level="13.4" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-border"><i class="fa fa-check"></i><b>13.4</b> Link border</a></li>
 <li class="chapter" data-level="13.5" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#highlight-links"><i class="fa fa-check"></i><b>13.5</b> Highlight links</a></li>
-<li class="chapter" data-level="13.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>13.6</b> Orders of links</a><ul>
+<li class="chapter" data-level="13.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>13.6</b> Orders of links</a>
+<ul>
 <li class="chapter" data-level="13.6.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-positions-on-sectors"><i class="fa fa-check"></i><b>13.6.1</b> Orders of positions on sectors</a></li>
 <li class="chapter" data-level="13.6.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#order-of-adding-links"><i class="fa fa-check"></i><b>13.6.2</b> Order of adding links</a></li>
 </ul></li>
@@ -245,12 +264,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.9" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#directional-relations"><i class="fa fa-check"></i><b>13.9</b> Directional relations</a></li>
 <li class="chapter" data-level="13.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#scaling"><i class="fa fa-check"></i><b>13.10</b> Scaling</a></li>
 <li class="chapter" data-level="13.11" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>13.11</b> Reduce</a></li>
-<li class="chapter" data-level="13.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>13.12</b> Input as a data frame</a><ul>
+<li class="chapter" data-level="13.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>13.12</b> Input as a data frame</a>
+<ul>
 <li class="chapter" data-level="13.12.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#multiple-links"><i class="fa fa-check"></i><b>13.12.1</b> Multiple links</a></li>
 <li class="chapter" data-level="13.12.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#unequal-width-of-the-link-ends"><i class="fa fa-check"></i><b>13.12.2</b> Unequal width of the link ends</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>14</b> Advanced usage of <code>chordDiagram()</code></a><ul>
+<li class="chapter" data-level="14" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>14</b> Advanced usage of <code>chordDiagram()</code></a>
+<ul>
 <li class="chapter" data-level="14.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>14.1</b> Organization of tracks</a></li>
 <li class="chapter" data-level="14.2" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-labels"><i class="fa fa-check"></i><b>14.2</b> Customize sector labels</a></li>
 <li class="chapter" data-level="14.3" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-axes"><i class="fa fa-check"></i><b>14.3</b> Customize sector axes</a></li>
@@ -260,7 +281,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>15</b> A complex example of Chord diagram</a></li>
 <li class="part"><span><b>IV Others</b></span></li>
-<li class="chapter" data-level="16" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>16</b> Make fun of the package</a><ul>
+<li class="chapter" data-level="16" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>16</b> Make fun of the package</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>16.1</b> A clock</a></li>
 <li class="chapter" data-level="16.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>16.2</b> A dartboard</a></li>
 <li class="chapter" data-level="16.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>16.3</b> Ba-Gua and Tai-Ji</a></li>
@@ -285,9 +307,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="make-fun-of-the-package" class="section level1">
+<div id="make-fun-of-the-package" class="section level1" number="16">
 <h1><span class="header-section-number">Chapter 16</span> Make fun of the package</h1>
-<div id="a-clock" class="section level2">
+<div id="a-clock" class="section level2" number="16.1">
 <h2><span class="header-section-number">16.1</span> A clock</h2>
 <p>The first example is a clock. The key function here is <code>circos.axis()</code> (Figure
 <a href="make-fun-of-the-package.html#fig:clock">16.1</a>). In the example, the whole circle only contains one sector in
@@ -296,72 +318,72 @@ which major tick at 0 is overlapping with major tick at 12.</p>
 based on current time when this Chapter is generated. The hands are drawn by <code>arraws()</code> function
 in the canvas coordinate. A real-time clock can be found at the <strong>Examples</strong> section in
 the help page of <code>circos.axis()</code>.</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" data-line-number="1"><span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">0</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">90</span>)</a>
-<a class="sourceLine" id="cb328-2" data-line-number="2"><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">12</span>))</a>
-<a class="sourceLine" id="cb328-3" data-line-number="3"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb328-4" data-line-number="4"><span class="kw">circos.axis</span>(<span class="dt">major.at =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">labels =</span> <span class="ot">NULL</span>, <span class="dt">direction =</span> <span class="st">&quot;inside&quot;</span>, </a>
-<a class="sourceLine" id="cb328-5" data-line-number="5">    <span class="dt">major.tick.length =</span> <span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>))</a>
-<a class="sourceLine" id="cb328-6" data-line-number="6"><span class="kw">circos.text</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">12</span>) <span class="op">-</span><span class="st"> </span><span class="kw">uy</span>(<span class="dv">6</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>)</a>
-<a class="sourceLine" id="cb328-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb328-8" data-line-number="8">current.time =<span class="st"> </span><span class="kw">as.POSIXlt</span>(<span class="kw">Sys.time</span>())</a>
-<a class="sourceLine" id="cb328-9" data-line-number="9">sec =<span class="st"> </span><span class="kw">ceiling</span>(current.time<span class="op">$</span>sec)</a>
-<a class="sourceLine" id="cb328-10" data-line-number="10">min =<span class="st"> </span>current.time<span class="op">$</span>min</a>
-<a class="sourceLine" id="cb328-11" data-line-number="11">hour =<span class="st"> </span>current.time<span class="op">$</span>hour</a>
-<a class="sourceLine" id="cb328-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb328-13" data-line-number="13">sec.degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>sec<span class="op">/</span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span></a>
-<a class="sourceLine" id="cb328-14" data-line-number="14"><span class="kw">arrows</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">cos</span>(sec.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.8</span>, <span class="kw">sin</span>(sec.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.8</span>)</a>
-<a class="sourceLine" id="cb328-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb328-16" data-line-number="16">min.degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>min<span class="op">/</span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span></a>
-<a class="sourceLine" id="cb328-17" data-line-number="17"><span class="kw">arrows</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">cos</span>(min.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.7</span>, <span class="kw">sin</span>(min.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.7</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)   </a>
-<a class="sourceLine" id="cb328-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb328-19" data-line-number="19">hour.degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>hour<span class="op">/</span><span class="dv">12</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span> <span class="op">-</span><span class="st"> </span>min<span class="op">/</span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span><span class="op">/</span><span class="dv">12</span></a>
-<a class="sourceLine" id="cb328-20" data-line-number="20"><span class="kw">arrows</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">cos</span>(hour.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.4</span>, <span class="kw">sin</span>(hour.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.4</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="make-fun-of-the-package.html#cb328-1"></a><span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">0</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">90</span>)</span>
+<span id="cb328-2"><a href="make-fun-of-the-package.html#cb328-2"></a><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">12</span>))</span>
+<span id="cb328-3"><a href="make-fun-of-the-package.html#cb328-3"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>)</span>
+<span id="cb328-4"><a href="make-fun-of-the-package.html#cb328-4"></a><span class="kw">circos.axis</span>(<span class="dt">major.at =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">labels =</span> <span class="ot">NULL</span>, <span class="dt">direction =</span> <span class="st">&quot;inside&quot;</span>, </span>
+<span id="cb328-5"><a href="make-fun-of-the-package.html#cb328-5"></a>    <span class="dt">major.tick.length =</span> <span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>))</span>
+<span id="cb328-6"><a href="make-fun-of-the-package.html#cb328-6"></a><span class="kw">circos.text</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">12</span>) <span class="op">-</span><span class="st"> </span><span class="kw">uy</span>(<span class="dv">6</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>)</span>
+<span id="cb328-7"><a href="make-fun-of-the-package.html#cb328-7"></a></span>
+<span id="cb328-8"><a href="make-fun-of-the-package.html#cb328-8"></a>current.time =<span class="st"> </span><span class="kw">as.POSIXlt</span>(<span class="kw">Sys.time</span>())</span>
+<span id="cb328-9"><a href="make-fun-of-the-package.html#cb328-9"></a>sec =<span class="st"> </span><span class="kw">ceiling</span>(current.time<span class="op">$</span>sec)</span>
+<span id="cb328-10"><a href="make-fun-of-the-package.html#cb328-10"></a>min =<span class="st"> </span>current.time<span class="op">$</span>min</span>
+<span id="cb328-11"><a href="make-fun-of-the-package.html#cb328-11"></a>hour =<span class="st"> </span>current.time<span class="op">$</span>hour</span>
+<span id="cb328-12"><a href="make-fun-of-the-package.html#cb328-12"></a></span>
+<span id="cb328-13"><a href="make-fun-of-the-package.html#cb328-13"></a>sec.degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>sec<span class="op">/</span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span></span>
+<span id="cb328-14"><a href="make-fun-of-the-package.html#cb328-14"></a><span class="kw">arrows</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">cos</span>(sec.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.8</span>, <span class="kw">sin</span>(sec.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.8</span>)</span>
+<span id="cb328-15"><a href="make-fun-of-the-package.html#cb328-15"></a></span>
+<span id="cb328-16"><a href="make-fun-of-the-package.html#cb328-16"></a>min.degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>min<span class="op">/</span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span></span>
+<span id="cb328-17"><a href="make-fun-of-the-package.html#cb328-17"></a><span class="kw">arrows</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">cos</span>(min.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.7</span>, <span class="kw">sin</span>(min.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.7</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)   </span>
+<span id="cb328-18"><a href="make-fun-of-the-package.html#cb328-18"></a></span>
+<span id="cb328-19"><a href="make-fun-of-the-package.html#cb328-19"></a>hour.degree =<span class="st"> </span><span class="dv">90</span> <span class="op">-</span><span class="st"> </span>hour<span class="op">/</span><span class="dv">12</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span> <span class="op">-</span><span class="st"> </span>min<span class="op">/</span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">360</span><span class="op">/</span><span class="dv">12</span></span>
+<span id="cb328-20"><a href="make-fun-of-the-package.html#cb328-20"></a><span class="kw">arrows</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">cos</span>(hour.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.4</span>, <span class="kw">sin</span>(hour.degree<span class="op">/</span><span class="dv">180</span><span class="op">*</span>pi)<span class="op">*</span><span class="fl">0.4</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:clock"></span>
-<img src="16-make-fun_files/figure-html/clock-1.svg" alt="A clock." width="384" />
+<img src="16-make-fun_files/figure-html/clock-1.png" alt="A clock." width="672" />
 <p class="caption">
 Figure 16.1: A clock.
 </p>
 </div>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb329-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="make-fun-of-the-package.html#cb329-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 </div>
-<div id="a-dartboard" class="section level2">
+<div id="a-dartboard" class="section level2" number="16.2">
 <h2><span class="header-section-number">16.2</span> A dartboard</h2>
 <p>The second example is a dartboard. In Figure <a href="make-fun-of-the-package.html#fig:dartboard">16.2</a>, tracks are assigned with
 different heights and each cell is initialized with different colors. The most
 inside green ring and red circle are plotted by <code>draw.sector()</code>.</p>
 <p>We use <code>circos.trackText()</code> to add labels because we know the global order of the labels.</p>
 <p>Now you can project the plot on your door and begin to play!</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" data-line-number="1">factors =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span>  <span class="co"># just indicate there are 20 sectors</span></a>
-<a class="sourceLine" id="cb330-2" data-line-number="2"><span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">0</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb330-3" data-line-number="3">    <span class="dt">start.degree =</span> <span class="dv">360</span><span class="op">/</span><span class="dv">20</span><span class="op">/</span><span class="dv">2</span>, <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">clock.wise =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb330-4" data-line-number="4"><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb330-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb330-6" data-line-number="6"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.15</span>)</a>
-<a class="sourceLine" id="cb330-7" data-line-number="7"><span class="kw">circos.trackText</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">20</span>), <span class="dt">y =</span> <span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">20</span>),</a>
-<a class="sourceLine" id="cb330-8" data-line-number="8">    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">4</span>, <span class="dv">18</span>, <span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">5</span>, <span class="dv">12</span>, <span class="dv">9</span>, <span class="dv">14</span>, <span class="dv">11</span>, <span class="dv">8</span>, <span class="dv">16</span>, <span class="dv">7</span>, <span class="dv">19</span>, <span class="dv">3</span>, <span class="dv">17</span>, <span class="dv">2</span>, <span class="dv">15</span>, <span class="dv">10</span>, <span class="dv">6</span>),</a>
-<a class="sourceLine" id="cb330-9" data-line-number="9">    <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">factors =</span> factors, <span class="dt">col =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">font =</span> <span class="dv">2</span>, <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>)</a>
-<a class="sourceLine" id="cb330-10" data-line-number="10"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors,</a>
-<a class="sourceLine" id="cb330-11" data-line-number="11">    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#E41A1C&quot;</span>, <span class="st">&quot;#4DAF4A&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.05</span>)</a>
-<a class="sourceLine" id="cb330-12" data-line-number="12"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors,</a>
-<a class="sourceLine" id="cb330-13" data-line-number="13">    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;white&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.275</span>)</a>
-<a class="sourceLine" id="cb330-14" data-line-number="14"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors,</a>
-<a class="sourceLine" id="cb330-15" data-line-number="15">    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#E41A1C&quot;</span>, <span class="st">&quot;#4DAF4A&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.05</span>)</a>
-<a class="sourceLine" id="cb330-16" data-line-number="16"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, </a>
-<a class="sourceLine" id="cb330-17" data-line-number="17">    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;white&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.375</span>)</a>
-<a class="sourceLine" id="cb330-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb330-19" data-line-number="19"><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</a>
-<a class="sourceLine" id="cb330-20" data-line-number="20">    <span class="dt">rou1 =</span> <span class="fl">0.1</span>, <span class="dt">col =</span> <span class="st">&quot;#4DAF4A&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#EEEEEE&quot;</span>)</a>
-<a class="sourceLine" id="cb330-21" data-line-number="21"><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</a>
-<a class="sourceLine" id="cb330-22" data-line-number="22">    <span class="dt">rou1 =</span> <span class="fl">0.05</span>, <span class="dt">col =</span> <span class="st">&quot;#E41A1C&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#EEEEEE&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="make-fun-of-the-package.html#cb330-1"></a>factors =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span>  <span class="co"># just indicate there are 20 sectors</span></span>
+<span id="cb330-2"><a href="make-fun-of-the-package.html#cb330-2"></a><span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">0</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb330-3"><a href="make-fun-of-the-package.html#cb330-3"></a>    <span class="dt">start.degree =</span> <span class="dv">360</span><span class="op">/</span><span class="dv">20</span><span class="op">/</span><span class="dv">2</span>, <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">clock.wise =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb330-4"><a href="make-fun-of-the-package.html#cb330-4"></a><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb330-5"><a href="make-fun-of-the-package.html#cb330-5"></a></span>
+<span id="cb330-6"><a href="make-fun-of-the-package.html#cb330-6"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.15</span>)</span>
+<span id="cb330-7"><a href="make-fun-of-the-package.html#cb330-7"></a><span class="kw">circos.trackText</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">20</span>), <span class="dt">y =</span> <span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">20</span>),</span>
+<span id="cb330-8"><a href="make-fun-of-the-package.html#cb330-8"></a>    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">4</span>, <span class="dv">18</span>, <span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">5</span>, <span class="dv">12</span>, <span class="dv">9</span>, <span class="dv">14</span>, <span class="dv">11</span>, <span class="dv">8</span>, <span class="dv">16</span>, <span class="dv">7</span>, <span class="dv">19</span>, <span class="dv">3</span>, <span class="dv">17</span>, <span class="dv">2</span>, <span class="dv">15</span>, <span class="dv">10</span>, <span class="dv">6</span>),</span>
+<span id="cb330-9"><a href="make-fun-of-the-package.html#cb330-9"></a>    <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">factors =</span> factors, <span class="dt">col =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">font =</span> <span class="dv">2</span>, <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>)</span>
+<span id="cb330-10"><a href="make-fun-of-the-package.html#cb330-10"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors,</span>
+<span id="cb330-11"><a href="make-fun-of-the-package.html#cb330-11"></a>    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#E41A1C&quot;</span>, <span class="st">&quot;#4DAF4A&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.05</span>)</span>
+<span id="cb330-12"><a href="make-fun-of-the-package.html#cb330-12"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors,</span>
+<span id="cb330-13"><a href="make-fun-of-the-package.html#cb330-13"></a>    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;white&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.275</span>)</span>
+<span id="cb330-14"><a href="make-fun-of-the-package.html#cb330-14"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors,</span>
+<span id="cb330-15"><a href="make-fun-of-the-package.html#cb330-15"></a>    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#E41A1C&quot;</span>, <span class="st">&quot;#4DAF4A&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.05</span>)</span>
+<span id="cb330-16"><a href="make-fun-of-the-package.html#cb330-16"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, </span>
+<span id="cb330-17"><a href="make-fun-of-the-package.html#cb330-17"></a>    <span class="dt">bg.col =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;white&quot;</span>), <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="st">&quot;#EEEEEE&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.375</span>)</span>
+<span id="cb330-18"><a href="make-fun-of-the-package.html#cb330-18"></a></span>
+<span id="cb330-19"><a href="make-fun-of-the-package.html#cb330-19"></a><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</span>
+<span id="cb330-20"><a href="make-fun-of-the-package.html#cb330-20"></a>    <span class="dt">rou1 =</span> <span class="fl">0.1</span>, <span class="dt">col =</span> <span class="st">&quot;#4DAF4A&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#EEEEEE&quot;</span>)</span>
+<span id="cb330-21"><a href="make-fun-of-the-package.html#cb330-21"></a><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</span>
+<span id="cb330-22"><a href="make-fun-of-the-package.html#cb330-22"></a>    <span class="dt">rou1 =</span> <span class="fl">0.05</span>, <span class="dt">col =</span> <span class="st">&quot;#E41A1C&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#EEEEEE&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:dartboard"></span>
-<img src="16-make-fun_files/figure-html/dartboard-1.svg" alt="A dartboard." width="384" />
+<img src="16-make-fun_files/figure-html/dartboard-1.png" alt="A dartboard." width="672" />
 <p class="caption">
 Figure 16.2: A dartboard.
 </p>
 </div>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb331-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="make-fun-of-the-package.html#cb331-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 </div>
-<div id="ba-gua-and-tai-ji" class="section level2">
+<div id="ba-gua-and-tai-ji" class="section level2" number="16.3">
 <h2><span class="header-section-number">16.3</span> Ba-Gua and Tai-Ji</h2>
 <p>The third example is <a href="https://en.wikipedia.org/wiki/Bagua">Ba-Gua</a>. The
 key functions are <code>circos.rect()</code> and <code>draw.sector()</code> (Figure <a href="make-fun-of-the-package.html#fig:bagua">16.3</a>).</p>
@@ -382,60 +404,60 @@ generated. In real world, Taiji can represent all phenomenon that is of
 dualism. Such as male and female, correct and wrong. However things would
 change, good thing would become bad thing as time goes by, and bad thing would
 also turn into good according to how you look at the world.</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb332-1" data-line-number="1">factors =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">8</span></a>
-<a class="sourceLine" id="cb332-2" data-line-number="2"><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="fl">22.5</span>, <span class="dt">gap.degree =</span> <span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb332-3" data-line-number="3"><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb332-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb332-5" data-line-number="5"><span class="co"># yang yao is __ (a long segment)</span></a>
-<a class="sourceLine" id="cb332-6" data-line-number="6">add_yang_yao =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb332-7" data-line-number="7">    <span class="kw">circos.rect</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb332-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb332-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb332-10" data-line-number="10"><span class="co"># yin yao is -- (two short segments)</span></a>
-<a class="sourceLine" id="cb332-11" data-line-number="11">add_yin_yao =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb332-12" data-line-number="12">    <span class="kw">circos.rect</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.45</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb332-13" data-line-number="13">    <span class="kw">circos.rect</span>(<span class="fl">0.55</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb332-14" data-line-number="14">}</a>
-<a class="sourceLine" id="cb332-15" data-line-number="15"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.border =</span> <span class="ot">NA</span>,</a>
-<a class="sourceLine" id="cb332-16" data-line-number="16">    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
-<a class="sourceLine" id="cb332-17" data-line-number="17">        i =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.numeric.index&quot;</span>)</a>
-<a class="sourceLine" id="cb332-18" data-line-number="18">        <span class="cf">if</span>(i <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>)) <span class="kw">add_yang_yao</span>() <span class="cf">else</span> <span class="kw">add_yin_yao</span>()</a>
-<a class="sourceLine" id="cb332-19" data-line-number="19">}, <span class="dt">track.height =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb332-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb332-21" data-line-number="21"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.border =</span> <span class="ot">NA</span>,</a>
-<a class="sourceLine" id="cb332-22" data-line-number="22">    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
-<a class="sourceLine" id="cb332-23" data-line-number="23">        i =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.numeric.index&quot;</span>)</a>
-<a class="sourceLine" id="cb332-24" data-line-number="24">        <span class="cf">if</span>(i <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)) <span class="kw">add_yang_yao</span>() <span class="cf">else</span> <span class="kw">add_yin_yao</span>()</a>
-<a class="sourceLine" id="cb332-25" data-line-number="25">    }, <span class="dt">track.height =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb332-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb332-27" data-line-number="27"><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.border =</span> <span class="ot">NA</span>, </a>
-<a class="sourceLine" id="cb332-28" data-line-number="28">    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
-<a class="sourceLine" id="cb332-29" data-line-number="29">        i =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.numeric.index&quot;</span>)</a>
-<a class="sourceLine" id="cb332-30" data-line-number="30">        <span class="cf">if</span>(i <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)) <span class="kw">add_yang_yao</span>() <span class="cf">else</span> <span class="kw">add_yin_yao</span>()</a>
-<a class="sourceLine" id="cb332-31" data-line-number="31">    }, <span class="dt">track.height =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb332-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb332-33" data-line-number="33"><span class="co"># the bottom of the most recent track</span></a>
-<a class="sourceLine" id="cb332-34" data-line-number="34">r =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.bottom.radius&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.1</span></a>
-<a class="sourceLine" id="cb332-35" data-line-number="35"><span class="co"># draw taiji, note default order is clock wise for `draw.sector`</span></a>
-<a class="sourceLine" id="cb332-36" data-line-number="36"><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">90</span>, <span class="dt">end.degree =</span> <span class="dv">-90</span>,</a>
-<a class="sourceLine" id="cb332-37" data-line-number="37">    <span class="dt">rou1 =</span> r, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb332-38" data-line-number="38"><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">270</span>, <span class="dt">end.degree =</span> <span class="dv">90</span>,</a>
-<a class="sourceLine" id="cb332-39" data-line-number="39">    <span class="dt">rou1 =</span> r, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb332-40" data-line-number="40"><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</a>
-<a class="sourceLine" id="cb332-41" data-line-number="41">    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</a>
-<a class="sourceLine" id="cb332-42" data-line-number="42"><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span>r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</a>
-<a class="sourceLine" id="cb332-43" data-line-number="43">    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb332-44" data-line-number="44"><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</a>
-<a class="sourceLine" id="cb332-45" data-line-number="45">    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">8</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb332-46" data-line-number="46"><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span>r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</a>
-<a class="sourceLine" id="cb332-47" data-line-number="47">    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">8</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="make-fun-of-the-package.html#cb332-1"></a>factors =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">8</span></span>
+<span id="cb332-2"><a href="make-fun-of-the-package.html#cb332-2"></a><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="fl">22.5</span>, <span class="dt">gap.degree =</span> <span class="dv">6</span>)</span>
+<span id="cb332-3"><a href="make-fun-of-the-package.html#cb332-3"></a><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb332-4"><a href="make-fun-of-the-package.html#cb332-4"></a></span>
+<span id="cb332-5"><a href="make-fun-of-the-package.html#cb332-5"></a><span class="co"># yang yao is __ (a long segment)</span></span>
+<span id="cb332-6"><a href="make-fun-of-the-package.html#cb332-6"></a>add_yang_yao =<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb332-7"><a href="make-fun-of-the-package.html#cb332-7"></a>    <span class="kw">circos.rect</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb332-8"><a href="make-fun-of-the-package.html#cb332-8"></a>}</span>
+<span id="cb332-9"><a href="make-fun-of-the-package.html#cb332-9"></a></span>
+<span id="cb332-10"><a href="make-fun-of-the-package.html#cb332-10"></a><span class="co"># yin yao is -- (two short segments)</span></span>
+<span id="cb332-11"><a href="make-fun-of-the-package.html#cb332-11"></a>add_yin_yao =<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb332-12"><a href="make-fun-of-the-package.html#cb332-12"></a>    <span class="kw">circos.rect</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.45</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb332-13"><a href="make-fun-of-the-package.html#cb332-13"></a>    <span class="kw">circos.rect</span>(<span class="fl">0.55</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb332-14"><a href="make-fun-of-the-package.html#cb332-14"></a>}</span>
+<span id="cb332-15"><a href="make-fun-of-the-package.html#cb332-15"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.border =</span> <span class="ot">NA</span>,</span>
+<span id="cb332-16"><a href="make-fun-of-the-package.html#cb332-16"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb332-17"><a href="make-fun-of-the-package.html#cb332-17"></a>        i =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.numeric.index&quot;</span>)</span>
+<span id="cb332-18"><a href="make-fun-of-the-package.html#cb332-18"></a>        <span class="cf">if</span>(i <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>)) <span class="kw">add_yang_yao</span>() <span class="cf">else</span> <span class="kw">add_yin_yao</span>()</span>
+<span id="cb332-19"><a href="make-fun-of-the-package.html#cb332-19"></a>}, <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span>
+<span id="cb332-20"><a href="make-fun-of-the-package.html#cb332-20"></a></span>
+<span id="cb332-21"><a href="make-fun-of-the-package.html#cb332-21"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.border =</span> <span class="ot">NA</span>,</span>
+<span id="cb332-22"><a href="make-fun-of-the-package.html#cb332-22"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb332-23"><a href="make-fun-of-the-package.html#cb332-23"></a>        i =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.numeric.index&quot;</span>)</span>
+<span id="cb332-24"><a href="make-fun-of-the-package.html#cb332-24"></a>        <span class="cf">if</span>(i <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)) <span class="kw">add_yang_yao</span>() <span class="cf">else</span> <span class="kw">add_yin_yao</span>()</span>
+<span id="cb332-25"><a href="make-fun-of-the-package.html#cb332-25"></a>    }, <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span>
+<span id="cb332-26"><a href="make-fun-of-the-package.html#cb332-26"></a></span>
+<span id="cb332-27"><a href="make-fun-of-the-package.html#cb332-27"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">factors =</span> factors, <span class="dt">bg.border =</span> <span class="ot">NA</span>, </span>
+<span id="cb332-28"><a href="make-fun-of-the-package.html#cb332-28"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb332-29"><a href="make-fun-of-the-package.html#cb332-29"></a>        i =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.numeric.index&quot;</span>)</span>
+<span id="cb332-30"><a href="make-fun-of-the-package.html#cb332-30"></a>        <span class="cf">if</span>(i <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)) <span class="kw">add_yang_yao</span>() <span class="cf">else</span> <span class="kw">add_yin_yao</span>()</span>
+<span id="cb332-31"><a href="make-fun-of-the-package.html#cb332-31"></a>    }, <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span>
+<span id="cb332-32"><a href="make-fun-of-the-package.html#cb332-32"></a></span>
+<span id="cb332-33"><a href="make-fun-of-the-package.html#cb332-33"></a><span class="co"># the bottom of the most recent track</span></span>
+<span id="cb332-34"><a href="make-fun-of-the-package.html#cb332-34"></a>r =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.bottom.radius&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.1</span></span>
+<span id="cb332-35"><a href="make-fun-of-the-package.html#cb332-35"></a><span class="co"># draw taiji, note default order is clock wise for `draw.sector`</span></span>
+<span id="cb332-36"><a href="make-fun-of-the-package.html#cb332-36"></a><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">90</span>, <span class="dt">end.degree =</span> <span class="dv">-90</span>,</span>
+<span id="cb332-37"><a href="make-fun-of-the-package.html#cb332-37"></a>    <span class="dt">rou1 =</span> r, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb332-38"><a href="make-fun-of-the-package.html#cb332-38"></a><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">start.degree =</span> <span class="dv">270</span>, <span class="dt">end.degree =</span> <span class="dv">90</span>,</span>
+<span id="cb332-39"><a href="make-fun-of-the-package.html#cb332-39"></a>    <span class="dt">rou1 =</span> r, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb332-40"><a href="make-fun-of-the-package.html#cb332-40"></a><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</span>
+<span id="cb332-41"><a href="make-fun-of-the-package.html#cb332-41"></a>    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb332-42"><a href="make-fun-of-the-package.html#cb332-42"></a><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span>r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</span>
+<span id="cb332-43"><a href="make-fun-of-the-package.html#cb332-43"></a>    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb332-44"><a href="make-fun-of-the-package.html#cb332-44"></a><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</span>
+<span id="cb332-45"><a href="make-fun-of-the-package.html#cb332-45"></a>    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">8</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb332-46"><a href="make-fun-of-the-package.html#cb332-46"></a><span class="kw">draw.sector</span>(<span class="dt">center =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span>r<span class="op">/</span><span class="dv">2</span>), <span class="dt">start.degree =</span> <span class="dv">0</span>, <span class="dt">end.degree =</span> <span class="dv">360</span>,</span>
+<span id="cb332-47"><a href="make-fun-of-the-package.html#cb332-47"></a>    <span class="dt">rou1 =</span> r<span class="op">/</span><span class="dv">8</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:bagua"></span>
-<img src="16-make-fun_files/figure-html/bagua-1.svg" alt="Ba-Gua and Tai-Ji." width="384" />
+<img src="16-make-fun_files/figure-html/bagua-1.png" alt="Ba-Gua and Tai-Ji." width="672" />
 <p class="caption">
 Figure 16.3: Ba-Gua and Tai-Ji.
 </p>
 </div>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" data-line-number="1"><span class="kw">circos.clear</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="make-fun-of-the-package.html#cb333-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 
 </div>
 </div>

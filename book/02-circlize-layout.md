@@ -17,7 +17,7 @@ are ranges of data in that cell. **circlize** knows which cell you are in and
 does all the transformations automatically.
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/coordinate-transformation-1.svg" alt="Transformation between different coordinates" width="768" />
+<img src="02-circlize-layout_files/figure-html/coordinate-transformation-1.png" alt="Transformation between different coordinates" width="768" />
 <p class="caption">(\#fig:coordinate-transformation)Transformation between different coordinates</p>
 </div>
 
@@ -35,7 +35,7 @@ Graphics can be added at any time as long as the tracks are created.
 Details are shown in Figure \@ref(fig:circlize-order) and as follows:
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/circlize-order-1.svg" alt="Order of drawing circular layout." width="768" />
+<img src="02-circlize-layout_files/figure-html/circlize-order-1.png" alt="Order of drawing circular layout." width="768" />
 <p class="caption">(\#fig:circlize-order)Order of drawing circular layout.</p>
 </div>
 
@@ -48,18 +48,18 @@ Details are shown in Figure \@ref(fig:circlize-order) and as follows:
    of the track can you add other graphics on it. There are three ways to add
    graphics in cells.
 
-       - After the creation of the track, use low-level graphic function like
-         `circos.points()`, `circos.lines()`, ... to add graphics cell by
-         cell. It always involves a `for` loop and you need to subset the data
-         by the categorical variable manually.
-       - Use `circos.trackPoints()`, `circos.trackLines()`, ... to add
-         simple graphics through all cells simultaneously.
-       - Use `panel.fun` argument in `circos.track()` to add graphics
-         immediately after the creation of a certain cell. `panel.fun` needs
-         two arguments `x` and `y` which are x values and y values that are in
-         the current cell. This subset operation is applied automatically.
-         This is the most recommended way. Section \@ref(panel-fun) gives
-         detailed explanation of using `panel.fun` argument.
+   - After the creation of the track, use low-level graphic function like
+     `circos.points()`, `circos.lines()`, ... to add graphics cell by
+     cell. It always involves a `for` loop and you need to subset the data
+     by the categorical variable manually.
+   - Use `circos.trackPoints()`, `circos.trackLines()`, ... to add
+     simple graphics through all cells simultaneously.
+   - Use `panel.fun` argument in `circos.track()` to add graphics
+     immediately after the creation of a certain cell. `panel.fun` needs
+     two arguments `x` and `y` which are x values and y values that are in
+     the current cell. This subset operation is applied automatically.
+     This is the most recommended way. Section \@ref(panel-fun) gives
+     detailed explanation of using `panel.fun` argument.
         
 3. Repeat step 2 to add more tracks on the circle unless it reaches the center
    of the circle.
@@ -152,7 +152,7 @@ can be thought as an imaginary plotting region for data points. In this
 section, we introduce how to set data ranges on x and y directions in cells.
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/circlize-coordinate-1.svg" alt="Sectors and tracks in circular layout." width="384" />
+<img src="02-circlize-layout_files/figure-html/circlize-coordinate-1.png" alt="Sectors and tracks in circular layout." width="384" />
 <p class="caption">(\#fig:circlize-coordinate)Sectors and tracks in circular layout.</p>
 </div>
 
@@ -197,7 +197,7 @@ circos.initialize(factors = f2, xlim = c(0, 1))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/circlize-factor-1.svg" alt="Different sector orders." width="768" />
+<img src="02-circlize-layout_files/figure-html/circlize-factor-1.png" alt="Different sector orders." width="768" />
 <p class="caption">(\#fig:circlize-factor)Different sector orders.</p>
 </div>
 
@@ -245,7 +245,7 @@ also you do not need to consider you are in the circle. Just pretending it is
 normal rectangle region with its own coordinate.
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/circlize-direction-1.svg" alt="Sector directions." width="768" />
+<img src="02-circlize-layout_files/figure-html/circlize-direction-1.png" alt="Sector directions." width="768" />
 <p class="caption">(\#fig:circlize-direction)Sector directions.</p>
 </div>
 
@@ -312,7 +312,7 @@ modified before the initialization of the circular layout.
   always from inside to outside in the circle.**
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/circlize-region-1.svg" alt="Regions in a cell." width="384" />
+<img src="02-circlize-layout_files/figure-html/circlize-region-1.png" alt="Regions in a cell." width="384" />
 <p class="caption">(\#fig:circlize-region)Regions in a cell.</p>
 </div>
 
@@ -701,7 +701,7 @@ circos.track(ylim = c(0, 1), track.height = uh(1, "inches"),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="02-circlize-layout_files/figure-html/unit-convert-1.svg" alt="Setting absolute units" width="576" />
+<img src="02-circlize-layout_files/figure-html/unit-convert-1.png" alt="Setting absolute units" width="576" />
 <p class="caption">(\#fig:unit-convert)Setting absolute units</p>
 </div>
 

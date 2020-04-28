@@ -1,5 +1,4 @@
 bookdown::gitbook:
-  dev: svg
   css: style.css
   config:
     toc:

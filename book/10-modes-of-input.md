@@ -226,7 +226,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-modes-of-input_files/figure-html/genomic-application-points-1.svg" alt="Add points under different modes." width="672" />
+<img src="10-modes-of-input_files/figure-html/genomic-application-points-1.png" alt="Add points under different modes." width="672" />
 <p class="caption">(\#fig:genomic-application-points)Add points under different modes.</p>
 </div>
 
@@ -342,7 +342,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-modes-of-input_files/figure-html/genomic-application-lines-1.svg" alt="Add lines under different modes." width="672" />
+<img src="10-modes-of-input_files/figure-html/genomic-application-lines-1.png" alt="Add lines under different modes." width="672" />
 <p class="caption">(\#fig:genomic-application-lines)Add lines under different modes.</p>
 </div>
 
@@ -427,6 +427,6 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-modes-of-input_files/figure-html/genomic-application-rect-1.svg" alt="Add rectangles under different modes." width="672" />
+<img src="10-modes-of-input_files/figure-html/genomic-application-rect-1.png" alt="Add rectangles under different modes." width="672" />
 <p class="caption">(\#fig:genomic-application-rect)Add rectangles under different modes.</p>
 </div>

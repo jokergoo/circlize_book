@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 Nested zooming | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 Nested zooming | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="high-level-genomic-functions.html"/>
 <link rel="next" href="the-chorddiagram-function.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,27 +53,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -81,9 +81,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -134,11 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="part"><span><b>I General Functionality</b></span></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#principle-of-design"><i class="fa fa-check"></i><b>1.1</b> Principle of design</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#a-qiuck-glance"><i class="fa fa-check"></i><b>1.2</b> A quick glance</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a><ul>
+<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="circular-layout.html"><a href="circular-layout.html#coordinate-transformation"><i class="fa fa-check"></i><b>2.1</b> Coordinate transformation</a></li>
 <li class="chapter" data-level="2.2" data-path="circular-layout.html"><a href="circular-layout.html#rules-for-making-the-circular-plot"><i class="fa fa-check"></i><b>2.2</b> Rules for making the circular plot</a></li>
 <li class="chapter" data-level="2.3" data-path="circular-layout.html"><a href="circular-layout.html#sectors-and-tracks"><i class="fa fa-check"></i><b>2.3</b> Sectors and tracks</a></li>
@@ -146,13 +148,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="circular-layout.html"><a href="circular-layout.html#create-plotting-regions"><i class="fa fa-check"></i><b>2.5</b> Create plotting regions</a></li>
 <li class="chapter" data-level="2.6" data-path="circular-layout.html"><a href="circular-layout.html#update-plotting-regions"><i class="fa fa-check"></i><b>2.6</b> Update plotting regions</a></li>
 <li class="chapter" data-level="2.7" data-path="circular-layout.html"><a href="circular-layout.html#panel-fun"><i class="fa fa-check"></i><b>2.7</b> <code>panel.fun</code> argument</a></li>
-<li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a><ul>
+<li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
+<ul>
 <li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
 <li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The convert functions</a></li>
 <li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a><ul>
+<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>3.1</b> Points</a></li>
 <li class="chapter" data-level="3.2" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>3.2</b> Lines</a></li>
 <li class="chapter" data-level="3.3" data-path="graphics.html"><a href="graphics.html#segments"><i class="fa fa-check"></i><b>3.3</b> Segments</a></li>
@@ -166,24 +170,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.11</b> Work together with the base graphic system</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
-<li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a><ul>
+<li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="high-level-plots.html"><a href="high-level-plots.html#circular-barplot"><i class="fa fa-check"></i><b>5.1</b> Circular barplots</a></li>
 <li class="chapter" data-level="5.2" data-path="high-level-plots.html"><a href="high-level-plots.html#histograms"><i class="fa fa-check"></i><b>5.2</b> Histograms</a></li>
 <li class="chapter" data-level="5.3" data-path="high-level-plots.html"><a href="high-level-plots.html#phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Phylogenetic trees</a></li>
 <li class="chapter" data-level="5.4" data-path="high-level-plots.html"><a href="high-level-plots.html#heatmaps"><i class="fa fa-check"></i><b>5.4</b> Heatmaps</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>6</b> Advanced layout</a><ul>
+<li class="chapter" data-level="6" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>6</b> Advanced layout</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="advanced-layout.html"><a href="advanced-layout.html#zooming-of-sectors"><i class="fa fa-check"></i><b>6.1</b> Zooming of sectors</a></li>
 <li class="chapter" data-level="6.2" data-path="advanced-layout.html"><a href="advanced-layout.html#part-circle"><i class="fa fa-check"></i><b>6.2</b> Visualize part of the circle</a></li>
 <li class="chapter" data-level="6.3" data-path="advanced-layout.html"><a href="advanced-layout.html#combine-circular-plots"><i class="fa fa-check"></i><b>6.3</b> Combine multiple circular plots</a></li>
 <li class="chapter" data-level="6.4" data-path="advanced-layout.html"><a href="advanced-layout.html#arrange-multiple-plots"><i class="fa fa-check"></i><b>6.4</b> Arrange multiple plots</a></li>
 </ul></li>
 <li class="part"><span><b>II Applications in Genomics</b></span></li>
-<li class="chapter" data-level="7" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>7</b> Introduction</a><ul>
+<li class="chapter" data-level="7" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>7</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="genomic-introduction.html"><a href="genomic-introduction.html#input-data"><i class="fa fa-check"></i><b>7.1</b> Input data</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>8</b> Initialize with genomic data</a><ul>
-<li class="chapter" data-level="8.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>8.1</b> Initialize with cytoband data</a><ul>
+<li class="chapter" data-level="8" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>8</b> Initialize with genomic data</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>8.1</b> Initialize with cytoband data</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>8.1.1</b> Basic usage</a></li>
 <li class="chapter" data-level="8.1.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#pre-defined-tracks"><i class="fa fa-check"></i><b>8.1.2</b> Pre-defined tracks</a></li>
 <li class="chapter" data-level="8.1.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#other-general-settings"><i class="fa fa-check"></i><b>8.1.3</b> Other general settings</a></li>
@@ -192,7 +201,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>8.3</b> Initialize with general genomic category</a></li>
 <li class="chapter" data-level="8.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>8.4</b> Zooming chromosomes</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>9</b> Create plotting regions for genomic data</a><ul>
+<li class="chapter" data-level="9" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>9</b> Create plotting regions for genomic data</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-points"><i class="fa fa-check"></i><b>9.1</b> Points</a></li>
 <li class="chapter" data-level="9.2" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-lines"><i class="fa fa-check"></i><b>9.2</b> Lines</a></li>
 <li class="chapter" data-level="9.3" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-text"><i class="fa fa-check"></i><b>9.3</b> Text</a></li>
@@ -200,43 +210,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-links"><i class="fa fa-check"></i><b>9.5</b> Links</a></li>
 <li class="chapter" data-level="9.6" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#mixed-use-of-general-circlize-functions"><i class="fa fa-check"></i><b>9.6</b> Mixed use of general circlize functions</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>10</b> modes for <code>circos.genomicTrack()</code></a><ul>
-<li class="chapter" data-level="10.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>10.1</b> Normal mode</a><ul>
+<li class="chapter" data-level="10" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>10</b> modes for <code>circos.genomicTrack()</code></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>10.1</b> Normal mode</a>
+<ul>
 <li class="chapter" data-level="10.1.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame"><i class="fa fa-check"></i><b>10.1.1</b> Input is a data frame</a></li>
 <li class="chapter" data-level="10.1.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames"><i class="fa fa-check"></i><b>10.1.2</b> Input is a list of data frames</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>10.2</b> Stack mode</a><ul>
+<li class="chapter" data-level="10.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>10.2</b> Stack mode</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame-1"><i class="fa fa-check"></i><b>10.2.1</b> Input is a data frame</a></li>
 <li class="chapter" data-level="10.2.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames-1"><i class="fa fa-check"></i><b>10.2.2</b> Input is a list of data frames</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>10.3</b> Applications</a><ul>
+<li class="chapter" data-level="10.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>10.3</b> Applications</a>
+<ul>
 <li class="chapter" data-level="10.3.1" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-points"><i class="fa fa-check"></i><b>10.3.1</b> Points</a></li>
 <li class="chapter" data-level="10.3.2" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-lines"><i class="fa fa-check"></i><b>10.3.2</b> Lines</a></li>
 <li class="chapter" data-level="10.3.3" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-rectangles"><i class="fa fa-check"></i><b>10.3.3</b> Rectangles</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>11</b> High-level genomic functions</a><ul>
+<li class="chapter" data-level="11" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>11</b> High-level genomic functions</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>11.1</b> Ideograms</a></li>
 <li class="chapter" data-level="11.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>11.2</b> Heatmaps</a></li>
 <li class="chapter" data-level="11.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>11.3</b> Labels</a></li>
 <li class="chapter" data-level="11.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>11.4</b> Genomic axes</a></li>
 <li class="chapter" data-level="11.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>11.5</b> Genomic density and Rainfall plot</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>12</b> Nested zooming</a><ul>
+<li class="chapter" data-level="12" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>12</b> Nested zooming</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="nested-zooming.html"><a href="nested-zooming.html#basic-idea"><i class="fa fa-check"></i><b>12.1</b> Basic idea</a></li>
 <li class="chapter" data-level="12.2" data-path="nested-zooming.html"><a href="nested-zooming.html#visualization-of-dmrs-from-tagmentation-based-wgbs"><i class="fa fa-check"></i><b>12.2</b> Visualization of DMRs from tagmentation-based WGBS</a></li>
 </ul></li>
 <li class="part"><span><b>III Visualize Relations</b></span></li>
-<li class="chapter" data-level="13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>13</b> The <code>chordDiagram()</code> function</a><ul>
+<li class="chapter" data-level="13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>13</b> The <code>chordDiagram()</code> function</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>13.1</b> Basic usage</a></li>
 <li class="chapter" data-level="13.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>13.2</b> Adjust by <code>circos.par()</code></a></li>
-<li class="chapter" data-level="13.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>13.3</b> Colors</a><ul>
+<li class="chapter" data-level="13.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>13.3</b> Colors</a>
+<ul>
 <li class="chapter" data-level="13.3.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#set-grid-colors"><i class="fa fa-check"></i><b>13.3.1</b> Set grid colors</a></li>
 <li class="chapter" data-level="13.3.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-color"><i class="fa fa-check"></i><b>13.3.2</b> Set link colors</a></li>
 </ul></li>
 <li class="chapter" data-level="13.4" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-border"><i class="fa fa-check"></i><b>13.4</b> Link border</a></li>
 <li class="chapter" data-level="13.5" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#highlight-links"><i class="fa fa-check"></i><b>13.5</b> Highlight links</a></li>
-<li class="chapter" data-level="13.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>13.6</b> Orders of links</a><ul>
+<li class="chapter" data-level="13.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>13.6</b> Orders of links</a>
+<ul>
 <li class="chapter" data-level="13.6.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-positions-on-sectors"><i class="fa fa-check"></i><b>13.6.1</b> Orders of positions on sectors</a></li>
 <li class="chapter" data-level="13.6.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#order-of-adding-links"><i class="fa fa-check"></i><b>13.6.2</b> Order of adding links</a></li>
 </ul></li>
@@ -245,12 +264,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.9" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#directional-relations"><i class="fa fa-check"></i><b>13.9</b> Directional relations</a></li>
 <li class="chapter" data-level="13.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#scaling"><i class="fa fa-check"></i><b>13.10</b> Scaling</a></li>
 <li class="chapter" data-level="13.11" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>13.11</b> Reduce</a></li>
-<li class="chapter" data-level="13.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>13.12</b> Input as a data frame</a><ul>
+<li class="chapter" data-level="13.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>13.12</b> Input as a data frame</a>
+<ul>
 <li class="chapter" data-level="13.12.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#multiple-links"><i class="fa fa-check"></i><b>13.12.1</b> Multiple links</a></li>
 <li class="chapter" data-level="13.12.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#unequal-width-of-the-link-ends"><i class="fa fa-check"></i><b>13.12.2</b> Unequal width of the link ends</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>14</b> Advanced usage of <code>chordDiagram()</code></a><ul>
+<li class="chapter" data-level="14" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>14</b> Advanced usage of <code>chordDiagram()</code></a>
+<ul>
 <li class="chapter" data-level="14.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>14.1</b> Organization of tracks</a></li>
 <li class="chapter" data-level="14.2" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-labels"><i class="fa fa-check"></i><b>14.2</b> Customize sector labels</a></li>
 <li class="chapter" data-level="14.3" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-axes"><i class="fa fa-check"></i><b>14.3</b> Customize sector axes</a></li>
@@ -260,7 +281,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>15</b> A complex example of Chord diagram</a></li>
 <li class="part"><span><b>IV Others</b></span></li>
-<li class="chapter" data-level="16" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>16</b> Make fun of the package</a><ul>
+<li class="chapter" data-level="16" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>16</b> Make fun of the package</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>16.1</b> A clock</a></li>
 <li class="chapter" data-level="16.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>16.2</b> A dartboard</a></li>
 <li class="chapter" data-level="16.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>16.3</b> Ba-Gua and Tai-Ji</a></li>
@@ -285,9 +307,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="nested-zooming" class="section level1">
+<div id="nested-zooming" class="section level1" number="12">
 <h1><span class="header-section-number">Chapter 12</span> Nested zooming</h1>
-<div id="basic-idea" class="section level2">
+<div id="basic-idea" class="section level2" number="12.1">
 <h2><span class="header-section-number">12.1</span> Basic idea</h2>
 <p>In Section <a href="advanced-layout.html#zooming-of-sectors">6.1</a> we introduced how to zoom sectors to the same circle
 in the same track. This works fine if there are only a few regions that need to be zoomed.
@@ -295,38 +317,38 @@ However, when the regions that need to be zoomed is too many, the method will no
 In this chapter, we introduce another zooming method which puts zoomed regions in a different
 circular plot.</p>
 <p>To illustrate the basic idea, we first generate a random data set.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb200-2" data-line-number="2">df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">cate =</span> <span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>], <span class="dv">400</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb200-3" data-line-number="3">                <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">400</span>),</a>
-<a class="sourceLine" id="cb200-4" data-line-number="4">                <span class="dt">y =</span> <span class="kw">runif</span>(<span class="dv">400</span>),</a>
-<a class="sourceLine" id="cb200-5" data-line-number="5">                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb200-6" data-line-number="6">df =<span class="st"> </span>df[<span class="kw">order</span>(df[[<span class="dv">1</span>]], df[[<span class="dv">2</span>]]), ]</a>
-<a class="sourceLine" id="cb200-7" data-line-number="7"><span class="kw">rownames</span>(df) =<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb200-8" data-line-number="8">df<span class="op">$</span>interval_x =<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">cut</span>(df<span class="op">$</span>x, <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>)))</a>
-<a class="sourceLine" id="cb200-9" data-line-number="9">df<span class="op">$</span>name =<span class="st"> </span><span class="kw">paste</span>(df<span class="op">$</span>cate, df<span class="op">$</span>interval_x, <span class="dt">sep =</span> <span class="st">&quot;:&quot;</span>)</a>
-<a class="sourceLine" id="cb200-10" data-line-number="10">df<span class="op">$</span>start =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">((</span><span class="ch">\\</span><span class="st">d(</span><span class="ch">\\</span><span class="st">.</span><span class="ch">\\</span><span class="st">d)?).*(</span><span class="ch">\\</span><span class="st">d(</span><span class="ch">\\</span><span class="st">.</span><span class="ch">\\</span><span class="st">d)?)]&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, df<span class="op">$</span>interval_x))</a>
-<a class="sourceLine" id="cb200-11" data-line-number="11">df<span class="op">$</span>end =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">((</span><span class="ch">\\</span><span class="st">d(</span><span class="ch">\\</span><span class="st">.</span><span class="ch">\\</span><span class="st">d)?),(</span><span class="ch">\\</span><span class="st">d(</span><span class="ch">\\</span><span class="st">.</span><span class="ch">\\</span><span class="st">d)?)]$&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">3&quot;</span>, df<span class="op">$</span>interval_x))</a>
-<a class="sourceLine" id="cb200-12" data-line-number="12">nm =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">unique</span>(df<span class="op">$</span>name), <span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb200-13" data-line-number="13">df2 =<span class="st"> </span>df[df<span class="op">$</span>name <span class="op">%in%</span><span class="st"> </span>nm, ]</a>
-<a class="sourceLine" id="cb200-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb200-15" data-line-number="15">correspondance =<span class="st"> </span><span class="kw">unique</span>(df2[, <span class="kw">c</span>(<span class="st">&quot;cate&quot;</span>, <span class="st">&quot;start&quot;</span>, <span class="st">&quot;end&quot;</span>, <span class="st">&quot;name&quot;</span>, <span class="st">&quot;start&quot;</span>, <span class="st">&quot;end&quot;</span>)])</a>
-<a class="sourceLine" id="cb200-16" data-line-number="16">zoom_sector =<span class="st"> </span><span class="kw">unique</span>(df2[, <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;start&quot;</span>, <span class="st">&quot;end&quot;</span>, <span class="st">&quot;cate&quot;</span>)])</a>
-<a class="sourceLine" id="cb200-17" data-line-number="17">zoom_data =<span class="st"> </span>df2[, <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>)]</a>
-<a class="sourceLine" id="cb200-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb200-19" data-line-number="19">data =<span class="st"> </span>df[, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb200-20" data-line-number="20">sector =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">cate =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>], <span class="dt">start =</span> <span class="dv">0</span>, <span class="dt">end =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb200-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb200-22" data-line-number="22">sector_col =<span class="st"> </span><span class="kw">structure</span>(<span class="kw">rand_color</span>(<span class="dv">8</span>, <span class="dt">transparency =</span> <span class="fl">0.5</span>), <span class="dt">names =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="nested-zooming.html#cb200-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb200-2"><a href="nested-zooming.html#cb200-2"></a>df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">cate =</span> <span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>], <span class="dv">400</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb200-3"><a href="nested-zooming.html#cb200-3"></a>                <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">400</span>),</span>
+<span id="cb200-4"><a href="nested-zooming.html#cb200-4"></a>                <span class="dt">y =</span> <span class="kw">runif</span>(<span class="dv">400</span>),</span>
+<span id="cb200-5"><a href="nested-zooming.html#cb200-5"></a>                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb200-6"><a href="nested-zooming.html#cb200-6"></a>df =<span class="st"> </span>df[<span class="kw">order</span>(df[[<span class="dv">1</span>]], df[[<span class="dv">2</span>]]), ]</span>
+<span id="cb200-7"><a href="nested-zooming.html#cb200-7"></a><span class="kw">rownames</span>(df) =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb200-8"><a href="nested-zooming.html#cb200-8"></a>df<span class="op">$</span>interval_x =<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">cut</span>(df<span class="op">$</span>x, <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>)))</span>
+<span id="cb200-9"><a href="nested-zooming.html#cb200-9"></a>df<span class="op">$</span>name =<span class="st"> </span><span class="kw">paste</span>(df<span class="op">$</span>cate, df<span class="op">$</span>interval_x, <span class="dt">sep =</span> <span class="st">&quot;:&quot;</span>)</span>
+<span id="cb200-10"><a href="nested-zooming.html#cb200-10"></a>df<span class="op">$</span>start =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">((</span><span class="ch">\\</span><span class="st">d(</span><span class="ch">\\</span><span class="st">.</span><span class="ch">\\</span><span class="st">d)?).*(</span><span class="ch">\\</span><span class="st">d(</span><span class="ch">\\</span><span class="st">.</span><span class="ch">\\</span><span class="st">d)?)]&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, df<span class="op">$</span>interval_x))</span>
+<span id="cb200-11"><a href="nested-zooming.html#cb200-11"></a>df<span class="op">$</span>end =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">((</span><span class="ch">\\</span><span class="st">d(</span><span class="ch">\\</span><span class="st">.</span><span class="ch">\\</span><span class="st">d)?),(</span><span class="ch">\\</span><span class="st">d(</span><span class="ch">\\</span><span class="st">.</span><span class="ch">\\</span><span class="st">d)?)]$&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">3&quot;</span>, df<span class="op">$</span>interval_x))</span>
+<span id="cb200-12"><a href="nested-zooming.html#cb200-12"></a>nm =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">unique</span>(df<span class="op">$</span>name), <span class="dv">20</span>)</span>
+<span id="cb200-13"><a href="nested-zooming.html#cb200-13"></a>df2 =<span class="st"> </span>df[df<span class="op">$</span>name <span class="op">%in%</span><span class="st"> </span>nm, ]</span>
+<span id="cb200-14"><a href="nested-zooming.html#cb200-14"></a></span>
+<span id="cb200-15"><a href="nested-zooming.html#cb200-15"></a>correspondance =<span class="st"> </span><span class="kw">unique</span>(df2[, <span class="kw">c</span>(<span class="st">&quot;cate&quot;</span>, <span class="st">&quot;start&quot;</span>, <span class="st">&quot;end&quot;</span>, <span class="st">&quot;name&quot;</span>, <span class="st">&quot;start&quot;</span>, <span class="st">&quot;end&quot;</span>)])</span>
+<span id="cb200-16"><a href="nested-zooming.html#cb200-16"></a>zoom_sector =<span class="st"> </span><span class="kw">unique</span>(df2[, <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;start&quot;</span>, <span class="st">&quot;end&quot;</span>, <span class="st">&quot;cate&quot;</span>)])</span>
+<span id="cb200-17"><a href="nested-zooming.html#cb200-17"></a>zoom_data =<span class="st"> </span>df2[, <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>)]</span>
+<span id="cb200-18"><a href="nested-zooming.html#cb200-18"></a></span>
+<span id="cb200-19"><a href="nested-zooming.html#cb200-19"></a>data =<span class="st"> </span>df[, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span>
+<span id="cb200-20"><a href="nested-zooming.html#cb200-20"></a>sector =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">cate =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>], <span class="dt">start =</span> <span class="dv">0</span>, <span class="dt">end =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb200-21"><a href="nested-zooming.html#cb200-21"></a></span>
+<span id="cb200-22"><a href="nested-zooming.html#cb200-22"></a>sector_col =<span class="st"> </span><span class="kw">structure</span>(<span class="kw">rand_color</span>(<span class="dv">8</span>, <span class="dt">transparency =</span> <span class="fl">0.5</span>), <span class="dt">names =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>])</span></code></pre></div>
 <p>Following variables are used for downstream visualization. <code>sector</code> contains sector names
 and coordinates at the x direction:</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">head</span>(sector, <span class="dt">n =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="nested-zooming.html#cb201-1"></a><span class="kw">head</span>(sector, <span class="dt">n =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##   cate start end
 ## 1    a     0   1
 ## 2    b     0   1
 ## 3    c     0   1
 ## 4    d     0   1</code></pre>
 <p><code>data</code> contains data points for a track.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">head</span>(data, <span class="dt">n =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="nested-zooming.html#cb203-1"></a><span class="kw">head</span>(data, <span class="dt">n =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##   cate          x         y
 ## 1    a 0.02314449 0.2170480
 ## 2    a 0.03978064 0.8062479
@@ -337,14 +359,14 @@ zooming. The zoomed intervals are stored in <code>zoom_sector</code>. In the zoo
 track, each interval is treated as an independent sector, thus, the name for
 each zoomed interval uses combination of the original sector name and the
 interval itself, just for easy reading.</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="kw">head</span>(zoom_sector, <span class="dt">n =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="nested-zooming.html#cb205-1"></a><span class="kw">head</span>(zoom_sector, <span class="dt">n =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##           name start end cate
 ## 17 a:(0.4,0.6]   0.4 0.6    a
 ## 48   a:(0.8,1]   0.8 1.0    a
 ## 57   b:(0,0.2]   0.0 0.2    b
 ## 76 b:(0.4,0.6]   0.4 0.6    b</code></pre>
 <p>And the subset of data which are in the zoomed intervals.</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">head</span>(zoom_data, <span class="dt">n =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="nested-zooming.html#cb207-1"></a><span class="kw">head</span>(zoom_data, <span class="dt">n =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##           name         x         y
 ## 17 a:(0.4,0.6] 0.4072693 0.3972460
 ## 18 a:(0.4,0.6] 0.4186692 0.2021846
@@ -353,7 +375,7 @@ interval itself, just for easy reading.</p>
 <p>The correspondance between the original sectors and the zoomed intervals are
 in <code>correspondance</code>. The value is a data frame with six columns. The value is
 the position of the intervals in the second circular plot in the first plot.</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">head</span>(correspondance, <span class="dt">n =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="nested-zooming.html#cb209-1"></a><span class="kw">head</span>(correspondance, <span class="dt">n =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##    cate start end        name start.1 end.1
 ## 17    a   0.4 0.6 a:(0.4,0.6]     0.4   0.6
 ## 48    a   0.8 1.0   a:(0.8,1]     0.8   1.0
@@ -366,30 +388,30 @@ which identifies which intervals that are zoomed belong to which sector. The
 together, arranges them and automatically draws the connection lines.</p>
 <p>To define “the circular plot”, the code for generating the plot needs to be
 wrapped into a function.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1">f1 =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb211-2" data-line-number="2">    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb211-3" data-line-number="3">    <span class="kw">circos.initialize</span>(sector[, <span class="dv">1</span>], <span class="dt">xlim =</span> sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</a>
-<a class="sourceLine" id="cb211-4" data-line-number="4">    <span class="kw">circos.track</span>(data[[<span class="dv">1</span>]], <span class="dt">x =</span> data[[<span class="dv">2</span>]], <span class="dt">y =</span> data[[<span class="dv">3</span>]], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb211-5" data-line-number="5">        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
-<a class="sourceLine" id="cb211-6" data-line-number="6">            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb211-7" data-line-number="7">    })</a>
-<a class="sourceLine" id="cb211-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb211-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb211-10" data-line-number="10">f2 =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb211-11" data-line-number="11">    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">2</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb211-12" data-line-number="12">    <span class="kw">circos.initialize</span>(zoom_sector[[<span class="dv">1</span>]], <span class="dt">xlim =</span> <span class="kw">as.matrix</span>(zoom_sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]))</a>
-<a class="sourceLine" id="cb211-13" data-line-number="13">    <span class="kw">circos.track</span>(zoom_data[[<span class="dv">1</span>]], <span class="dt">x =</span> zoom_data[[<span class="dv">2</span>]], <span class="dt">y =</span> zoom_data[[<span class="dv">3</span>]], </a>
-<a class="sourceLine" id="cb211-14" data-line-number="14">        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
-<a class="sourceLine" id="cb211-15" data-line-number="15">            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb211-16" data-line-number="16">        })</a>
-<a class="sourceLine" id="cb211-17" data-line-number="17">}</a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="nested-zooming.html#cb211-1"></a>f1 =<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb211-2"><a href="nested-zooming.html#cb211-2"></a>    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">10</span>)</span>
+<span id="cb211-3"><a href="nested-zooming.html#cb211-3"></a>    <span class="kw">circos.initialize</span>(sector[, <span class="dv">1</span>], <span class="dt">xlim =</span> sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</span>
+<span id="cb211-4"><a href="nested-zooming.html#cb211-4"></a>    <span class="kw">circos.track</span>(data[[<span class="dv">1</span>]], <span class="dt">x =</span> data[[<span class="dv">2</span>]], <span class="dt">y =</span> data[[<span class="dv">3</span>]], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb211-5"><a href="nested-zooming.html#cb211-5"></a>        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb211-6"><a href="nested-zooming.html#cb211-6"></a>            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb211-7"><a href="nested-zooming.html#cb211-7"></a>    })</span>
+<span id="cb211-8"><a href="nested-zooming.html#cb211-8"></a>}</span>
+<span id="cb211-9"><a href="nested-zooming.html#cb211-9"></a></span>
+<span id="cb211-10"><a href="nested-zooming.html#cb211-10"></a>f2 =<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb211-11"><a href="nested-zooming.html#cb211-11"></a>    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">2</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb211-12"><a href="nested-zooming.html#cb211-12"></a>    <span class="kw">circos.initialize</span>(zoom_sector[[<span class="dv">1</span>]], <span class="dt">xlim =</span> <span class="kw">as.matrix</span>(zoom_sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]))</span>
+<span id="cb211-13"><a href="nested-zooming.html#cb211-13"></a>    <span class="kw">circos.track</span>(zoom_data[[<span class="dv">1</span>]], <span class="dt">x =</span> zoom_data[[<span class="dv">2</span>]], <span class="dt">y =</span> zoom_data[[<span class="dv">3</span>]], </span>
+<span id="cb211-14"><a href="nested-zooming.html#cb211-14"></a>        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb211-15"><a href="nested-zooming.html#cb211-15"></a>            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb211-16"><a href="nested-zooming.html#cb211-16"></a>        })</span>
+<span id="cb211-17"><a href="nested-zooming.html#cb211-17"></a>}</span></code></pre></div>
 <p>In above, <code>f1()</code> is the code for generating the original plot and <code>f2()</code> is
 the code for generating the zoomed plot. They can be executed independently.</p>
 <p>To combine the two plots, simply put <code>f1()</code>, <code>f2()</code> and <code>corresponance</code> to
 <code>circos.nested()</code> (Figure <a href="nested-zooming.html#fig:nested-normal">12.1</a>).</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1"><span class="kw">circos.nested</span>(f1, f2, correspondance)</a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="nested-zooming.html#cb212-1"></a><span class="kw">circos.nested</span>(f1, f2, correspondance)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:nested-normal"></span>
-<img src="12-nested-zooming_files/figure-html/nested-normal-1.svg" alt="Nested zooming between two circular plots." width="384" />
+<img src="12-nested-zooming_files/figure-html/nested-normal-1.png" alt="Nested zooming between two circular plots." width="672" />
 <p class="caption">
 Figure 12.1: Nested zooming between two circular plots.
 </p>
@@ -399,9 +421,9 @@ degree for the second plot is automatically adjusted.</p>
 <p>Zoomed circle can also be put outside by swtiching <code>f1()</code> and <code>f2()</code>.
 Actually, for <code>circos.nested()</code>, It doesn’t care which one is zoomed or not,
 they are just two circular plots and a correspondance (Figure <a href="nested-zooming.html#fig:nested2">12.2</a>).</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="kw">circos.nested</span>(f2, f1, correspondance[, <span class="kw">c</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)])</a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="nested-zooming.html#cb213-1"></a><span class="kw">circos.nested</span>(f2, f1, correspondance[, <span class="kw">c</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)])</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:nested2"></span>
-<img src="12-nested-zooming_files/figure-html/nested2-1.svg" alt="Nested zooming between two circular plots, zoomed plot is put outside." width="384" />
+<img src="12-nested-zooming_files/figure-html/nested2-1.png" alt="Nested zooming between two circular plots, zoomed plot is put outside." width="672" />
 <p class="caption">
 Figure 12.2: Nested zooming between two circular plots, zoomed plot is put outside.
 </p>
@@ -414,7 +436,7 @@ value should be set to the second plot.</li>
 <li>By default the start degree of the second plot is automatically adjusted to
 make the difference between the original positions and zoomed sectors to a
 minimal. However, users can also manually adjusted the start degree for the
-second plot by setting <code>circos.par(&quot;start.degree&quot; = ...)</code> and
+second plot by setting <code>circos.par("start.degree" = ...)</code> and
 <code>adjust_start_degree</code> must be set to <code>TRUE</code> in <code>circos.nested()</code>.</li>
 <li>Since the function needs to know some information for the two circular
 plots, do not put <code>circos.clear()</code> at the end of each plot. They will be
@@ -422,46 +444,46 @@ added internally.</li>
 </ol>
 <p><code>f1()</code> and <code>f2()</code> are just normal code for implementing circular plot. There is no problem
 to make it more complex (Figure <a href="nested-zooming.html#fig:nested-complex">12.3</a>).</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1">sector_col =<span class="st"> </span><span class="kw">structure</span>(<span class="kw">rand_color</span>(<span class="dv">8</span>, <span class="dt">transparency =</span> <span class="fl">0.5</span>), <span class="dt">names =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>])</a>
-<a class="sourceLine" id="cb214-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb214-3" data-line-number="3">f1 =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb214-4" data-line-number="4">    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb214-5" data-line-number="5">    <span class="kw">circos.initialize</span>(sector[, <span class="dv">1</span>], <span class="dt">xlim =</span> sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</a>
-<a class="sourceLine" id="cb214-6" data-line-number="6">    <span class="kw">circos.track</span>(data[[<span class="dv">1</span>]], <span class="dt">x =</span> data[[<span class="dv">2</span>]], <span class="dt">y =</span> data[[<span class="dv">3</span>]], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb214-7" data-line-number="7">        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
-<a class="sourceLine" id="cb214-8" data-line-number="8">            l =<span class="st"> </span>correspondance[[<span class="dv">1</span>]] <span class="op">==</span><span class="st"> </span>CELL_META<span class="op">$</span>sector.index</a>
-<a class="sourceLine" id="cb214-9" data-line-number="9">            <span class="cf">if</span>(<span class="kw">sum</span>(l)) {</a>
-<a class="sourceLine" id="cb214-10" data-line-number="10">                <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">which</span>(l)) {</a>
-<a class="sourceLine" id="cb214-11" data-line-number="11">                    <span class="kw">circos.rect</span>(correspondance[i, <span class="dv">2</span>], CELL_META<span class="op">$</span>cell.ylim[<span class="dv">1</span>],</a>
-<a class="sourceLine" id="cb214-12" data-line-number="12">                                correspondance[i, <span class="dv">3</span>], CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>],</a>
-<a class="sourceLine" id="cb214-13" data-line-number="13">                                <span class="dt">col =</span> sector_col[CELL_META<span class="op">$</span>sector.index],</a>
-<a class="sourceLine" id="cb214-14" data-line-number="14">                                <span class="dt">border =</span> sector_col[CELL_META<span class="op">$</span>sector.index])</a>
-<a class="sourceLine" id="cb214-15" data-line-number="15">                }</a>
-<a class="sourceLine" id="cb214-16" data-line-number="16">            }</a>
-<a class="sourceLine" id="cb214-17" data-line-number="17">            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb214-18" data-line-number="18">            <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ylim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), </a>
-<a class="sourceLine" id="cb214-19" data-line-number="19">                CELL_META<span class="op">$</span>sector.index, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb214-20" data-line-number="20">    })</a>
-<a class="sourceLine" id="cb214-21" data-line-number="21">}</a>
-<a class="sourceLine" id="cb214-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb214-23" data-line-number="23">f2 =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb214-24" data-line-number="24">    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">2</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb214-25" data-line-number="25">    <span class="kw">circos.initialize</span>(zoom_sector[[<span class="dv">1</span>]], <span class="dt">xlim =</span> <span class="kw">as.matrix</span>(zoom_sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]))</a>
-<a class="sourceLine" id="cb214-26" data-line-number="26">    <span class="kw">circos.track</span>(zoom_data[[<span class="dv">1</span>]], <span class="dt">x =</span> zoom_data[[<span class="dv">2</span>]], <span class="dt">y =</span> zoom_data[[<span class="dv">3</span>]], </a>
-<a class="sourceLine" id="cb214-27" data-line-number="27">        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</a>
-<a class="sourceLine" id="cb214-28" data-line-number="28">            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb214-29" data-line-number="29">        }, <span class="dt">bg.col =</span> sector_col[zoom_sector<span class="op">$</span>cate],</a>
-<a class="sourceLine" id="cb214-30" data-line-number="30">        <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb214-31" data-line-number="31">}</a>
-<a class="sourceLine" id="cb214-32" data-line-number="32"><span class="kw">circos.nested</span>(f1, f2, correspondance, <span class="dt">connection_col =</span> sector_col[correspondance[[<span class="dv">1</span>]]])</a></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="nested-zooming.html#cb214-1"></a>sector_col =<span class="st"> </span><span class="kw">structure</span>(<span class="kw">rand_color</span>(<span class="dv">8</span>, <span class="dt">transparency =</span> <span class="fl">0.5</span>), <span class="dt">names =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>])</span>
+<span id="cb214-2"><a href="nested-zooming.html#cb214-2"></a></span>
+<span id="cb214-3"><a href="nested-zooming.html#cb214-3"></a>f1 =<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb214-4"><a href="nested-zooming.html#cb214-4"></a>    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">10</span>)</span>
+<span id="cb214-5"><a href="nested-zooming.html#cb214-5"></a>    <span class="kw">circos.initialize</span>(sector[, <span class="dv">1</span>], <span class="dt">xlim =</span> sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</span>
+<span id="cb214-6"><a href="nested-zooming.html#cb214-6"></a>    <span class="kw">circos.track</span>(data[[<span class="dv">1</span>]], <span class="dt">x =</span> data[[<span class="dv">2</span>]], <span class="dt">y =</span> data[[<span class="dv">3</span>]], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb214-7"><a href="nested-zooming.html#cb214-7"></a>        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb214-8"><a href="nested-zooming.html#cb214-8"></a>            l =<span class="st"> </span>correspondance[[<span class="dv">1</span>]] <span class="op">==</span><span class="st"> </span>CELL_META<span class="op">$</span>sector.index</span>
+<span id="cb214-9"><a href="nested-zooming.html#cb214-9"></a>            <span class="cf">if</span>(<span class="kw">sum</span>(l)) {</span>
+<span id="cb214-10"><a href="nested-zooming.html#cb214-10"></a>                <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">which</span>(l)) {</span>
+<span id="cb214-11"><a href="nested-zooming.html#cb214-11"></a>                    <span class="kw">circos.rect</span>(correspondance[i, <span class="dv">2</span>], CELL_META<span class="op">$</span>cell.ylim[<span class="dv">1</span>],</span>
+<span id="cb214-12"><a href="nested-zooming.html#cb214-12"></a>                                correspondance[i, <span class="dv">3</span>], CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>],</span>
+<span id="cb214-13"><a href="nested-zooming.html#cb214-13"></a>                                <span class="dt">col =</span> sector_col[CELL_META<span class="op">$</span>sector.index],</span>
+<span id="cb214-14"><a href="nested-zooming.html#cb214-14"></a>                                <span class="dt">border =</span> sector_col[CELL_META<span class="op">$</span>sector.index])</span>
+<span id="cb214-15"><a href="nested-zooming.html#cb214-15"></a>                }</span>
+<span id="cb214-16"><a href="nested-zooming.html#cb214-16"></a>            }</span>
+<span id="cb214-17"><a href="nested-zooming.html#cb214-17"></a>            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb214-18"><a href="nested-zooming.html#cb214-18"></a>            <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ylim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">uy</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), </span>
+<span id="cb214-19"><a href="nested-zooming.html#cb214-19"></a>                CELL_META<span class="op">$</span>sector.index, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>))</span>
+<span id="cb214-20"><a href="nested-zooming.html#cb214-20"></a>    })</span>
+<span id="cb214-21"><a href="nested-zooming.html#cb214-21"></a>}</span>
+<span id="cb214-22"><a href="nested-zooming.html#cb214-22"></a></span>
+<span id="cb214-23"><a href="nested-zooming.html#cb214-23"></a>f2 =<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb214-24"><a href="nested-zooming.html#cb214-24"></a>    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">2</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb214-25"><a href="nested-zooming.html#cb214-25"></a>    <span class="kw">circos.initialize</span>(zoom_sector[[<span class="dv">1</span>]], <span class="dt">xlim =</span> <span class="kw">as.matrix</span>(zoom_sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]))</span>
+<span id="cb214-26"><a href="nested-zooming.html#cb214-26"></a>    <span class="kw">circos.track</span>(zoom_data[[<span class="dv">1</span>]], <span class="dt">x =</span> zoom_data[[<span class="dv">2</span>]], <span class="dt">y =</span> zoom_data[[<span class="dv">3</span>]], </span>
+<span id="cb214-27"><a href="nested-zooming.html#cb214-27"></a>        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb214-28"><a href="nested-zooming.html#cb214-28"></a>            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb214-29"><a href="nested-zooming.html#cb214-29"></a>        }, <span class="dt">bg.col =</span> sector_col[zoom_sector<span class="op">$</span>cate],</span>
+<span id="cb214-30"><a href="nested-zooming.html#cb214-30"></a>        <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb214-31"><a href="nested-zooming.html#cb214-31"></a>}</span>
+<span id="cb214-32"><a href="nested-zooming.html#cb214-32"></a><span class="kw">circos.nested</span>(f1, f2, correspondance, <span class="dt">connection_col =</span> sector_col[correspondance[[<span class="dv">1</span>]]])</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:nested-complex"></span>
-<img src="12-nested-zooming_files/figure-html/nested-complex-1.svg" alt="Nested zooming between two circular plots, slightly complex plots." width="384" />
+<img src="12-nested-zooming_files/figure-html/nested-complex-1.png" alt="Nested zooming between two circular plots, slightly complex plots." width="672" />
 <p class="caption">
 Figure 12.3: Nested zooming between two circular plots, slightly complex plots.
 </p>
 </div>
 </div>
-<div id="visualization-of-dmrs-from-tagmentation-based-wgbs" class="section level2">
+<div id="visualization-of-dmrs-from-tagmentation-based-wgbs" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> Visualization of DMRs from tagmentation-based WGBS</h2>
 <p><a href="http://www.nature.com/nprot/journal/v8/n10/full/nprot.2013.118.html">Tagmentation-based whole-genome bisulfite sequencing</a>
 (T-WGBS) is a technology which can examine only a minor fraction of methylome of interest.
@@ -469,20 +491,20 @@ In this section, we demonstrate how to visualize DMRs which are detected from T-
 <p>In the example data loaded, <code>tagments</code> contains regions which are sequenced,
 <code>DMR1</code> contains DMRs for one patient detectd in tagment regions. Correspondance between tagment regions
 and original genome is stored in <code>correspondance</code>.</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">load</span>(<span class="kw">system.file</span>(<span class="dt">package =</span> <span class="st">&quot;circlize&quot;</span>, <span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;tagments_WGBS_DMR.RData&quot;</span>))</a>
-<a class="sourceLine" id="cb215-2" data-line-number="2"><span class="kw">head</span>(tagments, <span class="dt">n =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="nested-zooming.html#cb215-1"></a><span class="kw">load</span>(<span class="kw">system.file</span>(<span class="dt">package =</span> <span class="st">&quot;circlize&quot;</span>, <span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;tagments_WGBS_DMR.RData&quot;</span>))</span>
+<span id="cb215-2"><a href="nested-zooming.html#cb215-2"></a><span class="kw">head</span>(tagments, <span class="dt">n =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##                   tagments     start       end  chr
 ## 1   chr1-44876009-45016546  44876009  45016546 chr1
 ## 2   chr1-90460304-90761641  90460304  90761641 chr1
 ## 3 chr1-211666507-211692757 211666507 211692757 chr1
 ## 4   chr2-46387184-46477385  46387184  46477385 chr2</code></pre>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">head</span>(DMR1, <span class="dt">n =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="nested-zooming.html#cb217-1"></a><span class="kw">head</span>(DMR1, <span class="dt">n =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##                      chr    start      end   methDiff
 ## 1 chr1-44876009-45016546 44894352 44894643 -0.2812889
 ## 2 chr1-44876009-45016546 44902069 44902966 -0.3331170
 ## 3 chr1-90460304-90761641 90535428 90536046 -0.3550701
 ## 4 chr1-90460304-90761641 90546991 90547262 -0.4310808</code></pre>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">head</span>(correspondance, <span class="dt">n =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="nested-zooming.html#cb219-1"></a><span class="kw">head</span>(correspondance, <span class="dt">n =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##    chr     start       end                 tagments   start.1     end.1
 ## 1 chr1  44876009  45016546   chr1-44876009-45016546  44876009  45016546
 ## 2 chr1  90460304  90761641   chr1-90460304-90761641  90460304  90761641
@@ -490,38 +512,38 @@ and original genome is stored in <code>correspondance</code>.</p>
 ## 4 chr2  46387184  46477385   chr2-46387184-46477385  46387184  46477385</code></pre>
 <p>In Figure <a href="nested-zooming.html#fig:dmr">12.4</a>, the tagment regions are actually zoomed from the genome. In following code,
 <code>f1()</code> only makes a circular plot with whole genome and <code>f2()</code> makes circular plot for the tagment regions.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1">chr_bg_color =<span class="st"> </span><span class="kw">rand_color</span>(<span class="dv">22</span>, <span class="dt">transparency =</span> <span class="fl">0.8</span>)</a>
-<a class="sourceLine" id="cb221-2" data-line-number="2"><span class="kw">names</span>(chr_bg_color) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>)</a>
-<a class="sourceLine" id="cb221-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb221-4" data-line-number="4">f1 =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb221-5" data-line-number="5">    <span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="dv">2</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>)</a>
-<a class="sourceLine" id="cb221-6" data-line-number="6">    <span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>), </a>
-<a class="sourceLine" id="cb221-7" data-line-number="7">        <span class="dt">plotType =</span> <span class="kw">c</span>(<span class="st">&quot;ideogram&quot;</span>, <span class="st">&quot;labels&quot;</span>), <span class="dt">ideogram.height =</span> <span class="fl">0.03</span>)</a>
-<a class="sourceLine" id="cb221-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb221-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb221-10" data-line-number="10">f2 =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb221-11" data-line-number="11">    <span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">nrow</span>(tagments)<span class="op">-</span><span class="dv">1</span>), <span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb221-12" data-line-number="12">    <span class="kw">circos.genomicInitialize</span>(tagments, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</a>
-<a class="sourceLine" id="cb221-13" data-line-number="13">    <span class="kw">circos.genomicTrack</span>(DMR1, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), </a>
-<a class="sourceLine" id="cb221-14" data-line-number="14">        <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</a>
-<a class="sourceLine" id="cb221-15" data-line-number="15">            <span class="cf">for</span>(h <span class="cf">in</span> <span class="kw">seq</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="dt">by =</span> <span class="fl">0.2</span>)) {</a>
-<a class="sourceLine" id="cb221-16" data-line-number="16">                <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(h, h), <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;#AAAAAA&quot;</span>)</a>
-<a class="sourceLine" id="cb221-17" data-line-number="17">            }</a>
-<a class="sourceLine" id="cb221-18" data-line-number="18">            <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;#888888&quot;</span>)</a>
-<a class="sourceLine" id="cb221-19" data-line-number="19">        </a>
-<a class="sourceLine" id="cb221-20" data-line-number="20">            <span class="kw">circos.genomicPoints</span>(region, value, </a>
-<a class="sourceLine" id="cb221-21" data-line-number="21">                <span class="dt">col =</span> <span class="kw">ifelse</span>(value[[<span class="dv">1</span>]] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;#E41A1C&quot;</span>, <span class="st">&quot;#377EB8&quot;</span>), </a>
-<a class="sourceLine" id="cb221-22" data-line-number="22">                <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb221-23" data-line-number="23">    }, <span class="dt">bg.col =</span> chr_bg_color[tagments<span class="op">$</span>chr], <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="fl">0.02</span>, <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb221-24" data-line-number="24">    <span class="kw">circos.yaxis</span>(<span class="dt">side =</span> <span class="st">&quot;left&quot;</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="dt">by =</span> <span class="fl">0.3</span>), </a>
-<a class="sourceLine" id="cb221-25" data-line-number="25">        <span class="dt">sector.index =</span> <span class="kw">get.all.sector.index</span>()[<span class="dv">1</span>], <span class="dt">labels.cex =</span> <span class="fl">0.4</span>)</a>
-<a class="sourceLine" id="cb221-26" data-line-number="26">    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="kw">uh</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), </a>
-<a class="sourceLine" id="cb221-27" data-line-number="27">        <span class="dt">bg.col =</span> <span class="kw">add_transparency</span>(chr_bg_color[tagments<span class="op">$</span>chr], <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb221-28" data-line-number="28">}</a>
-<a class="sourceLine" id="cb221-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb221-30" data-line-number="30"><span class="kw">circos.nested</span>(f1, f2, correspondance, <span class="dt">connection_col =</span> chr_bg_color[correspondance[[<span class="dv">1</span>]]])</a></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="nested-zooming.html#cb221-1"></a>chr_bg_color =<span class="st"> </span><span class="kw">rand_color</span>(<span class="dv">22</span>, <span class="dt">transparency =</span> <span class="fl">0.8</span>)</span>
+<span id="cb221-2"><a href="nested-zooming.html#cb221-2"></a><span class="kw">names</span>(chr_bg_color) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>)</span>
+<span id="cb221-3"><a href="nested-zooming.html#cb221-3"></a></span>
+<span id="cb221-4"><a href="nested-zooming.html#cb221-4"></a>f1 =<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb221-5"><a href="nested-zooming.html#cb221-5"></a>    <span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="dv">2</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>)</span>
+<span id="cb221-6"><a href="nested-zooming.html#cb221-6"></a>    <span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>), </span>
+<span id="cb221-7"><a href="nested-zooming.html#cb221-7"></a>        <span class="dt">plotType =</span> <span class="kw">c</span>(<span class="st">&quot;ideogram&quot;</span>, <span class="st">&quot;labels&quot;</span>), <span class="dt">ideogram.height =</span> <span class="fl">0.03</span>)</span>
+<span id="cb221-8"><a href="nested-zooming.html#cb221-8"></a>}</span>
+<span id="cb221-9"><a href="nested-zooming.html#cb221-9"></a></span>
+<span id="cb221-10"><a href="nested-zooming.html#cb221-10"></a>f2 =<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb221-11"><a href="nested-zooming.html#cb221-11"></a>    <span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">nrow</span>(tagments)<span class="op">-</span><span class="dv">1</span>), <span class="dv">10</span>))</span>
+<span id="cb221-12"><a href="nested-zooming.html#cb221-12"></a>    <span class="kw">circos.genomicInitialize</span>(tagments, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
+<span id="cb221-13"><a href="nested-zooming.html#cb221-13"></a>    <span class="kw">circos.genomicTrack</span>(DMR1, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), </span>
+<span id="cb221-14"><a href="nested-zooming.html#cb221-14"></a>        <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb221-15"><a href="nested-zooming.html#cb221-15"></a>            <span class="cf">for</span>(h <span class="cf">in</span> <span class="kw">seq</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="dt">by =</span> <span class="fl">0.2</span>)) {</span>
+<span id="cb221-16"><a href="nested-zooming.html#cb221-16"></a>                <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(h, h), <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;#AAAAAA&quot;</span>)</span>
+<span id="cb221-17"><a href="nested-zooming.html#cb221-17"></a>            }</span>
+<span id="cb221-18"><a href="nested-zooming.html#cb221-18"></a>            <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;#888888&quot;</span>)</span>
+<span id="cb221-19"><a href="nested-zooming.html#cb221-19"></a>        </span>
+<span id="cb221-20"><a href="nested-zooming.html#cb221-20"></a>            <span class="kw">circos.genomicPoints</span>(region, value, </span>
+<span id="cb221-21"><a href="nested-zooming.html#cb221-21"></a>                <span class="dt">col =</span> <span class="kw">ifelse</span>(value[[<span class="dv">1</span>]] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;#E41A1C&quot;</span>, <span class="st">&quot;#377EB8&quot;</span>), </span>
+<span id="cb221-22"><a href="nested-zooming.html#cb221-22"></a>                <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb221-23"><a href="nested-zooming.html#cb221-23"></a>    }, <span class="dt">bg.col =</span> chr_bg_color[tagments<span class="op">$</span>chr], <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="fl">0.02</span>, <span class="dv">0</span>))</span>
+<span id="cb221-24"><a href="nested-zooming.html#cb221-24"></a>    <span class="kw">circos.yaxis</span>(<span class="dt">side =</span> <span class="st">&quot;left&quot;</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="dt">by =</span> <span class="fl">0.3</span>), </span>
+<span id="cb221-25"><a href="nested-zooming.html#cb221-25"></a>        <span class="dt">sector.index =</span> <span class="kw">get.all.sector.index</span>()[<span class="dv">1</span>], <span class="dt">labels.cex =</span> <span class="fl">0.4</span>)</span>
+<span id="cb221-26"><a href="nested-zooming.html#cb221-26"></a>    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="kw">uh</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), </span>
+<span id="cb221-27"><a href="nested-zooming.html#cb221-27"></a>        <span class="dt">bg.col =</span> <span class="kw">add_transparency</span>(chr_bg_color[tagments<span class="op">$</span>chr], <span class="dv">0</span>))</span>
+<span id="cb221-28"><a href="nested-zooming.html#cb221-28"></a>}</span>
+<span id="cb221-29"><a href="nested-zooming.html#cb221-29"></a></span>
+<span id="cb221-30"><a href="nested-zooming.html#cb221-30"></a><span class="kw">circos.nested</span>(f1, f2, correspondance, <span class="dt">connection_col =</span> chr_bg_color[correspondance[[<span class="dv">1</span>]]])</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:dmr"></span>
-<img src="12-nested-zooming_files/figure-html/dmr-1.svg" alt="Visualization of DMRs." width="576" />
+<img src="12-nested-zooming_files/figure-html/dmr-1.png" alt="Visualization of DMRs." width="576" />
 <p class="caption">
 Figure 12.4: Visualization of DMRs.
 </p>

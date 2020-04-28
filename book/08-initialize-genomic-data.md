@@ -31,7 +31,7 @@ text(0, 0, "default", cex = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-default-1.svg" alt="Initialize genomic plot, default." width="672" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-default-1.png" alt="Initialize genomic plot, default." width="672" />
 <p class="caption">(\#fig:genomic-initialize-ideogram-default)Initialize genomic plot, default.</p>
 </div>
 
@@ -106,7 +106,7 @@ text(0, 0, "subset of chromosomes", cex = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-subset-1.svg" alt="Initialize genomic plot, subset chromosomes." width="672" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-subset-1.png" alt="Initialize genomic plot, subset chromosomes." width="672" />
 <p class="caption">(\#fig:genomic-initialize-ideogram-subset)Initialize genomic plot, subset chromosomes.</p>
 </div>
 
@@ -137,7 +137,7 @@ text(0, 0, "plotType = NULL", cex = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-track-1.svg" alt="Initialize genomic plot, control tracks." width="768" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-track-1.png" alt="Initialize genomic plot, control tracks." width="768" />
 <p class="caption">(\#fig:genomic-initialize-ideogram-track)Initialize genomic plot, control tracks.</p>
 </div>
 
@@ -166,7 +166,7 @@ text(0, 0, "'gap.degree' = rep(c(2, 4), 12)", cex = 1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-par-1.svg" alt="Initialize genomic plot, control layout." width="768" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-initialize-ideogram-par-1.png" alt="Initialize genomic plot, control layout." width="768" />
 <p class="caption">(\#fig:genomic-initialize-ideogram-par)Initialize genomic plot, control layout.</p>
 </div>
 
@@ -195,7 +195,7 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-html/genomic-customize-chromosome-1.svg" alt="Customize chromosome track." width="672" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-customize-chromosome-1.png" alt="Customize chromosome track." width="672" />
 <p class="caption">(\#fig:genomic-customize-chromosome)Customize chromosome track.</p>
 </div>
 
@@ -282,7 +282,7 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-html/genomic-gene-model-1.svg" alt="Circular representation of alternative transcripts for genes." width="576" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-gene-model-1.png" alt="Circular representation of alternative transcripts for genes." width="576" />
 <p class="caption">(\#fig:genomic-gene-model)Circular representation of alternative transcripts for genes.</p>
 </div>
 
@@ -359,6 +359,6 @@ circos.clear()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="08-initialize-genomic-data_files/figure-html/genomic-zoom-1.svg" alt="Zoom chromosomes." width="576" />
+<img src="08-initialize-genomic-data_files/figure-html/genomic-zoom-1.png" alt="Zoom chromosomes." width="576" />
 <p class="caption">(\#fig:genomic-zoom)Zoom chromosomes.</p>
 </div>
