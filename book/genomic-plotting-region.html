@@ -338,8 +338,8 @@ Chapter <a href="modes-of-input.html#modes-of-input">10</a>). So whenever you us
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="genomic-plotting-region.html#cb145-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)</span>
 <span id="cb145-2"><a href="genomic-plotting-region.html#cb145-2"></a><span class="kw">head</span>(bed, <span class="dt">n =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##    chr  start    end     value1     value2
-## 1 chr1 132236 181290  0.2328518 -0.8911943
-## 2 chr1 270863 416531 -0.4566452  0.4524127</code></pre>
+## 1 chr1 238855 472394 -0.7775911 -0.7133165
+## 2 chr1 478672 759427  1.3356619  0.1425588</code></pre>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="genomic-plotting-region.html#cb147-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
 <span id="cb147-2"><a href="genomic-plotting-region.html#cb147-2"></a><span class="kw">circos.genomicTrackPlotRegion</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
 <span id="cb147-3"><a href="genomic-plotting-region.html#cb147-3"></a>    <span class="cf">if</span>(CELL_META<span class="op">$</span>sector.index <span class="op">==</span><span class="st"> &quot;chr1&quot;</span>) {</span>
@@ -348,11 +348,11 @@ Chapter <a href="modes-of-input.html#modes-of-input">10</a>). So whenever you us
 <span id="cb147-6"><a href="genomic-plotting-region.html#cb147-6"></a>    }</span>
 <span id="cb147-7"><a href="genomic-plotting-region.html#cb147-7"></a>})</span></code></pre></div>
 <pre><code>##    start    end
-## 1 132236 181290
-## 2 270863 416531
+## 1 238855 472394
+## 2 478672 759427
 ##       value1     value2
-## 1  0.2328518 -0.8911943
-## 2 -0.4566452  0.4524127</code></pre>
+## 1 -0.7775911 -0.7133165
+## 2  1.3356619  0.1425588</code></pre>
 <p>Since <code>circos.genomicTrack()</code> creates a new track, it needs values to
 calculate data ranges on y direction. Users can either specify the index of
 numeric columns in <code>data</code> by <code>numeric.column</code> (named index or numeric index,
@@ -547,7 +547,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["circlize-book.pdf", "circlize-book.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }
