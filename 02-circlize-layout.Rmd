@@ -46,18 +46,18 @@ source("src/intro-02-order.R")
    of the track can you add other graphics on it. There are three ways to add
    graphics in cells.
 
-       - After the creation of the track, use low-level graphic function like
-         `circos.points()`, `circos.lines()`, ... to add graphics cell by
-         cell. It always involves a `for` loop and you need to subset the data
-         by the categorical variable manually.
-       - Use `circos.trackPoints()`, `circos.trackLines()`, ... to add
-         simple graphics through all cells simultaneously.
-       - Use `panel.fun` argument in `circos.track()` to add graphics
-         immediately after the creation of a certain cell. `panel.fun` needs
-         two arguments `x` and `y` which are x values and y values that are in
-         the current cell. This subset operation is applied automatically.
-         This is the most recommended way. Section \@ref(panel-fun) gives
-         detailed explanation of using `panel.fun` argument.
+   - After the creation of the track, use low-level graphic function like
+     `circos.points()`, `circos.lines()`, ... to add graphics cell by
+     cell. It always involves a `for` loop and you need to subset the data
+     by the categorical variable manually.
+   - Use `circos.trackPoints()`, `circos.trackLines()`, ... to add
+     simple graphics through all cells simultaneously.
+   - Use `panel.fun` argument in `circos.track()` to add graphics
+     immediately after the creation of a certain cell. `panel.fun` needs
+     two arguments `x` and `y` which are x values and y values that are in
+     the current cell. This subset operation is applied automatically.
+     This is the most recommended way. Section \@ref(panel-fun) gives
+     detailed explanation of using `panel.fun` argument.
         
 3. Repeat step 2 to add more tracks on the circle unless it reaches the center
    of the circle.
