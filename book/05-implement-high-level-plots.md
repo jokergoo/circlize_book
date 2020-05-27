@@ -207,13 +207,13 @@ generate the two matrix and perform clustring on the two matrix.
 
 
 ```r
-mat = matrix(rnorm(100*10), nrow = 10, ncol = 100)
+mat = matrix(rnorm(100*10), nrow = 100, ncol = 10)
 col_fun = colorRamp2(c(-2, 0, 2), c("green", "black", "red"))
 factors = rep(letters[1:2], times = c(30, 70))
-mat_list = list(a = mat[, factors == "a"],
-                b = mat[, factors == "b"])
-dend_list = list(a = as.dendrogram(hclust(dist(t(mat_list[["a"]])))),
-                 b = as.dendrogram(hclust(dist(t(mat_list[["b"]])))))
+mat_list = list(a = mat[factors == "a", ],
+                b = mat[factors == "b", ])
+dend_list = list(a = as.dendrogram(hclust(dist(mat_list[["a"]]))),
+                 b = as.dendrogram(hclust(dist(mat_list[["b"]]))))
 ```
 
 In the first track, columns in the matrix are adjusted by the clustering.
@@ -228,14 +228,14 @@ circos.track(ylim = c(0, 10), bg.border = NA, panel.fun = function(x, y) {
     m = mat_list[[sector.index]]
     dend = dend_list[[sector.index]]
 
-    m2 = m[, order.dendrogram(dend)]
+    m2 = m[order.dendrogram(dend), ]
     col_mat = col_fun(m2)
     nr = nrow(m2)
     nc = ncol(m2)
-    for(i in 1:nr) {
-        circos.rect(1:nc - 1, rep(nr - i, nc), 
-            1:nc, rep(nr - i + 1, nc), 
-            border = col_mat[i, ], col = col_mat[i, ])
+    for(i in 1:nc) {
+        circos.rect(1:nr - 1, rep(nc - i, nr), 
+            1:nr, rep(nc - i + 1, nr), 
+            border = col_mat[, i], col = col_mat[, i])
     }
 })
 ```

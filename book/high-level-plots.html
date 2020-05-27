@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Implement high-level circular plots | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Implement high-level circular plots | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -459,13 +459,13 @@ visualize e.g. gene expression. Heatmaps are basically composed by rectangles,
 thus, they can be implemented by <code>circos.rect()</code>.</p>
 <p>In following example, we make a circular plot with two heatmaps. First we
 generate the two matrix and perform clustring on the two matrix.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="high-level-plots.html#cb99-1"></a>mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">100</span><span class="op">*</span><span class="dv">10</span>), <span class="dt">nrow =</span> <span class="dv">10</span>, <span class="dt">ncol =</span> <span class="dv">100</span>)</span>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="high-level-plots.html#cb99-1"></a>mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">100</span><span class="op">*</span><span class="dv">10</span>), <span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">10</span>)</span>
 <span id="cb99-2"><a href="high-level-plots.html#cb99-2"></a>col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
 <span id="cb99-3"><a href="high-level-plots.html#cb99-3"></a>factors =<span class="st"> </span><span class="kw">rep</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">times =</span> <span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">70</span>))</span>
-<span id="cb99-4"><a href="high-level-plots.html#cb99-4"></a>mat_list =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> mat[, factors <span class="op">==</span><span class="st"> &quot;a&quot;</span>],</span>
-<span id="cb99-5"><a href="high-level-plots.html#cb99-5"></a>                <span class="dt">b =</span> mat[, factors <span class="op">==</span><span class="st"> &quot;b&quot;</span>])</span>
-<span id="cb99-6"><a href="high-level-plots.html#cb99-6"></a>dend_list =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="kw">as.dendrogram</span>(<span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">t</span>(mat_list[[<span class="st">&quot;a&quot;</span>]])))),</span>
-<span id="cb99-7"><a href="high-level-plots.html#cb99-7"></a>                 <span class="dt">b =</span> <span class="kw">as.dendrogram</span>(<span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">t</span>(mat_list[[<span class="st">&quot;b&quot;</span>]])))))</span></code></pre></div>
+<span id="cb99-4"><a href="high-level-plots.html#cb99-4"></a>mat_list =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> mat[factors <span class="op">==</span><span class="st"> &quot;a&quot;</span>, ],</span>
+<span id="cb99-5"><a href="high-level-plots.html#cb99-5"></a>                <span class="dt">b =</span> mat[factors <span class="op">==</span><span class="st"> &quot;b&quot;</span>, ])</span>
+<span id="cb99-6"><a href="high-level-plots.html#cb99-6"></a>dend_list =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="kw">as.dendrogram</span>(<span class="kw">hclust</span>(<span class="kw">dist</span>(mat_list[[<span class="st">&quot;a&quot;</span>]]))),</span>
+<span id="cb99-7"><a href="high-level-plots.html#cb99-7"></a>                 <span class="dt">b =</span> <span class="kw">as.dendrogram</span>(<span class="kw">hclust</span>(<span class="kw">dist</span>(mat_list[[<span class="st">&quot;b&quot;</span>]]))))</span></code></pre></div>
 <p>In the first track, columns in the matrix are adjusted by the clustering.
 Also note we use <code>circos.rect()</code> in a vectorized way.</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="high-level-plots.html#cb100-1"></a><span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">gap.degree =</span> <span class="dv">5</span>)</span>
@@ -475,14 +475,14 @@ Also note we use <code>circos.rect()</code> in a vectorized way.</p>
 <span id="cb100-5"><a href="high-level-plots.html#cb100-5"></a>    m =<span class="st"> </span>mat_list[[sector.index]]</span>
 <span id="cb100-6"><a href="high-level-plots.html#cb100-6"></a>    dend =<span class="st"> </span>dend_list[[sector.index]]</span>
 <span id="cb100-7"><a href="high-level-plots.html#cb100-7"></a></span>
-<span id="cb100-8"><a href="high-level-plots.html#cb100-8"></a>    m2 =<span class="st"> </span>m[, <span class="kw">order.dendrogram</span>(dend)]</span>
+<span id="cb100-8"><a href="high-level-plots.html#cb100-8"></a>    m2 =<span class="st"> </span>m[<span class="kw">order.dendrogram</span>(dend), ]</span>
 <span id="cb100-9"><a href="high-level-plots.html#cb100-9"></a>    col_mat =<span class="st"> </span><span class="kw">col_fun</span>(m2)</span>
 <span id="cb100-10"><a href="high-level-plots.html#cb100-10"></a>    nr =<span class="st"> </span><span class="kw">nrow</span>(m2)</span>
 <span id="cb100-11"><a href="high-level-plots.html#cb100-11"></a>    nc =<span class="st"> </span><span class="kw">ncol</span>(m2)</span>
-<span id="cb100-12"><a href="high-level-plots.html#cb100-12"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nr) {</span>
-<span id="cb100-13"><a href="high-level-plots.html#cb100-13"></a>        <span class="kw">circos.rect</span>(<span class="dv">1</span><span class="op">:</span>nc <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">rep</span>(nr <span class="op">-</span><span class="st"> </span>i, nc), </span>
-<span id="cb100-14"><a href="high-level-plots.html#cb100-14"></a>            <span class="dv">1</span><span class="op">:</span>nc, <span class="kw">rep</span>(nr <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, nc), </span>
-<span id="cb100-15"><a href="high-level-plots.html#cb100-15"></a>            <span class="dt">border =</span> col_mat[i, ], <span class="dt">col =</span> col_mat[i, ])</span>
+<span id="cb100-12"><a href="high-level-plots.html#cb100-12"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nc) {</span>
+<span id="cb100-13"><a href="high-level-plots.html#cb100-13"></a>        <span class="kw">circos.rect</span>(<span class="dv">1</span><span class="op">:</span>nr <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">rep</span>(nc <span class="op">-</span><span class="st"> </span>i, nr), </span>
+<span id="cb100-14"><a href="high-level-plots.html#cb100-14"></a>            <span class="dv">1</span><span class="op">:</span>nr, <span class="kw">rep</span>(nc <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, nr), </span>
+<span id="cb100-15"><a href="high-level-plots.html#cb100-15"></a>            <span class="dt">border =</span> col_mat[, i], <span class="dt">col =</span> col_mat[, i])</span>
 <span id="cb100-16"><a href="high-level-plots.html#cb100-16"></a>    }</span>
 <span id="cb100-17"><a href="high-level-plots.html#cb100-17"></a>})</span></code></pre></div>
 <p>Since there are two dendrograms, it is important to make the height

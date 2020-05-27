@@ -456,11 +456,10 @@ Information that can be extracted by `get.cell.meta.data()` are:
   paddings.
 - `cell.ylim`: Minimal and maximal values on the y-axis extended by cell
   paddings.
-- `xplot`: Degree of right and left borders in the plotting region. The first
-  element corresponds to the start point of values on x-axis and the second element corresponds to the end point of values
-  on x-axis Since x-axis in data coordinate in cells are
-  always clockwise, `xplot[1]` is larger than `xplot[2]`.
+- `xplot`: Degree of right and left borders in the plotting region. The values ignore the direction of the circular layout (i.e. whether it is clock wise or not). `xplot[1]` is always upstream of `xplot[2]` in the clock-wise direction.
 - `yplot`: Radius of bottom and top radius in the plotting region.
+- `cell.width`: Width of the cell, measured in degree. It is calculated as `(xplot[1] - xplot[2]) %% 360`.
+- `cell.height`: Height of the cell. Simply `yplot[2] - yplot[1]`.
 - `cell.start.degree`: Same as `xplot[1]`.
 - `cell.end.degree`: Same as `xplot[2]`.
 - `cell.bottom.radius`: Same as `yplot[1]`.
@@ -744,6 +743,8 @@ circos.info(sector.index = "a", track.index = 1)
 ## cell.ylim: [-0.1, 1.1]
 ## xplot (degree): [0, 241]
 ## yplot (radius): [0.79, 0.99]
+## cell.width (degree): 119
+## cell.height (radius): 0.2
 ## track.margin: c(0.01, 0.01)
 ## cell.padding: c(0.02, 1, 0.02, 1)
 ## 

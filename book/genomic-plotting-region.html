@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Create plotting regions for genomic data | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Create plotting regions for genomic data | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -337,9 +337,9 @@ Chapter <a href="modes-of-input.html#modes-of-input">10</a>). So whenever you us
 <p>Following code demonstrates the values for <code>region</code> and <code>value</code> when used inside <code>panel.fun</code>.</p>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="genomic-plotting-region.html#cb145-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)</span>
 <span id="cb145-2"><a href="genomic-plotting-region.html#cb145-2"></a><span class="kw">head</span>(bed, <span class="dt">n =</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##    chr  start    end    value1     value2
-## 1 chr1  34295 178602 0.3581330 -0.1378075
-## 2 chr1 189361 366537 0.1635133 -0.4308993</code></pre>
+<pre><code>##    chr  start     end     value1     value2
+## 1 chr1 203408  779908 0.03663567  0.1430715
+## 2 chr1 899925 1008228 0.51014996 -0.1901903</code></pre>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="genomic-plotting-region.html#cb147-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
 <span id="cb147-2"><a href="genomic-plotting-region.html#cb147-2"></a><span class="kw">circos.genomicTrackPlotRegion</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
 <span id="cb147-3"><a href="genomic-plotting-region.html#cb147-3"></a>    <span class="cf">if</span>(CELL_META<span class="op">$</span>sector.index <span class="op">==</span><span class="st"> &quot;chr1&quot;</span>) {</span>
@@ -347,12 +347,12 @@ Chapter <a href="modes-of-input.html#modes-of-input">10</a>). So whenever you us
 <span id="cb147-5"><a href="genomic-plotting-region.html#cb147-5"></a>        <span class="kw">print</span>(<span class="kw">head</span>(value, <span class="dt">n =</span> <span class="dv">2</span>))</span>
 <span id="cb147-6"><a href="genomic-plotting-region.html#cb147-6"></a>    }</span>
 <span id="cb147-7"><a href="genomic-plotting-region.html#cb147-7"></a>})</span></code></pre></div>
-<pre><code>##    start    end
-## 1  34295 178602
-## 2 189361 366537
-##      value1     value2
-## 1 0.3581330 -0.1378075
-## 2 0.1635133 -0.4308993</code></pre>
+<pre><code>##    start     end
+## 1 203408  779908
+## 2 899925 1008228
+##       value1     value2
+## 1 0.03663567  0.1430715
+## 2 0.51014996 -0.1901903</code></pre>
 <p>Since <code>circos.genomicTrack()</code> creates a new track, it needs values to
 calculate data ranges on y direction. Users can either specify the index of
 numeric columns in <code>data</code> by <code>numeric.column</code> (named index or numeric index,

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Circular layout | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Circular layout | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -737,11 +737,10 @@ users to understand and customize new graphics.</p>
 paddings.</li>
 <li><code>cell.ylim</code>: Minimal and maximal values on the y-axis extended by cell
 paddings.</li>
-<li><code>xplot</code>: Degree of right and left borders in the plotting region. The first
-element corresponds to the start point of values on x-axis and the second element corresponds to the end point of values
-on x-axis Since x-axis in data coordinate in cells are
-always clockwise, <code>xplot[1]</code> is larger than <code>xplot[2]</code>.</li>
+<li><code>xplot</code>: Degree of right and left borders in the plotting region. The values ignore the direction of the circular layout (i.e. whether it is clock wise or not). <code>xplot[1]</code> is always upstream of <code>xplot[2]</code> in the clock-wise direction.</li>
 <li><code>yplot</code>: Radius of bottom and top radius in the plotting region.</li>
+<li><code>cell.width</code>: Width of the cell, measured in degree. It is calculated as <code>(xplot[1] - xplot[2]) %% 360</code>.</li>
+<li><code>cell.height</code>: Height of the cell. Simply <code>yplot[2] - yplot[1]</code>.</li>
 <li><code>cell.start.degree</code>: Same as <code>xplot[1]</code>.</li>
 <li><code>cell.end.degree</code>: Same as <code>xplot[2]</code>.</li>
 <li><code>cell.bottom.radius</code>: Same as <code>yplot[1]</code>.</li>
@@ -945,6 +944,8 @@ Figure 2.8: Setting absolute units
 ## cell.ylim: [-0.1, 1.1]
 ## xplot (degree): [0, 241]
 ## yplot (radius): [0.79, 0.99]
+## cell.width (degree): 119
+## cell.height (radius): 0.2
 ## track.margin: c(0.01, 0.01)
 ## cell.padding: c(0.02, 1, 0.02, 1)
 ## 
