@@ -2,12 +2,12 @@
 
 ## Coordinate transformation {#coordinate-transformation}
 
-To map graphics onto the circle, there exist transformations from several
+To map graphics onto the circle, there exist transformations among several
 coordinate systems. First, there are **data coordinate systems** in which
 ranges for x-axes and y-axes are the ranges of original data. Second, there is
 a **polar coordinate system** in which these coordinates are mapped onto a
 circle. Finally, there is a **canvas coordinate system** in which graphics are
-really drawn on the graphical device (figure \@ref(fig:coordinate-transformation)). 
+really drawn on the graphic device (Figure \@ref(fig:coordinate-transformation)). 
 Each cell has its own data coordinate and they are
 independent. **circlize** first transforms coordinates from data coordinate
 system to polar coordinate system and finally transforms into canvas
@@ -22,7 +22,7 @@ does all the transformations automatically.
 </div>
 
 The final canvas coordinate is in fact an ordinary coordinate in the base R
-graphic system with x range in `(-1, 1)` and y range in `(-1, 1)` by default.
+graphic system with x-range in `(-1, 1)` and y-range in `(-1, 1)` by default.
 It should be noted that **the circular plot is always drawn inside the circle which has
 radius of 1 (which means it is always a unit circle), and from outside to
 inside**.
@@ -83,7 +83,7 @@ As mentioned above, there are three ways to add graphics on a track.
 
 ```r
 circos.initialize(factors, xlim)
-circos.track(factors, ylim)
+circos.track(ylim)
 for(sector.index in all.sector.index) {
     circos.points(x1, y1, sector.index)
     circos.lines(x2, y2, sector.index)
@@ -107,7 +107,7 @@ for(sector.index in all.sector.index) {
 
 ```r
 circos.initialize(factors, xlim)
-circos.track(factors, ylim)
+circos.track(ylim)
 circos.trackPoints(factors, x, y)
 circos.trackLines(factors, x, y)
 ```
@@ -175,6 +175,13 @@ circos.initialize(factors, x = x)
 circos.initialize(factors, xlim = xlim)
 ```
 
+If `factors` is not specified, the row names of `xlim` are taken as the value for `factors`.
+
+
+```r
+circos.initialize(xlim = xlim)
+```
+
 After the initialization of the layout, you may not see anything drawn or only an
 empty graphical device is opened. That is because no track has been created
 yet, however, the layout has already been recorded internally.
@@ -234,6 +241,7 @@ are not created).
 # You will only see cells that are covered in `factors` have borders
 circos.track(factors, y = y)
 # You will see all cells have borders
+circos.track(ylim = c(0, 1))
 circos.track(ylim = ranges(y))
 ```
 
@@ -262,7 +270,7 @@ modified before the initialization of the circular layout.
 - `gap.degree`: Gap between two neighbour sectors. It can be a single value
   which means all gaps share same degree, or a vector which has same number as
   sectors. **Note the first gap is after the first sector.** See Figure
-  \@ref(fig:circlize-direction) and figure \@ref(fig:circlize-region).
+  \@ref(fig:circlize-direction) and Figure \@ref(fig:circlize-region).
 - `gap.after`: Same as `gap.degree`, but more understandable. Modifying values
   of `gap.after` will also modify `gap.degree` and vice versa.
 - `track.margin`: [Like `margin` in Cascading Style Sheets (CSS)](https://www.w3schools.com/css/css_margin.asp), it is the
@@ -270,7 +278,7 @@ modified before the initialization of the circular layout.
   left and right margin are controlled by `gap.after`, only bottom and top
   margin need to be set. The value for `track.margin` is the percentage to the
   radius of the unit circle. The value can also be set by `convert_height()`
-  or the short version `uh()` function with absolute units. See figure
+  or the short version `mm_h()`/`cm_h()`/`inches_h()` functions with absolute units. See Figure
   \@ref(fig:circlize-region).
 - `cell.padding`: Padding of the cell. [Like `padding` in Cascading Style
   Sheets (CSS)](https://www.w3schools.com/css/css_padding.asp), it is the blank area around the plotting regions, but within
@@ -278,7 +286,7 @@ modified before the initialization of the circular layout.
   top and right padding respectively. The first and the third padding values
   are the percentages to the radius of the unit circle, and the second and
   fourth values are the degrees. The first and the third value can be set by
-  `uh()` with absolute units. See figure \@ref(fig:circlize-region).
+  `mm_h()`/`cm_h()`/`inches_h()` with absolute units. See Figure \@ref(fig:circlize-region).
 - `unit.circle.segments`: Since curves are simulated by a series of straight
   lines, this parameter controls the amount of segments to represent a curve.
   The minimal length of the line segment is the length of the unit circle
@@ -287,8 +295,8 @@ modified before the initialization of the circular layout.
   in PDF format. See explanantion in Section \@ref(lines).
 - `track.height`: The default height of tracks. It is the percentage to the
   radius of the unit circle. The height includes the top and bottom cell
-  paddings but not the margins. The value can be set by `uh()` with absolute
-  units.
+  paddings but not the margins. The value can be set by
+  `mm_h()`/`cm_h()`/`inches_h()` with absolute units.
 - `points.overflow.warning`: Since each cell is in fact not a real plotting
   region but only an ordinary rectangle (or more precisely, a circular
   rectangle), it does not remove points that are plotted outside of the
@@ -307,7 +315,7 @@ modified before the initialization of the circular layout.
   `c(0, 1)` would only draw 1/4 of the circle.
 - `canvas.ylim`: The ranges in the canvas coordinate in y direction.
 - `clock.wise`: The order for drawing sectors. Default is `TRUE` which means
-  clockwise (figure \@ref(fig:circlize-direction). **Note that inside each
+  clockwise (Figure \@ref(fig:circlize-direction). **Note that inside each
   cell, the direction of x-axis is always clockwise and direction of y-axis is
   always from inside to outside in the circle.**
 
@@ -342,10 +350,52 @@ Similar reason, since some of the parameters are defined before the initializati
 of the circular layout, after making each plot, you need to call `circos.clear()`
 to manually reset all the parameters.
 
+`circos.par()` can be used in the same way as `options()`:
+
+
+```r
+circos.par("start.degree" = 30)
+```
+
+Or use the `$` symbol:
+
+
+```r
+circos.par$start.degree = 30
+```
+
+Use `RESET` to reset all the options to their default values:
+
+
+```r
+circos.par(RESET = TRUE)
+```
+
+`circos.par()` is aimed to be designed to be independent to the number or the
+order of sectors, however, there is an exception. The `gap.degree`/`gap.after` parameter
+controls the spaces between two neighbouring sectors. When it is set as a
+scalar, the gap is the same to every two neighbouring sectors and it works
+fine. It can also be a vector which has the same length as the number of
+sectors and it can cause problems:
+
+1. When you change the order of the sectors, you also need to manually change
+   the order of `gap.degree`/`gap.after`. 
+2. In `chordDiagram()` function which will be introduced in Section \@ref(the-chorddiagram-function), by
+   default the tiny sectors are removed to improve the visualization, which
+   means, the gap.degree should be adjusted. 
+3. Also in `chordDiagram()`,
+   sometimes it is not very straightforward to find out the order of sectors,
+   thus, it is difficult to set a proper `gap.degree`/`gap.after`.
+
+Now, from version 0.4.10, the value of `gap.degree`/`gap.after` can be set as a
+named vector where the names are the names of the sectors. In this case, the
+`gap.degree`/`gap.after` vector can be automatically reordered or subsetted according to the
+sector ordering in the plot.
+
 ## Create plotting regions {#create-plotting-regions}
 
-As described above, only after creating the plotting region can you add low-
-level graphics on it. The minimal set of arguments for `circos.track()` is to set
+As described above, only after creating the plotting region can you add low-level 
+graphics in it. The minimal set of arguments for `circos.track()` is to set
 either `y` or `ylim` which assigns range of y values for this track.
 `circos.track()` creates tracks for all sectors although in some case only
 parts of them are visible.
@@ -364,13 +414,14 @@ background colors.
 
 If you are confused with the `factors` orders, you can also customize the
 borders and background colors inside `panel.fun`.
-`get.cell.meta.data("cell.xlim")` and `get.cell.meta.data("cell.ylim")` give
-you dimensions of the plotting region and you can customize plot regions
-directly by e.g. `circos.rect(col = "#FF000040", border = 1)`.
+`get.cell.meta.data("cell.xlim")`/`CELL_META$cell.xlim` and
+`get.cell.meta.data("cell.ylim")`/`CELL_META$cell.ylim` give you dimensions of
+the plotting region and you can customize plot regions directly by e.g.
+`circos.rect(col = "#FF000040", border = 1)`.
 
 `circos.track()` provides `track.margin` and `cell.padding` arguments that
 they only control track margins and cell paddings for the current track. Of course
-the second and fourth value in `cell.padding` are ignored.
+the second and fourth value (the left and the right padding) in `cell.padding` are ignored.
 
 ## Update plotting regions {#update-plotting-regions}
 
@@ -414,6 +465,21 @@ y = 5:1
 circos.track(factors = factors, x = x, y = y,
     panel.fun = function(x, y) {
         circos.points(x, y)
+})
+```
+
+Since you can obtain the current sector index in `panel.fun`, you can ignore the values
+from the `x` and `y` arguments, while do subsetting by your own:
+
+
+```r
+factors = c("a", "a", "a", "b", "b")
+x2 = 1:5
+y2 = 5:1
+circos.track(ylim = range(y),
+    panel.fun = function(x, y) { # here x and y are useless
+        l = factors == CELL_META$sector.index
+        circos.points(x2[l], y2[l])
 })
 ```
 
@@ -522,7 +588,7 @@ set.current.cell(sector.index, track.index)
 circos.text(get.cell.meta.data("xcenter"),
             get.cell.meta.data("ycenter"),
             get.cell.meta.data("sector.index"))
-# or more simple
+# or even simpler
 circos.text(CELL_META$xcenter, CELL_META$ycenter, CELL_META$sector.index)
 ```
 
@@ -605,25 +671,13 @@ circos.initialize(pokemon_name, xlim = c(0, 1))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     pos = circlize:::polar2Cartesian(circlize(CELL_META$xcenter, CELL_META$ycenter))
     image = EBImage::readImage(pokemon_src[CELL_META$sector.numeric.index])
-    circos.text(CELL_META$xcenter, CELL_META$cell.ylim[1] - uy(2, "mm"),
+    circos.text(CELL_META$xcenter, CELL_META$cell.ylim[1] - mm_y(2),
         CELL_META$sector.index, facing = "clockwise", niceFacing = TRUE,
         adj = c(1, 0.5), cex = 0.6)
     rasterImage(image, 
         xleft = pos[1, 1] - 0.05, ybottom = pos[1, 2] - 0.05,
         xright = pos[1, 1] + 0.05, ytop = pos[1, 2]+ 0.05)
 }, bg.border = 1, track.height = 0.15)
-```
-
-```
-## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB profile
-
-## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB profile
-
-## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB profile
-
-## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB profile
-
-## Warning in readPNG(x, ...): libpng warning: iCCP: known incorrect sRGB profile
 ```
 
 <div class="figure" style="text-align: center">
@@ -638,7 +692,7 @@ circos.clear()
 In **circlize** package, there is a `circos.raster()` function which directly
 adds raster images. It is introduced in Section \@ref(raster-image).
 
-### The convert functions {#convert-functions}
+### The functions measured in absolute units {#convert-functions}
 
 For the functions in **circlize** package, they needs arguments which are
 lengths measured either in the canvas coordinate or in the data coordinate.
@@ -646,32 +700,47 @@ E.g. `track.height` argument in `circos.track()` corresponds to percent of
 radius of the unit circle. **circlize** package is built in the R base graphic
 system which is not straightforward to define a length with absolute units
 (e.g. a line of length 2 cm). To solve this problem, **circlize** provides
-three functions which convert absolute units to the canvas coordinate or the
+several functions which convert absolute units to the canvas coordinate or the
 data coordinate accordingly.
 
-`convert_length()` converts absolute units to the canvas coordinate. Since the
-aspect ratio for canvas coordinate is always set to 1, it doesn't matter
-whether to convert units in the x direction or in the y direction. The usage
-of `convert_length()` is straightforward, supported units are `mm`, `cm` and
-`inches`. If users want to convert a string height or width to the canvas coordinate,
-directly use `strheight()` or `strwidth()` functions.
+`mm_h()`, `cm_h()`, `inches_h()`/`inch_h()` functions convert absolute units
+to the canvas coordinate in the radical direction, which normally define the
+heights of e.g. tracks. If users want to convert a string height or width to
+the canvas coordinate, directly use `strheight()` or `strwidth()` functions.
 
 
 ```r
-convert_length(2, "mm")
+mm_h(2) # 2mm
+cm_h(1) # 1cm
 ```
 
-Since `convert_length()` is mostly used to define heights on the radical
-direction, e.g. track height or height of track margins, the function has
-another name `convert_height()`, or the short name `uh()` (stands for _unit height_).
+`mm_x()`, `cm_x()`, `inches_x()`/`inch_x()`, `mm_y()`, `cm_y()`,
+`inches_y()`/`inch_y()` convert absolute units to the data coordinate in the x
+or y direction. By default, the conversion is applied in the "current" cell,
+but it can still be used in other cells by specifying `sector.index` and
+`track.index` arguments.
 
-`convert_x()` and `convert_y()`, or the short version `ux()` and `uy()` (_unit x_ and _unit y_),
-convert absolute units to the data coordinate. By default, the conversion is
-applied in the "current" cell, but it can still be used in other cells by specifying `sector.index`
-and `track.index` arguments. Since the width of the cell is not identical from the top to
-the bottom in the cell, for `convert_x()` or `ux()` function, the position on
-y direction where the convert is applied needs to be specified. By default it
-is at the middle point on y-axis.
+
+```r
+mm_x(2)
+mm_x(1, sector.index, track.index)
+mm_y(2)
+mm_y(1, sector.index, track.index)
+```
+
+Since the width of the cell is not identical from the top to the bottom in the
+cell, for `*_x()` function, the position on y direction where the convert is
+applied can be specified by the `h` argument. By default it is converted at
+the middle point on y-axis.
+
+
+```r
+mm_x(2, h)
+```
+
+Normally the difference of e.g. `mm_x(2)` at different y positions in a track
+is very small (unless the track has very big `track.height`), so in most
+cases, you can ignore the setting of `h` argument.
 
 Following plot (Figure \@ref(fig:unit-convert)) is an example of setting absolute units.
 
@@ -680,21 +749,21 @@ Following plot (Figure \@ref(fig:unit-convert)) is an example of setting absolut
 fa = letters[1:10]
 circos.par(cell.padding = c(0, 0, 0, 0), track.margin = c(0, 0))
 circos.initialize(fa, xlim = cbind(rep(0, 10), runif(10, 0.5, 1.5)))
-circos.track(ylim = c(0, 1), track.height = uh(5, "mm"),
+circos.track(ylim = c(0, 1), track.height = mm_h(5),
     panel.fun = function(x, y) {
-        circos.lines(c(0, 0 + ux(5, "mm")), c(0.5, 0.5), col = "blue")
+        circos.lines(c(0, 0 + mm_x(5)), c(0.5, 0.5), col = "blue")
     })
-circos.track(ylim = c(0, 1), track.height = uh(1, "cm"),
-    track.margin = c(0, uh(2, "mm")),
+circos.track(ylim = c(0, 1), track.height = cm_h(1),
+    track.margin = c(0, mm_h(2)),
     panel.fun = function(x, y) {
         xcenter = get.cell.meta.data("xcenter")
-        circos.lines(c(xcenter, xcenter), c(0, uy(1, "cm")), col = "red")
+        circos.lines(c(xcenter, xcenter), c(0, cm_y(1)), col = "red")
     })
-circos.track(ylim = c(0, 1), track.height = uh(1, "inches"),
-    track.margin = c(0, uh(5, "mm")),
+circos.track(ylim = c(0, 1), track.height = inch_h(1),
+    track.margin = c(0, mm_h(5)),
     panel.fun = function(x, y) {
-        line_length_on_x = ux(1*sqrt(2)/2, "cm")
-        line_length_on_y = uy(1*sqrt(2)/2, "cm")
+        line_length_on_x = cm_x(1*sqrt(2)/2)
+        line_length_on_y = cm_y(1*sqrt(2)/2)
         circos.lines(c(0, line_length_on_x), c(0, line_length_on_y), col = "orange")
     })
 ```
@@ -762,3 +831,30 @@ You should always call `circos.clear()` at the end of every circular plot.
 There are several parameters for circular plot which can only be set before
 `circos.initialize()`, thus, before you draw the next circular plot, you need
 to reset all these parameters.
+
+## Set gaps between tracks
+
+In the older version, you need to set `track.height` parameter either in
+`circos.par()` or in `circos.track()` to control the space between tracks. Now
+there is a new `set_track_gap()` function which simplifies the setting of gaps
+between two tracks. With the `mm_h()`/`cm_h()`/`inch_h()` functions, it is very easy
+to set the gaps with physical units (Figure \@ref(fig:set-track-gap)).
+
+
+```r
+circos.initialize(fa = letters[1:10], xlim = c(0, 1))
+circos.track(ylim = c(0, 1))
+set_track_gap(mm_h(2)) # 2mm
+circos.track(ylim = c(0, 1))
+set_track_gap(cm_h(0.5)) # 0.5cm
+circos.track(ylim = c(0, 1))
+```
+
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-html/set-track-gap-1.png" alt="Setting gaps between tracks." width="576" />
+<p class="caption">(\#fig:set-track-gap)Setting gaps between tracks.</p>
+</div>
+
+```r
+circos.clear()
+```

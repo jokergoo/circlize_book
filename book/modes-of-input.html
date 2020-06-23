@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 modes for circos.genomicTrack() | Circular Visualization in R</title>
+  <title>Chapter 11 modes for circos.genomicTrack() | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 modes for circos.genomicTrack() | Circular Visualization in R" />
+  <meta property="og:title" content="Chapter 11 modes for circos.genomicTrack() | Circular Visualization in R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/jokergoo/circlize-book/book" />
   <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="jokergoo/circlize_book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 modes for circos.genomicTrack() | Circular Visualization in R" />
+  <meta name="twitter:title" content="Chapter 11 modes for circos.genomicTrack() | Circular Visualization in R" />
   
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="genomic-plotting-region.html"/>
 <link rel="next" href="high-level-genomic-functions.html"/>
-<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -151,23 +151,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
 <ul>
 <li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
-<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The convert functions</a></li>
+<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The functions measured in absolute units</a></li>
 <li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
 </ul></li>
+<li class="chapter" data-level="2.9" data-path="circular-layout.html"><a href="circular-layout.html#set-gaps-between-tracks"><i class="fa fa-check"></i><b>2.9</b> Set gaps between tracks</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>3.1</b> Points</a></li>
-<li class="chapter" data-level="3.2" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>3.2</b> Lines</a></li>
-<li class="chapter" data-level="3.3" data-path="graphics.html"><a href="graphics.html#segments"><i class="fa fa-check"></i><b>3.3</b> Segments</a></li>
-<li class="chapter" data-level="3.4" data-path="graphics.html"><a href="graphics.html#text"><i class="fa fa-check"></i><b>3.4</b> Text</a></li>
-<li class="chapter" data-level="3.5" data-path="graphics.html"><a href="graphics.html#rectangles"><i class="fa fa-check"></i><b>3.5</b> Rectangles and polygons</a></li>
-<li class="chapter" data-level="3.6" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.6</b> Axes</a></li>
-<li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#circular-arrows"><i class="fa fa-check"></i><b>3.7</b> Circular arrows</a></li>
-<li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.8</b> Raster image</a></li>
-<li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.9</b> Links</a></li>
-<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.10</b> Highlight sectors and tracks</a></li>
-<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.11</b> Work together with the base graphic system</a></li>
+<li class="chapter" data-level="3.1" data-path="graphics.html"><a href="graphics.html#setting-colors"><i class="fa fa-check"></i><b>3.1</b> Setting colors</a></li>
+<li class="chapter" data-level="3.2" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>3.2</b> Points</a></li>
+<li class="chapter" data-level="3.3" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>3.3</b> Lines</a></li>
+<li class="chapter" data-level="3.4" data-path="graphics.html"><a href="graphics.html#segments"><i class="fa fa-check"></i><b>3.4</b> Segments</a></li>
+<li class="chapter" data-level="3.5" data-path="graphics.html"><a href="graphics.html#text"><i class="fa fa-check"></i><b>3.5</b> Text</a></li>
+<li class="chapter" data-level="3.6" data-path="graphics.html"><a href="graphics.html#rectangles"><i class="fa fa-check"></i><b>3.6</b> Rectangles and polygons</a></li>
+<li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.7</b> Axes</a></li>
+<li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#barplots-boxplots-and-violin-plots"><i class="fa fa-check"></i><b>3.8</b> Barplots, boxplots and violin plots</a></li>
+<li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#circular-arrows"><i class="fa fa-check"></i><b>3.9</b> Circular arrows</a></li>
+<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.10</b> Raster image</a></li>
+<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.11</b> Links</a></li>
+<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.12</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.13</b> Work together with the base graphic system</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
 <li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
@@ -175,117 +178,126 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="high-level-plots.html"><a href="high-level-plots.html#circular-barplot"><i class="fa fa-check"></i><b>5.1</b> Circular barplots</a></li>
 <li class="chapter" data-level="5.2" data-path="high-level-plots.html"><a href="high-level-plots.html#histograms"><i class="fa fa-check"></i><b>5.2</b> Histograms</a></li>
 <li class="chapter" data-level="5.3" data-path="high-level-plots.html"><a href="high-level-plots.html#phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Phylogenetic trees</a></li>
-<li class="chapter" data-level="5.4" data-path="high-level-plots.html"><a href="high-level-plots.html#heatmaps"><i class="fa fa-check"></i><b>5.4</b> Heatmaps</a></li>
+<li class="chapter" data-level="5.4" data-path="high-level-plots.html"><a href="high-level-plots.html#heatmaps"><i class="fa fa-check"></i><b>5.4</b> Manually create heatmaps</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>6</b> Advanced layout</a>
+<li class="chapter" data-level="6" data-path="circos-heatmap.html"><a href="circos-heatmap.html"><i class="fa fa-check"></i><b>6</b> The <code>circos.heatmap()</code> function</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="advanced-layout.html"><a href="advanced-layout.html#zooming-of-sectors"><i class="fa fa-check"></i><b>6.1</b> Zooming of sectors</a></li>
-<li class="chapter" data-level="6.2" data-path="advanced-layout.html"><a href="advanced-layout.html#part-circle"><i class="fa fa-check"></i><b>6.2</b> Visualize part of the circle</a></li>
-<li class="chapter" data-level="6.3" data-path="advanced-layout.html"><a href="advanced-layout.html#combine-circular-plots"><i class="fa fa-check"></i><b>6.3</b> Combine multiple circular plots</a></li>
-<li class="chapter" data-level="6.4" data-path="advanced-layout.html"><a href="advanced-layout.html#arrange-multiple-plots"><i class="fa fa-check"></i><b>6.4</b> Arrange multiple plots</a></li>
+<li class="chapter" data-level="6.1" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circos-heatmap-input-data"><i class="fa fa-check"></i><b>6.1</b> Input data</a></li>
+<li class="chapter" data-level="6.2" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circular-layout-1"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
+<li class="chapter" data-level="6.3" data-path="circos-heatmap.html"><a href="circos-heatmap.html#dendrograms-and-row-names"><i class="fa fa-check"></i><b>6.3</b> Dendrograms and row names</a></li>
+<li class="chapter" data-level="6.4" data-path="circos-heatmap.html"><a href="circos-heatmap.html#clustering"><i class="fa fa-check"></i><b>6.4</b> Clustering</a></li>
+<li class="chapter" data-level="6.5" data-path="circos-heatmap.html"><a href="circos-heatmap.html#callback-on-dendrograms"><i class="fa fa-check"></i><b>6.5</b> Callback on dendrograms</a></li>
+<li class="chapter" data-level="6.6" data-path="circos-heatmap.html"><a href="circos-heatmap.html#multiple-heatmap-tracks"><i class="fa fa-check"></i><b>6.6</b> Multiple heatmap tracks</a></li>
+<li class="chapter" data-level="6.7" data-path="circos-heatmap.html"><a href="circos-heatmap.html#with-other-tracks"><i class="fa fa-check"></i><b>6.7</b> With other tracks</a></li>
+<li class="chapter" data-level="6.8" data-path="circos-heatmap.html"><a href="circos-heatmap.html#add-annotations"><i class="fa fa-check"></i><b>6.8</b> Add annotations</a></li>
+<li class="chapter" data-level="6.9" data-path="circos-heatmap.html"><a href="circos-heatmap.html#a-complex-example-of-circular-heatmaps"><i class="fa fa-check"></i><b>6.9</b> A complex example of circular heatmaps</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>7</b> Advanced layout</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="advanced-layout.html"><a href="advanced-layout.html#zooming-of-sectors"><i class="fa fa-check"></i><b>7.1</b> Zooming of sectors</a></li>
+<li class="chapter" data-level="7.2" data-path="advanced-layout.html"><a href="advanced-layout.html#part-circle"><i class="fa fa-check"></i><b>7.2</b> Visualize part of the circle</a></li>
+<li class="chapter" data-level="7.3" data-path="advanced-layout.html"><a href="advanced-layout.html#combine-circular-plots"><i class="fa fa-check"></i><b>7.3</b> Combine multiple circular plots</a></li>
+<li class="chapter" data-level="7.4" data-path="advanced-layout.html"><a href="advanced-layout.html#arrange-multiple-plots"><i class="fa fa-check"></i><b>7.4</b> Arrange multiple plots</a></li>
 </ul></li>
 <li class="part"><span><b>II Applications in Genomics</b></span></li>
-<li class="chapter" data-level="7" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>7</b> Introduction</a>
+<li class="chapter" data-level="8" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>8</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="genomic-introduction.html"><a href="genomic-introduction.html#input-data"><i class="fa fa-check"></i><b>7.1</b> Input data</a></li>
+<li class="chapter" data-level="8.1" data-path="genomic-introduction.html"><a href="genomic-introduction.html#input-data"><i class="fa fa-check"></i><b>8.1</b> Input data</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>8</b> Initialize with genomic data</a>
+<li class="chapter" data-level="9" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>9</b> Initialize with genomic data</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>8.1</b> Initialize with cytoband data</a>
+<li class="chapter" data-level="9.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>9.1</b> Initialize with cytoband data</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>8.1.1</b> Basic usage</a></li>
-<li class="chapter" data-level="8.1.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#pre-defined-tracks"><i class="fa fa-check"></i><b>8.1.2</b> Pre-defined tracks</a></li>
-<li class="chapter" data-level="8.1.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#other-general-settings"><i class="fa fa-check"></i><b>8.1.3</b> Other general settings</a></li>
+<li class="chapter" data-level="9.1.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>9.1.1</b> Basic usage</a></li>
+<li class="chapter" data-level="9.1.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#pre-defined-tracks"><i class="fa fa-check"></i><b>9.1.2</b> Pre-defined tracks</a></li>
+<li class="chapter" data-level="9.1.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#other-general-settings"><i class="fa fa-check"></i><b>9.1.3</b> Other general settings</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>8.2</b> Customize chromosome track</a></li>
-<li class="chapter" data-level="8.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>8.3</b> Initialize with general genomic category</a></li>
-<li class="chapter" data-level="8.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>8.4</b> Zooming chromosomes</a></li>
+<li class="chapter" data-level="9.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>9.2</b> Customize chromosome track</a></li>
+<li class="chapter" data-level="9.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>9.3</b> Initialize with general genomic category</a></li>
+<li class="chapter" data-level="9.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>9.4</b> Zooming chromosomes</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>9</b> Create plotting regions for genomic data</a>
+<li class="chapter" data-level="10" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>10</b> Create plotting regions for genomic data</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-points"><i class="fa fa-check"></i><b>9.1</b> Points</a></li>
-<li class="chapter" data-level="9.2" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-lines"><i class="fa fa-check"></i><b>9.2</b> Lines</a></li>
-<li class="chapter" data-level="9.3" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-text"><i class="fa fa-check"></i><b>9.3</b> Text</a></li>
-<li class="chapter" data-level="9.4" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-rectangles"><i class="fa fa-check"></i><b>9.4</b> Rectangles</a></li>
-<li class="chapter" data-level="9.5" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-links"><i class="fa fa-check"></i><b>9.5</b> Links</a></li>
-<li class="chapter" data-level="9.6" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#mixed-use-of-general-circlize-functions"><i class="fa fa-check"></i><b>9.6</b> Mixed use of general circlize functions</a></li>
+<li class="chapter" data-level="10.1" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-points"><i class="fa fa-check"></i><b>10.1</b> Points</a></li>
+<li class="chapter" data-level="10.2" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-lines"><i class="fa fa-check"></i><b>10.2</b> Lines</a></li>
+<li class="chapter" data-level="10.3" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-text"><i class="fa fa-check"></i><b>10.3</b> Text</a></li>
+<li class="chapter" data-level="10.4" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-rectangles"><i class="fa fa-check"></i><b>10.4</b> Rectangles</a></li>
+<li class="chapter" data-level="10.5" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-links"><i class="fa fa-check"></i><b>10.5</b> Links</a></li>
+<li class="chapter" data-level="10.6" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#mixed-use-of-general-circlize-functions"><i class="fa fa-check"></i><b>10.6</b> Mixed use of general circlize functions</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>10</b> modes for <code>circos.genomicTrack()</code></a>
+<li class="chapter" data-level="11" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>11</b> modes for <code>circos.genomicTrack()</code></a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>10.1</b> Normal mode</a>
+<li class="chapter" data-level="11.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>11.1</b> Normal mode</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame"><i class="fa fa-check"></i><b>10.1.1</b> Input is a data frame</a></li>
-<li class="chapter" data-level="10.1.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames"><i class="fa fa-check"></i><b>10.1.2</b> Input is a list of data frames</a></li>
+<li class="chapter" data-level="11.1.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame"><i class="fa fa-check"></i><b>11.1.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="11.1.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames"><i class="fa fa-check"></i><b>11.1.2</b> Input is a list of data frames</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>10.2</b> Stack mode</a>
+<li class="chapter" data-level="11.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>11.2</b> Stack mode</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame-1"><i class="fa fa-check"></i><b>10.2.1</b> Input is a data frame</a></li>
-<li class="chapter" data-level="10.2.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames-1"><i class="fa fa-check"></i><b>10.2.2</b> Input is a list of data frames</a></li>
+<li class="chapter" data-level="11.2.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame-1"><i class="fa fa-check"></i><b>11.2.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="11.2.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames-1"><i class="fa fa-check"></i><b>11.2.2</b> Input is a list of data frames</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>10.3</b> Applications</a>
+<li class="chapter" data-level="11.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>11.3</b> Applications</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-points"><i class="fa fa-check"></i><b>10.3.1</b> Points</a></li>
-<li class="chapter" data-level="10.3.2" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-lines"><i class="fa fa-check"></i><b>10.3.2</b> Lines</a></li>
-<li class="chapter" data-level="10.3.3" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-rectangles"><i class="fa fa-check"></i><b>10.3.3</b> Rectangles</a></li>
+<li class="chapter" data-level="11.3.1" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-points"><i class="fa fa-check"></i><b>11.3.1</b> Points</a></li>
+<li class="chapter" data-level="11.3.2" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-lines"><i class="fa fa-check"></i><b>11.3.2</b> Lines</a></li>
+<li class="chapter" data-level="11.3.3" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-rectangles"><i class="fa fa-check"></i><b>11.3.3</b> Rectangles</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>11</b> High-level genomic functions</a>
+<li class="chapter" data-level="12" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>12</b> High-level genomic functions</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>11.1</b> Ideograms</a></li>
-<li class="chapter" data-level="11.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>11.2</b> Heatmaps</a></li>
-<li class="chapter" data-level="11.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>11.3</b> Labels</a></li>
-<li class="chapter" data-level="11.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>11.4</b> Genomic axes</a></li>
-<li class="chapter" data-level="11.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>11.5</b> Genomic density and Rainfall plot</a></li>
+<li class="chapter" data-level="12.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>12.1</b> Ideograms</a></li>
+<li class="chapter" data-level="12.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>12.2</b> Heatmaps</a></li>
+<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
+<li class="chapter" data-level="12.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>12.4</b> Genomic axes</a></li>
+<li class="chapter" data-level="12.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>12.5</b> Genomic density and Rainfall plot</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>12</b> Nested zooming</a>
+<li class="chapter" data-level="13" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>13</b> Nested zooming</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="nested-zooming.html"><a href="nested-zooming.html#basic-idea"><i class="fa fa-check"></i><b>12.1</b> Basic idea</a></li>
-<li class="chapter" data-level="12.2" data-path="nested-zooming.html"><a href="nested-zooming.html#visualization-of-dmrs-from-tagmentation-based-wgbs"><i class="fa fa-check"></i><b>12.2</b> Visualization of DMRs from tagmentation-based WGBS</a></li>
+<li class="chapter" data-level="13.1" data-path="nested-zooming.html"><a href="nested-zooming.html#basic-idea"><i class="fa fa-check"></i><b>13.1</b> Basic idea</a></li>
+<li class="chapter" data-level="13.2" data-path="nested-zooming.html"><a href="nested-zooming.html#visualization-of-dmrs-from-tagmentation-based-wgbs"><i class="fa fa-check"></i><b>13.2</b> Visualization of DMRs from tagmentation-based WGBS</a></li>
 </ul></li>
 <li class="part"><span><b>III Visualize Relations</b></span></li>
-<li class="chapter" data-level="13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>13</b> The <code>chordDiagram()</code> function</a>
+<li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>13.1</b> Basic usage</a></li>
-<li class="chapter" data-level="13.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>13.2</b> Adjust by <code>circos.par()</code></a></li>
-<li class="chapter" data-level="13.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>13.3</b> Colors</a>
+<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
+<li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
+<li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
 <ul>
-<li class="chapter" data-level="13.3.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#set-grid-colors"><i class="fa fa-check"></i><b>13.3.1</b> Set grid colors</a></li>
-<li class="chapter" data-level="13.3.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-color"><i class="fa fa-check"></i><b>13.3.2</b> Set link colors</a></li>
+<li class="chapter" data-level="14.3.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#set-grid-colors"><i class="fa fa-check"></i><b>14.3.1</b> Set grid colors</a></li>
+<li class="chapter" data-level="14.3.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-color"><i class="fa fa-check"></i><b>14.3.2</b> Set link colors</a></li>
 </ul></li>
-<li class="chapter" data-level="13.4" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-border"><i class="fa fa-check"></i><b>13.4</b> Link border</a></li>
-<li class="chapter" data-level="13.5" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#highlight-links"><i class="fa fa-check"></i><b>13.5</b> Highlight links</a></li>
-<li class="chapter" data-level="13.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>13.6</b> Orders of links</a>
+<li class="chapter" data-level="14.4" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-border"><i class="fa fa-check"></i><b>14.4</b> Link border</a></li>
+<li class="chapter" data-level="14.5" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#highlight-links"><i class="fa fa-check"></i><b>14.5</b> Highlight links</a></li>
+<li class="chapter" data-level="14.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>14.6</b> Orders of links</a></li>
+<li class="chapter" data-level="14.7" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#z-index-of-adding-links"><i class="fa fa-check"></i><b>14.7</b> z-index of adding links</a></li>
+<li class="chapter" data-level="14.8" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#self-links"><i class="fa fa-check"></i><b>14.8</b> Self-links</a></li>
+<li class="chapter" data-level="14.9" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#symmetric-matrix"><i class="fa fa-check"></i><b>14.9</b> Symmetric matrix</a></li>
+<li class="chapter" data-level="14.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#directional-relations"><i class="fa fa-check"></i><b>14.10</b> Directional relations</a></li>
+<li class="chapter" data-level="14.11" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#scaling"><i class="fa fa-check"></i><b>14.11</b> Scaling</a></li>
+<li class="chapter" data-level="14.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>14.12</b> Reduce</a></li>
+<li class="chapter" data-level="14.13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>14.13</b> Input as a data frame</a>
 <ul>
-<li class="chapter" data-level="13.6.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-positions-on-sectors"><i class="fa fa-check"></i><b>13.6.1</b> Orders of positions on sectors</a></li>
-<li class="chapter" data-level="13.6.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#order-of-adding-links"><i class="fa fa-check"></i><b>13.6.2</b> Order of adding links</a></li>
-</ul></li>
-<li class="chapter" data-level="13.7" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#self-links"><i class="fa fa-check"></i><b>13.7</b> Self-links</a></li>
-<li class="chapter" data-level="13.8" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#symmetric-matrix"><i class="fa fa-check"></i><b>13.8</b> Symmetric matrix</a></li>
-<li class="chapter" data-level="13.9" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#directional-relations"><i class="fa fa-check"></i><b>13.9</b> Directional relations</a></li>
-<li class="chapter" data-level="13.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#scaling"><i class="fa fa-check"></i><b>13.10</b> Scaling</a></li>
-<li class="chapter" data-level="13.11" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>13.11</b> Reduce</a></li>
-<li class="chapter" data-level="13.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>13.12</b> Input as a data frame</a>
-<ul>
-<li class="chapter" data-level="13.12.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#multiple-links"><i class="fa fa-check"></i><b>13.12.1</b> Multiple links</a></li>
-<li class="chapter" data-level="13.12.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#unequal-width-of-the-link-ends"><i class="fa fa-check"></i><b>13.12.2</b> Unequal width of the link ends</a></li>
+<li class="chapter" data-level="14.13.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#multiple-links-between-two-sectors"><i class="fa fa-check"></i><b>14.13.1</b> Multiple links between two sectors</a></li>
+<li class="chapter" data-level="14.13.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#unequal-width-of-the-link-ends"><i class="fa fa-check"></i><b>14.13.2</b> Unequal width of the link ends</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>14</b> Advanced usage of <code>chordDiagram()</code></a>
+<li class="chapter" data-level="15" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>15</b> Advanced usage of <code>chordDiagram()</code></a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>14.1</b> Organization of tracks</a></li>
-<li class="chapter" data-level="14.2" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-labels"><i class="fa fa-check"></i><b>14.2</b> Customize sector labels</a></li>
-<li class="chapter" data-level="14.3" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-axes"><i class="fa fa-check"></i><b>14.3</b> Customize sector axes</a></li>
-<li class="chapter" data-level="14.4" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#put-horizontally-or-vertically-symmetric"><i class="fa fa-check"></i><b>14.4</b> Put horizontally or vertically symmetric</a></li>
-<li class="chapter" data-level="14.5" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#compare-two-chord-diagrams"><i class="fa fa-check"></i><b>14.5</b> Compare two Chord diagrams</a></li>
-<li class="chapter" data-level="14.6" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#multiple-group-chord-diagram"><i class="fa fa-check"></i><b>14.6</b> Multiple-group Chord diagram</a></li>
+<li class="chapter" data-level="15.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>15.1</b> Organization of tracks</a></li>
+<li class="chapter" data-level="15.2" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-labels"><i class="fa fa-check"></i><b>15.2</b> Customize sector labels</a></li>
+<li class="chapter" data-level="15.3" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-axes"><i class="fa fa-check"></i><b>15.3</b> Customize sector axes</a></li>
+<li class="chapter" data-level="15.4" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#put-horizontally-or-vertically-symmetric"><i class="fa fa-check"></i><b>15.4</b> Put horizontally or vertically symmetric</a></li>
+<li class="chapter" data-level="15.5" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#compare-two-chord-diagrams"><i class="fa fa-check"></i><b>15.5</b> Compare two Chord diagrams</a></li>
+<li class="chapter" data-level="15.6" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#multiple-group-chord-diagram"><i class="fa fa-check"></i><b>15.6</b> Multiple-group Chord diagram</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>15</b> A complex example of Chord diagram</a></li>
+<li class="chapter" data-level="16" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>16</b> A complex example of Chord diagram</a></li>
 <li class="part"><span><b>IV Others</b></span></li>
-<li class="chapter" data-level="16" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>16</b> Make fun of the package</a>
+<li class="chapter" data-level="17" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>17</b> Make fun of the package</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>16.1</b> A clock</a></li>
-<li class="chapter" data-level="16.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>16.2</b> A dartboard</a></li>
-<li class="chapter" data-level="16.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>16.3</b> Ba-Gua and Tai-Ji</a></li>
+<li class="chapter" data-level="17.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>17.1</b> A clock</a></li>
+<li class="chapter" data-level="17.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>17.2</b> A dartboard</a></li>
+<li class="chapter" data-level="17.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>17.3</b> Ba-Gua and Tai-Ji</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -307,16 +319,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="modes-of-input" class="section level1" number="10">
-<h1><span class="header-section-number">Chapter 10</span> modes for <code>circos.genomicTrack()</code></h1>
+<div id="modes-of-input" class="section level1" number="11">
+<h1><span class="header-section-number">Chapter 11</span> modes for <code>circos.genomicTrack()</code></h1>
 <p>The behaviour of <code>circos.genomicTrack()</code> and <code>panel.fun</code> will be different
 according to different input data (e.g. is it a simple data frame or a list of
 data frames? If it is a data frame, how many numeric columns it has?) and
 different settings.</p>
-<div id="normal-mode" class="section level2" number="10.1">
-<h2><span class="header-section-number">10.1</span> Normal mode</h2>
-<div id="input-is-a-data-frame" class="section level3" number="10.1.1">
-<h3><span class="header-section-number">10.1.1</span> Input is a data frame</h3>
+<div id="normal-mode" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Normal mode</h2>
+<div id="input-is-a-data-frame" class="section level3" number="11.1.1">
+<h3><span class="header-section-number">11.1.1</span> Input is a data frame</h3>
 <p>If input <code>data</code> is a data frame in <em>BED</em> format, <code>region</code> in <code>panel.fun</code> would
 be a data frame containing start position and end position in the current
 chromosome which is extracted from <code>data</code>. <code>value</code> is also a data frame
@@ -327,17 +339,17 @@ pass <code>...</code> to low-level genomic function such as <code>circos.genoimc
 well.</p>
 <p>If there are more than one numeric columns, graphics are added for each column
 repeatedly (with same genomic positions).</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="modes-of-input.html#cb159-1"></a>data =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)</span>
-<span id="cb159-2"><a href="modes-of-input.html#cb159-2"></a><span class="kw">circos.genomicTrack</span>(data, <span class="dt">numeric.column =</span> <span class="dv">4</span>, </span>
-<span id="cb159-3"><a href="modes-of-input.html#cb159-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb159-4"><a href="modes-of-input.html#cb159-4"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
-<span id="cb159-5"><a href="modes-of-input.html#cb159-5"></a>        <span class="kw">circos.genomicPoints</span>(region, value)</span>
-<span id="cb159-6"><a href="modes-of-input.html#cb159-6"></a>        <span class="co"># 1st column in `value` while 4th column in `data`</span></span>
-<span id="cb159-7"><a href="modes-of-input.html#cb159-7"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">numeric.column =</span> <span class="dv">1</span>)</span>
-<span id="cb159-8"><a href="modes-of-input.html#cb159-8"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="modes-of-input.html#cb225-1"></a>data =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)</span>
+<span id="cb225-2"><a href="modes-of-input.html#cb225-2"></a><span class="kw">circos.genomicTrack</span>(data, <span class="dt">numeric.column =</span> <span class="dv">4</span>, </span>
+<span id="cb225-3"><a href="modes-of-input.html#cb225-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb225-4"><a href="modes-of-input.html#cb225-4"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
+<span id="cb225-5"><a href="modes-of-input.html#cb225-5"></a>        <span class="kw">circos.genomicPoints</span>(region, value)</span>
+<span id="cb225-6"><a href="modes-of-input.html#cb225-6"></a>        <span class="co"># 1st column in `value` while 4th column in `data`</span></span>
+<span id="cb225-7"><a href="modes-of-input.html#cb225-7"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">numeric.column =</span> <span class="dv">1</span>)</span>
+<span id="cb225-8"><a href="modes-of-input.html#cb225-8"></a>})</span></code></pre></div>
 </div>
-<div id="input-is-a-list-of-data-frames" class="section level3" number="10.1.2">
-<h3><span class="header-section-number">10.1.2</span> Input is a list of data frames</h3>
+<div id="input-is-a-list-of-data-frames" class="section level3" number="11.1.2">
+<h3><span class="header-section-number">11.1.2</span> Input is a list of data frames</h3>
 <p>If input data is a list of data frames, <code>panel.fun</code> is applied on each
 data frame iteratively to the current cell. Under such condition, <code>region</code> and <code>value</code>
 will contain corresponding data in the current data frame and in the current chromosome. The index for the
@@ -347,28 +359,28 @@ inside <code>panel.fun</code> and <code>...</code> argument is mandatory.</p>
 <code>numeric.column</code> can only be one or the number of data frames, which means,
 there is only one numeric column that will be used in each data frame. If it
 is not specified, the first numeric column in each data frame is used.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="modes-of-input.html#cb160-1"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(<span class="kw">generateRandomBed</span>(), <span class="kw">generateRandomBed</span>())</span>
-<span id="cb160-2"><a href="modes-of-input.html#cb160-2"></a><span class="kw">circos.genomicTrack</span>(bed_list,</span>
-<span id="cb160-3"><a href="modes-of-input.html#cb160-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb160-4"><a href="modes-of-input.html#cb160-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb160-5"><a href="modes-of-input.html#cb160-5"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">col =</span> i, ...)</span>
-<span id="cb160-6"><a href="modes-of-input.html#cb160-6"></a>})</span>
-<span id="cb160-7"><a href="modes-of-input.html#cb160-7"></a></span>
-<span id="cb160-8"><a href="modes-of-input.html#cb160-8"></a><span class="co"># column 4 in the first bed and column 5 in the second bed</span></span>
-<span id="cb160-9"><a href="modes-of-input.html#cb160-9"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">numeric.column =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>),</span>
-<span id="cb160-10"><a href="modes-of-input.html#cb160-10"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb160-11"><a href="modes-of-input.html#cb160-11"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb160-12"><a href="modes-of-input.html#cb160-12"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">col =</span> i, ...)</span>
-<span id="cb160-13"><a href="modes-of-input.html#cb160-13"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="modes-of-input.html#cb226-1"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(<span class="kw">generateRandomBed</span>(), <span class="kw">generateRandomBed</span>())</span>
+<span id="cb226-2"><a href="modes-of-input.html#cb226-2"></a><span class="kw">circos.genomicTrack</span>(bed_list,</span>
+<span id="cb226-3"><a href="modes-of-input.html#cb226-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb226-4"><a href="modes-of-input.html#cb226-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb226-5"><a href="modes-of-input.html#cb226-5"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">col =</span> i, ...)</span>
+<span id="cb226-6"><a href="modes-of-input.html#cb226-6"></a>})</span>
+<span id="cb226-7"><a href="modes-of-input.html#cb226-7"></a></span>
+<span id="cb226-8"><a href="modes-of-input.html#cb226-8"></a><span class="co"># column 4 in the first bed and column 5 in the second bed</span></span>
+<span id="cb226-9"><a href="modes-of-input.html#cb226-9"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">numeric.column =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb226-10"><a href="modes-of-input.html#cb226-10"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb226-11"><a href="modes-of-input.html#cb226-11"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb226-12"><a href="modes-of-input.html#cb226-12"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">col =</span> i, ...)</span>
+<span id="cb226-13"><a href="modes-of-input.html#cb226-13"></a>})</span></code></pre></div>
 </div>
 </div>
-<div id="stack-mode" class="section level2" number="10.2">
-<h2><span class="header-section-number">10.2</span> Stack mode</h2>
+<div id="stack-mode" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> Stack mode</h2>
 <p><code>circos.genomicTrack()</code> also supports a <code>stack</code> mode by setting <code>stack = TRUE</code>. Under <code>stack</code> mode, <code>ylim</code> is re-defined inside the function and the
 y-axis is splitted into several bins with equal height and graphics are put
 onto “horizontal” bins (with position <code>y = 1, 2, ...</code>).</p>
-<div id="input-is-a-data-frame-1" class="section level3" number="10.2.1">
-<h3><span class="header-section-number">10.2.1</span> Input is a data frame</h3>
+<div id="input-is-a-data-frame-1" class="section level3" number="11.2.1">
+<h3><span class="header-section-number">11.2.1</span> Input is a data frame</h3>
 <p>Under <code>stack</code> mode, when input data is a single data frame containing one or
 more numeric columns, each numeric column defined in <code>numeric.column</code> will be
 treated as a single unit (recall that when <code>numeric.column</code> is not specified,
@@ -381,15 +393,15 @@ used for mapping the y positions, while replaced with <code>y = i</code> interna
 current chromosome, but <code>value</code> only contains current numeric column plus all
 non-numeric columns. The value of the index of “current” numeric column can be
 obtained by <code>getI(...)</code>.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="modes-of-input.html#cb161-1"></a>data =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)</span>
-<span id="cb161-2"><a href="modes-of-input.html#cb161-2"></a><span class="kw">circos.genomicTrack</span>(data, <span class="dt">stack =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb161-3"><a href="modes-of-input.html#cb161-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb161-4"><a href="modes-of-input.html#cb161-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb161-5"><a href="modes-of-input.html#cb161-5"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">col =</span> i, ...)</span>
-<span id="cb161-6"><a href="modes-of-input.html#cb161-6"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="modes-of-input.html#cb227-1"></a>data =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)</span>
+<span id="cb227-2"><a href="modes-of-input.html#cb227-2"></a><span class="kw">circos.genomicTrack</span>(data, <span class="dt">stack =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb227-3"><a href="modes-of-input.html#cb227-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb227-4"><a href="modes-of-input.html#cb227-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb227-5"><a href="modes-of-input.html#cb227-5"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">col =</span> i, ...)</span>
+<span id="cb227-6"><a href="modes-of-input.html#cb227-6"></a>})</span></code></pre></div>
 </div>
-<div id="input-is-a-list-of-data-frames-1" class="section level3" number="10.2.2">
-<h3><span class="header-section-number">10.2.2</span> Input is a list of data frames</h3>
+<div id="input-is-a-list-of-data-frames-1" class="section level3" number="11.2.2">
+<h3><span class="header-section-number">11.2.2</span> Input is a list of data frames</h3>
 <p>When input data is a list of data frames, each data frame will be treated as a
 single unit. <code>ylim</code> is re-defined to <code>c(0.5, n+0.5)</code> in which <code>n</code> is the
 number of data frames. <code>panel.fun</code> will be applied iteratively on each data
@@ -397,186 +409,186 @@ frame. In each iteration, in <code>panel.fun</code>, <code>region</code> is stil
 regions in current chromosome, and <code>value</code> contains columns in current data
 frame excluding the first three columns. Graphics by low-level genomic
 functions will be added on the `horizontal’ bins.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="modes-of-input.html#cb162-1"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(<span class="kw">generateRandomBed</span>(), <span class="kw">generateRandomBed</span>())</span>
-<span id="cb162-2"><a href="modes-of-input.html#cb162-2"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb162-3"><a href="modes-of-input.html#cb162-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb162-4"><a href="modes-of-input.html#cb162-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb162-5"><a href="modes-of-input.html#cb162-5"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
-<span id="cb162-6"><a href="modes-of-input.html#cb162-6"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="modes-of-input.html#cb228-1"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(<span class="kw">generateRandomBed</span>(), <span class="kw">generateRandomBed</span>())</span>
+<span id="cb228-2"><a href="modes-of-input.html#cb228-2"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb228-3"><a href="modes-of-input.html#cb228-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb228-4"><a href="modes-of-input.html#cb228-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb228-5"><a href="modes-of-input.html#cb228-5"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
+<span id="cb228-6"><a href="modes-of-input.html#cb228-6"></a>})</span></code></pre></div>
 <p>Under <code>stack</code> mode, if using a data frame with multiple numeric columns,
 graphics on all horizontal bins share the same genomic positions while if
 using a list of data frames, the genomic positions can be different.</p>
 </div>
 </div>
-<div id="applications" class="section level2" number="10.3">
-<h2><span class="header-section-number">10.3</span> Applications</h2>
+<div id="applications" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> Applications</h2>
 <p>In this section, we will show several real examples of adding genomic graphics
 under different modes. Again, if you are not happy with these functionalities,
 you can simply re-implement your plot with the basic circlize functions.</p>
-<div id="modes-points" class="section level3" number="10.3.1">
-<h3><span class="header-section-number">10.3.1</span> Points</h3>
+<div id="modes-points" class="section level3" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> Points</h3>
 <p>To make plots more clear to look at, we only add graphics in the first quarter
 of the circle and initialize the plot only with chromosome 1.</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="modes-of-input.html#cb163-1"></a><span class="kw">set.seed</span>(<span class="dv">999</span>)</span>
-<span id="cb163-2"><a href="modes-of-input.html#cb163-2"></a><span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.1</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>,</span>
-<span id="cb163-3"><a href="modes-of-input.html#cb163-3"></a>    <span class="dt">canvas.xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">canvas.ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">gap.degree =</span> <span class="dv">270</span>)</span>
-<span id="cb163-4"><a href="modes-of-input.html#cb163-4"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="st">&quot;chr1&quot;</span>, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</span></code></pre></div>
-<p>In the example figure (Figure <a href="modes-of-input.html#fig:genomic-application-points">10.1</a>) below, each track
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="modes-of-input.html#cb229-1"></a><span class="kw">set.seed</span>(<span class="dv">999</span>)</span>
+<span id="cb229-2"><a href="modes-of-input.html#cb229-2"></a><span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.1</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>,</span>
+<span id="cb229-3"><a href="modes-of-input.html#cb229-3"></a>    <span class="dt">canvas.xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">canvas.ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">gap.degree =</span> <span class="dv">270</span>)</span>
+<span id="cb229-4"><a href="modes-of-input.html#cb229-4"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="st">&quot;chr1&quot;</span>, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<p>In the example figure (Figure <a href="modes-of-input.html#fig:genomic-application-points">11.1</a>) below, each track
 contains points under different modes.</p>
 <p>In track A, it is the most normal way to add points. Here <code>bed</code> only contains
 one numeric column and points are added at the middle points of regions.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="modes-of-input.html#cb164-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>)</span>
-<span id="cb164-2"><a href="modes-of-input.html#cb164-2"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb164-3"><a href="modes-of-input.html#cb164-3"></a>    <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, ...)</span>
-<span id="cb164-4"><a href="modes-of-input.html#cb164-4"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="modes-of-input.html#cb230-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>)</span>
+<span id="cb230-2"><a href="modes-of-input.html#cb230-2"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb230-3"><a href="modes-of-input.html#cb230-3"></a>    <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, ...)</span>
+<span id="cb230-4"><a href="modes-of-input.html#cb230-4"></a>})</span></code></pre></div>
 <p>In track B, if it is specified as <code>stack</code> mode, points are added in a
 horizontal line (or visually, a circular line).</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="modes-of-input.html#cb165-1"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
-<span id="cb165-2"><a href="modes-of-input.html#cb165-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb165-3"><a href="modes-of-input.html#cb165-3"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>,...)</span>
-<span id="cb165-4"><a href="modes-of-input.html#cb165-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb165-5"><a href="modes-of-input.html#cb165-5"></a>        <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(i, i), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)</span>
-<span id="cb165-6"><a href="modes-of-input.html#cb165-6"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="modes-of-input.html#cb231-1"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb231-2"><a href="modes-of-input.html#cb231-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb231-3"><a href="modes-of-input.html#cb231-3"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>,...)</span>
+<span id="cb231-4"><a href="modes-of-input.html#cb231-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb231-5"><a href="modes-of-input.html#cb231-5"></a>        <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(i, i), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)</span>
+<span id="cb231-6"><a href="modes-of-input.html#cb231-6"></a>})</span></code></pre></div>
 <p>In track C, the input data is a list of two data frames. <code>panel.fun</code> is applied
 iterately on each data frame. The index of “current” index can be obtained by <code>getI(...)</code>.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="modes-of-input.html#cb166-1"></a>bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>)</span>
-<span id="cb166-2"><a href="modes-of-input.html#cb166-2"></a>bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>)</span>
-<span id="cb166-3"><a href="modes-of-input.html#cb166-3"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(bed1, bed2)</span>
-<span id="cb166-4"><a href="modes-of-input.html#cb166-4"></a><span class="kw">circos.genomicTrack</span>(bed_list, </span>
-<span id="cb166-5"><a href="modes-of-input.html#cb166-5"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb166-6"><a href="modes-of-input.html#cb166-6"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb166-7"><a href="modes-of-input.html#cb166-7"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> i, ...)</span>
-<span id="cb166-8"><a href="modes-of-input.html#cb166-8"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="modes-of-input.html#cb232-1"></a>bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>)</span>
+<span id="cb232-2"><a href="modes-of-input.html#cb232-2"></a>bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>)</span>
+<span id="cb232-3"><a href="modes-of-input.html#cb232-3"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(bed1, bed2)</span>
+<span id="cb232-4"><a href="modes-of-input.html#cb232-4"></a><span class="kw">circos.genomicTrack</span>(bed_list, </span>
+<span id="cb232-5"><a href="modes-of-input.html#cb232-5"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb232-6"><a href="modes-of-input.html#cb232-6"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb232-7"><a href="modes-of-input.html#cb232-7"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> i, ...)</span>
+<span id="cb232-8"><a href="modes-of-input.html#cb232-8"></a>})</span></code></pre></div>
 <p>In track D, the list of data frames is plotted under <code>stack</code> mode. Graphics
 corresponding to each data frame are added to a horizontal line.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="modes-of-input.html#cb167-1"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
-<span id="cb167-2"><a href="modes-of-input.html#cb167-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb167-3"><a href="modes-of-input.html#cb167-3"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb167-4"><a href="modes-of-input.html#cb167-4"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> i, ...)</span>
-<span id="cb167-5"><a href="modes-of-input.html#cb167-5"></a>        <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(i, i), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)</span>
-<span id="cb167-6"><a href="modes-of-input.html#cb167-6"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="modes-of-input.html#cb233-1"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb233-2"><a href="modes-of-input.html#cb233-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb233-3"><a href="modes-of-input.html#cb233-3"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb233-4"><a href="modes-of-input.html#cb233-4"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> i, ...)</span>
+<span id="cb233-5"><a href="modes-of-input.html#cb233-5"></a>        <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(i, i), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)</span>
+<span id="cb233-6"><a href="modes-of-input.html#cb233-6"></a>})</span></code></pre></div>
 <p>In track E, the data frame has four numeric columns. Under normal mode, all the four
 columns are used with the same genomic coordinates.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="modes-of-input.html#cb168-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
-<span id="cb168-2"><a href="modes-of-input.html#cb168-2"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
-<span id="cb168-3"><a href="modes-of-input.html#cb168-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb168-4"><a href="modes-of-input.html#cb168-4"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, ...)</span>
-<span id="cb168-5"><a href="modes-of-input.html#cb168-5"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="modes-of-input.html#cb234-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
+<span id="cb234-2"><a href="modes-of-input.html#cb234-2"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
+<span id="cb234-3"><a href="modes-of-input.html#cb234-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb234-4"><a href="modes-of-input.html#cb234-4"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, ...)</span>
+<span id="cb234-5"><a href="modes-of-input.html#cb234-5"></a>})</span></code></pre></div>
 <p>In track F, the data frame has four columns but is plotted under <code>stack</code> mode.
 Graphics for each column are added to a horizontal line. Current column can be
 obtained by <code>getI(...)</code>. Note here <code>value</code> in <code>panel.fun</code> is a data frame
 with only one column (which is the current numeric column).</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="modes-of-input.html#cb169-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
-<span id="cb169-2"><a href="modes-of-input.html#cb169-2"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
-<span id="cb169-3"><a href="modes-of-input.html#cb169-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb169-4"><a href="modes-of-input.html#cb169-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb169-5"><a href="modes-of-input.html#cb169-5"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> i, ...)</span>
-<span id="cb169-6"><a href="modes-of-input.html#cb169-6"></a>        <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(i, i), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)</span>
-<span id="cb169-7"><a href="modes-of-input.html#cb169-7"></a>})</span>
-<span id="cb169-8"><a href="modes-of-input.html#cb169-8"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="modes-of-input.html#cb235-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">300</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
+<span id="cb235-2"><a href="modes-of-input.html#cb235-2"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb235-3"><a href="modes-of-input.html#cb235-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb235-4"><a href="modes-of-input.html#cb235-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb235-5"><a href="modes-of-input.html#cb235-5"></a>        <span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> i, ...)</span>
+<span id="cb235-6"><a href="modes-of-input.html#cb235-6"></a>        <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(i, i), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)</span>
+<span id="cb235-7"><a href="modes-of-input.html#cb235-7"></a>})</span>
+<span id="cb235-8"><a href="modes-of-input.html#cb235-8"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-application-points"></span>
-<img src="10-modes-of-input_files/figure-html/genomic-application-points-1.png" alt="Add points under different modes." width="672" />
+<img src="11-modes-of-input_files/figure-html/genomic-application-points-1.png" alt="Add points under different modes." width="672" />
 <p class="caption">
-Figure 10.1: Add points under different modes.
+Figure 11.1: Add points under different modes.
 </p>
 </div>
 </div>
-<div id="modes-lines" class="section level3" number="10.3.2">
-<h3><span class="header-section-number">10.3.2</span> Lines</h3>
+<div id="modes-lines" class="section level3" number="11.3.2">
+<h3><span class="header-section-number">11.3.2</span> Lines</h3>
 <p>Similar as previous figure, only the first quarter in the circle is
-visualized. Examples are shown in Figure <a href="modes-of-input.html#fig:genomic-application-lines">10.2</a>.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="modes-of-input.html#cb170-1"></a><span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.08</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>,</span>
-<span id="cb170-2"><a href="modes-of-input.html#cb170-2"></a>    <span class="dt">canvas.xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">canvas.ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">gap.degree =</span> <span class="dv">270</span>,</span>
-<span id="cb170-3"><a href="modes-of-input.html#cb170-3"></a>    <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb170-4"><a href="modes-of-input.html#cb170-4"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="st">&quot;chr1&quot;</span>, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+visualized. Examples are shown in Figure <a href="modes-of-input.html#fig:genomic-application-lines">11.2</a>.</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="modes-of-input.html#cb236-1"></a><span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.08</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>,</span>
+<span id="cb236-2"><a href="modes-of-input.html#cb236-2"></a>    <span class="dt">canvas.xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">canvas.ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">gap.degree =</span> <span class="dv">270</span>,</span>
+<span id="cb236-3"><a href="modes-of-input.html#cb236-3"></a>    <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb236-4"><a href="modes-of-input.html#cb236-4"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="st">&quot;chr1&quot;</span>, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</span></code></pre></div>
 <p>In track A, it is the most simple way to add lines. Middle points of regions
 are used as the values on x-axes.</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="modes-of-input.html#cb171-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>)</span>
-<span id="cb171-2"><a href="modes-of-input.html#cb171-2"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
-<span id="cb171-3"><a href="modes-of-input.html#cb171-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb171-4"><a href="modes-of-input.html#cb171-4"></a>        <span class="kw">circos.genomicLines</span>(region, value)</span>
-<span id="cb171-5"><a href="modes-of-input.html#cb171-5"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="modes-of-input.html#cb237-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>)</span>
+<span id="cb237-2"><a href="modes-of-input.html#cb237-2"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
+<span id="cb237-3"><a href="modes-of-input.html#cb237-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb237-4"><a href="modes-of-input.html#cb237-4"></a>        <span class="kw">circos.genomicLines</span>(region, value)</span>
+<span id="cb237-5"><a href="modes-of-input.html#cb237-5"></a>})</span></code></pre></div>
 <p><code>circos.genomicLines()</code> is implemented by <code>circos.lines()</code>, thus, arguments
 supported in <code>circos.lines()</code> can also be in <code>circos.genomicLines()</code>. In track
 B, the area under the line is filled with color and in track C, type of the
 line is set to <code>h</code>.</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="modes-of-input.html#cb172-1"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
-<span id="cb172-2"><a href="modes-of-input.html#cb172-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb172-3"><a href="modes-of-input.html#cb172-3"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">area =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb172-4"><a href="modes-of-input.html#cb172-4"></a>})</span>
-<span id="cb172-5"><a href="modes-of-input.html#cb172-5"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
-<span id="cb172-6"><a href="modes-of-input.html#cb172-6"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb172-7"><a href="modes-of-input.html#cb172-7"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">type =</span> <span class="st">&quot;h&quot;</span>)</span>
-<span id="cb172-8"><a href="modes-of-input.html#cb172-8"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="modes-of-input.html#cb238-1"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
+<span id="cb238-2"><a href="modes-of-input.html#cb238-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb238-3"><a href="modes-of-input.html#cb238-3"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">area =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb238-4"><a href="modes-of-input.html#cb238-4"></a>})</span>
+<span id="cb238-5"><a href="modes-of-input.html#cb238-5"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
+<span id="cb238-6"><a href="modes-of-input.html#cb238-6"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb238-7"><a href="modes-of-input.html#cb238-7"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">type =</span> <span class="st">&quot;h&quot;</span>)</span>
+<span id="cb238-8"><a href="modes-of-input.html#cb238-8"></a>})</span></code></pre></div>
 <p>In track D, the input is a list of data frames. <code>panel.fun</code> is applied to each data frame
 iterately.</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="modes-of-input.html#cb173-1"></a>bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>)</span>
-<span id="cb173-2"><a href="modes-of-input.html#cb173-2"></a>bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>)</span>
-<span id="cb173-3"><a href="modes-of-input.html#cb173-3"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(bed1, bed2)</span>
-<span id="cb173-4"><a href="modes-of-input.html#cb173-4"></a><span class="kw">circos.genomicTrack</span>(bed_list, </span>
-<span id="cb173-5"><a href="modes-of-input.html#cb173-5"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb173-6"><a href="modes-of-input.html#cb173-6"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb173-7"><a href="modes-of-input.html#cb173-7"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> i, ...)</span>
-<span id="cb173-8"><a href="modes-of-input.html#cb173-8"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="modes-of-input.html#cb239-1"></a>bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>)</span>
+<span id="cb239-2"><a href="modes-of-input.html#cb239-2"></a>bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>)</span>
+<span id="cb239-3"><a href="modes-of-input.html#cb239-3"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(bed1, bed2)</span>
+<span id="cb239-4"><a href="modes-of-input.html#cb239-4"></a><span class="kw">circos.genomicTrack</span>(bed_list, </span>
+<span id="cb239-5"><a href="modes-of-input.html#cb239-5"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb239-6"><a href="modes-of-input.html#cb239-6"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb239-7"><a href="modes-of-input.html#cb239-7"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> i, ...)</span>
+<span id="cb239-8"><a href="modes-of-input.html#cb239-8"></a>})</span></code></pre></div>
 <p>In track E, the input is a list of data frames and is drawn under <code>stack</code>
 mode. Each genomic region is drawn as a horizontal segment and is put on a
 horizontal line where the width of the segment corresponds to the width of the
 genomc region. Under <code>stack</code> mode, for <code>circos.genomicLines()</code>, type of lines
 is only restricted to segments.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="modes-of-input.html#cb174-1"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
-<span id="cb174-2"><a href="modes-of-input.html#cb174-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb174-3"><a href="modes-of-input.html#cb174-3"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb174-4"><a href="modes-of-input.html#cb174-4"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> i, ...)</span>
-<span id="cb174-5"><a href="modes-of-input.html#cb174-5"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="modes-of-input.html#cb240-1"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb240-2"><a href="modes-of-input.html#cb240-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb240-3"><a href="modes-of-input.html#cb240-3"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb240-4"><a href="modes-of-input.html#cb240-4"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> i, ...)</span>
+<span id="cb240-5"><a href="modes-of-input.html#cb240-5"></a>})</span></code></pre></div>
 <p>In track F, the input is a data frame with four numeric columns. Each column
 is drawn under the normal mode where the same genomic coordinates are shared.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="modes-of-input.html#cb175-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
-<span id="cb175-2"><a href="modes-of-input.html#cb175-2"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
-<span id="cb175-3"><a href="modes-of-input.html#cb175-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb175-4"><a href="modes-of-input.html#cb175-4"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, ...)</span>
-<span id="cb175-5"><a href="modes-of-input.html#cb175-5"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="modes-of-input.html#cb241-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
+<span id="cb241-2"><a href="modes-of-input.html#cb241-2"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
+<span id="cb241-3"><a href="modes-of-input.html#cb241-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb241-4"><a href="modes-of-input.html#cb241-4"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, ...)</span>
+<span id="cb241-5"><a href="modes-of-input.html#cb241-5"></a>})</span></code></pre></div>
 <p>In track G, the data frame with four numeric columns are drawn under <code>stack</code> mode.
 All the four columns are drawn to four horizontal lines.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="modes-of-input.html#cb176-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
-<span id="cb176-2"><a href="modes-of-input.html#cb176-2"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
-<span id="cb176-3"><a href="modes-of-input.html#cb176-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb176-4"><a href="modes-of-input.html#cb176-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb176-5"><a href="modes-of-input.html#cb176-5"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> i, ...)</span>
-<span id="cb176-6"><a href="modes-of-input.html#cb176-6"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="modes-of-input.html#cb242-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">500</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
+<span id="cb242-2"><a href="modes-of-input.html#cb242-2"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb242-3"><a href="modes-of-input.html#cb242-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb242-4"><a href="modes-of-input.html#cb242-4"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb242-5"><a href="modes-of-input.html#cb242-5"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">col =</span> i, ...)</span>
+<span id="cb242-6"><a href="modes-of-input.html#cb242-6"></a>})</span></code></pre></div>
 <p>In track H, we specify <code>type</code> to <code>segment</code> and set different colors for segments.
 Note each segment is located at the y position defined in the numeric column.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="modes-of-input.html#cb177-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>)</span>
-<span id="cb177-2"><a href="modes-of-input.html#cb177-2"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
-<span id="cb177-3"><a href="modes-of-input.html#cb177-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb177-4"><a href="modes-of-input.html#cb177-4"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">type =</span> <span class="st">&quot;segment&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, </span>
-<span id="cb177-5"><a href="modes-of-input.html#cb177-5"></a>            <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="kw">nrow</span>(region)), ...)</span>
-<span id="cb177-6"><a href="modes-of-input.html#cb177-6"></a>})</span>
-<span id="cb177-7"><a href="modes-of-input.html#cb177-7"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="modes-of-input.html#cb243-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>)</span>
+<span id="cb243-2"><a href="modes-of-input.html#cb243-2"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
+<span id="cb243-3"><a href="modes-of-input.html#cb243-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb243-4"><a href="modes-of-input.html#cb243-4"></a>        <span class="kw">circos.genomicLines</span>(region, value, <span class="dt">type =</span> <span class="st">&quot;segment&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, </span>
+<span id="cb243-5"><a href="modes-of-input.html#cb243-5"></a>            <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="kw">nrow</span>(region)), ...)</span>
+<span id="cb243-6"><a href="modes-of-input.html#cb243-6"></a>})</span>
+<span id="cb243-7"><a href="modes-of-input.html#cb243-7"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-application-lines"></span>
-<img src="10-modes-of-input_files/figure-html/genomic-application-lines-1.png" alt="Add lines under different modes." width="672" />
+<img src="11-modes-of-input_files/figure-html/genomic-application-lines-1.png" alt="Add lines under different modes." width="672" />
 <p class="caption">
-Figure 10.2: Add lines under different modes.
+Figure 11.2: Add lines under different modes.
 </p>
 </div>
 </div>
-<div id="modes-rectangles" class="section level3" number="10.3.3">
-<h3><span class="header-section-number">10.3.3</span> Rectangles</h3>
+<div id="modes-rectangles" class="section level3" number="11.3.3">
+<h3><span class="header-section-number">11.3.3</span> Rectangles</h3>
 <p>Again, only the first quarter of the circle is initialized. For rectangles,
 the filled colors are always used to represent numeric values. Here we define
 a color mapping function <code>col_fun</code> to map values to colors. Examples are in
-Figure <a href="modes-of-input.html#fig:genomic-application-rect">10.3</a>.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="modes-of-input.html#cb178-1"></a><span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.15</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>,</span>
-<span id="cb178-2"><a href="modes-of-input.html#cb178-2"></a>    <span class="dt">canvas.xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">canvas.ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">gap.degree =</span> <span class="dv">270</span>)</span>
-<span id="cb178-3"><a href="modes-of-input.html#cb178-3"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="st">&quot;chr1&quot;</span>, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
-<span id="cb178-4"><a href="modes-of-input.html#cb178-4"></a>col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
+Figure <a href="modes-of-input.html#fig:genomic-application-rect">11.3</a>.</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="modes-of-input.html#cb244-1"></a><span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.15</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>,</span>
+<span id="cb244-2"><a href="modes-of-input.html#cb244-2"></a>    <span class="dt">canvas.xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">canvas.ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">gap.degree =</span> <span class="dv">270</span>)</span>
+<span id="cb244-3"><a href="modes-of-input.html#cb244-3"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="st">&quot;chr1&quot;</span>, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
+<span id="cb244-4"><a href="modes-of-input.html#cb244-4"></a>col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
 <p>To draw heatmaps, you probably want to use the <code>stack</code> mode. In track A, <code>bed</code>
 has four numeric columns and <code>stack</code> mode is used to arrange the heatmap. You
 can see rectangles are stacked for a certain genomic region.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="modes-of-input.html#cb179-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
-<span id="cb179-2"><a href="modes-of-input.html#cb179-2"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
-<span id="cb179-3"><a href="modes-of-input.html#cb179-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb179-4"><a href="modes-of-input.html#cb179-4"></a>        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">col =</span> <span class="kw">col_fun</span>(value[[<span class="dv">1</span>]]), <span class="dt">border =</span> <span class="ot">NA</span>, ...)</span>
-<span id="cb179-5"><a href="modes-of-input.html#cb179-5"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="modes-of-input.html#cb245-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
+<span id="cb245-2"><a href="modes-of-input.html#cb245-2"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb245-3"><a href="modes-of-input.html#cb245-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb245-4"><a href="modes-of-input.html#cb245-4"></a>        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">col =</span> <span class="kw">col_fun</span>(value[[<span class="dv">1</span>]]), <span class="dt">border =</span> <span class="ot">NA</span>, ...)</span>
+<span id="cb245-5"><a href="modes-of-input.html#cb245-5"></a>})</span></code></pre></div>
 <p>In track B, the input is a list of data frames. Under <code>stack</code> mode, each data
 frame is added to a horizontal line. Since genomic positions for different
 data frames can be different, you may see in the figure, positions for the two
@@ -585,38 +597,38 @@ sets of rectangles are different.</p>
 make them completely fill the cell in the vertical direction. <code>ytop</code> and
 <code>ybottom</code> can be used to adjust the height of rectangles. Note each line of
 rectangles is at <code>y = i</code> and the default height of rectangles are 1.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="modes-of-input.html#cb180-1"></a>bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)</span>
-<span id="cb180-2"><a href="modes-of-input.html#cb180-2"></a>bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)</span>
-<span id="cb180-3"><a href="modes-of-input.html#cb180-3"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(bed1, bed2)</span>
-<span id="cb180-4"><a href="modes-of-input.html#cb180-4"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
-<span id="cb180-5"><a href="modes-of-input.html#cb180-5"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb180-6"><a href="modes-of-input.html#cb180-6"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb180-7"><a href="modes-of-input.html#cb180-7"></a>        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop =</span> i <span class="op">+</span><span class="st"> </span><span class="fl">0.3</span>, <span class="dt">ybottom =</span> i <span class="op">-</span><span class="st"> </span><span class="fl">0.3</span>,</span>
-<span id="cb180-8"><a href="modes-of-input.html#cb180-8"></a>            <span class="dt">col =</span> <span class="kw">col_fun</span>(value[[<span class="dv">1</span>]]), ...)</span>
-<span id="cb180-9"><a href="modes-of-input.html#cb180-9"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="modes-of-input.html#cb246-1"></a>bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)</span>
+<span id="cb246-2"><a href="modes-of-input.html#cb246-2"></a>bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)</span>
+<span id="cb246-3"><a href="modes-of-input.html#cb246-3"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(bed1, bed2)</span>
+<span id="cb246-4"><a href="modes-of-input.html#cb246-4"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">stack =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb246-5"><a href="modes-of-input.html#cb246-5"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb246-6"><a href="modes-of-input.html#cb246-6"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb246-7"><a href="modes-of-input.html#cb246-7"></a>        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop =</span> i <span class="op">+</span><span class="st"> </span><span class="fl">0.3</span>, <span class="dt">ybottom =</span> i <span class="op">-</span><span class="st"> </span><span class="fl">0.3</span>,</span>
+<span id="cb246-8"><a href="modes-of-input.html#cb246-8"></a>            <span class="dt">col =</span> <span class="kw">col_fun</span>(value[[<span class="dv">1</span>]]), ...)</span>
+<span id="cb246-9"><a href="modes-of-input.html#cb246-9"></a>})</span></code></pre></div>
 <p>In track C, we implement same graphics as in track B, but with the normal mode.
 Under <code>stack</code> mode, data range on y axes and positions of rectangles are adjusted
 internally. Here we explicitly adjust it under the normal mode.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="modes-of-input.html#cb181-1"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>), </span>
-<span id="cb181-2"><a href="modes-of-input.html#cb181-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb181-3"><a href="modes-of-input.html#cb181-3"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
-<span id="cb181-4"><a href="modes-of-input.html#cb181-4"></a>        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop =</span> i <span class="op">+</span><span class="st"> </span><span class="fl">0.3</span>, <span class="dt">ybottom =</span> i <span class="op">-</span><span class="st"> </span><span class="fl">0.3</span>, </span>
-<span id="cb181-5"><a href="modes-of-input.html#cb181-5"></a>            <span class="dt">col =</span> <span class="kw">col_fun</span>(value[[<span class="dv">1</span>]]), ...)</span>
-<span id="cb181-6"><a href="modes-of-input.html#cb181-6"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="modes-of-input.html#cb247-1"></a><span class="kw">circos.genomicTrack</span>(bed_list, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>), </span>
+<span id="cb247-2"><a href="modes-of-input.html#cb247-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb247-3"><a href="modes-of-input.html#cb247-3"></a>        i =<span class="st"> </span><span class="kw">getI</span>(...)</span>
+<span id="cb247-4"><a href="modes-of-input.html#cb247-4"></a>        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop =</span> i <span class="op">+</span><span class="st"> </span><span class="fl">0.3</span>, <span class="dt">ybottom =</span> i <span class="op">-</span><span class="st"> </span><span class="fl">0.3</span>, </span>
+<span id="cb247-5"><a href="modes-of-input.html#cb247-5"></a>            <span class="dt">col =</span> <span class="kw">col_fun</span>(value[[<span class="dv">1</span>]]), ...)</span>
+<span id="cb247-6"><a href="modes-of-input.html#cb247-6"></a>})</span></code></pre></div>
 <p>In track D, rectangles are used to make barplots. We specify the position of
 the top of bars by <code>ytop.column</code> (1 means the first column in <code>value</code>).</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="modes-of-input.html#cb182-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>)</span>
-<span id="cb182-2"><a href="modes-of-input.html#cb182-2"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
-<span id="cb182-3"><a href="modes-of-input.html#cb182-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb182-4"><a href="modes-of-input.html#cb182-4"></a>        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop.column =</span> <span class="dv">1</span>, <span class="dt">ybottom =</span> <span class="dv">0</span>, </span>
-<span id="cb182-5"><a href="modes-of-input.html#cb182-5"></a>            <span class="dt">col =</span> <span class="kw">ifelse</span>(value[[<span class="dv">1</span>]] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), ...)</span>
-<span id="cb182-6"><a href="modes-of-input.html#cb182-6"></a>        <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)</span>
-<span id="cb182-7"><a href="modes-of-input.html#cb182-7"></a>})</span>
-<span id="cb182-8"><a href="modes-of-input.html#cb182-8"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="modes-of-input.html#cb248-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>)</span>
+<span id="cb248-2"><a href="modes-of-input.html#cb248-2"></a><span class="kw">circos.genomicTrack</span>(bed, </span>
+<span id="cb248-3"><a href="modes-of-input.html#cb248-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb248-4"><a href="modes-of-input.html#cb248-4"></a>        <span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop.column =</span> <span class="dv">1</span>, <span class="dt">ybottom =</span> <span class="dv">0</span>, </span>
+<span id="cb248-5"><a href="modes-of-input.html#cb248-5"></a>            <span class="dt">col =</span> <span class="kw">ifelse</span>(value[[<span class="dv">1</span>]] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), ...)</span>
+<span id="cb248-6"><a href="modes-of-input.html#cb248-6"></a>        <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000040&quot;</span>)</span>
+<span id="cb248-7"><a href="modes-of-input.html#cb248-7"></a>})</span>
+<span id="cb248-8"><a href="modes-of-input.html#cb248-8"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-application-rect"></span>
-<img src="10-modes-of-input_files/figure-html/genomic-application-rect-1.png" alt="Add rectangles under different modes." width="672" />
+<img src="11-modes-of-input_files/figure-html/genomic-application-rect-1.png" alt="Add rectangles under different modes." width="672" />
 <p class="caption">
-Figure 10.3: Add rectangles under different modes.
+Figure 11.3: Add rectangles under different modes.
 </p>
 </div>
 
@@ -660,7 +672,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jokergoo/circlize_book/edit/master/10-modes-of-input.Rmd",
+"link": "https://github.com/jokergoo/circlize_book/edit/master/11-modes-of-input.Rmd",
 "text": "Edit"
 },
 "history": {

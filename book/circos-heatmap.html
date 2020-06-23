@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 The circos.heatmap() function | Circular Visualization in R</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 The circos.heatmap() function | Circular Visualization in R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bookdown.org/jokergoo/circlize-book/book" />
+  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="github-repo" content="jokergoo/circlize_book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 The circos.heatmap() function | Circular Visualization in R" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+
+<meta name="author" content="Zuguang Gu" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="high-level-plots.html"/>
+<link rel="next" href="advanced-layout.html"/>
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Circular Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I General Functionality</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#principle-of-design"><i class="fa fa-check"></i><b>1.1</b> Principle of design</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#a-qiuck-glance"><i class="fa fa-check"></i><b>1.2</b> A quick glance</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="circular-layout.html"><a href="circular-layout.html#coordinate-transformation"><i class="fa fa-check"></i><b>2.1</b> Coordinate transformation</a></li>
+<li class="chapter" data-level="2.2" data-path="circular-layout.html"><a href="circular-layout.html#rules-for-making-the-circular-plot"><i class="fa fa-check"></i><b>2.2</b> Rules for making the circular plot</a></li>
+<li class="chapter" data-level="2.3" data-path="circular-layout.html"><a href="circular-layout.html#sectors-and-tracks"><i class="fa fa-check"></i><b>2.3</b> Sectors and tracks</a></li>
+<li class="chapter" data-level="2.4" data-path="circular-layout.html"><a href="circular-layout.html#graphic-parameters"><i class="fa fa-check"></i><b>2.4</b> Graphic parameters</a></li>
+<li class="chapter" data-level="2.5" data-path="circular-layout.html"><a href="circular-layout.html#create-plotting-regions"><i class="fa fa-check"></i><b>2.5</b> Create plotting regions</a></li>
+<li class="chapter" data-level="2.6" data-path="circular-layout.html"><a href="circular-layout.html#update-plotting-regions"><i class="fa fa-check"></i><b>2.6</b> Update plotting regions</a></li>
+<li class="chapter" data-level="2.7" data-path="circular-layout.html"><a href="circular-layout.html#panel-fun"><i class="fa fa-check"></i><b>2.7</b> <code>panel.fun</code> argument</a></li>
+<li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
+<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The functions measured in absolute units</a></li>
+<li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="circular-layout.html"><a href="circular-layout.html#set-gaps-between-tracks"><i class="fa fa-check"></i><b>2.9</b> Set gaps between tracks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="graphics.html"><a href="graphics.html#setting-colors"><i class="fa fa-check"></i><b>3.1</b> Setting colors</a></li>
+<li class="chapter" data-level="3.2" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>3.2</b> Points</a></li>
+<li class="chapter" data-level="3.3" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>3.3</b> Lines</a></li>
+<li class="chapter" data-level="3.4" data-path="graphics.html"><a href="graphics.html#segments"><i class="fa fa-check"></i><b>3.4</b> Segments</a></li>
+<li class="chapter" data-level="3.5" data-path="graphics.html"><a href="graphics.html#text"><i class="fa fa-check"></i><b>3.5</b> Text</a></li>
+<li class="chapter" data-level="3.6" data-path="graphics.html"><a href="graphics.html#rectangles"><i class="fa fa-check"></i><b>3.6</b> Rectangles and polygons</a></li>
+<li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.7</b> Axes</a></li>
+<li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#barplots-boxplots-and-violin-plots"><i class="fa fa-check"></i><b>3.8</b> Barplots, boxplots and violin plots</a></li>
+<li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#circular-arrows"><i class="fa fa-check"></i><b>3.9</b> Circular arrows</a></li>
+<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.10</b> Raster image</a></li>
+<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.11</b> Links</a></li>
+<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.12</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.13</b> Work together with the base graphic system</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
+<li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="high-level-plots.html"><a href="high-level-plots.html#circular-barplot"><i class="fa fa-check"></i><b>5.1</b> Circular barplots</a></li>
+<li class="chapter" data-level="5.2" data-path="high-level-plots.html"><a href="high-level-plots.html#histograms"><i class="fa fa-check"></i><b>5.2</b> Histograms</a></li>
+<li class="chapter" data-level="5.3" data-path="high-level-plots.html"><a href="high-level-plots.html#phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Phylogenetic trees</a></li>
+<li class="chapter" data-level="5.4" data-path="high-level-plots.html"><a href="high-level-plots.html#heatmaps"><i class="fa fa-check"></i><b>5.4</b> Manually create heatmaps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="circos-heatmap.html"><a href="circos-heatmap.html"><i class="fa fa-check"></i><b>6</b> The <code>circos.heatmap()</code> function</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circos-heatmap-input-data"><i class="fa fa-check"></i><b>6.1</b> Input data</a></li>
+<li class="chapter" data-level="6.2" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circular-layout-1"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
+<li class="chapter" data-level="6.3" data-path="circos-heatmap.html"><a href="circos-heatmap.html#dendrograms-and-row-names"><i class="fa fa-check"></i><b>6.3</b> Dendrograms and row names</a></li>
+<li class="chapter" data-level="6.4" data-path="circos-heatmap.html"><a href="circos-heatmap.html#clustering"><i class="fa fa-check"></i><b>6.4</b> Clustering</a></li>
+<li class="chapter" data-level="6.5" data-path="circos-heatmap.html"><a href="circos-heatmap.html#callback-on-dendrograms"><i class="fa fa-check"></i><b>6.5</b> Callback on dendrograms</a></li>
+<li class="chapter" data-level="6.6" data-path="circos-heatmap.html"><a href="circos-heatmap.html#multiple-heatmap-tracks"><i class="fa fa-check"></i><b>6.6</b> Multiple heatmap tracks</a></li>
+<li class="chapter" data-level="6.7" data-path="circos-heatmap.html"><a href="circos-heatmap.html#with-other-tracks"><i class="fa fa-check"></i><b>6.7</b> With other tracks</a></li>
+<li class="chapter" data-level="6.8" data-path="circos-heatmap.html"><a href="circos-heatmap.html#add-annotations"><i class="fa fa-check"></i><b>6.8</b> Add annotations</a></li>
+<li class="chapter" data-level="6.9" data-path="circos-heatmap.html"><a href="circos-heatmap.html#a-complex-example-of-circular-heatmaps"><i class="fa fa-check"></i><b>6.9</b> A complex example of circular heatmaps</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>7</b> Advanced layout</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="advanced-layout.html"><a href="advanced-layout.html#zooming-of-sectors"><i class="fa fa-check"></i><b>7.1</b> Zooming of sectors</a></li>
+<li class="chapter" data-level="7.2" data-path="advanced-layout.html"><a href="advanced-layout.html#part-circle"><i class="fa fa-check"></i><b>7.2</b> Visualize part of the circle</a></li>
+<li class="chapter" data-level="7.3" data-path="advanced-layout.html"><a href="advanced-layout.html#combine-circular-plots"><i class="fa fa-check"></i><b>7.3</b> Combine multiple circular plots</a></li>
+<li class="chapter" data-level="7.4" data-path="advanced-layout.html"><a href="advanced-layout.html#arrange-multiple-plots"><i class="fa fa-check"></i><b>7.4</b> Arrange multiple plots</a></li>
+</ul></li>
+<li class="part"><span><b>II Applications in Genomics</b></span></li>
+<li class="chapter" data-level="8" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>8</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="genomic-introduction.html"><a href="genomic-introduction.html#input-data"><i class="fa fa-check"></i><b>8.1</b> Input data</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>9</b> Initialize with genomic data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>9.1</b> Initialize with cytoband data</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>9.1.1</b> Basic usage</a></li>
+<li class="chapter" data-level="9.1.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#pre-defined-tracks"><i class="fa fa-check"></i><b>9.1.2</b> Pre-defined tracks</a></li>
+<li class="chapter" data-level="9.1.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#other-general-settings"><i class="fa fa-check"></i><b>9.1.3</b> Other general settings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>9.2</b> Customize chromosome track</a></li>
+<li class="chapter" data-level="9.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>9.3</b> Initialize with general genomic category</a></li>
+<li class="chapter" data-level="9.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>9.4</b> Zooming chromosomes</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>10</b> Create plotting regions for genomic data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-points"><i class="fa fa-check"></i><b>10.1</b> Points</a></li>
+<li class="chapter" data-level="10.2" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-lines"><i class="fa fa-check"></i><b>10.2</b> Lines</a></li>
+<li class="chapter" data-level="10.3" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-text"><i class="fa fa-check"></i><b>10.3</b> Text</a></li>
+<li class="chapter" data-level="10.4" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-rectangles"><i class="fa fa-check"></i><b>10.4</b> Rectangles</a></li>
+<li class="chapter" data-level="10.5" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-links"><i class="fa fa-check"></i><b>10.5</b> Links</a></li>
+<li class="chapter" data-level="10.6" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#mixed-use-of-general-circlize-functions"><i class="fa fa-check"></i><b>10.6</b> Mixed use of general circlize functions</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>11</b> modes for <code>circos.genomicTrack()</code></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>11.1</b> Normal mode</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame"><i class="fa fa-check"></i><b>11.1.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="11.1.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames"><i class="fa fa-check"></i><b>11.1.2</b> Input is a list of data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>11.2</b> Stack mode</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame-1"><i class="fa fa-check"></i><b>11.2.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="11.2.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames-1"><i class="fa fa-check"></i><b>11.2.2</b> Input is a list of data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>11.3</b> Applications</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-points"><i class="fa fa-check"></i><b>11.3.1</b> Points</a></li>
+<li class="chapter" data-level="11.3.2" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-lines"><i class="fa fa-check"></i><b>11.3.2</b> Lines</a></li>
+<li class="chapter" data-level="11.3.3" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-rectangles"><i class="fa fa-check"></i><b>11.3.3</b> Rectangles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>12</b> High-level genomic functions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>12.1</b> Ideograms</a></li>
+<li class="chapter" data-level="12.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>12.2</b> Heatmaps</a></li>
+<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
+<li class="chapter" data-level="12.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>12.4</b> Genomic axes</a></li>
+<li class="chapter" data-level="12.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>12.5</b> Genomic density and Rainfall plot</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>13</b> Nested zooming</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="nested-zooming.html"><a href="nested-zooming.html#basic-idea"><i class="fa fa-check"></i><b>13.1</b> Basic idea</a></li>
+<li class="chapter" data-level="13.2" data-path="nested-zooming.html"><a href="nested-zooming.html#visualization-of-dmrs-from-tagmentation-based-wgbs"><i class="fa fa-check"></i><b>13.2</b> Visualization of DMRs from tagmentation-based WGBS</a></li>
+</ul></li>
+<li class="part"><span><b>III Visualize Relations</b></span></li>
+<li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
+<li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
+<li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#set-grid-colors"><i class="fa fa-check"></i><b>14.3.1</b> Set grid colors</a></li>
+<li class="chapter" data-level="14.3.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-color"><i class="fa fa-check"></i><b>14.3.2</b> Set link colors</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-border"><i class="fa fa-check"></i><b>14.4</b> Link border</a></li>
+<li class="chapter" data-level="14.5" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#highlight-links"><i class="fa fa-check"></i><b>14.5</b> Highlight links</a></li>
+<li class="chapter" data-level="14.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>14.6</b> Orders of links</a></li>
+<li class="chapter" data-level="14.7" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#z-index-of-adding-links"><i class="fa fa-check"></i><b>14.7</b> z-index of adding links</a></li>
+<li class="chapter" data-level="14.8" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#self-links"><i class="fa fa-check"></i><b>14.8</b> Self-links</a></li>
+<li class="chapter" data-level="14.9" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#symmetric-matrix"><i class="fa fa-check"></i><b>14.9</b> Symmetric matrix</a></li>
+<li class="chapter" data-level="14.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#directional-relations"><i class="fa fa-check"></i><b>14.10</b> Directional relations</a></li>
+<li class="chapter" data-level="14.11" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#scaling"><i class="fa fa-check"></i><b>14.11</b> Scaling</a></li>
+<li class="chapter" data-level="14.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>14.12</b> Reduce</a></li>
+<li class="chapter" data-level="14.13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>14.13</b> Input as a data frame</a>
+<ul>
+<li class="chapter" data-level="14.13.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#multiple-links-between-two-sectors"><i class="fa fa-check"></i><b>14.13.1</b> Multiple links between two sectors</a></li>
+<li class="chapter" data-level="14.13.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#unequal-width-of-the-link-ends"><i class="fa fa-check"></i><b>14.13.2</b> Unequal width of the link ends</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>15</b> Advanced usage of <code>chordDiagram()</code></a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>15.1</b> Organization of tracks</a></li>
+<li class="chapter" data-level="15.2" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-labels"><i class="fa fa-check"></i><b>15.2</b> Customize sector labels</a></li>
+<li class="chapter" data-level="15.3" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-axes"><i class="fa fa-check"></i><b>15.3</b> Customize sector axes</a></li>
+<li class="chapter" data-level="15.4" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#put-horizontally-or-vertically-symmetric"><i class="fa fa-check"></i><b>15.4</b> Put horizontally or vertically symmetric</a></li>
+<li class="chapter" data-level="15.5" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#compare-two-chord-diagrams"><i class="fa fa-check"></i><b>15.5</b> Compare two Chord diagrams</a></li>
+<li class="chapter" data-level="15.6" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#multiple-group-chord-diagram"><i class="fa fa-check"></i><b>15.6</b> Multiple-group Chord diagram</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>16</b> A complex example of Chord diagram</a></li>
+<li class="part"><span><b>IV Others</b></span></li>
+<li class="chapter" data-level="17" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>17</b> Make fun of the package</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>17.1</b> A clock</a></li>
+<li class="chapter" data-level="17.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>17.2</b> A dartboard</a></li>
+<li class="chapter" data-level="17.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>17.3</b> Ba-Gua and Tai-Ji</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="circos-heatmap" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> The <code>circos.heatmap()</code> function</h1>
+<p>Circular heatmaps are pretty. With <strong>circlize</strong> package, it is possible to
+implement circular heatmaps by the low-level function <code>circos.rect()</code> as
+described in previous Chapter. From version 0.4.10, there is a new high-level function
+<code>circos.heatmap()</code> which greatly simplifies the creation of circular heatmaps. In this
+section, I will demostrate the usage of the new <code>circos.heatmap()</code> function.</p>
+<p>First let’s generate a random matrix and randomly split it into five groups.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="circos-heatmap.html#cb113-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb113-2"><a href="circos-heatmap.html#cb113-2"></a>mat1 =<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">cbind</span>(<span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">50</span><span class="op">*</span><span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">1</span>), <span class="dt">nr =</span> <span class="dv">50</span>), </span>
+<span id="cb113-3"><a href="circos-heatmap.html#cb113-3"></a>                   <span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">50</span><span class="op">*</span><span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">-1</span>), <span class="dt">nr =</span> <span class="dv">50</span>)),</span>
+<span id="cb113-4"><a href="circos-heatmap.html#cb113-4"></a>             <span class="kw">cbind</span>(<span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">50</span><span class="op">*</span><span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">-1</span>), <span class="dt">nr =</span> <span class="dv">50</span>), </span>
+<span id="cb113-5"><a href="circos-heatmap.html#cb113-5"></a>                   <span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">50</span><span class="op">*</span><span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">1</span>), <span class="dt">nr =</span> <span class="dv">50</span>))</span>
+<span id="cb113-6"><a href="circos-heatmap.html#cb113-6"></a>            )</span>
+<span id="cb113-7"><a href="circos-heatmap.html#cb113-7"></a><span class="kw">rownames</span>(mat1) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;R&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)</span>
+<span id="cb113-8"><a href="circos-heatmap.html#cb113-8"></a><span class="kw">colnames</span>(mat1) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span>
+<span id="cb113-9"><a href="circos-heatmap.html#cb113-9"></a>mat1 =<span class="st"> </span>mat1[<span class="kw">sample</span>(<span class="dv">100</span>, <span class="dv">100</span>), ] <span class="co"># randomly permute rows</span></span>
+<span id="cb113-10"><a href="circos-heatmap.html#cb113-10"></a>split =<span class="st"> </span><span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb113-11"><a href="circos-heatmap.html#cb113-11"></a>split =<span class="st"> </span><span class="kw">factor</span>(split, <span class="dt">levels =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span></code></pre></div>
+<p>Following plot is the normal layout of the heatmap (by <a href="https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html">the <strong>ComplexHeatmap</strong> package</a>).</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="circos-heatmap.html#cb114-1"></a><span class="kw">library</span>(ComplexHeatmap)</span>
+<span id="cb114-2"><a href="circos-heatmap.html#cb114-2"></a><span class="kw">Heatmap</span>(mat1, <span class="dt">row_split =</span> split)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-2-1.png" alt="A normal heatmap." width="384" />
+<p class="caption">
+Figure 6.1: A normal heatmap.
+</p>
+</div>
+<p>In the next sections, I will demonstrate how to visualize it circularly.</p>
+<div id="circos-heatmap-input-data" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Input data</h2>
+<p>The input for <code>circos.heatmap()</code> should be a matrix (or a vector which will be
+converted to a one-column matrix). If the matrix is split into groups, a
+categorical variable must be specified with the <code>split</code> argument. Note the
+value of <code>spilt</code> should be a character vector or a factor. If it is a numeric
+vector, it is converted to characters internally.</p>
+<p>Colors are important aesthetic mappings for the values in the matrix. In
+<code>circos.heatmap()</code>, users must specify <code>col</code> argument with a user-defined
+color schema. If the matrix is continuous numeric, value for <code>col</code> should be a
+color mapping generated by <code>colorRamp2()</code>, and if
+the matrix is in characters, value of <code>col</code> should be a named color vector.</p>
+<p>Following plot is the circular version of the previous heatmap. Note the
+matrix rows distribute in the circular direction and the matrix columns
+distribute in the radical direction. In following plot, the circle is split
+into five sectors where each sector corresponds to one row group.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="circos-heatmap.html#cb115-1"></a><span class="kw">library</span>(circlize) <span class="co"># &gt;= 0.4.10</span></span>
+<span id="cb115-2"><a href="circos-heatmap.html#cb115-2"></a>col_fun1 =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb115-3"><a href="circos-heatmap.html#cb115-3"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-3-1.png" alt="A circular heatmap which has been split." width="672" />
+<p class="caption">
+Figure 6.2: A circular heatmap which has been split.
+</p>
+</div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="circos-heatmap.html#cb116-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p><strong>There is one thing very important that is after creating the circular heatmap,
+you must call <code>circos.clear()</code> to remove the layout completely.</strong> I will explain
+this point later in this post.</p>
+<p>If <code>split</code> is not specified, there is only one big sector that contains
+the complete heatmap.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="circos-heatmap.html#cb117-1"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">col =</span> col_fun1)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-4-1.png" alt="A circular heatmap which no split." width="672" />
+<p class="caption">
+Figure 6.3: A circular heatmap which no split.
+</p>
+</div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="circos-heatmap.html#cb118-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+</div>
+<div id="circular-layout-1" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Circular layout</h2>
+<p>Similar as other circular plots generated by <strong>circlize</strong> package, the circular layout
+can be controlled by <code>circos.par()</code> before making the plot.</p>
+<p>The parameters for the heatmap track can be controlled in <code>circos.heatmap()</code> function,
+such as <code>track.height</code> (height of the track) and <code>bg.border</code> (border of the track).</p>
+<p>In the following example, The labels for the sectors are added by setting the
+<code>show.sector.labels</code> argument. The order of sectors is <code>c("a", "b", "c", "d", "e")</code> clock-wisely. You can see in the following plot, sector <code>a</code> starts
+from <span class="math inline">\(\theta = 90^{\circ}\)</span>.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="circos-heatmap.html#cb119-1"></a><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>, <span class="dt">gap.degree =</span> <span class="dv">10</span>)</span>
+<span id="cb119-2"><a href="circos-heatmap.html#cb119-2"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">track.height =</span> <span class="fl">0.4</span>, </span>
+<span id="cb119-3"><a href="circos-heatmap.html#cb119-3"></a>    <span class="dt">bg.border =</span> <span class="st">&quot;green&quot;</span>, <span class="dt">bg.lwd =</span> <span class="dv">2</span>, <span class="dt">bg.lty =</span> <span class="dv">2</span>, <span class="dt">show.sector.labels =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-5-1.png" alt="Circular heatmap. Control the layout." width="672" />
+<p class="caption">
+Figure 6.4: Circular heatmap. Control the layout.
+</p>
+</div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="circos-heatmap.html#cb120-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p>If the value for <code>split</code> argument is a factor, the order of the factor levels
+controls the order of heatmaps. If <code>split</code> is a simple vector, the order of
+heatmaps is <code>unique(split)</code>.</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="circos-heatmap.html#cb121-1"></a><span class="co"># note since circos.clear() was called in the previous plot,</span></span>
+<span id="cb121-2"><a href="circos-heatmap.html#cb121-2"></a><span class="co"># now the layout starts from theta = 0 (the first sector is &#39;e&#39;)</span></span>
+<span id="cb121-3"><a href="circos-heatmap.html#cb121-3"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> <span class="kw">factor</span>(split, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;e&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>)), </span>
+<span id="cb121-4"><a href="circos-heatmap.html#cb121-4"></a>    <span class="dt">col =</span> col_fun1, <span class="dt">show.sector.labels =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-6-1.png" alt="Circular heatmap. Control the order of heatmaps." width="672" />
+<p class="caption">
+Figure 6.5: Circular heatmap. Control the order of heatmaps.
+</p>
+</div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="circos-heatmap.html#cb122-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+</div>
+<div id="dendrograms-and-row-names" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Dendrograms and row names</h2>
+<p>By default, the numeric matrix is clustered on rows, thus, there are
+dendrograms generated from the clustering. <code>dend.side</code> argument controls the
+position of dendrograms relative to the heatmap track. Note, the dendrograms
+are on a separated track.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="circos-heatmap.html#cb123-1"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">dend.side =</span> <span class="st">&quot;inside&quot;</span>)</span>
+<span id="cb123-2"><a href="circos-heatmap.html#cb123-2"></a><span class="kw">circos.clear</span>()</span>
+<span id="cb123-3"><a href="circos-heatmap.html#cb123-3"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">dend.side =</span> <span class="st">&quot;outside&quot;</span>)</span>
+<span id="cb123-4"><a href="circos-heatmap.html#cb123-4"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-8-1.png" alt="Circular heatmap. Control the dendrograms." width="768" />
+<p class="caption">
+Figure 6.6: Circular heatmap. Control the dendrograms.
+</p>
+</div>
+<p>The height of the dendrograms is controlled by <code>dend.track.height</code> argument.</p>
+<p>Row names of the matrix can be drawn by setting <code>rownames.side</code> argument.
+Row names are also drawn in a separated track.</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="circos-heatmap.html#cb124-1"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">rownames.side =</span> <span class="st">&quot;inside&quot;</span>)</span>
+<span id="cb124-2"><a href="circos-heatmap.html#cb124-2"></a><span class="kw">circos.clear</span>()</span>
+<span id="cb124-3"><a href="circos-heatmap.html#cb124-3"></a><span class="kw">text</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="st">&#39;rownames.side = &quot;inside&quot;&#39;</span>)</span>
+<span id="cb124-4"><a href="circos-heatmap.html#cb124-4"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">rownames.side =</span> <span class="st">&quot;outside&quot;</span>)</span>
+<span id="cb124-5"><a href="circos-heatmap.html#cb124-5"></a><span class="kw">circos.clear</span>()</span>
+<span id="cb124-6"><a href="circos-heatmap.html#cb124-6"></a><span class="kw">text</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="st">&#39;rownames.side = &quot;outside&quot;&#39;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-10-1.png" alt="Circular heatmap. Control the row names." width="768" />
+<p class="caption">
+Figure 6.7: Circular heatmap. Control the row names.
+</p>
+</div>
+<p>Row names of the matrix and the dendrograms can be both drawn. Of course, they
+cannot be on the same side of the heatmap track.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="circos-heatmap.html#cb125-1"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">dend.side =</span> <span class="st">&quot;inside&quot;</span>, </span>
+<span id="cb125-2"><a href="circos-heatmap.html#cb125-2"></a>    <span class="dt">rownames.side =</span> <span class="st">&quot;outside&quot;</span>)</span>
+<span id="cb125-3"><a href="circos-heatmap.html#cb125-3"></a><span class="kw">circos.clear</span>()</span>
+<span id="cb125-4"><a href="circos-heatmap.html#cb125-4"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">dend.side =</span> <span class="st">&quot;outside&quot;</span>, </span>
+<span id="cb125-5"><a href="circos-heatmap.html#cb125-5"></a>    <span class="dt">rownames.side =</span> <span class="st">&quot;inside&quot;</span>)</span>
+<span id="cb125-6"><a href="circos-heatmap.html#cb125-6"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-12-1.png" alt="Circular heatmap. Control both the dendrograms and row names." width="768" />
+<p class="caption">
+Figure 6.8: Circular heatmap. Control both the dendrograms and row names.
+</p>
+</div>
+<p>Graphic parameters for row names can be set as a scalar or a vector with the
+length same as the number of rows in the matrix.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="circos-heatmap.html#cb126-1"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">rownames.side =</span> <span class="st">&quot;outside&quot;</span>,</span>
+<span id="cb126-2"><a href="circos-heatmap.html#cb126-2"></a>    <span class="dt">rownames.col =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mat1) <span class="op">%%</span><span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,</span>
+<span id="cb126-3"><a href="circos-heatmap.html#cb126-3"></a>    <span class="dt">rownames.cex =</span> <span class="kw">runif</span>(<span class="kw">nrow</span>(mat1), <span class="dt">min =</span> <span class="fl">0.3</span>, <span class="dt">max =</span> <span class="dv">2</span>),</span>
+<span id="cb126-4"><a href="circos-heatmap.html#cb126-4"></a>    <span class="dt">rownames.font =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mat1) <span class="op">%%</span><span class="st"> </span><span class="dv">4</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-13-1.png" alt="Circular heatmap. Control graphic parameters for row names." width="672" />
+<p class="caption">
+Figure 6.9: Circular heatmap. Control graphic parameters for row names.
+</p>
+</div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="circos-heatmap.html#cb127-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p>The graphic parameters of dendrogram can be set by directly rendering the
+dendrograms through a callback function, as will be demonstrated later.</p>
+</div>
+<div id="clustering" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Clustering</h2>
+<p>By default, the numeric matrix is clustered on rows. <code>cluster</code> argument
+can be set to <code>FALSE</code> to turn off the clustering.</p>
+<p>Of cource, when <code>cluster</code> is set to <code>FALSE</code>, no dendrogram is drawn even
+if <code>dend.side</code> is set.</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="circos-heatmap.html#cb128-1"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">cluster =</span> <span class="ot">FALSE</span>, <span class="dt">col =</span> col_fun1)</span>
+<span id="cb128-2"><a href="circos-heatmap.html#cb128-2"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-15-1.png" alt="Circular heatmap. Control clusterings." width="768" />
+<p class="caption">
+Figure 6.10: Circular heatmap. Control clusterings.
+</p>
+</div>
+<p>Clustering method and distance method are controlled by <code>clustering.method</code>
+and <code>distance.method</code> arguments.</p>
+<p><strong>Please note <code>circos.heatmap()</code> does not directly support clustering on
+matrix columns.</strong> You should apply column reordering before send to
+<code>circos.heatmap()</code>, <em>e.g.</em>,</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="circos-heatmap.html#cb129-1"></a>column_od =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">t</span>(mat1)))<span class="op">$</span>order</span>
+<span id="cb129-2"><a href="circos-heatmap.html#cb129-2"></a><span class="kw">circos.heatmap</span>(mat1[, column_od])</span>
+<span id="cb129-3"><a href="circos-heatmap.html#cb129-3"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+</div>
+<div id="callback-on-dendrograms" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Callback on dendrograms</h2>
+<p>The clustering generates dendrograms. Callback function can be applied to
+every dendrogram after it is generated in the corresponding sector. The callback
+function edits the dendrograms such as 1. reorder the dendrogrmas, or 2.
+color the dendrograms.</p>
+<p>In <code>circos.heatmap()</code>, a user-defined function should be set to
+<code>dend.callback</code> argument. The user-defined function should have three
+arguments:</p>
+<ul>
+<li><code>dend</code>: The dendrogram in the current sector.</li>
+<li><code>m</code>: The sub-matrix that corresponds to the current sector.</li>
+<li><code>si</code>: The sector index (or the sector name) for the current sector.</li>
+</ul>
+<p>The default callback function is defined as follows and it reorders the dendrogram
+by weighting the matrix row means.</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="circos-heatmap.html#cb130-1"></a><span class="cf">function</span>(dend, m, si) <span class="kw">reorder</span>(dend, <span class="kw">rowMeans</span>(m))</span></code></pre></div>
+<p>Following example reorders the dendrograms in every sector by <code>dendsort::dendsort()</code>.</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="circos-heatmap.html#cb131-1"></a><span class="kw">library</span>(dendsort)</span>
+<span id="cb131-2"><a href="circos-heatmap.html#cb131-2"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">dend.side =</span> <span class="st">&quot;inside&quot;</span>,</span>
+<span id="cb131-3"><a href="circos-heatmap.html#cb131-3"></a>    <span class="dt">dend.callback =</span> <span class="cf">function</span>(dend, m, si) {</span>
+<span id="cb131-4"><a href="circos-heatmap.html#cb131-4"></a>        <span class="kw">dendsort</span>(dend)</span>
+<span id="cb131-5"><a href="circos-heatmap.html#cb131-5"></a>    }</span>
+<span id="cb131-6"><a href="circos-heatmap.html#cb131-6"></a>)</span>
+<span id="cb131-7"><a href="circos-heatmap.html#cb131-7"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-19-1.png" alt="Circular Heatmap. Reorder dendrograms." width="768" />
+<p class="caption">
+Figure 6.11: Circular Heatmap. Reorder dendrograms.
+</p>
+</div>
+<p>We can use <code>color_branches()</code> from <strong>dendextend</strong> package to render the
+dendrogram edges. <em>E.g.</em>, to assign different colors for the dendrograms in
+the five sectors. Here the height of the dendrogram track is increased
+by the <code>dend.track.height</code> argument.</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="circos-heatmap.html#cb132-1"></a><span class="kw">library</span>(dendextend)</span>
+<span id="cb132-2"><a href="circos-heatmap.html#cb132-2"></a>dend_col =<span class="st"> </span><span class="kw">structure</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">names =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span>
+<span id="cb132-3"><a href="circos-heatmap.html#cb132-3"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">dend.side =</span> <span class="st">&quot;inside&quot;</span>,</span>
+<span id="cb132-4"><a href="circos-heatmap.html#cb132-4"></a>    <span class="dt">dend.track.height =</span> <span class="fl">0.2</span>,</span>
+<span id="cb132-5"><a href="circos-heatmap.html#cb132-5"></a>    <span class="dt">dend.callback =</span> <span class="cf">function</span>(dend, m, si) {</span>
+<span id="cb132-6"><a href="circos-heatmap.html#cb132-6"></a>        <span class="co"># when k = 1, it renders one same color for the whole dendrogram</span></span>
+<span id="cb132-7"><a href="circos-heatmap.html#cb132-7"></a>        <span class="kw">color_branches</span>(dend, <span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">col =</span> dend_col[si])</span>
+<span id="cb132-8"><a href="circos-heatmap.html#cb132-8"></a>    }</span>
+<span id="cb132-9"><a href="circos-heatmap.html#cb132-9"></a>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-20"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-20-1.png" alt="Circular heatmap. Render dendrograms that were split." width="672" />
+<p class="caption">
+Figure 6.12: Circular heatmap. Render dendrograms that were split.
+</p>
+</div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="circos-heatmap.html#cb133-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p>Or if the matrix is not split, we can assign the sub-dendrograms with
+different colors.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="circos-heatmap.html#cb134-1"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">col =</span> col_fun1, <span class="dt">dend.side =</span> <span class="st">&quot;inside&quot;</span>,</span>
+<span id="cb134-2"><a href="circos-heatmap.html#cb134-2"></a>    <span class="dt">dend.track.height =</span> <span class="fl">0.2</span>,</span>
+<span id="cb134-3"><a href="circos-heatmap.html#cb134-3"></a>    <span class="dt">dend.callback =</span> <span class="cf">function</span>(dend, m, si) {</span>
+<span id="cb134-4"><a href="circos-heatmap.html#cb134-4"></a>        <span class="kw">color_branches</span>(dend, <span class="dt">k =</span> <span class="dv">4</span>, <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb134-5"><a href="circos-heatmap.html#cb134-5"></a>    }</span>
+<span id="cb134-6"><a href="circos-heatmap.html#cb134-6"></a>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-21"></span>
+<img src="06-circos-heatmap_files/figure-html/unnamed-chunk-21-1.png" alt="Circular heatmap. Render dendrograms." width="672" />
+<p class="caption">
+Figure 6.13: Circular heatmap. Render dendrograms.
+</p>
+</div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="circos-heatmap.html#cb135-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+</div>
+<div id="multiple-heatmap-tracks" class="section level2" number="6.6">
+<h2><span class="header-section-number">6.6</span> Multiple heatmap tracks</h2>
+<p>If you make a circular plot which only contains one heatmap track, using
+<code>circos.heatmap()</code> is very straightforward. If you make a more complex
+circular plot which contains multiple tracks, there are more details on
+<code>circos.heatmap()</code> you should know.</p>
+<p>The first call of <code>circos.heatmap()</code> actually initializes the layout, <em>i.e.</em>,
+applying clustering and splitting the matrix. The dendrograms and split
+variable are stored internally. This is why you should explicitly call
+<code>circos.clear()</code> to remove all the internal variables so that it can ensure
+when you make a new circular heatmap, the first call of <code>circos.heatmap()</code> is
+in a clean environment.</p>
+<p>The first call of <code>circos.heatmap()</code> determines the row ordering (the order in
+the circular direction) for all tracks, thus, matrices in the following tracks
+share the same row ordering as in the first track. Also, the matrices in the
+following tracks are also split accordingly to the split in the first heatmap
+track.</p>
+<p>If clustering is not applied in the first heatmap track, the natural ordering
+of rows (<em>i.e.</em>, <code>c(1, 2, ..., n)</code>) is used.</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="circos-heatmap.html#cb136-1"></a>mat2 =<span class="st"> </span>mat1[<span class="kw">sample</span>(<span class="dv">100</span>, <span class="dv">100</span>), ] <span class="co"># randomly permute mat1 by rows</span></span>
+<span id="cb136-2"><a href="circos-heatmap.html#cb136-2"></a>col_fun2 =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb136-3"><a href="circos-heatmap.html#cb136-3"></a></span>
+<span id="cb136-4"><a href="circos-heatmap.html#cb136-4"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">dend.side =</span> <span class="st">&quot;outside&quot;</span>)</span>
+<span id="cb136-5"><a href="circos-heatmap.html#cb136-5"></a><span class="kw">circos.heatmap</span>(mat2, <span class="dt">col =</span> col_fun2)</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="circos-heatmap.html#cb137-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p>If I switch the two tracks, you can see now the clustering is controlled by
+the first heatmap track which is the green-red heatmap track.</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="circos-heatmap.html#cb138-1"></a><span class="kw">circos.heatmap</span>(mat2, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun2, <span class="dt">dend.side =</span> <span class="st">&quot;outside&quot;</span>)</span>
+<span id="cb138-2"><a href="circos-heatmap.html#cb138-2"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">col =</span> col_fun1)</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="circos-heatmap.html#cb139-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p>You might want to ask, what if I don’t want the clustering to be determined by
+the first track, while the second or the third track? The solution is simple.
+As I mentioned, the first call of <code>circos.heatmap()</code> initializes the layout.
+Actually the initialization can be manually done by explicitly calling
+<code>circos.heatmap.initialize()</code> function which <code>circos.heatmap()</code> internally
+calls.</p>
+<p>In <code>circos.heatmap.initialize()</code>, you specify whatever matrix you want to
+apply clustering as well as the split variable, then, the following
+<code>circos.heatmap()</code> calls all share this layout.</p>
+<p>In the following example, the global layout is determined by <code>mat1</code> which is
+visualized in the second track. I set <code>dend.side = "outside"</code> in the first
+track and actually you can find the dendrograms are actually generatd based
+on the matrix in the second track.</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="circos-heatmap.html#cb140-1"></a><span class="kw">circos.heatmap.initialize</span>(mat1, <span class="dt">split =</span> split)</span>
+<span id="cb140-2"><a href="circos-heatmap.html#cb140-2"></a><span class="kw">circos.heatmap</span>(mat2, <span class="dt">col =</span> col_fun2, <span class="dt">dend.side =</span> <span class="st">&quot;outside&quot;</span>)</span>
+<span id="cb140-3"><a href="circos-heatmap.html#cb140-3"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">col =</span> col_fun1)</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="circos-heatmap.html#cb141-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p>In the next example, the heatmap layout is generated from <code>mat1</code>, while
+the two heatmap tracks only contain five columns for each.</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="circos-heatmap.html#cb142-1"></a><span class="kw">circos.heatmap.initialize</span>(mat1, <span class="dt">split =</span> split)</span>
+<span id="cb142-2"><a href="circos-heatmap.html#cb142-2"></a><span class="kw">circos.heatmap</span>(mat1[, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">col =</span> col_fun1)</span>
+<span id="cb142-3"><a href="circos-heatmap.html#cb142-3"></a><span class="kw">circos.heatmap</span>(mat1[, <span class="dv">6</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">col =</span> col_fun1)</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="circos-heatmap.html#cb143-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+</div>
+<div id="with-other-tracks" class="section level2" number="6.7">
+<h2><span class="header-section-number">6.7</span> With other tracks</h2>
+<p><code>circos.heatmap()</code> can also be integrated with other non-heatmap tracks,
+however, it is a little bit tricky. In the circular layout, values on x-axes
+and y-axes are just the numeric indices. Assume there are <code>nr</code> rows and <code>nc</code>
+columns for the heatmap in a sector, the heatmap rows are drawn in intervals
+of <code>(0, 1)</code>, <code>c(1, 2)</code>, …, <code>c(nr-1, nr)</code> and similar for the heatmap
+columns. Also the original matrix is reordered. All these effects need to be
+considered if more tracks are added to make sure to have the correct
+correspondance to the heatmap track.</p>
+<p>After the heatmap layout is done, additional information for the
+tracks/sectors/cells can be retrieved by the special variable <code>CELL_META</code>. The
+additional meta data for the cell/sector are listed as follows and they are
+important for correctly corresponding to the heatmap track.</p>
+<ul>
+<li><code>CELL_META$row_dend</code> or simply <code>CELL_META$dend</code>: the dendrogram in the
+current sector. If no clustering was done, the value is <code>NULL</code>.</li>
+<li><code>CELL_META$row_order</code> or simply <code>CELL_META$order</code>: the row ordering of the
+sub-matrix in the current sector after clustering. If no clustering was
+done, the value is <code>c(1, 2, ..., )</code>.</li>
+<li><code>CELL_META$subset</code>: The subset of indices in the original complete matrix.
+The values are sorted increasing.</li>
+</ul>
+<p>Following are the outputs of <code>CELL_META$row_dend</code>, <code>CELL_META$row_order</code>
+and <code>CELL_META$subset</code> in the first sector in the example circular heatmap.</p>
+<pre><code>CELL_META$row_dend
+## &#39;dendrogram&#39; with 2 branches and 14 members total, at height 10.51736 
+
+CELL_META$row_order
+## [1]  2  6  4 12  8  1  5 10  7  9 13 11  3 14
+
+CELL_META$subset
+## [1]  8  9 14 18 20 37 55 62 66 72 78 85 93 97</code></pre>
+<p>In following example, I add a track which visualizes the row means of the
+first five columns in <code>mat1</code>. I added <code>cell.padding = c(0.02, 0, 0.02, 0)</code> so
+that the maximal and minimal points won’t overlap with the top and bottom
+borders of the cells.</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="circos-heatmap.html#cb145-1"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1)</span>
+<span id="cb145-2"><a href="circos-heatmap.html#cb145-2"></a>row_mean =<span class="st"> </span><span class="kw">rowMeans</span>(mat1[, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span>
+<span id="cb145-3"><a href="circos-heatmap.html#cb145-3"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">range</span>(row_mean), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb145-4"><a href="circos-heatmap.html#cb145-4"></a>    y =<span class="st"> </span>row_mean[CELL_META<span class="op">$</span>subset]</span>
+<span id="cb145-5"><a href="circos-heatmap.html#cb145-5"></a>    y =<span class="st"> </span>y[CELL_META<span class="op">$</span>row_order]</span>
+<span id="cb145-6"><a href="circos-heatmap.html#cb145-6"></a>    <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</span>
+<span id="cb145-7"><a href="circos-heatmap.html#cb145-7"></a>    <span class="kw">circos.points</span>(<span class="kw">seq_along</span>(y) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>, y, <span class="dt">col =</span> <span class="kw">ifelse</span>(y <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>))</span>
+<span id="cb145-8"><a href="circos-heatmap.html#cb145-8"></a>}, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="fl">0.02</span>, <span class="dv">0</span>, <span class="fl">0.02</span>, <span class="dv">0</span>))</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="circos-heatmap.html#cb146-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p>Similarly, if the points track is put as the first track, the layout should be initialized
+in advance.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="circos-heatmap.html#cb147-1"></a><span class="kw">circos.heatmap.initialize</span>(mat1, <span class="dt">split =</span> split)</span>
+<span id="cb147-2"><a href="circos-heatmap.html#cb147-2"></a><span class="co"># This is the same as the previous example</span></span>
+<span id="cb147-3"><a href="circos-heatmap.html#cb147-3"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">range</span>(row_mean), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb147-4"><a href="circos-heatmap.html#cb147-4"></a>    y =<span class="st"> </span>row_mean[CELL_META<span class="op">$</span>subset]</span>
+<span id="cb147-5"><a href="circos-heatmap.html#cb147-5"></a>    y =<span class="st"> </span>y[CELL_META<span class="op">$</span>row_order]</span>
+<span id="cb147-6"><a href="circos-heatmap.html#cb147-6"></a>    <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</span>
+<span id="cb147-7"><a href="circos-heatmap.html#cb147-7"></a>    <span class="kw">circos.points</span>(<span class="kw">seq_along</span>(y) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>, y, <span class="dt">col =</span> <span class="kw">ifelse</span>(y <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>))</span>
+<span id="cb147-8"><a href="circos-heatmap.html#cb147-8"></a>}, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="fl">0.02</span>, <span class="dv">0</span>, <span class="fl">0.02</span>, <span class="dv">0</span>))</span>
+<span id="cb147-9"><a href="circos-heatmap.html#cb147-9"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">col =</span> col_fun1) <span class="co"># no need to specify &#39;split&#39; here</span></span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="circos-heatmap.html#cb148-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p>Boxplots are very frequently used to correspond to the matrix rows.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="circos-heatmap.html#cb149-1"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1)</span>
+<span id="cb149-2"><a href="circos-heatmap.html#cb149-2"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">range</span>(mat1), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb149-3"><a href="circos-heatmap.html#cb149-3"></a>    m =<span class="st"> </span>mat1[CELL_META<span class="op">$</span>subset, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</span>
+<span id="cb149-4"><a href="circos-heatmap.html#cb149-4"></a>    m =<span class="st"> </span>m[CELL_META<span class="op">$</span>row_order, , drop =<span class="st"> </span><span class="ot">FALSE</span>]</span>
+<span id="cb149-5"><a href="circos-heatmap.html#cb149-5"></a>    n =<span class="st"> </span><span class="kw">nrow</span>(m)</span>
+<span id="cb149-6"><a href="circos-heatmap.html#cb149-6"></a>    <span class="co"># circos.boxplot is applied on matrix columns, so here we transpose it.</span></span>
+<span id="cb149-7"><a href="circos-heatmap.html#cb149-7"></a>    <span class="kw">circos.boxplot</span>(<span class="kw">t</span>(m), <span class="dt">pos =</span> <span class="dv">1</span><span class="op">:</span>n <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.3</span>)</span>
+<span id="cb149-8"><a href="circos-heatmap.html#cb149-8"></a>    <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</span>
+<span id="cb149-9"><a href="circos-heatmap.html#cb149-9"></a>}, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="fl">0.02</span>, <span class="dv">0</span>, <span class="fl">0.02</span>, <span class="dv">0</span>))</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="circos-heatmap.html#cb150-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+</div>
+<div id="add-annotations" class="section level2" number="6.8">
+<h2><span class="header-section-number">6.8</span> Add annotations</h2>
+<p>The labels for the sectors can be added by setting <code>show.sector.labels = TRUE</code>,
+however, this does not provide any customization on the labels. Users can
+customize their own labels by self-defining a <code>panel.fun</code> function,
+demonstrated as follows. Here the labels are added 2mm away from the
+heatmap track (by <code>convert_y(2, "mm")</code> which defines the offset in the y-direction).</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="circos-heatmap.html#cb151-1"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1)</span>
+<span id="cb151-2"><a href="circos-heatmap.html#cb151-2"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb151-3"><a href="circos-heatmap.html#cb151-3"></a>    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">convert_y</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), </span>
+<span id="cb151-4"><a href="circos-heatmap.html#cb151-4"></a>        <span class="kw">paste0</span>(<span class="st">&quot;this is group &quot;</span>, CELL_META<span class="op">$</span>sector.index),</span>
+<span id="cb151-5"><a href="circos-heatmap.html#cb151-5"></a>        <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>,</span>
+<span id="cb151-6"><a href="circos-heatmap.html#cb151-6"></a>        <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>), <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb151-7"><a href="circos-heatmap.html#cb151-7"></a>}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="circos-heatmap.html#cb152-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p>Column names of the matrix are not directly supported by <code>circos.heatmap()</code>,
+but they can be easily added also by self-defining a <code>panel.fun</code> function. In
+followig example, I set larger space (10 degrees, users normally need to try
+several values to get a best space) after the last sector (the fifth sector)
+by <code>gap.after</code> parameter in <code>circos.par()</code>, later I draw the column names in
+the last sector in <code>panel.fun</code>.</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="circos-heatmap.html#cb153-1"></a><span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">10</span>))</span>
+<span id="cb153-2"><a href="circos-heatmap.html#cb153-2"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">track.height =</span> <span class="fl">0.4</span>)</span>
+<span id="cb153-3"><a href="circos-heatmap.html#cb153-3"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb153-4"><a href="circos-heatmap.html#cb153-4"></a>    <span class="cf">if</span>(CELL_META<span class="op">$</span>sector.numeric.index <span class="op">==</span><span class="st"> </span><span class="dv">5</span>) { <span class="co"># the last sector</span></span>
+<span id="cb153-5"><a href="circos-heatmap.html#cb153-5"></a>        cn =<span class="st"> </span><span class="kw">colnames</span>(mat1)</span>
+<span id="cb153-6"><a href="circos-heatmap.html#cb153-6"></a>        n =<span class="st"> </span><span class="kw">length</span>(cn)</span>
+<span id="cb153-7"><a href="circos-heatmap.html#cb153-7"></a>        <span class="kw">circos.text</span>(<span class="kw">rep</span>(CELL_META<span class="op">$</span>cell.xlim[<span class="dv">2</span>], n) <span class="op">+</span><span class="st"> </span><span class="kw">convert_x</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), </span>
+<span id="cb153-8"><a href="circos-heatmap.html#cb153-8"></a>            <span class="dv">1</span><span class="op">:</span>n <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>, cn, </span>
+<span id="cb153-9"><a href="circos-heatmap.html#cb153-9"></a>            <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>)</span>
+<span id="cb153-10"><a href="circos-heatmap.html#cb153-10"></a>    }</span>
+<span id="cb153-11"><a href="circos-heatmap.html#cb153-11"></a>}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="circos-heatmap.html#cb154-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p>Next example adds rectangles and labels to show the two groups of columns in
+the matrix. The code inside <code>panel.fun</code> is simple. It basically draws
+rectangles and texts. <code>convert_x()</code> converts a unit on the x-direction to a
+proper value measured in tbe circular coordinate system.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="circos-heatmap.html#cb155-1"></a><span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">10</span>))</span>
+<span id="cb155-2"><a href="circos-heatmap.html#cb155-2"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1, <span class="dt">track.height =</span> <span class="fl">0.4</span>)</span>
+<span id="cb155-3"><a href="circos-heatmap.html#cb155-3"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb155-4"><a href="circos-heatmap.html#cb155-4"></a>    <span class="cf">if</span>(CELL_META<span class="op">$</span>sector.numeric.index <span class="op">==</span><span class="st"> </span><span class="dv">5</span>) { <span class="co"># the last sector</span></span>
+<span id="cb155-5"><a href="circos-heatmap.html#cb155-5"></a>        <span class="kw">circos.rect</span>(CELL_META<span class="op">$</span>cell.xlim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">convert_x</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">0</span>,</span>
+<span id="cb155-6"><a href="circos-heatmap.html#cb155-6"></a>                    CELL_META<span class="op">$</span>cell.xlim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">convert_x</span>(<span class="dv">5</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">5</span>,</span>
+<span id="cb155-7"><a href="circos-heatmap.html#cb155-7"></a>                    <span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">border =</span> <span class="ot">NA</span>)</span>
+<span id="cb155-8"><a href="circos-heatmap.html#cb155-8"></a>        <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>cell.xlim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">convert_x</span>(<span class="dv">3</span>, <span class="st">&quot;mm&quot;</span>), <span class="fl">2.5</span>,</span>
+<span id="cb155-9"><a href="circos-heatmap.html#cb155-9"></a>                    <span class="st">&quot;group 1&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>)</span>
+<span id="cb155-10"><a href="circos-heatmap.html#cb155-10"></a></span>
+<span id="cb155-11"><a href="circos-heatmap.html#cb155-11"></a>        <span class="kw">circos.rect</span>(CELL_META<span class="op">$</span>cell.xlim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">convert_x</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">5</span>,</span>
+<span id="cb155-12"><a href="circos-heatmap.html#cb155-12"></a>                    CELL_META<span class="op">$</span>cell.xlim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">convert_x</span>(<span class="dv">5</span>, <span class="st">&quot;mm&quot;</span>), <span class="dv">10</span>,</span>
+<span id="cb155-13"><a href="circos-heatmap.html#cb155-13"></a>                    <span class="dt">col =</span> <span class="st">&quot;pink&quot;</span>, <span class="dt">border =</span> <span class="ot">NA</span>)</span>
+<span id="cb155-14"><a href="circos-heatmap.html#cb155-14"></a>        <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>cell.xlim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">convert_x</span>(<span class="dv">3</span>, <span class="st">&quot;mm&quot;</span>), <span class="fl">7.5</span>,</span>
+<span id="cb155-15"><a href="circos-heatmap.html#cb155-15"></a>                    <span class="st">&quot;group 2&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>)</span>
+<span id="cb155-16"><a href="circos-heatmap.html#cb155-16"></a>    }</span>
+<span id="cb155-17"><a href="circos-heatmap.html#cb155-17"></a>}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="circos-heatmap.html#cb156-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p><strong>circlize</strong> does not generates legends, <a href="https://jokergoo.github.io/circlize_book/book/legends.html">but the legends can be manually
+generated by <code>ComplexHeatmap::Legend()</code> function and added to the
+circular plot</a>.
+Following is a simple example of adding a legend. In the next section, you can
+find a more complex example of adding many legends.</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="circos-heatmap.html#cb157-1"></a><span class="kw">circos.heatmap</span>(mat1, <span class="dt">split =</span> split, <span class="dt">col =</span> col_fun1)</span>
+<span id="cb157-2"><a href="circos-heatmap.html#cb157-2"></a><span class="kw">circos.clear</span>()</span>
+<span id="cb157-3"><a href="circos-heatmap.html#cb157-3"></a></span>
+<span id="cb157-4"><a href="circos-heatmap.html#cb157-4"></a><span class="kw">library</span>(ComplexHeatmap)</span>
+<span id="cb157-5"><a href="circos-heatmap.html#cb157-5"></a>lgd =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">title =</span> <span class="st">&quot;mat1&quot;</span>, <span class="dt">col_fun =</span> col_fun1)</span>
+<span id="cb157-6"><a href="circos-heatmap.html#cb157-6"></a><span class="kw">grid.draw</span>(lgd)</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="a-complex-example-of-circular-heatmaps" class="section level2" number="6.9">
+<h2><span class="header-section-number">6.9</span> A complex example of circular heatmaps</h2>
+<p>In this section, I will demonstrate how to make complex circular heatmaps.
+The heatmaps in the normal layout are in the following figure and now I will
+change them with the circular layout.</p>
+<p>The heatmaps visualize correlations between DNA methylation, gene expression
+and other genome-level information. You can go to <a href="http://jokergoo.github.io/supplementary/ComplexHeatmap-supplementary1-4/supplS3_methylation/supplS3_methylation.html">this
+link</a>
+to see how the original heatmaps were generated.</p>
+<p><img width="100%" src="https://user-images.githubusercontent.com/449218/82558169-5cddc600-9b6d-11ea-9108-0704751ac6ea.png" /></p>
+<p>The original heatmaps were generated with random datasets. The code for generating
+them is available at <a href="https://gist.github.com/jokergoo/0ea5639ee25a7edae3871ed8252924a1" class="uri">https://gist.github.com/jokergoo/0ea5639ee25a7edae3871ed8252924a1</a>.
+Here I just directly source the script from Gist.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="circos-heatmap.html#cb158-1"></a><span class="kw">source</span>(<span class="st">&quot;https://gist.githubusercontent.com/jokergoo/0ea5639ee25a7edae3871ed8252924a1/raw/57ca9426c2ed0cebcffd79db27a024033e5b8d52/random_matrices.R&quot;</span>)</span></code></pre></div>
+<p>Similar as the original heatmap, rows of all heatmaps are split into 5 groups
+by applying <em>k</em>-means clustering on rows of the methylation matrix
+(<code>mat_meth</code>).</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="circos-heatmap.html#cb159-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb159-2"><a href="circos-heatmap.html#cb159-2"></a>km =<span class="st"> </span><span class="kw">kmeans</span>(mat_meth, <span class="dt">centers =</span> <span class="dv">5</span>)<span class="op">$</span>cluster</span></code></pre></div>
+<p>Now there are following matrices/vectors that need to be visualized as heatmaps:</p>
+<ul>
+<li><code>mat_meth</code>: a matrix in which rows correspond to differetially methylated
+regions (DMRs). The value in the matrix is the mean methylation level in the
+DMR in every sample.</li>
+<li><code>mat_expr</code>: a matrix in which rows correspond to genes which are associated
+to the DMRs (<em>i.e.</em> the nearest gene to the DMR). The value in the matrix is
+the expression level for each gene in each sample. Expression is scaled for
+every gene across samples.</li>
+<li><code>direction</code>: direction of the methylation change (hyper meaning higher
+methylation in tumor samples, hypo means lower methylation in tumor
+samples).</li>
+<li><code>cor_pvalue</code>: <em>p</em>-value for the correlation test between methylation and
+expression of the associated gene. Values are -log10 transformed.</li>
+<li><code>gene_type</code>: type of the genes (<em>e.g.</em>, protein coding genes or lincRNAs).</li>
+<li><code>anno_gene</code>: annotation to the gene models (<em>i.e.</em>, intergenic, intragenic or transcription start site (TSS)).</li>
+<li><code>dist</code>: distance from DMRs to TSS of the assiciated genes.</li>
+<li><code>anno_enhancer</code>: fraction of each DMR that overlaps enhancers.</li>
+</ul>
+<p>Among these variables, <code>mat_meth</code>, <code>mat_expr</code>, <code>cor_pvalue</code>, <code>dist</code> and <code>anno_enhancer</code> are numeric
+and I set color mapping functions for them. For the others I set named color vectors.</p>
+<p>In the following code, I specify <code>split</code> in the first call of <code>circos.heatmap()</code> which
+is the methylation heatmap. The track heights are manually adjusted.</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="circos-heatmap.html#cb160-1"></a>col_meth =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb160-2"><a href="circos-heatmap.html#cb160-2"></a><span class="kw">circos.heatmap</span>(mat_meth, <span class="dt">split =</span> km, <span class="dt">col =</span> col_meth, <span class="dt">track.height =</span> <span class="fl">0.12</span>)</span>
+<span id="cb160-3"><a href="circos-heatmap.html#cb160-3"></a></span>
+<span id="cb160-4"><a href="circos-heatmap.html#cb160-4"></a>col_direction =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;hyper&quot;</span> =<span class="st"> &quot;red&quot;</span>, <span class="st">&quot;hypo&quot;</span> =<span class="st"> &quot;blue&quot;</span>)</span>
+<span id="cb160-5"><a href="circos-heatmap.html#cb160-5"></a><span class="kw">circos.heatmap</span>(direction, <span class="dt">col =</span> col_direction, <span class="dt">track.height =</span> <span class="fl">0.01</span>)</span>
+<span id="cb160-6"><a href="circos-heatmap.html#cb160-6"></a></span>
+<span id="cb160-7"><a href="circos-heatmap.html#cb160-7"></a>col_expr =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb160-8"><a href="circos-heatmap.html#cb160-8"></a><span class="kw">circos.heatmap</span>(mat_expr, <span class="dt">col =</span> col_expr, <span class="dt">track.height =</span> <span class="fl">0.12</span>)</span>
+<span id="cb160-9"><a href="circos-heatmap.html#cb160-9"></a></span>
+<span id="cb160-10"><a href="circos-heatmap.html#cb160-10"></a>col_pvalue =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb160-11"><a href="circos-heatmap.html#cb160-11"></a><span class="kw">circos.heatmap</span>(cor_pvalue, <span class="dt">col =</span> col_pvalue, <span class="dt">track.height =</span> <span class="fl">0.01</span>)</span>
+<span id="cb160-12"><a href="circos-heatmap.html#cb160-12"></a></span>
+<span id="cb160-13"><a href="circos-heatmap.html#cb160-13"></a><span class="kw">library</span>(RColorBrewer)</span>
+<span id="cb160-14"><a href="circos-heatmap.html#cb160-14"></a>col_gene_type =<span class="st"> </span><span class="kw">structure</span>(<span class="kw">brewer.pal</span>(<span class="kw">length</span>(<span class="kw">unique</span>(gene_type)), <span class="st">&quot;Set3&quot;</span>), <span class="dt">names =</span> <span class="kw">unique</span>(gene_type))</span>
+<span id="cb160-15"><a href="circos-heatmap.html#cb160-15"></a><span class="kw">circos.heatmap</span>(gene_type, <span class="dt">col =</span> col_gene_type, <span class="dt">track.height =</span> <span class="fl">0.01</span>)</span>
+<span id="cb160-16"><a href="circos-heatmap.html#cb160-16"></a></span>
+<span id="cb160-17"><a href="circos-heatmap.html#cb160-17"></a>col_anno_gene =<span class="st"> </span><span class="kw">structure</span>(<span class="kw">brewer.pal</span>(<span class="kw">length</span>(<span class="kw">unique</span>(anno_gene)), <span class="st">&quot;Set1&quot;</span>), <span class="dt">names =</span> <span class="kw">unique</span>(anno_gene))</span>
+<span id="cb160-18"><a href="circos-heatmap.html#cb160-18"></a><span class="kw">circos.heatmap</span>(anno_gene, <span class="dt">col =</span> col_anno_gene, <span class="dt">track.height =</span> <span class="fl">0.01</span>) </span>
+<span id="cb160-19"><a href="circos-heatmap.html#cb160-19"></a></span>
+<span id="cb160-20"><a href="circos-heatmap.html#cb160-20"></a>col_dist =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>), <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;white&quot;</span>))</span>
+<span id="cb160-21"><a href="circos-heatmap.html#cb160-21"></a><span class="kw">circos.heatmap</span>(dist, <span class="dt">col =</span> col_dist, <span class="dt">track.height =</span> <span class="fl">0.01</span>)</span>
+<span id="cb160-22"><a href="circos-heatmap.html#cb160-22"></a></span>
+<span id="cb160-23"><a href="circos-heatmap.html#cb160-23"></a>col_enhancer =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;orange&quot;</span>))</span>
+<span id="cb160-24"><a href="circos-heatmap.html#cb160-24"></a><span class="kw">circos.heatmap</span>(anno_enhancer, <span class="dt">col =</span> col_enhancer, <span class="dt">track.height =</span> <span class="fl">0.03</span>)</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-35-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="circos-heatmap.html#cb161-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<p>The circular heatmaps look pretty! Since rows in the matrices are genomic
+regions (the differentially methylated regions), if we can establish
+connections between some of the regions, <em>e.g.</em> physical interactions in the
+3D chromosome structure, the plot would be nicer and more useful.</p>
+<p>In following code, I generate some random interactions between DMRs.
+Each row in <code>df_link</code> means there is an interaction from the i<sup>th</sup> DMR
+to the j<sup>th</sup> DMR.</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="circos-heatmap.html#cb162-1"></a>df_link =<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb162-2"><a href="circos-heatmap.html#cb162-2"></a>    <span class="dt">from_index =</span> <span class="kw">sample</span>(<span class="kw">nrow</span>(mat_meth), <span class="dv">20</span>),</span>
+<span id="cb162-3"><a href="circos-heatmap.html#cb162-3"></a>    <span class="dt">to_index =</span> <span class="kw">sample</span>(<span class="kw">nrow</span>(mat_meth), <span class="dv">20</span>)</span>
+<span id="cb162-4"><a href="circos-heatmap.html#cb162-4"></a>)</span></code></pre></div>
+<p>Finding the positions of these DMRs on the circular heatmaps is tricky.
+Check the comments in the following code. Note here the <code>subset</code> and
+<code>row_order</code> meta data are retrieved by <code>get.cell.meta.data()</code> function
+by explicitly specifying the sector index.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="circos-heatmap.html#cb163-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(df_link))) {</span>
+<span id="cb163-2"><a href="circos-heatmap.html#cb163-2"></a>    <span class="co"># Let&#39;s call the DMR with index df_link$from_index[i] as DMR1,</span></span>
+<span id="cb163-3"><a href="circos-heatmap.html#cb163-3"></a>    <span class="co"># and the other one with index df_link$to_index[i] as DMR2.</span></span>
+<span id="cb163-4"><a href="circos-heatmap.html#cb163-4"></a></span>
+<span id="cb163-5"><a href="circos-heatmap.html#cb163-5"></a>    <span class="co"># The sector where DMR1 is in.</span></span>
+<span id="cb163-6"><a href="circos-heatmap.html#cb163-6"></a>    group1 =<span class="st"> </span>km[ df_link<span class="op">$</span>from_index[i] ]</span>
+<span id="cb163-7"><a href="circos-heatmap.html#cb163-7"></a>    <span class="co"># The sector where DMR2 is in.</span></span>
+<span id="cb163-8"><a href="circos-heatmap.html#cb163-8"></a>    group2 =<span class="st"> </span>km[ df_link<span class="op">$</span>to_index[i] ]</span>
+<span id="cb163-9"><a href="circos-heatmap.html#cb163-9"></a></span>
+<span id="cb163-10"><a href="circos-heatmap.html#cb163-10"></a>    <span class="co"># The subset of DMRs (row indices from mat_meth) in sector `group1`.</span></span>
+<span id="cb163-11"><a href="circos-heatmap.html#cb163-11"></a>    subset1 =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;subset&quot;</span>, <span class="dt">sector.index =</span> group1)</span>
+<span id="cb163-12"><a href="circos-heatmap.html#cb163-12"></a>    <span class="co"># The row ordering in sector `group1`.</span></span>
+<span id="cb163-13"><a href="circos-heatmap.html#cb163-13"></a>    row_order1 =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;row_order&quot;</span>, <span class="dt">sector.index =</span> group1)</span>
+<span id="cb163-14"><a href="circos-heatmap.html#cb163-14"></a>    <span class="co"># This is the position of DMR1 in the `group1` heatmap.</span></span>
+<span id="cb163-15"><a href="circos-heatmap.html#cb163-15"></a>    x1 =<span class="st"> </span><span class="kw">which</span>(subset1[row_order1] <span class="op">==</span><span class="st"> </span>df_link<span class="op">$</span>from_index[i])</span>
+<span id="cb163-16"><a href="circos-heatmap.html#cb163-16"></a></span>
+<span id="cb163-17"><a href="circos-heatmap.html#cb163-17"></a>    <span class="co"># The subset of DMRs (row indices from mat_meth) in sector `group2`.</span></span>
+<span id="cb163-18"><a href="circos-heatmap.html#cb163-18"></a>    subset2 =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;subset&quot;</span>, <span class="dt">sector.index =</span> group2)</span>
+<span id="cb163-19"><a href="circos-heatmap.html#cb163-19"></a>    <span class="co"># The row ordering in sector `group2`.</span></span>
+<span id="cb163-20"><a href="circos-heatmap.html#cb163-20"></a>    row_order2 =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;row_order&quot;</span>, <span class="dt">sector.index =</span> group2)</span>
+<span id="cb163-21"><a href="circos-heatmap.html#cb163-21"></a>    <span class="co"># This is the position of DMR2 in the `group2` heatmap.</span></span>
+<span id="cb163-22"><a href="circos-heatmap.html#cb163-22"></a>    x2 =<span class="st"> </span><span class="kw">which</span>(subset2[row_order2] <span class="op">==</span><span class="st"> </span>df_link<span class="op">$</span>to_index[i])</span>
+<span id="cb163-23"><a href="circos-heatmap.html#cb163-23"></a></span>
+<span id="cb163-24"><a href="circos-heatmap.html#cb163-24"></a>    <span class="co"># We take the middle point and draw a link between DMR1 and DMR2</span></span>
+<span id="cb163-25"><a href="circos-heatmap.html#cb163-25"></a>    <span class="kw">circos.link</span>(group1, x1 <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>, group2, x2 <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>, <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="dv">1</span>))</span>
+<span id="cb163-26"><a href="circos-heatmap.html#cb163-26"></a>}</span></code></pre></div>
+<p>To make things easier, I implemented a function <code>circos.heatmap.link()</code> that basically
+wraps the code above. Now drawing links between matrix rows is simpler:</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="circos-heatmap.html#cb164-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(df_link))) {</span>
+<span id="cb164-2"><a href="circos-heatmap.html#cb164-2"></a>    <span class="kw">circos.heatmap.link</span>(df_link<span class="op">$</span>from_index[i],</span>
+<span id="cb164-3"><a href="circos-heatmap.html#cb164-3"></a>                        df_link<span class="op">$</span>to_index[i],</span>
+<span id="cb164-4"><a href="circos-heatmap.html#cb164-4"></a>                        <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="dv">1</span>))</span>
+<span id="cb164-5"><a href="circos-heatmap.html#cb164-5"></a>}</span></code></pre></div>
+<p>After adding the links, the plots look nicer!</p>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-39-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Legends are important for understanding heatmaps. Unfortunately, <strong>circlize</strong>
+does not naturally support legends, however, <a href="https://jokergoo.github.io/circlize_book/book/legends.html">the circlize plots can be
+combined with the legends generated from
+<code>ComplexHeatmap::Legend()</code></a>.
+Following the instructions from that link, we need a function that draws the
+circlize plot and a <code>Legends</code> object (which is a <code>grid::grob</code> object).</p>
+<p>The function that draws the circular plot is simply a wrapper of the previous
+code without any modification.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="circos-heatmap.html#cb165-1"></a>circlize_plot =<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb165-2"><a href="circos-heatmap.html#cb165-2"></a>    <span class="kw">circos.heatmap</span>(mat_meth, <span class="dt">split =</span> km, <span class="dt">col =</span> col_meth, <span class="dt">track.height =</span> <span class="fl">0.12</span>)</span>
+<span id="cb165-3"><a href="circos-heatmap.html#cb165-3"></a>    <span class="kw">circos.heatmap</span>(direction, <span class="dt">col =</span> col_direction, <span class="dt">track.height =</span> <span class="fl">0.01</span>)</span>
+<span id="cb165-4"><a href="circos-heatmap.html#cb165-4"></a>    <span class="kw">circos.heatmap</span>(mat_expr, <span class="dt">col =</span> col_expr, <span class="dt">track.height =</span> <span class="fl">0.12</span>)</span>
+<span id="cb165-5"><a href="circos-heatmap.html#cb165-5"></a>    <span class="kw">circos.heatmap</span>(cor_pvalue, <span class="dt">col =</span> col_pvalue, <span class="dt">track.height =</span> <span class="fl">0.01</span>)</span>
+<span id="cb165-6"><a href="circos-heatmap.html#cb165-6"></a>    <span class="kw">circos.heatmap</span>(gene_type, <span class="dt">col =</span> col_gene_type, <span class="dt">track.height =</span> <span class="fl">0.01</span>)</span>
+<span id="cb165-7"><a href="circos-heatmap.html#cb165-7"></a>    <span class="kw">circos.heatmap</span>(anno_gene, <span class="dt">col =</span> col_anno_gene, <span class="dt">track.height =</span> <span class="fl">0.01</span>) </span>
+<span id="cb165-8"><a href="circos-heatmap.html#cb165-8"></a>    <span class="kw">circos.heatmap</span>(dist, <span class="dt">col =</span> col_dist, <span class="dt">track.height =</span> <span class="fl">0.01</span>)</span>
+<span id="cb165-9"><a href="circos-heatmap.html#cb165-9"></a>    <span class="kw">circos.heatmap</span>(anno_enhancer, <span class="dt">col =</span> col_enhancer, <span class="dt">track.height =</span> <span class="fl">0.03</span>)</span>
+<span id="cb165-10"><a href="circos-heatmap.html#cb165-10"></a></span>
+<span id="cb165-11"><a href="circos-heatmap.html#cb165-11"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(df_link))) {</span>
+<span id="cb165-12"><a href="circos-heatmap.html#cb165-12"></a>        <span class="kw">circos.heatmap.link</span>(df_link<span class="op">$</span>from_index[i],</span>
+<span id="cb165-13"><a href="circos-heatmap.html#cb165-13"></a>                            df_link<span class="op">$</span>to_index[i],</span>
+<span id="cb165-14"><a href="circos-heatmap.html#cb165-14"></a>                            <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="dv">1</span>))</span>
+<span id="cb165-15"><a href="circos-heatmap.html#cb165-15"></a>    }</span>
+<span id="cb165-16"><a href="circos-heatmap.html#cb165-16"></a>    <span class="kw">circos.clear</span>()</span>
+<span id="cb165-17"><a href="circos-heatmap.html#cb165-17"></a>}</span></code></pre></div>
+<p>The legends can be generated from the color mapping functions and color vectors.
+The <code>ComplexHeatmap::Legend()</code> function is very flexible that you can customize
+the labels on the legends (see how <code>lgd_pvalue</code>, <code>lgd_dist</code> and <code>lgd_enhancer</code> are
+defined).</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="circos-heatmap.html#cb166-1"></a>lgd_meth =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">title =</span> <span class="st">&quot;Methylation&quot;</span>, <span class="dt">col_fun =</span> col_meth)</span>
+<span id="cb166-2"><a href="circos-heatmap.html#cb166-2"></a>lgd_direction =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">title =</span> <span class="st">&quot;Direction&quot;</span>, <span class="dt">at =</span> <span class="kw">names</span>(col_direction), </span>
+<span id="cb166-3"><a href="circos-heatmap.html#cb166-3"></a>    <span class="dt">legend_gp =</span> <span class="kw">gpar</span>(<span class="dt">fill =</span> col_direction))</span>
+<span id="cb166-4"><a href="circos-heatmap.html#cb166-4"></a>lgd_expr =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">title =</span> <span class="st">&quot;Expression&quot;</span>, <span class="dt">col_fun =</span> col_expr)</span>
+<span id="cb166-5"><a href="circos-heatmap.html#cb166-5"></a>lgd_pvalue =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">title =</span> <span class="st">&quot;P-value&quot;</span>, <span class="dt">col_fun =</span> col_pvalue, <span class="dt">at =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>), </span>
+<span id="cb166-6"><a href="circos-heatmap.html#cb166-6"></a>    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.01</span>, <span class="fl">0.0001</span>))</span>
+<span id="cb166-7"><a href="circos-heatmap.html#cb166-7"></a>lgd_gene_type =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">title =</span> <span class="st">&quot;Gene type&quot;</span>, <span class="dt">at =</span> <span class="kw">names</span>(col_gene_type), </span>
+<span id="cb166-8"><a href="circos-heatmap.html#cb166-8"></a>    <span class="dt">legend_gp =</span> <span class="kw">gpar</span>(<span class="dt">fill =</span> col_gene_type))</span>
+<span id="cb166-9"><a href="circos-heatmap.html#cb166-9"></a>lgd_anno_gene =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">title =</span> <span class="st">&quot;Gene anno&quot;</span>, <span class="dt">at =</span> <span class="kw">names</span>(col_anno_gene), </span>
+<span id="cb166-10"><a href="circos-heatmap.html#cb166-10"></a>    <span class="dt">legend_gp =</span> <span class="kw">gpar</span>(<span class="dt">fill =</span> col_anno_gene))</span>
+<span id="cb166-11"><a href="circos-heatmap.html#cb166-11"></a>lgd_dist =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">title =</span> <span class="st">&quot;Dist to TSS&quot;</span>, <span class="dt">col_fun =</span> col_dist, </span>
+<span id="cb166-12"><a href="circos-heatmap.html#cb166-12"></a>    <span class="dt">at =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5000</span>, <span class="dv">10000</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;0kb&quot;</span>, <span class="st">&quot;5kb&quot;</span>, <span class="st">&quot;10kb&quot;</span>))</span>
+<span id="cb166-13"><a href="circos-heatmap.html#cb166-13"></a>lgd_enhancer =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">title =</span> <span class="st">&quot;Enhancer overlap&quot;</span>, <span class="dt">col_fun =</span> col_enhancer, </span>
+<span id="cb166-14"><a href="circos-heatmap.html#cb166-14"></a>    <span class="dt">at =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;0%&quot;</span>, <span class="st">&quot;25%&quot;</span>, <span class="st">&quot;50%&quot;</span>, <span class="st">&quot;75%&quot;</span>, <span class="st">&quot;100%&quot;</span>))</span></code></pre></div>
+<p>Now we use the <strong>gridBase</strong> to combine both base graphics (<strong>circlize</strong> is
+implemented with the base graphics) and <strong>grid</strong> graphics (<strong>ComplexHeatmap</strong> is
+implemented with the <strong>grid</strong> graphics). You can just use the following code
+as a template for your plot if you want to try.</p>
+<p>And, BINGO! Wie schön!!</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="circos-heatmap.html#cb167-1"></a><span class="kw">library</span>(gridBase)</span>
+<span id="cb167-2"><a href="circos-heatmap.html#cb167-2"></a><span class="kw">plot.new</span>()</span>
+<span id="cb167-3"><a href="circos-heatmap.html#cb167-3"></a>circle_size =<span class="st"> </span><span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;snpc&quot;</span>) <span class="co"># snpc unit gives you a square region</span></span>
+<span id="cb167-4"><a href="circos-heatmap.html#cb167-4"></a></span>
+<span id="cb167-5"><a href="circos-heatmap.html#cb167-5"></a><span class="kw">pushViewport</span>(<span class="kw">viewport</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">width =</span> circle_size, <span class="dt">height =</span> circle_size,</span>
+<span id="cb167-6"><a href="circos-heatmap.html#cb167-6"></a>    <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;center&quot;</span>)))</span>
+<span id="cb167-7"><a href="circos-heatmap.html#cb167-7"></a><span class="kw">par</span>(<span class="dt">omi =</span> <span class="kw">gridOMI</span>(), <span class="dt">new =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb167-8"><a href="circos-heatmap.html#cb167-8"></a><span class="kw">circlize_plot</span>()</span>
+<span id="cb167-9"><a href="circos-heatmap.html#cb167-9"></a><span class="kw">upViewport</span>()</span>
+<span id="cb167-10"><a href="circos-heatmap.html#cb167-10"></a></span>
+<span id="cb167-11"><a href="circos-heatmap.html#cb167-11"></a>h =<span class="st"> </span><span class="kw">dev.size</span>()[<span class="dv">2</span>]</span>
+<span id="cb167-12"><a href="circos-heatmap.html#cb167-12"></a>lgd_list =<span class="st"> </span><span class="kw">packLegend</span>(lgd_meth, lgd_direction, lgd_expr, lgd_pvalue, lgd_gene_type, </span>
+<span id="cb167-13"><a href="circos-heatmap.html#cb167-13"></a>    lgd_anno_gene, lgd_dist, lgd_enhancer, <span class="dt">max_height =</span> <span class="kw">unit</span>(<span class="fl">0.9</span><span class="op">*</span>h, <span class="st">&quot;inch&quot;</span>))</span>
+<span id="cb167-14"><a href="circos-heatmap.html#cb167-14"></a><span class="kw">draw</span>(lgd_list, <span class="dt">x =</span> circle_size, <span class="dt">just =</span> <span class="st">&quot;left&quot;</span>)</span></code></pre></div>
+<p><img src="06-circos-heatmap_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="high-level-plots.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="advanced-layout.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jokergoo/circlize_book/edit/master/06-circos-heatmap.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

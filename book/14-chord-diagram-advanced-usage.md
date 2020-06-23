@@ -286,6 +286,7 @@ First we make the "big" Chord diagram.
 mat1 = matrix(sample(20, 25, replace = TRUE), 5)
 chordDiagram(mat1, directional = 1, grid.col = rep(1:5, 2), transparency = 0.5,
     big.gap = 10, small.gap = 1) # 10 and 1 are default values for the two arguments
+circos.clear()
 ```
 
 The second matrix only has half the values in `mat1`.
@@ -303,6 +304,7 @@ to make the scale of the two Chord diagram the same.
 gap = calc_gap(mat1, mat2, big.gap = 10, small.gap = 1)
 chordDiagram(mat2, directional = 1, grid.col = rep(1:5, 2), transparency = 0.5,
     big.gap = gap, small.gap = 1)
+circos.clear()
 ```
 
 Now the scale of the two Chord diagrams (Figure \@ref(fig:chord-diagram-compare)) are the 
@@ -319,18 +321,17 @@ sets of the sectors.
 
 ## Multiple-group Chord diagram
 
-Generally `chordDiagram()` function visualizes relations between two groups
-(i.e. from rows to columns if the input is an adjacency matrix or from column
-1 to column 2 if the input is an adjacency list), however, for
-`chordDiagram()`, it actually doesn't need any grouping information. The
-visual effect of grouping is just enhanced by setting different gap degrees.
-In this case, it is easy to make a Chord diagram with more than two groups.
 
-First let's generate three matrix which contain pairwise relations from three groups:
+From verion 0.4.10 of the **circlize** package, there is a new `group`
+argument in `chordDiagram()` function which is very convenient for making
+multiple-group Chord diagrams.
+
+I first generate a random matrix where there are three groups (`A`, `B`, and `C`).
+Note this new functionality works the same for the input as a data frame.
 
 
 ```r
-options(digits = 2)
+library(circlize)
 mat1 = matrix(rnorm(25), nrow = 5)
 rownames(mat1) = paste0("A", 1:5)
 colnames(mat1) = paste0("B", 1:5)
@@ -342,13 +343,7 @@ colnames(mat2) = paste0("C", 1:5)
 mat3 = matrix(rnorm(25), nrow = 5)
 rownames(mat3) = paste0("B", 1:5)
 colnames(mat3) = paste0("C", 1:5)
-```
 
-Since `chordDiagram()` only accepts one single matrix, here the three
-matrix are merged into one big matrix.
-
-
-```r
 mat = matrix(0, nrow = 10, ncol = 10)
 rownames(mat) = c(rownames(mat2), rownames(mat3))
 colnames(mat) = c(colnames(mat1), colnames(mat2))
@@ -359,40 +354,147 @@ mat
 ```
 
 ```
-##       B1    B2     B3     B4    B5     C1     C2    C3    C4    C5
-## A1  0.98  3.24  0.517  2.128  0.44 -0.866  0.754 -0.90 -0.61  0.54
-## A2 -0.37 -0.42  0.369 -0.741 -0.46 -0.236 -0.499 -1.31 -1.19 -0.41
-## A3  1.05  0.30 -0.215 -1.096 -1.06 -0.197  0.214  2.00  2.20 -0.48
-## A4 -1.05  0.64  0.065  0.038  1.26  1.110 -0.325  0.60  1.31 -0.79
-## A5 -1.26 -0.48 -0.034  0.310 -0.35  0.085  0.095 -1.25 -0.27 -0.59
-## B1  0.00  0.00  0.000  0.000  0.00  1.651 -0.516 -1.24  0.71  0.88
-## B2  0.00  0.00  0.000  0.000  0.00 -0.054 -0.993 -1.28 -0.36 -1.02
-## B3  0.00  0.00  0.000  0.000  0.00  0.119  1.676 -0.57  0.06  1.96
-## B4  0.00  0.00  0.000  0.000  0.00  0.244 -0.441  0.62 -0.70 -0.09
-## B5  0.00  0.00  0.000  0.000  0.00  1.232 -0.723  1.11 -0.72  0.21
+##            B1         B2          B3         B4         B5          C1
+## A1  0.9769734  3.2410399  0.51686204  2.1284519  0.4365235 -0.86551286
+## A2 -0.3745809 -0.4168576  0.36896453 -0.7413361 -0.4583653 -0.23627957
+## A3  1.0527115  0.2982276 -0.21538051 -1.0959963 -1.0633261 -0.19717589
+## A4 -1.0491770  0.6365697  0.06529303  0.0377884  1.2631852  1.10992029
+## A5 -1.2601552 -0.4837806 -0.03406725  0.3104807 -0.3496504  0.08473729
+## B1  0.0000000  0.0000000  0.00000000  0.0000000  0.0000000  1.65090747
+## B2  0.0000000  0.0000000  0.00000000  0.0000000  0.0000000 -0.05402813
+## B3  0.0000000  0.0000000  0.00000000  0.0000000  0.0000000  0.11924524
+## B4  0.0000000  0.0000000  0.00000000  0.0000000  0.0000000  0.24368743
+## B5  0.0000000  0.0000000  0.00000000  0.0000000  0.0000000  1.23247588
+##             C2         C3          C4          C5
+## A1  0.75405379 -0.8953634 -0.61116592  0.54319406
+## A2 -0.49929202 -1.3108015 -1.18548008 -0.41433995
+## A3  0.21444531  1.9972134  2.19881035 -0.47624689
+## A4 -0.32468591  0.6007088  1.31241298 -0.78860284
+## A5  0.09458353 -1.2512714 -0.26514506 -0.59461727
+## B1 -0.51606383 -1.2362731  0.70758835  0.88465050
+## B2 -0.99250715 -1.2847157 -0.36365730 -1.01559258
+## B3  1.67569693 -0.5739735  0.05974994  1.95529397
+## B4 -0.44116322  0.6179858 -0.70459646 -0.09031959
+## B5 -0.72306597  1.1098481 -0.71721816  0.21453883
 ```
 
-When making the chord diagram, we set larger gaps between groups to identify different groups.
-Here we manually adjust `gap.after` in `circos.par()`.
+The main thing is to create "a grouping variable". The variable contains
+the group labels and the sector names are used as the names in the vector.
 
-Also we add an additional track in which we add lines to enhance the visual effect of different groups.
 
 
 ```r
-library(circlize)
-circos.par(gap.after = rep(c(rep(1, 4), 8), 3))
+nm = unique(unlist(dimnames(mat)))
+group = structure(gsub("\\d", "", nm), names = nm)
+group
 ```
 
 ```
-## Warning: 'gap.degree' can only be modified before `circos.initialize`, or maybe
-## you forgot to call `circos.clear` in your last plot.
+##  A1  A2  A3  A4  A5  B1  B2  B3  B4  B5  C1  C2  C3  C4  C5 
+## "A" "A" "A" "A" "A" "B" "B" "B" "B" "B" "C" "C" "C" "C" "C"
+```
+
+Assign `group` variable to the `group` argument:
+
+
+```r
+grid.col = structure(c(rep(2, 5), rep(3, 5), rep(4, 5)),
+                names = c(paste0("A", 1:5), paste0("B", 1:5), paste0("C", 1:5)))
+chordDiagram(mat, group = group, grid.col = grid.col)
+```
+
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-grouped-1.png" alt="Grouped Chord diagram." width="672" />
+<p class="caption">(\#fig:chord-grouped)Grouped Chord diagram.</p>
+</div>
+
+```r
+circos.clear()
+```
+
+We can try another grouping:
+
+
+```r
+group = structure(gsub("^\\w", "", nm), names = nm)
+group
+```
+
+```
+##  A1  A2  A3  A4  A5  B1  B2  B3  B4  B5  C1  C2  C3  C4  C5 
+## "1" "2" "3" "4" "5" "1" "2" "3" "4" "5" "1" "2" "3" "4" "5"
 ```
 
 ```r
-chordDiagram(mat, annotationTrack = c("grid", "axis"),
+chordDiagram(mat, group = group, grid.col = grid.col)
+```
+
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-grouped2-1.png" alt="Grouped Chord diagram. A different grouping." width="672" />
+<p class="caption">(\#fig:chord-grouped2)Grouped Chord diagram. A different grouping.</p>
+</div>
+
+```r
+circos.clear()
+```
+
+The order of `group` controls the sector orders and if `group` is set as a factor,
+the order of levels controls the order of groups.
+
+
+```r
+group = structure(gsub("\\d", "", nm), names = nm)
+group = factor(group[sample(length(group), length(group))], levels = c("C", "A", "B"))
+group
+```
+
+```
+## B3 A3 B5 B2 C1 A1 A2 C4 A5 C2 C5 B4 A4 B1 C3 
+##  B  A  B  B  C  A  A  C  A  C  C  B  A  B  C 
+## Levels: C A B
+```
+
+```r
+chordDiagram(mat, group = group, grid.col = grid.col)
+```
+
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-grouped3-1.png" alt="Grouped Chord diagram. Control the orders of groups." width="672" />
+<p class="caption">(\#fig:chord-grouped3)Grouped Chord diagram. Control the orders of groups.</p>
+</div>
+
+```r
+circos.clear()
+```
+
+The gap between groups is controlled by `big.gap` argument and the gap between
+sectors is controlled by `small.gap` argument.
+
+
+```r
+group = structure(gsub("\\d", "", nm), names = nm)
+chordDiagram(mat, group = group, grid.col = grid.col, big.gap = 20, small.gap = 5)
+```
+
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-grouped4-1.png" alt="Grouped Chord diagram. Control the gaps between groups." width="672" />
+<p class="caption">(\#fig:chord-grouped4)Grouped Chord diagram. Control the gaps between groups.</p>
+</div>
+
+```r
+circos.clear()
+```
+
+As a normal Chord diagram, the labels and other tracks can be manually adjusted:
+
+
+```r
+group = structure(gsub("\\d", "", nm), names = nm)
+chordDiagram(mat, group = group, grid.col = grid.col,
+    annotationTrack = c("grid", "axis"),
     preAllocateTracks = list(
-        track.height = uh(4, "mm"),
-        track.margin = c(uh(4, "mm"), 0)
+        track.height = mm_h(4),
+        track.margin = c(mm_h(4), 0)
 ))
 circos.track(track.index = 2, panel.fun = function(x, y) {
     sector.index = get.cell.meta.data("sector.index")
@@ -409,25 +511,11 @@ highlight.sector(colnames(mat2), track.index = 1, col = "blue",
     text = "C", cex = 0.8, text.col = "white", niceFacing = TRUE)
 ```
 
-<img src="14-chord-diagram-advanced-usage_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-advanced-usage_files/figure-html/chord-grouped5-1.png" alt="A more customized grouped Chord diagram." width="672" />
+<p class="caption">(\#fig:chord-grouped5)A more customized grouped Chord diagram.</p>
+</div>
 
 ```r
 circos.clear()
-```
-
-If row names and column names in the big matrix are not grouped, the sector order
-can be manually adjusted by `order` argument.
-
-
-```r
-chordDiagram(mat, order = c(paset0("A", 1:5), paset0("B", 1:5), paset0("C", 1:5)))
-```
-
-It is similar way to construct a multiple-group Chord diagram with data frame as input.
-
-
-```r
-library(reshape2)
-df2 = do.call("rbind", list(melt(mat1), melt(mat2), melt(mat3)))
-chordDiagram(df2, order = c(paste0("A", 1:5), paste0("B", 1:5), paste0("C", 1:5)))
 ```

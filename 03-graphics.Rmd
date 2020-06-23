@@ -23,6 +23,45 @@ circos.points(x, y, sector.index, track.index)
 In this chapter, we will also discuss how to customize links and how to highlight
 regions in the circle.
 
+## Setting colors
+
+Color is a major aesthetic element to map to the data points. In **circliez** there are
+two functions that provides customization of colors.
+
+`colorRamp2()` provides an exact way for mapping continuous values. users specify a vector
+of break values and a vector of colors, all the other colors are linearly interpolated between
+the correspoding break values. In following example, we generate a color mapping which is symmetric
+to zero.
+
+```{r}
+col_fun = colorRamp2(c(-2, 0, 2), c("blue", "white", "red"))
+col_fun(seq(-5, 1, by = 1)) # all the values smaller than -2 are all mapped to blue
+```
+
+`rand_color()` implements the algorithem of [randomColor.js](https://github.com/davidmerfield/randomColor).
+See the following example:
+
+```{r, fig.width = 6, fig.height = 5.4}
+par(mar = c(1, 1, 1, 1))
+plot(NULL, xlim = c(1, 10), ylim = c(1, 8), axes = FALSE, ann = FALSE)
+points(1:10, rep(1, 10), pch = 16, cex = 5, 
+    col = rand_color(10, luminosity = "random"))
+points(1:10, rep(2, 10), pch = 16, cex = 5, 
+    col = rand_color(10, luminosity = "bright"))
+points(1:10, rep(3, 10), pch = 16, cex = 5, 
+    col = rand_color(10, luminosity = "light"))
+points(1:10, rep(4, 10), pch = 16, cex = 5, 
+    col = rand_color(10, luminosity = "dark"))
+points(1:10, rep(5, 10), pch = 16, cex = 5, 
+    col = rand_color(10, hue = "red", luminosity = "bright"))
+points(1:10, rep(6, 10), pch = 16, cex = 5, 
+    col = rand_color(10, hue = "green", luminosity = "bright"))
+points(1:10, rep(7, 10), pch = 16, cex = 5, 
+    col = rand_color(10, hue = "blue", luminosity = "bright"))
+points(1:10, rep(8, 10), pch = 16, cex = 5, 
+    col = rand_color(10, hue = "monochrome", luminosity = "bright"))
+```
+
 ## Points {#points}
 
 Adding points by `circos.points()` is similar as `points()` function. Possible
@@ -110,11 +149,23 @@ circos.lines(x, y, col, area, baseline, border)
 
 Line segments can be added by `circos.segments()` function. The usage is similar
 as `segments()`. Radical segments can be added by setting `straight` to `TRUE`.
-
+An example is in Figure \@ref(fig:circlize-segments).
 
 ```{r, eval = FALSE}
 circos.segments(x0, y0, x1, y1)
 circos.segments(x0, y0, x1, y1, straight)
+```
+
+```{r circlize-segments, echo = FALSE, fig.cap = "Draw segments."}
+circos.initialize(letters[1:8], xlim = c(0, 1))
+circos.track(ylim = c(0, 1), track.height = 0.3, panel.fun = function(x, y) {
+    x = seq(0.2, 0.8, by = 0.2)
+    y = seq(0.2, 0.8, by = 0.2)
+
+    circos.segments(x, 0.1, x, 0.9)
+    circos.segments(0.1, y, 0.9, y)
+})
+circos.clear()
 ```
 
 ## Text {#text}
@@ -127,7 +178,7 @@ which are `inside`, `outside`, `clockwise`, `reverse.clockwise`, `downward`,
 `bending.outside`, currently, single line text is only supported. If you want to
 put bended text into two lines, you need to split text into two lines and add
 each line by `circos.text()` separately. The different facings are illustrated
-in figure \@ref(fig:circlize-text).
+in Figure \@ref(fig:circlize-text).
 
 ```{r circlize-text, echo = FALSE, fig.cap = "Text facings."}
 source("src/intro-09-text.R")
@@ -169,11 +220,11 @@ circos.text(x, y, labels, adj = c(0, degree(5)), facing = "clockwise")
 
 As `circos.text()` is applied in the data coordiante, offset can be directly
 added to `x` or/and `y` as a value measured in the data coordinate. An absolute
-offset can be set by using `ux()` (in x direction) and `uy()` (in y
+offset can be set by using e.g. `mm_x()` (in x direction) and `mm_y()` (in y
 direction).
 
 ```{r, eval = FALSE}
-circos.text(x + ux(2, "mm"), y + uy(2, "mm"), labels)
+circos.text(x + mm_x(2), y + mm_y(2), labels)
 ```
 
 ## Rectangles and polygons {#rectangles}
@@ -257,7 +308,7 @@ circos.axis(h, major.at, labels, major.tick, minor.ticks,
 
 Y-axis is also supported by `circos.yaxis()`. The usage is similar as
 `circos.axis()` One thing that needs to be note is users need to manually adjust
-`gap.degree` in `circos.par()` to make sure there are enough spaces for y-axes.
+`gap.degree`/`gap.after` in `circos.par()` to make sure there are enough spaces for y-axes.
 (Figure \@ref(fig:circlize-yaxis))
 
 ```{r, eval = FALSE}
@@ -267,6 +318,81 @@ circos.yaxis(at, labels, sector.index, track.index)
 
 ```{r circlize-yaxis, echo = FALSE, fig.cap = "Y-axes"}
 source("src/intro-11-yaxis.R")
+```
+
+## Barplots, boxplots and violin plots
+
+`circos.barplot()`, `circos.boxplot()` and `circos.violin()` are introduced
+together because the values on x-axes are the integer indices of bars, boxes
+or violins for which xlim should be properly set in `circos.initialize()`.
+
+For circular barplots, users can either specify a vector which generates a
+“normal” barplot, or a matrix which generates a stacked barplot (Figure \@ref(fig:circlize-barplot)).
+
+```{r circlize-barplot, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Circular barplots."}
+par(mfrow = c(1, 2))
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    value = runif(10)
+    circos.barplot(value, 1:10 - 0.5, col = 1:10)
+})
+circos.track(ylim = c(-1, 1), panel.fun = function(x, y) {
+    value = runif(10, min = -1, max = 1)
+    circos.barplot(value, 1:10 - 0.5, col = ifelse(value > 0, 2, 3))
+})
+circos.clear()
+
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 4), panel.fun = function(x, y) {
+    value = matrix(runif(10*4), ncol = 4)
+    circos.barplot(value, 1:10 - 0.5, col = 2:5)
+})
+circos.clear()
+```
+
+For circular boxplots, the boxes can be drawn one-by-one by providing a vector
+for each box, or drawn in batch with a list/matrix as input (Figure \@ref(fig:circlize-boxplot)).
+
+```{r circlize-boxplot, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Circular boxplots."}
+par(mfrow = c(1, 2))
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    for(pos in seq(0.5, 9.5, by = 1)) {
+        value = runif(10)
+        circos.boxplot(value, pos)
+    }
+})
+circos.clear()
+
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    value = replicate(runif(10), n = 10, simplify = FALSE)
+    circos.boxplot(value, 1:10 - 0.5, col = 1:10)
+})
+circos.clear()
+```
+
+For circular violin plots, the violins can be drawn one-by-one by providing a vector for each violin, or drawn in batch with a list/matrix as input (Figure \@ref(fig:circlize-violinplot)).
+
+Please note, to make it comparable between violins, `max_density` argument should be set.
+
+```{r circlize-violinplot, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Circular violin plots."}
+par(mfrow = c(1, 2))
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    for(pos in seq(0.5, 9.5, by = 1)) {
+        value = runif(10)
+        circos.violin(value, pos)
+    }
+})
+circos.clear()
+
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    value = replicate(runif(10), n = 10, simplify = FALSE)
+    circos.violin(value, 1:10 - 0.5, col = 1:10)
+})
+circos.clear()
 ```
 
 ## Circular arrows
@@ -280,19 +406,32 @@ arrow and the length is defined by `x2 - x1`. `arrow.head.width` and
 `arrow.head.length` control the size of the arrow head, and values are
 measured in the data coordinate in corresponding cell. `tail` controls the
 shape of the arrow tail. Note for `width`, `arrow.head.width` and
-`arrow.head.length`, the value can be set by `ux()`, `uy()` with absolute
-units. See figure \@ref(fig:circular-arrow).
+`arrow.head.length`, the value can be set by e.g. `mm_x()`, `mm_y()` with absolute
+units. If users want to draw the arrows in the reversed direction, set `arrow.position`
+argument to `start`. See Figure \@ref(fig:circular-arrow).
 
 
-```{r circular-arrow, fig.width = 4, fig.height = 4, fig.cap = "Circular arrows."}
+```{r circular-arrow, fig.width = 8, fig.height = 4, fig.cap = "Circular arrows."}
+par(mfrow = c(1, 2))
 circos.initialize(letters[1:4], xlim = c(0, 1))
 col = rand_color(4)
 tail = c("point", "normal", "point", "normal")
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     circos.arrow(x1 = 0, x2 = 1, y = 0.5, width = 0.4, 
-        arrow.head.width = 0.6, arrow.head.length = ux(1, "cm"), 
+        arrow.head.width = 0.6, arrow.head.length = cm_x(1), 
         col = col[CELL_META$sector.numeric.index], 
         tail = tail[CELL_META$sector.numeric.index])
+}, bg.border = NA, track.height = 0.4)
+circos.clear()
+
+circos.initialize(letters[1:4], xlim = c(0, 1))
+tail = c("point", "normal", "point", "normal")
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    circos.arrow(x1 = 0, x2 = 1, y = 0.5, width = 0.4, 
+        arrow.head.width = 0.6, arrow.head.length = cm_x(1), 
+        col = col[CELL_META$sector.numeric.index], 
+        tail = tail[CELL_META$sector.numeric.index],
+        arrow.position = "start")
 }, bg.border = NA, track.height = 0.4)
 circos.clear()
 ```
@@ -300,10 +439,12 @@ circos.clear()
 Circular arrows are useful to visualize events which happen in circular style,
 such as different phases in cell cycle. Following example code visualizes four
 phases in cell cycle where the width of sectors correspond to the hours in
-each phase (figure \@ref(fig:cell-cycle)). Also circular arrows can be used to
+each phase (Figure \@ref(fig:cell-cycle)). Also circular arrows can be used to
 visualize genes in circular genome where the arrows represent the orientation
 of the gene, such as [mitochondrial genome](https://en.wikipedia.org/wiki/Mitochondrial_DNA)
-or [plasmid genome](https://en.wikipedia.org/wiki/Plasmid).
+or [plasmid genome](https://en.wikipedia.org/wiki/Plasmid). Just remember if the gene
+is in the reverse strand or the negative strand, set `arrow.position = "start"` to 
+draw the arrow in the other direction.
 
 ```{r cell-cycle, fig.width = 4, fig.height = 4, fig.cap = "Cell cycle."}
 cell_cycle = data.frame(phase = factor(c("G1", "S", "G2", "M"), levels = c("G1", "S", "G2", "M")),
@@ -313,7 +454,7 @@ circos.par(start.degree = 90)
 circos.initialize(cell_cycle$phase, xlim = cbind(rep(0, 4), cell_cycle$hour))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     circos.arrow(CELL_META$xlim[1], CELL_META$xlim[2], 
-        arrow.head.width = CELL_META$yrange*0.8, arrow.head.length = ux(0.5, "cm"),
+        arrow.head.width = CELL_META$yrange*0.8, arrow.head.length = cm_x(0.5),
         col = color[CELL_META$sector.numeric.index])
     circos.text(CELL_META$xcenter, CELL_META$ycenter, CELL_META$sector.index, 
         facing = "downward")
@@ -421,7 +562,7 @@ circos.link("e", c(2, 3), "g", 5, border = 1)
 circos.clear()
 ```
 
-The position of link end is controlled by `rou`. By default, it is the bottom
+The position of link end is controlled by `rou` (sorry the name should be called `rho`). By default, it is the bottom
 of the most inside track and normally, you don't need to care about
 this setting. The two ends of the link are located in a same circle by default. The
 positions of two ends can be adjusted with different values for `rou1` and

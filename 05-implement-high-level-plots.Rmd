@@ -6,9 +6,11 @@ functions to construct complicated graphics for specific purposes.
 
 ## Circular barplots {#circular-barplot}
 
-In the following code, we put all the nine bars in one track and one sector.
-You can also put them into 9 tracks, but the code would be very similar. See
-Figure \@ref(fig:circular-barplot).
+**circlize** already has a `circos.barplot()` function that draws the
+barplots. Here is another type of circular barplots. In the following code, we put all
+the nine bars in one track and one sector. You can also put them into 9
+tracks, but the code would be very similar. See Figure
+\@ref(fig:circular-barplot).
 
 ```{r circular-barplot, fig.cap = "A circular barplot."}
 category = paste0("category", "_", 1:9)
@@ -38,13 +40,13 @@ circos.clear()
 
 When adding text by `circos.text()`, `adj` is specified to `c(1.05, 0.5)`
 which means text is aligned to the right and there is also offset between the
-text and the anchor points. We can also use `ux()` to set the offset to
+text and the anchor points. We can also use `mm_x()` to set the offset to
 absolute units. Conversion on x direction in a circular coordinate is affected
 by the position on y axis, here we must set the `h` argument. Following code
 can be used to replace the `circos.text()` in above example.
 
 ```{r, eval = FALSE}
-circos.text(xlim[1] - ux(2, "mm", h = 1:9), 1:9, 
+circos.text(xlim[1] - mm_x(2, h = 1:9), 1:9, 
 	paste(category, " - ", percent, "%"), 
     facing = "downward", adj = c(1, 0.5), cex = 0.8)
 ```
@@ -193,7 +195,7 @@ With the flexibility of **circlize** package, it is easy to add more tracks
 if you want to add more corresponded information for the dendrogram to the
 plot.
 
-## Heatmaps {#heatmaps}
+## Manually create heatmaps {#heatmaps}
 
 Heatmaps, and sometimes combined with dendrograms are frequently used to
 visualize e.g. gene expression. Heatmaps are basically composed by rectangles,

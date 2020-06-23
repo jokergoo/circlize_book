@@ -6,7 +6,7 @@ layout(rbind(1:4, 5:8, 9:12), width = c(1.5, 2, 1.5, 2))
 par(mar = c(1, 1, 1, 1), xpd = NA)
 
 plot(c(0, 1), c(0, 1), type = "n", ann = FALSE, axes = FALSE)
-text(0.5, 0.5, "circos.initialize", adj = c(0.5, 0.5), cex = 1.2)
+text(0.5, 0.5, "circos.initialize()", adj = c(0.5, 0.5), cex = 1.2)
 
 circos.par(gap.degree = 5)
 circos.initialize(1:4, xlim = rbind(c(0, 1), c(0, 2), c(0, 3), c(0, 4)))
@@ -19,7 +19,7 @@ draw.sector(start.degree = 0, end.degree = 360, rou1 = 1, col = NA, lty = 2, bor
 circos.clear()
 
 plot(c(0, 1), c(0, 1), type = "n", ann = FALSE, axes = FALSE)
-text(0.5, 0.5, "circos.trackPlotRegion", adj = c(0.5, 0.5), cex = 1.2)
+text(0.5, 0.5, "circos.track()", adj = c(0.5, 0.5), cex = 1.2)
 
 circos.par(gap.degree = 5)
 circos.initialize(1:4, xlim = rbind(c(0, 1), c(0, 2), c(0, 3), c(0, 4)))
@@ -27,7 +27,7 @@ circos.trackPlotRegion(ylim = c(0, 1))
 circos.clear()
 
 plot(c(0, 1), c(0, 1), type = "n", ann = FALSE, axes = FALSE)
-text(0.5, 0.5, "circos.points\ncircos.lines\ncircos.text\n...", adj = c(0.5, 0.5), cex = 1.2)
+text(0.5, 0.5, "circos.points()\ncircos.lines()\ncircos.text()\n...", adj = c(0.5, 0.5), cex = 1.2)
 
 circos.par(gap.degree = 5)
 circos.initialize(1:4, xlim = rbind(c(0, 1), c(0, 2), c(0, 3), c(0, 4)))
@@ -38,7 +38,7 @@ circos.trackPlotRegion(ylim = c(0, 1), panel.fun = function(x, y) {
 circos.clear()
 
 plot(c(0, 1), c(0, 1), type = "n", ann = FALSE, axes = FALSE)
-text(0.5, 0.5, "circos.trackPlotRegion", adj = c(0.5, 0.5), cex = 1.2)
+text(0.5, 0.5, "circos.track()", adj = c(0.5, 0.5), cex = 1.2)
 
 circos.par(gap.degree = 5)
 circos.initialize(1:4, xlim = rbind(c(0, 1), c(0, 2), c(0, 3), c(0, 4)))
@@ -50,7 +50,7 @@ circos.trackPlotRegion(ylim = c(0, 1))
 circos.clear()
 
 plot(c(0, 1), c(0, 1), type = "n", ann = FALSE, axes = FALSE)
-text(0.5, 0.5, "circos.points\ncircos.lines\ncircos.text\n...", adj = c(0.5, 0.5), cex = 1.2)
+text(0.5, 0.5, "circos.points()\ncircos.lines()\ncircos.text()\n...", adj = c(0.5, 0.5), cex = 1.2)
 
 circos.par(gap.degree = 5)
 circos.initialize(1:4, xlim = rbind(c(0, 1), c(0, 2), c(0, 3), c(0, 4)))
@@ -65,7 +65,7 @@ circos.trackPlotRegion(ylim = c(0, 1), panel.fun = function(x, y) {
 circos.clear()
 
 plot(c(0, 1), c(0, 1), type = "n", ann = FALSE, axes = FALSE)
-text(0.5, 0.5, "...\ncircos.clear", adj = c(0.5, 0.5), cex = 1.2)
+text(0.5, 0.5, "...\ncircos.clear()", adj = c(0.5, 0.5), cex = 1.2)
 
 layout(rbind(1))
 par(xpd = FALSE)

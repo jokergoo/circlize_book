@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 16 Advanced usage of chordDiagram() | Circular Visualization in R</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 16 Advanced usage of chordDiagram() | Circular Visualization in R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bookdown.org/jokergoo/circlize-book/book" />
+  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="github-repo" content="jokergoo/circlize_book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 16 Advanced usage of chordDiagram() | Circular Visualization in R" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+
+<meta name="author" content="Zuguang Gu" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="the-chorddiagram-function.html"/>
+<link rel="next" href="a-complex-example-of-chord-diagram.html"/>
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Circular Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I General Functionality</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#principle-of-design"><i class="fa fa-check"></i><b>1.1</b> Principle of design</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#a-qiuck-glance"><i class="fa fa-check"></i><b>1.2</b> A quick glance</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="circular-layout.html"><a href="circular-layout.html#coordinate-transformation"><i class="fa fa-check"></i><b>2.1</b> Coordinate transformation</a></li>
+<li class="chapter" data-level="2.2" data-path="circular-layout.html"><a href="circular-layout.html#rules-for-making-the-circular-plot"><i class="fa fa-check"></i><b>2.2</b> Rules for making the circular plot</a></li>
+<li class="chapter" data-level="2.3" data-path="circular-layout.html"><a href="circular-layout.html#sectors-and-tracks"><i class="fa fa-check"></i><b>2.3</b> Sectors and tracks</a></li>
+<li class="chapter" data-level="2.4" data-path="circular-layout.html"><a href="circular-layout.html#graphic-parameters"><i class="fa fa-check"></i><b>2.4</b> Graphic parameters</a></li>
+<li class="chapter" data-level="2.5" data-path="circular-layout.html"><a href="circular-layout.html#create-plotting-regions"><i class="fa fa-check"></i><b>2.5</b> Create plotting regions</a></li>
+<li class="chapter" data-level="2.6" data-path="circular-layout.html"><a href="circular-layout.html#update-plotting-regions"><i class="fa fa-check"></i><b>2.6</b> Update plotting regions</a></li>
+<li class="chapter" data-level="2.7" data-path="circular-layout.html"><a href="circular-layout.html#panel-fun"><i class="fa fa-check"></i><b>2.7</b> <code>panel.fun</code> argument</a></li>
+<li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
+<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The functions measured in absolute units</a></li>
+<li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="circular-layout.html"><a href="circular-layout.html#set-gaps-between-tracks"><i class="fa fa-check"></i><b>2.9</b> Set gaps between tracks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="graphics.html"><a href="graphics.html#setting-colors"><i class="fa fa-check"></i><b>3.1</b> Setting colors</a></li>
+<li class="chapter" data-level="3.2" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>3.2</b> Points</a></li>
+<li class="chapter" data-level="3.3" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>3.3</b> Lines</a></li>
+<li class="chapter" data-level="3.4" data-path="graphics.html"><a href="graphics.html#segments"><i class="fa fa-check"></i><b>3.4</b> Segments</a></li>
+<li class="chapter" data-level="3.5" data-path="graphics.html"><a href="graphics.html#text"><i class="fa fa-check"></i><b>3.5</b> Text</a></li>
+<li class="chapter" data-level="3.6" data-path="graphics.html"><a href="graphics.html#rectangles"><i class="fa fa-check"></i><b>3.6</b> Rectangles and polygons</a></li>
+<li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.7</b> Axes</a></li>
+<li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#barplots-boxplots-and-violin-plots"><i class="fa fa-check"></i><b>3.8</b> Barplots, boxplots and violin plots</a></li>
+<li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#circular-arrows"><i class="fa fa-check"></i><b>3.9</b> Circular arrows</a></li>
+<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.10</b> Raster image</a></li>
+<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.11</b> Links</a></li>
+<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.12</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.13</b> Work together with the base graphic system</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
+<li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="high-level-plots.html"><a href="high-level-plots.html#circular-barplot"><i class="fa fa-check"></i><b>5.1</b> Circular barplots</a></li>
+<li class="chapter" data-level="5.2" data-path="high-level-plots.html"><a href="high-level-plots.html#histograms"><i class="fa fa-check"></i><b>5.2</b> Histograms</a></li>
+<li class="chapter" data-level="5.3" data-path="high-level-plots.html"><a href="high-level-plots.html#phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Phylogenetic trees</a></li>
+<li class="chapter" data-level="5.4" data-path="high-level-plots.html"><a href="high-level-plots.html#heatmaps"><i class="fa fa-check"></i><b>5.4</b> Manually create heatmaps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="circos-heatmap.html"><a href="circos-heatmap.html"><i class="fa fa-check"></i><b>6</b> The <code>circos.heatmap()</code> function</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circos-heatmap-input-data"><i class="fa fa-check"></i><b>6.1</b> Input data</a></li>
+<li class="chapter" data-level="6.2" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circular-layout-1"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
+<li class="chapter" data-level="6.3" data-path="circos-heatmap.html"><a href="circos-heatmap.html#dendrograms-and-row-names"><i class="fa fa-check"></i><b>6.3</b> Dendrograms and row names</a></li>
+<li class="chapter" data-level="6.4" data-path="circos-heatmap.html"><a href="circos-heatmap.html#clustering"><i class="fa fa-check"></i><b>6.4</b> Clustering</a></li>
+<li class="chapter" data-level="6.5" data-path="circos-heatmap.html"><a href="circos-heatmap.html#callback-on-dendrograms"><i class="fa fa-check"></i><b>6.5</b> Callback on dendrograms</a></li>
+<li class="chapter" data-level="6.6" data-path="circos-heatmap.html"><a href="circos-heatmap.html#multiple-heatmap-tracks"><i class="fa fa-check"></i><b>6.6</b> Multiple heatmap tracks</a></li>
+<li class="chapter" data-level="6.7" data-path="circos-heatmap.html"><a href="circos-heatmap.html#with-other-tracks"><i class="fa fa-check"></i><b>6.7</b> With other tracks</a></li>
+<li class="chapter" data-level="6.8" data-path="circos-heatmap.html"><a href="circos-heatmap.html#add-annotations"><i class="fa fa-check"></i><b>6.8</b> Add annotations</a></li>
+<li class="chapter" data-level="6.9" data-path="circos-heatmap.html"><a href="circos-heatmap.html#a-complex-example-of-circular-heatmaps"><i class="fa fa-check"></i><b>6.9</b> A complex example of circular heatmaps</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>7</b> Advanced layout</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="advanced-layout.html"><a href="advanced-layout.html#zooming-of-sectors"><i class="fa fa-check"></i><b>7.1</b> Zooming of sectors</a></li>
+<li class="chapter" data-level="7.2" data-path="advanced-layout.html"><a href="advanced-layout.html#part-circle"><i class="fa fa-check"></i><b>7.2</b> Visualize part of the circle</a></li>
+<li class="chapter" data-level="7.3" data-path="advanced-layout.html"><a href="advanced-layout.html#combine-circular-plots"><i class="fa fa-check"></i><b>7.3</b> Combine multiple circular plots</a></li>
+<li class="chapter" data-level="7.4" data-path="advanced-layout.html"><a href="advanced-layout.html#arrange-multiple-plots"><i class="fa fa-check"></i><b>7.4</b> Arrange multiple plots</a></li>
+</ul></li>
+<li class="part"><span><b>II Applications in Genomics</b></span></li>
+<li class="chapter" data-level="8" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>8</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="genomic-introduction.html"><a href="genomic-introduction.html#input-data"><i class="fa fa-check"></i><b>8.1</b> Input data</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>9</b> Initialize with genomic data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>9.1</b> Initialize with cytoband data</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>9.1.1</b> Basic usage</a></li>
+<li class="chapter" data-level="9.1.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#pre-defined-tracks"><i class="fa fa-check"></i><b>9.1.2</b> Pre-defined tracks</a></li>
+<li class="chapter" data-level="9.1.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#other-general-settings"><i class="fa fa-check"></i><b>9.1.3</b> Other general settings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>9.2</b> Customize chromosome track</a></li>
+<li class="chapter" data-level="9.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>9.3</b> Initialize with general genomic category</a></li>
+<li class="chapter" data-level="9.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>9.4</b> Zooming chromosomes</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>10</b> Create plotting regions for genomic data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-points"><i class="fa fa-check"></i><b>10.1</b> Points</a></li>
+<li class="chapter" data-level="10.2" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-lines"><i class="fa fa-check"></i><b>10.2</b> Lines</a></li>
+<li class="chapter" data-level="10.3" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-text"><i class="fa fa-check"></i><b>10.3</b> Text</a></li>
+<li class="chapter" data-level="10.4" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-rectangles"><i class="fa fa-check"></i><b>10.4</b> Rectangles</a></li>
+<li class="chapter" data-level="10.5" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-links"><i class="fa fa-check"></i><b>10.5</b> Links</a></li>
+<li class="chapter" data-level="10.6" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#mixed-use-of-general-circlize-functions"><i class="fa fa-check"></i><b>10.6</b> Mixed use of general circlize functions</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>11</b> modes for <code>circos.genomicTrack()</code></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>11.1</b> Normal mode</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame"><i class="fa fa-check"></i><b>11.1.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="11.1.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames"><i class="fa fa-check"></i><b>11.1.2</b> Input is a list of data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>11.2</b> Stack mode</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame-1"><i class="fa fa-check"></i><b>11.2.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="11.2.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames-1"><i class="fa fa-check"></i><b>11.2.2</b> Input is a list of data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>11.3</b> Applications</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-points"><i class="fa fa-check"></i><b>11.3.1</b> Points</a></li>
+<li class="chapter" data-level="11.3.2" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-lines"><i class="fa fa-check"></i><b>11.3.2</b> Lines</a></li>
+<li class="chapter" data-level="11.3.3" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-rectangles"><i class="fa fa-check"></i><b>11.3.3</b> Rectangles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>12</b> High-level genomic functions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>12.1</b> Ideograms</a></li>
+<li class="chapter" data-level="12.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>12.2</b> Heatmaps</a></li>
+<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
+<li class="chapter" data-level="12.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>12.4</b> Genomic axes</a></li>
+<li class="chapter" data-level="12.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>12.5</b> Genomic density and Rainfall plot</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>13</b> Nested zooming</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="nested-zooming.html"><a href="nested-zooming.html#basic-idea"><i class="fa fa-check"></i><b>13.1</b> Basic idea</a></li>
+<li class="chapter" data-level="13.2" data-path="nested-zooming.html"><a href="nested-zooming.html#visualization-of-dmrs-from-tagmentation-based-wgbs"><i class="fa fa-check"></i><b>13.2</b> Visualization of DMRs from tagmentation-based WGBS</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>14</b> Advanced usage of <code>chordDiagram()</code></a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>14.1</b> Organization of tracks</a></li>
+<li class="chapter" data-level="14.2" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-labels"><i class="fa fa-check"></i><b>14.2</b> Customize sector labels</a></li>
+<li class="chapter" data-level="14.3" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-axes"><i class="fa fa-check"></i><b>14.3</b> Customize sector axes</a></li>
+<li class="chapter" data-level="14.4" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#put-horizontally-or-vertically-symmetric"><i class="fa fa-check"></i><b>14.4</b> Put horizontally or vertically symmetric</a></li>
+<li class="chapter" data-level="14.5" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#compare-two-chord-diagrams"><i class="fa fa-check"></i><b>14.5</b> Compare two Chord diagrams</a></li>
+<li class="chapter" data-level="14.6" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#multiple-group-chord-diagram"><i class="fa fa-check"></i><b>14.6</b> Multiple-group Chord diagram</a></li>
+</ul></li>
+<li class="part"><span><b>III Visualize Relations</b></span></li>
+<li class="chapter" data-level="15" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>15</b> The <code>chordDiagram()</code> function</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>15.1</b> Basic usage</a></li>
+<li class="chapter" data-level="15.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>15.2</b> Adjust by <code>circos.par()</code></a></li>
+<li class="chapter" data-level="15.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>15.3</b> Colors</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#set-grid-colors"><i class="fa fa-check"></i><b>15.3.1</b> Set grid colors</a></li>
+<li class="chapter" data-level="15.3.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-color"><i class="fa fa-check"></i><b>15.3.2</b> Set link colors</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-border"><i class="fa fa-check"></i><b>15.4</b> Link border</a></li>
+<li class="chapter" data-level="15.5" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#highlight-links"><i class="fa fa-check"></i><b>15.5</b> Highlight links</a></li>
+<li class="chapter" data-level="15.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>15.6</b> Orders of links</a>
+<ul>
+<li class="chapter" data-level="15.6.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-positions-on-sectors"><i class="fa fa-check"></i><b>15.6.1</b> Orders of positions on sectors</a></li>
+<li class="chapter" data-level="15.6.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#order-of-adding-links"><i class="fa fa-check"></i><b>15.6.2</b> Order of adding links</a></li>
+</ul></li>
+<li class="chapter" data-level="15.7" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#self-links"><i class="fa fa-check"></i><b>15.7</b> Self-links</a></li>
+<li class="chapter" data-level="15.8" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#symmetric-matrix"><i class="fa fa-check"></i><b>15.8</b> Symmetric matrix</a></li>
+<li class="chapter" data-level="15.9" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#directional-relations"><i class="fa fa-check"></i><b>15.9</b> Directional relations</a></li>
+<li class="chapter" data-level="15.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#scaling"><i class="fa fa-check"></i><b>15.10</b> Scaling</a></li>
+<li class="chapter" data-level="15.11" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>15.11</b> Reduce</a></li>
+<li class="chapter" data-level="15.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>15.12</b> Input as a data frame</a>
+<ul>
+<li class="chapter" data-level="15.12.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#multiple-links"><i class="fa fa-check"></i><b>15.12.1</b> Multiple links</a></li>
+<li class="chapter" data-level="15.12.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#unequal-width-of-the-link-ends"><i class="fa fa-check"></i><b>15.12.2</b> Unequal width of the link ends</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="advanced-usage-of-chorddiagram-1.html"><a href="advanced-usage-of-chorddiagram-1.html"><i class="fa fa-check"></i><b>16</b> Advanced usage of <code>chordDiagram()</code></a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="advanced-usage-of-chorddiagram-1.html"><a href="advanced-usage-of-chorddiagram-1.html#organization-of-tracks-1"><i class="fa fa-check"></i><b>16.1</b> Organization of tracks</a></li>
+<li class="chapter" data-level="16.2" data-path="advanced-usage-of-chorddiagram-1.html"><a href="advanced-usage-of-chorddiagram-1.html#customize-sector-labels-1"><i class="fa fa-check"></i><b>16.2</b> Customize sector labels</a></li>
+<li class="chapter" data-level="16.3" data-path="advanced-usage-of-chorddiagram-1.html"><a href="advanced-usage-of-chorddiagram-1.html#customize-sector-axes-1"><i class="fa fa-check"></i><b>16.3</b> Customize sector axes</a></li>
+<li class="chapter" data-level="16.4" data-path="advanced-usage-of-chorddiagram-1.html"><a href="advanced-usage-of-chorddiagram-1.html#put-horizontally-or-vertically-symmetric-1"><i class="fa fa-check"></i><b>16.4</b> Put horizontally or vertically symmetric</a></li>
+<li class="chapter" data-level="16.5" data-path="advanced-usage-of-chorddiagram-1.html"><a href="advanced-usage-of-chorddiagram-1.html#compare-two-chord-diagrams-1"><i class="fa fa-check"></i><b>16.5</b> Compare two Chord diagrams</a></li>
+<li class="chapter" data-level="16.6" data-path="advanced-usage-of-chorddiagram-1.html"><a href="advanced-usage-of-chorddiagram-1.html#multiple-group-chord-diagram-1"><i class="fa fa-check"></i><b>16.6</b> Multiple-group Chord diagram</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>17</b> A complex example of Chord diagram</a></li>
+<li class="part"><span><b>IV Others</b></span></li>
+<li class="chapter" data-level="18" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>18</b> Make fun of the package</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>18.1</b> A clock</a></li>
+<li class="chapter" data-level="18.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>18.2</b> A dartboard</a></li>
+<li class="chapter" data-level="18.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>18.3</b> Ba-Gua and Tai-Ji</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="advanced-usage-of-chorddiagram-1" class="section level1" number="16">
+<h1><span class="header-section-number">Chapter 16</span> Advanced usage of <code>chordDiagram()</code></h1>
+<p>The default style of <code>chordDiagram()</code> is somehow enough for most visualization
+tasks, still you can have more configurations on the plot.</p>
+<p>The usage is same for both ajacency matrix and ajacency list, so we only
+demonstrate with the matrix.</p>
+<div id="organization-of-tracks-1" class="section level2" number="16.1">
+<h2><span class="header-section-number">16.1</span> Organization of tracks</h2>
+<p>By default, <code>chordDiagram()</code> creates two tracks, one track for labels and one
+track for grids with axes.</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="advanced-usage-of-chorddiagram-1.html#cb387-1"></a><span class="kw">chordDiagram</span>(mat)</span>
+<span id="cb387-2"><a href="advanced-usage-of-chorddiagram-1.html#cb387-2"></a><span class="kw">circos.info</span>()</span></code></pre></div>
+<pre><code>## All your sectors:
+## [1] &quot;S1&quot; &quot;S2&quot; &quot;S3&quot; &quot;E1&quot; &quot;E2&quot; &quot;E3&quot; &quot;E4&quot; &quot;E5&quot; &quot;E6&quot;
+## 
+## All your tracks:
+## [1] 1 2
+## 
+## Your current sector.index is E6
+## Your current track.index is 2</code></pre>
+<p>These two tracks can be controlled by <code>annotationTrack</code> argument. Available
+values for this argument are <code>grid</code>, <code>name</code> and <code>axis</code>. The height of
+annotation tracks can be set by <code>annotationTrackHeight</code> which is the
+percentage to the radius of unit circle and can be set by <code>uh()</code> function with
+an absolute unit. Axes are only added if <code>grid</code> is set in <code>annotationTrack</code>
+(Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-default-track">14.1</a>).</p>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="advanced-usage-of-chorddiagram-1.html#cb389-1"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>)</span>
+<span id="cb389-2"><a href="advanced-usage-of-chorddiagram-1.html#cb389-2"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;grid&quot;</span>),</span>
+<span id="cb389-3"><a href="advanced-usage-of-chorddiagram-1.html#cb389-3"></a>    <span class="dt">annotationTrackHeight =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.01</span>))</span>
+<span id="cb389-4"><a href="advanced-usage-of-chorddiagram-1.html#cb389-4"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:chord-diagram-default-track"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-diagram-default-track-1.png" alt="Track organization in `chordDiagram()`." width="768" />
+<p class="caption">
+Figure 14.1: Track organization in <code>chordDiagram()</code>.
+</p>
+</div>
+<p>Several empty tracks can be allocated before Chord diagram is drawn. Then self-defined graphics can
+be added to these empty tracks afterwards. The number of pre-allocated tracks can be set
+through <code>preAllocateTracks</code>.</p>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="advanced-usage-of-chorddiagram-1.html#cb390-1"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">preAllocateTracks =</span> <span class="dv">2</span>)</span>
+<span id="cb390-2"><a href="advanced-usage-of-chorddiagram-1.html#cb390-2"></a><span class="kw">circos.info</span>()</span></code></pre></div>
+<pre><code>## All your sectors:
+## [1] &quot;S1&quot; &quot;S2&quot; &quot;S3&quot; &quot;E1&quot; &quot;E2&quot; &quot;E3&quot; &quot;E4&quot; &quot;E5&quot; &quot;E6&quot;
+## 
+## All your tracks:
+## [1] 1 2 3 4
+## 
+## Your current sector.index is E6
+## Your current track.index is 4</code></pre>
+<p>The default settings for pre-allocated tracks are:</p>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="advanced-usage-of-chorddiagram-1.html#cb392-1"></a><span class="kw">list</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb392-2"><a href="advanced-usage-of-chorddiagram-1.html#cb392-2"></a>     <span class="dt">track.height =</span> <span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span>),</span>
+<span id="cb392-3"><a href="advanced-usage-of-chorddiagram-1.html#cb392-3"></a>     <span class="dt">bg.col =</span> <span class="ot">NA</span>,</span>
+<span id="cb392-4"><a href="advanced-usage-of-chorddiagram-1.html#cb392-4"></a>     <span class="dt">bg.border =</span> <span class="ot">NA</span>,</span>
+<span id="cb392-5"><a href="advanced-usage-of-chorddiagram-1.html#cb392-5"></a>     <span class="dt">bg.lty =</span> <span class="kw">par</span>(<span class="st">&quot;lty&quot;</span>),</span>
+<span id="cb392-6"><a href="advanced-usage-of-chorddiagram-1.html#cb392-6"></a>     <span class="dt">bg.lwd =</span> <span class="kw">par</span>(<span class="st">&quot;lwd&quot;</span>))</span></code></pre></div>
+<p>The default settings for pre-allocated tracks can be overwritten by specifying <code>preAllocateTracks</code>
+as a list.</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="advanced-usage-of-chorddiagram-1.html#cb393-1"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>,</span>
+<span id="cb393-2"><a href="advanced-usage-of-chorddiagram-1.html#cb393-2"></a>    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.3</span>))</span></code></pre></div>
+<p>If more than one tracks need to be pre-allocated, just specify <code>preAllocateTracks</code>
+as a list which contains settings for each track:</p>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="advanced-usage-of-chorddiagram-1.html#cb394-1"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">annotationTrack =</span> <span class="ot">NULL</span>,</span>
+<span id="cb394-2"><a href="advanced-usage-of-chorddiagram-1.html#cb394-2"></a>    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.1</span>),</span>
+<span id="cb394-3"><a href="advanced-usage-of-chorddiagram-1.html#cb394-3"></a>                             <span class="kw">list</span>(<span class="dt">bg.border =</span> <span class="st">&quot;black&quot;</span>)))</span></code></pre></div>
+<p>By default <code>chordDiagram()</code> provides poor supports for customization of sector
+labels and axes, but with <code>preAllocateTracks</code> it is rather easy to customize
+them. Such customization will be introduced in next section.</p>
+</div>
+<div id="customize-sector-labels-1" class="section level2" number="16.2">
+<h2><span class="header-section-number">16.2</span> Customize sector labels</h2>
+<p>In <code>chordDiagram()</code>, there is no argument to control the style of sector
+labels, but this can be done by first pre-allocating an empty track and
+customizing the labels in it later. In the following example, one track is
+firstly allocated and a Chord diagram is added without label track and axes.
+Later, the first track is updated with adding labels with clockwise facings
+(Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels-show">14.2</a>).</p>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="advanced-usage-of-chorddiagram-1.html#cb395-1"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, </span>
+<span id="cb395-2"><a href="advanced-usage-of-chorddiagram-1.html#cb395-2"></a>    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">max</span>(<span class="kw">strwidth</span>(<span class="kw">unlist</span>(<span class="kw">dimnames</span>(mat))))))</span>
+<span id="cb395-3"><a href="advanced-usage-of-chorddiagram-1.html#cb395-3"></a><span class="co"># we go back to the first track and customize sector labels</span></span>
+<span id="cb395-4"><a href="advanced-usage-of-chorddiagram-1.html#cb395-4"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb395-5"><a href="advanced-usage-of-chorddiagram-1.html#cb395-5"></a>    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ylim[<span class="dv">1</span>], CELL_META<span class="op">$</span>sector.index, </span>
+<span id="cb395-6"><a href="advanced-usage-of-chorddiagram-1.html#cb395-6"></a>        <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>))</span>
+<span id="cb395-7"><a href="advanced-usage-of-chorddiagram-1.html#cb395-7"></a>}, <span class="dt">bg.border =</span> <span class="ot">NA</span>) <span class="co"># here set bg.border to NA is important</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:chord-diagram-labels-show"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-show-1.png" alt="Change label directions." width="672" />
+<p class="caption">
+Figure 14.2: Change label directions.
+</p>
+</div>
+<p>In the following example, the labels are put on the grids (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels-inside">14.3</a>).
+Please note <code>circos.text()</code> and
+<code>get.cell.meta.data()</code> can be used outside <code>panel.fun</code> if the sector index and
+track index are specified explicitly.</p>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="advanced-usage-of-chorddiagram-1.html#cb396-1"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, </span>
+<span id="cb396-2"><a href="advanced-usage-of-chorddiagram-1.html#cb396-2"></a>    <span class="dt">annotationTrack =</span> <span class="kw">c</span>(<span class="st">&quot;grid&quot;</span>, <span class="st">&quot;axis&quot;</span>), <span class="dt">annotationTrackHeight =</span> <span class="kw">uh</span>(<span class="dv">5</span>, <span class="st">&quot;mm&quot;</span>))</span>
+<span id="cb396-3"><a href="advanced-usage-of-chorddiagram-1.html#cb396-3"></a><span class="cf">for</span>(si <span class="cf">in</span> <span class="kw">get.all.sector.index</span>()) {</span>
+<span id="cb396-4"><a href="advanced-usage-of-chorddiagram-1.html#cb396-4"></a>    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb396-5"><a href="advanced-usage-of-chorddiagram-1.html#cb396-5"></a>    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb396-6"><a href="advanced-usage-of-chorddiagram-1.html#cb396-6"></a>    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="kw">mean</span>(ylim), si, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">1</span>, </span>
+<span id="cb396-7"><a href="advanced-usage-of-chorddiagram-1.html#cb396-7"></a>        <span class="dt">facing =</span> <span class="st">&quot;bending.inside&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb396-8"><a href="advanced-usage-of-chorddiagram-1.html#cb396-8"></a>}</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:chord-diagram-labels-inside"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-inside-1.png" alt="Put sector labels to the grid." width="672" />
+<p class="caption">
+Figure 14.3: Put sector labels to the grid.
+</p>
+</div>
+<p>For the last example in this section, if the width of the sector is less than
+20 degree, the labels are added in the radical direction (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-labels-multile-style">14.4</a>).</p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="advanced-usage-of-chorddiagram-1.html#cb397-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb397-2"><a href="advanced-usage-of-chorddiagram-1.html#cb397-2"></a>mat2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>), <span class="dv">10</span>)</span>
+<span id="cb397-3"><a href="advanced-usage-of-chorddiagram-1.html#cb397-3"></a><span class="kw">chordDiagram</span>(mat2, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, </span>
+<span id="cb397-4"><a href="advanced-usage-of-chorddiagram-1.html#cb397-4"></a>    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">max</span>(<span class="kw">strwidth</span>(<span class="kw">unlist</span>(<span class="kw">dimnames</span>(mat))))))</span>
+<span id="cb397-5"><a href="advanced-usage-of-chorddiagram-1.html#cb397-5"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb397-6"><a href="advanced-usage-of-chorddiagram-1.html#cb397-6"></a>    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>)</span>
+<span id="cb397-7"><a href="advanced-usage-of-chorddiagram-1.html#cb397-7"></a>    xplot =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xplot&quot;</span>)</span>
+<span id="cb397-8"><a href="advanced-usage-of-chorddiagram-1.html#cb397-8"></a>    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>)</span>
+<span id="cb397-9"><a href="advanced-usage-of-chorddiagram-1.html#cb397-9"></a>    sector.name =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)</span>
+<span id="cb397-10"><a href="advanced-usage-of-chorddiagram-1.html#cb397-10"></a></span>
+<span id="cb397-11"><a href="advanced-usage-of-chorddiagram-1.html#cb397-11"></a>    <span class="cf">if</span>(<span class="kw">abs</span>(xplot[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xplot[<span class="dv">1</span>]) <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>) {</span>
+<span id="cb397-12"><a href="advanced-usage-of-chorddiagram-1.html#cb397-12"></a>        <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), ylim[<span class="dv">1</span>], sector.name, <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>,</span>
+<span id="cb397-13"><a href="advanced-usage-of-chorddiagram-1.html#cb397-13"></a>            <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb397-14"><a href="advanced-usage-of-chorddiagram-1.html#cb397-14"></a>    } <span class="cf">else</span> {</span>
+<span id="cb397-15"><a href="advanced-usage-of-chorddiagram-1.html#cb397-15"></a>        <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), ylim[<span class="dv">1</span>], sector.name, <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>, </span>
+<span id="cb397-16"><a href="advanced-usage-of-chorddiagram-1.html#cb397-16"></a>            <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>), <span class="dt">col=</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb397-17"><a href="advanced-usage-of-chorddiagram-1.html#cb397-17"></a>    }</span>
+<span id="cb397-18"><a href="advanced-usage-of-chorddiagram-1.html#cb397-18"></a>}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:chord-diagram-labels-multile-style"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-diagram-labels-multile-style-1.png" alt="Adjust label direction according to the width of sectors." width="672" />
+<p class="caption">
+Figure 14.4: Adjust label direction according to the width of sectors.
+</p>
+</div>
+<p>When you set direction of sector labels as radical (<code>clockwise</code> or
+<code>reverse.clockwise</code>), if the labels are too long and exceed your figure
+region, you can either decrease the size of the font or set <code>canvas.xlim</code> and
+<code>canvas.ylim</code> parameters in <code>circos.par()</code> to wider intervals.</p>
+</div>
+<div id="customize-sector-axes-1" class="section level2" number="16.3">
+<h2><span class="header-section-number">16.3</span> Customize sector axes</h2>
+<p>Axes are helpful to correspond to the absolute values of links. By default
+<code>chordDiagram()</code> adds axes on the grid track. But it is easy to customize one
+with self-defined code.</p>
+<p>In following example code, we draw another type of axes which show relative
+percent on sectors. We first pre-allocate an empty track by
+<code>preAllocateTracks</code> and come back to this track to add axes later.</p>
+<p>You may see we add the first axes to the top of second track. You can also
+put them to the bottom of the first track.</p>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="advanced-usage-of-chorddiagram-1.html#cb398-1"></a><span class="co"># similar as the previous example, but we only plot the grid track</span></span>
+<span id="cb398-2"><a href="advanced-usage-of-chorddiagram-1.html#cb398-2"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, </span>
+<span id="cb398-3"><a href="advanced-usage-of-chorddiagram-1.html#cb398-3"></a>    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="kw">uh</span>(<span class="dv">5</span>, <span class="st">&quot;mm&quot;</span>)))</span>
+<span id="cb398-4"><a href="advanced-usage-of-chorddiagram-1.html#cb398-4"></a><span class="cf">for</span>(si <span class="cf">in</span> <span class="kw">get.all.sector.index</span>()) {</span>
+<span id="cb398-5"><a href="advanced-usage-of-chorddiagram-1.html#cb398-5"></a>    <span class="kw">circos.axis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>, <span class="dt">labels.cex =</span> <span class="fl">0.3</span>, <span class="dt">sector.index =</span> si, <span class="dt">track.index =</span> <span class="dv">2</span>)</span>
+<span id="cb398-6"><a href="advanced-usage-of-chorddiagram-1.html#cb398-6"></a>}</span></code></pre></div>
+<p>Now we go back to the first track to add the second type of axes and sector names.
+In <code>panel.fun</code>, if the sector is less than 30 degree, the break for the axis is set to 0.5
+(Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-axes">14.5</a>).</p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="advanced-usage-of-chorddiagram-1.html#cb399-1"></a><span class="co"># the second axis as well as the sector labels are added in this track</span></span>
+<span id="cb399-2"><a href="advanced-usage-of-chorddiagram-1.html#cb399-2"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">1</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb399-3"><a href="advanced-usage-of-chorddiagram-1.html#cb399-3"></a>    xlim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xlim&quot;</span>)</span>
+<span id="cb399-4"><a href="advanced-usage-of-chorddiagram-1.html#cb399-4"></a>    ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>)</span>
+<span id="cb399-5"><a href="advanced-usage-of-chorddiagram-1.html#cb399-5"></a>    sector.name =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)</span>
+<span id="cb399-6"><a href="advanced-usage-of-chorddiagram-1.html#cb399-6"></a>    xplot =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xplot&quot;</span>)</span>
+<span id="cb399-7"><a href="advanced-usage-of-chorddiagram-1.html#cb399-7"></a>    </span>
+<span id="cb399-8"><a href="advanced-usage-of-chorddiagram-1.html#cb399-8"></a>    <span class="kw">circos.lines</span>(xlim, <span class="kw">c</span>(<span class="kw">mean</span>(ylim), <span class="kw">mean</span>(ylim)), <span class="dt">lty =</span> <span class="dv">3</span>) <span class="co"># dotted line</span></span>
+<span id="cb399-9"><a href="advanced-usage-of-chorddiagram-1.html#cb399-9"></a>    by =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">abs</span>(xplot[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xplot[<span class="dv">1</span>]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>)</span>
+<span id="cb399-10"><a href="advanced-usage-of-chorddiagram-1.html#cb399-10"></a>    <span class="cf">for</span>(p <span class="cf">in</span> <span class="kw">seq</span>(by, <span class="dv">1</span>, <span class="dt">by =</span> by)) {</span>
+<span id="cb399-11"><a href="advanced-usage-of-chorddiagram-1.html#cb399-11"></a>        <span class="kw">circos.text</span>(p<span class="op">*</span>(xlim[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>xlim[<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span>xlim[<span class="dv">1</span>], <span class="kw">mean</span>(ylim) <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span>, </span>
+<span id="cb399-12"><a href="advanced-usage-of-chorddiagram-1.html#cb399-12"></a>            <span class="kw">paste0</span>(p<span class="op">*</span><span class="dv">100</span>, <span class="st">&quot;%&quot;</span>), <span class="dt">cex =</span> <span class="fl">0.3</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>), <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb399-13"><a href="advanced-usage-of-chorddiagram-1.html#cb399-13"></a>    }</span>
+<span id="cb399-14"><a href="advanced-usage-of-chorddiagram-1.html#cb399-14"></a>    </span>
+<span id="cb399-15"><a href="advanced-usage-of-chorddiagram-1.html#cb399-15"></a>    <span class="kw">circos.text</span>(<span class="kw">mean</span>(xlim), <span class="dv">1</span>, sector.name, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>))</span>
+<span id="cb399-16"><a href="advanced-usage-of-chorddiagram-1.html#cb399-16"></a>}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</span>
+<span id="cb399-17"><a href="advanced-usage-of-chorddiagram-1.html#cb399-17"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:chord-diagram-axes"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-diagram-axes-1.png" alt="Customize sector axes for Chord diagram." width="576" />
+<p class="caption">
+Figure 14.5: Customize sector axes for Chord diagram.
+</p>
+</div>
+</div>
+<div id="put-horizontally-or-vertically-symmetric-1" class="section level2" number="16.4">
+<h2><span class="header-section-number">16.4</span> Put horizontally or vertically symmetric</h2>
+<p>In Chord diagram, when there are two groups (which correspond to rows and columns
+if the input is an adjacency matrix), it is always visually beautiful to rotate the diagram
+to be symmetric on horizontal direction or vertical direction. See following example:</p>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="advanced-usage-of-chorddiagram-1.html#cb400-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb400-2"><a href="advanced-usage-of-chorddiagram-1.html#cb400-2"></a><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">0</span>)</span>
+<span id="cb400-3"><a href="advanced-usage-of-chorddiagram-1.html#cb400-3"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">big.gap =</span> <span class="dv">20</span>)</span>
+<span id="cb400-4"><a href="advanced-usage-of-chorddiagram-1.html#cb400-4"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000080&quot;</span>)</span>
+<span id="cb400-5"><a href="advanced-usage-of-chorddiagram-1.html#cb400-5"></a><span class="kw">circos.clear</span>()</span>
+<span id="cb400-6"><a href="advanced-usage-of-chorddiagram-1.html#cb400-6"></a></span>
+<span id="cb400-7"><a href="advanced-usage-of-chorddiagram-1.html#cb400-7"></a><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>)</span>
+<span id="cb400-8"><a href="advanced-usage-of-chorddiagram-1.html#cb400-8"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">big.gap =</span> <span class="dv">20</span>)</span>
+<span id="cb400-9"><a href="advanced-usage-of-chorddiagram-1.html#cb400-9"></a><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#00000080&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:chord-diagram-sym"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-diagram-sym-1.png" alt="Rotate Chord diagram." width="768" />
+<p class="caption">
+Figure 14.6: Rotate Chord diagram.
+</p>
+</div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="advanced-usage-of-chorddiagram-1.html#cb401-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+</div>
+<div id="compare-two-chord-diagrams-1" class="section level2" number="16.5">
+<h2><span class="header-section-number">16.5</span> Compare two Chord diagrams</h2>
+<p>Normally, in Chord diagram, values in <code>mat</code> are normalized to the summation of
+the absolute values in the matrix, which means the width for links only
+represents relative values. Then, when comparing two Chord diagrams, it is
+necessary that unit width of links in the two plots should be represented in a
+same scale. This problem can be solved by adding larger gaps to the Chord
+diagram which has smaller matrix.</p>
+<p>First we make the “big” Chord diagram.</p>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="advanced-usage-of-chorddiagram-1.html#cb402-1"></a>mat1 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">20</span>, <span class="dv">25</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dv">5</span>)</span>
+<span id="cb402-2"><a href="advanced-usage-of-chorddiagram-1.html#cb402-2"></a><span class="kw">chordDiagram</span>(mat1, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">transparency =</span> <span class="fl">0.5</span>,</span>
+<span id="cb402-3"><a href="advanced-usage-of-chorddiagram-1.html#cb402-3"></a>    <span class="dt">big.gap =</span> <span class="dv">10</span>, <span class="dt">small.gap =</span> <span class="dv">1</span>) <span class="co"># 10 and 1 are default values for the two arguments</span></span></code></pre></div>
+<p>The second matrix only has half the values in <code>mat1</code>.</p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="advanced-usage-of-chorddiagram-1.html#cb403-1"></a>mat2 =<span class="st"> </span>mat1 <span class="op">/</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<p><code>calc_gap()</code> can be used to calculate the gap for the second Chord diagram
+to make the scale of the two Chord diagram the same.</p>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="advanced-usage-of-chorddiagram-1.html#cb404-1"></a>gap =<span class="st"> </span><span class="kw">calc_gap</span>(mat1, mat2, <span class="dt">big.gap =</span> <span class="dv">10</span>, <span class="dt">small.gap =</span> <span class="dv">1</span>)</span>
+<span id="cb404-2"><a href="advanced-usage-of-chorddiagram-1.html#cb404-2"></a><span class="kw">chordDiagram</span>(mat2, <span class="dt">directional =</span> <span class="dv">1</span>, <span class="dt">grid.col =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">transparency =</span> <span class="fl">0.5</span>,</span>
+<span id="cb404-3"><a href="advanced-usage-of-chorddiagram-1.html#cb404-3"></a>    <span class="dt">big.gap =</span> gap, <span class="dt">small.gap =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>Now the scale of the two Chord diagrams (Figure <a href="advanced-usage-of-chorddiagram.html#fig:chord-diagram-compare">14.7</a>) are the
+same if you compare the scale of axes in the two diagrams.</p>
+<div class="figure" style="text-align: center"><span id="fig:chord-diagram-compare"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-diagram-compare-1.png" alt="Compare two Chord Diagrams in a same scale." width="768" />
+<p class="caption">
+Figure 14.7: Compare two Chord Diagrams in a same scale.
+</p>
+</div>
+<p>To correctly use the functionality of <code>calc_gap()</code>, the two Chord diagram should
+have same value for <code>small.gap</code> and there should be no overlap between the two
+sets of the sectors.</p>
+</div>
+<div id="multiple-group-chord-diagram-1" class="section level2" number="16.6">
+<h2><span class="header-section-number">16.6</span> Multiple-group Chord diagram</h2>
+<p>From verion 0.4.10 of the <strong>circlize</strong> package, there is a new <code>group</code>
+argument in <code>chordDiagram()</code> function which is very convenient for making
+multiple-group Chord diagrams.</p>
+<p>I first generate a random matrix where there are three groups (<code>A</code>, <code>B</code>, and <code>C</code>).
+Note this new functionality works the same for the input as a data frame.</p>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="advanced-usage-of-chorddiagram-1.html#cb405-1"></a><span class="kw">library</span>(circlize)</span>
+<span id="cb405-2"><a href="advanced-usage-of-chorddiagram-1.html#cb405-2"></a>mat1 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)</span>
+<span id="cb405-3"><a href="advanced-usage-of-chorddiagram-1.html#cb405-3"></a><span class="kw">rownames</span>(mat1) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb405-4"><a href="advanced-usage-of-chorddiagram-1.html#cb405-4"></a><span class="kw">colnames</span>(mat1) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb405-5"><a href="advanced-usage-of-chorddiagram-1.html#cb405-5"></a></span>
+<span id="cb405-6"><a href="advanced-usage-of-chorddiagram-1.html#cb405-6"></a>mat2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)</span>
+<span id="cb405-7"><a href="advanced-usage-of-chorddiagram-1.html#cb405-7"></a><span class="kw">rownames</span>(mat2) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb405-8"><a href="advanced-usage-of-chorddiagram-1.html#cb405-8"></a><span class="kw">colnames</span>(mat2) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb405-9"><a href="advanced-usage-of-chorddiagram-1.html#cb405-9"></a></span>
+<span id="cb405-10"><a href="advanced-usage-of-chorddiagram-1.html#cb405-10"></a>mat3 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>), <span class="dt">nrow =</span> <span class="dv">5</span>)</span>
+<span id="cb405-11"><a href="advanced-usage-of-chorddiagram-1.html#cb405-11"></a><span class="kw">rownames</span>(mat3) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb405-12"><a href="advanced-usage-of-chorddiagram-1.html#cb405-12"></a><span class="kw">colnames</span>(mat3) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb405-13"><a href="advanced-usage-of-chorddiagram-1.html#cb405-13"></a></span>
+<span id="cb405-14"><a href="advanced-usage-of-chorddiagram-1.html#cb405-14"></a>mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> <span class="dv">10</span>, <span class="dt">ncol =</span> <span class="dv">10</span>)</span>
+<span id="cb405-15"><a href="advanced-usage-of-chorddiagram-1.html#cb405-15"></a><span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rownames</span>(mat2), <span class="kw">rownames</span>(mat3))</span>
+<span id="cb405-16"><a href="advanced-usage-of-chorddiagram-1.html#cb405-16"></a><span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">colnames</span>(mat1), <span class="kw">colnames</span>(mat2))</span>
+<span id="cb405-17"><a href="advanced-usage-of-chorddiagram-1.html#cb405-17"></a>mat[<span class="kw">rownames</span>(mat1), <span class="kw">colnames</span>(mat1)] =<span class="st"> </span>mat1</span>
+<span id="cb405-18"><a href="advanced-usage-of-chorddiagram-1.html#cb405-18"></a>mat[<span class="kw">rownames</span>(mat2), <span class="kw">colnames</span>(mat2)] =<span class="st"> </span>mat2</span>
+<span id="cb405-19"><a href="advanced-usage-of-chorddiagram-1.html#cb405-19"></a>mat[<span class="kw">rownames</span>(mat3), <span class="kw">colnames</span>(mat3)] =<span class="st"> </span>mat3</span>
+<span id="cb405-20"><a href="advanced-usage-of-chorddiagram-1.html#cb405-20"></a>mat</span></code></pre></div>
+<pre><code>##            B1         B2          B3         B4         B5          C1
+## A1  0.9769734  3.2410399  0.51686204  2.1284519  0.4365235 -0.86551286
+## A2 -0.3745809 -0.4168576  0.36896453 -0.7413361 -0.4583653 -0.23627957
+## A3  1.0527115  0.2982276 -0.21538051 -1.0959963 -1.0633261 -0.19717589
+## A4 -1.0491770  0.6365697  0.06529303  0.0377884  1.2631852  1.10992029
+## A5 -1.2601552 -0.4837806 -0.03406725  0.3104807 -0.3496504  0.08473729
+## B1  0.0000000  0.0000000  0.00000000  0.0000000  0.0000000  1.65090747
+## B2  0.0000000  0.0000000  0.00000000  0.0000000  0.0000000 -0.05402813
+## B3  0.0000000  0.0000000  0.00000000  0.0000000  0.0000000  0.11924524
+## B4  0.0000000  0.0000000  0.00000000  0.0000000  0.0000000  0.24368743
+## B5  0.0000000  0.0000000  0.00000000  0.0000000  0.0000000  1.23247588
+##             C2         C3          C4          C5
+## A1  0.75405379 -0.8953634 -0.61116592  0.54319406
+## A2 -0.49929202 -1.3108015 -1.18548008 -0.41433995
+## A3  0.21444531  1.9972134  2.19881035 -0.47624689
+## A4 -0.32468591  0.6007088  1.31241298 -0.78860284
+## A5  0.09458353 -1.2512714 -0.26514506 -0.59461727
+## B1 -0.51606383 -1.2362731  0.70758835  0.88465050
+## B2 -0.99250715 -1.2847157 -0.36365730 -1.01559258
+## B3  1.67569693 -0.5739735  0.05974994  1.95529397
+## B4 -0.44116322  0.6179858 -0.70459646 -0.09031959
+## B5 -0.72306597  1.1098481 -0.71721816  0.21453883</code></pre>
+<p>The main thing is to create “a grouping variable”. The variable contains
+the group labels and the sector names are used as the names in the vector.</p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="advanced-usage-of-chorddiagram-1.html#cb407-1"></a>nm =<span class="st"> </span><span class="kw">unique</span>(<span class="kw">unlist</span>(<span class="kw">dimnames</span>(mat)))</span>
+<span id="cb407-2"><a href="advanced-usage-of-chorddiagram-1.html#cb407-2"></a>group =<span class="st"> </span><span class="kw">structure</span>(<span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>, <span class="st">&quot;&quot;</span>, nm), <span class="dt">names =</span> nm)</span>
+<span id="cb407-3"><a href="advanced-usage-of-chorddiagram-1.html#cb407-3"></a>group</span></code></pre></div>
+<pre><code>##  A1  A2  A3  A4  A5  B1  B2  B3  B4  B5  C1  C2  C3  C4  C5 
+## &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;B&quot; &quot;B&quot; &quot;B&quot; &quot;B&quot; &quot;B&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot;</code></pre>
+<p>Assign <code>group</code> variable to the <code>group</code> argument:</p>
+<pre><code>## Warning: &#39;gap.degree&#39; can only be modified before `circos.initialize`, or maybe
+## you forgot to call `circos.clear` in your last plot.</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:chord-grouped"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-grouped-1.png" alt="Grouped Chord diagram." width="768" />
+<p class="caption">
+Figure 14.8: Grouped Chord diagram.
+</p>
+</div>
+<p>We can try another grouping:</p>
+<pre><code>##  A1  A2  A3  A4  A5  B1  B2  B3  B4  B5  C1  C2  C3  C4  C5 
+## &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot; &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot; &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot;</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:chord-grouped2"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-grouped2-1.png" alt="Grouped Chord diagram. A different grouping." width="768" />
+<p class="caption">
+Figure 14.9: Grouped Chord diagram. A different grouping.
+</p>
+</div>
+<p>The order of <code>group</code> controls the sector orders and if <code>group</code> is set as a factor,
+the order of levels controls the order of groups.</p>
+<pre><code>## B3 A3 B5 B2 C1 A1 A2 C4 A5 C2 C5 B4 A4 B1 C3 
+##  B  A  B  B  C  A  A  C  A  C  C  B  A  B  C 
+## Levels: C A B</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:chord-grouped3"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-grouped3-1.png" alt="Grouped Chord diagram. Control the orders of groups." width="768" />
+<p class="caption">
+Figure 14.10: Grouped Chord diagram. Control the orders of groups.
+</p>
+</div>
+<p>The gap between groups is controlled by <code>big.gap</code> argument and the gap between
+sectors is controlled by <code>small.gap</code> argument.</p>
+<div class="figure" style="text-align: center"><span id="fig:chord-grouped4"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-grouped4-1.png" alt="Grouped Chord diagram. Control the gaps between groups." width="768" />
+<p class="caption">
+Figure 14.11: Grouped Chord diagram. Control the gaps between groups.
+</p>
+</div>
+<p>As a normal Chord diagram, the labels and other tracks can be manually adjusted:</p>
+<div class="figure" style="text-align: center"><span id="fig:chord-grouped5"></span>
+<img src="15-chord-diagram-advanced-usage_files/figure-html/chord-grouped5-1.png" alt="A more customized grouped Chord diagram." width="768" />
+<p class="caption">
+Figure 14.12: A more customized grouped Chord diagram.
+</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-chorddiagram-function.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-complex-example-of-chord-diagram.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jokergoo/circlize_book/edit/master/15-chord-diagram-advanced-usage.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

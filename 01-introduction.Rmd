@@ -29,13 +29,12 @@ visualizing relationships by Chord diagram.
 
 ## Principle of design
 
-A circular layout is composed of sectors and tracks. For data in different
-categories, they are allocated into different sectors and for multiple
-measurements of the same category, they are represented as stacked tracks from
+A circular layout is composed of _sectors_ and _tracks_. For data in different
+categories, they are allocated into different sectors, and for multiple
+measurements on the same category, they are represented as stacked tracks from
 outside of the circle to the inside. The intersection of a sector and a track
-is called a cell (or a grid, a panel), which is the basic unit in a circular
-layout. It is an imaginary plotting region for data points in a certain
-category.
+is called a _cell_ (or a grid, a panel), which is the basic unit in a circular
+layout. It is an imaginary plotting region for drawing data points.
 
 Since most of the figures are composed of simple graphics, such as points,
 lines, polygon, **circlize** implements low-level graphic functions for adding
@@ -57,6 +56,19 @@ specifically designed for circular visualization.
 - `circos.polygon()`: adds polygons in a cell.
 - `circos.text()`: adds text in a cell.
 - `circos.axis()` ands `circos.yaxis()`: add axis in a cell.
+
+Following function draws links between two positions in the circle:
+
+- `circos.link()`
+
+Following functions draw high-level graphics:
+
+- `circos.barplot()`: draw barplots.
+- `circos.boxplot()`: draw boxplots.
+- `circos.violin()`: draws violin plots.
+- `circos.heatmap()`: draw circular heatmaps.
+- `circos.raster()`: draw raster images.
+- `circos.arrow()`: draw circular arrows.
 
 Following functions arrange the circular layout.
 
@@ -121,18 +133,18 @@ a track-by-track manner. Before drawing anything, we need to know that all
 tracks should be first created by `circos.trackPlotRegion()` or, for short,
 `circos.track()`, then the low-level functions can be added afterwards. Just
 think in the base R graphic engine, you need first call `plot()` then you can
-use functions such as `points()` and `lines()` to add graphics. Since x ranges
+use functions such as `points()` and `lines()` to add graphics. Since x-ranges
 for cells in the track have already been defined in the initialization step,
-here we only need to specify the y ranges for each cell. The y ranges can be
-specified by `y` argument as a numeric vector (so that y ranges will be
+here we only need to specify the y-range for each cell. The y-ranges can be
+specified by `y` argument as a numeric vector (so that y-range will be
 automatically extracted and calculated in each cell) or `ylim` argument as a
-vector of length two. In principle, y ranges should be same for all cells in a
+vector of length two. In principle, y-ranges should be same for all cells in a
 same track. (See Figure \@ref(fig:circlize-glance-track-1))
 
 ```{r circlize_glance_1, eval=FALSE}
 circos.track(factors = df$factors, y = df$y,
     panel.fun = function(x, y) {
-        circos.text(CELL_META$xcenter, CELL_META$cell.ylim[2] + uy(5, "mm"), 
+        circos.text(CELL_META$xcenter, CELL_META$cell.ylim[2] + mm_y(5), 
             CELL_META$sector.index)
         circos.axis(labels.cex = 0.6)
 })
@@ -169,12 +181,13 @@ first track and add sector names in it (like what
 `circos.initializeWithIdeogram()` and `chordDiagram()` do, after you go through
 following chapters).
 
-When specifying the position of text on the y direction, an offset of `uy(5,
-"mm")` is added to the y position of the text. In `circos.text()`, x and y
-values are measured in the data coordinate (the coordinate in cell), and
-`uy()` function (or `ux()` which is measured on x direction) converts absolute
-units to corresponding values in data coordinate. Section \@ref(convert-functions)
-provides more information of converting units in different coordinates.
+When specifying the position of text on the y direction, an offset of
+`mm_y(5)` (5mm) is added to the y position of the text. In `circos.text()`, x and y
+values are measured in the data coordinate (the coordinate in cell), and there
+are some helper functions that convert absolute units to corresponding values
+in data coordinate. Section
+\@ref(convert-functions) provides more information of converting units in
+different coordinates.
 
 After the track is created, points are added to the first track by
 `circos.trackPoints()`. `circos.trackPoints()` simply adds points in all cells
@@ -211,7 +224,7 @@ circos.clear()
 ```
 
 In the third track and in `panel.fun`, we randomly picked 10 data points in
-each cell, sort them and connect them with lines. In following code, when
+each cell, sort them by x-values and connect them with lines. In following code, when
 `factors`, `x` and `y` arguments are set in `circos.track()`, x values and y
 values are split by `df$factors` and corresponding subset of x and y values
 are sent to `panel.fun` through `panel.fun`'s `x` and `y` arguments. Thus, `x`
