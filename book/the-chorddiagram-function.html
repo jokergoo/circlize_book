@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 The chordDiagram() function | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 14 The chordDiagram() function | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="nested-zooming.html"/>
 <link rel="next" href="advanced-usage-of-chorddiagram.html"/>
-<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
@@ -183,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="circos-heatmap.html"><a href="circos-heatmap.html"><i class="fa fa-check"></i><b>6</b> The <code>circos.heatmap()</code> function</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circos-heatmap-input-data"><i class="fa fa-check"></i><b>6.1</b> Input data</a></li>
-<li class="chapter" data-level="6.2" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circular-layout-1"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
+<li class="chapter" data-level="6.2" data-path="circular-layout.html"><a href="circular-layout.html#circular-layout"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
 <li class="chapter" data-level="6.3" data-path="circos-heatmap.html"><a href="circos-heatmap.html#dendrograms-and-row-names"><i class="fa fa-check"></i><b>6.3</b> Dendrograms and row names</a></li>
 <li class="chapter" data-level="6.4" data-path="circos-heatmap.html"><a href="circos-heatmap.html#clustering"><i class="fa fa-check"></i><b>6.4</b> Clustering</a></li>
 <li class="chapter" data-level="6.5" data-path="circos-heatmap.html"><a href="circos-heatmap.html#callback-on-dendrograms"><i class="fa fa-check"></i><b>6.5</b> Callback on dendrograms</a></li>
@@ -260,7 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Visualize Relations</b></span></li>
 <li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
+<li class="chapter" data-level="14.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
 <li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
 <li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
 <ul>
@@ -376,7 +377,7 @@ adjacency matrix and list.</p>
 <p>Since the usage for the two types of inputs are highly similar, in this chapter,
 we mainly show figures generated from the matrix, but still show the code which uses
 adjacency list.</p>
-<div id="basic-usage-1" class="section level2" number="14.1">
+<div id="basic-usage" class="section level2" number="14.1">
 <h2><span class="header-section-number">14.1</span> Basic usage</h2>
 <p>First let’s generate a random matrix and the corresponding adjacency list.</p>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="the-chorddiagram-function.html#cb292-1"></a><span class="kw">set.seed</span>(<span class="dv">999</span>)</span>
@@ -479,7 +480,7 @@ Figure 14.3: Set gaps in Chord diagram.
 <p>As explained in Section <a href="circular-layout.html#graphic-parameters">2.4</a>, <code>gap.after</code> can also specified
 as a named vector:</p>
 <div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="the-chorddiagram-function.html#cb304-1"></a><span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="st">&quot;S1&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;S2&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;S3&quot;</span> =<span class="st"> </span><span class="dv">15</span>, <span class="st">&quot;E1&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E2&quot;</span> =<span class="st"> </span><span class="dv">5</span>,</span>
-<span id="cb304-2"><a href="the-chorddiagram-function.html#cb304-2"></a>                         <span class="st">&quot;E3&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E4&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E5&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E6&quot;</span> =<span class="st"> </span><span class="dv">15</span>))</span>
+<span id="cb304-2"><a href="the-chorddiagram-function.html#cb304-2"></a>	                     <span class="st">&quot;E3&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E4&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E5&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E6&quot;</span> =<span class="st"> </span><span class="dv">15</span>))</span>
 <span id="cb304-3"><a href="the-chorddiagram-function.html#cb304-3"></a><span class="kw">chordDiagram</span>(mat)</span>
 <span id="cb304-4"><a href="the-chorddiagram-function.html#cb304-4"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <p>To make it simpler, users can directly set <code>big.gap</code> in <code>chordDiagram()</code>
@@ -1119,9 +1120,9 @@ Let's make an animation of how the links are added sequantially:
 ```r
 nr = nrow(df)
 for(i in seq_len(nr)) {
-    visible = rep(TRUE, nr)
-    visible[seq(i, nr)[-1]] = FALSE
-    chordDiagram(df, grid.col = grid.col, link.visible = visible)
+	visible = rep(TRUE, nr)
+	visible[seq(i, nr)[-1]] = FALSE
+	chordDiagram(df, grid.col = grid.col, link.visible = visible)
 }
 ```
 

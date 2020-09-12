@@ -315,9 +315,9 @@ modified before the initialization of the circular layout.
   `c(0, 1)` would only draw 1/4 of the circle.
 - `canvas.ylim`: The ranges in the canvas coordinate in y direction.
 - `clock.wise`: The order for drawing sectors. Default is `TRUE` which means
-  clockwise (Figure \@ref(fig:circlize-direction). **Note that inside each
-  cell, the direction of x-axis is always clockwise and direction of y-axis is
-  always from inside to outside in the circle.**
+  clockwise (Figure \@ref(fig:circlize-direction).
+- `xaxis.clock.wise`: The direction of x-axis in each cell. By default it is clockwise.
+   Note this new parameter was only available from version 0.4.11.
 
 <div class="figure" style="text-align: center">
 <img src="02-circlize-layout_files/figure-html/circlize-region-1.png" alt="Regions in a cell." width="384" />
@@ -337,6 +337,7 @@ Default values for graphic parameters are listed in following table.
 `canvas.xlim`              `c(-1, 1)`
 `canvas.ylim`              `c(-1, 1)`
 `clock.wise`               `TRUE` 
+`xaxis.clock.wise`         `TRUE`
 -------------------------- ---------------------------
 
 Parameters related to the allocation of sectors cannot be changed after the

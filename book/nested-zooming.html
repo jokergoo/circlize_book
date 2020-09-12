@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 13 Nested zooming | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 13 Nested zooming | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="high-level-genomic-functions.html"/>
 <link rel="next" href="the-chorddiagram-function.html"/>
-<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
@@ -183,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="circos-heatmap.html"><a href="circos-heatmap.html"><i class="fa fa-check"></i><b>6</b> The <code>circos.heatmap()</code> function</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circos-heatmap-input-data"><i class="fa fa-check"></i><b>6.1</b> Input data</a></li>
-<li class="chapter" data-level="6.2" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circular-layout-1"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
+<li class="chapter" data-level="6.2" data-path="circular-layout.html"><a href="circular-layout.html#circular-layout"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
 <li class="chapter" data-level="6.3" data-path="circos-heatmap.html"><a href="circos-heatmap.html#dendrograms-and-row-names"><i class="fa fa-check"></i><b>6.3</b> Dendrograms and row names</a></li>
 <li class="chapter" data-level="6.4" data-path="circos-heatmap.html"><a href="circos-heatmap.html#clustering"><i class="fa fa-check"></i><b>6.4</b> Clustering</a></li>
 <li class="chapter" data-level="6.5" data-path="circos-heatmap.html"><a href="circos-heatmap.html#callback-on-dendrograms"><i class="fa fa-check"></i><b>6.5</b> Callback on dendrograms</a></li>
@@ -260,7 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Visualize Relations</b></span></li>
 <li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
+<li class="chapter" data-level="14.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
 <li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
 <li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
 <ul>
@@ -331,9 +332,9 @@ circular plot.</p>
 <p>To illustrate the basic idea, we first generate a random data set.</p>
 <div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="nested-zooming.html#cb266-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb266-2"><a href="nested-zooming.html#cb266-2"></a>df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">cate =</span> <span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>], <span class="dv">400</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb266-3"><a href="nested-zooming.html#cb266-3"></a>                <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">400</span>),</span>
-<span id="cb266-4"><a href="nested-zooming.html#cb266-4"></a>                <span class="dt">y =</span> <span class="kw">runif</span>(<span class="dv">400</span>),</span>
-<span id="cb266-5"><a href="nested-zooming.html#cb266-5"></a>                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb266-3"><a href="nested-zooming.html#cb266-3"></a>	            <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">400</span>),</span>
+<span id="cb266-4"><a href="nested-zooming.html#cb266-4"></a>	            <span class="dt">y =</span> <span class="kw">runif</span>(<span class="dv">400</span>),</span>
+<span id="cb266-5"><a href="nested-zooming.html#cb266-5"></a>	            <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span>
 <span id="cb266-6"><a href="nested-zooming.html#cb266-6"></a>df =<span class="st"> </span>df[<span class="kw">order</span>(df[[<span class="dv">1</span>]], df[[<span class="dv">2</span>]]), ]</span>
 <span id="cb266-7"><a href="nested-zooming.html#cb266-7"></a><span class="kw">rownames</span>(df) =<span class="st"> </span><span class="ot">NULL</span></span>
 <span id="cb266-8"><a href="nested-zooming.html#cb266-8"></a>df<span class="op">$</span>interval_x =<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">cut</span>(df<span class="op">$</span>x, <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>)))</span>
@@ -401,21 +402,21 @@ together, arranges them and automatically draws the connection lines.</p>
 <p>To define “the circular plot”, the code for generating the plot needs to be
 wrapped into a function.</p>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="nested-zooming.html#cb277-1"></a>f1 =<span class="st"> </span><span class="cf">function</span>() {</span>
-<span id="cb277-2"><a href="nested-zooming.html#cb277-2"></a>    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">10</span>)</span>
-<span id="cb277-3"><a href="nested-zooming.html#cb277-3"></a>    <span class="kw">circos.initialize</span>(sector[, <span class="dv">1</span>], <span class="dt">xlim =</span> sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</span>
-<span id="cb277-4"><a href="nested-zooming.html#cb277-4"></a>    <span class="kw">circos.track</span>(data[[<span class="dv">1</span>]], <span class="dt">x =</span> data[[<span class="dv">2</span>]], <span class="dt">y =</span> data[[<span class="dv">3</span>]], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb277-5"><a href="nested-zooming.html#cb277-5"></a>        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb277-6"><a href="nested-zooming.html#cb277-6"></a>            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb277-7"><a href="nested-zooming.html#cb277-7"></a>    })</span>
+<span id="cb277-2"><a href="nested-zooming.html#cb277-2"></a>	<span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">10</span>)</span>
+<span id="cb277-3"><a href="nested-zooming.html#cb277-3"></a>	<span class="kw">circos.initialize</span>(sector[, <span class="dv">1</span>], <span class="dt">xlim =</span> sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</span>
+<span id="cb277-4"><a href="nested-zooming.html#cb277-4"></a>	<span class="kw">circos.track</span>(data[[<span class="dv">1</span>]], <span class="dt">x =</span> data[[<span class="dv">2</span>]], <span class="dt">y =</span> data[[<span class="dv">3</span>]], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb277-5"><a href="nested-zooming.html#cb277-5"></a>		<span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb277-6"><a href="nested-zooming.html#cb277-6"></a>			<span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb277-7"><a href="nested-zooming.html#cb277-7"></a>	})</span>
 <span id="cb277-8"><a href="nested-zooming.html#cb277-8"></a>}</span>
 <span id="cb277-9"><a href="nested-zooming.html#cb277-9"></a></span>
 <span id="cb277-10"><a href="nested-zooming.html#cb277-10"></a>f2 =<span class="st"> </span><span class="cf">function</span>() {</span>
-<span id="cb277-11"><a href="nested-zooming.html#cb277-11"></a>    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">2</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb277-12"><a href="nested-zooming.html#cb277-12"></a>    <span class="kw">circos.initialize</span>(zoom_sector[[<span class="dv">1</span>]], <span class="dt">xlim =</span> <span class="kw">as.matrix</span>(zoom_sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]))</span>
-<span id="cb277-13"><a href="nested-zooming.html#cb277-13"></a>    <span class="kw">circos.track</span>(zoom_data[[<span class="dv">1</span>]], <span class="dt">x =</span> zoom_data[[<span class="dv">2</span>]], <span class="dt">y =</span> zoom_data[[<span class="dv">3</span>]], </span>
-<span id="cb277-14"><a href="nested-zooming.html#cb277-14"></a>        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb277-15"><a href="nested-zooming.html#cb277-15"></a>            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
-<span id="cb277-16"><a href="nested-zooming.html#cb277-16"></a>        })</span>
+<span id="cb277-11"><a href="nested-zooming.html#cb277-11"></a>	<span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">2</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb277-12"><a href="nested-zooming.html#cb277-12"></a>	<span class="kw">circos.initialize</span>(zoom_sector[[<span class="dv">1</span>]], <span class="dt">xlim =</span> <span class="kw">as.matrix</span>(zoom_sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]))</span>
+<span id="cb277-13"><a href="nested-zooming.html#cb277-13"></a>	<span class="kw">circos.track</span>(zoom_data[[<span class="dv">1</span>]], <span class="dt">x =</span> zoom_data[[<span class="dv">2</span>]], <span class="dt">y =</span> zoom_data[[<span class="dv">3</span>]], </span>
+<span id="cb277-14"><a href="nested-zooming.html#cb277-14"></a>		<span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb277-15"><a href="nested-zooming.html#cb277-15"></a>			<span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb277-16"><a href="nested-zooming.html#cb277-16"></a>		})</span>
 <span id="cb277-17"><a href="nested-zooming.html#cb277-17"></a>}</span></code></pre></div>
 <p>In above, <code>f1()</code> is the code for generating the original plot and <code>f2()</code> is
 the code for generating the zoomed plot. They can be executed independently.</p>
@@ -459,33 +460,33 @@ to make it more complex (Figure <a href="nested-zooming.html#fig:nested-complex"
 <div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="nested-zooming.html#cb280-1"></a>sector_col =<span class="st"> </span><span class="kw">structure</span>(<span class="kw">rand_color</span>(<span class="dv">8</span>, <span class="dt">transparency =</span> <span class="fl">0.5</span>), <span class="dt">names =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>])</span>
 <span id="cb280-2"><a href="nested-zooming.html#cb280-2"></a></span>
 <span id="cb280-3"><a href="nested-zooming.html#cb280-3"></a>f1 =<span class="st"> </span><span class="cf">function</span>() {</span>
-<span id="cb280-4"><a href="nested-zooming.html#cb280-4"></a>    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">10</span>)</span>
-<span id="cb280-5"><a href="nested-zooming.html#cb280-5"></a>    <span class="kw">circos.initialize</span>(sector[, <span class="dv">1</span>], <span class="dt">xlim =</span> sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</span>
-<span id="cb280-6"><a href="nested-zooming.html#cb280-6"></a>    <span class="kw">circos.track</span>(data[[<span class="dv">1</span>]], <span class="dt">x =</span> data[[<span class="dv">2</span>]], <span class="dt">y =</span> data[[<span class="dv">3</span>]], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb280-7"><a href="nested-zooming.html#cb280-7"></a>        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb280-8"><a href="nested-zooming.html#cb280-8"></a>            l =<span class="st"> </span>correspondance[[<span class="dv">1</span>]] <span class="op">==</span><span class="st"> </span>CELL_META<span class="op">$</span>sector.index</span>
-<span id="cb280-9"><a href="nested-zooming.html#cb280-9"></a>            <span class="cf">if</span>(<span class="kw">sum</span>(l)) {</span>
-<span id="cb280-10"><a href="nested-zooming.html#cb280-10"></a>                <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">which</span>(l)) {</span>
-<span id="cb280-11"><a href="nested-zooming.html#cb280-11"></a>                    <span class="kw">circos.rect</span>(correspondance[i, <span class="dv">2</span>], CELL_META<span class="op">$</span>cell.ylim[<span class="dv">1</span>],</span>
-<span id="cb280-12"><a href="nested-zooming.html#cb280-12"></a>                                correspondance[i, <span class="dv">3</span>], CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>],</span>
-<span id="cb280-13"><a href="nested-zooming.html#cb280-13"></a>                                <span class="dt">col =</span> sector_col[CELL_META<span class="op">$</span>sector.index],</span>
-<span id="cb280-14"><a href="nested-zooming.html#cb280-14"></a>                                <span class="dt">border =</span> sector_col[CELL_META<span class="op">$</span>sector.index])</span>
-<span id="cb280-15"><a href="nested-zooming.html#cb280-15"></a>                }</span>
-<span id="cb280-16"><a href="nested-zooming.html#cb280-16"></a>            }</span>
-<span id="cb280-17"><a href="nested-zooming.html#cb280-17"></a>            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
-<span id="cb280-18"><a href="nested-zooming.html#cb280-18"></a>            <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ylim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">mm_y</span>(<span class="dv">2</span>), </span>
-<span id="cb280-19"><a href="nested-zooming.html#cb280-19"></a>                CELL_META<span class="op">$</span>sector.index, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>))</span>
-<span id="cb280-20"><a href="nested-zooming.html#cb280-20"></a>    })</span>
+<span id="cb280-4"><a href="nested-zooming.html#cb280-4"></a>	<span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">10</span>)</span>
+<span id="cb280-5"><a href="nested-zooming.html#cb280-5"></a>	<span class="kw">circos.initialize</span>(sector[, <span class="dv">1</span>], <span class="dt">xlim =</span> sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</span>
+<span id="cb280-6"><a href="nested-zooming.html#cb280-6"></a>	<span class="kw">circos.track</span>(data[[<span class="dv">1</span>]], <span class="dt">x =</span> data[[<span class="dv">2</span>]], <span class="dt">y =</span> data[[<span class="dv">3</span>]], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb280-7"><a href="nested-zooming.html#cb280-7"></a>		<span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb280-8"><a href="nested-zooming.html#cb280-8"></a>			l =<span class="st"> </span>correspondance[[<span class="dv">1</span>]] <span class="op">==</span><span class="st"> </span>CELL_META<span class="op">$</span>sector.index</span>
+<span id="cb280-9"><a href="nested-zooming.html#cb280-9"></a>			<span class="cf">if</span>(<span class="kw">sum</span>(l)) {</span>
+<span id="cb280-10"><a href="nested-zooming.html#cb280-10"></a>				<span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">which</span>(l)) {</span>
+<span id="cb280-11"><a href="nested-zooming.html#cb280-11"></a>					<span class="kw">circos.rect</span>(correspondance[i, <span class="dv">2</span>], CELL_META<span class="op">$</span>cell.ylim[<span class="dv">1</span>],</span>
+<span id="cb280-12"><a href="nested-zooming.html#cb280-12"></a>						        correspondance[i, <span class="dv">3</span>], CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>],</span>
+<span id="cb280-13"><a href="nested-zooming.html#cb280-13"></a>						        <span class="dt">col =</span> sector_col[CELL_META<span class="op">$</span>sector.index],</span>
+<span id="cb280-14"><a href="nested-zooming.html#cb280-14"></a>						        <span class="dt">border =</span> sector_col[CELL_META<span class="op">$</span>sector.index])</span>
+<span id="cb280-15"><a href="nested-zooming.html#cb280-15"></a>				}</span>
+<span id="cb280-16"><a href="nested-zooming.html#cb280-16"></a>			}</span>
+<span id="cb280-17"><a href="nested-zooming.html#cb280-17"></a>			<span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb280-18"><a href="nested-zooming.html#cb280-18"></a>			<span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ylim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">mm_y</span>(<span class="dv">2</span>), </span>
+<span id="cb280-19"><a href="nested-zooming.html#cb280-19"></a>				CELL_META<span class="op">$</span>sector.index, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>))</span>
+<span id="cb280-20"><a href="nested-zooming.html#cb280-20"></a>	})</span>
 <span id="cb280-21"><a href="nested-zooming.html#cb280-21"></a>}</span>
 <span id="cb280-22"><a href="nested-zooming.html#cb280-22"></a></span>
 <span id="cb280-23"><a href="nested-zooming.html#cb280-23"></a>f2 =<span class="st"> </span><span class="cf">function</span>() {</span>
-<span id="cb280-24"><a href="nested-zooming.html#cb280-24"></a>    <span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">2</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb280-25"><a href="nested-zooming.html#cb280-25"></a>    <span class="kw">circos.initialize</span>(zoom_sector[[<span class="dv">1</span>]], <span class="dt">xlim =</span> <span class="kw">as.matrix</span>(zoom_sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]))</span>
-<span id="cb280-26"><a href="nested-zooming.html#cb280-26"></a>    <span class="kw">circos.track</span>(zoom_data[[<span class="dv">1</span>]], <span class="dt">x =</span> zoom_data[[<span class="dv">2</span>]], <span class="dt">y =</span> zoom_data[[<span class="dv">3</span>]], </span>
-<span id="cb280-27"><a href="nested-zooming.html#cb280-27"></a>        <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb280-28"><a href="nested-zooming.html#cb280-28"></a>            <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
-<span id="cb280-29"><a href="nested-zooming.html#cb280-29"></a>        }, <span class="dt">bg.col =</span> sector_col[zoom_sector<span class="op">$</span>cate],</span>
-<span id="cb280-30"><a href="nested-zooming.html#cb280-30"></a>        <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb280-24"><a href="nested-zooming.html#cb280-24"></a>	<span class="kw">circos.par</span>(<span class="dt">gap.degree =</span> <span class="dv">2</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb280-25"><a href="nested-zooming.html#cb280-25"></a>	<span class="kw">circos.initialize</span>(zoom_sector[[<span class="dv">1</span>]], <span class="dt">xlim =</span> <span class="kw">as.matrix</span>(zoom_sector[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]))</span>
+<span id="cb280-26"><a href="nested-zooming.html#cb280-26"></a>	<span class="kw">circos.track</span>(zoom_data[[<span class="dv">1</span>]], <span class="dt">x =</span> zoom_data[[<span class="dv">2</span>]], <span class="dt">y =</span> zoom_data[[<span class="dv">3</span>]], </span>
+<span id="cb280-27"><a href="nested-zooming.html#cb280-27"></a>		<span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb280-28"><a href="nested-zooming.html#cb280-28"></a>			<span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb280-29"><a href="nested-zooming.html#cb280-29"></a>		}, <span class="dt">bg.col =</span> sector_col[zoom_sector<span class="op">$</span>cate],</span>
+<span id="cb280-30"><a href="nested-zooming.html#cb280-30"></a>		<span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
 <span id="cb280-31"><a href="nested-zooming.html#cb280-31"></a>}</span>
 <span id="cb280-32"><a href="nested-zooming.html#cb280-32"></a><span class="kw">circos.nested</span>(f1, f2, correspondance, <span class="dt">connection_col =</span> sector_col[correspondance[[<span class="dv">1</span>]]])</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:nested-complex"></span>
@@ -528,29 +529,29 @@ and original genome is stored in <code>correspondance</code>.</p>
 <span id="cb287-2"><a href="nested-zooming.html#cb287-2"></a><span class="kw">names</span>(chr_bg_color) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>)</span>
 <span id="cb287-3"><a href="nested-zooming.html#cb287-3"></a></span>
 <span id="cb287-4"><a href="nested-zooming.html#cb287-4"></a>f1 =<span class="st"> </span><span class="cf">function</span>() {</span>
-<span id="cb287-5"><a href="nested-zooming.html#cb287-5"></a>    <span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="dv">2</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>)</span>
-<span id="cb287-6"><a href="nested-zooming.html#cb287-6"></a>    <span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>), </span>
-<span id="cb287-7"><a href="nested-zooming.html#cb287-7"></a>        <span class="dt">plotType =</span> <span class="kw">c</span>(<span class="st">&quot;ideogram&quot;</span>, <span class="st">&quot;labels&quot;</span>), <span class="dt">ideogram.height =</span> <span class="fl">0.03</span>)</span>
+<span id="cb287-5"><a href="nested-zooming.html#cb287-5"></a>	<span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="dv">2</span>, <span class="dt">start.degree =</span> <span class="dv">90</span>)</span>
+<span id="cb287-6"><a href="nested-zooming.html#cb287-6"></a>	<span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>), </span>
+<span id="cb287-7"><a href="nested-zooming.html#cb287-7"></a>		<span class="dt">plotType =</span> <span class="kw">c</span>(<span class="st">&quot;ideogram&quot;</span>, <span class="st">&quot;labels&quot;</span>), <span class="dt">ideogram.height =</span> <span class="fl">0.03</span>)</span>
 <span id="cb287-8"><a href="nested-zooming.html#cb287-8"></a>}</span>
 <span id="cb287-9"><a href="nested-zooming.html#cb287-9"></a></span>
 <span id="cb287-10"><a href="nested-zooming.html#cb287-10"></a>f2 =<span class="st"> </span><span class="cf">function</span>() {</span>
-<span id="cb287-11"><a href="nested-zooming.html#cb287-11"></a>    <span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">nrow</span>(tagments)<span class="op">-</span><span class="dv">1</span>), <span class="dv">10</span>))</span>
-<span id="cb287-12"><a href="nested-zooming.html#cb287-12"></a>    <span class="kw">circos.genomicInitialize</span>(tagments, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
-<span id="cb287-13"><a href="nested-zooming.html#cb287-13"></a>    <span class="kw">circos.genomicTrack</span>(DMR1, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), </span>
-<span id="cb287-14"><a href="nested-zooming.html#cb287-14"></a>        <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb287-15"><a href="nested-zooming.html#cb287-15"></a>            <span class="cf">for</span>(h <span class="cf">in</span> <span class="kw">seq</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="dt">by =</span> <span class="fl">0.2</span>)) {</span>
-<span id="cb287-16"><a href="nested-zooming.html#cb287-16"></a>                <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(h, h), <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;#AAAAAA&quot;</span>)</span>
-<span id="cb287-17"><a href="nested-zooming.html#cb287-17"></a>            }</span>
-<span id="cb287-18"><a href="nested-zooming.html#cb287-18"></a>            <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;#888888&quot;</span>)</span>
-<span id="cb287-19"><a href="nested-zooming.html#cb287-19"></a>        </span>
-<span id="cb287-20"><a href="nested-zooming.html#cb287-20"></a>            <span class="kw">circos.genomicPoints</span>(region, value, </span>
-<span id="cb287-21"><a href="nested-zooming.html#cb287-21"></a>                <span class="dt">col =</span> <span class="kw">ifelse</span>(value[[<span class="dv">1</span>]] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;#E41A1C&quot;</span>, <span class="st">&quot;#377EB8&quot;</span>), </span>
-<span id="cb287-22"><a href="nested-zooming.html#cb287-22"></a>                <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
-<span id="cb287-23"><a href="nested-zooming.html#cb287-23"></a>    }, <span class="dt">bg.col =</span> chr_bg_color[tagments<span class="op">$</span>chr], <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="fl">0.02</span>, <span class="dv">0</span>))</span>
-<span id="cb287-24"><a href="nested-zooming.html#cb287-24"></a>    <span class="kw">circos.yaxis</span>(<span class="dt">side =</span> <span class="st">&quot;left&quot;</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="dt">by =</span> <span class="fl">0.3</span>), </span>
-<span id="cb287-25"><a href="nested-zooming.html#cb287-25"></a>        <span class="dt">sector.index =</span> <span class="kw">get.all.sector.index</span>()[<span class="dv">1</span>], <span class="dt">labels.cex =</span> <span class="fl">0.4</span>)</span>
-<span id="cb287-26"><a href="nested-zooming.html#cb287-26"></a>    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="kw">mm_h</span>(<span class="dv">2</span>), </span>
-<span id="cb287-27"><a href="nested-zooming.html#cb287-27"></a>        <span class="dt">bg.col =</span> <span class="kw">add_transparency</span>(chr_bg_color[tagments<span class="op">$</span>chr], <span class="dv">0</span>))</span>
+<span id="cb287-11"><a href="nested-zooming.html#cb287-11"></a>	<span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">nrow</span>(tagments)<span class="op">-</span><span class="dv">1</span>), <span class="dv">10</span>))</span>
+<span id="cb287-12"><a href="nested-zooming.html#cb287-12"></a>	<span class="kw">circos.genomicInitialize</span>(tagments, <span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
+<span id="cb287-13"><a href="nested-zooming.html#cb287-13"></a>	<span class="kw">circos.genomicTrack</span>(DMR1, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), </span>
+<span id="cb287-14"><a href="nested-zooming.html#cb287-14"></a>		<span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb287-15"><a href="nested-zooming.html#cb287-15"></a>			<span class="cf">for</span>(h <span class="cf">in</span> <span class="kw">seq</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="dt">by =</span> <span class="fl">0.2</span>)) {</span>
+<span id="cb287-16"><a href="nested-zooming.html#cb287-16"></a>		        <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(h, h), <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;#AAAAAA&quot;</span>)</span>
+<span id="cb287-17"><a href="nested-zooming.html#cb287-17"></a>		    }</span>
+<span id="cb287-18"><a href="nested-zooming.html#cb287-18"></a>		    <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;#888888&quot;</span>)</span>
+<span id="cb287-19"><a href="nested-zooming.html#cb287-19"></a>	    </span>
+<span id="cb287-20"><a href="nested-zooming.html#cb287-20"></a>			<span class="kw">circos.genomicPoints</span>(region, value, </span>
+<span id="cb287-21"><a href="nested-zooming.html#cb287-21"></a>				<span class="dt">col =</span> <span class="kw">ifelse</span>(value[[<span class="dv">1</span>]] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;#E41A1C&quot;</span>, <span class="st">&quot;#377EB8&quot;</span>), </span>
+<span id="cb287-22"><a href="nested-zooming.html#cb287-22"></a>				<span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb287-23"><a href="nested-zooming.html#cb287-23"></a>	}, <span class="dt">bg.col =</span> chr_bg_color[tagments<span class="op">$</span>chr], <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="fl">0.02</span>, <span class="dv">0</span>))</span>
+<span id="cb287-24"><a href="nested-zooming.html#cb287-24"></a>	<span class="kw">circos.yaxis</span>(<span class="dt">side =</span> <span class="st">&quot;left&quot;</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="dt">by =</span> <span class="fl">0.3</span>), </span>
+<span id="cb287-25"><a href="nested-zooming.html#cb287-25"></a>		<span class="dt">sector.index =</span> <span class="kw">get.all.sector.index</span>()[<span class="dv">1</span>], <span class="dt">labels.cex =</span> <span class="fl">0.4</span>)</span>
+<span id="cb287-26"><a href="nested-zooming.html#cb287-26"></a>	<span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="kw">mm_h</span>(<span class="dv">2</span>), </span>
+<span id="cb287-27"><a href="nested-zooming.html#cb287-27"></a>		<span class="dt">bg.col =</span> <span class="kw">add_transparency</span>(chr_bg_color[tagments<span class="op">$</span>chr], <span class="dv">0</span>))</span>
 <span id="cb287-28"><a href="nested-zooming.html#cb287-28"></a>}</span>
 <span id="cb287-29"><a href="nested-zooming.html#cb287-29"></a></span>
 <span id="cb287-30"><a href="nested-zooming.html#cb287-30"></a><span class="kw">circos.nested</span>(f1, f2, correspondance, <span class="dt">connection_col =</span> chr_bg_color[correspondance[[<span class="dv">1</span>]]])</span></code></pre></div>

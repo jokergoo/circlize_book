@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Implement high-level circular plots | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Implement high-level circular plots | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="legends.html"/>
 <link rel="next" href="circos-heatmap.html"/>
-<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
@@ -183,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="circos-heatmap.html"><a href="circos-heatmap.html"><i class="fa fa-check"></i><b>6</b> The <code>circos.heatmap()</code> function</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circos-heatmap-input-data"><i class="fa fa-check"></i><b>6.1</b> Input data</a></li>
-<li class="chapter" data-level="6.2" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circular-layout-1"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
+<li class="chapter" data-level="6.2" data-path="circular-layout.html"><a href="circular-layout.html#circular-layout"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
 <li class="chapter" data-level="6.3" data-path="circos-heatmap.html"><a href="circos-heatmap.html#dendrograms-and-row-names"><i class="fa fa-check"></i><b>6.3</b> Dendrograms and row names</a></li>
 <li class="chapter" data-level="6.4" data-path="circos-heatmap.html"><a href="circos-heatmap.html#clustering"><i class="fa fa-check"></i><b>6.4</b> Clustering</a></li>
 <li class="chapter" data-level="6.5" data-path="circos-heatmap.html"><a href="circos-heatmap.html#callback-on-dendrograms"><i class="fa fa-check"></i><b>6.5</b> Callback on dendrograms</a></li>
@@ -260,7 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Visualize Relations</b></span></li>
 <li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
+<li class="chapter" data-level="14.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
 <li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
 <li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
 <ul>
@@ -344,13 +345,13 @@ tracks, but the code would be very similar. See Figure
 <span id="cb100-12"><a href="high-level-plots.html#cb100-12"></a>                        <span class="kw">rep</span>(xlim[<span class="dv">2</span>], <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>,</span>
 <span id="cb100-13"><a href="high-level-plots.html#cb100-13"></a>                        <span class="dt">col =</span> <span class="st">&quot;#CCCCCC&quot;</span>)</span>
 <span id="cb100-14"><a href="high-level-plots.html#cb100-14"></a>        <span class="kw">circos.rect</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.45</span>, percent, <span class="dv">1</span><span class="op">:</span><span class="dv">9</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.45</span>,</span>
-<span id="cb100-15"><a href="high-level-plots.html#cb100-15"></a>            <span class="dt">col =</span> color, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb100-15"><a href="high-level-plots.html#cb100-15"></a>        	<span class="dt">col =</span> color, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
 <span id="cb100-16"><a href="high-level-plots.html#cb100-16"></a>        <span class="kw">circos.text</span>(<span class="kw">rep</span>(xlim[<span class="dv">1</span>], <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, </span>
-<span id="cb100-17"><a href="high-level-plots.html#cb100-17"></a>            <span class="kw">paste</span>(category, <span class="st">&quot; - &quot;</span>, percent, <span class="st">&quot;%&quot;</span>), </span>
+<span id="cb100-17"><a href="high-level-plots.html#cb100-17"></a>        	<span class="kw">paste</span>(category, <span class="st">&quot; - &quot;</span>, percent, <span class="st">&quot;%&quot;</span>), </span>
 <span id="cb100-18"><a href="high-level-plots.html#cb100-18"></a>            <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">0.5</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>) </span>
 <span id="cb100-19"><a href="high-level-plots.html#cb100-19"></a>        breaks =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">85</span>, <span class="dt">by =</span> <span class="dv">5</span>)</span>
 <span id="cb100-20"><a href="high-level-plots.html#cb100-20"></a>        <span class="kw">circos.axis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>, <span class="dt">major.at =</span> breaks, <span class="dt">labels =</span> <span class="kw">paste0</span>(breaks, <span class="st">&quot;%&quot;</span>), </span>
-<span id="cb100-21"><a href="high-level-plots.html#cb100-21"></a>            <span class="dt">labels.cex =</span> <span class="fl">0.6</span>)</span>
+<span id="cb100-21"><a href="high-level-plots.html#cb100-21"></a>        	<span class="dt">labels.cex =</span> <span class="fl">0.6</span>)</span>
 <span id="cb100-22"><a href="high-level-plots.html#cb100-22"></a>})</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circular-barplot"></span>
 <img src="05-implement-high-level-plots_files/figure-html/circular-barplot-1.png" alt="A circular barplot." width="672" />
@@ -366,7 +367,7 @@ absolute units. Conversion on x direction in a circular coordinate is affected
 by the position on y axis, here we must set the <code>h</code> argument. Following code
 can be used to replace the <code>circos.text()</code> in above example.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="high-level-plots.html#cb102-1"></a><span class="kw">circos.text</span>(xlim[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">mm_x</span>(<span class="dv">2</span>, <span class="dt">h =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, </span>
-<span id="cb102-2"><a href="high-level-plots.html#cb102-2"></a>    <span class="kw">paste</span>(category, <span class="st">&quot; - &quot;</span>, percent, <span class="st">&quot;%&quot;</span>), </span>
+<span id="cb102-2"><a href="high-level-plots.html#cb102-2"></a>	<span class="kw">paste</span>(category, <span class="st">&quot; - &quot;</span>, percent, <span class="st">&quot;%&quot;</span>), </span>
 <span id="cb102-3"><a href="high-level-plots.html#cb102-3"></a>    <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
 </div>
 <div id="histograms" class="section level2" number="5.2">
@@ -388,11 +389,11 @@ value helps to compare the distributions between cells.</p>
 <span id="cb103-2"><a href="high-level-plots.html#cb103-2"></a>factors =<span class="st"> </span><span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>], <span class="dv">1600</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb103-3"><a href="high-level-plots.html#cb103-3"></a><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x)</span>
 <span id="cb103-4"><a href="high-level-plots.html#cb103-4"></a><span class="kw">circos.trackHist</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x, <span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, </span>
-<span id="cb103-5"><a href="high-level-plots.html#cb103-5"></a>    <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span>
+<span id="cb103-5"><a href="high-level-plots.html#cb103-5"></a>	<span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span>
 <span id="cb103-6"><a href="high-level-plots.html#cb103-6"></a><span class="kw">circos.trackHist</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x, <span class="dt">bin.size =</span> <span class="fl">0.1</span>, </span>
-<span id="cb103-7"><a href="high-level-plots.html#cb103-7"></a>    <span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span>
+<span id="cb103-7"><a href="high-level-plots.html#cb103-7"></a>	<span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span>
 <span id="cb103-8"><a href="high-level-plots.html#cb103-8"></a><span class="kw">circos.trackHist</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x, <span class="dt">draw.density =</span> <span class="ot">TRUE</span>, </span>
-<span id="cb103-9"><a href="high-level-plots.html#cb103-9"></a>    <span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span></code></pre></div>
+<span id="cb103-9"><a href="high-level-plots.html#cb103-9"></a>	<span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circular-histograms"></span>
 <img src="05-implement-high-level-plots_files/figure-html/circular-histograms-1.png" alt="Histograms on circular layout." width="672" />
 <p class="caption">

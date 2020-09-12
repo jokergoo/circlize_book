@@ -1,7 +1,7 @@
 --- 
 title: "Circular Visualization in R"
 author: "Zuguang Gu"
-date: "last revised on 2020-06-23"
+date: "last revised on 2020-09-12"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -36,9 +36,9 @@ sessionInfo()
 ```
 
 ```
-## R version 4.0.0 (2020-04-24)
+## R version 4.0.2 (2020-06-22)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
-## Running under: macOS Catalina 10.15.4
+## Running under: macOS Catalina 10.15.5
 ## 
 ## Matrix products: default
 ## BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
@@ -54,11 +54,10 @@ sessionInfo()
 ## [1] circlize_0.4.11
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.4.6        bookdown_0.19       digest_0.6.25      
-##  [4] grid_4.0.0          magrittr_1.5        evaluate_0.14      
-##  [7] stringi_1.4.6       rlang_0.4.6         GlobalOptions_0.1.2
-## [10] rmarkdown_2.2       tools_4.0.0         stringr_1.4.0      
-## [13] xfun_0.14           yaml_2.2.1          compiler_4.0.0     
-## [16] colorspace_1.4-1    shape_1.4.4         htmltools_0.4.0    
-## [19] knitr_1.28
+##  [1] bookdown_0.20       digest_0.6.25       grid_4.0.2         
+##  [4] magrittr_1.5        evaluate_0.14       rlang_0.4.7        
+##  [7] stringi_1.4.6       GlobalOptions_0.1.2 rmarkdown_2.3      
+## [10] tools_4.0.2         stringr_1.4.0       xfun_0.16          
+## [13] yaml_2.2.1          compiler_4.0.2      colorspace_1.4-1   
+## [16] shape_1.4.4         htmltools_0.5.0     knitr_1.29
 ```

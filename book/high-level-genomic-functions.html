@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 High-level genomic functions | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 High-level genomic functions | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="modes-of-input.html"/>
 <link rel="next" href="nested-zooming.html"/>
-<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
@@ -183,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="circos-heatmap.html"><a href="circos-heatmap.html"><i class="fa fa-check"></i><b>6</b> The <code>circos.heatmap()</code> function</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circos-heatmap-input-data"><i class="fa fa-check"></i><b>6.1</b> Input data</a></li>
-<li class="chapter" data-level="6.2" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circular-layout-1"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
+<li class="chapter" data-level="6.2" data-path="circular-layout.html"><a href="circular-layout.html#circular-layout"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
 <li class="chapter" data-level="6.3" data-path="circos-heatmap.html"><a href="circos-heatmap.html#dendrograms-and-row-names"><i class="fa fa-check"></i><b>6.3</b> Dendrograms and row names</a></li>
 <li class="chapter" data-level="6.4" data-path="circos-heatmap.html"><a href="circos-heatmap.html#clustering"><i class="fa fa-check"></i><b>6.4</b> Clustering</a></li>
 <li class="chapter" data-level="6.5" data-path="circos-heatmap.html"><a href="circos-heatmap.html#callback-on-dendrograms"><i class="fa fa-check"></i><b>6.5</b> Callback on dendrograms</a></li>
@@ -260,7 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Visualize Relations</b></span></li>
 <li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-1"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
+<li class="chapter" data-level="14.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
 <li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
 <li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
 <ul>
@@ -391,7 +392,7 @@ argument controls the gap between two neighbouring labels.</p>
 <p>Similarlly, labels can be put outside of the normal genomic track (Figure <a href="high-level-genomic-functions.html#fig:genomic-labels">12.3</a> right).</p>
 <div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="high-level-genomic-functions.html#cb253-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
 <span id="cb253-2"><a href="high-level-genomic-functions.html#cb253-2"></a><span class="kw">circos.genomicLabels</span>(bed, <span class="dt">labels.column =</span> <span class="dv">4</span>, <span class="dt">side =</span> <span class="st">&quot;outside&quot;</span>,</span>
-<span id="cb253-3"><a href="high-level-genomic-functions.html#cb253-3"></a>    <span class="dt">col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])), <span class="dt">line_col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])))</span>
+<span id="cb253-3"><a href="high-level-genomic-functions.html#cb253-3"></a>	<span class="dt">col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])), <span class="dt">line_col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])))</span>
 <span id="cb253-4"><a href="high-level-genomic-functions.html#cb253-4"></a><span class="kw">circos.genomicIdeogram</span>()</span>
 <span id="cb253-5"><a href="high-level-genomic-functions.html#cb253-5"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-labels"></span>
@@ -411,11 +412,11 @@ used to add genomic axes at any track (Figure <a href="high-level-genomic-functi
 <span id="cb254-2"><a href="high-level-genomic-functions.html#cb254-2"></a><span class="kw">circos.genomicIdeogram</span>()</span>
 <span id="cb254-3"><a href="high-level-genomic-functions.html#cb254-3"></a><span class="co"># still work on the ideogram track</span></span>
 <span id="cb254-4"><a href="high-level-genomic-functions.html#cb254-4"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="kw">get.current.track.index</span>(), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb254-5"><a href="high-level-genomic-functions.html#cb254-5"></a>    <span class="kw">circos.genomicAxis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>)</span>
+<span id="cb254-5"><a href="high-level-genomic-functions.html#cb254-5"></a>	<span class="kw">circos.genomicAxis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>)</span>
 <span id="cb254-6"><a href="high-level-genomic-functions.html#cb254-6"></a>})</span>
 <span id="cb254-7"><a href="high-level-genomic-functions.html#cb254-7"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span>
 <span id="cb254-8"><a href="high-level-genomic-functions.html#cb254-8"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="kw">get.current.track.index</span>(), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb254-9"><a href="high-level-genomic-functions.html#cb254-9"></a>    <span class="kw">circos.genomicAxis</span>(<span class="dt">h =</span> <span class="st">&quot;bottom&quot;</span>, <span class="dt">direction =</span> <span class="st">&quot;inside&quot;</span>)</span>
+<span id="cb254-9"><a href="high-level-genomic-functions.html#cb254-9"></a>	<span class="kw">circos.genomicAxis</span>(<span class="dt">h =</span> <span class="st">&quot;bottom&quot;</span>, <span class="dt">direction =</span> <span class="st">&quot;inside&quot;</span>)</span>
 <span id="cb254-10"><a href="high-level-genomic-functions.html#cb254-10"></a>})</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-axis"></span>
 <img src="12-high-level-genomic-functions_files/figure-html/genomic-axis-1.png" alt="Add genomic axes." width="672" />

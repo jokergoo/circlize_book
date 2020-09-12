@@ -20,7 +20,7 @@ groups based on expression profile. In each group, a chromatin state is
 assigned to the corresponding genomic bin if it is recurrent in at least half
 of the samples in each group.
 
-The processed data can be set from http://jokergoo.github.io/data/chromatin_transition.RData.
+The processed data can be set from https://jokergoo.github.io/circlize_book/data/chromatin_transition.RData.
 
 ```{r}
 load("data/chromatin_transition.RData")
