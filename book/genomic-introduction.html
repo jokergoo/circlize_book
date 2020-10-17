@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
 <ul>
 <li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
-<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The functions measured in absolute units</a></li>
+<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> Absolute units</a></li>
 <li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="circular-layout.html"><a href="circular-layout.html#set-gaps-between-tracks"><i class="fa fa-check"></i><b>2.9</b> Set gaps between tracks</a></li>
@@ -216,6 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>9.2</b> Customize chromosome track</a></li>
 <li class="chapter" data-level="9.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>9.3</b> Initialize with general genomic category</a></li>
 <li class="chapter" data-level="9.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>9.4</b> Zooming chromosomes</a></li>
+<li class="chapter" data-level="9.5" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#concatenating-two-genomes"><i class="fa fa-check"></i><b>9.5</b> Concatenating two genomes</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>10</b> Create plotting regions for genomic data</a>
 <ul>
@@ -261,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Visualize Relations</b></span></li>
 <li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
+<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-of-making-chord-diagram"><i class="fa fa-check"></i><b>14.1</b> Basic usage of making Chord diagram</a></li>
 <li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
 <li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
 <ul>
@@ -357,9 +358,9 @@ of chromosomes. In the function, <code>nr</code> and <code>nc</code> control the
 numeric columns that users need. Please note <code>nr</code> are not exactly the same as
 the number of rows which are returned by the function. <code>fun</code> argument is a
 self-defined function to generate random values.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="genomic-introduction.html#cb181-1"></a><span class="kw">set.seed</span>(<span class="dv">999</span>)</span>
-<span id="cb181-2"><a href="genomic-introduction.html#cb181-2"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>()</span>
-<span id="cb181-3"><a href="genomic-introduction.html#cb181-3"></a><span class="kw">head</span>(bed)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="genomic-introduction.html#cb196-1"></a><span class="kw">set.seed</span>(<span class="dv">999</span>)</span>
+<span id="cb196-2"><a href="genomic-introduction.html#cb196-2"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>()</span>
+<span id="cb196-3"><a href="genomic-introduction.html#cb196-3"></a><span class="kw">head</span>(bed)</span></code></pre></div>
 <pre><code>##    chr   start     end       value1
 ## 1 chr1  118750  451929 -0.367702502
 ## 2 chr1  472114  805024 -0.001764946
@@ -367,11 +368,11 @@ self-defined function to generate random values.</p>
 ## 4 chr1 1058915 1081590  0.390291705
 ## 5 chr1 1194426 1341960 -1.305901261
 ## 6 chr1 1670402 2048723  0.340227447</code></pre>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="genomic-introduction.html#cb183-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
-<span id="cb183-2"><a href="genomic-introduction.html#cb183-2"></a><span class="kw">nrow</span>(bed)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="genomic-introduction.html#cb198-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">200</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
+<span id="cb198-2"><a href="genomic-introduction.html#cb198-2"></a><span class="kw">nrow</span>(bed)</span></code></pre></div>
 <pre><code>## [1] 205</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="genomic-introduction.html#cb185-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>, <span class="dt">fun =</span> <span class="cf">function</span>(k) <span class="kw">sample</span>(letters, k, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</span>
-<span id="cb185-2"><a href="genomic-introduction.html#cb185-2"></a><span class="kw">head</span>(bed)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="genomic-introduction.html#cb200-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>, <span class="dt">fun =</span> <span class="cf">function</span>(k) <span class="kw">sample</span>(letters, k, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb200-2"><a href="genomic-introduction.html#cb200-2"></a><span class="kw">head</span>(bed)</span></code></pre></div>
 <pre><code>##    chr   start     end value1 value2
 ## 1 chr1  275067  349212      q      e
 ## 2 chr1  350892  658970      u      f

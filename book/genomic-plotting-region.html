@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
 <ul>
 <li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
-<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The functions measured in absolute units</a></li>
+<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> Absolute units</a></li>
 <li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="circular-layout.html"><a href="circular-layout.html#set-gaps-between-tracks"><i class="fa fa-check"></i><b>2.9</b> Set gaps between tracks</a></li>
@@ -216,6 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>9.2</b> Customize chromosome track</a></li>
 <li class="chapter" data-level="9.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>9.3</b> Initialize with general genomic category</a></li>
 <li class="chapter" data-level="9.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>9.4</b> Zooming chromosomes</a></li>
+<li class="chapter" data-level="9.5" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#concatenating-two-genomes"><i class="fa fa-check"></i><b>9.5</b> Concatenating two genomes</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>10</b> Create plotting regions for genomic data</a>
 <ul>
@@ -261,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Visualize Relations</b></span></li>
 <li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
+<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-of-making-chord-diagram"><i class="fa fa-check"></i><b>14.1</b> Basic usage of making Chord diagram</a></li>
 <li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
 <li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
 <ul>
@@ -333,9 +334,9 @@ introduce in Chapter <a href="modes-of-input.html#modes-of-input">11</a>.</p>
 <p>Similar as <code>circos.track()</code>, <code>circos.genomicTrack()</code> also accepts a self-
 defined function <code>panel.fun</code> which is applied in every cell but with different
 form.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="genomic-plotting-region.html#cb210-1"></a><span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb210-2"><a href="genomic-plotting-region.html#cb210-2"></a>    <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
-<span id="cb210-3"><a href="genomic-plotting-region.html#cb210-3"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="genomic-plotting-region.html#cb238-1"></a><span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb238-2"><a href="genomic-plotting-region.html#cb238-2"></a>    <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
+<span id="cb238-3"><a href="genomic-plotting-region.html#cb238-3"></a>})</span></code></pre></div>
 <p>Inside <code>panel.fun</code>, users can use low-level graphic functions to add basic
 graphics in each cell. <code>panel.fun</code> expects two arguments <code>region</code> and <code>value</code>
 which are automatically processed and passed from <code>circos.genomicTrack()</code>.
@@ -344,28 +345,28 @@ position in the current chromosome. <code>value</code> is also a data frame whic
 contains other columns (start for the fourth column, if it exists). Thus, basically,
 <code>region</code> can be thought as values on x axes and <code>value</code> as values on y axes.</p>
 <p>There should be a third arguments <code>...</code> which is mandatory and is used to pass
-user- invisible variables to inner functions and make magics (explained in
+user-invisible variables to inner functions and make magics (explained in
 Chapter <a href="modes-of-input.html#modes-of-input">11</a>). So whenever you use <code>panel.fun</code> in
 <code>circos.genomicTrack()</code>, please add it to the end of your function.</p>
 <p>Following code demonstrates the values for <code>region</code> and <code>value</code> when used inside <code>panel.fun</code>.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="genomic-plotting-region.html#cb211-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)</span>
-<span id="cb211-2"><a href="genomic-plotting-region.html#cb211-2"></a><span class="kw">head</span>(bed, <span class="dt">n =</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##    chr  start    end     value1     value2
-## 1 chr1  51183 369562 0.05685268 -0.3906638
-## 2 chr1 501196 509613 0.14666888  0.6059461</code></pre>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="genomic-plotting-region.html#cb213-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
-<span id="cb213-2"><a href="genomic-plotting-region.html#cb213-2"></a><span class="kw">circos.genomicTrackPlotRegion</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb213-3"><a href="genomic-plotting-region.html#cb213-3"></a>    <span class="cf">if</span>(CELL_META<span class="op">$</span>sector.index <span class="op">==</span><span class="st"> &quot;chr1&quot;</span>) {</span>
-<span id="cb213-4"><a href="genomic-plotting-region.html#cb213-4"></a>        <span class="kw">print</span>(<span class="kw">head</span>(region, <span class="dt">n =</span> <span class="dv">2</span>))</span>
-<span id="cb213-5"><a href="genomic-plotting-region.html#cb213-5"></a>        <span class="kw">print</span>(<span class="kw">head</span>(value, <span class="dt">n =</span> <span class="dv">2</span>))</span>
-<span id="cb213-6"><a href="genomic-plotting-region.html#cb213-6"></a>    }</span>
-<span id="cb213-7"><a href="genomic-plotting-region.html#cb213-7"></a>})</span></code></pre></div>
-<pre><code>##    start    end
-## 1  51183 369562
-## 2 501196 509613
-##       value1     value2
-## 1 0.05685268 -0.3906638
-## 2 0.14666888  0.6059461</code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="genomic-plotting-region.html#cb239-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)</span>
+<span id="cb239-2"><a href="genomic-plotting-region.html#cb239-2"></a><span class="kw">head</span>(bed, <span class="dt">n =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##    chr   start     end    value1      value2
+## 1 chr1  409593 1105440 0.5745723  0.36032798
+## 2 chr1 1168602 1306396 0.3397518 -0.06331312</code></pre>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="genomic-plotting-region.html#cb241-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
+<span id="cb241-2"><a href="genomic-plotting-region.html#cb241-2"></a><span class="kw">circos.genomicTrackPlotRegion</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb241-3"><a href="genomic-plotting-region.html#cb241-3"></a>    <span class="cf">if</span>(CELL_META<span class="op">$</span>sector.index <span class="op">==</span><span class="st"> &quot;chr1&quot;</span>) {</span>
+<span id="cb241-4"><a href="genomic-plotting-region.html#cb241-4"></a>        <span class="kw">print</span>(<span class="kw">head</span>(region, <span class="dt">n =</span> <span class="dv">2</span>))</span>
+<span id="cb241-5"><a href="genomic-plotting-region.html#cb241-5"></a>        <span class="kw">print</span>(<span class="kw">head</span>(value, <span class="dt">n =</span> <span class="dv">2</span>))</span>
+<span id="cb241-6"><a href="genomic-plotting-region.html#cb241-6"></a>    }</span>
+<span id="cb241-7"><a href="genomic-plotting-region.html#cb241-7"></a>})</span></code></pre></div>
+<pre><code>##     start     end
+## 1  409593 1105440
+## 2 1168602 1306396
+##      value1      value2
+## 1 0.5745723  0.36032798
+## 2 0.3397518 -0.06331312</code></pre>
 <p>Since <code>circos.genomicTrack()</code> creates a new track, it needs values to
 calculate data ranges on y direction. Users can either specify the index of
 numeric columns in <code>data</code> by <code>numeric.column</code> (named index or numeric index,
@@ -373,18 +374,18 @@ it can also be a vector with more than one columns) or directly set <code>ylim</
 them are set, the function will try to look for all numeric columns in <code>data</code>
 (of course, excluding the first three columns), and set them as
 <code>numeric.column</code>.</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="genomic-plotting-region.html#cb215-1"></a><span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb215-2"><a href="genomic-plotting-region.html#cb215-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb215-3"><a href="genomic-plotting-region.html#cb215-3"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
-<span id="cb215-4"><a href="genomic-plotting-region.html#cb215-4"></a>})</span>
-<span id="cb215-5"><a href="genomic-plotting-region.html#cb215-5"></a><span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">numeric.column =</span> <span class="kw">c</span>(<span class="st">&quot;value1&quot;</span>, <span class="st">&quot;value2&quot;</span>), </span>
-<span id="cb215-6"><a href="genomic-plotting-region.html#cb215-6"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb215-7"><a href="genomic-plotting-region.html#cb215-7"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
-<span id="cb215-8"><a href="genomic-plotting-region.html#cb215-8"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="genomic-plotting-region.html#cb243-1"></a><span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb243-2"><a href="genomic-plotting-region.html#cb243-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb243-3"><a href="genomic-plotting-region.html#cb243-3"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
+<span id="cb243-4"><a href="genomic-plotting-region.html#cb243-4"></a>})</span>
+<span id="cb243-5"><a href="genomic-plotting-region.html#cb243-5"></a><span class="kw">circos.genomicTrackPlotRegion</span>(data, <span class="dt">numeric.column =</span> <span class="kw">c</span>(<span class="st">&quot;value1&quot;</span>, <span class="st">&quot;value2&quot;</span>), </span>
+<span id="cb243-6"><a href="genomic-plotting-region.html#cb243-6"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb243-7"><a href="genomic-plotting-region.html#cb243-7"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
+<span id="cb243-8"><a href="genomic-plotting-region.html#cb243-8"></a>})</span></code></pre></div>
 <p>Since genomic functions are implemented by basic circlize functions, you can
 use <code>circos.info()</code> anywhere to get information of sectors and tracks.</p>
 <p>As you already see in previous examples, <strong>circlize</strong> also provides low-level graphic
-functions specifically designed for genomic data. They are all implemented by corresponding
+functions specifically designed for genomic data. They are all implemented by the corresponding
 normal circlize functions, but needs input variables with special format.</p>
 <p>In this chapter, we introduce the basic usage of <code>circos.genomicTrack()</code> and
 low-level <code>circos.genomic*()</code>. In Chapter <a href="modes-of-input.html#modes-of-input">11</a>, we will
@@ -412,14 +413,14 @@ difference of 3 for the column index! When <code>numeric.column</code> is passed
 <code>circos.genomicPoints()</code> internally, 3 is subtracted automatically. If you use
 character index instead of numeric index, you do not need to worry about it.</p>
 <p>Possible usages of <code>circos.genomicPoints()</code> are as follows.</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="genomic-plotting-region.html#cb216-1"></a><span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">numeric.column =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb216-2"><a href="genomic-plotting-region.html#cb216-2"></a><span class="kw">circos.genomicPoints</span>(region, value, cex, pch)</span>
-<span id="cb216-3"><a href="genomic-plotting-region.html#cb216-3"></a><span class="kw">circos.genomicPoints</span>(region, value, sector.index, track.index)</span>
-<span id="cb216-4"><a href="genomic-plotting-region.html#cb216-4"></a><span class="kw">circos.genomicTrack</span>(data, <span class="dt">numeric.column =</span> <span class="dv">4</span>, </span>
-<span id="cb216-5"><a href="genomic-plotting-region.html#cb216-5"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb216-6"><a href="genomic-plotting-region.html#cb216-6"></a>        <span class="co"># numeric.column is automatically passed to `circos.genomicPoints()`</span></span>
-<span id="cb216-7"><a href="genomic-plotting-region.html#cb216-7"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
-<span id="cb216-8"><a href="genomic-plotting-region.html#cb216-8"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="genomic-plotting-region.html#cb244-1"></a><span class="kw">circos.genomicPoints</span>(region, value, <span class="dt">numeric.column =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb244-2"><a href="genomic-plotting-region.html#cb244-2"></a><span class="kw">circos.genomicPoints</span>(region, value, cex, pch)</span>
+<span id="cb244-3"><a href="genomic-plotting-region.html#cb244-3"></a><span class="kw">circos.genomicPoints</span>(region, value, sector.index, track.index)</span>
+<span id="cb244-4"><a href="genomic-plotting-region.html#cb244-4"></a><span class="kw">circos.genomicTrack</span>(data, <span class="dt">numeric.column =</span> <span class="dv">4</span>, </span>
+<span id="cb244-5"><a href="genomic-plotting-region.html#cb244-5"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb244-6"><a href="genomic-plotting-region.html#cb244-6"></a>        <span class="co"># numeric.column is automatically passed to `circos.genomicPoints()`</span></span>
+<span id="cb244-7"><a href="genomic-plotting-region.html#cb244-7"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
+<span id="cb244-8"><a href="genomic-plotting-region.html#cb244-8"></a>})</span></code></pre></div>
 <p>If there is only one numeric column, graphical parameters such as <code>pch</code>, <code>cex</code>
 can be of length one or number of rows of <code>region</code>. If there are more than one
 numeric columns specified, points for each numeric column will be added
@@ -429,37 +430,37 @@ number of numeric columns specified.</p>
 idea of the implementation is shown as following code, so, if you don’t like the
 <code>circos.genomic*()</code> functions, it would not be difficult to directly use the
 <code>circos.*()</code> functions.</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="genomic-plotting-region.html#cb217-1"></a>circos.genomicPoints =<span class="st"> </span><span class="cf">function</span>(region, value, <span class="dt">numeric.column =</span> <span class="dv">1</span>, ...) {</span>
-<span id="cb217-2"><a href="genomic-plotting-region.html#cb217-2"></a>    x =<span class="st"> </span>(region[[<span class="dv">2</span>]] <span class="op">+</span><span class="st"> </span>region[[<span class="dv">1</span>]])<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb217-3"><a href="genomic-plotting-region.html#cb217-3"></a>    <span class="cf">for</span>(i <span class="cf">in</span> numeric.column) {</span>
-<span id="cb217-4"><a href="genomic-plotting-region.html#cb217-4"></a>        y =<span class="st"> </span>value[[i]]</span>
-<span id="cb217-5"><a href="genomic-plotting-region.html#cb217-5"></a>        <span class="kw">circos.points</span>(x, y, ...)</span>
-<span id="cb217-6"><a href="genomic-plotting-region.html#cb217-6"></a>    }</span>
-<span id="cb217-7"><a href="genomic-plotting-region.html#cb217-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="genomic-plotting-region.html#cb245-1"></a>circos.genomicPoints =<span class="st"> </span><span class="cf">function</span>(region, value, <span class="dt">numeric.column =</span> <span class="dv">1</span>, ...) {</span>
+<span id="cb245-2"><a href="genomic-plotting-region.html#cb245-2"></a>    x =<span class="st"> </span>(region[[<span class="dv">2</span>]] <span class="op">+</span><span class="st"> </span>region[[<span class="dv">1</span>]])<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb245-3"><a href="genomic-plotting-region.html#cb245-3"></a>    <span class="cf">for</span>(i <span class="cf">in</span> numeric.column) {</span>
+<span id="cb245-4"><a href="genomic-plotting-region.html#cb245-4"></a>        y =<span class="st"> </span>value[[i]]</span>
+<span id="cb245-5"><a href="genomic-plotting-region.html#cb245-5"></a>        <span class="kw">circos.points</span>(x, y, ...)</span>
+<span id="cb245-6"><a href="genomic-plotting-region.html#cb245-6"></a>    }</span>
+<span id="cb245-7"><a href="genomic-plotting-region.html#cb245-7"></a>}</span></code></pre></div>
 </div>
 <div id="genomic-lines" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> Lines</h2>
 <p><code>circos.genomicLines()</code> is similar as <code>circos.lines()</code>. The setting of
 graphical parameters is similar as <code>circos.genomicPoints()</code>.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="genomic-plotting-region.html#cb218-1"></a><span class="kw">circos.genomicLines</span>(region, value, ...)</span>
-<span id="cb218-2"><a href="genomic-plotting-region.html#cb218-2"></a><span class="kw">circos.genomicLines</span>(region, value, <span class="dt">numeric.column =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb218-3"><a href="genomic-plotting-region.html#cb218-3"></a><span class="kw">circos.genomicLines</span>(region, value, area, baseline, border)</span>
-<span id="cb218-4"><a href="genomic-plotting-region.html#cb218-4"></a><span class="kw">circos.genomicLines</span>(region, value, sector.index, track.index)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="genomic-plotting-region.html#cb246-1"></a><span class="kw">circos.genomicLines</span>(region, value, ...)</span>
+<span id="cb246-2"><a href="genomic-plotting-region.html#cb246-2"></a><span class="kw">circos.genomicLines</span>(region, value, <span class="dt">numeric.column =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb246-3"><a href="genomic-plotting-region.html#cb246-3"></a><span class="kw">circos.genomicLines</span>(region, value, area, baseline, border)</span>
+<span id="cb246-4"><a href="genomic-plotting-region.html#cb246-4"></a><span class="kw">circos.genomicLines</span>(region, value, sector.index, track.index)</span></code></pre></div>
 <p><strong>circlize</strong> additionally provides a new option <code>segment</code> for <code>lty</code> by
 which each genomic regions represent as ‘horizontal’ lines at y positions
 (see Figure <a href="modes-of-input.html#fig:genomic-application-lines">11.2</a>, track H).</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="genomic-plotting-region.html#cb219-1"></a><span class="kw">circos.genomicLines</span>(region, value, lwd, <span class="dt">lty =</span> <span class="st">&quot;segment&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="genomic-plotting-region.html#cb247-1"></a><span class="kw">circos.genomicLines</span>(region, value, lwd, <span class="dt">lty =</span> <span class="st">&quot;segment&quot;</span>)</span></code></pre></div>
 </div>
 <div id="genomic-text" class="section level2" number="10.3">
 <h2><span class="header-section-number">10.3</span> Text</h2>
 <p>For <code>circos.genomicText()</code>, the position of text can be specified either by <code>numeric.column</code>
 or a separated vector <code>y</code>. The labels of text can be specified either by <code>labels.column</code>
 or a vector <code>labels</code>.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="genomic-plotting-region.html#cb220-1"></a><span class="kw">circos.genomicText</span>(region, value, ...)</span>
-<span id="cb220-2"><a href="genomic-plotting-region.html#cb220-2"></a><span class="kw">circos.genomicText</span>(region, value, <span class="dt">y =</span> <span class="dv">1</span>, labels)</span>
-<span id="cb220-3"><a href="genomic-plotting-region.html#cb220-3"></a><span class="kw">circos.genomicText</span>(region, value, numeric.column, labels.column)</span>
-<span id="cb220-4"><a href="genomic-plotting-region.html#cb220-4"></a><span class="kw">circos.genomicText</span>(region, value, facing, niceFacing, adj)</span>
-<span id="cb220-5"><a href="genomic-plotting-region.html#cb220-5"></a><span class="kw">circos.genomicText</span>(region, value, sector.index, track.index)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="genomic-plotting-region.html#cb248-1"></a><span class="kw">circos.genomicText</span>(region, value, ...)</span>
+<span id="cb248-2"><a href="genomic-plotting-region.html#cb248-2"></a><span class="kw">circos.genomicText</span>(region, value, <span class="dt">y =</span> <span class="dv">1</span>, labels)</span>
+<span id="cb248-3"><a href="genomic-plotting-region.html#cb248-3"></a><span class="kw">circos.genomicText</span>(region, value, numeric.column, labels.column)</span>
+<span id="cb248-4"><a href="genomic-plotting-region.html#cb248-4"></a><span class="kw">circos.genomicText</span>(region, value, facing, niceFacing, adj)</span>
+<span id="cb248-5"><a href="genomic-plotting-region.html#cb248-5"></a><span class="kw">circos.genomicText</span>(region, value, sector.index, track.index)</span></code></pre></div>
 </div>
 <div id="genomic-rectangles" class="section level2" number="10.4">
 <h2><span class="header-section-number">10.4</span> Rectangles</h2>
@@ -467,31 +468,31 @@ or a vector <code>labels</code>.</p>
 already determined by the start and end of the genomic regions, we only need
 to set the positions of top and bottom of the rectangles by specifying <code>ytop</code>,
 <code>ybottom</code> or <code>ytop.column</code>, <code>ybottom.column</code>.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="genomic-plotting-region.html#cb221-1"></a><span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop =</span> <span class="dv">1</span>, <span class="dt">ybottom =</span> <span class="dv">0</span>)</span>
-<span id="cb221-2"><a href="genomic-plotting-region.html#cb221-2"></a><span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop.column =</span> <span class="dv">2</span>, <span class="dt">ybottom =</span> <span class="dv">0</span>)</span>
-<span id="cb221-3"><a href="genomic-plotting-region.html#cb221-3"></a><span class="kw">circos.genomicRect</span>(region, value, col, border)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="genomic-plotting-region.html#cb249-1"></a><span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop =</span> <span class="dv">1</span>, <span class="dt">ybottom =</span> <span class="dv">0</span>)</span>
+<span id="cb249-2"><a href="genomic-plotting-region.html#cb249-2"></a><span class="kw">circos.genomicRect</span>(region, value, <span class="dt">ytop.column =</span> <span class="dv">2</span>, <span class="dt">ybottom =</span> <span class="dv">0</span>)</span>
+<span id="cb249-3"><a href="genomic-plotting-region.html#cb249-3"></a><span class="kw">circos.genomicRect</span>(region, value, col, border)</span></code></pre></div>
 </div>
 <div id="genomic-links" class="section level2" number="10.5">
 <h2><span class="header-section-number">10.5</span> Links</h2>
 <p><code>circos.genomicLink()</code> expects two data frames and it adds links from genomic
 regions in the first data frame to corresponding genomic regions in the second
 data frame. All additional arguments are passed to <code>circos.link()</code>.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="genomic-plotting-region.html#cb222-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb222-2"><a href="genomic-plotting-region.html#cb222-2"></a>bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)</span>
-<span id="cb222-3"><a href="genomic-plotting-region.html#cb222-3"></a>bed1 =<span class="st"> </span>bed1[<span class="kw">sample</span>(<span class="kw">nrow</span>(bed1), <span class="dv">20</span>), ]</span>
-<span id="cb222-4"><a href="genomic-plotting-region.html#cb222-4"></a>bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)</span>
-<span id="cb222-5"><a href="genomic-plotting-region.html#cb222-5"></a>bed2 =<span class="st"> </span>bed2[<span class="kw">sample</span>(<span class="kw">nrow</span>(bed2), <span class="dv">20</span>), ]</span>
-<span id="cb222-6"><a href="genomic-plotting-region.html#cb222-6"></a></span>
-<span id="cb222-7"><a href="genomic-plotting-region.html#cb222-7"></a><span class="kw">circos.initializeWithIdeogram</span>()</span>
-<span id="cb222-8"><a href="genomic-plotting-region.html#cb222-8"></a><span class="kw">circos.genomicLink</span>(bed1, bed2, <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="kw">nrow</span>(bed1), <span class="dt">transparency =</span> <span class="fl">0.5</span>), </span>
-<span id="cb222-9"><a href="genomic-plotting-region.html#cb222-9"></a>    <span class="dt">border =</span> <span class="ot">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="genomic-plotting-region.html#cb250-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb250-2"><a href="genomic-plotting-region.html#cb250-2"></a>bed1 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)</span>
+<span id="cb250-3"><a href="genomic-plotting-region.html#cb250-3"></a>bed1 =<span class="st"> </span>bed1[<span class="kw">sample</span>(<span class="kw">nrow</span>(bed1), <span class="dv">20</span>), ]</span>
+<span id="cb250-4"><a href="genomic-plotting-region.html#cb250-4"></a>bed2 =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>)</span>
+<span id="cb250-5"><a href="genomic-plotting-region.html#cb250-5"></a>bed2 =<span class="st"> </span>bed2[<span class="kw">sample</span>(<span class="kw">nrow</span>(bed2), <span class="dv">20</span>), ]</span>
+<span id="cb250-6"><a href="genomic-plotting-region.html#cb250-6"></a></span>
+<span id="cb250-7"><a href="genomic-plotting-region.html#cb250-7"></a><span class="kw">circos.initializeWithIdeogram</span>()</span>
+<span id="cb250-8"><a href="genomic-plotting-region.html#cb250-8"></a><span class="kw">circos.genomicLink</span>(bed1, bed2, <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="kw">nrow</span>(bed1), <span class="dt">transparency =</span> <span class="fl">0.5</span>), </span>
+<span id="cb250-9"><a href="genomic-plotting-region.html#cb250-9"></a>    <span class="dt">border =</span> <span class="ot">NA</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-links"></span>
 <img src="10-create-plotting-regions_files/figure-html/genomic-links-1.png" alt="Add links from two sets of genomic regions." width="576" />
 <p class="caption">
 Figure 10.1: Add links from two sets of genomic regions.
 </p>
 </div>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="genomic-plotting-region.html#cb223-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="genomic-plotting-region.html#cb251-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 </div>
 <div id="mixed-use-of-general-circlize-functions" class="section level2" number="10.6">
 <h2><span class="header-section-number">10.6</span> Mixed use of general circlize functions</h2>
@@ -499,16 +500,16 @@ Figure 10.1: Add links from two sets of genomic regions.
 functions, you can also use general circlize functions to add more graphics.
 For example, some horizontal lines and texts are added to each cell and axes
 are put on top of each cell.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="genomic-plotting-region.html#cb224-1"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb224-2"><a href="genomic-plotting-region.html#cb224-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb224-3"><a href="genomic-plotting-region.html#cb224-3"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
-<span id="cb224-4"><a href="genomic-plotting-region.html#cb224-4"></a>        </span>
-<span id="cb224-5"><a href="genomic-plotting-region.html#cb224-5"></a>        <span class="cf">for</span>(h <span class="cf">in</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">-0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>)) {</span>
-<span id="cb224-6"><a href="genomic-plotting-region.html#cb224-6"></a>            <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</span>
-<span id="cb224-7"><a href="genomic-plotting-region.html#cb224-7"></a>        }</span>
-<span id="cb224-8"><a href="genomic-plotting-region.html#cb224-8"></a>        <span class="kw">circos.text</span>(x, y, labels)</span>
-<span id="cb224-9"><a href="genomic-plotting-region.html#cb224-9"></a>        <span class="kw">circos.axis</span>(<span class="st">&quot;top&quot;</span>)</span>
-<span id="cb224-10"><a href="genomic-plotting-region.html#cb224-10"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="genomic-plotting-region.html#cb252-1"></a><span class="kw">circos.genomicTrack</span>(bed, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb252-2"><a href="genomic-plotting-region.html#cb252-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb252-3"><a href="genomic-plotting-region.html#cb252-3"></a>        <span class="kw">circos.genomicPoints</span>(region, value, ...)</span>
+<span id="cb252-4"><a href="genomic-plotting-region.html#cb252-4"></a>        </span>
+<span id="cb252-5"><a href="genomic-plotting-region.html#cb252-5"></a>        <span class="cf">for</span>(h <span class="cf">in</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">-0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>)) {</span>
+<span id="cb252-6"><a href="genomic-plotting-region.html#cb252-6"></a>            <span class="kw">circos.lines</span>(CELL_META<span class="op">$</span>cell.xlim, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</span>
+<span id="cb252-7"><a href="genomic-plotting-region.html#cb252-7"></a>        }</span>
+<span id="cb252-8"><a href="genomic-plotting-region.html#cb252-8"></a>        <span class="kw">circos.text</span>(x, y, labels)</span>
+<span id="cb252-9"><a href="genomic-plotting-region.html#cb252-9"></a>        <span class="kw">circos.axis</span>(<span class="st">&quot;top&quot;</span>)</span>
+<span id="cb252-10"><a href="genomic-plotting-region.html#cb252-10"></a>})</span></code></pre></div>
 
 </div>
 </div>

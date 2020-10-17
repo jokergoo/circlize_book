@@ -100,13 +100,13 @@ represent categories, a numeric vector of x values and a vectoe of y values.
 ```{r}
 set.seed(999)
 n = 1000
-df = data.frame(factors = sample(letters[1:8], n, replace = TRUE),
+df = data.frame(sectors = sample(letters[1:8], n, replace = TRUE),
     x = rnorm(n), y = runif(n))
 ```
 
 First we initialize the circular layout. The circle is split into sectors
 based on the data range on x-axes in each category. In following code, `df$x`
-is split by `df$factors` and the width of sectors are automatically calculated
+is split by `df$sectors` and the width of sectors are automatically calculated
 based on data ranges in each category. Be default, sectors are positioned
 started from $\theta = 0$ (in the polar coordinate system) and go along the circle
 clock-wisely. You may not see anything after running following code because no
@@ -116,13 +116,14 @@ track has been added yet.
 library(circlize)
 circos.par("track.height" = 0.1)
 circos.par("points.overflow.warning" = FALSE)
-circos.initialize(factors = df$factors, x = df$x)
+circos.initialize(df$sectors, x = df$x)
 ```
 
 We set a global parameter `track.height` to 0.1 by the option function
 `circis.par()` so that all tracks which will be added have a default height of
 0.1. The circle used by **circlize** always has a radius of 1, so a height of
-0.1 means 10% of the circle radius.
+0.1 means 10% of the circle radius. In later chapters, you can find how to set the
+height with physical units, e.g. cm.
 
 Note that the allocation of sectors only needs values on x direction (or
 on the circular direction), the values on y direction (radical direction) will be used
@@ -142,14 +143,15 @@ vector of length two. In principle, y-ranges should be same for all cells in a
 same track. (See Figure \@ref(fig:circlize-glance-track-1))
 
 ```{r circlize_glance_1, eval=FALSE}
-circos.track(factors = df$factors, y = df$y,
+circos.track(df$sectors, y = df$y,
     panel.fun = function(x, y) {
-        circos.text(CELL_META$xcenter, CELL_META$cell.ylim[2] + mm_y(5), 
+        circos.text(CELL_META$xcenter, 
+            CELL_META$cell.ylim[2] + mm_y(5), 
             CELL_META$sector.index)
         circos.axis(labels.cex = 0.6)
 })
 col = rep(c("#FF0000", "#00FF00"), 4)
-circos.trackPoints(df$factors, df$x, df$y, col = col, pch = 16, cex = 0.5)
+circos.trackPoints(df$sectors, df$x, df$y, col = col, pch = 16, cex = 0.5)
 circos.text(-1, 0.5, "text", sector.index = "a", track.index = 1)
 ```
 
@@ -194,8 +196,8 @@ After the track is created, points are added to the first track by
 simultaneously. As further explained in Section \@ref(points), it can be
 replaced by putting `circos.text()` in `panel.fun`, however,
 `circos.trackPoints()` would be more convenient if only the points are needed
-to put in the cells. It is quite straightforward to understand that this
-function needs a categorical variable (`df$factors`), values on x direction
+to put in the cells (but I don't really recommend). It is quite straightforward to understand that this
+function needs a categorical variable (`df$sectors`), values on x direction
 and y direction (`df$x` and `df$y`).
 
 Low-level functions such as `circos.text()` can also be used outside
@@ -205,15 +207,15 @@ track may not be what you want. If the graphics are directly added to the
 track which are most recently created, `track.index` can be ommitted because
 this track is just marked as the "current" track.
 
-OK, now we add histograms to the second track. Here `circos.trackHist()` is a high-
-level function which means it creates a new track (as you can imagin `hist()`
+OK, now we add histograms to the second track. Here `circos.trackHist()` is a 
+high-level function which means it creates a new track (as you can imagin `hist()`
 is also a high-level function). `bin.size` is explicitly set so that the bin
 size for histograms in all cells are the same and can be compared to each
 other. (See Figure \@ref(fig:circlize-glance-track-2))
 
 ```{r circlize_glance_2, eval=FALSE}
 bgcol = rep(c("#EFEFEF", "#CCCCCC"), 4)
-circos.trackHist(df$factors, df$x, bin.size = 0.2, bg.col = bgcol, col = NA)
+circos.trackHist(df$sectors, df$x, bin.size = 0.2, bg.col = bgcol, col = NA)
 ```
 
 ```{r circlize-glance-track-2, echo = FALSE, fig.cap = "First example of circlize, add the second track."}
@@ -224,15 +226,16 @@ circos.clear()
 ```
 
 In the third track and in `panel.fun`, we randomly picked 10 data points in
-each cell, sort them by x-values and connect them with lines. In following code, when
-`factors`, `x` and `y` arguments are set in `circos.track()`, x values and y
-values are split by `df$factors` and corresponding subset of x and y values
-are sent to `panel.fun` through `panel.fun`'s `x` and `y` arguments. Thus, `x`
-an `y` in `panel.fun` are exactly the values in the "current" cell. 
-(See Figure \@ref(fig:circlize-glance-track-3))
+each cell, sort them by x-values and connect them with lines. In following
+code, when `sectors` (the first unnamed argument), `x` and `y` arguments are set in
+`circos.track()`, x values and y values are split by `df$sectors` and
+corresponding subset of x and y values are sent to `panel.fun` through
+`panel.fun`'s `x` and `y` arguments. Thus, `x` an `y` in `panel.fun` are
+exactly the values in the "current" cell. (See Figure
+\@ref(fig:circlize-glance-track-3))
 
 ```{r circlize_glance_3, eval=FALSE}
-circos.track(factors = df$factors, x = df$x, y = df$y,
+circos.track(df$sectors, x = df$x, y = df$y,
     panel.fun = function(x, y) {
         ind = sample(length(x), 10)
         x2 = x[ind]

@@ -102,7 +102,7 @@ can be controlled by `circos.par()` before making the plot.
 The parameters for the heatmap track can be controlled in `circos.heatmap()` function,
 such as `track.height` (height of the track) and `bg.border` (border of the track).
 
-In the following example, The labels for the sectors are added by setting the
+In the following example, the labels for the sectors are added by setting the
 `show.sector.labels` argument. The order of sectors is `c("a", "b", "c", "d",
 "e")` clock-wisely. You can see in the following plot, sector `a` starts
 from $\theta = 90^{\circ}$.
@@ -230,7 +230,7 @@ dendrograms through a callback function, as will be demonstrated later.
 By default, the numeric matrix is clustered on rows. `cluster` argument
 can be set to `FALSE` to turn off the clustering.
 
-Of cource, when `cluster` is set to `FALSE`, no dendrogram is drawn even
+Of course, when `cluster` is set to `FALSE`, no dendrogram is drawn even
 if `dend.side` is set.
 
 
@@ -262,7 +262,7 @@ circos.clear()
 
 The clustering generates dendrograms. Callback function can be applied to
 every dendrogram after it is generated in the corresponding sector. The callback
-function edits the dendrograms such as 1. reorder the dendrogrmas, or 2.
+function edits the dendrograms such as 1. reorder the dendrograms, or 2.
 color the dendrograms.
 
 In `circos.heatmap()`, a user-defined function should be set to

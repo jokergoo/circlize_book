@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
 <ul>
 <li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
-<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The functions measured in absolute units</a></li>
+<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> Absolute units</a></li>
 <li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="circular-layout.html"><a href="circular-layout.html#set-gaps-between-tracks"><i class="fa fa-check"></i><b>2.9</b> Set gaps between tracks</a></li>
@@ -216,6 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>9.2</b> Customize chromosome track</a></li>
 <li class="chapter" data-level="9.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>9.3</b> Initialize with general genomic category</a></li>
 <li class="chapter" data-level="9.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>9.4</b> Zooming chromosomes</a></li>
+<li class="chapter" data-level="9.5" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#concatenating-two-genomes"><i class="fa fa-check"></i><b>9.5</b> Concatenating two genomes</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>10</b> Create plotting regions for genomic data</a>
 <ul>
@@ -261,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Visualize Relations</b></span></li>
 <li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
+<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-of-making-chord-diagram"><i class="fa fa-check"></i><b>14.1</b> Basic usage of making Chord diagram</a></li>
 <li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
 <li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
 <ul>
@@ -414,22 +415,23 @@ a basic idea of how the package works.</p>
 represent categories, a numeric vector of x values and a vectoe of y values.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introduction.html#cb3-1"></a><span class="kw">set.seed</span>(<span class="dv">999</span>)</span>
 <span id="cb3-2"><a href="introduction.html#cb3-2"></a>n =<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb3-3"><a href="introduction.html#cb3-3"></a>df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">factors =</span> <span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>], n, <span class="dt">replace =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb3-3"><a href="introduction.html#cb3-3"></a>df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">sectors =</span> <span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>], n, <span class="dt">replace =</span> <span class="ot">TRUE</span>),</span>
 <span id="cb3-4"><a href="introduction.html#cb3-4"></a>    <span class="dt">x =</span> <span class="kw">rnorm</span>(n), <span class="dt">y =</span> <span class="kw">runif</span>(n))</span></code></pre></div>
 <p>First we initialize the circular layout. The circle is split into sectors
 based on the data range on x-axes in each category. In following code, <code>df$x</code>
-is split by <code>df$factors</code> and the width of sectors are automatically calculated
+is split by <code>df$sectors</code> and the width of sectors are automatically calculated
 based on data ranges in each category. Be default, sectors are positioned
 started from <span class="math inline">\(\theta = 0\)</span> (in the polar coordinate system) and go along the circle
 clock-wisely. You may not see anything after running following code because no
 track has been added yet.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="introduction.html#cb4-1"></a><span class="kw">library</span>(circlize)</span>
 <span id="cb4-2"><a href="introduction.html#cb4-2"></a><span class="kw">circos.par</span>(<span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.1</span>)</span>
-<span id="cb4-3"><a href="introduction.html#cb4-3"></a><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> df<span class="op">$</span>factors, <span class="dt">x =</span> df<span class="op">$</span>x)</span></code></pre></div>
+<span id="cb4-3"><a href="introduction.html#cb4-3"></a><span class="kw">circos.initialize</span>(df<span class="op">$</span>sectors, <span class="dt">x =</span> df<span class="op">$</span>x)</span></code></pre></div>
 <p>We set a global parameter <code>track.height</code> to 0.1 by the option function
 <code>circis.par()</code> so that all tracks which will be added have a default height of
 0.1. The circle used by <strong>circlize</strong> always has a radius of 1, so a height of
-0.1 means 10% of the circle radius.</p>
+0.1 means 10% of the circle radius. In later chapters, you can find how to set the
+height with physical units, e.g. cm.</p>
 <p>Note that the allocation of sectors only needs values on x direction (or
 on the circular direction), the values on y direction (radical direction) will be used
 in the step of creating tracks.</p>
@@ -445,15 +447,16 @@ specified by <code>y</code> argument as a numeric vector (so that y-range will b
 automatically extracted and calculated in each cell) or <code>ylim</code> argument as a
 vector of length two. In principle, y-ranges should be same for all cells in a
 same track. (See Figure <a href="introduction.html#fig:circlize-glance-track-1">1.2</a>)</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introduction.html#cb5-1"></a><span class="kw">circos.track</span>(<span class="dt">factors =</span> df<span class="op">$</span>factors, <span class="dt">y =</span> df<span class="op">$</span>y,</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introduction.html#cb5-1"></a><span class="kw">circos.track</span>(df<span class="op">$</span>sectors, <span class="dt">y =</span> df<span class="op">$</span>y,</span>
 <span id="cb5-2"><a href="introduction.html#cb5-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb5-3"><a href="introduction.html#cb5-3"></a>        <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">mm_y</span>(<span class="dv">5</span>), </span>
-<span id="cb5-4"><a href="introduction.html#cb5-4"></a>            CELL_META<span class="op">$</span>sector.index)</span>
-<span id="cb5-5"><a href="introduction.html#cb5-5"></a>        <span class="kw">circos.axis</span>(<span class="dt">labels.cex =</span> <span class="fl">0.6</span>)</span>
-<span id="cb5-6"><a href="introduction.html#cb5-6"></a>})</span>
-<span id="cb5-7"><a href="introduction.html#cb5-7"></a>col =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#FF0000&quot;</span>, <span class="st">&quot;#00FF00&quot;</span>), <span class="dv">4</span>)</span>
-<span id="cb5-8"><a href="introduction.html#cb5-8"></a><span class="kw">circos.trackPoints</span>(df<span class="op">$</span>factors, df<span class="op">$</span>x, df<span class="op">$</span>y, <span class="dt">col =</span> col, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
-<span id="cb5-9"><a href="introduction.html#cb5-9"></a><span class="kw">circos.text</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="st">&quot;text&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>)</span></code></pre></div>
+<span id="cb5-3"><a href="introduction.html#cb5-3"></a>        <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, </span>
+<span id="cb5-4"><a href="introduction.html#cb5-4"></a>            CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">mm_y</span>(<span class="dv">5</span>), </span>
+<span id="cb5-5"><a href="introduction.html#cb5-5"></a>            CELL_META<span class="op">$</span>sector.index)</span>
+<span id="cb5-6"><a href="introduction.html#cb5-6"></a>        <span class="kw">circos.axis</span>(<span class="dt">labels.cex =</span> <span class="fl">0.6</span>)</span>
+<span id="cb5-7"><a href="introduction.html#cb5-7"></a>})</span>
+<span id="cb5-8"><a href="introduction.html#cb5-8"></a>col =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#FF0000&quot;</span>, <span class="st">&quot;#00FF00&quot;</span>), <span class="dv">4</span>)</span>
+<span id="cb5-9"><a href="introduction.html#cb5-9"></a><span class="kw">circos.trackPoints</span>(df<span class="op">$</span>sectors, df<span class="op">$</span>x, df<span class="op">$</span>y, <span class="dt">col =</span> col, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb5-10"><a href="introduction.html#cb5-10"></a><span class="kw">circos.text</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="st">&quot;text&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-glance-track-1"></span>
 <img src="01-introduction_files/figure-html/circlize-glance-track-1-1.png" alt="First example of circlize, add the first track." width="672" />
 <p class="caption">
@@ -491,8 +494,8 @@ different coordinates.</p>
 simultaneously. As further explained in Section <a href="graphics.html#points">3.2</a>, it can be
 replaced by putting <code>circos.text()</code> in <code>panel.fun</code>, however,
 <code>circos.trackPoints()</code> would be more convenient if only the points are needed
-to put in the cells. It is quite straightforward to understand that this
-function needs a categorical variable (<code>df$factors</code>), values on x direction
+to put in the cells (but I don’t really recommend). It is quite straightforward to understand that this
+function needs a categorical variable (<code>df$sectors</code>), values on x direction
 and y direction (<code>df$x</code> and <code>df$y</code>).</p>
 <p>Low-level functions such as <code>circos.text()</code> can also be used outside
 <code>panel.fun</code> as shown in above code. If so, <code>sector.index</code> and <code>track.index</code>
@@ -500,13 +503,13 @@ need to be specified explicitly because the “current” sector and “current�
 track may not be what you want. If the graphics are directly added to the
 track which are most recently created, <code>track.index</code> can be ommitted because
 this track is just marked as the “current” track.</p>
-<p>OK, now we add histograms to the second track. Here <code>circos.trackHist()</code> is a high-
-level function which means it creates a new track (as you can imagin <code>hist()</code>
+<p>OK, now we add histograms to the second track. Here <code>circos.trackHist()</code> is a
+high-level function which means it creates a new track (as you can imagin <code>hist()</code>
 is also a high-level function). <code>bin.size</code> is explicitly set so that the bin
 size for histograms in all cells are the same and can be compared to each
 other. (See Figure <a href="introduction.html#fig:circlize-glance-track-2">1.3</a>)</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="introduction.html#cb6-1"></a>bgcol =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;#EFEFEF&quot;</span>, <span class="st">&quot;#CCCCCC&quot;</span>), <span class="dv">4</span>)</span>
-<span id="cb6-2"><a href="introduction.html#cb6-2"></a><span class="kw">circos.trackHist</span>(df<span class="op">$</span>factors, df<span class="op">$</span>x, <span class="dt">bin.size =</span> <span class="fl">0.2</span>, <span class="dt">bg.col =</span> bgcol, <span class="dt">col =</span> <span class="ot">NA</span>)</span></code></pre></div>
+<span id="cb6-2"><a href="introduction.html#cb6-2"></a><span class="kw">circos.trackHist</span>(df<span class="op">$</span>sectors, df<span class="op">$</span>x, <span class="dt">bin.size =</span> <span class="fl">0.2</span>, <span class="dt">bg.col =</span> bgcol, <span class="dt">col =</span> <span class="ot">NA</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circlize-glance-track-2"></span>
 <img src="01-introduction_files/figure-html/circlize-glance-track-2-1.png" alt="First example of circlize, add the second track." width="672" />
 <p class="caption">
@@ -514,13 +517,14 @@ Figure 1.3: First example of circlize, add the second track.
 </p>
 </div>
 <p>In the third track and in <code>panel.fun</code>, we randomly picked 10 data points in
-each cell, sort them by x-values and connect them with lines. In following code, when
-<code>factors</code>, <code>x</code> and <code>y</code> arguments are set in <code>circos.track()</code>, x values and y
-values are split by <code>df$factors</code> and corresponding subset of x and y values
-are sent to <code>panel.fun</code> through <code>panel.fun</code>’s <code>x</code> and <code>y</code> arguments. Thus, <code>x</code>
-an <code>y</code> in <code>panel.fun</code> are exactly the values in the “current” cell.
-(See Figure <a href="introduction.html#fig:circlize-glance-track-3">1.4</a>)</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introduction.html#cb7-1"></a><span class="kw">circos.track</span>(<span class="dt">factors =</span> df<span class="op">$</span>factors, <span class="dt">x =</span> df<span class="op">$</span>x, <span class="dt">y =</span> df<span class="op">$</span>y,</span>
+each cell, sort them by x-values and connect them with lines. In following
+code, when <code>sectors</code> (the first unnamed argument), <code>x</code> and <code>y</code> arguments are set in
+<code>circos.track()</code>, x values and y values are split by <code>df$sectors</code> and
+corresponding subset of x and y values are sent to <code>panel.fun</code> through
+<code>panel.fun</code>’s <code>x</code> and <code>y</code> arguments. Thus, <code>x</code> an <code>y</code> in <code>panel.fun</code> are
+exactly the values in the “current” cell. (See Figure
+<a href="introduction.html#fig:circlize-glance-track-3">1.4</a>)</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introduction.html#cb7-1"></a><span class="kw">circos.track</span>(df<span class="op">$</span>sectors, <span class="dt">x =</span> df<span class="op">$</span>x, <span class="dt">y =</span> df<span class="op">$</span>y,</span>
 <span id="cb7-2"><a href="introduction.html#cb7-2"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
 <span id="cb7-3"><a href="introduction.html#cb7-3"></a>        ind =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">length</span>(x), <span class="dv">10</span>)</span>
 <span id="cb7-4"><a href="introduction.html#cb7-4"></a>        x2 =<span class="st"> </span>x[ind]</span>

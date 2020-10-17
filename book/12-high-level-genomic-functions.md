@@ -29,7 +29,7 @@ circos.genomicIdeogram(track.height = 0.2)
 
 Matrix which corresponds to genomic regions can be visualized as heatmaps. Heatmaps
 completely fill the track and there are connection lines connecting heatmaps and original positions
-in the genome. `circos.genomicHeamtap()` draws connection lines and heatmaps as two tracks
+in the genome. `circos.genomicHeatmap()` draws connection lines and heatmaps as two tracks
 and combines them as an integrated track.
 
 Generally, all numeric columns (excluding the first three columns) in the

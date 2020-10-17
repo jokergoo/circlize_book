@@ -26,7 +26,7 @@ regions in the circle.
 
 ## Setting colors
 
-Color is a major aesthetic element to map to the data points. In **circliez** there are
+Color is a major aesthetic element to map to the data points. In **circlize** there are
 two functions that provides customization of colors.
 
 `colorRamp2()` provides an exact way for mapping continuous values. users specify a vector
@@ -72,10 +72,38 @@ points(1:10, rep(8, 10), pch = 16, cex = 5,
 
 <img src="03-graphics_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" />
 
+Actually there is another function `col2value()` which can convert back to the values
+highly approximate to the original values from a vector of colors.
+
+
+```r
+col_fun = colorRamp2(c(-2, 0, 2), c("blue", "white", "red"))
+value = seq(-2, 2, by = 0.2)
+value
+```
+
+```
+##  [1] -2.0 -1.8 -1.6 -1.4 -1.2 -1.0 -0.8 -0.6 -0.4 -0.2  0.0  0.2  0.4  0.6  0.8
+## [16]  1.0  1.2  1.4  1.6  1.8  2.0
+```
+
+```r
+col = col_fun(value)
+col2value(col, col_fun = col_fun)
+```
+
+```
+##  [1] -2.000000e+00 -1.795620e+00 -1.595206e+00 -1.391406e+00 -1.189672e+00
+##  [6] -9.870220e-01 -7.853407e-01 -5.861849e-01 -3.901391e-01 -1.985154e-01
+## [11] -7.401487e-17  1.761338e-01  3.592285e-01  5.454043e-01  7.429882e-01
+## [16]  9.423823e-01  1.150753e+00  1.359655e+00  1.575352e+00  1.785834e+00
+## [21]  2.000000e+00
+```
+
 ## Points {#points}
 
 Adding points by `circos.points()` is similar as `points()` function. Possible
-usage is:
+usages are:
 
 
 ```r
@@ -96,7 +124,7 @@ selected by explictly setting `track.index` argument.
 
 ```r
 circos.track(...)
-circos.trackPoints(fa, x, y)
+circos.trackPoints(sectors, x, y)
 ```
 
 `circos.trackPoints()` is simply implemented by `circos.points()` with a `for`
@@ -106,7 +134,7 @@ identical to above code.
 
 
 ```r
-circos.track(fa, x, y, panel.fun = function(x, y) {
+circos.track(sectors, x, y, panel.fun = function(x, y) {
 	circos.points(x, y)
 })
 ```
@@ -151,7 +179,7 @@ set `straight` argument to `TRUE` to get rid of unnecessary segmentations.
 <p class="caption">(\#fig:circlize-linecurve)Transformation of straight lines into curves in the circle.</p>
 </div>
 
-Possible usage for `circos.lines()` is:
+Possible usages for `circos.lines()` are:
 
 
 ```r
@@ -173,10 +201,26 @@ circos.segments(x0, y0, x1, y1)
 circos.segments(x0, y0, x1, y1, straight)
 ```
 
+
+```r
+circos.initialize(letters[1:8], xlim = c(0, 1))
+circos.track(ylim = c(0, 1), track.height = 0.3, panel.fun = function(x, y) {
+    x = seq(0.2, 0.8, by = 0.2)
+    y = seq(0.2, 0.8, by = 0.2)
+
+    circos.segments(x, 0.1, x, 0.9)
+    circos.segments(0.1, y, 0.9, y)
+})
+```
+
 <div class="figure" style="text-align: center">
 <img src="03-graphics_files/figure-html/circlize-segments-1.png" alt="Draw segments." width="672" />
 <p class="caption">(\#fig:circlize-segments)Draw segments.</p>
 </div>
+
+```r
+circos.clear()
+```
 
 ## Text {#text}
 
@@ -195,7 +239,7 @@ in Figure \@ref(fig:circlize-text).
 <p class="caption">(\#fig:circlize-text)Text facings.</p>
 </div>
 
-Possible usage for `circos.text()` is:
+Possible usages for `circos.text()` are:
 
 
 ```r
@@ -313,7 +357,7 @@ exceed data ranges on x-axis in the corresponding cell, their positions are
 automatically adjusted to be shifted inwards in the cell.
 
 Possible usage of `circos.axis()` is as follows. Note `h` can be `bottom`, `top`
-or a numeric value.
+or a numeric value, and `major.tick.length` can be set with `mm_y()`/`cm_y()`/`inch_y()`.
 
 
 ```r
@@ -333,8 +377,8 @@ Y-axis is also supported by `circos.yaxis()`. The usage is similar as
 
 
 ```r
-circos.yaxis(side)
-circos.yaxis(at, labels, sector.index, track.index)
+circos.yaxis(side) # break values are automatically calculated
+circos.yaxis(side, at, labels, sector.index, track.index)
 ```
 
 <div class="figure" style="text-align: center">
@@ -351,42 +395,113 @@ or violins for which xlim should be properly set in `circos.initialize()`.
 For circular barplots, users can either specify a vector which generates a
 “normal” barplot, or a matrix which generates a stacked barplot (Figure \@ref(fig:circlize-barplot)).
 
+
+```r
+par(mfrow = c(1, 2))
+circos.initialize(letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    value = runif(10)
+    circos.barplot(value, 1:10 - 0.5, col = 1:10)
+})
+circos.track(ylim = c(-1, 1), panel.fun = function(x, y) {
+    value = runif(10, min = -1, max = 1)
+    circos.barplot(value, 1:10 - 0.5, col = ifelse(value > 0, 2, 3))
+})
+circos.clear()
+
+circos.initialize(letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 4), panel.fun = function(x, y) {
+    value = matrix(runif(10*4), ncol = 4)
+    circos.barplot(value, 1:10 - 0.5, col = 2:5)
+})
+```
+
 <div class="figure" style="text-align: center">
 <img src="03-graphics_files/figure-html/circlize-barplot-1.png" alt="Circular barplots." width="768" />
 <p class="caption">(\#fig:circlize-barplot)Circular barplots.</p>
 </div>
 
+```r
+circos.clear()
+```
+
 For circular boxplots, the boxes can be drawn one-by-one by providing a vector
 for each box, or drawn in batch with a list/matrix as input (Figure \@ref(fig:circlize-boxplot)).
+
+
+```r
+par(mfrow = c(1, 2))
+circos.initialize(letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    for(pos in seq(0.5, 9.5, by = 1)) {
+        value = runif(10)
+        circos.boxplot(value, pos)
+    }
+})
+circos.clear()
+
+circos.initialize(letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    value = replicate(runif(10), n = 10, simplify = FALSE)
+    circos.boxplot(value, 1:10 - 0.5, col = 1:10)
+})
+```
 
 <div class="figure" style="text-align: center">
 <img src="03-graphics_files/figure-html/circlize-boxplot-1.png" alt="Circular boxplots." width="768" />
 <p class="caption">(\#fig:circlize-boxplot)Circular boxplots.</p>
 </div>
 
+```r
+circos.clear()
+```
+
 For circular violin plots, the violins can be drawn one-by-one by providing a vector for each violin, or drawn in batch with a list/matrix as input (Figure \@ref(fig:circlize-violinplot)).
 
 Please note, to make it comparable between violins, `max_density` argument should be set.
+
+
+```r
+par(mfrow = c(1, 2))
+circos.initialize(letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    for(pos in seq(0.5, 9.5, by = 1)) {
+        value = runif(10)
+        circos.violin(value, pos)
+    }
+})
+circos.clear()
+
+circos.initialize(letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    value = replicate(runif(10), n = 10, simplify = FALSE)
+    circos.violin(value, 1:10 - 0.5, col = 1:10)
+})
+```
 
 <div class="figure" style="text-align: center">
 <img src="03-graphics_files/figure-html/circlize-violinplot-1.png" alt="Circular violin plots." width="768" />
 <p class="caption">(\#fig:circlize-violinplot)Circular violin plots.</p>
 </div>
 
+```r
+circos.clear()
+```
+
 ## Circular arrows
 
-Circular arrows can be used to represent stages in a circle. `circos.arrow()`
-draws circular arrows parallel to the circle. Since the arrow is always
-parallel to the circle, on x-direction, the start and end position of the
-arrow need to be defined while on the y-direction, only the position of the
-center of arrow needs to be defined. Also `width` controls the width of the
-arrow and the length is defined by `x2 - x1`. `arrow.head.width` and
+`circos.arrow()` draws circular arrows parallel to the circle. Since the arrow
+is always parallel to the circle, on x-direction, the start and end position
+of the arrow need to be defined while on the y-direction, only the position of
+the center of arrow needs to be defined. Also `width` controls the width of
+the arrow and the length is defined by `x2 - x1`. `arrow.head.width` and
 `arrow.head.length` control the size of the arrow head, and values are
 measured in the data coordinate in corresponding cell. `tail` controls the
 shape of the arrow tail. Note for `width`, `arrow.head.width` and
-`arrow.head.length`, the value can be set by e.g. `mm_x()`, `mm_y()` with absolute
-units. If users want to draw the arrows in the reversed direction, set `arrow.position`
-argument to `start`. See Figure \@ref(fig:circular-arrow).
+`arrow.head.length`, the value can be set by e.g. `mm_x()`, `mm_y()` with
+absolute units. If users want to draw the arrows in the reversed direction,
+set `arrow.position` argument to `start`. See Figure
+\@ref(fig:circular-arrow).
 
 
 
@@ -561,11 +676,12 @@ circos.link(sector.index1, c(0, 1), sector.index2, 0, col, lwd, lty, border)
 <p class="caption">(\#fig:link-example)Different types of links.</p>
 </div>
 
-The position of link end is controlled by `rou` (sorry the name should be called `rho`). By default, it is the bottom
-of the most inside track and normally, you don't need to care about
-this setting. The two ends of the link are located in a same circle by default. The
-positions of two ends can be adjusted with different values for `rou1` and
-`rou2` arguments. See Figure \@ref(fig:link-end).
+The position of link end is controlled by `rou` (sorry the name should be
+called `rho`, sorry for my Chinese Greek accent). By default, it is the bottom of the most inside track and
+normally, you don't need to care about this setting. The two ends of the link
+are located in a same circle by default. The positions of two ends can be
+adjusted with different values for `rou1` and `rou2` arguments. See Figure
+\@ref(fig:link-end).
 
 
 ```r
@@ -604,8 +720,8 @@ When there are many links, the height of all links can be systematically adjuste
 The value is between 0 and 1.
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-html/link-ratio-1.png" alt="Adjust link heights by `h.ratio`." width="768" />
-<p class="caption">(\#fig:link-ratio)Adjust link heights by `h.ratio`.</p>
+<img src="03-graphics_files/figure-html/link-ratio-1.png" alt="Adjust link heights by 'h.ratio'." width="768" />
+<p class="caption">(\#fig:link-ratio)Adjust link heights by 'h.ratio'.</p>
 </div>
 
 The border of link (if it is a ribbon) or the link itself (if it is a line) is
@@ -698,8 +814,8 @@ draw.sector(0, 360, rou1 = 0.7, rou2 = 0.6, col = "#0000FF80")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-graphics_files/figure-html/draw-sector-general-1.png" alt="General usage of `draw.sector()`." width="384" />
-<p class="caption">(\#fig:draw-sector-general)General usage of `draw.sector()`.</p>
+<img src="03-graphics_files/figure-html/draw-sector-general-1.png" alt="General usage of 'draw.sector()'." width="384" />
+<p class="caption">(\#fig:draw-sector-general)General usage of 'draw.sector()'.</p>
 </div>
 
 In order to highlight cells in the circular plot, we can use
@@ -713,8 +829,8 @@ First we create a circular plot with eight sectors and three tracks.
 
 
 ```r
-factors = letters[1:8]
-circos.initialize(factors, xlim = c(0, 1))
+sectors = letters[1:8]
+circos.initialize(sectors, xlim = c(0, 1))
 for(i in 1:3) {
     circos.track(ylim = c(0, 1))
 }
@@ -779,12 +895,12 @@ representing ratios of the width or height of the highlighted region (Figure \@r
 One advantage of `highlight.sector()` is that it supports to add text in the
 highlighted regions. By default, the text is drawn at that center of the
 highlighted region. The position on the radical direction can be set by
-`text.vjust` argument either by a numeric value or a string in form of `"2 inches"`` or `"-1.2cm"`.
+`text.vjust` argument either by a numeric value or a string in form of `"2 inches"` or `"-1.2cm"`.
 
 
 ```r
-factors = letters[1:8]
-circos.initialize(factors, xlim = c(0, 1))
+sectors = letters[1:8]
+circos.initialize(sectors, xlim = c(0, 1))
 for(i in 1:4) {
     circos.track(ylim = c(0, 1))
 }
@@ -797,7 +913,7 @@ highlight.sector("d", col = NA, border = "red", lwd = 2)
 highlight.sector("e", col = "#0000FF40", track.index = c(2, 3))
 highlight.sector(c("f", "g"), col = NA, border = "green", 
     lwd = 2, track.index = c(2, 3), padding = c(0.1, 0.1, 0.1, 0.1))
-highlight.sector(factors, col = "#FFFF0040", track.index = 4)
+highlight.sector(sectors, col = "#FFFF0040", track.index = 4)
 ```
 
 <div class="figure" style="text-align: center">
@@ -824,8 +940,8 @@ so that the plotting is not clipped.
 
 
 ```r
-factors = letters[1:4]
-circos.initialize(factors = factors, xlim = c(0, 1))
+sectors = letters[1:4]
+circos.initialize(sectors, xlim = c(0, 1))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     circos.points(1:20/20, 1:20/20)
 })

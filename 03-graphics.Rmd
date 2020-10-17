@@ -25,7 +25,7 @@ regions in the circle.
 
 ## Setting colors
 
-Color is a major aesthetic element to map to the data points. In **circliez** there are
+Color is a major aesthetic element to map to the data points. In **circlize** there are
 two functions that provides customization of colors.
 
 `colorRamp2()` provides an exact way for mapping continuous values. users specify a vector
@@ -62,10 +62,21 @@ points(1:10, rep(8, 10), pch = 16, cex = 5,
     col = rand_color(10, hue = "monochrome", luminosity = "bright"))
 ```
 
+Actually there is another function `col2value()` which can convert back to the values
+highly approximate to the original values from a vector of colors.
+
+```{r}
+col_fun = colorRamp2(c(-2, 0, 2), c("blue", "white", "red"))
+value = seq(-2, 2, by = 0.2)
+value
+col = col_fun(value)
+col2value(col, col_fun = col_fun)
+```
+
 ## Points {#points}
 
 Adding points by `circos.points()` is similar as `points()` function. Possible
-usage is:
+usages are:
 
 ```{r, eval = FALSE}
 circos.points(x, y)
@@ -84,7 +95,7 @@ selected by explictly setting `track.index` argument.
 
 ```{r, eval = FALSE}
 circos.track(...)
-circos.trackPoints(fa, x, y)
+circos.trackPoints(sectors, x, y)
 ```
 
 `circos.trackPoints()` is simply implemented by `circos.points()` with a `for`
@@ -93,7 +104,7 @@ loop. However, it is more recommended to directly use `circos.points()` and
 identical to above code.
 
 ```{r, eval = FALSE}
-circos.track(fa, x, y, panel.fun = function(x, y) {
+circos.track(sectors, x, y, panel.fun = function(x, y) {
 	circos.points(x, y)
 })
 ```
@@ -136,7 +147,7 @@ set `straight` argument to `TRUE` to get rid of unnecessary segmentations.
 source("src/intro-08-linescurve.R")
 ```
 
-Possible usage for `circos.lines()` is:
+Possible usages for `circos.lines()` are:
 
 ```{r, eval = FALSE}
 circos.lines(x, y)
@@ -156,7 +167,7 @@ circos.segments(x0, y0, x1, y1)
 circos.segments(x0, y0, x1, y1, straight)
 ```
 
-```{r circlize-segments, echo = FALSE, fig.cap = "Draw segments."}
+```{r circlize-segments, fig.cap = "Draw segments."}
 circos.initialize(letters[1:8], xlim = c(0, 1))
 circos.track(ylim = c(0, 1), track.height = 0.3, panel.fun = function(x, y) {
     x = seq(0.2, 0.8, by = 0.2)
@@ -184,7 +195,7 @@ in Figure \@ref(fig:circlize-text).
 source("src/intro-09-text.R")
 ```
 
-Possible usage for `circos.text()` is:
+Possible usages for `circos.text()` are:
 
 ```{r, eval = FALSE}
 circos.text(x, y, labels)
@@ -294,7 +305,7 @@ exceed data ranges on x-axis in the corresponding cell, their positions are
 automatically adjusted to be shifted inwards in the cell.
 
 Possible usage of `circos.axis()` is as follows. Note `h` can be `bottom`, `top`
-or a numeric value.
+or a numeric value, and `major.tick.length` can be set with `mm_y()`/`cm_y()`/`inch_y()`.
 
 ```{r, eval = FALSE}
 circos.axis(h)
@@ -312,8 +323,8 @@ Y-axis is also supported by `circos.yaxis()`. The usage is similar as
 (Figure \@ref(fig:circlize-yaxis))
 
 ```{r, eval = FALSE}
-circos.yaxis(side)
-circos.yaxis(at, labels, sector.index, track.index)
+circos.yaxis(side) # break values are automatically calculated
+circos.yaxis(side, at, labels, sector.index, track.index)
 ```
 
 ```{r circlize-yaxis, echo = FALSE, fig.cap = "Y-axes"}
@@ -329,9 +340,9 @@ or violins for which xlim should be properly set in `circos.initialize()`.
 For circular barplots, users can either specify a vector which generates a
 “normal” barplot, or a matrix which generates a stacked barplot (Figure \@ref(fig:circlize-barplot)).
 
-```{r circlize-barplot, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Circular barplots."}
+```{r circlize-barplot, fig.width = 8, fig.height = 4, fig.cap = "Circular barplots."}
 par(mfrow = c(1, 2))
-circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.initialize(letters[1:4], xlim = c(0, 10))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     value = runif(10)
     circos.barplot(value, 1:10 - 0.5, col = 1:10)
@@ -342,7 +353,7 @@ circos.track(ylim = c(-1, 1), panel.fun = function(x, y) {
 })
 circos.clear()
 
-circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.initialize(letters[1:4], xlim = c(0, 10))
 circos.track(ylim = c(0, 4), panel.fun = function(x, y) {
     value = matrix(runif(10*4), ncol = 4)
     circos.barplot(value, 1:10 - 0.5, col = 2:5)
@@ -353,9 +364,9 @@ circos.clear()
 For circular boxplots, the boxes can be drawn one-by-one by providing a vector
 for each box, or drawn in batch with a list/matrix as input (Figure \@ref(fig:circlize-boxplot)).
 
-```{r circlize-boxplot, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Circular boxplots."}
+```{r circlize-boxplot, fig.width = 8, fig.height = 4, fig.cap = "Circular boxplots."}
 par(mfrow = c(1, 2))
-circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.initialize(letters[1:4], xlim = c(0, 10))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     for(pos in seq(0.5, 9.5, by = 1)) {
         value = runif(10)
@@ -364,7 +375,7 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 })
 circos.clear()
 
-circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.initialize(letters[1:4], xlim = c(0, 10))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     value = replicate(runif(10), n = 10, simplify = FALSE)
     circos.boxplot(value, 1:10 - 0.5, col = 1:10)
@@ -376,9 +387,9 @@ For circular violin plots, the violins can be drawn one-by-one by providing a ve
 
 Please note, to make it comparable between violins, `max_density` argument should be set.
 
-```{r circlize-violinplot, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Circular violin plots."}
+```{r circlize-violinplot, fig.width = 8, fig.height = 4, fig.cap = "Circular violin plots."}
 par(mfrow = c(1, 2))
-circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.initialize(letters[1:4], xlim = c(0, 10))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     for(pos in seq(0.5, 9.5, by = 1)) {
         value = runif(10)
@@ -387,7 +398,7 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 })
 circos.clear()
 
-circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.initialize(letters[1:4], xlim = c(0, 10))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     value = replicate(runif(10), n = 10, simplify = FALSE)
     circos.violin(value, 1:10 - 0.5, col = 1:10)
@@ -397,18 +408,18 @@ circos.clear()
 
 ## Circular arrows
 
-Circular arrows can be used to represent stages in a circle. `circos.arrow()`
-draws circular arrows parallel to the circle. Since the arrow is always
-parallel to the circle, on x-direction, the start and end position of the
-arrow need to be defined while on the y-direction, only the position of the
-center of arrow needs to be defined. Also `width` controls the width of the
-arrow and the length is defined by `x2 - x1`. `arrow.head.width` and
+`circos.arrow()` draws circular arrows parallel to the circle. Since the arrow
+is always parallel to the circle, on x-direction, the start and end position
+of the arrow need to be defined while on the y-direction, only the position of
+the center of arrow needs to be defined. Also `width` controls the width of
+the arrow and the length is defined by `x2 - x1`. `arrow.head.width` and
 `arrow.head.length` control the size of the arrow head, and values are
 measured in the data coordinate in corresponding cell. `tail` controls the
 shape of the arrow tail. Note for `width`, `arrow.head.width` and
-`arrow.head.length`, the value can be set by e.g. `mm_x()`, `mm_y()` with absolute
-units. If users want to draw the arrows in the reversed direction, set `arrow.position`
-argument to `start`. See Figure \@ref(fig:circular-arrow).
+`arrow.head.length`, the value can be set by e.g. `mm_x()`, `mm_y()` with
+absolute units. If users want to draw the arrows in the reversed direction,
+set `arrow.position` argument to `start`. See Figure
+\@ref(fig:circular-arrow).
 
 
 ```{r circular-arrow, fig.width = 8, fig.height = 4, fig.cap = "Circular arrows."}
@@ -549,10 +560,10 @@ circos.link(sector.index1, c(0, 1), sector.index2, 0, col, lwd, lty, border)
 ```
 
 ```{r link-example, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Different types of links."}
-factors = letters[1:8]
+sectors = letters[1:8]
 circos.par(points.overflow.warning = FALSE)
-circos.initialize(factors = factors, xlim = c(0, 10))
-circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+circos.initialize(sectors, xlim = c(0, 10))
+circos.track(sectors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
 
 circos.link("a", 5, "c", 5, border = 1)
 circos.link("b", 5, "d", c(4, 6), border = 1)
@@ -562,11 +573,12 @@ circos.link("e", c(2, 3), "g", 5, border = 1)
 circos.clear()
 ```
 
-The position of link end is controlled by `rou` (sorry the name should be called `rho`). By default, it is the bottom
-of the most inside track and normally, you don't need to care about
-this setting. The two ends of the link are located in a same circle by default. The
-positions of two ends can be adjusted with different values for `rou1` and
-`rou2` arguments. See Figure \@ref(fig:link-end).
+The position of link end is controlled by `rou` (sorry the name should be
+called `rho`, sorry for my Chinese Greek accent). By default, it is the bottom of the most inside track and
+normally, you don't need to care about this setting. The two ends of the link
+are located in a same circle by default. The positions of two ends can be
+adjusted with different values for `rou1` and `rou2` arguments. See Figure
+\@ref(fig:link-end).
 
 ```{r, eval = FALSE}
 circos.link(sector.index1, 0, sector.index2, 0, rou)
@@ -575,8 +587,8 @@ circos.link(sector.index1, 0, sector.index2, 0, rou1, rou2)
 
 ```{r link-end, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Positions of link ends."}
 circos.par(points.overflow.warning = FALSE)
-circos.initialize(factors = factors, xlim = c(0, 10))
-circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+circos.initialize(sectors, xlim = c(0, 10))
+circos.track(sectors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
 
 circos.link("a", 5, "c", 5, rou2 = 0.5, border = 1)
 circos.link("b", 5, "d", c(4, 6), rou2 = 0.5, border = 1)
@@ -601,8 +613,8 @@ circos.link(sector.index1, 0, sector.index2, 0, h, h2)
 
 ```{r link-height, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Adjust link heights."}
 circos.par(points.overflow.warning = FALSE)
-circos.initialize(factors = factors, xlim = c(0, 10))
-circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+circos.initialize(sectors, xlim = c(0, 10))
+circos.track(sectors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
 
 circos.link("a", 10, "b", c(1, 9), border = 1);
 circos.text(9, -8, "default `h`", adj = c(0, 0.5), sector.index = "a", facing = "downward") 
@@ -614,28 +626,28 @@ circos.clear()
 When there are many links, the height of all links can be systematically adjusted by `h.ratio` (Figure \@ref(fig:link-ratio)). 
 The value is between 0 and 1.
 
-```{r link-ratio, echo = FALSE, fig.width = 8, fig.height = 8/3, fig.cap = "Adjust link heights by `h.ratio`."}
+```{r link-ratio, echo = FALSE, fig.width = 8, fig.height = 8/3, fig.cap = "Adjust link heights by 'h.ratio'."}
 par(mfrow = c(1, 3))
-circos.initialize(factors = factors, xlim = c(0, 10))
-circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+circos.initialize(sectors, xlim = c(0, 10))
+circos.track(sectors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
 for(i in 1:100) {
-	circos.link(sample(factors, 1), runif(1, max = 10), sample(factors, 1), runif(1, max = 10),
+	circos.link(sample(sectors, 1), runif(1, max = 10), sample(sectors, 1), runif(1, max = 10),
 		h.ratio = 0.7)
 }
 circos.clear()
 text(-1, 1, "h.ratio = 0.7", adj = c(0, 1))
-circos.initialize(factors = factors, xlim = c(0, 10))
-circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+circos.initialize(sectors, xlim = c(0, 10))
+circos.track(sectors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
 for(i in 1:100) {
-	circos.link(sample(factors, 1), runif(1, max = 10), sample(factors, 1), runif(1, max = 10),
+	circos.link(sample(sectors, 1), runif(1, max = 10), sample(sectors, 1), runif(1, max = 10),
 		h.ratio = 0.5)
 }
 circos.clear()
 text(-1, 1, "h.ratio = 0.5\ndefault", adj = c(0, 1))
-circos.initialize(factors = factors, xlim = c(0, 10))
-circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+circos.initialize(sectors, xlim = c(0, 10))
+circos.track(sectors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
 for(i in 1:100) {
-	circos.link(sample(factors, 1), runif(1, max = 10), sample(factors, 1), runif(1, max = 10),
+	circos.link(sample(sectors, 1), runif(1, max = 10), sample(sectors, 1), runif(1, max = 10),
 		h.ratio = 0.3)
 }
 circos.clear()
@@ -655,8 +667,8 @@ circos.link(sector.index1, 0, sector.index2, 0, w, w2)
 
 ```{r link-shape, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Different link shapes."}
 circos.par(points.overflow.warning = FALSE)
-circos.initialize(factors = factors, xlim = c(0, 10))
-circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+circos.initialize(sectors, xlim = c(0, 10))
+circos.track(sectors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
 
 circos.link("a", 5, "b", 5); circos.text(10, -5, "default", facing = "outside", sector.index = "a")
 circos.link("b", 5, "c", 5, h = 0.2); circos.text(10, -5, "h=0.2", facing = "outside", sector.index = "b")
@@ -672,8 +684,8 @@ be de-generated as a 'hill' (Figure \@ref(fig:link-hill)).
 
 ```{r link-hill, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Link as a hill."}
 circos.par(points.overflow.warning = FALSE)
-circos.initialize(factors = factors, xlim = c(0, 10))
-circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+circos.initialize(sectors, xlim = c(0, 10))
+circos.track(sectors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
 circos.link("a", c(2, 6), "a", c(3, 7))
 circos.clear()
 ```
@@ -700,8 +712,8 @@ circos.link(sector.index1, c(0, 1), sector.index2, c(0, 1), directional = -1)
 
 ```{r link-arrow, echo = FALSE, fig.width = 4, fig.height = 4, fig.cap = "Link with arrows."}
 circos.par(points.overflow.warning = FALSE)
-circos.initialize(factors = factors, xlim = c(0, 10))
-circos.track(factors = factors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
+circos.initialize(sectors, xlim = c(0, 10))
+circos.track(sectors, ylim = c(0, 1), bg.col = "grey", bg.border = NA, track.height = 0.05)
 circos.link("a", 5, "b", 5, directional = 1, arr.length = 0.2)
 circos.link("c", c(3, 7), "d", c(3, 7), directional = 1, arr.col = "white", arr.length = 0.2)
 circos.link("e", c(4, 6), "f", c(4, 6), directional = 1, arr.type = "big.arrow", arr.length = 0.04)
@@ -733,7 +745,7 @@ draw.sector(start.degree, end.degree, clock.wise = FALSE)
 
 Following code shows examples of `draw.sector()` (Figure \@ref(fig:draw-sector-general)).
 
-```{r draw-sector-general, fig.width = 4, fig.height = 4, fig.cap = "General usage of `draw.sector()`."}
+```{r draw-sector-general, fig.width = 4, fig.height = 4, fig.cap = "General usage of 'draw.sector()'."}
 par(mar = c(1, 1, 1, 1))
 plot(c(-1, 1), c(-1, 1), type = "n", axes = FALSE, ann = FALSE, asp = 1)
 draw.sector(20, 0)
@@ -753,8 +765,8 @@ shows several examples to highlight sectors and tracks.
 First we create a circular plot with eight sectors and three tracks.
 
 ```{r circlize_highlight_1, eval = FALSE}
-factors = letters[1:8]
-circos.initialize(factors, xlim = c(0, 1))
+sectors = letters[1:8]
+circos.initialize(sectors, xlim = c(0, 1))
 for(i in 1:3) {
     circos.track(ylim = c(0, 1))
 }
@@ -819,11 +831,11 @@ representing ratios of the width or height of the highlighted region (Figure \@r
 One advantage of `highlight.sector()` is that it supports to add text in the
 highlighted regions. By default, the text is drawn at that center of the
 highlighted region. The position on the radical direction can be set by
-`text.vjust` argument either by a numeric value or a string in form of `"2 inches"`` or `"-1.2cm"`.
+`text.vjust` argument either by a numeric value or a string in form of `"2 inches"` or `"-1.2cm"`.
 
 ```{r circlize-highlight-sector, fig.width = 4, fig.height = 4, fig.cap = "Highlight sectors."}
-factors = letters[1:8]
-circos.initialize(factors, xlim = c(0, 1))
+sectors = letters[1:8]
+circos.initialize(sectors, xlim = c(0, 1))
 for(i in 1:4) {
     circos.track(ylim = c(0, 1))
 }
@@ -836,7 +848,7 @@ highlight.sector("d", col = NA, border = "red", lwd = 2)
 highlight.sector("e", col = "#0000FF40", track.index = c(2, 3))
 highlight.sector(c("f", "g"), col = NA, border = "green", 
     lwd = 2, track.index = c(2, 3), padding = c(0.1, 0.1, 0.1, 0.1))
-highlight.sector(factors, col = "#FFFF0040", track.index = 4)
+highlight.sector(sectors, col = "#FFFF0040", track.index = 4)
 circos.clear()
 ```
 
@@ -854,8 +866,8 @@ Sometimes, when the text or other graphics are far from the circle, you may set 
 so that the plotting is not clipped.
 
 ```{r circlize-base, fig.cap = "Work with base graphic functions."}
-factors = letters[1:4]
-circos.initialize(factors = factors, xlim = c(0, 1))
+sectors = letters[1:4]
+circos.initialize(sectors, xlim = c(0, 1))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     circos.points(1:20/20, 1:20/20)
 })

@@ -154,7 +154,7 @@ for(si in get.all.sector.index()) {
 </div>
 
 For the last example in this section, if the width of the sector is less than
-20 degree, the labels are added in the radical direction (Figure \@ref(fig:chord-diagram-labels-multile-style)).
+10 degree, the labels are added in the radical direction (Figure \@ref(fig:chord-diagram-labels-multile-style)).
 
 
 ```r
@@ -168,7 +168,7 @@ circos.track(track.index = 1, panel.fun = function(x, y) {
     ylim = get.cell.meta.data("ylim")
     sector.name = get.cell.meta.data("sector.index")
 
-    if(abs(xplot[2] - xplot[1]) < 20) {
+    if(abs(xplot[2] - xplot[1]) < 10) {
         circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise",
             niceFacing = TRUE, adj = c(0, 0.5), col = "red")
     } else {
@@ -329,7 +329,6 @@ Note this new functionality works the same for the input as a data frame.
 
 
 ```r
-library(circlize)
 mat1 = matrix(rnorm(25), nrow = 5)
 rownames(mat1) = paste0("A", 1:5)
 colnames(mat1) = paste0("B", 1:5)
@@ -395,9 +394,10 @@ group
 Assign `group` variable to the `group` argument:
 
 
-```
-## Warning: 'gap.degree' can only be modified before `circos.initialize`, or maybe
-## you forgot to call `circos.clear` in your last plot.
+```r
+grid.col = structure(c(rep(2, 5), rep(3, 5), rep(4, 5)),
+                names = c(paste0("A", 1:5), paste0("B", 1:5), paste0("C", 1:5)))
+chordDiagram(mat, group = group, grid.col = grid.col)
 ```
 
 <div class="figure" style="text-align: center">
@@ -405,12 +405,25 @@ Assign `group` variable to the `group` argument:
 <p class="caption">(\#fig:chord-grouped)Grouped Chord diagram.</p>
 </div>
 
+```r
+circos.clear()
+```
+
 We can try another grouping:
 
+
+```r
+group = structure(gsub("^\\w", "", nm), names = nm)
+group
+```
 
 ```
 ##  A1  A2  A3  A4  A5  B1  B2  B3  B4  B5  C1  C2  C3  C4  C5 
 ## "1" "2" "3" "4" "5" "1" "2" "3" "4" "5" "1" "2" "3" "4" "5"
+```
+
+```r
+chordDiagram(mat, group = group, grid.col = grid.col)
 ```
 
 <div class="figure" style="text-align: center">
@@ -418,9 +431,19 @@ We can try another grouping:
 <p class="caption">(\#fig:chord-grouped2)Grouped Chord diagram. A different grouping.</p>
 </div>
 
+```r
+circos.clear()
+```
+
 The order of `group` controls the sector orders and if `group` is set as a factor,
 the order of levels controls the order of groups.
 
+
+```r
+group = structure(gsub("\\d", "", nm), names = nm)
+group = factor(group[sample(length(group), length(group))], levels = c("C", "A", "B"))
+group
+```
 
 ```
 ## B3 A3 B5 B2 C1 A1 A2 C4 A5 C2 C5 B4 A4 B1 C3 
@@ -428,22 +451,82 @@ the order of levels controls the order of groups.
 ## Levels: C A B
 ```
 
+```r
+chordDiagram(mat, group = group, grid.col = grid.col)
+```
+
 <div class="figure" style="text-align: center">
 <img src="15-chord-diagram-advanced-usage_files/figure-html/chord-grouped3-1.png" alt="Grouped Chord diagram. Control the orders of groups." width="768" />
 <p class="caption">(\#fig:chord-grouped3)Grouped Chord diagram. Control the orders of groups.</p>
 </div>
 
+```r
+circos.clear()
+```
+
 The gap between groups is controlled by `big.gap` argument and the gap between
 sectors is controlled by `small.gap` argument.
+
+
+```r
+group = structure(gsub("\\d", "", nm), names = nm)
+chordDiagram(mat, group = group, grid.col = grid.col, big.gap = 20, small.gap = 5)
+```
 
 <div class="figure" style="text-align: center">
 <img src="15-chord-diagram-advanced-usage_files/figure-html/chord-grouped4-1.png" alt="Grouped Chord diagram. Control the gaps between groups." width="768" />
 <p class="caption">(\#fig:chord-grouped4)Grouped Chord diagram. Control the gaps between groups.</p>
 </div>
 
+```r
+circos.clear()
+```
+
 As a normal Chord diagram, the labels and other tracks can be manually adjusted:
+
+
+```r
+group = structure(gsub("\\d", "", nm), names = nm)
+chordDiagram(mat, group = group, grid.col = grid.col,
+    annotationTrack = c("grid", "axis"),
+    preAllocateTracks = list(
+        track.height = mm_h(4),
+        track.margin = c(mm_h(4), 0)
+))
+circos.track(track.index = 2, panel.fun = function(x, y) {
+    sector.index = get.cell.meta.data("sector.index")
+    xlim = get.cell.meta.data("xlim")
+    ylim = get.cell.meta.data("ylim")
+    circos.text(mean(xlim), mean(ylim), sector.index, cex = 0.6, niceFacing = TRUE)
+}, bg.border = NA)
+
+highlight.sector(rownames(mat1), track.index = 1, col = "red", 
+    text = "A", cex = 0.8, text.col = "white", niceFacing = TRUE)
+highlight.sector(colnames(mat1), track.index = 1, col = "green", 
+    text = "B", cex = 0.8, text.col = "white", niceFacing = TRUE)
+highlight.sector(colnames(mat2), track.index = 1, col = "blue", 
+    text = "C", cex = 0.8, text.col = "white", niceFacing = TRUE)
+```
 
 <div class="figure" style="text-align: center">
 <img src="15-chord-diagram-advanced-usage_files/figure-html/chord-grouped5-1.png" alt="A more customized grouped Chord diagram." width="768" />
 <p class="caption">(\#fig:chord-grouped5)A more customized grouped Chord diagram.</p>
 </div>
+
+```r
+circos.clear()
+```
+
+
+The implementation of multi-group Chord diagram is very simple. It can also be done
+by setting a proper sector order (by `order` argument) and a `gap.after` parameter.
+The previous example can be implemented without the `group` argument by the following code,
+but you need to manually calculate the proper value for `gap.after`. Setting `group`
+argument automatically does this for you.
+
+
+```r
+circos.par(gap.after = c(rep(1, 4), 5, rep(1, 4), 5, rep(1, 4), 5))
+chordDiagram(mat, order = names(sort(group)), grid.col = grid.col)
+circos.clear()
+```

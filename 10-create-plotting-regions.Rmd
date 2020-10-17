@@ -29,7 +29,7 @@ contains other columns (start for the fourth column, if it exists). Thus, basica
 `region` can be thought as values on x axes and `value` as values on y axes.
 
 There should be a third arguments `...` which is mandatory and is used to pass
-user- invisible variables to inner functions and make magics (explained in
+user-invisible variables to inner functions and make magics (explained in
 Chapter \@ref(modes-of-input)). So whenever you use `panel.fun` in
 `circos.genomicTrack()`, please add it to the end of your function.
 
@@ -73,7 +73,7 @@ Since genomic functions are implemented by basic circlize functions, you can
 use `circos.info()` anywhere to get information of sectors and tracks.
 
 As you already see in previous examples, **circlize** also provides low-level graphic
-functions specifically designed for genomic data. They are all implemented by corresponding
+functions specifically designed for genomic data. They are all implemented by the corresponding
 normal circlize functions, but needs input variables with special format.
 
 In this chapter, we introduce the basic usage of `circos.genomicTrack()` and

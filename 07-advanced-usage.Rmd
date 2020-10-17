@@ -36,7 +36,7 @@ We first generate a data frame with six categories.
 ```{r}
 set.seed(123)
 df = data.frame(
-    factors = sample(letters[1:6], 400, replace = TRUE),
+    sectors = sample(letters[1:6], 400, replace = TRUE),
     x = rnorm(400),
     y = rnorm(400),
     stringsAsFactors = FALSE
@@ -47,8 +47,8 @@ We want to zoom sector a and the first 10 points in sector b. First we extract
 these data and format as a new data frame.
 
 ```{r}
-zoom_df_a = df[df$factors == "a", ]
-zoom_df_b = df[df$factors == "b", ]
+zoom_df_a = df[df$sectors == "a", ]
+zoom_df_b = df[df$sectors == "b", ]
 zoom_df_b = zoom_df_b[order(zoom_df_b[, 2])[1:10], ]
 zoom_df = rbind(zoom_df_a, zoom_df_b)
 ```
@@ -58,7 +58,7 @@ add "zoom_" prefix to the original names to show that they are "zoomed" sectors.
 that, it is attached to the original data frame.
 
 ```{r}
-zoom_df$factors = paste0("zoom_", zoom_df$factors)
+zoom_df$sectors = paste0("zoom_", zoom_df$sectors)
 df2 = rbind(df, zoom_df)
 ```
 
@@ -77,9 +77,9 @@ consideration, the width of the original sectors are not exactly 180 degree,
 but the real value is quite close to it.
 
 ```{r}
-xrange = tapply(df2$x, df2$factors, function(x) max(x) - min(x))
-normal_sector_index = unique(df$factors)
-zoomed_sector_index = unique(zoom_df$factors)
+xrange = tapply(df2$x, df2$sectors, function(x) max(x) - min(x))
+normal_sector_index = unique(df$sectors)
+zoomed_sector_index = unique(zoom_df$sectors)
 sector.width = c(xrange[normal_sector_index] / sum(xrange[normal_sector_index]), 
                  xrange[zoomed_sector_index] / sum(xrange[zoomed_sector_index]))
 sector.width
@@ -94,8 +94,8 @@ In following code, since the sector names are added outside the first track,
 
 ```{r circlize_zoom_1, eval = FALSE}
 circos.par(start.degree = 90, points.overflow.warning = FALSE)
-circos.initialize(df2$factors, x = df2$x, sector.width = sector.width)
-circos.track(df2$factors, x = df2$x, y = df2$y, 
+circos.initialize(df2$sectors, x = df2$x, sector.width = sector.width)
+circos.track(df2$sectors, x = df2$x, y = df2$y, 
     panel.fun = function(x, y) {
     circos.points(x, y, col = "red", pch = 16, cex = 0.5)
     circos.text(CELL_META$xcenter, CELL_META$cell.ylim[2] + mm_y(2), 
@@ -149,8 +149,8 @@ degree.)
 ```{r, eval = FALSE}
 circos.par("canvas.xlim" = c(0, 1), "canvas.ylim" = c(0, 1),
     "start.degree" = 90, "gap.after" = 270)
-factors = "a" # this is the name of your sector
-circos.initialize(factors = factors, xlim = ...)
+sectors = "a" # this is the name of your sector
+circos.initialize(sectors = sectors, xlim = ...)
 ...
 ```
 
@@ -162,14 +162,14 @@ is to create an empty track first and customize the cells by `circos.update()`.
 Following code illustrates the two methods (Figure \@ref(fig:circlize-part2)).
 
 ```{r circlize-part2, fig.cap = "Show subset of cells in tracks."}
-factors = letters[1:4]
-circos.initialize(factors = factors, xlim = c(0, 1))
+sectors = letters[1:4]
+circos.initialize(sectors, xlim = c(0, 1))
 
 # directly specify the subset of data
-df = data.frame(factors = rep("a", 100),
+df = data.frame(sectors = rep("a", 100),
                 x = runif(100),
                 y = runif(100))
-circos.track(df$factors, x = df$x, y = df$y, 
+circos.track(df$sectors, x = df$x, y = df$y, 
     panel.fun = function(x, y) {
         circos.points(x, y, pch = 16, cex = 0.5)
 })
@@ -179,8 +179,8 @@ circos.track(ylim = range(df$y), bg.border = NA)
 circos.update(sector.index = "a", bg.border = "black")
 circos.points(df$x, df$y, pch = 16, cex = 0.5)
 
-circos.track(factors = factors, ylim = c(0, 1))
-circos.track(factors = factors, ylim = c(0, 1))
+circos.track(sectors = sectors, ylim = c(0, 1))
+circos.track(sectors = sectors, ylim = c(0, 1))
 circos.clear()
 ```
 
@@ -198,8 +198,8 @@ nested. Figure \@ref(fig:circlize-nested) illustrates the invisible canvas
 coordinate and how the two circular plots overlap.
 
 ```{r, eval = FALSE}
-factors = letters[1:4]
-circos.initialize(factors = factors, xlim = c(0, 1))
+sectors = letters[1:4]
+circos.initialize(sectors, xlim = c(0, 1))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     circos.text(0.5, 0.5, "outer circos", niceFacing = TRUE)
 })
@@ -207,8 +207,8 @@ circos.clear()
 
 par(new = TRUE) # <- magic
 circos.par("canvas.xlim" = c(-2, 2), "canvas.ylim" = c(-2, 2))
-factors = letters[1:3]
-circos.initialize(factors = factors, xlim = c(0, 1))
+sectors = letters[1:3]
+circos.initialize(sectors, xlim = c(0, 1))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     circos.text(0.5, 0.5, "inner circos", niceFacing = TRUE)
 })
@@ -235,15 +235,15 @@ In fact, it makes four circular plots where only one
 sector for each plot is plotted. 
 
 ```{r circlize-diff-radius, fig.cap = "Cells with differnet radius."}
-factors = letters[1:4]
+sectors = letters[1:4]
 lim = c(1, 1.1, 1.2, 1.3)
 for(i in 1:4) {
     circos.par("canvas.xlim" = c(-lim[i], lim[i]), 
         "canvas.ylim" = c(-lim[i], lim[i]), 
         "track.height" = 0.4)
-    circos.initialize(factors = factors, xlim = c(0, 1))
+    circos.initialize(sectors, xlim = c(0, 1))
     circos.track(ylim = c(0, 1), bg.border = NA)
-    circos.update(sector.index = factors[i], bg.border = "black")
+    circos.update(sector.index = sectors[i], bg.border = "black")
     circos.points(runif(10), runif(10), pch = 16)
     circos.clear()
     par(new = TRUE)
@@ -263,16 +263,16 @@ In chapter \@ref(nested-zooming), we use this technique to implement zoomings by
 ## Arrange multiple plots {#arrange-multiple-plots}
 
 **circlize** is implemented in the base R graphic system, thus, you can use
-`layout()` or `par(mforw, mfcol)` to arrange multiple circular plots in one page
+`layout()` or `par("mfrow")`/`par("mfcol")` to arrange multiple circular plots in one page
 (Figure \@ref(fig:circlize-multiple-layout)).
 
 ```{r circlize-multiple-layout, fig.width = 8, fig.height = 8, fig.cap = "Arrange multiple circular plots."}
 layout(matrix(1:9, 3, 3))
 for(i in 1:9) {
-    factors = 1:8
+    sectors = 1:8
     par(mar = c(0.5, 0.5, 0.5, 0.5))
     circos.par(cell.padding = c(0, 0, 0, 0))
-    circos.initialize(factors, xlim = c(0, 1))
+    circos.initialize(sectors, xlim = c(0, 1))
     circos.track(ylim = c(0, 1), track.height = 0.05,
         bg.col = rand_color(8), bg.border = NA)
     for(i in 1:20) {

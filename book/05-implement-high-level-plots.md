@@ -28,13 +28,13 @@ circos.track(ylim = c(0.5, length(percent)+0.5), track.height = 0.8,
                         rep(xlim[2], 9), 1:9,
                         col = "#CCCCCC")
         circos.rect(rep(0, 9), 1:9 - 0.45, percent, 1:9 + 0.45,
-        	col = color, border = "white")
+            col = color, border = "white")
         circos.text(rep(xlim[1], 9), 1:9, 
-        	paste(category, " - ", percent, "%"), 
+            paste(category, " - ", percent, "%"), 
             facing = "downward", adj = c(1.05, 0.5), cex = 0.8) 
         breaks = seq(0, 85, by = 5)
         circos.axis(h = "top", major.at = breaks, labels = paste0(breaks, "%"), 
-        	labels.cex = 0.6)
+            labels.cex = 0.6)
 })
 ```
 
@@ -57,7 +57,7 @@ can be used to replace the `circos.text()` in above example.
 
 ```r
 circos.text(xlim[1] - mm_x(2, h = 1:9), 1:9, 
-	paste(category, " - ", percent, "%"), 
+    paste(category, " - ", percent, "%"), 
     facing = "downward", adj = c(1, 0.5), cex = 0.8)
 ```
 
@@ -82,14 +82,14 @@ value helps to compare the distributions between cells.
 
 ```r
 x = rnorm(1600)
-factors = sample(letters[1:16], 1600, replace = TRUE)
-circos.initialize(factors = factors, x = x)
-circos.trackHist(factors = factors, x = x, col = "#999999", 
-	border = "#999999")
-circos.trackHist(factors = factors, x = x, bin.size = 0.1, 
-	col = "#999999", border = "#999999")
-circos.trackHist(factors = factors, x = x, draw.density = TRUE, 
-	col = "#999999", border = "#999999")
+sectors = sample(letters[1:16], 1600, replace = TRUE)
+circos.initialize(sectors, x = x)
+circos.trackHist(sectors, x = x, col = "#999999", 
+    border = "#999999")
+circos.trackHist(sectors, x = x, bin.size = 0.1, 
+    col = "#999999", border = "#999999")
+circos.trackHist(sectors, x = x, draw.density = TRUE, 
+    col = "#999999", border = "#999999")
 ```
 
 <div class="figure" style="text-align: center">
@@ -144,7 +144,7 @@ colors to represent different sub trees.
 
 ```r
 circos.par(cell.padding = c(0, 0, 0, 0))
-circos.initialize(factors = "a", xlim = c(0, n)) # only one sector
+circos.initialize("a", xlim = c(0, n)) # only one sector
 circos.track(ylim = c(0, 1), bg.border = NA, track.height = 0.3, 
     panel.fun = function(x, y) {
         for(i in seq_len(n)) {
@@ -211,9 +211,9 @@ generate the two matrix and perform clustring on the two matrix.
 ```r
 mat = matrix(rnorm(100*10), nrow = 100, ncol = 10)
 col_fun = colorRamp2(c(-2, 0, 2), c("green", "black", "red"))
-factors = rep(letters[1:2], times = c(30, 70))
-mat_list = list(a = mat[factors == "a", ],
-                b = mat[factors == "b", ])
+sectors = rep(letters[1:2], times = c(30, 70))
+mat_list = list(a = mat[sectors == "a", ],
+                b = mat[sectors == "b", ])
 dend_list = list(a = as.dendrogram(hclust(dist(mat_list[["a"]]))),
                  b = as.dendrogram(hclust(dist(mat_list[["b"]]))))
 ```
@@ -224,7 +224,7 @@ Also note we use `circos.rect()` in a vectorized way.
 
 ```r
 circos.par(cell.padding = c(0, 0, 0, 0), gap.degree = 5)
-circos.initialize(factors, xlim = cbind(c(0, 0), table(factors)))
+circos.initialize(sectors, xlim = cbind(c(0, 0), table(sectors)))
 circos.track(ylim = c(0, 10), bg.border = NA, panel.fun = function(x, y) {
     sector.index = CELL_META$sector.index
     m = mat_list[[sector.index]]
@@ -251,7 +251,6 @@ of the two dendrograms and set it to `ylim` of the second track (Figure \@ref(fi
 max_height = max(sapply(dend_list, function(x) attr(x, "height")))
 circos.track(ylim = c(0, max_height), bg.border = NA, track.height = 0.3, 
     panel.fun = function(x, y) {
-
         sector.index = get.cell.meta.data("sector.index")
         dend = dend_list[[sector.index]]
         circos.dendrogram(dend, max_height = max_height)
@@ -263,3 +262,8 @@ circos.clear()
 <img src="05-implement-high-level-plots_files/figure-html/circular-heatmap-1.png" alt="Circular heatmaps." width="672" />
 <p class="caption">(\#fig:circular-heatmap)Circular heatmaps.</p>
 </div>
+
+
+In the next chapter, we will introduce a high-level function `circos.heatmap()`
+which draws fancy circular heatmaps.
+

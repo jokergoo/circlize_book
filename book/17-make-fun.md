@@ -19,7 +19,7 @@ the help page of `circos.axis()`.
 
 ```r
 circos.par(gap.degree = 0, cell.padding = c(0, 0, 0, 0), start.degree = 90)
-circos.initialize(factors = "a", xlim = c(0, 12))
+circos.initialize("a", xlim = c(0, 12))
 circos.track(ylim = c(0, 1), bg.border = NA)
 circos.axis(major.at = 0:12, labels = NULL, direction = "inside", 
     major.tick.length = mm_y(2))
@@ -61,22 +61,22 @@ Now you can project the plot on your door and begin to play!
 
 
 ```r
-factors = 1:20  # just indicate there are 20 sectors
+sectors = 1:20  # just indicate there are 20 sectors
 circos.par(gap.degree = 0, cell.padding = c(0, 0, 0, 0),
     start.degree = 360/20/2, track.margin = c(0, 0), clock.wise = FALSE)
-circos.initialize(factors = factors, xlim = c(0, 1))
+circos.initialize(sectors, xlim = c(0, 1))
 
-circos.track(ylim = c(0, 1), factors = factors, bg.col = "black", track.height = 0.15)
+circos.track(ylim = c(0, 1), sectors = sectors, bg.col = "black", track.height = 0.15)
 circos.trackText(x = rep(0.5, 20), y = rep(0.5, 20),
     labels = c(13, 4, 18, 1, 20, 5, 12, 9, 14, 11, 8, 16, 7, 19, 3, 17, 2, 15, 10, 6),
-    cex = 0.8, factors = factors, col = "#EEEEEE", font = 2, facing = "downward")
-circos.track(ylim = c(0, 1), factors = factors,
+    cex = 0.8, sectors = sectors, col = "#EEEEEE", font = 2, facing = "downward")
+circos.track(ylim = c(0, 1), sectors = sectors,
     bg.col = rep(c("#E41A1C", "#4DAF4A"), 10), bg.border = "#EEEEEE", track.height = 0.05)
-circos.track(ylim = c(0, 1), factors = factors,
+circos.track(ylim = c(0, 1), sectors = sectors,
     bg.col = rep(c("black", "white"), 10), bg.border = "#EEEEEE", track.height = 0.275)
-circos.track(ylim = c(0, 1), factors = factors,
+circos.track(ylim = c(0, 1), sectors = sectors,
     bg.col = rep(c("#E41A1C", "#4DAF4A"), 10), bg.border = "#EEEEEE", track.height = 0.05)
-circos.track(ylim = c(0, 1), factors = factors, 
+circos.track(ylim = c(0, 1), sectors = sectors, 
     bg.col = rep(c("black", "white"), 10), bg.border = "#EEEEEE", track.height = 0.375)
 
 draw.sector(center = c(0, 0), start.degree = 0, end.degree = 360,
@@ -121,9 +121,9 @@ also turn into good according to how you look at the world.
 
 
 ```r
-factors = 1:8
+sectors = 1:8
 circos.par(start.degree = 22.5, gap.degree = 6)
-circos.initialize(factors = factors, xlim = c(0, 1))
+circos.initialize(sectors, xlim = c(0, 1))
 
 # yang yao is __ (a long segment)
 add_yang_yao = function() {
@@ -135,19 +135,19 @@ add_yin_yao = function() {
     circos.rect(0,0,0.45,1, col = "black")
     circos.rect(0.55,0,1,1, col = "black")
 }
-circos.track(ylim = c(0, 1), factors = factors, bg.border = NA,
+circos.track(ylim = c(0, 1), sectors = sectors, bg.border = NA,
     panel.fun = function(x, y) {
         i = get.cell.meta.data("sector.numeric.index")
         if(i %in% c(2, 5, 7, 8)) add_yang_yao() else add_yin_yao()
 }, track.height = 0.1)
 
-circos.track(ylim = c(0, 1), factors = factors, bg.border = NA,
+circos.track(ylim = c(0, 1), sectors = sectors, bg.border = NA,
     panel.fun = function(x, y) {
         i = get.cell.meta.data("sector.numeric.index")
         if(i %in% c(1, 6, 7, 8)) add_yang_yao() else add_yin_yao()
     }, track.height = 0.1)
 
-circos.track(ylim = c(0, 1), factors = factors, bg.border = NA, 
+circos.track(ylim = c(0, 1), sectors = sectors, bg.border = NA, 
     panel.fun = function(x, y) {
         i = get.cell.meta.data("sector.numeric.index")
         if(i %in% c(4, 5, 6, 7)) add_yang_yao() else add_yin_yao()

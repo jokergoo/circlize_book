@@ -82,7 +82,7 @@ As mentioned above, there are three ways to add graphics on a track.
 
 
 ```r
-circos.initialize(factors, xlim)
+circos.initialize(sectors, xlim)
 circos.track(ylim)
 for(sector.index in all.sector.index) {
     circos.points(x1, y1, sector.index)
@@ -106,10 +106,10 @@ for(sector.index in all.sector.index) {
 
 
 ```r
-circos.initialize(factors, xlim)
+circos.initialize(sectors, xlim)
 circos.track(ylim)
-circos.trackPoints(factors, x, y)
-circos.trackLines(factors, x, y)
+circos.trackPoints(sectors, x, y)
+circos.trackLines(sectors, x, y)
 ```
 
 3.   Use a panel function to add self-defined graphics as soon as the cell has
@@ -127,8 +127,8 @@ circos.trackLines(factors, x, y)
 
 
 ```r
-circos.initialize(factors, xlim)
-circos.track(factors, all_x, all_y, ylim,
+circos.initialize(sectors, xlim)
+circos.track(sectors, all_x, all_y, ylim,
     panel.fun = function(x, y) {
         circos.points(x, y)
         circos.lines(x, y)
@@ -157,10 +157,10 @@ section, we introduce how to set data ranges on x and y directions in cells.
 </div>
 
 Sectors are first allocated on the circle by `circos.initialize()`. There must
-be a categorical variable (say `factors`) that on the circle, each sector
+be a categorical variable (say `sectors`) that on the circle, each sector
 corresponds to one category. The width of sectors (measured by degree) are proportional to the data
 range in sectors on x direction (or the circular direction). The data range can be specified as a numeric
-vector `x` which has same length as `factors`, then `x` is split by `factors`
+vector `x` which has same length as `sectors`, then `x` is split by `sectors`
 and data ranges are calculated for each sector internally.
 
 Data ranges can also be specified directly by `xlim` argument. The valid value
@@ -171,11 +171,11 @@ adjusted. If `xlim` is a vector of length two, all sectors have the same x range
 
 
 ```r
-circos.initialize(factors, x = x)
-circos.initialize(factors, xlim = xlim)
+circos.initialize(sectors, x = x)
+circos.initialize(sectors, xlim = xlim)
 ```
 
-If `factors` is not specified, the row names of `xlim` are taken as the value for `factors`.
+If `sectors` is not specified, the row names of `xlim` are taken as the value for `sectors`.
 
 
 ```r
@@ -189,18 +189,18 @@ yet, however, the layout has already been recorded internally.
 In the initialization step, not only the width of each sector is assigned, but
 also the order of sectors on the circle is determined. **Order of the sectors
 are determined by the order of levels of the input factor**. If the value for
-`factors` is not a factor, the order of sectors is `unique(factors)`. Thus, if
+`sectors` is not a factor, the order of sectors is `unique(sectors)`. Thus, if
 you want to change the order of sectors, you can just change of the level of
-`factors` variable. The following code generates plots with different
+`sectors` variable. The following code generates plots with different
 sector orders (Figure \@ref(fig:circlize-factor)).
 
 
 ```r
-fa = c("d", "f", "e", "c", "g", "b", "a")
-f1 = factor(fa)
-circos.initialize(factors = f1, xlim = c(0, 1))
-f2 = factor(fa, levels = fa)
-circos.initialize(factors = f2, xlim = c(0, 1))
+sectors = c("d", "f", "e", "c", "g", "b", "a")
+s1 = factor(sectors)
+circos.initialize(s1, xlim = c(0, 1))
+s2 = factor(sectors, levels = sectors)
+circos.initialize(s2, xlim = c(0, 1))
 ```
 
 <div class="figure" style="text-align: center">
@@ -212,7 +212,7 @@ circos.initialize(factors = f2, xlim = c(0, 1))
 x-axes.** Then, for each track, we only need to specify the data range on y
 direction (or the radical direction) for cells. Similar as `circos.initialize()`, `circos.track()` also
 receives either `y` or `ylim` argument to specify the range of y-values. Since
-all cells in a same track shares a same y range, `ylim` is just a vector of
+all cells in a same track share a same y range, `ylim` is just a vector of
 length two if it is specified.
 
 `x` can also be specified in `circos.track()`, but it is only used to send to
@@ -221,14 +221,14 @@ are sent to each cell and how the graphics are added.
 
 
 ```r
-circos.track(factors, y = y)
-circos.track(factors, ylim = c(0, 1))
-circos.track(factors, x = x, y = y)
+circos.track(sectors, y = y)
+circos.track(sectors, ylim = c(0, 1))
+circos.track(sectors, x = x, y = y)
 ```
 
 In the track creation step, since all sectors have already been allocated in
-the circle, if `factors` argument is not set, `circos.track()` would create
-plotting regions for all available sectors. Also, levels of `factors` do
+the circle, if `sectors` argument is not set, `circos.track()` would create
+plotting regions for all available sectors. Also, levels of `sectors` do
 not need to be specified explicitly because the order of sectors has already
 be determined in the initialization step. If users only create cells for a subset
 of sectors in the track (not all sectors), in fact, cells in remaining
@@ -237,9 +237,9 @@ are not created).
 
 
 ```r
-# assume `factors` only covers a subset of sectors
-# You will only see cells that are covered in `factors` have borders
-circos.track(factors, y = y)
+# assume `sectors` only covers a subset of sectors
+# You will only see cells that are covered in `sectors` have borders
+circos.track(sectors, y = y)
 # You will see all cells have borders
 circos.track(ylim = c(0, 1))
 circos.track(ylim = ranges(y))
@@ -255,6 +255,11 @@ normal rectangle region with its own coordinate.
 <div class="figure" style="text-align: center">
 <img src="02-circlize-layout_files/figure-html/circlize-direction-1.png" alt="Sector directions." width="768" />
 <p class="caption">(\#fig:circlize-direction)Sector directions.</p>
+</div>
+
+<div class="figure" style="text-align: center">
+<img src="02-circlize-layout_files/figure-html/circlize-axis-direction-1.png" alt="Axes directions." width="768" />
+<p class="caption">(\#fig:circlize-axis-direction)Axes directions.</p>
 </div>
 
 ## Graphic parameters {#graphic-parameters}
@@ -277,8 +282,7 @@ modified before the initialization of the circular layout.
   blank area out of the plotting region, also outside of the borders. Since
   left and right margin are controlled by `gap.after`, only bottom and top
   margin need to be set. The value for `track.margin` is the percentage to the
-  radius of the unit circle. The value can also be set by `convert_height()`
-  or the short version `mm_h()`/`cm_h()`/`inches_h()` functions with absolute units. See Figure
+  radius of the unit circle. The value can also be set by `mm_h()`/`cm_h()`/`inches_h()` functions with absolute units. See Figure
   \@ref(fig:circlize-region).
 - `cell.padding`: Padding of the cell. [Like `padding` in Cascading Style
   Sheets (CSS)](https://www.w3schools.com/css/css_padding.asp), it is the blank area around the plotting regions, but within
@@ -314,10 +318,20 @@ modified before the initialization of the circular layout.
   the circle. E.g. setting `canvas.xlim` to `c(0, 1)` and `canvas.ylim` to
   `c(0, 1)` would only draw 1/4 of the circle.
 - `canvas.ylim`: The ranges in the canvas coordinate in y direction.
+- `circle.margin`: Margin in the horizontal and vertical direction. The value
+  should be a positive numeric vector and the length of it should be either 1,
+  2, or 4. When it has length of 1, it controls the margin on the four sides
+  of the circle. When it has length of 2, the first value controls the margin
+  on the left and right, and the second value controls the margin on the
+  bottom and top side. When it has length of 4, the four values controls the
+  margins on the left, right, bottom and top sides of the circle. So A value
+  of `c(x1, x2, y1, y2)` means `circos.par(canvas.xlim = c(-(1+x1), 1+x2),
+  canvas.ylim = c(-(1+y1), 1+y2))`.
 - `clock.wise`: The order for drawing sectors. Default is `TRUE` which means
   clockwise (Figure \@ref(fig:circlize-direction).
 - `xaxis.clock.wise`: The direction of x-axis in each cell. By default it is clockwise.
-   Note this new parameter was only available from version 0.4.11.
+   Note this new parameter was only available from version 0.4.11 (Figure \@ref(fig:circlize-axis-direction)).
+   Also see more details [on this blog post](https://jokergoo.github.io/2020/08/17/reverse-x-axes-in-the-circular-plot/).
 
 <div class="figure" style="text-align: center">
 <img src="02-circlize-layout_files/figure-html/circlize-region-1.png" alt="Regions in a cell." width="384" />
@@ -336,13 +350,14 @@ Default values for graphic parameters are listed in following table.
 `points.overflow.warning`  `TRUE`
 `canvas.xlim`              `c(-1, 1)`
 `canvas.ylim`              `c(-1, 1)`
+`circle.margin`            `c(0, 0, 0, 0)`
 `clock.wise`               `TRUE` 
 `xaxis.clock.wise`         `TRUE`
 -------------------------- ---------------------------
 
 Parameters related to the allocation of sectors cannot be changed after the
 initialization of the circular layout. Thus, `start.degree`,
-`gap.degree`/`gap.after`, `canvas.xlim`, `canvas.ylim` and `clock.wise` can
+`gap.degree`/`gap.after`, `canvas.xlim`, `canvas.ylim`, `circle.margin`, `clock.wise` and `xaxis.clock.wise` can
 only be modified before `circos.initialize()`. The second and the fourth
 values of `cell.padding` (left and right paddings) can not be modified neither
 (or will be ignored).
@@ -370,6 +385,33 @@ Use `RESET` to reset all the options to their default values:
 
 ```r
 circos.par(RESET = TRUE)
+```
+
+Simply enter `circos.par` prints the current values of all parameters:
+
+
+```r
+circos.par
+```
+
+```
+##  Option                  Value           
+##  -----------------------:------------------
+##  start.degree            0               
+##  gap.degree              1               
+##  gap.after               1               
+##  track.margin            0.01, 0.01      
+##  unit.circle.segments    500             
+##  cell.padding            0.02, 1, 0.02, 1
+##  track.height            0.2             
+##  points.overflow.warning TRUE            
+##  circle.margin           0, 0, 0, 0      
+##  canvas.xlim             -1, 1           
+##  canvas.ylim             -1, 1           
+##  major.by.degree         10              
+##  clock.wise              TRUE            
+##  xaxis.clock.wise        TRUE            
+##  message                 TRUE
 ```
 
 `circos.par()` is aimed to be designed to be independent to the number or the
@@ -401,10 +443,10 @@ either `y` or `ylim` which assigns range of y values for this track.
 `circos.track()` creates tracks for all sectors although in some case only
 parts of them are visible.
 
-If `factors` is not specified, all cells in the track will be created with the
-same settings. If `factors`, `x` and `y` are set, they need to be vectors with
+If `sectors` is not specified, all cells in the track will be created with the
+same settings. If `sectors`, `x` and `y` are set, they need to be vectors with
 the same length. Proper values of `x` and `y` that correspond to current cell
-will be passed to `panel.fun` by subsetting `factors` internally. Section
+will be passed to `panel.fun` by subsetting `sectors` internally. Section
 \@ref(panel-fun) explains the usage of `panel.fun`.
 
 Graphic arguments such as `bg.border` and `bg.col` can either be a scalar or a
@@ -413,12 +455,18 @@ corresponds to the order of sectors.
 Thus, you can create plot regions with different styles of borders and
 background colors.
 
-If you are confused with the `factors` orders, you can also customize the
+If you are confused with the `sectors` orders, you can also customize the
 borders and background colors inside `panel.fun`.
 `get.cell.meta.data("cell.xlim")`/`CELL_META$cell.xlim` and
 `get.cell.meta.data("cell.ylim")`/`CELL_META$cell.ylim` give you dimensions of
 the plotting region and you can customize plot regions directly by e.g.
-`circos.rect(col = "#FF000040", border = 1)`.
+
+
+```r
+circos.rect(CELL_META$cell.xlim[1], CELL_META$cell.ylim[1],
+            CELL_META$cell.xlim[2], CELL_META$cell.ylim[2], 
+            col = "#FF000040", border = 1)
+```
 
 `circos.track()` provides `track.margin` and `cell.padding` arguments that
 they only control track margins and cell paddings for the current track. Of course
@@ -434,7 +482,7 @@ can not be modified.
 
 
 ```r
-circos.track(factors, ylim = c(0, 1), track.index = 1, ...)
+circos.track(sectors, ylim = c(0, 1), track.index = 1, ...)
 ```
 
 For a single cell, `circos.update()` can be used to erase all graphics that
@@ -449,21 +497,21 @@ circos.points(x, y, sector.index, track.index)
 
 ## `panel.fun` argument {#panel-fun}
 
-`panel.fun` argument in `circos.track()` is extremely useful to apply plotting
+The `panel.fun` argument in `circos.track()` is extremely useful to apply plotting
 as soon as the cell has been created. This self-defined function needs two
 arguments `x` and `y` which are data points that belong to this cell. The
 value for `x` and `y` are automatically extracted from `x` and `y` in
-`circos.track()` according to the category defined in `factors`. In the
+`circos.track()` according to the category defined in `sectors`. In the
 following example, inside `panel.fun`, in sector `a`, the value of `x` is
 `1:3` and in sector `b`, value of `x` is `4:5`. If `x` or `y` in
 `circos.track()` is `NULL`, then `x` or `y` inside `panel.fun` is also `NULL`.
 
 
 ```r
-factors = c("a", "a", "a", "b", "b")
+sectors = c("a", "a", "a", "b", "b")
 x = 1:5
 y = 5:1
-circos.track(factors = factors, x = x, y = y,
+circos.track(sectors, x = x, y = y,
     panel.fun = function(x, y) {
         circos.points(x, y)
 })
@@ -474,12 +522,12 @@ from the `x` and `y` arguments, while do subsetting by your own:
 
 
 ```r
-factors = c("a", "a", "a", "b", "b")
+sectors = c("a", "a", "a", "b", "b")
 x2 = 1:5
 y2 = 5:1
 circos.track(ylim = range(y),
     panel.fun = function(x, y) { # here x and y are useless
-        l = factors == CELL_META$sector.index
+        l = sectors == CELL_META$sector.index
         circos.points(x2[l], y2[l])
 })
 ```
@@ -555,7 +603,7 @@ There is a companion variable `CELL_META` which is identical to
 `get.cell.meta.data()` to get cell meta information, but easier and shorter to
 write. Actually, the value of `CELL_META` itself is meaningless, but e.g.
 `CELL_META$sector.index` is automatically redirected to
-`get.cell.meta.data("sector.index")`. Following code rewrites above example
+`get.cell.meta.data("sector.index")`. Following code rewrites previous example
 code with `CELL_META`.
 
 
@@ -597,7 +645,7 @@ circos.text(CELL_META$xcenter, CELL_META$ycenter, CELL_META$sector.index)
 
 ### `circlize()` and `reverse.circlize()` {#circlize_and_reverse_circlize}
 
-**circlize** transform data points in several coordinate systems and it is
+**circlize** transforms data points in several coordinate systems and it is
 basically done by the core function `circlize()`. The function transforms from data
 coordinate (coordinate in the cell) to the polar coordinate and its companion
 `reverse.circlize()` transforms from polar coordinate to a specified data coordinate. The
@@ -605,8 +653,8 @@ default transformation is applied in the `current` cell.
 
 
 ```r
-factors = c("a", "b")
-circos.initialize(factors, xlim = c(0, 1))
+sectors = c("a", "b")
+circos.initialize(sectors, xlim = c(0, 1))
 circos.track(ylim = c(0, 1))
 # x = 0.5, y = 0.5 in sector a and track 1
 circlize(0.5, 0.5, sector.index = "a", track.index = 1)
@@ -636,7 +684,7 @@ reverse.circlize(90, 0.9, sector.index = "b", track.index = 1)
 ## [1,] 0.5028249 0.56
 ```
 
-You can see the results are different for two `reverse.circlize()` calls
+You can see the results are different for two `reverse.circlize()`
 although it is the same points in the polar coordinate, because they are
 mapped to different cells.
 
@@ -693,7 +741,7 @@ circos.clear()
 In **circlize** package, there is a `circos.raster()` function which directly
 adds raster images. It is introduced in Section \@ref(raster-image).
 
-### The functions measured in absolute units {#convert-functions}
+### Absolute units {#convert-functions}
 
 For the functions in **circlize** package, they needs arguments which are
 lengths measured either in the canvas coordinate or in the data coordinate.
@@ -731,8 +779,8 @@ mm_y(1, sector.index, track.index)
 
 Since the width of the cell is not identical from the top to the bottom in the
 cell, for `*_x()` function, the position on y direction where the convert is
-applied can be specified by the `h` argument. By default it is converted at
-the middle point on y-axis.
+applied can be specified by the `h` argument (measured in data coordinate). By
+default it is converted at the middle point on y-axis.
 
 
 ```r
@@ -747,9 +795,9 @@ Following plot (Figure \@ref(fig:unit-convert)) is an example of setting absolut
 
 
 ```r
-fa = letters[1:10]
+sectors = letters[1:10]
 circos.par(cell.padding = c(0, 0, 0, 0), track.margin = c(0, 0))
-circos.initialize(fa, xlim = cbind(rep(0, 10), runif(10, 0.5, 1.5)))
+circos.initialize(sectors, xlim = cbind(rep(0, 10), runif(10, 0.5, 1.5)))
 circos.track(ylim = c(0, 1), track.height = mm_h(5),
     panel.fun = function(x, y) {
         circos.lines(c(0, 0 + mm_x(5)), c(0.5, 0.5), col = "blue")
@@ -785,8 +833,8 @@ You can get basic information of your current circular plot by
 
 
 ```r
-factors = letters[1:3]
-circos.initialize(factors = factors, xlim = c(1, 2))
+sectors = letters[1:3]
+circos.initialize(sectors, xlim = c(1, 2))
 circos.info()
 ```
 
@@ -835,7 +883,7 @@ to reset all these parameters.
 
 ## Set gaps between tracks
 
-In the older version, you need to set `track.height` parameter either in
+In the older versions, you need to set `track.height` parameter either in
 `circos.par()` or in `circos.track()` to control the space between tracks. Now
 there is a new `set_track_gap()` function which simplifies the setting of gaps
 between two tracks. With the `mm_h()`/`cm_h()`/`inch_h()` functions, it is very easy
@@ -843,7 +891,7 @@ to set the gaps with physical units (Figure \@ref(fig:set-track-gap)).
 
 
 ```r
-circos.initialize(fa = letters[1:10], xlim = c(0, 1))
+circos.initialize(letters[1:10], xlim = c(0, 1))
 circos.track(ylim = c(0, 1))
 set_track_gap(mm_h(2)) # 2mm
 circos.track(ylim = c(0, 1))

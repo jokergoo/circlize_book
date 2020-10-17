@@ -29,7 +29,7 @@ colnames(mat) = LETTERS[1:3]
 mat
 ```
 
-And the code in below is an example of a adjacency list.
+And the code in below is an example of an adjacency list.
 
 ```{r}
 df = data.frame(from = letters[1:3], to = LETTERS[1:3], value = 1:3)
@@ -67,7 +67,7 @@ Since the usage for the two types of inputs are highly similar, in this chapter,
 we mainly show figures generated from the matrix, but still show the code which uses
 adjacency list.
 
-## Basic usage
+## Basic usage of making Chord diagram
 
 First let's generate a random matrix and the corresponding adjacency list.
 
@@ -85,7 +85,7 @@ df = data.frame(from = rep(rownames(mat), times = ncol(mat)),
 df
 ```
 
-The most simple usage is just calling `chordDiagram()` with 
+The simplest usage is just calling `chordDiagram()` with 
 `mat` (Figure \@ref(fig:chord-diagram-basic)).
 
 ```{r chord-diagram-basic, fig.cap = "Basic usages of `chordDiagram()`."}
@@ -178,7 +178,7 @@ rows and columns in the matrix, or the first column and the second column
 in the data frame represent two different groups. 
 
 ```{r chord-diagram-basic-big-gap, fig.cap = "Directly set big.gap in chordDiagram()."}
-chordDiagram(mat, big.gap = 10)
+chordDiagram(mat, big.gap = 30)
 circos.clear()
 ```
 
@@ -198,7 +198,10 @@ direction can be set by `circos.par(clock.wise = ...)` (Figure
 In Figure \@ref(fig:chord-diagram-basic-start-degree) (left), setting
 `circos.par(clock.wise = FALSE)` makes the link so twisted. Actually making
 the direction reverse clock wise can also be done by setting a reversed order
-of all sectors (Figure \@ref(fig:chord-diagram-basic-start-degree), right).
+of all sectors (Figure \@ref(fig:chord-diagram-basic-start-degree), right). As
+we can see, the links in the left plot are very twisted, while it still looks
+fine in the right plot. The reason is `chordDiagram()` automatically optimizes
+the positions of links according to the arrangement of sectors.
 
 ```{r chord-diagram-basic-start-degree, fig.width = 8, fig.height = 4, fig.cap = "Change position and orientation of Chord diagram."}
 par(mfrow = c(1, 2))
@@ -281,6 +284,8 @@ third column has the proper values.
 
 ```{r, eval = FALSE}
 chordDiagram(df, grid.col = grid.col, col = col_fun)
+# or
+chordDiagram(df, grid.col = grid.col, col = col_fun(df[, 3]))
 ```
 
 When the input is a matrix, sometimes you don't need to generate the whole
@@ -441,9 +446,9 @@ be set to control the order of positioning links on sectors
 ```{r chord-diagram-link-order1, echo = -1, fig.width = 8, fig.height = 4, fig.cap = "Order of positioning links on sectors."}
 par(mfrow = c(1, 2))
 chordDiagram(mat, grid.col = grid.col, link.sort = TRUE, link.decreasing = TRUE)
-title("link.sort = TRUE, link.decreasing = TRUE", cex = 0.8)
+title("link.sort = TRUE, link.decreasing = TRUE", cex = 0.6)
 chordDiagram(mat, grid.col = grid.col, link.sort = TRUE, link.decreasing = FALSE)
-title("link.sort = TRUE, link.decreasing = FALSE", cex = 0.8)
+title("link.sort = TRUE, link.decreasing = FALSE", cex = 0.6)
 ```
 
 ## z-index of adding links
@@ -472,7 +477,7 @@ chordDiagram(df, grid.col = grid.col, transparency = 0, link.zindex = rank(df[[3
 
 How to set self links dependends on whether the information needs to be duplicated. 
 The `self.link` argument can be set to `1` or `2` for the two different scenarios. 
-Check the difference in Figure \@ref(fig:chord-diagram-self-link).
+Check the difference in Figure \@ref(fig:chord-diagram-self-link) (the black link on sector `a`).
 
 ```{r chord-diagram-self-link, echo = -1, fig.width = 8, fig.height = 4, fig.cap = "Self-links in Chord diagram."}
 par(mfrow = c(1, 2))
@@ -536,7 +541,7 @@ colnames(mat2) = letters[1:7]
 mat2
 ```
 
-```{r chord-diagram-directional-overlap, fig.cap = "CHord diagram where row names and column names overlap."}
+```{r chord-diagram-directional-overlap, fig.cap = "Chord diagram where row names and column names overlap."}
 chordDiagram(mat2, grid.col = 1:7, directional = 1, row.col = 1:5)
 ```
 
@@ -609,10 +614,15 @@ As shown in the previous Figures, there are bars on the source sector side
 that show the proportion of target sectors (actually it is not necessarily to
 be that, the bars are put on the side where the links are shorter and
 `diffHeight` with a positive value). The bars can be removed by setting
-`link.target.prop = FALSE`:
+`link.target.prop = FALSE`. The height of the bars is controlled by
+`target.prop.height` argument.
 
-```{r}
-chordDiagram(matx, directional = 1, link.target.prop = FALSE)
+```{r chord-diagram-link-target-prop, fig.width = 8, fig.height = 4, fig.cap = "Control argument link.target.prop and target.prop.height."}
+par(mfrow = c(1, 2))
+chordDiagram(mat, grid.col = grid.col, directional = 1, 
+	link.target.prop = FALSE)
+chordDiagram(mat, grid.col = grid.col, directional = 1, 
+	diffHeight = mm_h(10), target.prop.height = mm_h(8))
 ```
 
 ## Scaling
@@ -656,7 +666,7 @@ mat[, 3] = 1e-10
 ```
 
 In the Chord Diagram, categories corresponding to the second row and the third column will
-be removed.
+be removed (`R2` and `C3` are removed).
 
 ```{r, echo = 2:3, result = "none"}
 pdf(NULL)
@@ -675,7 +685,7 @@ mat[2, ] = 0
 mat[, 3] = 0
 ```
 
-All parameters for sectors such as colors or gaps between sectors are also
+All parameters for sectors such as colors or gaps between sectors are also automatically
 reduced accordingly by the function.
 
 
@@ -707,6 +717,8 @@ which have the same length as the number of rows of the input data frame. They a
 - `link.zindex`
 
 Since all of them are already demonstrated in previous sections, we won't show them again here.
+
+The following two sections list unique features only from data frames.
 
 ### Multiple links between two sectors
 

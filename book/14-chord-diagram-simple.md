@@ -35,7 +35,7 @@ mat
 ## c 3 6 9
 ```
 
-And the code in below is an example of a adjacency list.
+And the code in below is an example of an adjacency list.
 
 
 ```r
@@ -81,7 +81,7 @@ Since the usage for the two types of inputs are highly similar, in this chapter,
 we mainly show figures generated from the matrix, but still show the code which uses
 adjacency list.
 
-## Basic usage
+## Basic usage of making Chord diagram
 
 First let's generate a random matrix and the corresponding adjacency list.
 
@@ -131,7 +131,7 @@ df
 ## 18   S3 E6    18
 ```
 
-The most simple usage is just calling `chordDiagram()` with 
+The simplest usage is just calling `chordDiagram()` with 
 `mat` (Figure \@ref(fig:chord-diagram-basic)).
 
 
@@ -253,7 +253,7 @@ in the data frame represent two different groups.
 
 
 ```r
-chordDiagram(mat, big.gap = 10)
+chordDiagram(mat, big.gap = 30)
 ```
 
 <div class="figure" style="text-align: center">
@@ -281,7 +281,10 @@ direction can be set by `circos.par(clock.wise = ...)` (Figure
 In Figure \@ref(fig:chord-diagram-basic-start-degree) (left), setting
 `circos.par(clock.wise = FALSE)` makes the link so twisted. Actually making
 the direction reverse clock wise can also be done by setting a reversed order
-of all sectors (Figure \@ref(fig:chord-diagram-basic-start-degree), right).
+of all sectors (Figure \@ref(fig:chord-diagram-basic-start-degree), right). As
+we can see, the links in the left plot are very twisted, while it still looks
+fine in the right plot. The reason is `chordDiagram()` automatically optimizes
+the positions of links according to the arrangement of sectors.
 
 
 ```r
@@ -398,6 +401,8 @@ third column has the proper values.
 
 ```r
 chordDiagram(df, grid.col = grid.col, col = col_fun)
+# or
+chordDiagram(df, grid.col = grid.col, col = col_fun(df[, 3]))
 ```
 
 When the input is a matrix, sometimes you don't need to generate the whole
@@ -614,9 +619,9 @@ be set to control the order of positioning links on sectors
 
 ```r
 chordDiagram(mat, grid.col = grid.col, link.sort = TRUE, link.decreasing = TRUE)
-title("link.sort = TRUE, link.decreasing = TRUE", cex = 0.8)
+title("link.sort = TRUE, link.decreasing = TRUE", cex = 0.6)
 chordDiagram(mat, grid.col = grid.col, link.sort = TRUE, link.decreasing = FALSE)
-title("link.sort = TRUE, link.decreasing = FALSE", cex = 0.8)
+title("link.sort = TRUE, link.decreasing = FALSE", cex = 0.6)
 ```
 
 <div class="figure" style="text-align: center">
@@ -656,7 +661,7 @@ chordDiagram(df, grid.col = grid.col, transparency = 0, link.zindex = rank(df[[3
 
 How to set self links dependends on whether the information needs to be duplicated. 
 The `self.link` argument can be set to `1` or `2` for the two different scenarios. 
-Check the difference in Figure \@ref(fig:chord-diagram-self-link).
+Check the difference in Figure \@ref(fig:chord-diagram-self-link) (the black link on sector `a`).
 
 
 ```r
@@ -752,8 +757,8 @@ chordDiagram(mat2, grid.col = 1:7, directional = 1, row.col = 1:5)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="14-chord-diagram-simple_files/figure-html/chord-diagram-directional-overlap-1.png" alt="CHord diagram where row names and column names overlap." width="672" />
-<p class="caption">(\#fig:chord-diagram-directional-overlap)CHord diagram where row names and column names overlap.</p>
+<img src="14-chord-diagram-simple_files/figure-html/chord-diagram-directional-overlap-1.png" alt="Chord diagram where row names and column names overlap." width="672" />
+<p class="caption">(\#fig:chord-diagram-directional-overlap)Chord diagram where row names and column names overlap.</p>
 </div>
 
 If you do not need self-link for which two ends of a link are in a same sector, 
@@ -866,14 +871,22 @@ As shown in the previous Figures, there are bars on the source sector side
 that show the proportion of target sectors (actually it is not necessarily to
 be that, the bars are put on the side where the links are shorter and
 `diffHeight` with a positive value). The bars can be removed by setting
-`link.target.prop = FALSE`:
+`link.target.prop = FALSE`. The height of the bars is controlled by
+`target.prop.height` argument.
 
 
 ```r
-chordDiagram(matx, directional = 1, link.target.prop = FALSE)
+par(mfrow = c(1, 2))
+chordDiagram(mat, grid.col = grid.col, directional = 1, 
+	link.target.prop = FALSE)
+chordDiagram(mat, grid.col = grid.col, directional = 1, 
+	diffHeight = mm_h(10), target.prop.height = mm_h(8))
 ```
 
-<img src="14-chord-diagram-simple_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="14-chord-diagram-simple_files/figure-html/chord-diagram-link-target-prop-1.png" alt="Control argument link.target.prop and target.prop.height." width="768" />
+<p class="caption">(\#fig:chord-diagram-link-target-prop)Control argument link.target.prop and target.prop.height.</p>
+</div>
 
 ## Scaling
 
@@ -923,7 +936,7 @@ mat[, 3] = 1e-10
 ```
 
 In the Chord Diagram, categories corresponding to the second row and the third column will
-be removed.
+be removed (`R2` and `C3` are removed).
 
 
 ```r
@@ -953,7 +966,7 @@ mat[2, ] = 0
 mat[, 3] = 0
 ```
 
-All parameters for sectors such as colors or gaps between sectors are also
+All parameters for sectors such as colors or gaps between sectors are also automatically
 reduced accordingly by the function.
 
 
@@ -985,6 +998,8 @@ which have the same length as the number of rows of the input data frame. They a
 - `link.zindex`
 
 Since all of them are already demonstrated in previous sections, we won't show them again here.
+
+The following two sections list unique features only from data frames.
 
 ### Multiple links between two sectors
 
@@ -1090,7 +1105,7 @@ for(i in seq_len(nr)) {
 }
 ```
 
-<img src="14-chord-diagram-simple_files/figure-html/unnamed-chunk-22-.gif" width="672" style="display: block; margin: auto;" />
+<img src="14-chord-diagram-simple_files/figure-html/unnamed-chunk-21-.gif" width="672" style="display: block; margin: auto;" />
 
 I created a second data frame which is the same as `df` but with
 rows randomly permuted.

@@ -27,8 +27,8 @@ library(circlize)
 col_fun = colorRamp2(c(-2, 0, 2), c("green", "yellow", "red"))
 circlize_plot = function() {
     set.seed(12345)
-    fa = letters[1:10]
-    circos.initialize(fa, xlim = c(0, 1))
+    sectors = letters[1:10]
+    circos.initialize(sectors, xlim = c(0, 1))
     circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
         circos.points(runif(20), runif(20), cex = 0.5, pch = 16, col = 2)
         circos.points(runif(20), runif(20), cex = 0.5, pch = 16, col = 3)
@@ -39,8 +39,8 @@ circlize_plot = function() {
     })
 
     for(i in 1:10) {
-        circos.link(sample(fa, 1), sort(runif(10))[1:2], 
-                    sample(fa, 1), sort(runif(10))[1:2],
+        circos.link(sample(sectors, 1), sort(runif(10))[1:2], 
+                    sample(sectors, 1), sort(runif(10))[1:2],
                     col = add_transparency(col_fun(rnorm(1))))
     }
     circos.clear()
@@ -51,7 +51,9 @@ In **ComplexHeatmap** package with version higher than 1.99.0, there is a
 `Legend()` function which customizes legends with various styles. In following
 code, legends for the two tracks and links are constructed. In the end the
 three legends are packed vertically by `packLegend()`. For more detailed usage
-of `Legend()` and `packLegend()`, please refer to their help pages.
+of `Legend()` and `packLegend()`, please refer to their help pages and [the
+ComplexHeatmap
+book](https://jokergoo.github.io/ComplexHeatmap-reference/book/legends.html).
 
 
 ```r
@@ -76,10 +78,9 @@ lgd_list_vertical
 ## A pack of 3 legends
 ```
 
-`lgd_points`, `lgd_lines`, `lgd_links` and `lgd_list_vertical` are all `grob`
-objects (graphical objects) defined by **grid** package, which you can think
+`lgd_points`, `lgd_lines`, `lgd_links` and `lgd_list_vertical` can be thought
 as boxes which contain all graphical elements for legends and they can be
-added to the plot by `grid.draw()`.
+added to the plot by `draw()`.
 
 **circlize** is implemented in the base graphic system while
 **ComplexHeatmap** is implemented by **grid** graphic system. However, these
@@ -92,7 +93,6 @@ graphic device.)
 circlize_plot()
 # next the grid graphics are added directly to the plot
 # where circlize has created.
-
 draw(lgd_list_vertical, x = unit(4, "mm"), y = unit(4, "mm"), just = c("left", "bottom"))
 ```
 
@@ -120,7 +120,7 @@ draw(lgd_links, x = unit(1, "npc") - unit(2, "mm"), y = unit(4, "mm"),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="04-legends_files/figure-html/two-legends-1.png" alt="Split into two legends." width="672" />
+<img src="04-legends_files/figure-html/two-legends-1.png" alt="Split into two legends." width="480" />
 <p class="caption">(\#fig:two-legends)Split into two legends.</p>
 </div>
 

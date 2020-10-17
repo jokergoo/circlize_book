@@ -161,6 +161,10 @@ small circular rectangles to represent the proportions. In following example, th
 rectangles in the bottom half show e.g. how much the state 15 in group 1 has
 been transited to different states in group 2.
 
+Note from version 0.4.11, there is a new argument `link.target.prop` in `chordDiagram()`.
+It basically automatically applies following code. However, we still suggest users
+to read the following code because more tracks with similar code will be drawn later.
+
 ```{r third, eval = FALSE}
 for(i in seq_len(nrow(cdm_res))) {
 	if(cdm_res$value1[i] > 0) {

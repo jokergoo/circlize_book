@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
 <ul>
 <li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
-<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The functions measured in absolute units</a></li>
+<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> Absolute units</a></li>
 <li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="circular-layout.html"><a href="circular-layout.html#set-gaps-between-tracks"><i class="fa fa-check"></i><b>2.9</b> Set gaps between tracks</a></li>
@@ -216,6 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>9.2</b> Customize chromosome track</a></li>
 <li class="chapter" data-level="9.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>9.3</b> Initialize with general genomic category</a></li>
 <li class="chapter" data-level="9.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>9.4</b> Zooming chromosomes</a></li>
+<li class="chapter" data-level="9.5" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#concatenating-two-genomes"><i class="fa fa-check"></i><b>9.5</b> Concatenating two genomes</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>10</b> Create plotting regions for genomic data</a>
 <ul>
@@ -261,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Visualize Relations</b></span></li>
 <li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
+<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-of-making-chord-diagram"><i class="fa fa-check"></i><b>14.1</b> Basic usage of making Chord diagram</a></li>
 <li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
 <li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
 <ul>
@@ -329,10 +330,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 if the cytoband data is available. Actually, the ideograms are drawn by <code>circos.genomicIdeogram()</code>.
 <code>circos.genomicIdeogram()</code> creates a small track of ideograms and can be used anywhere
 in the circle. By default it adds ideograms for human genome hg19 (Figure <a href="high-level-genomic-functions.html#fig:ideogram">12.1</a>).</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="high-level-genomic-functions.html#cb249-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="kw">c</span>(<span class="st">&quot;labels&quot;</span>, <span class="st">&quot;axis&quot;</span>))</span>
-<span id="cb249-2"><a href="high-level-genomic-functions.html#cb249-2"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb249-3"><a href="high-level-genomic-functions.html#cb249-3"></a><span class="kw">circos.genomicIdeogram</span>() <span class="co"># put ideogram as the third track</span></span>
-<span id="cb249-4"><a href="high-level-genomic-functions.html#cb249-4"></a><span class="kw">circos.genomicIdeogram</span>(<span class="dt">track.height =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="high-level-genomic-functions.html#cb277-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="kw">c</span>(<span class="st">&quot;labels&quot;</span>, <span class="st">&quot;axis&quot;</span>))</span>
+<span id="cb277-2"><a href="high-level-genomic-functions.html#cb277-2"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb277-3"><a href="high-level-genomic-functions.html#cb277-3"></a><span class="kw">circos.genomicIdeogram</span>() <span class="co"># put ideogram as the third track</span></span>
+<span id="cb277-4"><a href="high-level-genomic-functions.html#cb277-4"></a><span class="kw">circos.genomicIdeogram</span>(<span class="dt">track.height =</span> <span class="fl">0.2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:ideogram"></span>
 <img src="12-high-level-genomic-functions_files/figure-html/ideogram-1.png" alt="Circular ideograms." width="672" />
 <p class="caption">
@@ -344,7 +345,7 @@ Figure 12.1: Circular ideograms.
 <h2><span class="header-section-number">12.2</span> Heatmaps</h2>
 <p>Matrix which corresponds to genomic regions can be visualized as heatmaps. Heatmaps
 completely fill the track and there are connection lines connecting heatmaps and original positions
-in the genome. <code>circos.genomicHeamtap()</code> draws connection lines and heatmaps as two tracks
+in the genome. <code>circos.genomicHeatmap()</code> draws connection lines and heatmaps as two tracks
 and combines them as an integrated track.</p>
 <p>Generally, all numeric columns (excluding the first three columns) in the
 input data frame are used to make the heatmap. Columns can also be specified
@@ -354,19 +355,19 @@ by <code>colorRamp2()</code>.</p>
 <p>The height of the connection line track and the heatmap track can be set by <code>connection_height</code>
 and <code>heatmap_height</code> arguments. Also parameters for the styles of lines and rectangle borders
 can be adjusted, please check the help page of <code>circos.genomicHeatmap()</code>.</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="high-level-genomic-functions.html#cb250-1"></a><span class="kw">circos.initializeWithIdeogram</span>()</span>
-<span id="cb250-2"><a href="high-level-genomic-functions.html#cb250-2"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
-<span id="cb250-3"><a href="high-level-genomic-functions.html#cb250-3"></a>col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
-<span id="cb250-4"><a href="high-level-genomic-functions.html#cb250-4"></a><span class="kw">circos.genomicHeatmap</span>(bed, <span class="dt">col =</span> col_fun, <span class="dt">side =</span> <span class="st">&quot;inside&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
-<span id="cb250-5"><a href="high-level-genomic-functions.html#cb250-5"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="high-level-genomic-functions.html#cb278-1"></a><span class="kw">circos.initializeWithIdeogram</span>()</span>
+<span id="cb278-2"><a href="high-level-genomic-functions.html#cb278-2"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">100</span>, <span class="dt">nc =</span> <span class="dv">4</span>)</span>
+<span id="cb278-3"><a href="high-level-genomic-functions.html#cb278-3"></a>col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb278-4"><a href="high-level-genomic-functions.html#cb278-4"></a><span class="kw">circos.genomicHeatmap</span>(bed, <span class="dt">col =</span> col_fun, <span class="dt">side =</span> <span class="st">&quot;inside&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb278-5"><a href="high-level-genomic-functions.html#cb278-5"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <p>In the left figure in Figure <a href="high-level-genomic-functions.html#fig:genomic-heatmap">12.2</a>, the heatmaps are put inside the
 normal genomic track. Heatmaps are also be put outside the normal genomic track by setting
 <code>side = "outside"</code> (Figure <a href="high-level-genomic-functions.html#fig:genomic-heatmap">12.2</a>, right).</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="high-level-genomic-functions.html#cb251-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
-<span id="cb251-2"><a href="high-level-genomic-functions.html#cb251-2"></a><span class="kw">circos.genomicHeatmap</span>(bed, <span class="dt">col =</span> col_fun, <span class="dt">side =</span> <span class="st">&quot;outside&quot;</span>,</span>
-<span id="cb251-3"><a href="high-level-genomic-functions.html#cb251-3"></a>    <span class="dt">line_col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])))</span>
-<span id="cb251-4"><a href="high-level-genomic-functions.html#cb251-4"></a><span class="kw">circos.genomicIdeogram</span>()</span>
-<span id="cb251-5"><a href="high-level-genomic-functions.html#cb251-5"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="high-level-genomic-functions.html#cb279-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
+<span id="cb279-2"><a href="high-level-genomic-functions.html#cb279-2"></a><span class="kw">circos.genomicHeatmap</span>(bed, <span class="dt">col =</span> col_fun, <span class="dt">side =</span> <span class="st">&quot;outside&quot;</span>,</span>
+<span id="cb279-3"><a href="high-level-genomic-functions.html#cb279-3"></a>    <span class="dt">line_col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])))</span>
+<span id="cb279-4"><a href="high-level-genomic-functions.html#cb279-4"></a><span class="kw">circos.genomicIdeogram</span>()</span>
+<span id="cb279-5"><a href="high-level-genomic-functions.html#cb279-5"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-heatmap"></span>
 <img src="12-high-level-genomic-functions_files/figure-html/genomic-heatmap-1.png" alt="Genomic heamtaps." width="768" />
 <p class="caption">
@@ -384,17 +385,17 @@ creates two tracks where one for the connection lines and one for the
 labels. You can set the height of the labels track to be the maximum
 width of labels by <code>labels_height = max(strwidth(labels))</code>. <code>padding</code>
 argument controls the gap between two neighbouring labels.</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="high-level-genomic-functions.html#cb252-1"></a><span class="kw">circos.initializeWithIdeogram</span>()</span>
-<span id="cb252-2"><a href="high-level-genomic-functions.html#cb252-2"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">50</span>, <span class="dt">fun =</span> <span class="cf">function</span>(k) <span class="kw">sample</span>(letters, k, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</span>
-<span id="cb252-3"><a href="high-level-genomic-functions.html#cb252-3"></a>bed[<span class="dv">1</span>, <span class="dv">4</span>] =<span class="st"> &quot;aaaaa&quot;</span></span>
-<span id="cb252-4"><a href="high-level-genomic-functions.html#cb252-4"></a><span class="kw">circos.genomicLabels</span>(bed, <span class="dt">labels.column =</span> <span class="dv">4</span>, <span class="dt">side =</span> <span class="st">&quot;inside&quot;</span>)</span>
-<span id="cb252-5"><a href="high-level-genomic-functions.html#cb252-5"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="high-level-genomic-functions.html#cb280-1"></a><span class="kw">circos.initializeWithIdeogram</span>()</span>
+<span id="cb280-2"><a href="high-level-genomic-functions.html#cb280-2"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nr =</span> <span class="dv">50</span>, <span class="dt">fun =</span> <span class="cf">function</span>(k) <span class="kw">sample</span>(letters, k, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb280-3"><a href="high-level-genomic-functions.html#cb280-3"></a>bed[<span class="dv">1</span>, <span class="dv">4</span>] =<span class="st"> &quot;aaaaa&quot;</span></span>
+<span id="cb280-4"><a href="high-level-genomic-functions.html#cb280-4"></a><span class="kw">circos.genomicLabels</span>(bed, <span class="dt">labels.column =</span> <span class="dv">4</span>, <span class="dt">side =</span> <span class="st">&quot;inside&quot;</span>)</span>
+<span id="cb280-5"><a href="high-level-genomic-functions.html#cb280-5"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <p>Similarlly, labels can be put outside of the normal genomic track (Figure <a href="high-level-genomic-functions.html#fig:genomic-labels">12.3</a> right).</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="high-level-genomic-functions.html#cb253-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
-<span id="cb253-2"><a href="high-level-genomic-functions.html#cb253-2"></a><span class="kw">circos.genomicLabels</span>(bed, <span class="dt">labels.column =</span> <span class="dv">4</span>, <span class="dt">side =</span> <span class="st">&quot;outside&quot;</span>,</span>
-<span id="cb253-3"><a href="high-level-genomic-functions.html#cb253-3"></a>	<span class="dt">col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])), <span class="dt">line_col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])))</span>
-<span id="cb253-4"><a href="high-level-genomic-functions.html#cb253-4"></a><span class="kw">circos.genomicIdeogram</span>()</span>
-<span id="cb253-5"><a href="high-level-genomic-functions.html#cb253-5"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="high-level-genomic-functions.html#cb281-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
+<span id="cb281-2"><a href="high-level-genomic-functions.html#cb281-2"></a><span class="kw">circos.genomicLabels</span>(bed, <span class="dt">labels.column =</span> <span class="dv">4</span>, <span class="dt">side =</span> <span class="st">&quot;outside&quot;</span>,</span>
+<span id="cb281-3"><a href="high-level-genomic-functions.html#cb281-3"></a>	<span class="dt">col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])), <span class="dt">line_col =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(bed[[<span class="dv">1</span>]])))</span>
+<span id="cb281-4"><a href="high-level-genomic-functions.html#cb281-4"></a><span class="kw">circos.genomicIdeogram</span>()</span>
+<span id="cb281-5"><a href="high-level-genomic-functions.html#cb281-5"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-labels"></span>
 <img src="12-high-level-genomic-functions_files/figure-html/genomic-labels-1.png" alt="Genomic labels." width="768" />
 <p class="caption">
@@ -408,23 +409,23 @@ Figure 12.3: Genomic labels.
 here. For <code>circos.initializeWithIdeogram()</code>, by default it draws axes with tick labels properly
 formatted. The axes are internally implemented by <code>circos.genomicAxis()</code> and it can be
 used to add genomic axes at any track (Figure <a href="high-level-genomic-functions.html#fig:genomic-axis">12.4</a>).</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="high-level-genomic-functions.html#cb254-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
-<span id="cb254-2"><a href="high-level-genomic-functions.html#cb254-2"></a><span class="kw">circos.genomicIdeogram</span>()</span>
-<span id="cb254-3"><a href="high-level-genomic-functions.html#cb254-3"></a><span class="co"># still work on the ideogram track</span></span>
-<span id="cb254-4"><a href="high-level-genomic-functions.html#cb254-4"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="kw">get.current.track.index</span>(), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb254-5"><a href="high-level-genomic-functions.html#cb254-5"></a>	<span class="kw">circos.genomicAxis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>)</span>
-<span id="cb254-6"><a href="high-level-genomic-functions.html#cb254-6"></a>})</span>
-<span id="cb254-7"><a href="high-level-genomic-functions.html#cb254-7"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span>
-<span id="cb254-8"><a href="high-level-genomic-functions.html#cb254-8"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="kw">get.current.track.index</span>(), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb254-9"><a href="high-level-genomic-functions.html#cb254-9"></a>	<span class="kw">circos.genomicAxis</span>(<span class="dt">h =</span> <span class="st">&quot;bottom&quot;</span>, <span class="dt">direction =</span> <span class="st">&quot;inside&quot;</span>)</span>
-<span id="cb254-10"><a href="high-level-genomic-functions.html#cb254-10"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="high-level-genomic-functions.html#cb282-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
+<span id="cb282-2"><a href="high-level-genomic-functions.html#cb282-2"></a><span class="kw">circos.genomicIdeogram</span>()</span>
+<span id="cb282-3"><a href="high-level-genomic-functions.html#cb282-3"></a><span class="co"># still work on the ideogram track</span></span>
+<span id="cb282-4"><a href="high-level-genomic-functions.html#cb282-4"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="kw">get.current.track.index</span>(), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb282-5"><a href="high-level-genomic-functions.html#cb282-5"></a>	<span class="kw">circos.genomicAxis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>)</span>
+<span id="cb282-6"><a href="high-level-genomic-functions.html#cb282-6"></a>})</span>
+<span id="cb282-7"><a href="high-level-genomic-functions.html#cb282-7"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span>
+<span id="cb282-8"><a href="high-level-genomic-functions.html#cb282-8"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="kw">get.current.track.index</span>(), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb282-9"><a href="high-level-genomic-functions.html#cb282-9"></a>	<span class="kw">circos.genomicAxis</span>(<span class="dt">h =</span> <span class="st">&quot;bottom&quot;</span>, <span class="dt">direction =</span> <span class="st">&quot;inside&quot;</span>)</span>
+<span id="cb282-10"><a href="high-level-genomic-functions.html#cb282-10"></a>})</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-axis"></span>
 <img src="12-high-level-genomic-functions_files/figure-html/genomic-axis-1.png" alt="Add genomic axes." width="672" />
 <p class="caption">
 Figure 12.4: Add genomic axes.
 </p>
 </div>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="high-level-genomic-functions.html#cb255-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="high-level-genomic-functions.html#cb283-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 </div>
 <div id="genomic-density-and-rainfall-plot" class="section level2" number="12.5">
 <h2><span class="header-section-number">12.5</span> Genomic density and Rainfall plot</h2>
@@ -439,8 +440,8 @@ and draw as points on the plot. Since <code>circos.genomicRainfall()</code> gene
 y-direction (<code>log10(distance)</code>), it is actually a high-level function which
 creates a new track.</p>
 <p>The input data can be a single data frame or a list of data frames.</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="high-level-genomic-functions.html#cb256-1"></a><span class="kw">circos.genoimcRainfall</span>(bed)</span>
-<span id="cb256-2"><a href="high-level-genomic-functions.html#cb256-2"></a><span class="kw">circos.genoimcRainfall</span>(bed_list, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="high-level-genomic-functions.html#cb284-1"></a><span class="kw">circos.genoimcRainfall</span>(bed)</span>
+<span id="cb284-2"><a href="high-level-genomic-functions.html#cb284-2"></a><span class="kw">circos.genoimcRainfall</span>(bed_list, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>))</span></code></pre></div>
 <p>However, if the amount of regions in a cluster is high, dots will overlap, and
 direct assessment of the number and density of regions in the cluster will be
 impossible. To overcome this limitation, additional tracks are added which
@@ -449,45 +450,45 @@ window that is covered by genomic regions).</p>
 <p><code>circos.genomicDensity()</code> calculates how much a genomic window is covered by
 regions in <code>bed</code>. It is also a high-level function and creates a new track.</p>
 <p>The input data can be a single data frame or a list of data frames.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="high-level-genomic-functions.html#cb257-1"></a><span class="kw">circos.genomicDensity</span>(bed)</span>
-<span id="cb257-2"><a href="high-level-genomic-functions.html#cb257-2"></a><span class="kw">circos.genomicDensity</span>(bed, <span class="dt">baseline =</span> <span class="dv">0</span>)</span>
-<span id="cb257-3"><a href="high-level-genomic-functions.html#cb257-3"></a><span class="kw">circos.genomicDensity</span>(bed, <span class="dt">window.size =</span> <span class="fl">1e6</span>)</span>
-<span id="cb257-4"><a href="high-level-genomic-functions.html#cb257-4"></a><span class="kw">circos.genomicDensity</span>(bedlist, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>, <span class="st">&quot;#0000FF80&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="high-level-genomic-functions.html#cb285-1"></a><span class="kw">circos.genomicDensity</span>(bed)</span>
+<span id="cb285-2"><a href="high-level-genomic-functions.html#cb285-2"></a><span class="kw">circos.genomicDensity</span>(bed, <span class="dt">baseline =</span> <span class="dv">0</span>)</span>
+<span id="cb285-3"><a href="high-level-genomic-functions.html#cb285-3"></a><span class="kw">circos.genomicDensity</span>(bed, <span class="dt">window.size =</span> <span class="fl">1e6</span>)</span>
+<span id="cb285-4"><a href="high-level-genomic-functions.html#cb285-4"></a><span class="kw">circos.genomicDensity</span>(bedlist, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>, <span class="st">&quot;#0000FF80&quot;</span>))</span></code></pre></div>
 <p>Following example makes a rainfall plot for differentially methylated regions
 (DMR) and their genomic densities. In the plot, red corresponds to hyper-methylated
 DMRs (gain of methylation) and blue corresponds to hypo-methylated
 DMRs (loss of methylation). You may see how the combination of rainfall track
 and genomic density track helps to get a more precise inference of the
 distribution of DMRs on genome (Figure <a href="high-level-genomic-functions.html#fig:genomic-rainfall">12.5</a>).</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="high-level-genomic-functions.html#cb258-1"></a><span class="kw">load</span>(<span class="kw">system.file</span>(<span class="dt">package =</span> <span class="st">&quot;circlize&quot;</span>, <span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;DMR.RData&quot;</span>))</span>
-<span id="cb258-2"><a href="high-level-genomic-functions.html#cb258-2"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>))</span>
-<span id="cb258-3"><a href="high-level-genomic-functions.html#cb258-3"></a></span>
-<span id="cb258-4"><a href="high-level-genomic-functions.html#cb258-4"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(DMR_hyper, DMR_hypo)</span>
-<span id="cb258-5"><a href="high-level-genomic-functions.html#cb258-5"></a><span class="kw">circos.genomicRainfall</span>(bed_list, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.4</span>, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>, <span class="st">&quot;#0000FF80&quot;</span>))</span>
-<span id="cb258-6"><a href="high-level-genomic-functions.html#cb258-6"></a><span class="kw">circos.genomicDensity</span>(DMR_hyper, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>), <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span>
-<span id="cb258-7"><a href="high-level-genomic-functions.html#cb258-7"></a><span class="kw">circos.genomicDensity</span>(DMR_hypo, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#0000FF80&quot;</span>), <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="high-level-genomic-functions.html#cb286-1"></a><span class="kw">load</span>(<span class="kw">system.file</span>(<span class="dt">package =</span> <span class="st">&quot;circlize&quot;</span>, <span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;DMR.RData&quot;</span>))</span>
+<span id="cb286-2"><a href="high-level-genomic-functions.html#cb286-2"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>))</span>
+<span id="cb286-3"><a href="high-level-genomic-functions.html#cb286-3"></a></span>
+<span id="cb286-4"><a href="high-level-genomic-functions.html#cb286-4"></a>bed_list =<span class="st"> </span><span class="kw">list</span>(DMR_hyper, DMR_hypo)</span>
+<span id="cb286-5"><a href="high-level-genomic-functions.html#cb286-5"></a><span class="kw">circos.genomicRainfall</span>(bed_list, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.4</span>, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>, <span class="st">&quot;#0000FF80&quot;</span>))</span>
+<span id="cb286-6"><a href="high-level-genomic-functions.html#cb286-6"></a><span class="kw">circos.genomicDensity</span>(DMR_hyper, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>), <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span>
+<span id="cb286-7"><a href="high-level-genomic-functions.html#cb286-7"></a><span class="kw">circos.genomicDensity</span>(DMR_hypo, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#0000FF80&quot;</span>), <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-rainfall"></span>
 <img src="12-high-level-genomic-functions_files/figure-html/genomic-rainfall-1.png" alt="Genomic rainfall plot and densities." width="576" />
 <p class="caption">
 Figure 12.5: Genomic rainfall plot and densities.
 </p>
 </div>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="high-level-genomic-functions.html#cb259-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="high-level-genomic-functions.html#cb287-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <p><code>circos.genomicDensity()</code> also supports to calculate the overlap as the <strong>number</strong> of the regions
 that overlap to each window by setting <code>count_by = "number"</code>.</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="high-level-genomic-functions.html#cb260-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>))</span>
-<span id="cb260-2"><a href="high-level-genomic-functions.html#cb260-2"></a><span class="kw">circos.genomicDensity</span>(DMR_hyper, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>), <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span>
-<span id="cb260-3"><a href="high-level-genomic-functions.html#cb260-3"></a><span class="kw">circos.genomicDensity</span>(DMR_hyper, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>), <span class="dt">count_by =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="high-level-genomic-functions.html#cb288-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">chromosome.index =</span> <span class="kw">paste0</span>(<span class="st">&quot;chr&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">22</span>))</span>
+<span id="cb288-2"><a href="high-level-genomic-functions.html#cb288-2"></a><span class="kw">circos.genomicDensity</span>(DMR_hyper, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>), <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span>
+<span id="cb288-3"><a href="high-level-genomic-functions.html#cb288-3"></a><span class="kw">circos.genomicDensity</span>(DMR_hyper, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#FF000080&quot;</span>), <span class="dt">count_by =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">track.height =</span> <span class="fl">0.1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:genomic-rainfall2"></span>
 <img src="12-high-level-genomic-functions_files/figure-html/genomic-rainfall2-1.png" alt="Genomic densities." width="576" />
 <p class="caption">
 Figure 12.6: Genomic densities.
 </p>
 </div>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="high-level-genomic-functions.html#cb261-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="high-level-genomic-functions.html#cb289-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <p>Internally, <code>rainfallTransform()</code> and <code>genomicDensity()</code> are used to the neighbrouing distance
 and the genomic density values.</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="high-level-genomic-functions.html#cb262-1"></a><span class="kw">head</span>(<span class="kw">rainfallTransform</span>(DMR_hyper))</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="high-level-genomic-functions.html#cb290-1"></a><span class="kw">head</span>(<span class="kw">rainfallTransform</span>(DMR_hyper))</span></code></pre></div>
 <pre><code>##      chr   start     end  dist
 ## 70  chr1  933445  934443 35323
 ## 104 chr1  969766  970362  4909
@@ -495,7 +496,7 @@ and the genomic density values.</p>
 ## 154 chr1 1108819 1109923 31522
 ## 155 chr1 1141445 1142405 31522
 ## 157 chr1 1181550 1182782 39145</code></pre>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="high-level-genomic-functions.html#cb264-1"></a><span class="kw">head</span>(<span class="kw">genomicDensity</span>(DMR_hyper, <span class="dt">window.size =</span> <span class="fl">1e6</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="high-level-genomic-functions.html#cb292-1"></a><span class="kw">head</span>(<span class="kw">genomicDensity</span>(DMR_hyper, <span class="dt">window.size =</span> <span class="fl">1e6</span>))</span></code></pre></div>
 <pre><code>##    chr   start     end    value
 ## 1 chr1       1 1000000 0.003093
 ## 2 chr1  500001 1500000 0.007592

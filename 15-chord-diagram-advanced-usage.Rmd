@@ -122,7 +122,7 @@ for(si in get.all.sector.index()) {
 ```
 
 For the last example in this section, if the width of the sector is less than
-20 degree, the labels are added in the radical direction (Figure \@ref(fig:chord-diagram-labels-multile-style)).
+10 degree, the labels are added in the radical direction (Figure \@ref(fig:chord-diagram-labels-multile-style)).
 
 ```{r chord-diagram-labels-multile-style, fig.cap = "Adjust label direction according to the width of sectors."}
 set.seed(123)
@@ -135,7 +135,7 @@ circos.track(track.index = 1, panel.fun = function(x, y) {
     ylim = get.cell.meta.data("ylim")
     sector.name = get.cell.meta.data("sector.index")
 
-    if(abs(xplot[2] - xplot[1]) < 20) {
+    if(abs(xplot[2] - xplot[1]) < 10) {
         circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise",
             niceFacing = TRUE, adj = c(0, 0.5), col = "red")
     } else {
@@ -262,6 +262,7 @@ par(mfrow = c(1, 2))
 eval(parse(text = chunks[["chord_diagram_compare_1"]]))
 eval(parse(text = chunks[["chord_diagram_compare_2"]]))
 eval(parse(text = chunks[["chord_diagram_compare_3"]]))
+circos.clear()
 ```
 
 To correctly use the functionality of `calc_gap()`, the two Chord diagram should
@@ -279,7 +280,6 @@ I first generate a random matrix where there are three groups (`A`, `B`, and `C`
 Note this new functionality works the same for the input as a data frame.
 
 ```{r}
-library(circlize)
 mat1 = matrix(rnorm(25), nrow = 5)
 rownames(mat1) = paste0("A", 1:5)
 colnames(mat1) = paste0("B", 1:5)
@@ -313,7 +313,7 @@ group
 
 Assign `group` variable to the `group` argument:
 
-```{r chord-grouped, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Grouped Chord diagram."}
+```{r chord-grouped, fig.width = 8, fig.height = 4, fig.cap = "Grouped Chord diagram."}
 grid.col = structure(c(rep(2, 5), rep(3, 5), rep(4, 5)),
                 names = c(paste0("A", 1:5), paste0("B", 1:5), paste0("C", 1:5)))
 chordDiagram(mat, group = group, grid.col = grid.col)
@@ -322,7 +322,7 @@ circos.clear()
 
 We can try another grouping:
 
-```{r chord-grouped2, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Grouped Chord diagram. A different grouping."}
+```{r chord-grouped2, fig.width = 8, fig.height = 4, fig.cap = "Grouped Chord diagram. A different grouping."}
 group = structure(gsub("^\\w", "", nm), names = nm)
 group
 chordDiagram(mat, group = group, grid.col = grid.col)
@@ -332,7 +332,7 @@ circos.clear()
 The order of `group` controls the sector orders and if `group` is set as a factor,
 the order of levels controls the order of groups.
 
-```{r chord-grouped3, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Grouped Chord diagram. Control the orders of groups."}
+```{r chord-grouped3, fig.width = 8, fig.height = 4, fig.cap = "Grouped Chord diagram. Control the orders of groups."}
 group = structure(gsub("\\d", "", nm), names = nm)
 group = factor(group[sample(length(group), length(group))], levels = c("C", "A", "B"))
 group
@@ -343,7 +343,7 @@ circos.clear()
 The gap between groups is controlled by `big.gap` argument and the gap between
 sectors is controlled by `small.gap` argument.
 
-```{r chord-grouped4, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Grouped Chord diagram. Control the gaps between groups."}
+```{r chord-grouped4, fig.width = 8, fig.height = 4, fig.cap = "Grouped Chord diagram. Control the gaps between groups."}
 group = structure(gsub("\\d", "", nm), names = nm)
 chordDiagram(mat, group = group, grid.col = grid.col, big.gap = 20, small.gap = 5)
 circos.clear()
@@ -351,7 +351,7 @@ circos.clear()
 
 As a normal Chord diagram, the labels and other tracks can be manually adjusted:
 
-```{r chord-grouped5, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "A more customized grouped Chord diagram."}
+```{r chord-grouped5, fig.width = 8, fig.height = 4, fig.cap = "A more customized grouped Chord diagram."}
 group = structure(gsub("\\d", "", nm), names = nm)
 chordDiagram(mat, group = group, grid.col = grid.col,
     annotationTrack = c("grid", "axis"),
@@ -372,5 +372,18 @@ highlight.sector(colnames(mat1), track.index = 1, col = "green",
     text = "B", cex = 0.8, text.col = "white", niceFacing = TRUE)
 highlight.sector(colnames(mat2), track.index = 1, col = "blue", 
     text = "C", cex = 0.8, text.col = "white", niceFacing = TRUE)
+circos.clear()
+```
+
+
+The implementation of multi-group Chord diagram is very simple. It can also be done
+by setting a proper sector order (by `order` argument) and a `gap.after` parameter.
+The previous example can be implemented without the `group` argument by the following code,
+but you need to manually calculate the proper value for `gap.after`. Setting `group`
+argument automatically does this for you.
+
+```{r, eval = FALSE}
+circos.par(gap.after = c(rep(1, 4), 5, rep(1, 4), 5, rep(1, 4), 5))
+chordDiagram(mat, order = names(sort(group)), grid.col = grid.col)
 circos.clear()
 ```

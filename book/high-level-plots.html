@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
 <ul>
 <li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
-<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> The functions measured in absolute units</a></li>
+<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> Absolute units</a></li>
 <li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="circular-layout.html"><a href="circular-layout.html#set-gaps-between-tracks"><i class="fa fa-check"></i><b>2.9</b> Set gaps between tracks</a></li>
@@ -216,6 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>9.2</b> Customize chromosome track</a></li>
 <li class="chapter" data-level="9.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>9.3</b> Initialize with general genomic category</a></li>
 <li class="chapter" data-level="9.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>9.4</b> Zooming chromosomes</a></li>
+<li class="chapter" data-level="9.5" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#concatenating-two-genomes"><i class="fa fa-check"></i><b>9.5</b> Concatenating two genomes</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>10</b> Create plotting regions for genomic data</a>
 <ul>
@@ -261,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Visualize Relations</b></span></li>
 <li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>14.1</b> Basic usage</a></li>
+<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-of-making-chord-diagram"><i class="fa fa-check"></i><b>14.1</b> Basic usage of making Chord diagram</a></li>
 <li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
 <li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
 <ul>
@@ -331,44 +332,44 @@ barplots. Here is another type of circular barplots. In the following code, we p
 the nine bars in one track and one sector. You can also put them into 9
 tracks, but the code would be very similar. See Figure
 <a href="high-level-plots.html#fig:circular-barplot">5.1</a>.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="high-level-plots.html#cb100-1"></a>category =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;category&quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>)</span>
-<span id="cb100-2"><a href="high-level-plots.html#cb100-2"></a>percent =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">sample</span>(<span class="dv">40</span><span class="op">:</span><span class="dv">80</span>, <span class="dv">9</span>))</span>
-<span id="cb100-3"><a href="high-level-plots.html#cb100-3"></a>color =<span class="st"> </span><span class="kw">rev</span>(<span class="kw">rainbow</span>(<span class="kw">length</span>(percent)))</span>
-<span id="cb100-4"><a href="high-level-plots.html#cb100-4"></a></span>
-<span id="cb100-5"><a href="high-level-plots.html#cb100-5"></a><span class="kw">library</span>(circlize)</span>
-<span id="cb100-6"><a href="high-level-plots.html#cb100-6"></a><span class="kw">circos.par</span>(<span class="st">&quot;start.degree&quot;</span> =<span class="st"> </span><span class="dv">90</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb100-7"><a href="high-level-plots.html#cb100-7"></a><span class="kw">circos.initialize</span>(<span class="st">&quot;a&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>)) <span class="co"># &#39;a` just means there is one sector</span></span>
-<span id="cb100-8"><a href="high-level-plots.html#cb100-8"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="kw">length</span>(percent)<span class="op">+</span><span class="fl">0.5</span>), <span class="dt">track.height =</span> <span class="fl">0.8</span>, </span>
-<span id="cb100-9"><a href="high-level-plots.html#cb100-9"></a>    <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb100-10"><a href="high-level-plots.html#cb100-10"></a>        xlim =<span class="st"> </span>CELL_META<span class="op">$</span>xlim</span>
-<span id="cb100-11"><a href="high-level-plots.html#cb100-11"></a>        <span class="kw">circos.segments</span>(<span class="kw">rep</span>(xlim[<span class="dv">1</span>], <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>,</span>
-<span id="cb100-12"><a href="high-level-plots.html#cb100-12"></a>                        <span class="kw">rep</span>(xlim[<span class="dv">2</span>], <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>,</span>
-<span id="cb100-13"><a href="high-level-plots.html#cb100-13"></a>                        <span class="dt">col =</span> <span class="st">&quot;#CCCCCC&quot;</span>)</span>
-<span id="cb100-14"><a href="high-level-plots.html#cb100-14"></a>        <span class="kw">circos.rect</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.45</span>, percent, <span class="dv">1</span><span class="op">:</span><span class="dv">9</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.45</span>,</span>
-<span id="cb100-15"><a href="high-level-plots.html#cb100-15"></a>        	<span class="dt">col =</span> color, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
-<span id="cb100-16"><a href="high-level-plots.html#cb100-16"></a>        <span class="kw">circos.text</span>(<span class="kw">rep</span>(xlim[<span class="dv">1</span>], <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, </span>
-<span id="cb100-17"><a href="high-level-plots.html#cb100-17"></a>        	<span class="kw">paste</span>(category, <span class="st">&quot; - &quot;</span>, percent, <span class="st">&quot;%&quot;</span>), </span>
-<span id="cb100-18"><a href="high-level-plots.html#cb100-18"></a>            <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">0.5</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>) </span>
-<span id="cb100-19"><a href="high-level-plots.html#cb100-19"></a>        breaks =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">85</span>, <span class="dt">by =</span> <span class="dv">5</span>)</span>
-<span id="cb100-20"><a href="high-level-plots.html#cb100-20"></a>        <span class="kw">circos.axis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>, <span class="dt">major.at =</span> breaks, <span class="dt">labels =</span> <span class="kw">paste0</span>(breaks, <span class="st">&quot;%&quot;</span>), </span>
-<span id="cb100-21"><a href="high-level-plots.html#cb100-21"></a>        	<span class="dt">labels.cex =</span> <span class="fl">0.6</span>)</span>
-<span id="cb100-22"><a href="high-level-plots.html#cb100-22"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="high-level-plots.html#cb115-1"></a>category =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;category&quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>)</span>
+<span id="cb115-2"><a href="high-level-plots.html#cb115-2"></a>percent =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">sample</span>(<span class="dv">40</span><span class="op">:</span><span class="dv">80</span>, <span class="dv">9</span>))</span>
+<span id="cb115-3"><a href="high-level-plots.html#cb115-3"></a>color =<span class="st"> </span><span class="kw">rev</span>(<span class="kw">rainbow</span>(<span class="kw">length</span>(percent)))</span>
+<span id="cb115-4"><a href="high-level-plots.html#cb115-4"></a></span>
+<span id="cb115-5"><a href="high-level-plots.html#cb115-5"></a><span class="kw">library</span>(circlize)</span>
+<span id="cb115-6"><a href="high-level-plots.html#cb115-6"></a><span class="kw">circos.par</span>(<span class="st">&quot;start.degree&quot;</span> =<span class="st"> </span><span class="dv">90</span>, <span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb115-7"><a href="high-level-plots.html#cb115-7"></a><span class="kw">circos.initialize</span>(<span class="st">&quot;a&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>)) <span class="co"># &#39;a` just means there is one sector</span></span>
+<span id="cb115-8"><a href="high-level-plots.html#cb115-8"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="kw">length</span>(percent)<span class="op">+</span><span class="fl">0.5</span>), <span class="dt">track.height =</span> <span class="fl">0.8</span>, </span>
+<span id="cb115-9"><a href="high-level-plots.html#cb115-9"></a>    <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb115-10"><a href="high-level-plots.html#cb115-10"></a>        xlim =<span class="st"> </span>CELL_META<span class="op">$</span>xlim</span>
+<span id="cb115-11"><a href="high-level-plots.html#cb115-11"></a>        <span class="kw">circos.segments</span>(<span class="kw">rep</span>(xlim[<span class="dv">1</span>], <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>,</span>
+<span id="cb115-12"><a href="high-level-plots.html#cb115-12"></a>                        <span class="kw">rep</span>(xlim[<span class="dv">2</span>], <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>,</span>
+<span id="cb115-13"><a href="high-level-plots.html#cb115-13"></a>                        <span class="dt">col =</span> <span class="st">&quot;#CCCCCC&quot;</span>)</span>
+<span id="cb115-14"><a href="high-level-plots.html#cb115-14"></a>        <span class="kw">circos.rect</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.45</span>, percent, <span class="dv">1</span><span class="op">:</span><span class="dv">9</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.45</span>,</span>
+<span id="cb115-15"><a href="high-level-plots.html#cb115-15"></a>            <span class="dt">col =</span> color, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb115-16"><a href="high-level-plots.html#cb115-16"></a>        <span class="kw">circos.text</span>(<span class="kw">rep</span>(xlim[<span class="dv">1</span>], <span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, </span>
+<span id="cb115-17"><a href="high-level-plots.html#cb115-17"></a>            <span class="kw">paste</span>(category, <span class="st">&quot; - &quot;</span>, percent, <span class="st">&quot;%&quot;</span>), </span>
+<span id="cb115-18"><a href="high-level-plots.html#cb115-18"></a>            <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">0.5</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>) </span>
+<span id="cb115-19"><a href="high-level-plots.html#cb115-19"></a>        breaks =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">85</span>, <span class="dt">by =</span> <span class="dv">5</span>)</span>
+<span id="cb115-20"><a href="high-level-plots.html#cb115-20"></a>        <span class="kw">circos.axis</span>(<span class="dt">h =</span> <span class="st">&quot;top&quot;</span>, <span class="dt">major.at =</span> breaks, <span class="dt">labels =</span> <span class="kw">paste0</span>(breaks, <span class="st">&quot;%&quot;</span>), </span>
+<span id="cb115-21"><a href="high-level-plots.html#cb115-21"></a>            <span class="dt">labels.cex =</span> <span class="fl">0.6</span>)</span>
+<span id="cb115-22"><a href="high-level-plots.html#cb115-22"></a>})</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circular-barplot"></span>
 <img src="05-implement-high-level-plots_files/figure-html/circular-barplot-1.png" alt="A circular barplot." width="672" />
 <p class="caption">
 Figure 5.1: A circular barplot.
 </p>
 </div>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="high-level-plots.html#cb101-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="high-level-plots.html#cb116-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <p>When adding text by <code>circos.text()</code>, <code>adj</code> is specified to <code>c(1.05, 0.5)</code>
 which means text is aligned to the right and there is also offset between the
 text and the anchor points. We can also use <code>mm_x()</code> to set the offset to
 absolute units. Conversion on x direction in a circular coordinate is affected
 by the position on y axis, here we must set the <code>h</code> argument. Following code
 can be used to replace the <code>circos.text()</code> in above example.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="high-level-plots.html#cb102-1"></a><span class="kw">circos.text</span>(xlim[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">mm_x</span>(<span class="dv">2</span>, <span class="dt">h =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, </span>
-<span id="cb102-2"><a href="high-level-plots.html#cb102-2"></a>	<span class="kw">paste</span>(category, <span class="st">&quot; - &quot;</span>, percent, <span class="st">&quot;%&quot;</span>), </span>
-<span id="cb102-3"><a href="high-level-plots.html#cb102-3"></a>    <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="high-level-plots.html#cb117-1"></a><span class="kw">circos.text</span>(xlim[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">mm_x</span>(<span class="dv">2</span>, <span class="dt">h =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, </span>
+<span id="cb117-2"><a href="high-level-plots.html#cb117-2"></a>    <span class="kw">paste</span>(category, <span class="st">&quot; - &quot;</span>, percent, <span class="st">&quot;%&quot;</span>), </span>
+<span id="cb117-3"><a href="high-level-plots.html#cb117-3"></a>    <span class="dt">facing =</span> <span class="st">&quot;downward&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
 </div>
 <div id="histograms" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Histograms</h2>
@@ -385,22 +386,22 @@ lines. By default, bin size of histogram in each cell is calculated
 separatedly and they will be different between cells, which makes it not
 consistent to compare. Manually setting <code>bin.size</code> in all cells to a same
 value helps to compare the distributions between cells.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="high-level-plots.html#cb103-1"></a>x =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1600</span>)</span>
-<span id="cb103-2"><a href="high-level-plots.html#cb103-2"></a>factors =<span class="st"> </span><span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>], <span class="dv">1600</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb103-3"><a href="high-level-plots.html#cb103-3"></a><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x)</span>
-<span id="cb103-4"><a href="high-level-plots.html#cb103-4"></a><span class="kw">circos.trackHist</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x, <span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, </span>
-<span id="cb103-5"><a href="high-level-plots.html#cb103-5"></a>	<span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span>
-<span id="cb103-6"><a href="high-level-plots.html#cb103-6"></a><span class="kw">circos.trackHist</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x, <span class="dt">bin.size =</span> <span class="fl">0.1</span>, </span>
-<span id="cb103-7"><a href="high-level-plots.html#cb103-7"></a>	<span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span>
-<span id="cb103-8"><a href="high-level-plots.html#cb103-8"></a><span class="kw">circos.trackHist</span>(<span class="dt">factors =</span> factors, <span class="dt">x =</span> x, <span class="dt">draw.density =</span> <span class="ot">TRUE</span>, </span>
-<span id="cb103-9"><a href="high-level-plots.html#cb103-9"></a>	<span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="high-level-plots.html#cb118-1"></a>x =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1600</span>)</span>
+<span id="cb118-2"><a href="high-level-plots.html#cb118-2"></a>sectors =<span class="st"> </span><span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>], <span class="dv">1600</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb118-3"><a href="high-level-plots.html#cb118-3"></a><span class="kw">circos.initialize</span>(sectors, <span class="dt">x =</span> x)</span>
+<span id="cb118-4"><a href="high-level-plots.html#cb118-4"></a><span class="kw">circos.trackHist</span>(sectors, <span class="dt">x =</span> x, <span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, </span>
+<span id="cb118-5"><a href="high-level-plots.html#cb118-5"></a>    <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span>
+<span id="cb118-6"><a href="high-level-plots.html#cb118-6"></a><span class="kw">circos.trackHist</span>(sectors, <span class="dt">x =</span> x, <span class="dt">bin.size =</span> <span class="fl">0.1</span>, </span>
+<span id="cb118-7"><a href="high-level-plots.html#cb118-7"></a>    <span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span>
+<span id="cb118-8"><a href="high-level-plots.html#cb118-8"></a><span class="kw">circos.trackHist</span>(sectors, <span class="dt">x =</span> x, <span class="dt">draw.density =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb118-9"><a href="high-level-plots.html#cb118-9"></a>    <span class="dt">col =</span> <span class="st">&quot;#999999&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;#999999&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circular-histograms"></span>
 <img src="05-implement-high-level-plots_files/figure-html/circular-histograms-1.png" alt="Histograms on circular layout." width="672" />
 <p class="caption">
 Figure 5.2: Histograms on circular layout.
 </p>
 </div>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="high-level-plots.html#cb104-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="high-level-plots.html#cb119-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 </div>
 <div id="phylogenetic-trees" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Phylogenetic trees</h2>
@@ -412,48 +413,48 @@ In this example, we will demonstrate how to draw the tree from the <code>dendrog
 Nevertheless, other classes can be converted to <code>dendrogram</code> without too much difficulty.</p>
 <p>The <code>bird.orders</code> data we are using here is from <strong>ape</strong> package. This data set is
 related to species of birds.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="high-level-plots.html#cb105-1"></a><span class="kw">library</span>(ape)</span>
-<span id="cb105-2"><a href="high-level-plots.html#cb105-2"></a><span class="kw">data</span>(bird.orders)</span>
-<span id="cb105-3"><a href="high-level-plots.html#cb105-3"></a>hc =<span class="st"> </span><span class="kw">as.hclust</span>(bird.orders)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="high-level-plots.html#cb120-1"></a><span class="kw">library</span>(ape)</span>
+<span id="cb120-2"><a href="high-level-plots.html#cb120-2"></a><span class="kw">data</span>(bird.orders)</span>
+<span id="cb120-3"><a href="high-level-plots.html#cb120-3"></a>hc =<span class="st"> </span><span class="kw">as.hclust</span>(bird.orders)</span></code></pre></div>
 <p>We split the tree into six sub trees by <code>cutree()</code> and convert the data into a
 <code>dendrogram</code> object.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="high-level-plots.html#cb106-1"></a>labels =<span class="st"> </span>hc<span class="op">$</span>labels  <span class="co"># name of birds</span></span>
-<span id="cb106-2"><a href="high-level-plots.html#cb106-2"></a>ct =<span class="st"> </span><span class="kw">cutree</span>(hc, <span class="dv">6</span>)  <span class="co"># cut tree into 6 pieces</span></span>
-<span id="cb106-3"><a href="high-level-plots.html#cb106-3"></a>n =<span class="st"> </span><span class="kw">length</span>(labels)  <span class="co"># number of bird species</span></span>
-<span id="cb106-4"><a href="high-level-plots.html#cb106-4"></a>dend =<span class="st"> </span><span class="kw">as.dendrogram</span>(hc)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="high-level-plots.html#cb121-1"></a>labels =<span class="st"> </span>hc<span class="op">$</span>labels  <span class="co"># name of birds</span></span>
+<span id="cb121-2"><a href="high-level-plots.html#cb121-2"></a>ct =<span class="st"> </span><span class="kw">cutree</span>(hc, <span class="dv">6</span>)  <span class="co"># cut tree into 6 pieces</span></span>
+<span id="cb121-3"><a href="high-level-plots.html#cb121-3"></a>n =<span class="st"> </span><span class="kw">length</span>(labels)  <span class="co"># number of bird species</span></span>
+<span id="cb121-4"><a href="high-level-plots.html#cb121-4"></a>dend =<span class="st"> </span><span class="kw">as.dendrogram</span>(hc)</span></code></pre></div>
 <p>As we mentioned before, the x-value for the phylogenetic tree is in fact
 index. Thus, the x-lim is just the minimum and maximum index of labels in the
 tree. Since there is only one phylogenetic tree, we only need one “big”
 sector.</p>
 <p>In the first track, we plot the name of each bird, with different
 colors to represent different sub trees.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="high-level-plots.html#cb107-1"></a><span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb107-2"><a href="high-level-plots.html#cb107-2"></a><span class="kw">circos.initialize</span>(<span class="dt">factors =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, n)) <span class="co"># only one sector</span></span>
-<span id="cb107-3"><a href="high-level-plots.html#cb107-3"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.3</span>, </span>
-<span id="cb107-4"><a href="high-level-plots.html#cb107-4"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb107-5"><a href="high-level-plots.html#cb107-5"></a>        <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(n)) {</span>
-<span id="cb107-6"><a href="high-level-plots.html#cb107-6"></a>            <span class="kw">circos.text</span>(i<span class="fl">-0.5</span>, <span class="dv">0</span>, labels[i], <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), </span>
-<span id="cb107-7"><a href="high-level-plots.html#cb107-7"></a>                <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb107-8"><a href="high-level-plots.html#cb107-8"></a>                <span class="dt">col =</span> ct[labels[i]], <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
-<span id="cb107-9"><a href="high-level-plots.html#cb107-9"></a>        }</span>
-<span id="cb107-10"><a href="high-level-plots.html#cb107-10"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="high-level-plots.html#cb122-1"></a><span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb122-2"><a href="high-level-plots.html#cb122-2"></a><span class="kw">circos.initialize</span>(<span class="st">&quot;a&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, n)) <span class="co"># only one sector</span></span>
+<span id="cb122-3"><a href="high-level-plots.html#cb122-3"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.3</span>, </span>
+<span id="cb122-4"><a href="high-level-plots.html#cb122-4"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb122-5"><a href="high-level-plots.html#cb122-5"></a>        <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(n)) {</span>
+<span id="cb122-6"><a href="high-level-plots.html#cb122-6"></a>            <span class="kw">circos.text</span>(i<span class="fl">-0.5</span>, <span class="dv">0</span>, labels[i], <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), </span>
+<span id="cb122-7"><a href="high-level-plots.html#cb122-7"></a>                <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb122-8"><a href="high-level-plots.html#cb122-8"></a>                <span class="dt">col =</span> ct[labels[i]], <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb122-9"><a href="high-level-plots.html#cb122-9"></a>        }</span>
+<span id="cb122-10"><a href="high-level-plots.html#cb122-10"></a>})</span></code></pre></div>
 <p>In the above code, setting <code>xlim</code> to <code>c(0, n)</code> is very important because the
 leaves of the dendrogram are drawn at <code>x = seq(0.5, n - 0.5)</code>.</p>
 <p>In the second track, we plot the circular dendrogram by <code>circos.dendrogram()</code> (Figure <a href="high-level-plots.html#fig:phylogenetic-tree">5.3</a> left).
 You can render the dendrogram by <strong>dendextend</strong> package.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="high-level-plots.html#cb108-1"></a><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(dendextend))</span>
-<span id="cb108-2"><a href="high-level-plots.html#cb108-2"></a>dend =<span class="st"> </span><span class="kw">color_branches</span>(dend, <span class="dt">k =</span> <span class="dv">6</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</span>
-<span id="cb108-3"><a href="high-level-plots.html#cb108-3"></a>dend_height =<span class="st"> </span><span class="kw">attr</span>(dend, <span class="st">&quot;height&quot;</span>)</span>
-<span id="cb108-4"><a href="high-level-plots.html#cb108-4"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, dend_height), <span class="dt">bg.border =</span> <span class="ot">NA</span>, </span>
-<span id="cb108-5"><a href="high-level-plots.html#cb108-5"></a>    <span class="dt">track.height =</span> <span class="fl">0.4</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb108-6"><a href="high-level-plots.html#cb108-6"></a>        <span class="kw">circos.dendrogram</span>(dend)</span>
-<span id="cb108-7"><a href="high-level-plots.html#cb108-7"></a>})</span>
-<span id="cb108-8"><a href="high-level-plots.html#cb108-8"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="high-level-plots.html#cb123-1"></a><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(dendextend))</span>
+<span id="cb123-2"><a href="high-level-plots.html#cb123-2"></a>dend =<span class="st"> </span><span class="kw">color_branches</span>(dend, <span class="dt">k =</span> <span class="dv">6</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</span>
+<span id="cb123-3"><a href="high-level-plots.html#cb123-3"></a>dend_height =<span class="st"> </span><span class="kw">attr</span>(dend, <span class="st">&quot;height&quot;</span>)</span>
+<span id="cb123-4"><a href="high-level-plots.html#cb123-4"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, dend_height), <span class="dt">bg.border =</span> <span class="ot">NA</span>, </span>
+<span id="cb123-5"><a href="high-level-plots.html#cb123-5"></a>    <span class="dt">track.height =</span> <span class="fl">0.4</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb123-6"><a href="high-level-plots.html#cb123-6"></a>        <span class="kw">circos.dendrogram</span>(dend)</span>
+<span id="cb123-7"><a href="high-level-plots.html#cb123-7"></a>})</span>
+<span id="cb123-8"><a href="high-level-plots.html#cb123-8"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <p>By default, dendrograms are facing outside of the circle (so that the labels
 should also be added outside the dendrogram). In <code>circos.dendrogram()</code>, you
 can set <code>facing</code> argument to <code>inside</code> to make them facing inside. In this
 case, dendrogram track is added first and labels are added later (Figure <a href="high-level-plots.html#fig:phylogenetic-tree">5.3</a> right).</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="high-level-plots.html#cb109-1"></a><span class="kw">circos.dendrogram</span>(dend, <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="high-level-plots.html#cb124-1"></a><span class="kw">circos.dendrogram</span>(dend, <span class="dt">facing =</span> <span class="st">&quot;inside&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:phylogenetic-tree"></span>
 <img src="05-implement-high-level-plots_files/figure-html/phylogenetic-tree-1.png" alt="A circular phylogenetic tree." width="768" />
 <p class="caption">
@@ -474,50 +475,51 @@ visualize e.g. gene expression. Heatmaps are basically composed by rectangles,
 thus, they can be implemented by <code>circos.rect()</code>.</p>
 <p>In following example, we make a circular plot with two heatmaps. First we
 generate the two matrix and perform clustring on the two matrix.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="high-level-plots.html#cb110-1"></a>mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">100</span><span class="op">*</span><span class="dv">10</span>), <span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">10</span>)</span>
-<span id="cb110-2"><a href="high-level-plots.html#cb110-2"></a>col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
-<span id="cb110-3"><a href="high-level-plots.html#cb110-3"></a>factors =<span class="st"> </span><span class="kw">rep</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">times =</span> <span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">70</span>))</span>
-<span id="cb110-4"><a href="high-level-plots.html#cb110-4"></a>mat_list =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> mat[factors <span class="op">==</span><span class="st"> &quot;a&quot;</span>, ],</span>
-<span id="cb110-5"><a href="high-level-plots.html#cb110-5"></a>                <span class="dt">b =</span> mat[factors <span class="op">==</span><span class="st"> &quot;b&quot;</span>, ])</span>
-<span id="cb110-6"><a href="high-level-plots.html#cb110-6"></a>dend_list =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="kw">as.dendrogram</span>(<span class="kw">hclust</span>(<span class="kw">dist</span>(mat_list[[<span class="st">&quot;a&quot;</span>]]))),</span>
-<span id="cb110-7"><a href="high-level-plots.html#cb110-7"></a>                 <span class="dt">b =</span> <span class="kw">as.dendrogram</span>(<span class="kw">hclust</span>(<span class="kw">dist</span>(mat_list[[<span class="st">&quot;b&quot;</span>]]))))</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="high-level-plots.html#cb125-1"></a>mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">100</span><span class="op">*</span><span class="dv">10</span>), <span class="dt">nrow =</span> <span class="dv">100</span>, <span class="dt">ncol =</span> <span class="dv">10</span>)</span>
+<span id="cb125-2"><a href="high-level-plots.html#cb125-2"></a>col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb125-3"><a href="high-level-plots.html#cb125-3"></a>sectors =<span class="st"> </span><span class="kw">rep</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">times =</span> <span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">70</span>))</span>
+<span id="cb125-4"><a href="high-level-plots.html#cb125-4"></a>mat_list =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> mat[sectors <span class="op">==</span><span class="st"> &quot;a&quot;</span>, ],</span>
+<span id="cb125-5"><a href="high-level-plots.html#cb125-5"></a>                <span class="dt">b =</span> mat[sectors <span class="op">==</span><span class="st"> &quot;b&quot;</span>, ])</span>
+<span id="cb125-6"><a href="high-level-plots.html#cb125-6"></a>dend_list =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="kw">as.dendrogram</span>(<span class="kw">hclust</span>(<span class="kw">dist</span>(mat_list[[<span class="st">&quot;a&quot;</span>]]))),</span>
+<span id="cb125-7"><a href="high-level-plots.html#cb125-7"></a>                 <span class="dt">b =</span> <span class="kw">as.dendrogram</span>(<span class="kw">hclust</span>(<span class="kw">dist</span>(mat_list[[<span class="st">&quot;b&quot;</span>]]))))</span></code></pre></div>
 <p>In the first track, columns in the matrix are adjusted by the clustering.
 Also note we use <code>circos.rect()</code> in a vectorized way.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="high-level-plots.html#cb111-1"></a><span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">gap.degree =</span> <span class="dv">5</span>)</span>
-<span id="cb111-2"><a href="high-level-plots.html#cb111-2"></a><span class="kw">circos.initialize</span>(factors, <span class="dt">xlim =</span> <span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="kw">table</span>(factors)))</span>
-<span id="cb111-3"><a href="high-level-plots.html#cb111-3"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb111-4"><a href="high-level-plots.html#cb111-4"></a>    sector.index =<span class="st"> </span>CELL_META<span class="op">$</span>sector.index</span>
-<span id="cb111-5"><a href="high-level-plots.html#cb111-5"></a>    m =<span class="st"> </span>mat_list[[sector.index]]</span>
-<span id="cb111-6"><a href="high-level-plots.html#cb111-6"></a>    dend =<span class="st"> </span>dend_list[[sector.index]]</span>
-<span id="cb111-7"><a href="high-level-plots.html#cb111-7"></a></span>
-<span id="cb111-8"><a href="high-level-plots.html#cb111-8"></a>    m2 =<span class="st"> </span>m[<span class="kw">order.dendrogram</span>(dend), ]</span>
-<span id="cb111-9"><a href="high-level-plots.html#cb111-9"></a>    col_mat =<span class="st"> </span><span class="kw">col_fun</span>(m2)</span>
-<span id="cb111-10"><a href="high-level-plots.html#cb111-10"></a>    nr =<span class="st"> </span><span class="kw">nrow</span>(m2)</span>
-<span id="cb111-11"><a href="high-level-plots.html#cb111-11"></a>    nc =<span class="st"> </span><span class="kw">ncol</span>(m2)</span>
-<span id="cb111-12"><a href="high-level-plots.html#cb111-12"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nc) {</span>
-<span id="cb111-13"><a href="high-level-plots.html#cb111-13"></a>        <span class="kw">circos.rect</span>(<span class="dv">1</span><span class="op">:</span>nr <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">rep</span>(nc <span class="op">-</span><span class="st"> </span>i, nr), </span>
-<span id="cb111-14"><a href="high-level-plots.html#cb111-14"></a>            <span class="dv">1</span><span class="op">:</span>nr, <span class="kw">rep</span>(nc <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, nr), </span>
-<span id="cb111-15"><a href="high-level-plots.html#cb111-15"></a>            <span class="dt">border =</span> col_mat[, i], <span class="dt">col =</span> col_mat[, i])</span>
-<span id="cb111-16"><a href="high-level-plots.html#cb111-16"></a>    }</span>
-<span id="cb111-17"><a href="high-level-plots.html#cb111-17"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="high-level-plots.html#cb126-1"></a><span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">gap.degree =</span> <span class="dv">5</span>)</span>
+<span id="cb126-2"><a href="high-level-plots.html#cb126-2"></a><span class="kw">circos.initialize</span>(sectors, <span class="dt">xlim =</span> <span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="kw">table</span>(sectors)))</span>
+<span id="cb126-3"><a href="high-level-plots.html#cb126-3"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb126-4"><a href="high-level-plots.html#cb126-4"></a>    sector.index =<span class="st"> </span>CELL_META<span class="op">$</span>sector.index</span>
+<span id="cb126-5"><a href="high-level-plots.html#cb126-5"></a>    m =<span class="st"> </span>mat_list[[sector.index]]</span>
+<span id="cb126-6"><a href="high-level-plots.html#cb126-6"></a>    dend =<span class="st"> </span>dend_list[[sector.index]]</span>
+<span id="cb126-7"><a href="high-level-plots.html#cb126-7"></a></span>
+<span id="cb126-8"><a href="high-level-plots.html#cb126-8"></a>    m2 =<span class="st"> </span>m[<span class="kw">order.dendrogram</span>(dend), ]</span>
+<span id="cb126-9"><a href="high-level-plots.html#cb126-9"></a>    col_mat =<span class="st"> </span><span class="kw">col_fun</span>(m2)</span>
+<span id="cb126-10"><a href="high-level-plots.html#cb126-10"></a>    nr =<span class="st"> </span><span class="kw">nrow</span>(m2)</span>
+<span id="cb126-11"><a href="high-level-plots.html#cb126-11"></a>    nc =<span class="st"> </span><span class="kw">ncol</span>(m2)</span>
+<span id="cb126-12"><a href="high-level-plots.html#cb126-12"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nc) {</span>
+<span id="cb126-13"><a href="high-level-plots.html#cb126-13"></a>        <span class="kw">circos.rect</span>(<span class="dv">1</span><span class="op">:</span>nr <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">rep</span>(nc <span class="op">-</span><span class="st"> </span>i, nr), </span>
+<span id="cb126-14"><a href="high-level-plots.html#cb126-14"></a>            <span class="dv">1</span><span class="op">:</span>nr, <span class="kw">rep</span>(nc <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, nr), </span>
+<span id="cb126-15"><a href="high-level-plots.html#cb126-15"></a>            <span class="dt">border =</span> col_mat[, i], <span class="dt">col =</span> col_mat[, i])</span>
+<span id="cb126-16"><a href="high-level-plots.html#cb126-16"></a>    }</span>
+<span id="cb126-17"><a href="high-level-plots.html#cb126-17"></a>})</span></code></pre></div>
 <p>Since there are two dendrograms, it is important to make the height
 of both dendrogram in a same scale. We calculate the maximum height
 of the two dendrograms and set it to <code>ylim</code> of the second track (Figure <a href="high-level-plots.html#fig:circular-heatmap">5.4</a>).</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="high-level-plots.html#cb112-1"></a>max_height =<span class="st"> </span><span class="kw">max</span>(<span class="kw">sapply</span>(dend_list, <span class="cf">function</span>(x) <span class="kw">attr</span>(x, <span class="st">&quot;height&quot;</span>)))</span>
-<span id="cb112-2"><a href="high-level-plots.html#cb112-2"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, max_height), <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.3</span>, </span>
-<span id="cb112-3"><a href="high-level-plots.html#cb112-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb112-4"><a href="high-level-plots.html#cb112-4"></a></span>
-<span id="cb112-5"><a href="high-level-plots.html#cb112-5"></a>        sector.index =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)</span>
-<span id="cb112-6"><a href="high-level-plots.html#cb112-6"></a>        dend =<span class="st"> </span>dend_list[[sector.index]]</span>
-<span id="cb112-7"><a href="high-level-plots.html#cb112-7"></a>        <span class="kw">circos.dendrogram</span>(dend, <span class="dt">max_height =</span> max_height)</span>
-<span id="cb112-8"><a href="high-level-plots.html#cb112-8"></a>})</span>
-<span id="cb112-9"><a href="high-level-plots.html#cb112-9"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="high-level-plots.html#cb127-1"></a>max_height =<span class="st"> </span><span class="kw">max</span>(<span class="kw">sapply</span>(dend_list, <span class="cf">function</span>(x) <span class="kw">attr</span>(x, <span class="st">&quot;height&quot;</span>)))</span>
+<span id="cb127-2"><a href="high-level-plots.html#cb127-2"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, max_height), <span class="dt">bg.border =</span> <span class="ot">NA</span>, <span class="dt">track.height =</span> <span class="fl">0.3</span>, </span>
+<span id="cb127-3"><a href="high-level-plots.html#cb127-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb127-4"><a href="high-level-plots.html#cb127-4"></a>        sector.index =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)</span>
+<span id="cb127-5"><a href="high-level-plots.html#cb127-5"></a>        dend =<span class="st"> </span>dend_list[[sector.index]]</span>
+<span id="cb127-6"><a href="high-level-plots.html#cb127-6"></a>        <span class="kw">circos.dendrogram</span>(dend, <span class="dt">max_height =</span> max_height)</span>
+<span id="cb127-7"><a href="high-level-plots.html#cb127-7"></a>})</span>
+<span id="cb127-8"><a href="high-level-plots.html#cb127-8"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:circular-heatmap"></span>
 <img src="05-implement-high-level-plots_files/figure-html/circular-heatmap-1.png" alt="Circular heatmaps." width="672" />
 <p class="caption">
 Figure 5.4: Circular heatmaps.
 </p>
 </div>
+<p>In the next chapter, we will introduce a high-level function <code>circos.heatmap()</code>
+which draws fancy circular heatmaps.</p>
 
 </div>
 </div>
