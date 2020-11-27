@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 The chordDiagram() function | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 14 The chordDiagram() function | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="nested-zooming.html"/>
 <link rel="next" href="advanced-usage-of-chorddiagram.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -184,7 +186,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="circos-heatmap.html"><a href="circos-heatmap.html"><i class="fa fa-check"></i><b>6</b> The <code>circos.heatmap()</code> function</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circos-heatmap-input-data"><i class="fa fa-check"></i><b>6.1</b> Input data</a></li>
-<li class="chapter" data-level="6.2" data-path="circular-layout.html"><a href="circular-layout.html#circular-layout"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
+<li class="chapter" data-level="6.2" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circular-layout-1"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
 <li class="chapter" data-level="6.3" data-path="circos-heatmap.html"><a href="circos-heatmap.html#dendrograms-and-row-names"><i class="fa fa-check"></i><b>6.3</b> Dendrograms and row names</a></li>
 <li class="chapter" data-level="6.4" data-path="circos-heatmap.html"><a href="circos-heatmap.html#clustering"><i class="fa fa-check"></i><b>6.4</b> Clustering</a></li>
 <li class="chapter" data-level="6.5" data-path="circos-heatmap.html"><a href="circos-heatmap.html#callback-on-dendrograms"><i class="fa fa-check"></i><b>6.5</b> Callback on dendrograms</a></li>
@@ -481,7 +483,7 @@ Figure 14.3: Set gaps in Chord diagram.
 <p>As explained in Section <a href="circular-layout.html#graphic-parameters">2.4</a>, <code>gap.after</code> can also specified
 as a named vector:</p>
 <div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="the-chorddiagram-function.html#cb332-1"></a><span class="kw">circos.par</span>(<span class="dt">gap.after =</span> <span class="kw">c</span>(<span class="st">&quot;S1&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;S2&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;S3&quot;</span> =<span class="st"> </span><span class="dv">15</span>, <span class="st">&quot;E1&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E2&quot;</span> =<span class="st"> </span><span class="dv">5</span>,</span>
-<span id="cb332-2"><a href="the-chorddiagram-function.html#cb332-2"></a>	                     <span class="st">&quot;E3&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E4&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E5&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E6&quot;</span> =<span class="st"> </span><span class="dv">15</span>))</span>
+<span id="cb332-2"><a href="the-chorddiagram-function.html#cb332-2"></a>                         <span class="st">&quot;E3&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E4&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E5&quot;</span> =<span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;E6&quot;</span> =<span class="st"> </span><span class="dv">15</span>))</span>
 <span id="cb332-3"><a href="the-chorddiagram-function.html#cb332-3"></a><span class="kw">chordDiagram</span>(mat)</span>
 <span id="cb332-4"><a href="the-chorddiagram-function.html#cb332-4"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
 <p>To make it simpler, users can directly set <code>big.gap</code> in <code>chordDiagram()</code>
@@ -956,9 +958,9 @@ be that, the bars are put on the side where the links are shorter and
 <code>target.prop.height</code> argument.</p>
 <div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="the-chorddiagram-function.html#cb372-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
 <span id="cb372-2"><a href="the-chorddiagram-function.html#cb372-2"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">directional =</span> <span class="dv">1</span>, </span>
-<span id="cb372-3"><a href="the-chorddiagram-function.html#cb372-3"></a>	<span class="dt">link.target.prop =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb372-3"><a href="the-chorddiagram-function.html#cb372-3"></a>    <span class="dt">link.target.prop =</span> <span class="ot">FALSE</span>)</span>
 <span id="cb372-4"><a href="the-chorddiagram-function.html#cb372-4"></a><span class="kw">chordDiagram</span>(mat, <span class="dt">grid.col =</span> grid.col, <span class="dt">directional =</span> <span class="dv">1</span>, </span>
-<span id="cb372-5"><a href="the-chorddiagram-function.html#cb372-5"></a>	<span class="dt">diffHeight =</span> <span class="kw">mm_h</span>(<span class="dv">10</span>), <span class="dt">target.prop.height =</span> <span class="kw">mm_h</span>(<span class="dv">8</span>))</span></code></pre></div>
+<span id="cb372-5"><a href="the-chorddiagram-function.html#cb372-5"></a>    <span class="dt">diffHeight =</span> <span class="kw">mm_h</span>(<span class="dv">10</span>), <span class="dt">target.prop.height =</span> <span class="kw">mm_h</span>(<span class="dv">8</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:chord-diagram-link-target-prop"></span>
 <img src="14-chord-diagram-simple_files/figure-html/chord-diagram-link-target-prop-1.png" alt="Control argument link.target.prop and target.prop.height." width="768" />
 <p class="caption">
@@ -1137,9 +1139,9 @@ Let's make an animation of how the links are added sequantially:
 ```r
 nr = nrow(df)
 for(i in seq_len(nr)) {
-	visible = rep(TRUE, nr)
-	visible[seq(i, nr)[-1]] = FALSE
-	chordDiagram(df, grid.col = grid.col, link.visible = visible)
+    visible = rep(TRUE, nr)
+    visible[seq(i, nr)[-1]] = FALSE
+    chordDiagram(df, grid.col = grid.col, link.visible = visible)
 }
 ```
 

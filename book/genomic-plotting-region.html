@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Create plotting regions for genomic data | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Create plotting regions for genomic data | Circular Visualization in R" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="initialize-genomic-plot.html"/>
 <link rel="next" href="modes-of-input.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -184,7 +186,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="circos-heatmap.html"><a href="circos-heatmap.html"><i class="fa fa-check"></i><b>6</b> The <code>circos.heatmap()</code> function</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circos-heatmap-input-data"><i class="fa fa-check"></i><b>6.1</b> Input data</a></li>
-<li class="chapter" data-level="6.2" data-path="circular-layout.html"><a href="circular-layout.html#circular-layout"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
+<li class="chapter" data-level="6.2" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circular-layout-1"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
 <li class="chapter" data-level="6.3" data-path="circos-heatmap.html"><a href="circos-heatmap.html#dendrograms-and-row-names"><i class="fa fa-check"></i><b>6.3</b> Dendrograms and row names</a></li>
 <li class="chapter" data-level="6.4" data-path="circos-heatmap.html"><a href="circos-heatmap.html#clustering"><i class="fa fa-check"></i><b>6.4</b> Clustering</a></li>
 <li class="chapter" data-level="6.5" data-path="circos-heatmap.html"><a href="circos-heatmap.html#callback-on-dendrograms"><i class="fa fa-check"></i><b>6.5</b> Callback on dendrograms</a></li>
@@ -351,9 +353,9 @@ Chapter <a href="modes-of-input.html#modes-of-input">11</a>). So whenever you us
 <p>Following code demonstrates the values for <code>region</code> and <code>value</code> when used inside <code>panel.fun</code>.</p>
 <div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="genomic-plotting-region.html#cb239-1"></a>bed =<span class="st"> </span><span class="kw">generateRandomBed</span>(<span class="dt">nc =</span> <span class="dv">2</span>)</span>
 <span id="cb239-2"><a href="genomic-plotting-region.html#cb239-2"></a><span class="kw">head</span>(bed, <span class="dt">n =</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##    chr   start     end    value1      value2
-## 1 chr1  409593 1105440 0.5745723  0.36032798
-## 2 chr1 1168602 1306396 0.3397518 -0.06331312</code></pre>
+<pre><code>##    chr  start     end     value1     value2
+## 1 chr1  55659  272460  0.1481202 -0.9773213
+## 2 chr1 994899 1136003 -1.1922246  0.3737273</code></pre>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="genomic-plotting-region.html#cb241-1"></a><span class="kw">circos.initializeWithIdeogram</span>(<span class="dt">plotType =</span> <span class="ot">NULL</span>)</span>
 <span id="cb241-2"><a href="genomic-plotting-region.html#cb241-2"></a><span class="kw">circos.genomicTrackPlotRegion</span>(bed, <span class="dt">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
 <span id="cb241-3"><a href="genomic-plotting-region.html#cb241-3"></a>    <span class="cf">if</span>(CELL_META<span class="op">$</span>sector.index <span class="op">==</span><span class="st"> &quot;chr1&quot;</span>) {</span>
@@ -361,12 +363,12 @@ Chapter <a href="modes-of-input.html#modes-of-input">11</a>). So whenever you us
 <span id="cb241-5"><a href="genomic-plotting-region.html#cb241-5"></a>        <span class="kw">print</span>(<span class="kw">head</span>(value, <span class="dt">n =</span> <span class="dv">2</span>))</span>
 <span id="cb241-6"><a href="genomic-plotting-region.html#cb241-6"></a>    }</span>
 <span id="cb241-7"><a href="genomic-plotting-region.html#cb241-7"></a>})</span></code></pre></div>
-<pre><code>##     start     end
-## 1  409593 1105440
-## 2 1168602 1306396
-##      value1      value2
-## 1 0.5745723  0.36032798
-## 2 0.3397518 -0.06331312</code></pre>
+<pre><code>##    start     end
+## 1  55659  272460
+## 2 994899 1136003
+##       value1     value2
+## 1  0.1481202 -0.9773213
+## 2 -1.1922246  0.3737273</code></pre>
 <p>Since <code>circos.genomicTrack()</code> creates a new track, it needs values to
 calculate data ranges on y direction. Users can either specify the index of
 numeric columns in <code>data</code> by <code>numeric.column</code> (named index or numeric index,

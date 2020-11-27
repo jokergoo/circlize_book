@@ -559,9 +559,13 @@ demonstrated as follows. Here the labels are added 2mm away from the
 heatmap track (by `convert_y(2, "mm")` which defines the offset in the y-direction).
 
 
+Here I set `track.index = get.current.track.index()` to make sure the labels
+are always added in the correct track.
+
+
 ```r
 circos.heatmap(mat1, split = split, col = col_fun1)
-circos.track(track.index = 1, panel.fun = function(x, y) {
+circos.track(track.index = get.current.track.index(), panel.fun = function(x, y) {
     circos.text(CELL_META$xcenter, CELL_META$cell.ylim[2] + convert_y(2, "mm"), 
         paste0("this is group ", CELL_META$sector.index),
         facing = "bending.inside", cex = 0.8,
@@ -586,7 +590,7 @@ the last sector in `panel.fun`.
 ```r
 circos.par(gap.after = c(2, 2, 2, 2, 10))
 circos.heatmap(mat1, split = split, col = col_fun1, track.height = 0.4)
-circos.track(track.index = 1, panel.fun = function(x, y) {
+circos.track(track.index = get.current.track.index(), panel.fun = function(x, y) {
     if(CELL_META$sector.numeric.index == 5) { # the last sector
         cn = colnames(mat1)
         n = length(cn)
@@ -612,7 +616,7 @@ proper value measured in tbe circular coordinate system.
 ```r
 circos.par(gap.after = c(2, 2, 2, 2, 10))
 circos.heatmap(mat1, split = split, col = col_fun1, track.height = 0.4)
-circos.track(track.index = 1, panel.fun = function(x, y) {
+circos.track(track.index = get.current.track.index(), panel.fun = function(x, y) {
     if(CELL_META$sector.numeric.index == 5) { # the last sector
         circos.rect(CELL_META$cell.xlim[2] + convert_x(1, "mm"), 0,
                     CELL_META$cell.xlim[2] + convert_x(5, "mm"), 5,

@@ -1,7 +1,7 @@
 --- 
 title: "Circular Visualization in R"
 author: "Zuguang Gu"
-date: "last revised on 2020-10-17"
+date: "last revised on 2020-11-27"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -18,7 +18,7 @@ description: "This book provides a comprehensive overview of implementing circul
 
 This is the documentation of the
 [**circlize**](https://cran.r-project.org/package=circlize) package. Examples
-in the book are generated under version 0.4.11.
+in the book are generated under version 0.4.12.1004.
 
 If you use **circlize** in your publications, I am appreciated if you can cite:
 
@@ -51,13 +51,13 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] circlize_0.4.11
+## [1] circlize_0.4.12.1004
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] bookdown_0.20       digest_0.6.25       grid_4.0.2         
-##  [4] magrittr_1.5        evaluate_0.14       rlang_0.4.7        
-##  [7] stringi_1.4.6       GlobalOptions_0.1.2 rmarkdown_2.3      
-## [10] tools_4.0.2         stringr_1.4.0       xfun_0.16          
-## [13] yaml_2.2.1          compiler_4.0.2      colorspace_1.4-1   
-## [16] shape_1.4.4         htmltools_0.5.0     knitr_1.29
+##  [1] bookdown_0.21       digest_0.6.27       grid_4.0.2         
+##  [4] magrittr_2.0.1      evaluate_0.14       rlang_0.4.8        
+##  [7] stringi_1.5.3       GlobalOptions_0.1.2 rmarkdown_2.5      
+## [10] tools_4.0.2         stringr_1.4.0       xfun_0.19          
+## [13] yaml_2.2.1          compiler_4.0.2      colorspace_2.0-0   
+## [16] shape_1.4.5         htmltools_0.5.0     knitr_1.30
 ```
