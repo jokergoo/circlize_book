@@ -104,11 +104,11 @@ df = data.frame(sectors = sample(letters[1:8], n, replace = TRUE),
     x = rnorm(n), y = runif(n))
 ```
 
-First we initialize the circular layout. The circle is split into sectors
+First, we initialize the circular layout. The circle is split into sectors
 based on the data range on x-axes in each category. In following code, `df$x`
 is split by `df$sectors` and the widths of sectors are automatically calculated
-based on data ranges in each category. Be default, sectors are positioned
-started from $\theta = 0$ (in the polar coordinate system) and go clockwise 
+based on data ranges in each category. By default, sectors are positioned
+starting from $\theta = 0$ (in the polar coordinate system) and go clockwise 
 around the circle. You will not see anything after running the following code 
 because no track has been added yet.
 
@@ -195,8 +195,8 @@ After the track is created, points are added to the first track by
 `circos.trackPoints()`. `circos.trackPoints()` simply adds points in all cells
 simultaneously. As further explained in Section \@ref(points), it can be
 replaced by putting `circos.text()` in `panel.fun`, however,
-`circos.trackPoints()` would be more convenient if only the points are needed
-to put in the cells (but I don't really recommend it). It is quite straightforward to understand that this
+`circos.trackPoints()` would be more convenient if you need only points 
+in the cells (but I don't really recommend it). It is quite straightforward to understand that this
 function needs a categorical variable (`df$sectors`), values on x direction
 and y direction (`df$x` and `df$y`).
 
@@ -208,7 +208,7 @@ track, `track.index` can be ommitted, because
 this track is the one marked as the "current" track.
 
 OK, now we add histograms to the second track. Here `circos.trackHist()` is a 
-high-level function which means it creates a new track (as you can imagine, `hist()`
+high-level function, which means it creates a new track (as you can imagine, `hist()`
 is also a high-level function). `bin.size` is explicitly set so that the bin
 size for histograms in all cells are the same and can be compared to each
 other (see Figure \@ref(fig:circlize-glance-track-2)).
@@ -255,7 +255,7 @@ circos.clear()
 
 Now we go back to the second track and update the cell in sector "d".
 This is done by `circos.updatePlotRegion()` or the short version
-`circos.update()`. The function erases graphics added to the cell.
+`circos.update()`. The function erases the current graphics in the cell.
 `circos.update()` can not modify the `xlim` and `ylim` of the cell as well as
 other settings related to the position of the cell. `circos.update()` needs 
 to explicitly specify the sector index and track index unless the "current"
@@ -281,7 +281,7 @@ circos.clear()
 ```
 
 Next we continue to create new tracks. Although we have gone back to the
-second track, when creating a new track, the new track is still created after
+second track, our newly created track is added as
 the innermost track. In this new track, we add heatmaps by
 `circos.rect()`. Note that here we haven't set the input data, only
 the `ylim` argument, because heatmaps just fill the whole cell from the left
@@ -312,7 +312,7 @@ circos.clear()
 ```
 
 In the inside of the circle, either links or ribbons are added. There can be links
-from single point to point, point to interval or interval to interval. Section \@ref(links)
+from single point to point, point to interval, or interval to interval. Section \@ref(links)
 gives detailed usage of links. (See Figure \@ref(fig:circlize-glance-track-links))
 
 ```{r circlize_glance_5, eval=FALSE}
@@ -333,8 +333,8 @@ eval(parse(text = chunks[["circlize_glance_5"]]))
 circos.clear()
 ```
 
-Finally we need to reset the graphic parameters and internal variables, so
-that it will not mess up your next plot.
+Finally, we need to reset the graphic parameters and internal variables so
+that they don't not mess up your next plot.
 
 ```{r, eval = FALSE}
 circos.clear()
