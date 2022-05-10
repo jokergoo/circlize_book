@@ -411,7 +411,8 @@ circos.par
 ##  major.by.degree         10              
 ##  clock.wise              TRUE            
 ##  xaxis.clock.wise        TRUE            
-##  message                 TRUE
+##  message                 TRUE            
+##  help                    TRUE
 ```
 
 `circos.par()` is aimed to be designed to be independent to the number or the
@@ -709,8 +710,7 @@ and `circlize:::polar2Cartesian()`.
 ```r
 library(yaml)
 data = yaml.load_file("https://raw.githubusercontent.com/Templarian/slack-emoji-pokemon/master/pokemon.yaml")
-set.seed(123)
-pokemon_list = data$emojis[sample(length(data$emojis), 40)]
+pokemon_list = data$emojis[1:40]
 pokemon_name = sapply(pokemon_list, function(x) x$name)
 pokemon_src = sapply(pokemon_list, function(x) x$src)
 
@@ -859,7 +859,7 @@ circos.info(sector.index = "a", track.index = 1)
 ## ylim: [0, 1]
 ## cell.xlim: [0.991453, 2.008547]
 ## cell.ylim: [-0.1, 1.1]
-## xplot (degree): [0, 241]
+## xplot (degree): [360, 241]
 ## yplot (radius): [0.79, 0.99]
 ## cell.width (degree): 119
 ## cell.height (radius): 0.2

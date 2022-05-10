@@ -641,8 +641,7 @@ and `circlize:::polar2Cartesian()`.
 ```{r circular-pokemon, warning = FALSE, fig.width = 6, fig.height = 6, dev = "png", fig.cap = "Add raster image to the circular plot."}
 library(yaml)
 data = yaml.load_file("https://raw.githubusercontent.com/Templarian/slack-emoji-pokemon/master/pokemon.yaml")
-set.seed(123)
-pokemon_list = data$emojis[sample(length(data$emojis), 40)]
+pokemon_list = data$emojis[1:40]
 pokemon_name = sapply(pokemon_list, function(x) x$name)
 pokemon_src = sapply(pokemon_list, function(x) x$src)
 

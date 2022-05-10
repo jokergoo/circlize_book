@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Page not found | Circular Visualization in R</title>
+  <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Page not found | Circular Visualization in R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bookdown.org/jokergoo/circlize-book/book" />
+  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
+  <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="github-repo" content="jokergoo/circlize_book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Page not found | Circular Visualization in R" />
+  
+  <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
+  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
+
+<meta name="author" content="Zuguang Gu" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Circular Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I General Functionality</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#principle-of-design"><i class="fa fa-check"></i><b>1.1</b> Principle of design</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#a-qiuck-glance"><i class="fa fa-check"></i><b>1.2</b> A quick glance</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="circular-layout.html"><a href="circular-layout.html"><i class="fa fa-check"></i><b>2</b> Circular layout</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="circular-layout.html"><a href="circular-layout.html#coordinate-transformation"><i class="fa fa-check"></i><b>2.1</b> Coordinate transformation</a></li>
+<li class="chapter" data-level="2.2" data-path="circular-layout.html"><a href="circular-layout.html#rules-for-making-the-circular-plot"><i class="fa fa-check"></i><b>2.2</b> Rules for making the circular plot</a></li>
+<li class="chapter" data-level="2.3" data-path="circular-layout.html"><a href="circular-layout.html#sectors-and-tracks"><i class="fa fa-check"></i><b>2.3</b> Sectors and tracks</a></li>
+<li class="chapter" data-level="2.4" data-path="circular-layout.html"><a href="circular-layout.html#graphic-parameters"><i class="fa fa-check"></i><b>2.4</b> Graphic parameters</a></li>
+<li class="chapter" data-level="2.5" data-path="circular-layout.html"><a href="circular-layout.html#create-plotting-regions"><i class="fa fa-check"></i><b>2.5</b> Create plotting regions</a></li>
+<li class="chapter" data-level="2.6" data-path="circular-layout.html"><a href="circular-layout.html#update-plotting-regions"><i class="fa fa-check"></i><b>2.6</b> Update plotting regions</a></li>
+<li class="chapter" data-level="2.7" data-path="circular-layout.html"><a href="circular-layout.html#panel-fun"><i class="fa fa-check"></i><b>2.7</b> <code>panel.fun</code> argument</a></li>
+<li class="chapter" data-level="2.8" data-path="circular-layout.html"><a href="circular-layout.html#other-utilities"><i class="fa fa-check"></i><b>2.8</b> Other utilities</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="circular-layout.html"><a href="circular-layout.html#circlize_and_reverse_circlize"><i class="fa fa-check"></i><b>2.8.1</b> <code>circlize()</code> and <code>reverse.circlize()</code></a></li>
+<li class="chapter" data-level="2.8.2" data-path="circular-layout.html"><a href="circular-layout.html#convert-functions"><i class="fa fa-check"></i><b>2.8.2</b> Absolute units</a></li>
+<li class="chapter" data-level="2.8.3" data-path="circular-layout.html"><a href="circular-layout.html#circos-info-and-circos-clear"><i class="fa fa-check"></i><b>2.8.3</b> <code>circos.info()</code> and <code>circos.clear()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="circular-layout.html"><a href="circular-layout.html#set-gaps-between-tracks"><i class="fa fa-check"></i><b>2.9</b> Set gaps between tracks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>3</b> Graphics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="graphics.html"><a href="graphics.html#setting-colors"><i class="fa fa-check"></i><b>3.1</b> Setting colors</a></li>
+<li class="chapter" data-level="3.2" data-path="graphics.html"><a href="graphics.html#points"><i class="fa fa-check"></i><b>3.2</b> Points</a></li>
+<li class="chapter" data-level="3.3" data-path="graphics.html"><a href="graphics.html#lines"><i class="fa fa-check"></i><b>3.3</b> Lines</a></li>
+<li class="chapter" data-level="3.4" data-path="graphics.html"><a href="graphics.html#segments"><i class="fa fa-check"></i><b>3.4</b> Segments</a></li>
+<li class="chapter" data-level="3.5" data-path="graphics.html"><a href="graphics.html#text"><i class="fa fa-check"></i><b>3.5</b> Text</a></li>
+<li class="chapter" data-level="3.6" data-path="graphics.html"><a href="graphics.html#rectangles"><i class="fa fa-check"></i><b>3.6</b> Rectangles and polygons</a></li>
+<li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.7</b> Axes</a></li>
+<li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#barplots-boxplots-and-violin-plots"><i class="fa fa-check"></i><b>3.8</b> Barplots, boxplots and violin plots</a></li>
+<li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#circular-arrows"><i class="fa fa-check"></i><b>3.9</b> Circular arrows</a></li>
+<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#labels"><i class="fa fa-check"></i><b>3.10</b> Labels</a></li>
+<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.11</b> Raster image</a></li>
+<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.12</b> Links</a></li>
+<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.13</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.14" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.14</b> Work together with the base graphic system</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
+<li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="high-level-plots.html"><a href="high-level-plots.html#circular-barplot"><i class="fa fa-check"></i><b>5.1</b> Circular barplots</a></li>
+<li class="chapter" data-level="5.2" data-path="high-level-plots.html"><a href="high-level-plots.html#histograms"><i class="fa fa-check"></i><b>5.2</b> Histograms</a></li>
+<li class="chapter" data-level="5.3" data-path="high-level-plots.html"><a href="high-level-plots.html#phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Phylogenetic trees</a></li>
+<li class="chapter" data-level="5.4" data-path="high-level-plots.html"><a href="high-level-plots.html#heatmaps"><i class="fa fa-check"></i><b>5.4</b> Manually create heatmaps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="circos-heatmap.html"><a href="circos-heatmap.html"><i class="fa fa-check"></i><b>6</b> The <code>circos.heatmap()</code> function</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circos-heatmap-input-data"><i class="fa fa-check"></i><b>6.1</b> Input data</a></li>
+<li class="chapter" data-level="6.2" data-path="circos-heatmap.html"><a href="circos-heatmap.html#circular-layout-1"><i class="fa fa-check"></i><b>6.2</b> Circular layout</a></li>
+<li class="chapter" data-level="6.3" data-path="circos-heatmap.html"><a href="circos-heatmap.html#dendrograms-and-row-names"><i class="fa fa-check"></i><b>6.3</b> Dendrograms and row names</a></li>
+<li class="chapter" data-level="6.4" data-path="circos-heatmap.html"><a href="circos-heatmap.html#clustering"><i class="fa fa-check"></i><b>6.4</b> Clustering</a></li>
+<li class="chapter" data-level="6.5" data-path="circos-heatmap.html"><a href="circos-heatmap.html#callback-on-dendrograms"><i class="fa fa-check"></i><b>6.5</b> Callback on dendrograms</a></li>
+<li class="chapter" data-level="6.6" data-path="circos-heatmap.html"><a href="circos-heatmap.html#multiple-heatmap-tracks"><i class="fa fa-check"></i><b>6.6</b> Multiple heatmap tracks</a></li>
+<li class="chapter" data-level="6.7" data-path="circos-heatmap.html"><a href="circos-heatmap.html#with-other-tracks"><i class="fa fa-check"></i><b>6.7</b> With other tracks</a></li>
+<li class="chapter" data-level="6.8" data-path="circos-heatmap.html"><a href="circos-heatmap.html#add-annotations"><i class="fa fa-check"></i><b>6.8</b> Add annotations</a></li>
+<li class="chapter" data-level="6.9" data-path="circos-heatmap.html"><a href="circos-heatmap.html#a-complex-example-of-circular-heatmaps"><i class="fa fa-check"></i><b>6.9</b> A complex example of circular heatmaps</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="advanced-layout.html"><a href="advanced-layout.html"><i class="fa fa-check"></i><b>7</b> Advanced layout</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="advanced-layout.html"><a href="advanced-layout.html#zooming-of-sectors"><i class="fa fa-check"></i><b>7.1</b> Zooming of sectors</a></li>
+<li class="chapter" data-level="7.2" data-path="advanced-layout.html"><a href="advanced-layout.html#part-circle"><i class="fa fa-check"></i><b>7.2</b> Visualize part of the circle</a></li>
+<li class="chapter" data-level="7.3" data-path="advanced-layout.html"><a href="advanced-layout.html#combine-circular-plots"><i class="fa fa-check"></i><b>7.3</b> Combine multiple circular plots</a></li>
+<li class="chapter" data-level="7.4" data-path="advanced-layout.html"><a href="advanced-layout.html#arrange-multiple-plots"><i class="fa fa-check"></i><b>7.4</b> Arrange multiple plots</a></li>
+</ul></li>
+<li class="part"><span><b>II Applications in Genomics</b></span></li>
+<li class="chapter" data-level="8" data-path="genomic-introduction.html"><a href="genomic-introduction.html"><i class="fa fa-check"></i><b>8</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="genomic-introduction.html"><a href="genomic-introduction.html#input-data"><i class="fa fa-check"></i><b>8.1</b> Input data</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html"><i class="fa fa-check"></i><b>9</b> Initialize with genomic data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-cytoband"><i class="fa fa-check"></i><b>9.1</b> Initialize with cytoband data</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#basic-usage"><i class="fa fa-check"></i><b>9.1.1</b> Basic usage</a></li>
+<li class="chapter" data-level="9.1.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#pre-defined-tracks"><i class="fa fa-check"></i><b>9.1.2</b> Pre-defined tracks</a></li>
+<li class="chapter" data-level="9.1.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#other-general-settings"><i class="fa fa-check"></i><b>9.1.3</b> Other general settings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#customize-chromosome-track"><i class="fa fa-check"></i><b>9.2</b> Customize chromosome track</a></li>
+<li class="chapter" data-level="9.3" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#initialize-with-general-genomic-category"><i class="fa fa-check"></i><b>9.3</b> Initialize with general genomic category</a></li>
+<li class="chapter" data-level="9.4" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#zooming-chromosomes"><i class="fa fa-check"></i><b>9.4</b> Zooming chromosomes</a></li>
+<li class="chapter" data-level="9.5" data-path="initialize-genomic-plot.html"><a href="initialize-genomic-plot.html#concatenating-two-genomes"><i class="fa fa-check"></i><b>9.5</b> Concatenating two genomes</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html"><i class="fa fa-check"></i><b>10</b> Create plotting regions for genomic data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-points"><i class="fa fa-check"></i><b>10.1</b> Points</a></li>
+<li class="chapter" data-level="10.2" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-lines"><i class="fa fa-check"></i><b>10.2</b> Lines</a></li>
+<li class="chapter" data-level="10.3" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-text"><i class="fa fa-check"></i><b>10.3</b> Text</a></li>
+<li class="chapter" data-level="10.4" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-rectangles"><i class="fa fa-check"></i><b>10.4</b> Rectangles</a></li>
+<li class="chapter" data-level="10.5" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#genomic-links"><i class="fa fa-check"></i><b>10.5</b> Links</a></li>
+<li class="chapter" data-level="10.6" data-path="genomic-plotting-region.html"><a href="genomic-plotting-region.html#mixed-use-of-general-circlize-functions"><i class="fa fa-check"></i><b>10.6</b> Mixed use of general circlize functions</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="modes-of-input.html"><a href="modes-of-input.html"><i class="fa fa-check"></i><b>11</b> modes for <code>circos.genomicTrack()</code></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="modes-of-input.html"><a href="modes-of-input.html#normal-mode"><i class="fa fa-check"></i><b>11.1</b> Normal mode</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame"><i class="fa fa-check"></i><b>11.1.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="11.1.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames"><i class="fa fa-check"></i><b>11.1.2</b> Input is a list of data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="modes-of-input.html"><a href="modes-of-input.html#stack-mode"><i class="fa fa-check"></i><b>11.2</b> Stack mode</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-data-frame-1"><i class="fa fa-check"></i><b>11.2.1</b> Input is a data frame</a></li>
+<li class="chapter" data-level="11.2.2" data-path="modes-of-input.html"><a href="modes-of-input.html#input-is-a-list-of-data-frames-1"><i class="fa fa-check"></i><b>11.2.2</b> Input is a list of data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="modes-of-input.html"><a href="modes-of-input.html#applications"><i class="fa fa-check"></i><b>11.3</b> Applications</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-points"><i class="fa fa-check"></i><b>11.3.1</b> Points</a></li>
+<li class="chapter" data-level="11.3.2" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-lines"><i class="fa fa-check"></i><b>11.3.2</b> Lines</a></li>
+<li class="chapter" data-level="11.3.3" data-path="modes-of-input.html"><a href="modes-of-input.html#modes-rectangles"><i class="fa fa-check"></i><b>11.3.3</b> Rectangles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html"><i class="fa fa-check"></i><b>12</b> High-level genomic functions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>12.1</b> Ideograms</a></li>
+<li class="chapter" data-level="12.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>12.2</b> Heatmaps</a></li>
+<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels-1"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
+<li class="chapter" data-level="12.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>12.4</b> Genomic axes</a></li>
+<li class="chapter" data-level="12.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>12.5</b> Genomic density and Rainfall plot</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="nested-zooming.html"><a href="nested-zooming.html"><i class="fa fa-check"></i><b>13</b> Nested zooming</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="nested-zooming.html"><a href="nested-zooming.html#basic-idea"><i class="fa fa-check"></i><b>13.1</b> Basic idea</a></li>
+<li class="chapter" data-level="13.2" data-path="nested-zooming.html"><a href="nested-zooming.html#visualization-of-dmrs-from-tagmentation-based-wgbs"><i class="fa fa-check"></i><b>13.2</b> Visualization of DMRs from tagmentation-based WGBS</a></li>
+</ul></li>
+<li class="part"><span><b>III Visualize Relations</b></span></li>
+<li class="chapter" data-level="14" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html"><i class="fa fa-check"></i><b>14</b> The <code>chordDiagram()</code> function</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#basic-usage-of-making-chord-diagram"><i class="fa fa-check"></i><b>14.1</b> Basic usage of making Chord diagram</a></li>
+<li class="chapter" data-level="14.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#adjust-by-circos.par"><i class="fa fa-check"></i><b>14.2</b> Adjust by <code>circos.par()</code></a></li>
+<li class="chapter" data-level="14.3" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-colors"><i class="fa fa-check"></i><b>14.3</b> Colors</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#set-grid-colors"><i class="fa fa-check"></i><b>14.3.1</b> Set grid colors</a></li>
+<li class="chapter" data-level="14.3.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-color"><i class="fa fa-check"></i><b>14.3.2</b> Set link colors</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#chord-diagram-link-border"><i class="fa fa-check"></i><b>14.4</b> Link border</a></li>
+<li class="chapter" data-level="14.5" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#highlight-links"><i class="fa fa-check"></i><b>14.5</b> Highlight links</a></li>
+<li class="chapter" data-level="14.6" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#orders-of-links"><i class="fa fa-check"></i><b>14.6</b> Orders of links</a></li>
+<li class="chapter" data-level="14.7" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#z-index-of-adding-links"><i class="fa fa-check"></i><b>14.7</b> z-index of adding links</a></li>
+<li class="chapter" data-level="14.8" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#self-links"><i class="fa fa-check"></i><b>14.8</b> Self-links</a></li>
+<li class="chapter" data-level="14.9" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#symmetric-matrix"><i class="fa fa-check"></i><b>14.9</b> Symmetric matrix</a></li>
+<li class="chapter" data-level="14.10" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#directional-relations"><i class="fa fa-check"></i><b>14.10</b> Directional relations</a></li>
+<li class="chapter" data-level="14.11" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#scaling"><i class="fa fa-check"></i><b>14.11</b> Scaling</a></li>
+<li class="chapter" data-level="14.12" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#reduce"><i class="fa fa-check"></i><b>14.12</b> Reduce</a></li>
+<li class="chapter" data-level="14.13" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#input-as-a-data-frame"><i class="fa fa-check"></i><b>14.13</b> Input as a data frame</a>
+<ul>
+<li class="chapter" data-level="14.13.1" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#multiple-links-between-two-sectors"><i class="fa fa-check"></i><b>14.13.1</b> Multiple links between two sectors</a></li>
+<li class="chapter" data-level="14.13.2" data-path="the-chorddiagram-function.html"><a href="the-chorddiagram-function.html#unequal-width-of-the-link-ends"><i class="fa fa-check"></i><b>14.13.2</b> Unequal width of the link ends</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html"><i class="fa fa-check"></i><b>15</b> Advanced usage of <code>chordDiagram()</code></a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#organization-of-tracks"><i class="fa fa-check"></i><b>15.1</b> Organization of tracks</a></li>
+<li class="chapter" data-level="15.2" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-labels"><i class="fa fa-check"></i><b>15.2</b> Customize sector labels</a></li>
+<li class="chapter" data-level="15.3" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#customize-sector-axes"><i class="fa fa-check"></i><b>15.3</b> Customize sector axes</a></li>
+<li class="chapter" data-level="15.4" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#put-horizontally-or-vertically-symmetric"><i class="fa fa-check"></i><b>15.4</b> Put horizontally or vertically symmetric</a></li>
+<li class="chapter" data-level="15.5" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#compare-two-chord-diagrams"><i class="fa fa-check"></i><b>15.5</b> Compare two Chord diagrams</a></li>
+<li class="chapter" data-level="15.6" data-path="advanced-usage-of-chorddiagram.html"><a href="advanced-usage-of-chorddiagram.html#multiple-group-chord-diagram"><i class="fa fa-check"></i><b>15.6</b> Multiple-group Chord diagram</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="a-complex-example-of-chord-diagram.html"><a href="a-complex-example-of-chord-diagram.html"><i class="fa fa-check"></i><b>16</b> A complex example of Chord diagram</a></li>
+<li class="part"><span><b>IV Others</b></span></li>
+<li class="chapter" data-level="17" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html"><i class="fa fa-check"></i><b>17</b> Make fun of the package</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-clock"><i class="fa fa-check"></i><b>17.1</b> A clock</a></li>
+<li class="chapter" data-level="17.2" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#a-dartboard"><i class="fa fa-check"></i><b>17.2</b> A dartboard</a></li>
+<li class="chapter" data-level="17.3" data-path="make-fun-of-the-package.html"><a href="make-fun-of-the-package.html#ba-gua-and-tai-ji"><i class="fa fa-check"></i><b>17.3</b> Ba-Gua and Tai-Ji</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Circular Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jokergoo/circlize_book/edit/master/%s",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

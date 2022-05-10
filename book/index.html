@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Circular Visualization in R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/jokergoo/circlize-book/book" />
-  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
   <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   <meta name="github-repo" content="jokergoo/circlize_book" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Circular Visualization in R" />
   
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
 
 <meta name="author" content="Zuguang Gu" />
 
@@ -32,8 +32,9 @@
   
 
 <link rel="next" href="introduction.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,16 +50,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -119,6 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -170,10 +171,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.7</b> Axes</a></li>
 <li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#barplots-boxplots-and-violin-plots"><i class="fa fa-check"></i><b>3.8</b> Barplots, boxplots and violin plots</a></li>
 <li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#circular-arrows"><i class="fa fa-check"></i><b>3.9</b> Circular arrows</a></li>
-<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.10</b> Raster image</a></li>
-<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.11</b> Links</a></li>
-<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.12</b> Highlight sectors and tracks</a></li>
-<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.13</b> Work together with the base graphic system</a></li>
+<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#labels"><i class="fa fa-check"></i><b>3.10</b> Labels</a></li>
+<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.11</b> Raster image</a></li>
+<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.12</b> Links</a></li>
+<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.13</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.14" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.14</b> Work together with the base graphic system</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
 <li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
@@ -252,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="12.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>12.1</b> Ideograms</a></li>
 <li class="chapter" data-level="12.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>12.2</b> Heatmaps</a></li>
-<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
+<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels-1"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
 <li class="chapter" data-level="12.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>12.4</b> Genomic axes</a></li>
 <li class="chapter" data-level="12.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>12.5</b> Genomic density and Rainfall plot</a></li>
 </ul></li>
@@ -326,44 +328,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Circular Visualization in R</h1>
 <p class="author"><em>Zuguang Gu</em></p>
-<p class="date"><em>last revised on 2020-11-27</em></p>
+<p class="date"><em>last revised on 2022-05-10</em></p>
 </div>
-<div id="about" class="section level1 unnumbered" number="">
+<div id="about" class="section level1 unnumbered">
 <h1>About</h1>
 <p>This is the documentation of the
 <a href="https://cran.r-project.org/package=circlize"><strong>circlize</strong></a> package. Examples
-in the book are generated under version 0.4.12.1004.</p>
+in the book are generated under version 0.4.15.</p>
 <p>If you use <strong>circlize</strong> in your publications, I am appreciated if you can cite:</p>
 <p>Gu, Z. (2014) circlize implements and enhances circular visualization in R.
 Bioinformatics. DOI:
 <a href="https://doi.org/10.1093/bioinformatics/btu393">10.1093/bioinformatics/btu393</a></p>
 <p><img src="images/circlize_cover.jpg" style="width:500px;border:2px solid black;" /></p>
 <p>Session info:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
-<pre><code>## R version 4.0.2 (2020-06-22)
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<pre><code>## R version 4.1.2 (2021-11-01)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
-## Running under: macOS Catalina 10.15.5
+## Running under: macOS Big Sur 10.16
 ## 
 ## Matrix products: default
-## BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-## LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+## BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
 ## 
 ## locale:
-## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+## [1] C/UTF-8/C/C/C/C
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] circlize_0.4.12.1004
+## [1] circlize_0.4.15
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] bookdown_0.21       digest_0.6.27       grid_4.0.2         
-##  [4] magrittr_2.0.1      evaluate_0.14       rlang_0.4.8        
-##  [7] stringi_1.5.3       GlobalOptions_0.1.2 rmarkdown_2.5      
-## [10] tools_4.0.2         stringr_1.4.0       xfun_0.19          
-## [13] yaml_2.2.1          compiler_4.0.2      colorspace_2.0-0   
-## [16] shape_1.4.5         htmltools_0.5.0     knitr_1.30</code></pre>
+##  [1] bookdown_0.24       digest_0.6.29       R6_2.5.1           
+##  [4] grid_4.1.2          jsonlite_1.7.2      magrittr_2.0.1     
+##  [7] evaluate_0.14       stringi_1.7.6       rlang_0.4.12       
+## [10] GlobalOptions_0.1.2 jquerylib_0.1.4     bslib_0.3.1        
+## [13] rmarkdown_2.11      tools_4.1.2         stringr_1.4.0      
+## [16] xfun_0.29           yaml_2.2.1          fastmap_1.1.0      
+## [19] compiler_4.1.2      colorspace_2.0-2    shape_1.4.6        
+## [22] htmltools_0.5.2     knitr_1.37          sass_0.4.0</code></pre>
 
 </div>
 
@@ -379,7 +383,6 @@ Bioinformatics. DOI:
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -398,6 +401,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -418,6 +422,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

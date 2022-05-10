@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Legends | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Legends | Circular Visualization in R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/jokergoo/circlize-book/book" />
-  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
   <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   <meta name="github-repo" content="jokergoo/circlize_book" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 4 Legends | Circular Visualization in R" />
   
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
 
 <meta name="author" content="Zuguang Gu" />
 
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="graphics.html"/>
 <link rel="next" href="high-level-plots.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,16 +50,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -119,6 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -170,10 +171,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.7</b> Axes</a></li>
 <li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#barplots-boxplots-and-violin-plots"><i class="fa fa-check"></i><b>3.8</b> Barplots, boxplots and violin plots</a></li>
 <li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#circular-arrows"><i class="fa fa-check"></i><b>3.9</b> Circular arrows</a></li>
-<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.10</b> Raster image</a></li>
-<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.11</b> Links</a></li>
-<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.12</b> Highlight sectors and tracks</a></li>
-<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.13</b> Work together with the base graphic system</a></li>
+<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#labels"><i class="fa fa-check"></i><b>3.10</b> Labels</a></li>
+<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.11</b> Raster image</a></li>
+<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.12</b> Links</a></li>
+<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.13</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.14" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.14</b> Work together with the base graphic system</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
 <li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
@@ -252,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="12.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>12.1</b> Ideograms</a></li>
 <li class="chapter" data-level="12.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>12.2</b> Heatmaps</a></li>
-<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
+<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels-1"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
 <li class="chapter" data-level="12.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>12.4</b> Genomic axes</a></li>
 <li class="chapter" data-level="12.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>12.5</b> Genomic density and Rainfall plot</a></li>
 </ul></li>
@@ -338,29 +340,29 @@ circle is generated. The first track will have a legend that contains points,
 the second track will have a legend that contains lines, and the links
 correspond to a continuous color mapping. The code is wrapped into a function
 so that it can be used repeatedly.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="legends.html#cb107-1"></a><span class="kw">library</span>(circlize)</span>
-<span id="cb107-2"><a href="legends.html#cb107-2"></a></span>
-<span id="cb107-3"><a href="legends.html#cb107-3"></a>col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
-<span id="cb107-4"><a href="legends.html#cb107-4"></a>circlize_plot =<span class="st"> </span><span class="cf">function</span>() {</span>
-<span id="cb107-5"><a href="legends.html#cb107-5"></a>    <span class="kw">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb107-6"><a href="legends.html#cb107-6"></a>    sectors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span>
-<span id="cb107-7"><a href="legends.html#cb107-7"></a>    <span class="kw">circos.initialize</span>(sectors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb107-8"><a href="legends.html#cb107-8"></a>    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb107-9"><a href="legends.html#cb107-9"></a>        <span class="kw">circos.points</span>(<span class="kw">runif</span>(<span class="dv">20</span>), <span class="kw">runif</span>(<span class="dv">20</span>), <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">col =</span> <span class="dv">2</span>)</span>
-<span id="cb107-10"><a href="legends.html#cb107-10"></a>        <span class="kw">circos.points</span>(<span class="kw">runif</span>(<span class="dv">20</span>), <span class="kw">runif</span>(<span class="dv">20</span>), <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">col =</span> <span class="dv">3</span>)</span>
-<span id="cb107-11"><a href="legends.html#cb107-11"></a>    })</span>
-<span id="cb107-12"><a href="legends.html#cb107-12"></a>    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb107-13"><a href="legends.html#cb107-13"></a>        <span class="kw">circos.lines</span>(<span class="kw">sort</span>(<span class="kw">runif</span>(<span class="dv">20</span>)), <span class="kw">runif</span>(<span class="dv">20</span>), <span class="dt">col =</span> <span class="dv">4</span>)</span>
-<span id="cb107-14"><a href="legends.html#cb107-14"></a>        <span class="kw">circos.lines</span>(<span class="kw">sort</span>(<span class="kw">runif</span>(<span class="dv">20</span>)), <span class="kw">runif</span>(<span class="dv">20</span>), <span class="dt">col =</span> <span class="dv">5</span>)</span>
-<span id="cb107-15"><a href="legends.html#cb107-15"></a>    })</span>
-<span id="cb107-16"><a href="legends.html#cb107-16"></a></span>
-<span id="cb107-17"><a href="legends.html#cb107-17"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</span>
-<span id="cb107-18"><a href="legends.html#cb107-18"></a>        <span class="kw">circos.link</span>(<span class="kw">sample</span>(sectors, <span class="dv">1</span>), <span class="kw">sort</span>(<span class="kw">runif</span>(<span class="dv">10</span>))[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], </span>
-<span id="cb107-19"><a href="legends.html#cb107-19"></a>                    <span class="kw">sample</span>(sectors, <span class="dv">1</span>), <span class="kw">sort</span>(<span class="kw">runif</span>(<span class="dv">10</span>))[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],</span>
-<span id="cb107-20"><a href="legends.html#cb107-20"></a>                    <span class="dt">col =</span> <span class="kw">add_transparency</span>(<span class="kw">col_fun</span>(<span class="kw">rnorm</span>(<span class="dv">1</span>))))</span>
-<span id="cb107-21"><a href="legends.html#cb107-21"></a>    }</span>
-<span id="cb107-22"><a href="legends.html#cb107-22"></a>    <span class="kw">circos.clear</span>()</span>
-<span id="cb107-23"><a href="legends.html#cb107-23"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="legends.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(circlize)</span>
+<span id="cb110-2"><a href="legends.html#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="legends.html#cb110-3" aria-hidden="true" tabindex="-1"></a>col_fun <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb110-4"><a href="legends.html#cb110-4" aria-hidden="true" tabindex="-1"></a>circlize_plot <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb110-5"><a href="legends.html#cb110-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb110-6"><a href="legends.html#cb110-6" aria-hidden="true" tabindex="-1"></a>    sectors <span class="ot">=</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb110-7"><a href="legends.html#cb110-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.initialize</span>(sectors, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb110-8"><a href="legends.html#cb110-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb110-9"><a href="legends.html#cb110-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.points</span>(<span class="fu">runif</span>(<span class="dv">20</span>), <span class="fu">runif</span>(<span class="dv">20</span>), <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb110-10"><a href="legends.html#cb110-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.points</span>(<span class="fu">runif</span>(<span class="dv">20</span>), <span class="fu">runif</span>(<span class="dv">20</span>), <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="dv">3</span>)</span>
+<span id="cb110-11"><a href="legends.html#cb110-11" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb110-12"><a href="legends.html#cb110-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb110-13"><a href="legends.html#cb110-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.lines</span>(<span class="fu">sort</span>(<span class="fu">runif</span>(<span class="dv">20</span>)), <span class="fu">runif</span>(<span class="dv">20</span>), <span class="at">col =</span> <span class="dv">4</span>)</span>
+<span id="cb110-14"><a href="legends.html#cb110-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.lines</span>(<span class="fu">sort</span>(<span class="fu">runif</span>(<span class="dv">20</span>)), <span class="fu">runif</span>(<span class="dv">20</span>), <span class="at">col =</span> <span class="dv">5</span>)</span>
+<span id="cb110-15"><a href="legends.html#cb110-15" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb110-16"><a href="legends.html#cb110-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-17"><a href="legends.html#cb110-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb110-18"><a href="legends.html#cb110-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.link</span>(<span class="fu">sample</span>(sectors, <span class="dv">1</span>), <span class="fu">sort</span>(<span class="fu">runif</span>(<span class="dv">10</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], </span>
+<span id="cb110-19"><a href="legends.html#cb110-19" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">sample</span>(sectors, <span class="dv">1</span>), <span class="fu">sort</span>(<span class="fu">runif</span>(<span class="dv">10</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb110-20"><a href="legends.html#cb110-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">col =</span> <span class="fu">add_transparency</span>(<span class="fu">col_fun</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>))))</span>
+<span id="cb110-21"><a href="legends.html#cb110-21" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb110-22"><a href="legends.html#cb110-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.clear</span>()</span>
+<span id="cb110-23"><a href="legends.html#cb110-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>In <strong>ComplexHeatmap</strong> package with version higher than 1.99.0, there is a
 <code>Legend()</code> function which customizes legends with various styles. In following
 code, legends for the two tracks and links are constructed. In the end the
@@ -368,21 +370,21 @@ three legends are packed vertically by <code>packLegend()</code>. For more detai
 of <code>Legend()</code> and <code>packLegend()</code>, please refer to their help pages and <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/legends.html">the
 ComplexHeatmap
 book</a>.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="legends.html#cb108-1"></a><span class="kw">library</span>(ComplexHeatmap)</span>
-<span id="cb108-2"><a href="legends.html#cb108-2"></a><span class="co"># discrete</span></span>
-<span id="cb108-3"><a href="legends.html#cb108-3"></a>lgd_points =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">at =</span> <span class="kw">c</span>(<span class="st">&quot;label1&quot;</span>, <span class="st">&quot;label2&quot;</span>), <span class="dt">type =</span> <span class="st">&quot;points&quot;</span>, </span>
-<span id="cb108-4"><a href="legends.html#cb108-4"></a>    <span class="dt">legend_gp =</span> <span class="kw">gpar</span>(<span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">title_position =</span> <span class="st">&quot;topleft&quot;</span>, </span>
-<span id="cb108-5"><a href="legends.html#cb108-5"></a>    <span class="dt">title =</span> <span class="st">&quot;Track1&quot;</span>)</span>
-<span id="cb108-6"><a href="legends.html#cb108-6"></a><span class="co"># discrete</span></span>
-<span id="cb108-7"><a href="legends.html#cb108-7"></a>lgd_lines =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">at =</span> <span class="kw">c</span>(<span class="st">&quot;label3&quot;</span>, <span class="st">&quot;label4&quot;</span>), <span class="dt">type =</span> <span class="st">&quot;lines&quot;</span>, </span>
-<span id="cb108-8"><a href="legends.html#cb108-8"></a>    <span class="dt">legend_gp =</span> <span class="kw">gpar</span>(<span class="dt">col =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">lwd =</span> <span class="dv">2</span>), <span class="dt">title_position =</span> <span class="st">&quot;topleft&quot;</span>, </span>
-<span id="cb108-9"><a href="legends.html#cb108-9"></a>    <span class="dt">title =</span> <span class="st">&quot;Track2&quot;</span>)</span>
-<span id="cb108-10"><a href="legends.html#cb108-10"></a><span class="co"># continuous</span></span>
-<span id="cb108-11"><a href="legends.html#cb108-11"></a>lgd_links =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">at =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">-1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">col_fun =</span> col_fun, </span>
-<span id="cb108-12"><a href="legends.html#cb108-12"></a>    <span class="dt">title_position =</span> <span class="st">&quot;topleft&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Links&quot;</span>)</span>
-<span id="cb108-13"><a href="legends.html#cb108-13"></a></span>
-<span id="cb108-14"><a href="legends.html#cb108-14"></a>lgd_list_vertical =<span class="st"> </span><span class="kw">packLegend</span>(lgd_points, lgd_lines, lgd_links)</span>
-<span id="cb108-15"><a href="legends.html#cb108-15"></a>lgd_list_vertical</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="legends.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb111-2"><a href="legends.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="co"># discrete</span></span>
+<span id="cb111-3"><a href="legends.html#cb111-3" aria-hidden="true" tabindex="-1"></a>lgd_points <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">at =</span> <span class="fu">c</span>(<span class="st">&quot;label1&quot;</span>, <span class="st">&quot;label2&quot;</span>), <span class="at">type =</span> <span class="st">&quot;points&quot;</span>, </span>
+<span id="cb111-4"><a href="legends.html#cb111-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend_gp =</span> <span class="fu">gpar</span>(<span class="at">col =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">title_position =</span> <span class="st">&quot;topleft&quot;</span>, </span>
+<span id="cb111-5"><a href="legends.html#cb111-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Track1&quot;</span>)</span>
+<span id="cb111-6"><a href="legends.html#cb111-6" aria-hidden="true" tabindex="-1"></a><span class="co"># discrete</span></span>
+<span id="cb111-7"><a href="legends.html#cb111-7" aria-hidden="true" tabindex="-1"></a>lgd_lines <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">at =</span> <span class="fu">c</span>(<span class="st">&quot;label3&quot;</span>, <span class="st">&quot;label4&quot;</span>), <span class="at">type =</span> <span class="st">&quot;lines&quot;</span>, </span>
+<span id="cb111-8"><a href="legends.html#cb111-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend_gp =</span> <span class="fu">gpar</span>(<span class="at">col =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">lwd =</span> <span class="dv">2</span>), <span class="at">title_position =</span> <span class="st">&quot;topleft&quot;</span>, </span>
+<span id="cb111-9"><a href="legends.html#cb111-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Track2&quot;</span>)</span>
+<span id="cb111-10"><a href="legends.html#cb111-10" aria-hidden="true" tabindex="-1"></a><span class="co"># continuous</span></span>
+<span id="cb111-11"><a href="legends.html#cb111-11" aria-hidden="true" tabindex="-1"></a>lgd_links <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col_fun =</span> col_fun, </span>
+<span id="cb111-12"><a href="legends.html#cb111-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title_position =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Links&quot;</span>)</span>
+<span id="cb111-13"><a href="legends.html#cb111-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-14"><a href="legends.html#cb111-14" aria-hidden="true" tabindex="-1"></a>lgd_list_vertical <span class="ot">=</span> <span class="fu">packLegend</span>(lgd_points, lgd_lines, lgd_links)</span>
+<span id="cb111-15"><a href="legends.html#cb111-15" aria-hidden="true" tabindex="-1"></a>lgd_list_vertical</span></code></pre></div>
 <pre><code>## A pack of 3 legends</code></pre>
 <p><code>lgd_points</code>, <code>lgd_lines</code>, <code>lgd_links</code> and <code>lgd_list_vertical</code> can be thought
 as boxes which contain all graphical elements for legends and they can be
@@ -392,11 +394,11 @@ added to the plot by <code>draw()</code>.</p>
 two systems can be mixed somehow. We can directly add grid graphics to the base
 graphics. (Actually they are two independent layers but drawn on a same
 graphic device.)</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="legends.html#cb110-1"></a><span class="kw">circlize_plot</span>()</span>
-<span id="cb110-2"><a href="legends.html#cb110-2"></a><span class="co"># next the grid graphics are added directly to the plot</span></span>
-<span id="cb110-3"><a href="legends.html#cb110-3"></a><span class="co"># where circlize has created.</span></span>
-<span id="cb110-4"><a href="legends.html#cb110-4"></a><span class="kw">draw</span>(lgd_list_vertical, <span class="dt">x =</span> <span class="kw">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:directly-add"></span>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="legends.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circlize_plot</span>()</span>
+<span id="cb113-2"><a href="legends.html#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="co"># next the grid graphics are added directly to the plot</span></span>
+<span id="cb113-3"><a href="legends.html#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="co"># where circlize has created.</span></span>
+<span id="cb113-4"><a href="legends.html#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(lgd_list_vertical, <span class="at">x =</span> <span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">y =</span> <span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">just =</span> <span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:directly-add"></span>
 <img src="04-legends_files/figure-html/directly-add-1.png" alt="Directly add grid graphics." width="384" />
 <p class="caption">
 Figure 4.1: Directly add grid graphics.
@@ -408,14 +410,14 @@ can see that one big problem is when there are many legends that the size for
 the legends is too big, they may overap to the circle. One solution is to
 split the legends into several parts and add each part to different corners in
 the plot (Figure <a href="legends.html#fig:two-legends">4.2</a>).</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="legends.html#cb111-1"></a>lgd_list_vertical2 =<span class="st"> </span><span class="kw">packLegend</span>(lgd_points, lgd_lines)</span>
-<span id="cb111-2"><a href="legends.html#cb111-2"></a><span class="kw">circlize_plot</span>()</span>
-<span id="cb111-3"><a href="legends.html#cb111-3"></a><span class="co"># next the grid graphics are added directly to the plot</span></span>
-<span id="cb111-4"><a href="legends.html#cb111-4"></a><span class="co"># where circlize has created.</span></span>
-<span id="cb111-5"><a href="legends.html#cb111-5"></a><span class="kw">draw</span>(lgd_list_vertical2, <span class="dt">x =</span> <span class="kw">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span>
-<span id="cb111-6"><a href="legends.html#cb111-6"></a><span class="kw">draw</span>(lgd_links, <span class="dt">x =</span> <span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;npc&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">unit</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), </span>
-<span id="cb111-7"><a href="legends.html#cb111-7"></a>    <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:two-legends"></span>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="legends.html#cb114-1" aria-hidden="true" tabindex="-1"></a>lgd_list_vertical2 <span class="ot">=</span> <span class="fu">packLegend</span>(lgd_points, lgd_lines)</span>
+<span id="cb114-2"><a href="legends.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circlize_plot</span>()</span>
+<span id="cb114-3"><a href="legends.html#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="co"># next the grid graphics are added directly to the plot</span></span>
+<span id="cb114-4"><a href="legends.html#cb114-4" aria-hidden="true" tabindex="-1"></a><span class="co"># where circlize has created.</span></span>
+<span id="cb114-5"><a href="legends.html#cb114-5" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(lgd_list_vertical2, <span class="at">x =</span> <span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">y =</span> <span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">just =</span> <span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span>
+<span id="cb114-6"><a href="legends.html#cb114-6" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(lgd_links, <span class="at">x =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;npc&quot;</span>) <span class="sc">-</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">y =</span> <span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>), </span>
+<span id="cb114-7"><a href="legends.html#cb114-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">just =</span> <span class="fu">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:two-legends"></span>
 <img src="04-legends_files/figure-html/two-legends-1.png" alt="Split into two legends." width="480" />
 <p class="caption">
 Figure 4.2: Split into two legends.
@@ -437,44 +439,44 @@ current graphic device instead of opening a new one.</p>
 <p>Here I use <code>plot.new()</code> to open a new graphic device. In interactive session,
 it seems ok if you also use <code>grid.newpage()</code>, but <code>grid.newpage()</code> gives error
 when building a <strong>knitr</strong> document.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="legends.html#cb112-1"></a><span class="kw">library</span>(gridBase)</span>
-<span id="cb112-2"><a href="legends.html#cb112-2"></a><span class="kw">plot.new</span>()</span>
-<span id="cb112-3"><a href="legends.html#cb112-3"></a>circle_size =<span class="st"> </span><span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;snpc&quot;</span>) <span class="co"># snpc unit gives you a square region</span></span>
-<span id="cb112-4"><a href="legends.html#cb112-4"></a></span>
-<span id="cb112-5"><a href="legends.html#cb112-5"></a><span class="kw">pushViewport</span>(<span class="kw">viewport</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">width =</span> circle_size, <span class="dt">height =</span> circle_size,</span>
-<span id="cb112-6"><a href="legends.html#cb112-6"></a>    <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;center&quot;</span>)))</span>
-<span id="cb112-7"><a href="legends.html#cb112-7"></a><span class="kw">par</span>(<span class="dt">omi =</span> <span class="kw">gridOMI</span>(), <span class="dt">new =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb112-8"><a href="legends.html#cb112-8"></a><span class="kw">circlize_plot</span>()</span>
-<span id="cb112-9"><a href="legends.html#cb112-9"></a><span class="kw">upViewport</span>()</span>
-<span id="cb112-10"><a href="legends.html#cb112-10"></a></span>
-<span id="cb112-11"><a href="legends.html#cb112-11"></a><span class="kw">draw</span>(lgd_list_vertical, <span class="dt">x =</span> circle_size, <span class="dt">just =</span> <span class="st">&quot;left&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="legends.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridBase)</span>
+<span id="cb115-2"><a href="legends.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.new</span>()</span>
+<span id="cb115-3"><a href="legends.html#cb115-3" aria-hidden="true" tabindex="-1"></a>circle_size <span class="ot">=</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;snpc&quot;</span>) <span class="co"># snpc unit gives you a square region</span></span>
+<span id="cb115-4"><a href="legends.html#cb115-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-5"><a href="legends.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fl">0.5</span>, <span class="at">width =</span> circle_size, <span class="at">height =</span> circle_size,</span>
+<span id="cb115-6"><a href="legends.html#cb115-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">just =</span> <span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;center&quot;</span>)))</span>
+<span id="cb115-7"><a href="legends.html#cb115-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">omi =</span> <span class="fu">gridOMI</span>(), <span class="at">new =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb115-8"><a href="legends.html#cb115-8" aria-hidden="true" tabindex="-1"></a><span class="fu">circlize_plot</span>()</span>
+<span id="cb115-9"><a href="legends.html#cb115-9" aria-hidden="true" tabindex="-1"></a><span class="fu">upViewport</span>()</span>
+<span id="cb115-10"><a href="legends.html#cb115-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-11"><a href="legends.html#cb115-11" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(lgd_list_vertical, <span class="at">x =</span> circle_size, <span class="at">just =</span> <span class="st">&quot;left&quot;</span>)</span></code></pre></div>
 <p><img src="04-legends_files/figure-html/right-legend-1.png" width="446.150971128609" style="display: block; margin: auto;" /></p>
 <p>The legends can also be put at the bottom of the circular plot and it is just
 a matter how users arrange the grid viewports. In this case, all legends are
 changed to horizontal style, and three legends are packed horizontally as
 well.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="legends.html#cb113-1"></a>lgd_points =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">at =</span> <span class="kw">c</span>(<span class="st">&quot;label1&quot;</span>, <span class="st">&quot;label2&quot;</span>), <span class="dt">type =</span> <span class="st">&quot;points&quot;</span>, </span>
-<span id="cb113-2"><a href="legends.html#cb113-2"></a>    <span class="dt">legend_gp =</span> <span class="kw">gpar</span>(<span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">title_position =</span> <span class="st">&quot;topleft&quot;</span>, </span>
-<span id="cb113-3"><a href="legends.html#cb113-3"></a>    <span class="dt">title =</span> <span class="st">&quot;Track1&quot;</span>, <span class="dt">nrow =</span> <span class="dv">1</span>)</span>
-<span id="cb113-4"><a href="legends.html#cb113-4"></a></span>
-<span id="cb113-5"><a href="legends.html#cb113-5"></a>lgd_lines =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">at =</span> <span class="kw">c</span>(<span class="st">&quot;label3&quot;</span>, <span class="st">&quot;label4&quot;</span>), <span class="dt">type =</span> <span class="st">&quot;lines&quot;</span>, </span>
-<span id="cb113-6"><a href="legends.html#cb113-6"></a>    <span class="dt">legend_gp =</span> <span class="kw">gpar</span>(<span class="dt">col =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">lwd =</span> <span class="dv">2</span>), <span class="dt">title_position =</span> <span class="st">&quot;topleft&quot;</span>, </span>
-<span id="cb113-7"><a href="legends.html#cb113-7"></a>    <span class="dt">title =</span> <span class="st">&quot;Track2&quot;</span>, <span class="dt">nrow =</span> <span class="dv">1</span>)</span>
-<span id="cb113-8"><a href="legends.html#cb113-8"></a></span>
-<span id="cb113-9"><a href="legends.html#cb113-9"></a>lgd_links =<span class="st"> </span><span class="kw">Legend</span>(<span class="dt">at =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">-1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">col_fun =</span> col_fun, </span>
-<span id="cb113-10"><a href="legends.html#cb113-10"></a>    <span class="dt">title_position =</span> <span class="st">&quot;topleft&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Links&quot;</span>, <span class="dt">direction =</span> <span class="st">&quot;horizontal&quot;</span>)</span>
-<span id="cb113-11"><a href="legends.html#cb113-11"></a></span>
-<span id="cb113-12"><a href="legends.html#cb113-12"></a>lgd_list_horizontal =<span class="st"> </span><span class="kw">packLegend</span>(lgd_points, lgd_lines, lgd_links, </span>
-<span id="cb113-13"><a href="legends.html#cb113-13"></a>    <span class="dt">direction =</span> <span class="st">&quot;horizontal&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="legends.html#cb116-1" aria-hidden="true" tabindex="-1"></a>lgd_points <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">at =</span> <span class="fu">c</span>(<span class="st">&quot;label1&quot;</span>, <span class="st">&quot;label2&quot;</span>), <span class="at">type =</span> <span class="st">&quot;points&quot;</span>, </span>
+<span id="cb116-2"><a href="legends.html#cb116-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend_gp =</span> <span class="fu">gpar</span>(<span class="at">col =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">title_position =</span> <span class="st">&quot;topleft&quot;</span>, </span>
+<span id="cb116-3"><a href="legends.html#cb116-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Track1&quot;</span>, <span class="at">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb116-4"><a href="legends.html#cb116-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-5"><a href="legends.html#cb116-5" aria-hidden="true" tabindex="-1"></a>lgd_lines <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">at =</span> <span class="fu">c</span>(<span class="st">&quot;label3&quot;</span>, <span class="st">&quot;label4&quot;</span>), <span class="at">type =</span> <span class="st">&quot;lines&quot;</span>, </span>
+<span id="cb116-6"><a href="legends.html#cb116-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend_gp =</span> <span class="fu">gpar</span>(<span class="at">col =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">lwd =</span> <span class="dv">2</span>), <span class="at">title_position =</span> <span class="st">&quot;topleft&quot;</span>, </span>
+<span id="cb116-7"><a href="legends.html#cb116-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Track2&quot;</span>, <span class="at">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb116-8"><a href="legends.html#cb116-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-9"><a href="legends.html#cb116-9" aria-hidden="true" tabindex="-1"></a>lgd_links <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col_fun =</span> col_fun, </span>
+<span id="cb116-10"><a href="legends.html#cb116-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title_position =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Links&quot;</span>, <span class="at">direction =</span> <span class="st">&quot;horizontal&quot;</span>)</span>
+<span id="cb116-11"><a href="legends.html#cb116-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-12"><a href="legends.html#cb116-12" aria-hidden="true" tabindex="-1"></a>lgd_list_horizontal <span class="ot">=</span> <span class="fu">packLegend</span>(lgd_points, lgd_lines, lgd_links, </span>
+<span id="cb116-13"><a href="legends.html#cb116-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="st">&quot;horizontal&quot;</span>)</span></code></pre></div>
 <p>Similar code to arrange viewports.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="legends.html#cb114-1"></a><span class="kw">plot.new</span>()</span>
-<span id="cb114-2"><a href="legends.html#cb114-2"></a><span class="kw">pushViewport</span>(<span class="kw">viewport</span>(<span class="dt">x =</span> <span class="fl">0.5</span>, <span class="dt">y =</span> <span class="dv">1</span>, <span class="dt">width =</span> circle_size, <span class="dt">height =</span> circle_size,</span>
-<span id="cb114-3"><a href="legends.html#cb114-3"></a>    <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;top&quot;</span>)))</span>
-<span id="cb114-4"><a href="legends.html#cb114-4"></a><span class="kw">par</span>(<span class="dt">omi =</span> <span class="kw">gridOMI</span>(), <span class="dt">new =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb114-5"><a href="legends.html#cb114-5"></a><span class="kw">circlize_plot</span>()</span>
-<span id="cb114-6"><a href="legends.html#cb114-6"></a><span class="kw">upViewport</span>()</span>
-<span id="cb114-7"><a href="legends.html#cb114-7"></a></span>
-<span id="cb114-8"><a href="legends.html#cb114-8"></a><span class="kw">draw</span>(lgd_list_horizontal, <span class="dt">y =</span> <span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;npc&quot;</span>) <span class="op">-</span><span class="st"> </span>circle_size, <span class="dt">just =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="legends.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.new</span>()</span>
+<span id="cb117-2"><a href="legends.html#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="dv">1</span>, <span class="at">width =</span> circle_size, <span class="at">height =</span> circle_size,</span>
+<span id="cb117-3"><a href="legends.html#cb117-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">just =</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;top&quot;</span>)))</span>
+<span id="cb117-4"><a href="legends.html#cb117-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">omi =</span> <span class="fu">gridOMI</span>(), <span class="at">new =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb117-5"><a href="legends.html#cb117-5" aria-hidden="true" tabindex="-1"></a><span class="fu">circlize_plot</span>()</span>
+<span id="cb117-6"><a href="legends.html#cb117-6" aria-hidden="true" tabindex="-1"></a><span class="fu">upViewport</span>()</span>
+<span id="cb117-7"><a href="legends.html#cb117-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-8"><a href="legends.html#cb117-8" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(lgd_list_horizontal, <span class="at">y =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;npc&quot;</span>) <span class="sc">-</span> circle_size, <span class="at">just =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
 <p><img src="04-legends_files/figure-html/bottom-legend-1.png" width="384" style="display: block; margin: auto;" /></p>
 
 </div>
@@ -488,7 +490,6 @@ well.</p>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -507,6 +508,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -527,6 +529,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

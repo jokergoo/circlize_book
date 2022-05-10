@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Circular layout | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Circular layout | Circular Visualization in R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/jokergoo/circlize-book/book" />
-  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
   <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   <meta name="github-repo" content="jokergoo/circlize_book" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 2 Circular layout | Circular Visualization in R" />
   
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
 
 <meta name="author" content="Zuguang Gu" />
 
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="introduction.html"/>
 <link rel="next" href="graphics.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,16 +50,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -119,6 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -170,10 +171,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.7</b> Axes</a></li>
 <li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#barplots-boxplots-and-violin-plots"><i class="fa fa-check"></i><b>3.8</b> Barplots, boxplots and violin plots</a></li>
 <li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#circular-arrows"><i class="fa fa-check"></i><b>3.9</b> Circular arrows</a></li>
-<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.10</b> Raster image</a></li>
-<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.11</b> Links</a></li>
-<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.12</b> Highlight sectors and tracks</a></li>
-<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.13</b> Work together with the base graphic system</a></li>
+<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#labels"><i class="fa fa-check"></i><b>3.10</b> Labels</a></li>
+<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.11</b> Raster image</a></li>
+<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.12</b> Links</a></li>
+<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.13</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.14" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.14</b> Work together with the base graphic system</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
 <li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
@@ -252,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="12.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>12.1</b> Ideograms</a></li>
 <li class="chapter" data-level="12.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>12.2</b> Heatmaps</a></li>
-<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
+<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels-1"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
 <li class="chapter" data-level="12.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>12.4</b> Genomic axes</a></li>
 <li class="chapter" data-level="12.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>12.5</b> Genomic density and Rainfall plot</a></li>
 </ul></li>
@@ -340,7 +342,7 @@ coordinate system. For users, they only need to imagine that each cell is a
 normal rectangular plotting region (data coordinate) in which x-lim and y-lim
 are ranges of data in that cell. <strong>circlize</strong> knows which cell you are in and
 does all the transformations automatically.</p>
-<div class="figure" style="text-align: center"><span id="fig:coordinate-transformation"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:coordinate-transformation"></span>
 <img src="02-circlize-layout_files/figure-html/coordinate-transformation-1.png" alt="Transformation between different coordinates" width="768" />
 <p class="caption">
 Figure 2.1: Transformation between different coordinates
@@ -358,7 +360,7 @@ inside</strong>.</p>
 <code>initialize layout -&gt; create track -&gt; add graphics -&gt; create track -&gt; add graphics - ... -&gt; clear</code>.
 Graphics can be added at any time as long as the tracks are created.
 Details are shown in Figure <a href="circular-layout.html#fig:circlize-order">2.2</a> and as follows:</p>
-<div class="figure" style="text-align: center"><span id="fig:circlize-order"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-order"></span>
 <img src="02-circlize-layout_files/figure-html/circlize-order-1.png" alt="Order of drawing circular layout." width="768" />
 <p class="caption">
 Figure 2.2: Order of drawing circular layout.
@@ -405,12 +407,12 @@ the “current” track index and as the two functions are used just after
 <code>circos.track()</code>, the “current” track index is what the two functions
 expect and it can be ommited when calling the two functions.</p></li>
 </ol>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="circular-layout.html#cb12-1"></a><span class="kw">circos.initialize</span>(sectors, xlim)</span>
-<span id="cb12-2"><a href="circular-layout.html#cb12-2"></a><span class="kw">circos.track</span>(ylim)</span>
-<span id="cb12-3"><a href="circular-layout.html#cb12-3"></a><span class="cf">for</span>(sector.index <span class="cf">in</span> all.sector.index) {</span>
-<span id="cb12-4"><a href="circular-layout.html#cb12-4"></a>    <span class="kw">circos.points</span>(x1, y1, sector.index)</span>
-<span id="cb12-5"><a href="circular-layout.html#cb12-5"></a>    <span class="kw">circos.lines</span>(x2, y2, sector.index)</span>
-<span id="cb12-6"><a href="circular-layout.html#cb12-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="circular-layout.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(sectors, xlim)</span>
+<span id="cb12-2"><a href="circular-layout.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(ylim)</span>
+<span id="cb12-3"><a href="circular-layout.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(sector.index <span class="cf">in</span> all.sector.index) {</span>
+<span id="cb12-4"><a href="circular-layout.html#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.points</span>(x1, y1, sector.index)</span>
+<span id="cb12-5"><a href="circular-layout.html#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.lines</span>(x2, y2, sector.index)</span>
+<span id="cb12-6"><a href="circular-layout.html#cb12-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Add graphics in a batch mode. In following code, <code>circos.trackPoints()</code>
 and <code>circos.trackLines()</code> need a categorical variable, a vector of x
@@ -425,10 +427,10 @@ specify which track to add the graphics. Similarly, since these two are
 called just after <code>circos.track()</code>, the graphics are added in the newly
 created track right away.</p></li>
 </ol>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="circular-layout.html#cb13-1"></a><span class="kw">circos.initialize</span>(sectors, xlim)</span>
-<span id="cb13-2"><a href="circular-layout.html#cb13-2"></a><span class="kw">circos.track</span>(ylim)</span>
-<span id="cb13-3"><a href="circular-layout.html#cb13-3"></a><span class="kw">circos.trackPoints</span>(sectors, x, y)</span>
-<span id="cb13-4"><a href="circular-layout.html#cb13-4"></a><span class="kw">circos.trackLines</span>(sectors, x, y)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="circular-layout.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(sectors, xlim)</span>
+<span id="cb13-2"><a href="circular-layout.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(ylim)</span>
+<span id="cb13-3"><a href="circular-layout.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.trackPoints</span>(sectors, x, y)</span>
+<span id="cb13-4"><a href="circular-layout.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.trackLines</span>(sectors, x, y)</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Use a panel function to add self-defined graphics as soon as the cell has
 been created. This is the way recommended and you can find most of the
@@ -440,14 +442,14 @@ without specifying sector index and track index.</p>
 <p>If you look at following code, you will find the code inside <code>panel.fun</code>
 is as natural as using <code>points()</code> or <code>lines()</code> in the normal R graphic
 system. This is a way to help you think a cell is an “imaginary
-rectangular plotting region”.</p></li>
+rectangular plotting region.”</p></li>
 </ol>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="circular-layout.html#cb14-1"></a><span class="kw">circos.initialize</span>(sectors, xlim)</span>
-<span id="cb14-2"><a href="circular-layout.html#cb14-2"></a><span class="kw">circos.track</span>(sectors, all_x, all_y, ylim,</span>
-<span id="cb14-3"><a href="circular-layout.html#cb14-3"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb14-4"><a href="circular-layout.html#cb14-4"></a>        <span class="kw">circos.points</span>(x, y)</span>
-<span id="cb14-5"><a href="circular-layout.html#cb14-5"></a>        <span class="kw">circos.lines</span>(x, y)</span>
-<span id="cb14-6"><a href="circular-layout.html#cb14-6"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="circular-layout.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(sectors, xlim)</span>
+<span id="cb14-2"><a href="circular-layout.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(sectors, all_x, all_y, ylim,</span>
+<span id="cb14-3"><a href="circular-layout.html#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb14-4"><a href="circular-layout.html#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.points</span>(x, y)</span>
+<span id="cb14-5"><a href="circular-layout.html#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.lines</span>(x, y)</span>
+<span id="cb14-6"><a href="circular-layout.html#cb14-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>There are several internal variables keeping tracing of the current sector and
 track when applying <code>circos.track()</code> and <code>circos.update()</code>. Thus, although
 functions like <code>circos.points()</code>, <code>circos.lines()</code> need to specify the index
@@ -463,7 +465,7 @@ explicitly and it will be added in the most recently created or updated cell.</p
 one sector. The intersection of a sector and a track is called a cell which
 can be thought as an imaginary plotting region for data points. In this
 section, we introduce how to set data ranges on x and y directions in cells.</p>
-<div class="figure" style="text-align: center"><span id="fig:circlize-coordinate"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-coordinate"></span>
 <img src="02-circlize-layout_files/figure-html/circlize-coordinate-1.png" alt="Sectors and tracks in circular layout." width="384" />
 <p class="caption">
 Figure 2.3: Sectors and tracks in circular layout.
@@ -480,10 +482,10 @@ for <code>xilm</code> is a two-column matrix with same number of rows as number 
 sectors that each row in <code>xlim</code> corresponds to one sector. If <code>xlim</code> has row
 names which already cover sector names, row order of <code>xlim</code> is automatically
 adjusted. If <code>xlim</code> is a vector of length two, all sectors have the same x range.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="circular-layout.html#cb15-1"></a><span class="kw">circos.initialize</span>(sectors, <span class="dt">x =</span> x)</span>
-<span id="cb15-2"><a href="circular-layout.html#cb15-2"></a><span class="kw">circos.initialize</span>(sectors, <span class="dt">xlim =</span> xlim)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="circular-layout.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(sectors, <span class="at">x =</span> x)</span>
+<span id="cb15-2"><a href="circular-layout.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(sectors, <span class="at">xlim =</span> xlim)</span></code></pre></div>
 <p>If <code>sectors</code> is not specified, the row names of <code>xlim</code> are taken as the value for <code>sectors</code>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="circular-layout.html#cb16-1"></a><span class="kw">circos.initialize</span>(<span class="dt">xlim =</span> xlim)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="circular-layout.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(<span class="at">xlim =</span> xlim)</span></code></pre></div>
 <p>After the initialization of the layout, you may not see anything drawn or only an
 empty graphical device is opened. That is because no track has been created
 yet, however, the layout has already been recorded internally.</p>
@@ -494,12 +496,12 @@ are determined by the order of levels of the input factor</strong>. If the value
 you want to change the order of sectors, you can just change of the level of
 <code>sectors</code> variable. The following code generates plots with different
 sector orders (Figure <a href="circular-layout.html#fig:circlize-factor">2.4</a>).</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="circular-layout.html#cb17-1"></a>sectors =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;d&quot;</span>, <span class="st">&quot;f&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>)</span>
-<span id="cb17-2"><a href="circular-layout.html#cb17-2"></a>s1 =<span class="st"> </span><span class="kw">factor</span>(sectors)</span>
-<span id="cb17-3"><a href="circular-layout.html#cb17-3"></a><span class="kw">circos.initialize</span>(s1, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb17-4"><a href="circular-layout.html#cb17-4"></a>s2 =<span class="st"> </span><span class="kw">factor</span>(sectors, <span class="dt">levels =</span> sectors)</span>
-<span id="cb17-5"><a href="circular-layout.html#cb17-5"></a><span class="kw">circos.initialize</span>(s2, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:circlize-factor"></span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="circular-layout.html#cb17-1" aria-hidden="true" tabindex="-1"></a>sectors <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;d&quot;</span>, <span class="st">&quot;f&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>)</span>
+<span id="cb17-2"><a href="circular-layout.html#cb17-2" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">=</span> <span class="fu">factor</span>(sectors)</span>
+<span id="cb17-3"><a href="circular-layout.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(s1, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb17-4"><a href="circular-layout.html#cb17-4" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">=</span> <span class="fu">factor</span>(sectors, <span class="at">levels =</span> sectors)</span>
+<span id="cb17-5"><a href="circular-layout.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(s2, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-factor"></span>
 <img src="02-circlize-layout_files/figure-html/circlize-factor-1.png" alt="Different sector orders." width="768" />
 <p class="caption">
 Figure 2.4: Different sector orders.
@@ -514,9 +516,9 @@ length two if it is specified.</p>
 <p><code>x</code> can also be specified in <code>circos.track()</code>, but it is only used to send to
 <code>panel.fun</code>. In Section <a href="circular-layout.html#panel-fun">2.7</a>, we will introduce how <code>x</code> and <code>y</code>
 are sent to each cell and how the graphics are added.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="circular-layout.html#cb18-1"></a><span class="kw">circos.track</span>(sectors, <span class="dt">y =</span> y)</span>
-<span id="cb18-2"><a href="circular-layout.html#cb18-2"></a><span class="kw">circos.track</span>(sectors, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb18-3"><a href="circular-layout.html#cb18-3"></a><span class="kw">circos.track</span>(sectors, <span class="dt">x =</span> x, <span class="dt">y =</span> y)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="circular-layout.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(sectors, <span class="at">y =</span> y)</span>
+<span id="cb18-2"><a href="circular-layout.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(sectors, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb18-3"><a href="circular-layout.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(sectors, <span class="at">x =</span> x, <span class="at">y =</span> y)</span></code></pre></div>
 <p>In the track creation step, since all sectors have already been allocated in
 the circle, if <code>sectors</code> argument is not set, <code>circos.track()</code> would create
 plotting regions for all available sectors. Also, levels of <code>sectors</code> do
@@ -525,25 +527,25 @@ be determined in the initialization step. If users only create cells for a subse
 of sectors in the track (not all sectors), in fact, cells in remaining
 unspecified sectors are created as well, but with no borders (pretending they
 are not created).</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="circular-layout.html#cb19-1"></a><span class="co"># assume `sectors` only covers a subset of sectors</span></span>
-<span id="cb19-2"><a href="circular-layout.html#cb19-2"></a><span class="co"># You will only see cells that are covered in `sectors` have borders</span></span>
-<span id="cb19-3"><a href="circular-layout.html#cb19-3"></a><span class="kw">circos.track</span>(sectors, <span class="dt">y =</span> y)</span>
-<span id="cb19-4"><a href="circular-layout.html#cb19-4"></a><span class="co"># You will see all cells have borders</span></span>
-<span id="cb19-5"><a href="circular-layout.html#cb19-5"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb19-6"><a href="circular-layout.html#cb19-6"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">ranges</span>(y))</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="circular-layout.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assume `sectors` only covers a subset of sectors</span></span>
+<span id="cb19-2"><a href="circular-layout.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You will only see cells that are covered in `sectors` have borders</span></span>
+<span id="cb19-3"><a href="circular-layout.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(sectors, <span class="at">y =</span> y)</span>
+<span id="cb19-4"><a href="circular-layout.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># You will see all cells have borders</span></span>
+<span id="cb19-5"><a href="circular-layout.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb19-6"><a href="circular-layout.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">ranges</span>(y))</span></code></pre></div>
 <p>Cells are basic units in the circular plot and are independent from each
 other. After the creation of cells, they have self-contained meta values of
 x-lim and y-lim (data range measured in data coordinate). So if you are adding
 graphics in one cell, you do not need to consider things outside the cell and
 also you do not need to consider you are in the circle. Just pretending it is
 normal rectangle region with its own coordinate.</p>
-<div class="figure" style="text-align: center"><span id="fig:circlize-direction"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-direction"></span>
 <img src="02-circlize-layout_files/figure-html/circlize-direction-1.png" alt="Sector directions." width="768" />
 <p class="caption">
 Figure 2.5: Sector directions.
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:circlize-axis-direction"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-axis-direction"></span>
 <img src="02-circlize-layout_files/figure-html/circlize-axis-direction-1.png" alt="Axes directions." width="768" />
 <p class="caption">
 Figure 2.6: Axes directions.
@@ -620,7 +622,7 @@ clockwise (Figure <a href="circular-layout.html#fig:circlize-direction">2.5</a>.
 Note this new parameter was only available from version 0.4.11 (Figure <a href="circular-layout.html#fig:circlize-axis-direction">2.6</a>).
 Also see more details <a href="https://jokergoo.github.io/2020/08/17/reverse-x-axes-in-the-circular-plot/">on this blog post</a>.</li>
 </ul>
-<div class="figure" style="text-align: center"><span id="fig:circlize-region"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-region"></span>
 <img src="02-circlize-layout_files/figure-html/circlize-region-1.png" alt="Regions in a cell." width="384" />
 <p class="caption">
 Figure 2.7: Regions in a cell.
@@ -689,13 +691,13 @@ values of <code>cell.padding</code> (left and right paddings) can not be modifie
 of the circular layout, after making each plot, you need to call <code>circos.clear()</code>
 to manually reset all the parameters.</p>
 <p><code>circos.par()</code> can be used in the same way as <code>options()</code>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="circular-layout.html#cb20-1"></a><span class="kw">circos.par</span>(<span class="st">&quot;start.degree&quot;</span> =<span class="st"> </span><span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="circular-layout.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="st">&quot;start.degree&quot;</span> <span class="ot">=</span> <span class="dv">30</span>)</span></code></pre></div>
 <p>Or use the <code>$</code> symbol:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="circular-layout.html#cb21-1"></a>circos.par<span class="op">$</span>start.degree =<span class="st"> </span><span class="dv">30</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="circular-layout.html#cb21-1" aria-hidden="true" tabindex="-1"></a>circos.par<span class="sc">$</span>start.degree <span class="ot">=</span> <span class="dv">30</span></span></code></pre></div>
 <p>Use <code>RESET</code> to reset all the options to their default values:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="circular-layout.html#cb22-1"></a><span class="kw">circos.par</span>(<span class="dt">RESET =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="circular-layout.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="at">RESET =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Simply enter <code>circos.par</code> prints the current values of all parameters:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="circular-layout.html#cb23-1"></a>circos.par</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="circular-layout.html#cb23-1" aria-hidden="true" tabindex="-1"></a>circos.par</span></code></pre></div>
 <pre><code>##  Option                  Value           
 ##  -----------------------:------------------
 ##  start.degree            0               
@@ -712,7 +714,8 @@ to manually reset all the parameters.</p>
 ##  major.by.degree         10              
 ##  clock.wise              TRUE            
 ##  xaxis.clock.wise        TRUE            
-##  message                 TRUE</code></pre>
+##  message                 TRUE            
+##  help                    TRUE</code></pre>
 <p><code>circos.par()</code> is aimed to be designed to be independent to the number or the
 order of sectors, however, there is an exception. The <code>gap.degree</code>/<code>gap.after</code> parameter
 controls the spaces between two neighbouring sectors. When it is set as a
@@ -756,9 +759,9 @@ borders and background colors inside <code>panel.fun</code>.
 <code>get.cell.meta.data("cell.xlim")</code>/<code>CELL_META$cell.xlim</code> and
 <code>get.cell.meta.data("cell.ylim")</code>/<code>CELL_META$cell.ylim</code> give you dimensions of
 the plotting region and you can customize plot regions directly by e.g.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="circular-layout.html#cb25-1"></a><span class="kw">circos.rect</span>(CELL_META<span class="op">$</span>cell.xlim[<span class="dv">1</span>], CELL_META<span class="op">$</span>cell.ylim[<span class="dv">1</span>],</span>
-<span id="cb25-2"><a href="circular-layout.html#cb25-2"></a>            CELL_META<span class="op">$</span>cell.xlim[<span class="dv">2</span>], CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>], </span>
-<span id="cb25-3"><a href="circular-layout.html#cb25-3"></a>            <span class="dt">col =</span> <span class="st">&quot;#FF000040&quot;</span>, <span class="dt">border =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="circular-layout.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.rect</span>(CELL_META<span class="sc">$</span>cell.xlim[<span class="dv">1</span>], CELL_META<span class="sc">$</span>cell.ylim[<span class="dv">1</span>],</span>
+<span id="cb25-2"><a href="circular-layout.html#cb25-2" aria-hidden="true" tabindex="-1"></a>            CELL_META<span class="sc">$</span>cell.xlim[<span class="dv">2</span>], CELL_META<span class="sc">$</span>cell.ylim[<span class="dv">2</span>], </span>
+<span id="cb25-3"><a href="circular-layout.html#cb25-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="st">&quot;#FF000040&quot;</span>, <span class="at">border =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><code>circos.track()</code> provides <code>track.margin</code> and <code>cell.padding</code> arguments that
 they only control track margins and cell paddings for the current track. Of course
 the second and fourth value (the left and the right padding) in <code>cell.padding</code> are ignored.</p>
@@ -770,12 +773,12 @@ to a track which already exists, <code>circos.track()</code> actually <strong>re
 track. In this case, coordinates on y directions can be re-defined, but
 settings related to the positions of the track such as the height of the track
 can not be modified.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="circular-layout.html#cb26-1"></a><span class="kw">circos.track</span>(sectors, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.index =</span> <span class="dv">1</span>, ...)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="circular-layout.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(sectors, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">track.index =</span> <span class="dv">1</span>, ...)</span></code></pre></div>
 <p>For a single cell, <code>circos.update()</code> can be used to erase all graphics that
 have been already added in the cell. However, the data coordinate in the cell
 keeps unchanged.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="circular-layout.html#cb27-1"></a><span class="kw">circos.update</span>(sector.index, track.index)</span>
-<span id="cb27-2"><a href="circular-layout.html#cb27-2"></a><span class="kw">circos.points</span>(x, y, sector.index, track.index)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="circular-layout.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.update</span>(sector.index, track.index)</span>
+<span id="cb27-2"><a href="circular-layout.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.points</span>(x, y, sector.index, track.index)</span></code></pre></div>
 </div>
 <div id="panel-fun" class="section level2" number="2.7">
 <h2><span class="header-section-number">2.7</span> <code>panel.fun</code> argument</h2>
@@ -787,23 +790,23 @@ value for <code>x</code> and <code>y</code> are automatically extracted from <co
 following example, inside <code>panel.fun</code>, in sector <code>a</code>, the value of <code>x</code> is
 <code>1:3</code> and in sector <code>b</code>, value of <code>x</code> is <code>4:5</code>. If <code>x</code> or <code>y</code> in
 <code>circos.track()</code> is <code>NULL</code>, then <code>x</code> or <code>y</code> inside <code>panel.fun</code> is also <code>NULL</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="circular-layout.html#cb28-1"></a>sectors =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
-<span id="cb28-2"><a href="circular-layout.html#cb28-2"></a>x =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
-<span id="cb28-3"><a href="circular-layout.html#cb28-3"></a>y =<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span></span>
-<span id="cb28-4"><a href="circular-layout.html#cb28-4"></a><span class="kw">circos.track</span>(sectors, <span class="dt">x =</span> x, <span class="dt">y =</span> y,</span>
-<span id="cb28-5"><a href="circular-layout.html#cb28-5"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb28-6"><a href="circular-layout.html#cb28-6"></a>        <span class="kw">circos.points</span>(x, y)</span>
-<span id="cb28-7"><a href="circular-layout.html#cb28-7"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="circular-layout.html#cb28-1" aria-hidden="true" tabindex="-1"></a>sectors <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
+<span id="cb28-2"><a href="circular-layout.html#cb28-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb28-3"><a href="circular-layout.html#cb28-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">1</span></span>
+<span id="cb28-4"><a href="circular-layout.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(sectors, <span class="at">x =</span> x, <span class="at">y =</span> y,</span>
+<span id="cb28-5"><a href="circular-layout.html#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb28-6"><a href="circular-layout.html#cb28-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.points</span>(x, y)</span>
+<span id="cb28-7"><a href="circular-layout.html#cb28-7" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>Since you can obtain the current sector index in <code>panel.fun</code>, you can ignore the values
 from the <code>x</code> and <code>y</code> arguments, while do subsetting by your own:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="circular-layout.html#cb29-1"></a>sectors =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
-<span id="cb29-2"><a href="circular-layout.html#cb29-2"></a>x2 =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
-<span id="cb29-3"><a href="circular-layout.html#cb29-3"></a>y2 =<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span></span>
-<span id="cb29-4"><a href="circular-layout.html#cb29-4"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">range</span>(y),</span>
-<span id="cb29-5"><a href="circular-layout.html#cb29-5"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) { <span class="co"># here x and y are useless</span></span>
-<span id="cb29-6"><a href="circular-layout.html#cb29-6"></a>        l =<span class="st"> </span>sectors <span class="op">==</span><span class="st"> </span>CELL_META<span class="op">$</span>sector.index</span>
-<span id="cb29-7"><a href="circular-layout.html#cb29-7"></a>        <span class="kw">circos.points</span>(x2[l], y2[l])</span>
-<span id="cb29-8"><a href="circular-layout.html#cb29-8"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="circular-layout.html#cb29-1" aria-hidden="true" tabindex="-1"></a>sectors <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
+<span id="cb29-2"><a href="circular-layout.html#cb29-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb29-3"><a href="circular-layout.html#cb29-3" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">=</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">1</span></span>
+<span id="cb29-4"><a href="circular-layout.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">range</span>(y),</span>
+<span id="cb29-5"><a href="circular-layout.html#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) { <span class="co"># here x and y are useless</span></span>
+<span id="cb29-6"><a href="circular-layout.html#cb29-6" aria-hidden="true" tabindex="-1"></a>        l <span class="ot">=</span> sectors <span class="sc">==</span> CELL_META<span class="sc">$</span>sector.index</span>
+<span id="cb29-7"><a href="circular-layout.html#cb29-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.points</span>(x2[l], y2[l])</span>
+<span id="cb29-8"><a href="circular-layout.html#cb29-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>In <code>panel.fun</code>, one thing important is that if you use any low-level graphic
 functions, you don’t need to specify <code>sector.index</code> and <code>track.index</code>
 explicitly. Remember that when applying <code>circos.track()</code>, cells in the track
@@ -819,8 +822,8 @@ users to understand and customize new graphics.</p>
 <p>Inside <code>panel.fun</code>, information of the ‘current’ cell can be obtained through
 <code>get.cell.meta.data()</code>. Also this function takes the ‘current’ sector and
 ‘current’ track by default.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="circular-layout.html#cb30-1"></a><span class="kw">get.cell.meta.data</span>(name)</span>
-<span id="cb30-2"><a href="circular-layout.html#cb30-2"></a><span class="kw">get.cell.meta.data</span>(name, sector.index, track.index)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="circular-layout.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get.cell.meta.data</span>(name)</span>
+<span id="cb30-2"><a href="circular-layout.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get.cell.meta.data</span>(name, sector.index, track.index)</span></code></pre></div>
 <p>Information that can be extracted by <code>get.cell.meta.data()</code> are:</p>
 <ul>
 <li><code>sector.index</code>: The name for the sector.</li>
@@ -849,12 +852,12 @@ paddings.</li>
 </ul>
 <p>Following example code uses <code>get.cell.meta.data()</code> to add sector index in the
 center of each cell.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="circular-layout.html#cb31-1"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> ylim, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb31-2"><a href="circular-layout.html#cb31-2"></a>    sector.index =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)</span>
-<span id="cb31-3"><a href="circular-layout.html#cb31-3"></a>    xcenter =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xcenter&quot;</span>)</span>
-<span id="cb31-4"><a href="circular-layout.html#cb31-4"></a>    ycenter =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ycenter&quot;</span>)</span>
-<span id="cb31-5"><a href="circular-layout.html#cb31-5"></a>    <span class="kw">circos.text</span>(xcenter, ycenter, sector.index)</span>
-<span id="cb31-6"><a href="circular-layout.html#cb31-6"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="circular-layout.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> ylim, <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb31-2"><a href="circular-layout.html#cb31-2" aria-hidden="true" tabindex="-1"></a>    sector.index <span class="ot">=</span> <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>)</span>
+<span id="cb31-3"><a href="circular-layout.html#cb31-3" aria-hidden="true" tabindex="-1"></a>    xcenter <span class="ot">=</span> <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;xcenter&quot;</span>)</span>
+<span id="cb31-4"><a href="circular-layout.html#cb31-4" aria-hidden="true" tabindex="-1"></a>    ycenter <span class="ot">=</span> <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;ycenter&quot;</span>)</span>
+<span id="cb31-5"><a href="circular-layout.html#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.text</span>(xcenter, ycenter, sector.index)</span>
+<span id="cb31-6"><a href="circular-layout.html#cb31-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p><code>get.cell.meta.data()</code> can also be used outside <code>panel.fun</code>, but you need to
 explictly specify <code>sector.index</code> and <code>track.index</code> arguments unless the current
 index is what you want.</p>
@@ -864,26 +867,26 @@ write. Actually, the value of <code>CELL_META</code> itself is meaningless, but 
 <code>CELL_META$sector.index</code> is automatically redirected to
 <code>get.cell.meta.data("sector.index")</code>. Following code rewrites previous example
 code with <code>CELL_META</code>.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="circular-layout.html#cb32-1"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> ylim, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb32-2"><a href="circular-layout.html#cb32-2"></a>    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, </span>
-<span id="cb32-3"><a href="circular-layout.html#cb32-3"></a>        CELL_META<span class="op">$</span>sector.index)</span>
-<span id="cb32-4"><a href="circular-layout.html#cb32-4"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="circular-layout.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> ylim, <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb32-2"><a href="circular-layout.html#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.text</span>(CELL_META<span class="sc">$</span>xcenter, CELL_META<span class="sc">$</span>ycenter, </span>
+<span id="cb32-3"><a href="circular-layout.html#cb32-3" aria-hidden="true" tabindex="-1"></a>        CELL_META<span class="sc">$</span>sector.index)</span>
+<span id="cb32-4"><a href="circular-layout.html#cb32-4" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>Please note <code>CELL_META</code> only extracts information for the “current” cell, thus,
 it is recommended to use only in <code>panel.fun</code>.</p>
 <p>Nevertheless, if you have several lines of code which need to be executed out of <code>panel.fun</code>,
 you can flag the specified cell as the “current” cell by <code>set.current.cell()</code>, which can save you from typing
 too many <code>sector.index = ..., track.index = ...</code>. E.g. following code</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="circular-layout.html#cb33-1"></a><span class="kw">circos.text</span>(<span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xcenter&quot;</span>, sector.index, track.index),</span>
-<span id="cb33-2"><a href="circular-layout.html#cb33-2"></a>            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ycenter&quot;</span>, sector.index, track.index),</span>
-<span id="cb33-3"><a href="circular-layout.html#cb33-3"></a>            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>, sector.index, track.index),</span>
-<span id="cb33-4"><a href="circular-layout.html#cb33-4"></a>            sector.index, track.index)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="circular-layout.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.text</span>(<span class="fu">get.cell.meta.data</span>(<span class="st">&quot;xcenter&quot;</span>, sector.index, track.index),</span>
+<span id="cb33-2"><a href="circular-layout.html#cb33-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;ycenter&quot;</span>, sector.index, track.index),</span>
+<span id="cb33-3"><a href="circular-layout.html#cb33-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>, sector.index, track.index),</span>
+<span id="cb33-4"><a href="circular-layout.html#cb33-4" aria-hidden="true" tabindex="-1"></a>            sector.index, track.index)</span></code></pre></div>
 <p>can be simplified to:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="circular-layout.html#cb34-1"></a><span class="kw">set.current.cell</span>(sector.index, track.index)</span>
-<span id="cb34-2"><a href="circular-layout.html#cb34-2"></a><span class="kw">circos.text</span>(<span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xcenter&quot;</span>),</span>
-<span id="cb34-3"><a href="circular-layout.html#cb34-3"></a>            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ycenter&quot;</span>),</span>
-<span id="cb34-4"><a href="circular-layout.html#cb34-4"></a>            <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>))</span>
-<span id="cb34-5"><a href="circular-layout.html#cb34-5"></a><span class="co"># or even simpler</span></span>
-<span id="cb34-6"><a href="circular-layout.html#cb34-6"></a><span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, CELL_META<span class="op">$</span>sector.index)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="circular-layout.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.current.cell</span>(sector.index, track.index)</span>
+<span id="cb34-2"><a href="circular-layout.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.text</span>(<span class="fu">get.cell.meta.data</span>(<span class="st">&quot;xcenter&quot;</span>),</span>
+<span id="cb34-3"><a href="circular-layout.html#cb34-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;ycenter&quot;</span>),</span>
+<span id="cb34-4"><a href="circular-layout.html#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;sector.index&quot;</span>))</span>
+<span id="cb34-5"><a href="circular-layout.html#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># or even simpler</span></span>
+<span id="cb34-6"><a href="circular-layout.html#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.text</span>(CELL_META<span class="sc">$</span>xcenter, CELL_META<span class="sc">$</span>ycenter, CELL_META<span class="sc">$</span>sector.index)</span></code></pre></div>
 </div>
 <div id="other-utilities" class="section level2" number="2.8">
 <h2><span class="header-section-number">2.8</span> Other utilities</h2>
@@ -894,18 +897,18 @@ basically done by the core function <code>circlize()</code>. The function transf
 coordinate (coordinate in the cell) to the polar coordinate and its companion
 <code>reverse.circlize()</code> transforms from polar coordinate to a specified data coordinate. The
 default transformation is applied in the <code>current</code> cell.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="circular-layout.html#cb35-1"></a>sectors =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
-<span id="cb35-2"><a href="circular-layout.html#cb35-2"></a><span class="kw">circos.initialize</span>(sectors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb35-3"><a href="circular-layout.html#cb35-3"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb35-4"><a href="circular-layout.html#cb35-4"></a><span class="co"># x = 0.5, y = 0.5 in sector a and track 1</span></span>
-<span id="cb35-5"><a href="circular-layout.html#cb35-5"></a><span class="kw">circlize</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="circular-layout.html#cb35-1" aria-hidden="true" tabindex="-1"></a>sectors <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
+<span id="cb35-2"><a href="circular-layout.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(sectors, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb35-3"><a href="circular-layout.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb35-4"><a href="circular-layout.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># x = 0.5, y = 0.5 in sector a and track 1</span></span>
+<span id="cb35-5"><a href="circular-layout.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">circlize</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="at">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="at">track.index =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>##      theta  rou
 ## [1,] 270.5 0.89</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="circular-layout.html#cb37-1"></a><span class="co"># theta = 90, rou = 0.9 in the polar coordinate</span></span>
-<span id="cb37-2"><a href="circular-layout.html#cb37-2"></a><span class="kw">reverse.circlize</span>(<span class="dv">90</span>, <span class="fl">0.9</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="circular-layout.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># theta = 90, rou = 0.9 in the polar coordinate</span></span>
+<span id="cb37-2"><a href="circular-layout.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">reverse.circlize</span>(<span class="dv">90</span>, <span class="fl">0.9</span>, <span class="at">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="at">track.index =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>##             x    y
 ## [1,] 1.519774 0.56</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="circular-layout.html#cb39-1"></a><span class="kw">reverse.circlize</span>(<span class="dv">90</span>, <span class="fl">0.9</span>, <span class="dt">sector.index =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="circular-layout.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reverse.circlize</span>(<span class="dv">90</span>, <span class="fl">0.9</span>, <span class="at">sector.index =</span> <span class="st">&quot;b&quot;</span>, <span class="at">track.index =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>##              x    y
 ## [1,] 0.5028249 0.56</code></pre>
 <p>You can see the results are different for two <code>reverse.circlize()</code>
@@ -925,35 +928,34 @@ is not exported.</p>
 by <code>rasterImage()</code> which is applied in the canvas coordinate. Note how we change
 coordinate from data coordinate to canvas coordinate by using <code>circlize()</code>
 and <code>circlize:::polar2Cartesian()</code>.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="circular-layout.html#cb41-1"></a><span class="kw">library</span>(yaml)</span>
-<span id="cb41-2"><a href="circular-layout.html#cb41-2"></a>data =<span class="st"> </span><span class="kw">yaml.load_file</span>(<span class="st">&quot;https://raw.githubusercontent.com/Templarian/slack-emoji-pokemon/master/pokemon.yaml&quot;</span>)</span>
-<span id="cb41-3"><a href="circular-layout.html#cb41-3"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb41-4"><a href="circular-layout.html#cb41-4"></a>pokemon_list =<span class="st"> </span>data<span class="op">$</span>emojis[<span class="kw">sample</span>(<span class="kw">length</span>(data<span class="op">$</span>emojis), <span class="dv">40</span>)]</span>
-<span id="cb41-5"><a href="circular-layout.html#cb41-5"></a>pokemon_name =<span class="st"> </span><span class="kw">sapply</span>(pokemon_list, <span class="cf">function</span>(x) x<span class="op">$</span>name)</span>
-<span id="cb41-6"><a href="circular-layout.html#cb41-6"></a>pokemon_src =<span class="st"> </span><span class="kw">sapply</span>(pokemon_list, <span class="cf">function</span>(x) x<span class="op">$</span>src)</span>
-<span id="cb41-7"><a href="circular-layout.html#cb41-7"></a></span>
-<span id="cb41-8"><a href="circular-layout.html#cb41-8"></a><span class="kw">library</span>(EBImage)</span>
-<span id="cb41-9"><a href="circular-layout.html#cb41-9"></a><span class="kw">circos.par</span>(<span class="st">&quot;points.overflow.warning&quot;</span> =<span class="st"> </span><span class="ot">FALSE</span>)</span>
-<span id="cb41-10"><a href="circular-layout.html#cb41-10"></a><span class="kw">circos.initialize</span>(pokemon_name, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb41-11"><a href="circular-layout.html#cb41-11"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb41-12"><a href="circular-layout.html#cb41-12"></a>    pos =<span class="st"> </span>circlize<span class="op">:::</span><span class="kw">polar2Cartesian</span>(<span class="kw">circlize</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter))</span>
-<span id="cb41-13"><a href="circular-layout.html#cb41-13"></a>    image =<span class="st"> </span>EBImage<span class="op">::</span><span class="kw">readImage</span>(pokemon_src[CELL_META<span class="op">$</span>sector.numeric.index])</span>
-<span id="cb41-14"><a href="circular-layout.html#cb41-14"></a>    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>cell.ylim[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">mm_y</span>(<span class="dv">2</span>),</span>
-<span id="cb41-15"><a href="circular-layout.html#cb41-15"></a>        CELL_META<span class="op">$</span>sector.index, <span class="dt">facing =</span> <span class="st">&quot;clockwise&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb41-16"><a href="circular-layout.html#cb41-16"></a>        <span class="dt">adj =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>), <span class="dt">cex =</span> <span class="fl">0.6</span>)</span>
-<span id="cb41-17"><a href="circular-layout.html#cb41-17"></a>    <span class="kw">rasterImage</span>(image, </span>
-<span id="cb41-18"><a href="circular-layout.html#cb41-18"></a>        <span class="dt">xleft =</span> pos[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="fl">0.05</span>, <span class="dt">ybottom =</span> pos[<span class="dv">1</span>, <span class="dv">2</span>] <span class="op">-</span><span class="st"> </span><span class="fl">0.05</span>,</span>
-<span id="cb41-19"><a href="circular-layout.html#cb41-19"></a>        <span class="dt">xright =</span> pos[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="fl">0.05</span>, <span class="dt">ytop =</span> pos[<span class="dv">1</span>, <span class="dv">2</span>]<span class="op">+</span><span class="st"> </span><span class="fl">0.05</span>)</span>
-<span id="cb41-20"><a href="circular-layout.html#cb41-20"></a>}, <span class="dt">bg.border =</span> <span class="dv">1</span>, <span class="dt">track.height =</span> <span class="fl">0.15</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:circular-pokemon"></span>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="circular-layout.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yaml)</span>
+<span id="cb41-2"><a href="circular-layout.html#cb41-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">yaml.load_file</span>(<span class="st">&quot;https://raw.githubusercontent.com/Templarian/slack-emoji-pokemon/master/pokemon.yaml&quot;</span>)</span>
+<span id="cb41-3"><a href="circular-layout.html#cb41-3" aria-hidden="true" tabindex="-1"></a>pokemon_list <span class="ot">=</span> data<span class="sc">$</span>emojis[<span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>]</span>
+<span id="cb41-4"><a href="circular-layout.html#cb41-4" aria-hidden="true" tabindex="-1"></a>pokemon_name <span class="ot">=</span> <span class="fu">sapply</span>(pokemon_list, <span class="cf">function</span>(x) x<span class="sc">$</span>name)</span>
+<span id="cb41-5"><a href="circular-layout.html#cb41-5" aria-hidden="true" tabindex="-1"></a>pokemon_src <span class="ot">=</span> <span class="fu">sapply</span>(pokemon_list, <span class="cf">function</span>(x) x<span class="sc">$</span>src)</span>
+<span id="cb41-6"><a href="circular-layout.html#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="circular-layout.html#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EBImage)</span>
+<span id="cb41-8"><a href="circular-layout.html#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="st">&quot;points.overflow.warning&quot;</span> <span class="ot">=</span> <span class="cn">FALSE</span>)</span>
+<span id="cb41-9"><a href="circular-layout.html#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(pokemon_name, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb41-10"><a href="circular-layout.html#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb41-11"><a href="circular-layout.html#cb41-11" aria-hidden="true" tabindex="-1"></a>    pos <span class="ot">=</span> circlize<span class="sc">:::</span><span class="fu">polar2Cartesian</span>(<span class="fu">circlize</span>(CELL_META<span class="sc">$</span>xcenter, CELL_META<span class="sc">$</span>ycenter))</span>
+<span id="cb41-12"><a href="circular-layout.html#cb41-12" aria-hidden="true" tabindex="-1"></a>    image <span class="ot">=</span> EBImage<span class="sc">::</span><span class="fu">readImage</span>(pokemon_src[CELL_META<span class="sc">$</span>sector.numeric.index])</span>
+<span id="cb41-13"><a href="circular-layout.html#cb41-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.text</span>(CELL_META<span class="sc">$</span>xcenter, CELL_META<span class="sc">$</span>cell.ylim[<span class="dv">1</span>] <span class="sc">-</span> <span class="fu">mm_y</span>(<span class="dv">2</span>),</span>
+<span id="cb41-14"><a href="circular-layout.html#cb41-14" aria-hidden="true" tabindex="-1"></a>        CELL_META<span class="sc">$</span>sector.index, <span class="at">facing =</span> <span class="st">&quot;clockwise&quot;</span>, <span class="at">niceFacing =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-15"><a href="circular-layout.html#cb41-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">adj =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>), <span class="at">cex =</span> <span class="fl">0.6</span>)</span>
+<span id="cb41-16"><a href="circular-layout.html#cb41-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rasterImage</span>(image, </span>
+<span id="cb41-17"><a href="circular-layout.html#cb41-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">xleft =</span> pos[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">ybottom =</span> pos[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">-</span> <span class="fl">0.05</span>,</span>
+<span id="cb41-18"><a href="circular-layout.html#cb41-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">xright =</span> pos[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">+</span> <span class="fl">0.05</span>, <span class="at">ytop =</span> pos[<span class="dv">1</span>, <span class="dv">2</span>]<span class="sc">+</span> <span class="fl">0.05</span>)</span>
+<span id="cb41-19"><a href="circular-layout.html#cb41-19" aria-hidden="true" tabindex="-1"></a>}, <span class="at">bg.border =</span> <span class="dv">1</span>, <span class="at">track.height =</span> <span class="fl">0.15</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circular-pokemon"></span>
 <img src="02-circlize-layout_files/figure-html/circular-pokemon-1.png" alt="Add raster image to the circular plot." width="576" />
 <p class="caption">
 Figure 2.8: Add raster image to the circular plot.
 </p>
 </div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="circular-layout.html#cb42-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="circular-layout.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.clear</span>()</span></code></pre></div>
 <p>In <strong>circlize</strong> package, there is a <code>circos.raster()</code> function which directly
-adds raster images. It is introduced in Section <a href="graphics.html#raster-image">3.10</a>.</p>
+adds raster images. It is introduced in Section <a href="graphics.html#raster-image">3.11</a>.</p>
 </div>
 <div id="convert-functions" class="section level3" number="2.8.2">
 <h3><span class="header-section-number">2.8.2</span> Absolute units</h3>
@@ -969,76 +971,76 @@ data coordinate accordingly.</p>
 to the canvas coordinate in the radical direction, which normally define the
 heights of e.g. tracks. If users want to convert a string height or width to
 the canvas coordinate, directly use <code>strheight()</code> or <code>strwidth()</code> functions.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="circular-layout.html#cb43-1"></a><span class="kw">mm_h</span>(<span class="dv">2</span>) <span class="co"># 2mm</span></span>
-<span id="cb43-2"><a href="circular-layout.html#cb43-2"></a><span class="kw">cm_h</span>(<span class="dv">1</span>) <span class="co"># 1cm</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="circular-layout.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mm_h</span>(<span class="dv">2</span>) <span class="co"># 2mm</span></span>
+<span id="cb43-2"><a href="circular-layout.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cm_h</span>(<span class="dv">1</span>) <span class="co"># 1cm</span></span></code></pre></div>
 <p><code>mm_x()</code>, <code>cm_x()</code>, <code>inches_x()</code>/<code>inch_x()</code>, <code>mm_y()</code>, <code>cm_y()</code>,
 <code>inches_y()</code>/<code>inch_y()</code> convert absolute units to the data coordinate in the x
 or y direction. By default, the conversion is applied in the “current” cell,
 but it can still be used in other cells by specifying <code>sector.index</code> and
 <code>track.index</code> arguments.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="circular-layout.html#cb44-1"></a><span class="kw">mm_x</span>(<span class="dv">2</span>)</span>
-<span id="cb44-2"><a href="circular-layout.html#cb44-2"></a><span class="kw">mm_x</span>(<span class="dv">1</span>, sector.index, track.index)</span>
-<span id="cb44-3"><a href="circular-layout.html#cb44-3"></a><span class="kw">mm_y</span>(<span class="dv">2</span>)</span>
-<span id="cb44-4"><a href="circular-layout.html#cb44-4"></a><span class="kw">mm_y</span>(<span class="dv">1</span>, sector.index, track.index)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="circular-layout.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mm_x</span>(<span class="dv">2</span>)</span>
+<span id="cb44-2"><a href="circular-layout.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mm_x</span>(<span class="dv">1</span>, sector.index, track.index)</span>
+<span id="cb44-3"><a href="circular-layout.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mm_y</span>(<span class="dv">2</span>)</span>
+<span id="cb44-4"><a href="circular-layout.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mm_y</span>(<span class="dv">1</span>, sector.index, track.index)</span></code></pre></div>
 <p>Since the width of the cell is not identical from the top to the bottom in the
 cell, for <code>*_x()</code> function, the position on y direction where the convert is
 applied can be specified by the <code>h</code> argument (measured in data coordinate). By
 default it is converted at the middle point on y-axis.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="circular-layout.html#cb45-1"></a><span class="kw">mm_x</span>(<span class="dv">2</span>, h)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="circular-layout.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mm_x</span>(<span class="dv">2</span>, h)</span></code></pre></div>
 <p>Normally the difference of e.g. <code>mm_x(2)</code> at different y positions in a track
 is very small (unless the track has very big <code>track.height</code>), so in most
 cases, you can ignore the setting of <code>h</code> argument.</p>
 <p>Following plot (Figure <a href="circular-layout.html#fig:unit-convert">2.9</a>) is an example of setting absolute units.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="circular-layout.html#cb46-1"></a>sectors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span>
-<span id="cb46-2"><a href="circular-layout.html#cb46-2"></a><span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb46-3"><a href="circular-layout.html#cb46-3"></a><span class="kw">circos.initialize</span>(sectors, <span class="dt">xlim =</span> <span class="kw">cbind</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="kw">runif</span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>)))</span>
-<span id="cb46-4"><a href="circular-layout.html#cb46-4"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="kw">mm_h</span>(<span class="dv">5</span>),</span>
-<span id="cb46-5"><a href="circular-layout.html#cb46-5"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb46-6"><a href="circular-layout.html#cb46-6"></a>        <span class="kw">circos.lines</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="kw">mm_x</span>(<span class="dv">5</span>)), <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb46-7"><a href="circular-layout.html#cb46-7"></a>    })</span>
-<span id="cb46-8"><a href="circular-layout.html#cb46-8"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="kw">cm_h</span>(<span class="dv">1</span>),</span>
-<span id="cb46-9"><a href="circular-layout.html#cb46-9"></a>    <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">mm_h</span>(<span class="dv">2</span>)),</span>
-<span id="cb46-10"><a href="circular-layout.html#cb46-10"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb46-11"><a href="circular-layout.html#cb46-11"></a>        xcenter =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;xcenter&quot;</span>)</span>
-<span id="cb46-12"><a href="circular-layout.html#cb46-12"></a>        <span class="kw">circos.lines</span>(<span class="kw">c</span>(xcenter, xcenter), <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cm_y</span>(<span class="dv">1</span>)), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb46-13"><a href="circular-layout.html#cb46-13"></a>    })</span>
-<span id="cb46-14"><a href="circular-layout.html#cb46-14"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="kw">inch_h</span>(<span class="dv">1</span>),</span>
-<span id="cb46-15"><a href="circular-layout.html#cb46-15"></a>    <span class="dt">track.margin =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">mm_h</span>(<span class="dv">5</span>)),</span>
-<span id="cb46-16"><a href="circular-layout.html#cb46-16"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb46-17"><a href="circular-layout.html#cb46-17"></a>        line_length_on_x =<span class="st"> </span><span class="kw">cm_x</span>(<span class="dv">1</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>)</span>
-<span id="cb46-18"><a href="circular-layout.html#cb46-18"></a>        line_length_on_y =<span class="st"> </span><span class="kw">cm_y</span>(<span class="dv">1</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>)</span>
-<span id="cb46-19"><a href="circular-layout.html#cb46-19"></a>        <span class="kw">circos.lines</span>(<span class="kw">c</span>(<span class="dv">0</span>, line_length_on_x), <span class="kw">c</span>(<span class="dv">0</span>, line_length_on_y), <span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>)</span>
-<span id="cb46-20"><a href="circular-layout.html#cb46-20"></a>    })</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unit-convert"></span>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="circular-layout.html#cb46-1" aria-hidden="true" tabindex="-1"></a>sectors <span class="ot">=</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb46-2"><a href="circular-layout.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="at">cell.padding =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">track.margin =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb46-3"><a href="circular-layout.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(sectors, <span class="at">xlim =</span> <span class="fu">cbind</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="fu">runif</span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>)))</span>
+<span id="cb46-4"><a href="circular-layout.html#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">track.height =</span> <span class="fu">mm_h</span>(<span class="dv">5</span>),</span>
+<span id="cb46-5"><a href="circular-layout.html#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb46-6"><a href="circular-layout.html#cb46-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.lines</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span> <span class="sc">+</span> <span class="fu">mm_x</span>(<span class="dv">5</span>)), <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb46-7"><a href="circular-layout.html#cb46-7" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb46-8"><a href="circular-layout.html#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">track.height =</span> <span class="fu">cm_h</span>(<span class="dv">1</span>),</span>
+<span id="cb46-9"><a href="circular-layout.html#cb46-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">track.margin =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">mm_h</span>(<span class="dv">2</span>)),</span>
+<span id="cb46-10"><a href="circular-layout.html#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb46-11"><a href="circular-layout.html#cb46-11" aria-hidden="true" tabindex="-1"></a>        xcenter <span class="ot">=</span> <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;xcenter&quot;</span>)</span>
+<span id="cb46-12"><a href="circular-layout.html#cb46-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.lines</span>(<span class="fu">c</span>(xcenter, xcenter), <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">cm_y</span>(<span class="dv">1</span>)), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb46-13"><a href="circular-layout.html#cb46-13" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb46-14"><a href="circular-layout.html#cb46-14" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">track.height =</span> <span class="fu">inch_h</span>(<span class="dv">1</span>),</span>
+<span id="cb46-15"><a href="circular-layout.html#cb46-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">track.margin =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">mm_h</span>(<span class="dv">5</span>)),</span>
+<span id="cb46-16"><a href="circular-layout.html#cb46-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb46-17"><a href="circular-layout.html#cb46-17" aria-hidden="true" tabindex="-1"></a>        line_length_on_x <span class="ot">=</span> <span class="fu">cm_x</span>(<span class="dv">1</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb46-18"><a href="circular-layout.html#cb46-18" aria-hidden="true" tabindex="-1"></a>        line_length_on_y <span class="ot">=</span> <span class="fu">cm_y</span>(<span class="dv">1</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb46-19"><a href="circular-layout.html#cb46-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.lines</span>(<span class="fu">c</span>(<span class="dv">0</span>, line_length_on_x), <span class="fu">c</span>(<span class="dv">0</span>, line_length_on_y), <span class="at">col =</span> <span class="st">&quot;orange&quot;</span>)</span>
+<span id="cb46-20"><a href="circular-layout.html#cb46-20" aria-hidden="true" tabindex="-1"></a>    })</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unit-convert"></span>
 <img src="02-circlize-layout_files/figure-html/unit-convert-1.png" alt="Setting absolute units" width="576" />
 <p class="caption">
 Figure 2.9: Setting absolute units
 </p>
 </div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="circular-layout.html#cb47-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="circular-layout.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.clear</span>()</span></code></pre></div>
 </div>
 <div id="circos-info-and-circos-clear" class="section level3" number="2.8.3">
 <h3><span class="header-section-number">2.8.3</span> <code>circos.info()</code> and <code>circos.clear()</code></h3>
 <p>You can get basic information of your current circular plot by
 <code>circos.info()</code>. The function can be called at any time.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="circular-layout.html#cb48-1"></a>sectors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span>
-<span id="cb48-2"><a href="circular-layout.html#cb48-2"></a><span class="kw">circos.initialize</span>(sectors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb48-3"><a href="circular-layout.html#cb48-3"></a><span class="kw">circos.info</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="circular-layout.html#cb48-1" aria-hidden="true" tabindex="-1"></a>sectors <span class="ot">=</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb48-2"><a href="circular-layout.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(sectors, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb48-3"><a href="circular-layout.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.info</span>()</span></code></pre></div>
 <pre><code>## All your sectors:
 ## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;
 ## 
 ## No track has been created
 ## 
 ## Your current sector.index is a</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="circular-layout.html#cb50-1"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb50-2"><a href="circular-layout.html#cb50-2"></a><span class="kw">circos.info</span>(<span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">track.index =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="circular-layout.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb50-2"><a href="circular-layout.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.info</span>(<span class="at">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="at">track.index =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## sector index: &#39;a&#39;
 ## track index: 1
 ## xlim: [1, 2]
 ## ylim: [0, 1]
 ## cell.xlim: [0.991453, 2.008547]
 ## cell.ylim: [-0.1, 1.1]
-## xplot (degree): [0, 241]
+## xplot (degree): [360, 241]
 ## yplot (radius): [0.79, 0.99]
 ## cell.width (degree): 119
 ## cell.height (radius): 0.2
@@ -1047,7 +1049,7 @@ Figure 2.9: Setting absolute units
 ## 
 ## Your current sector.index is c
 ## Your current track.index is 1</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="circular-layout.html#cb52-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="circular-layout.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.clear</span>()</span></code></pre></div>
 <p>It can also add labels to all cells by <code>circos.info(plot = TRUE)</code>.</p>
 <p>You should always call <code>circos.clear()</code> at the end of every circular plot.
 There are several parameters for circular plot which can only be set before
@@ -1062,19 +1064,19 @@ to reset all these parameters.</p>
 there is a new <code>set_track_gap()</code> function which simplifies the setting of gaps
 between two tracks. With the <code>mm_h()</code>/<code>cm_h()</code>/<code>inch_h()</code> functions, it is very easy
 to set the gaps with physical units (Figure <a href="circular-layout.html#fig:set-track-gap">2.10</a>).</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="circular-layout.html#cb53-1"></a><span class="kw">circos.initialize</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb53-2"><a href="circular-layout.html#cb53-2"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb53-3"><a href="circular-layout.html#cb53-3"></a><span class="kw">set_track_gap</span>(<span class="kw">mm_h</span>(<span class="dv">2</span>)) <span class="co"># 2mm</span></span>
-<span id="cb53-4"><a href="circular-layout.html#cb53-4"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb53-5"><a href="circular-layout.html#cb53-5"></a><span class="kw">set_track_gap</span>(<span class="kw">cm_h</span>(<span class="fl">0.5</span>)) <span class="co"># 0.5cm</span></span>
-<span id="cb53-6"><a href="circular-layout.html#cb53-6"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:set-track-gap"></span>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="circular-layout.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb53-2"><a href="circular-layout.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb53-3"><a href="circular-layout.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set_track_gap</span>(<span class="fu">mm_h</span>(<span class="dv">2</span>)) <span class="co"># 2mm</span></span>
+<span id="cb53-4"><a href="circular-layout.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb53-5"><a href="circular-layout.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set_track_gap</span>(<span class="fu">cm_h</span>(<span class="fl">0.5</span>)) <span class="co"># 0.5cm</span></span>
+<span id="cb53-6"><a href="circular-layout.html#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:set-track-gap"></span>
 <img src="02-circlize-layout_files/figure-html/set-track-gap-1.png" alt="Setting gaps between tracks." width="576" />
 <p class="caption">
 Figure 2.10: Setting gaps between tracks.
 </p>
 </div>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="circular-layout.html#cb54-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="circular-layout.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.clear</span>()</span></code></pre></div>
 
 </div>
 </div>
@@ -1088,7 +1090,6 @@ Figure 2.10: Setting gaps between tracks.
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1107,6 +1108,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -1127,6 +1129,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

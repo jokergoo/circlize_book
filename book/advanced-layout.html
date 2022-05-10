@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Advanced layout | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Advanced layout | Circular Visualization in R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/jokergoo/circlize-book/book" />
-  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
   <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   <meta name="github-repo" content="jokergoo/circlize_book" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 7 Advanced layout | Circular Visualization in R" />
   
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
 
 <meta name="author" content="Zuguang Gu" />
 
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="circos-heatmap.html"/>
 <link rel="next" href="genomic-introduction.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,16 +50,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -119,6 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -170,10 +171,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.7</b> Axes</a></li>
 <li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#barplots-boxplots-and-violin-plots"><i class="fa fa-check"></i><b>3.8</b> Barplots, boxplots and violin plots</a></li>
 <li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#circular-arrows"><i class="fa fa-check"></i><b>3.9</b> Circular arrows</a></li>
-<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.10</b> Raster image</a></li>
-<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.11</b> Links</a></li>
-<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.12</b> Highlight sectors and tracks</a></li>
-<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.13</b> Work together with the base graphic system</a></li>
+<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#labels"><i class="fa fa-check"></i><b>3.10</b> Labels</a></li>
+<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.11</b> Raster image</a></li>
+<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.12</b> Links</a></li>
+<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.13</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.14" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.14</b> Work together with the base graphic system</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
 <li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
@@ -252,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="12.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>12.1</b> Ideograms</a></li>
 <li class="chapter" data-level="12.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>12.2</b> Heatmaps</a></li>
-<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
+<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels-1"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
 <li class="chapter" data-level="12.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>12.4</b> Genomic axes</a></li>
 <li class="chapter" data-level="12.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>12.5</b> Genomic density and Rainfall plot</a></li>
 </ul></li>
@@ -347,24 +349,24 @@ sectors, but with x direction zoomed.</p>
 <p>Following example shows more clearly the basic idea of this “horizontal”
 zooming.</p>
 <p>We first generate a data frame with six categories.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="advanced-layout.html#cb183-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb183-2"><a href="advanced-layout.html#cb183-2"></a>df =<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb183-3"><a href="advanced-layout.html#cb183-3"></a>    <span class="dt">sectors =</span> <span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>], <span class="dv">400</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb183-4"><a href="advanced-layout.html#cb183-4"></a>    <span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">400</span>),</span>
-<span id="cb183-5"><a href="advanced-layout.html#cb183-5"></a>    <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">400</span>),</span>
-<span id="cb183-6"><a href="advanced-layout.html#cb183-6"></a>    <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span></span>
-<span id="cb183-7"><a href="advanced-layout.html#cb183-7"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="advanced-layout.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb186-2"><a href="advanced-layout.html#cb186-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb186-3"><a href="advanced-layout.html#cb186-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">sectors =</span> <span class="fu">sample</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>], <span class="dv">400</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb186-4"><a href="advanced-layout.html#cb186-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">400</span>),</span>
+<span id="cb186-5"><a href="advanced-layout.html#cb186-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">400</span>),</span>
+<span id="cb186-6"><a href="advanced-layout.html#cb186-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb186-7"><a href="advanced-layout.html#cb186-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>We want to zoom sector a and the first 10 points in sector b. First we extract
 these data and format as a new data frame.</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="advanced-layout.html#cb184-1"></a>zoom_df_a =<span class="st"> </span>df[df<span class="op">$</span>sectors <span class="op">==</span><span class="st"> &quot;a&quot;</span>, ]</span>
-<span id="cb184-2"><a href="advanced-layout.html#cb184-2"></a>zoom_df_b =<span class="st"> </span>df[df<span class="op">$</span>sectors <span class="op">==</span><span class="st"> &quot;b&quot;</span>, ]</span>
-<span id="cb184-3"><a href="advanced-layout.html#cb184-3"></a>zoom_df_b =<span class="st"> </span>zoom_df_b[<span class="kw">order</span>(zoom_df_b[, <span class="dv">2</span>])[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], ]</span>
-<span id="cb184-4"><a href="advanced-layout.html#cb184-4"></a>zoom_df =<span class="st"> </span><span class="kw">rbind</span>(zoom_df_a, zoom_df_b)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="advanced-layout.html#cb187-1" aria-hidden="true" tabindex="-1"></a>zoom_df_a <span class="ot">=</span> df[df<span class="sc">$</span>sectors <span class="sc">==</span> <span class="st">&quot;a&quot;</span>, ]</span>
+<span id="cb187-2"><a href="advanced-layout.html#cb187-2" aria-hidden="true" tabindex="-1"></a>zoom_df_b <span class="ot">=</span> df[df<span class="sc">$</span>sectors <span class="sc">==</span> <span class="st">&quot;b&quot;</span>, ]</span>
+<span id="cb187-3"><a href="advanced-layout.html#cb187-3" aria-hidden="true" tabindex="-1"></a>zoom_df_b <span class="ot">=</span> zoom_df_b[<span class="fu">order</span>(zoom_df_b[, <span class="dv">2</span>])[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], ]</span>
+<span id="cb187-4"><a href="advanced-layout.html#cb187-4" aria-hidden="true" tabindex="-1"></a>zoom_df <span class="ot">=</span> <span class="fu">rbind</span>(zoom_df_a, zoom_df_b)</span></code></pre></div>
 <p>Then we need to change the sector names in the zoomed data frame. Here we just simply
 add “zoom_” prefix to the original names to show that they are “zoomed” sectors. After
 that, it is attached to the original data frame.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="advanced-layout.html#cb185-1"></a>zoom_df<span class="op">$</span>sectors =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;zoom_&quot;</span>, zoom_df<span class="op">$</span>sectors)</span>
-<span id="cb185-2"><a href="advanced-layout.html#cb185-2"></a>df2 =<span class="st"> </span><span class="kw">rbind</span>(df, zoom_df)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="advanced-layout.html#cb188-1" aria-hidden="true" tabindex="-1"></a>zoom_df<span class="sc">$</span>sectors <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;zoom_&quot;</span>, zoom_df<span class="sc">$</span>sectors)</span>
+<span id="cb188-2"><a href="advanced-layout.html#cb188-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> <span class="fu">rbind</span>(df, zoom_df)</span></code></pre></div>
 <p>In this example, we will put the original cells in the left half of the circle
 and the zoomed sectors in the right. As we have already mentioned before, we
 simply normalize the width of normal sectors and normalize the width of zoomed
@@ -376,39 +378,39 @@ fine, they will be further normalized to 1 internally.</p>
 <p>Strictly speaking, since the gaps between sectors are not taken into
 consideration, the width of the original sectors are not exactly 180 degree,
 but the real value is quite close to it.</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="advanced-layout.html#cb186-1"></a>xrange =<span class="st"> </span><span class="kw">tapply</span>(df2<span class="op">$</span>x, df2<span class="op">$</span>sectors, <span class="cf">function</span>(x) <span class="kw">max</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x))</span>
-<span id="cb186-2"><a href="advanced-layout.html#cb186-2"></a>normal_sector_index =<span class="st"> </span><span class="kw">unique</span>(df<span class="op">$</span>sectors)</span>
-<span id="cb186-3"><a href="advanced-layout.html#cb186-3"></a>zoomed_sector_index =<span class="st"> </span><span class="kw">unique</span>(zoom_df<span class="op">$</span>sectors)</span>
-<span id="cb186-4"><a href="advanced-layout.html#cb186-4"></a>sector.width =<span class="st"> </span><span class="kw">c</span>(xrange[normal_sector_index] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(xrange[normal_sector_index]), </span>
-<span id="cb186-5"><a href="advanced-layout.html#cb186-5"></a>                 xrange[zoomed_sector_index] <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(xrange[zoomed_sector_index]))</span>
-<span id="cb186-6"><a href="advanced-layout.html#cb186-6"></a>sector.width</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="advanced-layout.html#cb189-1" aria-hidden="true" tabindex="-1"></a>xrange <span class="ot">=</span> <span class="fu">tapply</span>(df2<span class="sc">$</span>x, df2<span class="sc">$</span>sectors, <span class="cf">function</span>(x) <span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x))</span>
+<span id="cb189-2"><a href="advanced-layout.html#cb189-2" aria-hidden="true" tabindex="-1"></a>normal_sector_index <span class="ot">=</span> <span class="fu">unique</span>(df<span class="sc">$</span>sectors)</span>
+<span id="cb189-3"><a href="advanced-layout.html#cb189-3" aria-hidden="true" tabindex="-1"></a>zoomed_sector_index <span class="ot">=</span> <span class="fu">unique</span>(zoom_df<span class="sc">$</span>sectors)</span>
+<span id="cb189-4"><a href="advanced-layout.html#cb189-4" aria-hidden="true" tabindex="-1"></a>sector.width <span class="ot">=</span> <span class="fu">c</span>(xrange[normal_sector_index] <span class="sc">/</span> <span class="fu">sum</span>(xrange[normal_sector_index]), </span>
+<span id="cb189-5"><a href="advanced-layout.html#cb189-5" aria-hidden="true" tabindex="-1"></a>                 xrange[zoomed_sector_index] <span class="sc">/</span> <span class="fu">sum</span>(xrange[zoomed_sector_index]))</span>
+<span id="cb189-6"><a href="advanced-layout.html#cb189-6" aria-hidden="true" tabindex="-1"></a>sector.width</span></code></pre></div>
 <pre><code>##         c         f         b         e         d         a    zoom_a    zoom_b 
 ## 0.1774352 0.1649639 0.1685275 0.1662047 0.1668505 0.1560182 0.7237996 0.2762004</code></pre>
 <p>What to do next is just to make the circular plot in the normal way. All the
 graphics in sector a and b will be automatically zoomed to sector “zoom_a”
-and “zoom_b”.</p>
+and “zoom_b.”</p>
 <p>In following code, since the sector names are added outside the first track,
 <code>points.overflow.warning</code> is set to <code>FALSE</code> to turn off the warning messages.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="advanced-layout.html#cb188-1"></a><span class="kw">circos.par</span>(<span class="dt">start.degree =</span> <span class="dv">90</span>, <span class="dt">points.overflow.warning =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb188-2"><a href="advanced-layout.html#cb188-2"></a><span class="kw">circos.initialize</span>(df2<span class="op">$</span>sectors, <span class="dt">x =</span> df2<span class="op">$</span>x, <span class="dt">sector.width =</span> sector.width)</span>
-<span id="cb188-3"><a href="advanced-layout.html#cb188-3"></a><span class="kw">circos.track</span>(df2<span class="op">$</span>sectors, <span class="dt">x =</span> df2<span class="op">$</span>x, <span class="dt">y =</span> df2<span class="op">$</span>y, </span>
-<span id="cb188-4"><a href="advanced-layout.html#cb188-4"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb188-5"><a href="advanced-layout.html#cb188-5"></a>    <span class="kw">circos.points</span>(x, y, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
-<span id="cb188-6"><a href="advanced-layout.html#cb188-6"></a>    <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>cell.ylim[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="kw">mm_y</span>(<span class="dv">2</span>), </span>
-<span id="cb188-7"><a href="advanced-layout.html#cb188-7"></a>        CELL_META<span class="op">$</span>sector.index, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb188-8"><a href="advanced-layout.html#cb188-8"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="advanced-layout.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="at">start.degree =</span> <span class="dv">90</span>, <span class="at">points.overflow.warning =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb191-2"><a href="advanced-layout.html#cb191-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(df2<span class="sc">$</span>sectors, <span class="at">x =</span> df2<span class="sc">$</span>x, <span class="at">sector.width =</span> sector.width)</span>
+<span id="cb191-3"><a href="advanced-layout.html#cb191-3" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(df2<span class="sc">$</span>sectors, <span class="at">x =</span> df2<span class="sc">$</span>x, <span class="at">y =</span> df2<span class="sc">$</span>y, </span>
+<span id="cb191-4"><a href="advanced-layout.html#cb191-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb191-5"><a href="advanced-layout.html#cb191-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.points</span>(x, y, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb191-6"><a href="advanced-layout.html#cb191-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.text</span>(CELL_META<span class="sc">$</span>xcenter, CELL_META<span class="sc">$</span>cell.ylim[<span class="dv">2</span>] <span class="sc">+</span> <span class="fu">mm_y</span>(<span class="dv">2</span>), </span>
+<span id="cb191-7"><a href="advanced-layout.html#cb191-7" aria-hidden="true" tabindex="-1"></a>        CELL_META<span class="sc">$</span>sector.index, <span class="at">niceFacing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb191-8"><a href="advanced-layout.html#cb191-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>Adding links from original sectors to zoomed sectors is a good idea to show
 where the zooming occurs (Figure <a href="advanced-layout.html#fig:circlize-zoom">7.1</a>). Notice that
 we manually adjust the position of one end of the sector b link.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="advanced-layout.html#cb189-1"></a><span class="kw">circos.link</span>(<span class="st">&quot;a&quot;</span>, <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>),</span>
-<span id="cb189-2"><a href="advanced-layout.html#cb189-2"></a>    <span class="st">&quot;zoom_a&quot;</span>, <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;zoom_a&quot;</span>),</span>
-<span id="cb189-3"><a href="advanced-layout.html#cb189-3"></a>    <span class="dt">border =</span> <span class="ot">NA</span>, <span class="dt">col =</span> <span class="st">&quot;#00000020&quot;</span>)</span>
-<span id="cb189-4"><a href="advanced-layout.html#cb189-4"></a><span class="kw">circos.link</span>(<span class="st">&quot;b&quot;</span>, <span class="kw">c</span>(zoom_df_b[<span class="dv">1</span>, <span class="dv">2</span>], zoom_df_b[<span class="dv">10</span>, <span class="dv">2</span>]),</span>
-<span id="cb189-5"><a href="advanced-layout.html#cb189-5"></a>    <span class="st">&quot;zoom_b&quot;</span>, <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;zoom_b&quot;</span>),</span>
-<span id="cb189-6"><a href="advanced-layout.html#cb189-6"></a>    <span class="dt">rou1 =</span> <span class="kw">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="dt">sector.index =</span> <span class="st">&quot;b&quot;</span>),</span>
-<span id="cb189-7"><a href="advanced-layout.html#cb189-7"></a>    <span class="dt">border =</span> <span class="ot">NA</span>, <span class="dt">col =</span> <span class="st">&quot;#00000020&quot;</span>)</span>
-<span id="cb189-8"><a href="advanced-layout.html#cb189-8"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:circlize-zoom"></span>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="advanced-layout.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.link</span>(<span class="st">&quot;a&quot;</span>, <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="at">sector.index =</span> <span class="st">&quot;a&quot;</span>),</span>
+<span id="cb192-2"><a href="advanced-layout.html#cb192-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;zoom_a&quot;</span>, <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="at">sector.index =</span> <span class="st">&quot;zoom_a&quot;</span>),</span>
+<span id="cb192-3"><a href="advanced-layout.html#cb192-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">border =</span> <span class="cn">NA</span>, <span class="at">col =</span> <span class="st">&quot;#00000020&quot;</span>)</span>
+<span id="cb192-4"><a href="advanced-layout.html#cb192-4" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.link</span>(<span class="st">&quot;b&quot;</span>, <span class="fu">c</span>(zoom_df_b[<span class="dv">1</span>, <span class="dv">2</span>], zoom_df_b[<span class="dv">10</span>, <span class="dv">2</span>]),</span>
+<span id="cb192-5"><a href="advanced-layout.html#cb192-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;zoom_b&quot;</span>, <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;cell.xlim&quot;</span>, <span class="at">sector.index =</span> <span class="st">&quot;zoom_b&quot;</span>),</span>
+<span id="cb192-6"><a href="advanced-layout.html#cb192-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">rou1 =</span> <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;cell.top.radius&quot;</span>, <span class="at">sector.index =</span> <span class="st">&quot;b&quot;</span>),</span>
+<span id="cb192-7"><a href="advanced-layout.html#cb192-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">border =</span> <span class="cn">NA</span>, <span class="at">col =</span> <span class="st">&quot;#00000020&quot;</span>)</span>
+<span id="cb192-8"><a href="advanced-layout.html#cb192-8" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.clear</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-zoom"></span>
 <img src="07-advanced-usage_files/figure-html/circlize-zoom-1.png" alt="Zoom sectors." width="672" />
 <p class="caption">
 Figure 7.1: Zoom sectors.
@@ -425,7 +427,7 @@ the circular plot is always drawn in a canvas where x values range from -1 to
 are all set to <code>c(0, 1)</code>, which means, the canvas is restricted to the right
 top part, then only sectors between 0 to 90 degree are visible
 (Figure <a href="advanced-layout.html#fig:circlize-part">7.2</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:circlize-part"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-part"></span>
 <img src="07-advanced-usage_files/figure-html/circlize-part-1.png" alt="One quarter of the circle." width="768" />
 <p class="caption">
 Figure 7.2: One quarter of the circle.
@@ -435,43 +437,43 @@ Figure 7.2: One quarter of the circle.
 one sector in the layout and set <code>gap.after</code> to 270. (One sector with
 <code>gap.after</code> of 270 degree means the width of this sector is exactly 90
 degree.)</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="advanced-layout.html#cb190-1"></a><span class="kw">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="st">&quot;canvas.ylim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb190-2"><a href="advanced-layout.html#cb190-2"></a>    <span class="st">&quot;start.degree&quot;</span> =<span class="st"> </span><span class="dv">90</span>, <span class="st">&quot;gap.after&quot;</span> =<span class="st"> </span><span class="dv">270</span>)</span>
-<span id="cb190-3"><a href="advanced-layout.html#cb190-3"></a>sectors =<span class="st"> &quot;a&quot;</span> <span class="co"># this is the name of your sector</span></span>
-<span id="cb190-4"><a href="advanced-layout.html#cb190-4"></a><span class="kw">circos.initialize</span>(<span class="dt">sectors =</span> sectors, <span class="dt">xlim =</span> ...)</span>
-<span id="cb190-5"><a href="advanced-layout.html#cb190-5"></a>...</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="advanced-layout.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="st">&quot;canvas.ylim&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb193-2"><a href="advanced-layout.html#cb193-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;start.degree&quot;</span> <span class="ot">=</span> <span class="dv">90</span>, <span class="st">&quot;gap.after&quot;</span> <span class="ot">=</span> <span class="dv">270</span>)</span>
+<span id="cb193-3"><a href="advanced-layout.html#cb193-3" aria-hidden="true" tabindex="-1"></a>sectors <span class="ot">=</span> <span class="st">&quot;a&quot;</span> <span class="co"># this is the name of your sector</span></span>
+<span id="cb193-4"><a href="advanced-layout.html#cb193-4" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(<span class="at">sectors =</span> sectors, <span class="at">xlim =</span> ...)</span>
+<span id="cb193-5"><a href="advanced-layout.html#cb193-5" aria-hidden="true" tabindex="-1"></a>...</span></code></pre></div>
 <p>Similar idea can be applied to the circle where in some tracks,
 only a subset of cells are needed. Gererally there are two ways.
 The first way is to create the track and add graphics with subset of data that
 only corresponds to the cells that are needed. And the second way
 is to create an empty track first and customize the cells by <code>circos.update()</code>.
 Following code illustrates the two methods (Figure <a href="advanced-layout.html#fig:circlize-part2">7.3</a>).</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="advanced-layout.html#cb191-1"></a>sectors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span>
-<span id="cb191-2"><a href="advanced-layout.html#cb191-2"></a><span class="kw">circos.initialize</span>(sectors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb191-3"><a href="advanced-layout.html#cb191-3"></a></span>
-<span id="cb191-4"><a href="advanced-layout.html#cb191-4"></a><span class="co"># directly specify the subset of data</span></span>
-<span id="cb191-5"><a href="advanced-layout.html#cb191-5"></a>df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">sectors =</span> <span class="kw">rep</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">100</span>),</span>
-<span id="cb191-6"><a href="advanced-layout.html#cb191-6"></a>                <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">100</span>),</span>
-<span id="cb191-7"><a href="advanced-layout.html#cb191-7"></a>                <span class="dt">y =</span> <span class="kw">runif</span>(<span class="dv">100</span>))</span>
-<span id="cb191-8"><a href="advanced-layout.html#cb191-8"></a><span class="kw">circos.track</span>(df<span class="op">$</span>sectors, <span class="dt">x =</span> df<span class="op">$</span>x, <span class="dt">y =</span> df<span class="op">$</span>y, </span>
-<span id="cb191-9"><a href="advanced-layout.html#cb191-9"></a>    <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb191-10"><a href="advanced-layout.html#cb191-10"></a>        <span class="kw">circos.points</span>(x, y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
-<span id="cb191-11"><a href="advanced-layout.html#cb191-11"></a>})</span>
-<span id="cb191-12"><a href="advanced-layout.html#cb191-12"></a></span>
-<span id="cb191-13"><a href="advanced-layout.html#cb191-13"></a><span class="co"># create empty track first then fill graphics in the cell</span></span>
-<span id="cb191-14"><a href="advanced-layout.html#cb191-14"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">range</span>(df<span class="op">$</span>y), <span class="dt">bg.border =</span> <span class="ot">NA</span>)</span>
-<span id="cb191-15"><a href="advanced-layout.html#cb191-15"></a><span class="kw">circos.update</span>(<span class="dt">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">bg.border =</span> <span class="st">&quot;black&quot;</span>)</span>
-<span id="cb191-16"><a href="advanced-layout.html#cb191-16"></a><span class="kw">circos.points</span>(df<span class="op">$</span>x, df<span class="op">$</span>y, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
-<span id="cb191-17"><a href="advanced-layout.html#cb191-17"></a></span>
-<span id="cb191-18"><a href="advanced-layout.html#cb191-18"></a><span class="kw">circos.track</span>(<span class="dt">sectors =</span> sectors, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb191-19"><a href="advanced-layout.html#cb191-19"></a><span class="kw">circos.track</span>(<span class="dt">sectors =</span> sectors, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:circlize-part2"></span>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="advanced-layout.html#cb194-1" aria-hidden="true" tabindex="-1"></a>sectors <span class="ot">=</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb194-2"><a href="advanced-layout.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(sectors, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb194-3"><a href="advanced-layout.html#cb194-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-4"><a href="advanced-layout.html#cb194-4" aria-hidden="true" tabindex="-1"></a><span class="co"># directly specify the subset of data</span></span>
+<span id="cb194-5"><a href="advanced-layout.html#cb194-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">sectors =</span> <span class="fu">rep</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">100</span>),</span>
+<span id="cb194-6"><a href="advanced-layout.html#cb194-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">100</span>),</span>
+<span id="cb194-7"><a href="advanced-layout.html#cb194-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">100</span>))</span>
+<span id="cb194-8"><a href="advanced-layout.html#cb194-8" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(df<span class="sc">$</span>sectors, <span class="at">x =</span> df<span class="sc">$</span>x, <span class="at">y =</span> df<span class="sc">$</span>y, </span>
+<span id="cb194-9"><a href="advanced-layout.html#cb194-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb194-10"><a href="advanced-layout.html#cb194-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.points</span>(x, y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb194-11"><a href="advanced-layout.html#cb194-11" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb194-12"><a href="advanced-layout.html#cb194-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-13"><a href="advanced-layout.html#cb194-13" aria-hidden="true" tabindex="-1"></a><span class="co"># create empty track first then fill graphics in the cell</span></span>
+<span id="cb194-14"><a href="advanced-layout.html#cb194-14" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">range</span>(df<span class="sc">$</span>y), <span class="at">bg.border =</span> <span class="cn">NA</span>)</span>
+<span id="cb194-15"><a href="advanced-layout.html#cb194-15" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.update</span>(<span class="at">sector.index =</span> <span class="st">&quot;a&quot;</span>, <span class="at">bg.border =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb194-16"><a href="advanced-layout.html#cb194-16" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.points</span>(df<span class="sc">$</span>x, df<span class="sc">$</span>y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb194-17"><a href="advanced-layout.html#cb194-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-18"><a href="advanced-layout.html#cb194-18" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">sectors =</span> sectors, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb194-19"><a href="advanced-layout.html#cb194-19" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">sectors =</span> sectors, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-part2"></span>
 <img src="07-advanced-usage_files/figure-html/circlize-part2-1.png" alt="Show subset of cells in tracks." width="672" />
 <p class="caption">
 Figure 7.3: Show subset of cells in tracks.
 </p>
 </div>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="advanced-layout.html#cb192-1"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="advanced-layout.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.clear</span>()</span></code></pre></div>
 </div>
 <div id="combine-circular-plots" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Combine multiple circular plots</h2>
@@ -484,22 +486,22 @@ complex plots which include more than one circular plots.</p>
 <p>Folowing code shows how the two independent circualr plots are added and
 nested. Figure <a href="advanced-layout.html#fig:circlize-nested">7.4</a> illustrates the invisible canvas
 coordinate and how the two circular plots overlap.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="advanced-layout.html#cb193-1"></a>sectors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span>
-<span id="cb193-2"><a href="advanced-layout.html#cb193-2"></a><span class="kw">circos.initialize</span>(sectors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb193-3"><a href="advanced-layout.html#cb193-3"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb193-4"><a href="advanced-layout.html#cb193-4"></a>    <span class="kw">circos.text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;outer circos&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb193-5"><a href="advanced-layout.html#cb193-5"></a>})</span>
-<span id="cb193-6"><a href="advanced-layout.html#cb193-6"></a><span class="kw">circos.clear</span>()</span>
-<span id="cb193-7"><a href="advanced-layout.html#cb193-7"></a></span>
-<span id="cb193-8"><a href="advanced-layout.html#cb193-8"></a><span class="kw">par</span>(<span class="dt">new =</span> <span class="ot">TRUE</span>) <span class="co"># &lt;- magic</span></span>
-<span id="cb193-9"><a href="advanced-layout.html#cb193-9"></a><span class="kw">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="st">&quot;canvas.ylim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb193-10"><a href="advanced-layout.html#cb193-10"></a>sectors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span>
-<span id="cb193-11"><a href="advanced-layout.html#cb193-11"></a><span class="kw">circos.initialize</span>(sectors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb193-12"><a href="advanced-layout.html#cb193-12"></a><span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb193-13"><a href="advanced-layout.html#cb193-13"></a>    <span class="kw">circos.text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;inner circos&quot;</span>, <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb193-14"><a href="advanced-layout.html#cb193-14"></a>})</span>
-<span id="cb193-15"><a href="advanced-layout.html#cb193-15"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:circlize-nested"></span>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="advanced-layout.html#cb196-1" aria-hidden="true" tabindex="-1"></a>sectors <span class="ot">=</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb196-2"><a href="advanced-layout.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(sectors, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb196-3"><a href="advanced-layout.html#cb196-3" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb196-4"><a href="advanced-layout.html#cb196-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;outer circos&quot;</span>, <span class="at">niceFacing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb196-5"><a href="advanced-layout.html#cb196-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb196-6"><a href="advanced-layout.html#cb196-6" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.clear</span>()</span>
+<span id="cb196-7"><a href="advanced-layout.html#cb196-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-8"><a href="advanced-layout.html#cb196-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">new =</span> <span class="cn">TRUE</span>) <span class="co"># &lt;- magic</span></span>
+<span id="cb196-9"><a href="advanced-layout.html#cb196-9" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="st">&quot;canvas.ylim&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb196-10"><a href="advanced-layout.html#cb196-10" aria-hidden="true" tabindex="-1"></a>sectors <span class="ot">=</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb196-11"><a href="advanced-layout.html#cb196-11" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initialize</span>(sectors, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb196-12"><a href="advanced-layout.html#cb196-12" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb196-13"><a href="advanced-layout.html#cb196-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;inner circos&quot;</span>, <span class="at">niceFacing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb196-14"><a href="advanced-layout.html#cb196-14" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb196-15"><a href="advanced-layout.html#cb196-15" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.clear</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-nested"></span>
 <img src="07-advanced-usage_files/figure-html/circlize-nested-1.png" alt="Nested circular plots." width="768" />
 <p class="caption">
 Figure 7.4: Nested circular plots.
@@ -511,7 +513,7 @@ in Section <a href="advanced-layout.html#part-circle">7.2</a> to only show part 
 <code>canvas.xlim</code> and <code>canvas.ylim</code>, and finally arrange the two plots into one
 page. The source code for generating Figure <a href="advanced-layout.html#fig:circlize-separated">7.5</a> is
 at <a href="https://github.com/jokergoo/circlize_book/blob/master/src/intro-20-separated.R" class="uri">https://github.com/jokergoo/circlize_book/blob/master/src/intro-20-separated.R</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:circlize-separated"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-separated"></span>
 <img src="07-advanced-usage_files/figure-html/circlize-separated-1.png" alt="Two separated circular plots" width="768" />
 <p class="caption">
 Figure 7.5: Two separated circular plots
@@ -520,21 +522,21 @@ Figure 7.5: Two separated circular plots
 <p>The third example is to draw cells with different radius (Figure <a href="advanced-layout.html#fig:circlize-diff-radius">7.6</a>).
 In fact, it makes four circular plots where only one
 sector for each plot is plotted.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="advanced-layout.html#cb194-1"></a>sectors =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span>
-<span id="cb194-2"><a href="advanced-layout.html#cb194-2"></a>lim =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>)</span>
-<span id="cb194-3"><a href="advanced-layout.html#cb194-3"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {</span>
-<span id="cb194-4"><a href="advanced-layout.html#cb194-4"></a>    <span class="kw">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span>lim[i], lim[i]), </span>
-<span id="cb194-5"><a href="advanced-layout.html#cb194-5"></a>        <span class="st">&quot;canvas.ylim&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span>lim[i], lim[i]), </span>
-<span id="cb194-6"><a href="advanced-layout.html#cb194-6"></a>        <span class="st">&quot;track.height&quot;</span> =<span class="st"> </span><span class="fl">0.4</span>)</span>
-<span id="cb194-7"><a href="advanced-layout.html#cb194-7"></a>    <span class="kw">circos.initialize</span>(sectors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb194-8"><a href="advanced-layout.html#cb194-8"></a>    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>)</span>
-<span id="cb194-9"><a href="advanced-layout.html#cb194-9"></a>    <span class="kw">circos.update</span>(<span class="dt">sector.index =</span> sectors[i], <span class="dt">bg.border =</span> <span class="st">&quot;black&quot;</span>)</span>
-<span id="cb194-10"><a href="advanced-layout.html#cb194-10"></a>    <span class="kw">circos.points</span>(<span class="kw">runif</span>(<span class="dv">10</span>), <span class="kw">runif</span>(<span class="dv">10</span>), <span class="dt">pch =</span> <span class="dv">16</span>)</span>
-<span id="cb194-11"><a href="advanced-layout.html#cb194-11"></a>    <span class="kw">circos.clear</span>()</span>
-<span id="cb194-12"><a href="advanced-layout.html#cb194-12"></a>    <span class="kw">par</span>(<span class="dt">new =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb194-13"><a href="advanced-layout.html#cb194-13"></a>}</span>
-<span id="cb194-14"><a href="advanced-layout.html#cb194-14"></a><span class="kw">par</span>(<span class="dt">new =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:circlize-diff-radius"></span>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="advanced-layout.html#cb197-1" aria-hidden="true" tabindex="-1"></a>sectors <span class="ot">=</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb197-2"><a href="advanced-layout.html#cb197-2" aria-hidden="true" tabindex="-1"></a>lim <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>)</span>
+<span id="cb197-3"><a href="advanced-layout.html#cb197-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb197-4"><a href="advanced-layout.html#cb197-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.par</span>(<span class="st">&quot;canvas.xlim&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span>lim[i], lim[i]), </span>
+<span id="cb197-5"><a href="advanced-layout.html#cb197-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;canvas.ylim&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span>lim[i], lim[i]), </span>
+<span id="cb197-6"><a href="advanced-layout.html#cb197-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;track.height&quot;</span> <span class="ot">=</span> <span class="fl">0.4</span>)</span>
+<span id="cb197-7"><a href="advanced-layout.html#cb197-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.initialize</span>(sectors, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb197-8"><a href="advanced-layout.html#cb197-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">bg.border =</span> <span class="cn">NA</span>)</span>
+<span id="cb197-9"><a href="advanced-layout.html#cb197-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.update</span>(<span class="at">sector.index =</span> sectors[i], <span class="at">bg.border =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb197-10"><a href="advanced-layout.html#cb197-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.points</span>(<span class="fu">runif</span>(<span class="dv">10</span>), <span class="fu">runif</span>(<span class="dv">10</span>), <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb197-11"><a href="advanced-layout.html#cb197-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.clear</span>()</span>
+<span id="cb197-12"><a href="advanced-layout.html#cb197-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">par</span>(<span class="at">new =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb197-13"><a href="advanced-layout.html#cb197-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb197-14"><a href="advanced-layout.html#cb197-14" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">new =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-diff-radius"></span>
 <img src="07-advanced-usage_files/figure-html/circlize-diff-radius-1.png" alt="Cells with differnet radius." width="672" />
 <p class="caption">
 Figure 7.6: Cells with differnet radius.
@@ -552,22 +554,22 @@ to different circular plot.</p>
 <p><strong>circlize</strong> is implemented in the base R graphic system, thus, you can use
 <code>layout()</code> or <code>par("mfrow")</code>/<code>par("mfcol")</code> to arrange multiple circular plots in one page
 (Figure <a href="advanced-layout.html#fig:circlize-multiple-layout">7.7</a>).</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="advanced-layout.html#cb195-1"></a><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
-<span id="cb195-2"><a href="advanced-layout.html#cb195-2"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) {</span>
-<span id="cb195-3"><a href="advanced-layout.html#cb195-3"></a>    sectors =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">8</span></span>
-<span id="cb195-4"><a href="advanced-layout.html#cb195-4"></a>    <span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
-<span id="cb195-5"><a href="advanced-layout.html#cb195-5"></a>    <span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb195-6"><a href="advanced-layout.html#cb195-6"></a>    <span class="kw">circos.initialize</span>(sectors, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb195-7"><a href="advanced-layout.html#cb195-7"></a>    <span class="kw">circos.track</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">track.height =</span> <span class="fl">0.05</span>,</span>
-<span id="cb195-8"><a href="advanced-layout.html#cb195-8"></a>        <span class="dt">bg.col =</span> <span class="kw">rand_color</span>(<span class="dv">8</span>), <span class="dt">bg.border =</span> <span class="ot">NA</span>)</span>
-<span id="cb195-9"><a href="advanced-layout.html#cb195-9"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>) {</span>
-<span id="cb195-10"><a href="advanced-layout.html#cb195-10"></a>        se =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="dv">2</span>)</span>
-<span id="cb195-11"><a href="advanced-layout.html#cb195-11"></a>        <span class="kw">circos.link</span>(se[<span class="dv">1</span>], <span class="kw">runif</span>(<span class="dv">2</span>), se[<span class="dv">2</span>], <span class="kw">runif</span>(<span class="dv">2</span>), </span>
-<span id="cb195-12"><a href="advanced-layout.html#cb195-12"></a>            <span class="dt">col =</span> <span class="kw">rand_color</span>(<span class="dv">1</span>, <span class="dt">transparency =</span> <span class="fl">0.4</span>), <span class="dt">border =</span> <span class="ot">NA</span>)</span>
-<span id="cb195-13"><a href="advanced-layout.html#cb195-13"></a>    }</span>
-<span id="cb195-14"><a href="advanced-layout.html#cb195-14"></a>    <span class="kw">circos.clear</span>()</span>
-<span id="cb195-15"><a href="advanced-layout.html#cb195-15"></a>}</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:circlize-multiple-layout"></span>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="advanced-layout.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb198-2"><a href="advanced-layout.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>) {</span>
+<span id="cb198-3"><a href="advanced-layout.html#cb198-3" aria-hidden="true" tabindex="-1"></a>    sectors <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb198-4"><a href="advanced-layout.html#cb198-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
+<span id="cb198-5"><a href="advanced-layout.html#cb198-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.par</span>(<span class="at">cell.padding =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb198-6"><a href="advanced-layout.html#cb198-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.initialize</span>(sectors, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb198-7"><a href="advanced-layout.html#cb198-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.track</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">track.height =</span> <span class="fl">0.05</span>,</span>
+<span id="cb198-8"><a href="advanced-layout.html#cb198-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">bg.col =</span> <span class="fu">rand_color</span>(<span class="dv">8</span>), <span class="at">bg.border =</span> <span class="cn">NA</span>)</span>
+<span id="cb198-9"><a href="advanced-layout.html#cb198-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) {</span>
+<span id="cb198-10"><a href="advanced-layout.html#cb198-10" aria-hidden="true" tabindex="-1"></a>        se <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="dv">2</span>)</span>
+<span id="cb198-11"><a href="advanced-layout.html#cb198-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.link</span>(se[<span class="dv">1</span>], <span class="fu">runif</span>(<span class="dv">2</span>), se[<span class="dv">2</span>], <span class="fu">runif</span>(<span class="dv">2</span>), </span>
+<span id="cb198-12"><a href="advanced-layout.html#cb198-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="fu">rand_color</span>(<span class="dv">1</span>, <span class="at">transparency =</span> <span class="fl">0.4</span>), <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb198-13"><a href="advanced-layout.html#cb198-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb198-14"><a href="advanced-layout.html#cb198-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">circos.clear</span>()</span>
+<span id="cb198-15"><a href="advanced-layout.html#cb198-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circlize-multiple-layout"></span>
 <img src="07-advanced-usage_files/figure-html/circlize-multiple-layout-1.png" alt="Arrange multiple circular plots." width="768" />
 <p class="caption">
 Figure 7.7: Arrange multiple circular plots.
@@ -589,7 +591,6 @@ Figure 7.7: Arrange multiple circular plots.
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -608,6 +609,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -628,6 +630,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

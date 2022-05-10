@@ -479,6 +479,110 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 })
 ```
 
+```
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+
+## Warning in x/max_d * (violin_width/2): longer object length is not a multiple of
+## shorter object length
+```
+
 <div class="figure" style="text-align: center">
 <img src="03-graphics_files/figure-html/circlize-violinplot-1.png" alt="Circular violin plots." width="768" />
 <p class="caption">(\#fig:circlize-violinplot)Circular violin plots.</p>
@@ -569,6 +673,36 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 <div class="figure" style="text-align: center">
 <img src="03-graphics_files/figure-html/cell-cycle-1.png" alt="Cell cycle." width="384" />
 <p class="caption">(\#fig:cell-cycle)Cell cycle.</p>
+</div>
+
+```r
+circos.clear()
+```
+
+## Labels
+
+`circos.labels()` can be used to add a track of labels.
+This function creates two tracks, one for the connection lines and one for the labels.
+If two labels are too close and overlap, this function automatically adjusts the positions of neighouring labels.
+Check the following example (Figure \@ref(fig:labels)).
+
+
+```r
+par(mfrow = c(1, 2))
+circos.initialize(sectors = letters[1:8], xlim = c(0, 1))
+circos.track(ylim = c(0, 1))
+circos.labels(c("a", "a", "b", "b"), x = c(0.1, 0.12, 0.4, 0.6), labels = c(0.1, 0.12, 0.4, 0.6))
+circos.clear()
+
+circos.initialize(sectors = letters[1:8], xlim = c(0, 1))
+circos.labels(c("a", "a", "b", "b"), x = c(0.1, 0.12, 0.4, 0.6), labels = c(0.1, 0.12, 0.4, 0.6),
+    side = "outside")
+circos.track(ylim = c(0, 1))
+```
+
+<div class="figure" style="text-align: center">
+<img src="03-graphics_files/figure-html/labels-1.png" alt="Label track." width="768" />
+<p class="caption">(\#fig:labels)Label track.</p>
 </div>
 
 ```r

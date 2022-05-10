@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 16 A complex example of Chord diagram | Circular Visualization in R</title>
   <meta name="description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 16 A complex example of Chord diagram | Circular Visualization in R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/jokergoo/circlize-book/book" />
-  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta property="og:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
   <meta property="og:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
   <meta name="github-repo" content="jokergoo/circlize_book" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 16 A complex example of Chord diagram | Circular Visualization in R" />
   
   <meta name="twitter:description" content="This book provides a comprehensive overview of implementing circular visualization in R by cirlize package, espeically focusing on visualizaing high dimentional genomic data and revealing complex relationships by Chord diagram." />
-  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/bookimages/circlize_cover.jpg" />
+  <meta name="twitter:image" content="https://bookdown.org/jokergoo/circlize-book/book/images/circlize_cover.jpg" />
 
 <meta name="author" content="Zuguang Gu" />
 
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="advanced-usage-of-chorddiagram.html"/>
 <link rel="next" href="make-fun-of-the-package.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,16 +50,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -119,6 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -170,10 +171,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>3.7</b> Axes</a></li>
 <li class="chapter" data-level="3.8" data-path="graphics.html"><a href="graphics.html#barplots-boxplots-and-violin-plots"><i class="fa fa-check"></i><b>3.8</b> Barplots, boxplots and violin plots</a></li>
 <li class="chapter" data-level="3.9" data-path="graphics.html"><a href="graphics.html#circular-arrows"><i class="fa fa-check"></i><b>3.9</b> Circular arrows</a></li>
-<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.10</b> Raster image</a></li>
-<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.11</b> Links</a></li>
-<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.12</b> Highlight sectors and tracks</a></li>
-<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.13</b> Work together with the base graphic system</a></li>
+<li class="chapter" data-level="3.10" data-path="graphics.html"><a href="graphics.html#labels"><i class="fa fa-check"></i><b>3.10</b> Labels</a></li>
+<li class="chapter" data-level="3.11" data-path="graphics.html"><a href="graphics.html#raster-image"><i class="fa fa-check"></i><b>3.11</b> Raster image</a></li>
+<li class="chapter" data-level="3.12" data-path="graphics.html"><a href="graphics.html#links"><i class="fa fa-check"></i><b>3.12</b> Links</a></li>
+<li class="chapter" data-level="3.13" data-path="graphics.html"><a href="graphics.html#highlight-sectors-and-tracks"><i class="fa fa-check"></i><b>3.13</b> Highlight sectors and tracks</a></li>
+<li class="chapter" data-level="3.14" data-path="graphics.html"><a href="graphics.html#work-with-base-graphic-system"><i class="fa fa-check"></i><b>3.14</b> Work together with the base graphic system</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="legends.html"><a href="legends.html"><i class="fa fa-check"></i><b>4</b> Legends</a></li>
 <li class="chapter" data-level="5" data-path="high-level-plots.html"><a href="high-level-plots.html"><i class="fa fa-check"></i><b>5</b> Implement high-level circular plots</a>
@@ -252,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="12.1" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#ideograms"><i class="fa fa-check"></i><b>12.1</b> Ideograms</a></li>
 <li class="chapter" data-level="12.2" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-heatmap"><i class="fa fa-check"></i><b>12.2</b> Heatmaps</a></li>
-<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
+<li class="chapter" data-level="12.3" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#labels-1"><i class="fa fa-check"></i><b>12.3</b> Labels</a></li>
 <li class="chapter" data-level="12.4" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-axes"><i class="fa fa-check"></i><b>12.4</b> Genomic axes</a></li>
 <li class="chapter" data-level="12.5" data-path="high-level-genomic-functions.html"><a href="high-level-genomic-functions.html#genomic-density-and-rainfall-plot"><i class="fa fa-check"></i><b>12.5</b> Genomic density and Rainfall plot</a></li>
 </ul></li>
@@ -339,7 +341,7 @@ groups based on expression profile. In each group, a chromatin state is
 assigned to the corresponding genomic bin if it is recurrent in at least half
 of the samples in each group.</p>
 <p>The processed data can be set from <a href="https://jokergoo.github.io/circlize_book/data/chromatin_transition.RData" class="uri">https://jokergoo.github.io/circlize_book/data/chromatin_transition.RData</a>.</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="a-complex-example-of-chord-diagram.html#cb418-1"></a><span class="kw">load</span>(<span class="st">&quot;data/chromatin_transition.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="a-complex-example-of-chord-diagram.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/chromatin_transition.RData&quot;</span>)</span></code></pre></div>
 <p>In the RData file, there are three matrix: <code>mat</code>, <code>meth_mat_1</code> and
 <code>meth_mat_2</code> which are:</p>
 <ul>
@@ -356,13 +358,13 @@ E.g. <code>meth_mat_1["TssA", "TxFlnk"]</code> is the mean methylation for the r
 E.g. <code>meth_mat_2["TssA", "TxFlnk"]</code> is the mean methylation for the regions in
 <strong>group 2</strong> that have “TssA” state in group 1 and “TxFlnk” state in group 2.</li>
 </ul>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="a-complex-example-of-chord-diagram.html#cb419-1"></a>mat[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="a-complex-example-of-chord-diagram.html#cb422-1" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
 <pre><code>##            TssA TssAFlnk TxFlnk     Tx
 ## TssA     497200    79600  13400   1800
 ## TssAFlnk  56400   233200   5000    800
 ## TxFlnk        0      400  43000   1800
 ## Tx          800      200    200 166400</code></pre>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="a-complex-example-of-chord-diagram.html#cb421-1"></a>meth_mat_<span class="dv">1</span>[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="a-complex-example-of-chord-diagram.html#cb424-1" aria-hidden="true" tabindex="-1"></a>meth_mat_1[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
 <pre><code>##               TssA  TssAFlnk    TxFlnk        Tx
 ## TssA     0.1647232 0.1580874 0.1917435 0.2690045
 ## TssAFlnk 0.2591677 0.2689880 0.3616242 0.3411387
@@ -371,60 +373,60 @@ E.g. <code>meth_mat_2["TssA", "TxFlnk"]</code> is the mean methylation for the r
 <p>Normally, in majority in the genome, chromatin states of regions are not
 changed in the two groups, thus, we should only look at the regions in which
 the states are changed.</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="a-complex-example-of-chord-diagram.html#cb423-1"></a><span class="co"># proportion of the unchanges states in the genome</span></span>
-<span id="cb423-2"><a href="a-complex-example-of-chord-diagram.html#cb423-2"></a><span class="kw">sum</span>(<span class="kw">diag</span>(mat))<span class="op">/</span><span class="kw">sum</span>(mat)</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="a-complex-example-of-chord-diagram.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="co"># proportion of the unchanges states in the genome</span></span>
+<span id="cb426-2"><a href="a-complex-example-of-chord-diagram.html#cb426-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(mat))<span class="sc">/</span><span class="fu">sum</span>(mat)</span></code></pre></div>
 <pre><code>## [1] 0.6192262</code></pre>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="a-complex-example-of-chord-diagram.html#cb425-1"></a><span class="co"># remove the unchanged states</span></span>
-<span id="cb425-2"><a href="a-complex-example-of-chord-diagram.html#cb425-2"></a><span class="kw">diag</span>(mat) =<span class="st"> </span><span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="a-complex-example-of-chord-diagram.html#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove the unchanged states</span></span>
+<span id="cb428-2"><a href="a-complex-example-of-chord-diagram.html#cb428-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(mat) <span class="ot">=</span> <span class="dv">0</span></span></code></pre></div>
 <p>When making the plot, actually rows and columns are different (because one is
 from group 1 and the other is from group 2), thus we give them different names
 and the original names are stored in <code>all_states</code>.</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="a-complex-example-of-chord-diagram.html#cb426-1"></a>all_states =<span class="st"> </span><span class="kw">rownames</span>(mat)</span>
-<span id="cb426-2"><a href="a-complex-example-of-chord-diagram.html#cb426-2"></a>n_states =<span class="st"> </span><span class="kw">nrow</span>(mat)</span>
-<span id="cb426-3"><a href="a-complex-example-of-chord-diagram.html#cb426-3"></a></span>
-<span id="cb426-4"><a href="a-complex-example-of-chord-diagram.html#cb426-4"></a><span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;R_&quot;</span>, <span class="kw">seq_len</span>(n_states))</span>
-<span id="cb426-5"><a href="a-complex-example-of-chord-diagram.html#cb426-5"></a><span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;C_&quot;</span>, <span class="kw">seq_len</span>(n_states))</span>
-<span id="cb426-6"><a href="a-complex-example-of-chord-diagram.html#cb426-6"></a></span>
-<span id="cb426-7"><a href="a-complex-example-of-chord-diagram.html#cb426-7"></a><span class="kw">dimnames</span>(meth_mat_<span class="dv">1</span>) =<span class="st"> </span><span class="kw">dimnames</span>(mat)</span>
-<span id="cb426-8"><a href="a-complex-example-of-chord-diagram.html#cb426-8"></a><span class="kw">dimnames</span>(meth_mat_<span class="dv">2</span>) =<span class="st"> </span><span class="kw">dimnames</span>(mat)</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="a-complex-example-of-chord-diagram.html#cb429-1" aria-hidden="true" tabindex="-1"></a>all_states <span class="ot">=</span> <span class="fu">rownames</span>(mat)</span>
+<span id="cb429-2"><a href="a-complex-example-of-chord-diagram.html#cb429-2" aria-hidden="true" tabindex="-1"></a>n_states <span class="ot">=</span> <span class="fu">nrow</span>(mat)</span>
+<span id="cb429-3"><a href="a-complex-example-of-chord-diagram.html#cb429-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb429-4"><a href="a-complex-example-of-chord-diagram.html#cb429-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat) <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;R_&quot;</span>, <span class="fu">seq_len</span>(n_states))</span>
+<span id="cb429-5"><a href="a-complex-example-of-chord-diagram.html#cb429-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat) <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;C_&quot;</span>, <span class="fu">seq_len</span>(n_states))</span>
+<span id="cb429-6"><a href="a-complex-example-of-chord-diagram.html#cb429-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb429-7"><a href="a-complex-example-of-chord-diagram.html#cb429-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(meth_mat_1) <span class="ot">=</span> <span class="fu">dimnames</span>(mat)</span>
+<span id="cb429-8"><a href="a-complex-example-of-chord-diagram.html#cb429-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(meth_mat_2) <span class="ot">=</span> <span class="fu">dimnames</span>(mat)</span></code></pre></div>
 <p>Next we set the colors. <code>colmat</code> is the color of the links and the colors
 are represent as hexadecimal code. Links have more transparent (<code>A0</code>) if they
 contain few transitions (&lt; 70th percentile) because we don’t want it
 to disturb the visualization of the major transitions.</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="a-complex-example-of-chord-diagram.html#cb427-1"></a>state_col =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;TssA&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,    <span class="st">&quot;TssAFlnk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</span>
-<span id="cb427-2"><a href="a-complex-example-of-chord-diagram.html#cb427-2"></a>              <span class="st">&quot;TxFlnk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,  <span class="st">&quot;Tx&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</span>
-<span id="cb427-3"><a href="a-complex-example-of-chord-diagram.html#cb427-3"></a>              <span class="st">&quot;TxWk&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,    <span class="st">&quot;EnhG&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</span>
-<span id="cb427-4"><a href="a-complex-example-of-chord-diagram.html#cb427-4"></a>              <span class="st">&quot;Enh&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,     <span class="st">&quot;ZNF/Rpts&quot;</span> =<span class="st"> &quot;#E41A1C&quot;</span>,</span>
-<span id="cb427-5"><a href="a-complex-example-of-chord-diagram.html#cb427-5"></a>              <span class="st">&quot;Het&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,     <span class="st">&quot;TssBiv&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,</span>
-<span id="cb427-6"><a href="a-complex-example-of-chord-diagram.html#cb427-6"></a>              <span class="st">&quot;BivFlnk&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>, <span class="st">&quot;EnhBiv&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,</span>
-<span id="cb427-7"><a href="a-complex-example-of-chord-diagram.html#cb427-7"></a>              <span class="st">&quot;ReprPC&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,  <span class="st">&quot;ReprPCWk&quot;</span> =<span class="st"> &quot;#377EB8&quot;</span>,</span>
-<span id="cb427-8"><a href="a-complex-example-of-chord-diagram.html#cb427-8"></a>              <span class="st">&quot;Quies&quot;</span> =<span class="st"> &quot;black&quot;</span>)</span>
-<span id="cb427-9"><a href="a-complex-example-of-chord-diagram.html#cb427-9"></a></span>
-<span id="cb427-10"><a href="a-complex-example-of-chord-diagram.html#cb427-10"></a><span class="co"># one for rows and one for columns</span></span>
-<span id="cb427-11"><a href="a-complex-example-of-chord-diagram.html#cb427-11"></a>state_col2 =<span class="st"> </span><span class="kw">c</span>(state_col, state_col)</span>
-<span id="cb427-12"><a href="a-complex-example-of-chord-diagram.html#cb427-12"></a><span class="kw">names</span>(state_col2) =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rownames</span>(mat), <span class="kw">colnames</span>(mat))</span>
-<span id="cb427-13"><a href="a-complex-example-of-chord-diagram.html#cb427-13"></a></span>
-<span id="cb427-14"><a href="a-complex-example-of-chord-diagram.html#cb427-14"></a>colmat =<span class="st"> </span><span class="kw">rep</span>(state_col2[<span class="kw">rownames</span>(mat)], n_states)</span>
-<span id="cb427-15"><a href="a-complex-example-of-chord-diagram.html#cb427-15"></a>colmat =<span class="st"> </span><span class="kw">rgb</span>(<span class="kw">t</span>(<span class="kw">col2rgb</span>(colmat)), <span class="dt">maxColorValue =</span> <span class="dv">255</span>)</span>
-<span id="cb427-16"><a href="a-complex-example-of-chord-diagram.html#cb427-16"></a></span>
-<span id="cb427-17"><a href="a-complex-example-of-chord-diagram.html#cb427-17"></a>qati =<span class="st"> </span><span class="kw">quantile</span>(mat, <span class="fl">0.7</span>)</span>
-<span id="cb427-18"><a href="a-complex-example-of-chord-diagram.html#cb427-18"></a>colmat[mat <span class="op">&gt;</span><span class="st"> </span>qati] =<span class="st"> </span><span class="kw">paste0</span>(colmat[mat <span class="op">&gt;</span><span class="st"> </span>qati], <span class="st">&quot;A0&quot;</span>)</span>
-<span id="cb427-19"><a href="a-complex-example-of-chord-diagram.html#cb427-19"></a>colmat[mat <span class="op">&lt;=</span><span class="st"> </span>qati] =<span class="st"> </span><span class="kw">paste0</span>(colmat[mat <span class="op">&lt;=</span><span class="st"> </span>qati], <span class="st">&quot;20&quot;</span>)</span>
-<span id="cb427-20"><a href="a-complex-example-of-chord-diagram.html#cb427-20"></a><span class="kw">dim</span>(colmat) =<span class="st"> </span><span class="kw">dim</span>(mat)</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="a-complex-example-of-chord-diagram.html#cb430-1" aria-hidden="true" tabindex="-1"></a>state_col <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;TssA&quot;</span> <span class="ot">=</span> <span class="st">&quot;#E41A1C&quot;</span>,    <span class="st">&quot;TssAFlnk&quot;</span> <span class="ot">=</span> <span class="st">&quot;#E41A1C&quot;</span>,</span>
+<span id="cb430-2"><a href="a-complex-example-of-chord-diagram.html#cb430-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;TxFlnk&quot;</span> <span class="ot">=</span> <span class="st">&quot;#E41A1C&quot;</span>,  <span class="st">&quot;Tx&quot;</span> <span class="ot">=</span> <span class="st">&quot;#E41A1C&quot;</span>,</span>
+<span id="cb430-3"><a href="a-complex-example-of-chord-diagram.html#cb430-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;TxWk&quot;</span> <span class="ot">=</span> <span class="st">&quot;#E41A1C&quot;</span>,    <span class="st">&quot;EnhG&quot;</span> <span class="ot">=</span> <span class="st">&quot;#E41A1C&quot;</span>,</span>
+<span id="cb430-4"><a href="a-complex-example-of-chord-diagram.html#cb430-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;Enh&quot;</span> <span class="ot">=</span> <span class="st">&quot;#E41A1C&quot;</span>,     <span class="st">&quot;ZNF/Rpts&quot;</span> <span class="ot">=</span> <span class="st">&quot;#E41A1C&quot;</span>,</span>
+<span id="cb430-5"><a href="a-complex-example-of-chord-diagram.html#cb430-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;Het&quot;</span> <span class="ot">=</span> <span class="st">&quot;#377EB8&quot;</span>,     <span class="st">&quot;TssBiv&quot;</span> <span class="ot">=</span> <span class="st">&quot;#377EB8&quot;</span>,</span>
+<span id="cb430-6"><a href="a-complex-example-of-chord-diagram.html#cb430-6" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;BivFlnk&quot;</span> <span class="ot">=</span> <span class="st">&quot;#377EB8&quot;</span>, <span class="st">&quot;EnhBiv&quot;</span> <span class="ot">=</span> <span class="st">&quot;#377EB8&quot;</span>,</span>
+<span id="cb430-7"><a href="a-complex-example-of-chord-diagram.html#cb430-7" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;ReprPC&quot;</span> <span class="ot">=</span> <span class="st">&quot;#377EB8&quot;</span>,  <span class="st">&quot;ReprPCWk&quot;</span> <span class="ot">=</span> <span class="st">&quot;#377EB8&quot;</span>,</span>
+<span id="cb430-8"><a href="a-complex-example-of-chord-diagram.html#cb430-8" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;Quies&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb430-9"><a href="a-complex-example-of-chord-diagram.html#cb430-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb430-10"><a href="a-complex-example-of-chord-diagram.html#cb430-10" aria-hidden="true" tabindex="-1"></a><span class="co"># one for rows and one for columns</span></span>
+<span id="cb430-11"><a href="a-complex-example-of-chord-diagram.html#cb430-11" aria-hidden="true" tabindex="-1"></a>state_col2 <span class="ot">=</span> <span class="fu">c</span>(state_col, state_col)</span>
+<span id="cb430-12"><a href="a-complex-example-of-chord-diagram.html#cb430-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(state_col2) <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rownames</span>(mat), <span class="fu">colnames</span>(mat))</span>
+<span id="cb430-13"><a href="a-complex-example-of-chord-diagram.html#cb430-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb430-14"><a href="a-complex-example-of-chord-diagram.html#cb430-14" aria-hidden="true" tabindex="-1"></a>colmat <span class="ot">=</span> <span class="fu">rep</span>(state_col2[<span class="fu">rownames</span>(mat)], n_states)</span>
+<span id="cb430-15"><a href="a-complex-example-of-chord-diagram.html#cb430-15" aria-hidden="true" tabindex="-1"></a>colmat <span class="ot">=</span> <span class="fu">rgb</span>(<span class="fu">t</span>(<span class="fu">col2rgb</span>(colmat)), <span class="at">maxColorValue =</span> <span class="dv">255</span>)</span>
+<span id="cb430-16"><a href="a-complex-example-of-chord-diagram.html#cb430-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb430-17"><a href="a-complex-example-of-chord-diagram.html#cb430-17" aria-hidden="true" tabindex="-1"></a>qati <span class="ot">=</span> <span class="fu">quantile</span>(mat, <span class="fl">0.7</span>)</span>
+<span id="cb430-18"><a href="a-complex-example-of-chord-diagram.html#cb430-18" aria-hidden="true" tabindex="-1"></a>colmat[mat <span class="sc">&gt;</span> qati] <span class="ot">=</span> <span class="fu">paste0</span>(colmat[mat <span class="sc">&gt;</span> qati], <span class="st">&quot;A0&quot;</span>)</span>
+<span id="cb430-19"><a href="a-complex-example-of-chord-diagram.html#cb430-19" aria-hidden="true" tabindex="-1"></a>colmat[mat <span class="sc">&lt;=</span> qati] <span class="ot">=</span> <span class="fu">paste0</span>(colmat[mat <span class="sc">&lt;=</span> qati], <span class="st">&quot;20&quot;</span>)</span>
+<span id="cb430-20"><a href="a-complex-example-of-chord-diagram.html#cb430-20" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(colmat) <span class="ot">=</span> <span class="fu">dim</span>(mat)</span></code></pre></div>
 <p>Now we can use <code>chordDiagram()</code> function to make the plot. Here we set one
 pre-allocated track in which the methylation information will be added later.
 Also we only set <code>annotationTrack</code> to <code>grid</code> and the axes and sector labels
 will be customized in later code.</p>
 <p><code>chordDiagram()</code> returns a data frame which contains coordinates for all links.</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="a-complex-example-of-chord-diagram.html#cb428-1"></a><span class="kw">circos.par</span>(<span class="dt">cell.padding =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">points.overflow.warning =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb428-2"><a href="a-complex-example-of-chord-diagram.html#cb428-2"></a></span>
-<span id="cb428-3"><a href="a-complex-example-of-chord-diagram.html#cb428-3"></a>cdm_res =<span class="st"> </span><span class="kw">chordDiagram</span>(mat, <span class="dt">col =</span> colmat, <span class="dt">grid.col =</span> state_col2,</span>
-<span id="cb428-4"><a href="a-complex-example-of-chord-diagram.html#cb428-4"></a>    <span class="dt">directional =</span> <span class="ot">TRUE</span>, <span class="dt">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, </span>
-<span id="cb428-5"><a href="a-complex-example-of-chord-diagram.html#cb428-5"></a>    <span class="dt">big.gap =</span> <span class="dv">10</span>, <span class="dt">small.gap =</span> <span class="dv">1</span>,</span>
-<span id="cb428-6"><a href="a-complex-example-of-chord-diagram.html#cb428-6"></a>    <span class="dt">preAllocateTracks =</span> <span class="kw">list</span>(<span class="dt">track.height =</span> <span class="fl">0.1</span>),</span>
-<span id="cb428-7"><a href="a-complex-example-of-chord-diagram.html#cb428-7"></a>    <span class="dt">link.target.prop =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="a-complex-example-of-chord-diagram.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="at">cell.padding =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">points.overflow.warning =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb431-2"><a href="a-complex-example-of-chord-diagram.html#cb431-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb431-3"><a href="a-complex-example-of-chord-diagram.html#cb431-3" aria-hidden="true" tabindex="-1"></a>cdm_res <span class="ot">=</span> <span class="fu">chordDiagram</span>(mat, <span class="at">col =</span> colmat, <span class="at">grid.col =</span> state_col2,</span>
+<span id="cb431-4"><a href="a-complex-example-of-chord-diagram.html#cb431-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">directional =</span> <span class="cn">TRUE</span>, <span class="at">annotationTrack =</span> <span class="st">&quot;grid&quot;</span>, </span>
+<span id="cb431-5"><a href="a-complex-example-of-chord-diagram.html#cb431-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">big.gap =</span> <span class="dv">10</span>, <span class="at">small.gap =</span> <span class="dv">1</span>,</span>
+<span id="cb431-6"><a href="a-complex-example-of-chord-diagram.html#cb431-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">preAllocateTracks =</span> <span class="fu">list</span>(<span class="at">track.height =</span> <span class="fl">0.1</span>),</span>
+<span id="cb431-7"><a href="a-complex-example-of-chord-diagram.html#cb431-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">link.target.prop =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="16-a-complex-example-with-chord-diagram_files/figure-html/first-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="a-complex-example-of-chord-diagram.html#cb429-1"></a><span class="kw">head</span>(cdm_res)</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="a-complex-example-of-chord-diagram.html#cb432-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cdm_res)</span></code></pre></div>
 <pre><code>##    rn  cn value1 value2 o1 o2      x1     x2       col
 ## 1 R_1 C_1      0      0 15 13  431200 267200 #E41A1C20
 ## 2 R_2 C_1  56400  56400 15 12  159800 267200 #E41A1CA0
@@ -436,17 +438,17 @@ will be customized in later code.</p>
 added at the center of the grids in the second track, if the degree for a
 sector is larger than 3 degrees. Note since there is already one pre-allocated
 track, the circular rectangles are in the second track (<code>track.index = 2</code>).</p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="a-complex-example-of-chord-diagram.html#cb431-1"></a><span class="kw">circos.track</span>(<span class="dt">track.index =</span> <span class="dv">2</span>, <span class="dt">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb431-2"><a href="a-complex-example-of-chord-diagram.html#cb431-2"></a>    <span class="cf">if</span>(<span class="kw">abs</span>(CELL_META<span class="op">$</span>cell.start.degree <span class="op">-</span><span class="st"> </span>CELL_META<span class="op">$</span>cell.end.degree) <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) {</span>
-<span id="cb431-3"><a href="a-complex-example-of-chord-diagram.html#cb431-3"></a>        sn =<span class="st"> </span>CELL_META<span class="op">$</span>sector.index</span>
-<span id="cb431-4"><a href="a-complex-example-of-chord-diagram.html#cb431-4"></a>        i_state =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;(C|R)_&quot;</span>, <span class="st">&quot;&quot;</span>, sn))</span>
-<span id="cb431-5"><a href="a-complex-example-of-chord-diagram.html#cb431-5"></a>        <span class="kw">circos.text</span>(CELL_META<span class="op">$</span>xcenter, CELL_META<span class="op">$</span>ycenter, i_state, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, </span>
-<span id="cb431-6"><a href="a-complex-example-of-chord-diagram.html#cb431-6"></a>            <span class="dt">font =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.7</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="dt">niceFacing =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb431-7"><a href="a-complex-example-of-chord-diagram.html#cb431-7"></a>        xlim =<span class="st"> </span>CELL_META<span class="op">$</span>xlim</span>
-<span id="cb431-8"><a href="a-complex-example-of-chord-diagram.html#cb431-8"></a>        breaks =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, xlim[<span class="dv">2</span>], <span class="dt">by =</span> <span class="fl">4e5</span>)</span>
-<span id="cb431-9"><a href="a-complex-example-of-chord-diagram.html#cb431-9"></a>        <span class="kw">circos.axis</span>(<span class="dt">major.at =</span> breaks, <span class="dt">labels =</span> <span class="kw">paste0</span>(breaks<span class="op">/</span><span class="dv">1000</span>, <span class="st">&quot;KB&quot;</span>), <span class="dt">labels.cex =</span> <span class="fl">0.5</span>)</span>
-<span id="cb431-10"><a href="a-complex-example-of-chord-diagram.html#cb431-10"></a>    }</span>
-<span id="cb431-11"><a href="a-complex-example-of-chord-diagram.html#cb431-11"></a>}, <span class="dt">bg.border =</span> <span class="ot">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="a-complex-example-of-chord-diagram.html#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.track</span>(<span class="at">track.index =</span> <span class="dv">2</span>, <span class="at">panel.fun =</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb434-2"><a href="a-complex-example-of-chord-diagram.html#cb434-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">abs</span>(CELL_META<span class="sc">$</span>cell.start.degree <span class="sc">-</span> CELL_META<span class="sc">$</span>cell.end.degree) <span class="sc">&gt;</span> <span class="dv">3</span>) {</span>
+<span id="cb434-3"><a href="a-complex-example-of-chord-diagram.html#cb434-3" aria-hidden="true" tabindex="-1"></a>        sn <span class="ot">=</span> CELL_META<span class="sc">$</span>sector.index</span>
+<span id="cb434-4"><a href="a-complex-example-of-chord-diagram.html#cb434-4" aria-hidden="true" tabindex="-1"></a>        i_state <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;(C|R)_&quot;</span>, <span class="st">&quot;&quot;</span>, sn))</span>
+<span id="cb434-5"><a href="a-complex-example-of-chord-diagram.html#cb434-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.text</span>(CELL_META<span class="sc">$</span>xcenter, CELL_META<span class="sc">$</span>ycenter, i_state, <span class="at">col =</span> <span class="st">&quot;white&quot;</span>, </span>
+<span id="cb434-6"><a href="a-complex-example-of-chord-diagram.html#cb434-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">font =</span> <span class="dv">2</span>, <span class="at">cex =</span> <span class="fl">0.7</span>, <span class="at">adj =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="at">niceFacing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb434-7"><a href="a-complex-example-of-chord-diagram.html#cb434-7" aria-hidden="true" tabindex="-1"></a>        xlim <span class="ot">=</span> CELL_META<span class="sc">$</span>xlim</span>
+<span id="cb434-8"><a href="a-complex-example-of-chord-diagram.html#cb434-8" aria-hidden="true" tabindex="-1"></a>        breaks <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, xlim[<span class="dv">2</span>], <span class="at">by =</span> <span class="fl">4e5</span>)</span>
+<span id="cb434-9"><a href="a-complex-example-of-chord-diagram.html#cb434-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.axis</span>(<span class="at">major.at =</span> breaks, <span class="at">labels =</span> <span class="fu">paste0</span>(breaks<span class="sc">/</span><span class="dv">1000</span>, <span class="st">&quot;KB&quot;</span>), <span class="at">labels.cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb434-10"><a href="a-complex-example-of-chord-diagram.html#cb434-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb434-11"><a href="a-complex-example-of-chord-diagram.html#cb434-11" aria-hidden="true" tabindex="-1"></a>}, <span class="at">bg.border =</span> <span class="cn">NA</span>)</span></code></pre></div>
 <p><img src="16-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>On the top half, it is easy to see the proportion of different transitions in
 group 1 that come to every state in group 2. However, it is not
@@ -458,51 +460,51 @@ been transited to different states in group 2.</p>
 <p>Note from version 0.4.11, there is a new argument <code>link.target.prop</code> in <code>chordDiagram()</code>.
 It basically automatically applies following code. However, we still suggest users
 to read the following code because more tracks with similar code will be drawn later.</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="a-complex-example-of-chord-diagram.html#cb432-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(cdm_res))) {</span>
-<span id="cb432-2"><a href="a-complex-example-of-chord-diagram.html#cb432-2"></a>    <span class="cf">if</span>(cdm_res<span class="op">$</span>value1[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb432-3"><a href="a-complex-example-of-chord-diagram.html#cb432-3"></a>        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], <span class="op">-</span><span class="kw">mm_y</span>(<span class="dv">1</span>), </span>
-<span id="cb432-4"><a href="a-complex-example-of-chord-diagram.html#cb432-4"></a>            cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), <span class="op">-</span><span class="kw">mm_y</span>(<span class="dv">2</span>), </span>
-<span id="cb432-5"><a href="a-complex-example-of-chord-diagram.html#cb432-5"></a>            <span class="dt">col =</span> state_col2[cdm_res<span class="op">$</span>cn[i]], <span class="dt">border =</span> state_col2[cdm_res<span class="op">$</span>cn[i]],</span>
-<span id="cb432-6"><a href="a-complex-example-of-chord-diagram.html#cb432-6"></a>            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">2</span>)</span>
-<span id="cb432-7"><a href="a-complex-example-of-chord-diagram.html#cb432-7"></a>    }</span>
-<span id="cb432-8"><a href="a-complex-example-of-chord-diagram.html#cb432-8"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="a-complex-example-of-chord-diagram.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(cdm_res))) {</span>
+<span id="cb435-2"><a href="a-complex-example-of-chord-diagram.html#cb435-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(cdm_res<span class="sc">$</span>value1[i] <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb435-3"><a href="a-complex-example-of-chord-diagram.html#cb435-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], <span class="sc">-</span><span class="fu">mm_y</span>(<span class="dv">1</span>), </span>
+<span id="cb435-4"><a href="a-complex-example-of-chord-diagram.html#cb435-4" aria-hidden="true" tabindex="-1"></a>            cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="sc">-</span> <span class="fu">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), <span class="sc">-</span><span class="fu">mm_y</span>(<span class="dv">2</span>), </span>
+<span id="cb435-5"><a href="a-complex-example-of-chord-diagram.html#cb435-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> state_col2[cdm_res<span class="sc">$</span>cn[i]], <span class="at">border =</span> state_col2[cdm_res<span class="sc">$</span>cn[i]],</span>
+<span id="cb435-6"><a href="a-complex-example-of-chord-diagram.html#cb435-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> cdm_res<span class="sc">$</span>rn[i], <span class="at">track.index =</span> <span class="dv">2</span>)</span>
+<span id="cb435-7"><a href="a-complex-example-of-chord-diagram.html#cb435-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb435-8"><a href="a-complex-example-of-chord-diagram.html#cb435-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="16-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Methylation in each category is put on the most outside of the circle. On this track, we will
 put two paralle rectangles which are mean methylation and methylation difference between group 1
 and group 2. Basically, on the bottom, we show <code>meth_mat_2 - meth_mat_1</code> and on the top we show
 <code>meth_mat_1 - meth_mat_2</code>.</p>
 <p>The logic of following code is simple that it just simply adds rectangles repeatedly.</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="a-complex-example-of-chord-diagram.html#cb433-1"></a>abs_max =<span class="st"> </span><span class="kw">quantile</span>(<span class="kw">abs</span>(<span class="kw">c</span>(meth_mat_<span class="dv">1</span>, meth_mat_<span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>), <span class="fl">0.95</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb433-2"><a href="a-complex-example-of-chord-diagram.html#cb433-2"></a>col_fun =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="fl">0.5</span> <span class="op">-</span><span class="st"> </span>abs_max, <span class="fl">0.5</span>, <span class="fl">0.5</span> <span class="op">+</span><span class="st"> </span>abs_max), <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
-<span id="cb433-3"><a href="a-complex-example-of-chord-diagram.html#cb433-3"></a>col_fun2 =<span class="st"> </span><span class="kw">colorRamp2</span>(<span class="kw">c</span>(<span class="op">-</span>abs_max, <span class="dv">0</span>, abs_max), <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;orange&quot;</span>))</span>
-<span id="cb433-4"><a href="a-complex-example-of-chord-diagram.html#cb433-4"></a></span>
-<span id="cb433-5"><a href="a-complex-example-of-chord-diagram.html#cb433-5"></a>ylim =<span class="st"> </span><span class="kw">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>, <span class="dt">sector.index =</span> <span class="kw">rownames</span>(mat)[<span class="dv">1</span>], <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
-<span id="cb433-6"><a href="a-complex-example-of-chord-diagram.html#cb433-6"></a>y1 =<span class="st"> </span>ylim[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(ylim[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ylim[<span class="dv">1</span>])<span class="op">*</span><span class="fl">0.4</span></span>
-<span id="cb433-7"><a href="a-complex-example-of-chord-diagram.html#cb433-7"></a>y2 =<span class="st"> </span>ylim[<span class="dv">2</span>]</span>
-<span id="cb433-8"><a href="a-complex-example-of-chord-diagram.html#cb433-8"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(cdm_res))) {</span>
-<span id="cb433-9"><a href="a-complex-example-of-chord-diagram.html#cb433-9"></a>    <span class="cf">if</span>(cdm_res<span class="op">$</span>value1[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb433-10"><a href="a-complex-example-of-chord-diagram.html#cb433-10"></a>        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, </span>
-<span id="cb433-11"><a href="a-complex-example-of-chord-diagram.html#cb433-11"></a>            <span class="dt">col =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </span>
-<span id="cb433-12"><a href="a-complex-example-of-chord-diagram.html#cb433-12"></a>            <span class="dt">border =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</span>
-<span id="cb433-13"><a href="a-complex-example-of-chord-diagram.html#cb433-13"></a>            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
-<span id="cb433-14"><a href="a-complex-example-of-chord-diagram.html#cb433-14"></a></span>
-<span id="cb433-15"><a href="a-complex-example-of-chord-diagram.html#cb433-15"></a>        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y2, </span>
-<span id="cb433-16"><a href="a-complex-example-of-chord-diagram.html#cb433-16"></a>            <span class="dt">col =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </span>
-<span id="cb433-17"><a href="a-complex-example-of-chord-diagram.html#cb433-17"></a>            <span class="dt">border =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</span>
-<span id="cb433-18"><a href="a-complex-example-of-chord-diagram.html#cb433-18"></a>            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>rn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
-<span id="cb433-19"><a href="a-complex-example-of-chord-diagram.html#cb433-19"></a></span>
-<span id="cb433-20"><a href="a-complex-example-of-chord-diagram.html#cb433-20"></a>        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.45</span>, </span>
-<span id="cb433-21"><a href="a-complex-example-of-chord-diagram.html#cb433-21"></a>            <span class="dt">col =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </span>
-<span id="cb433-22"><a href="a-complex-example-of-chord-diagram.html#cb433-22"></a>            <span class="dt">border =</span> <span class="kw">col_fun</span>(meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</span>
-<span id="cb433-23"><a href="a-complex-example-of-chord-diagram.html#cb433-23"></a>            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>cn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
-<span id="cb433-24"><a href="a-complex-example-of-chord-diagram.html#cb433-24"></a></span>
-<span id="cb433-25"><a href="a-complex-example-of-chord-diagram.html#cb433-25"></a>        <span class="kw">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1 <span class="op">+</span><span class="st"> </span>(y2<span class="op">-</span>y1)<span class="op">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="kw">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y2, </span>
-<span id="cb433-26"><a href="a-complex-example-of-chord-diagram.html#cb433-26"></a>            <span class="dt">col =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]), </span>
-<span id="cb433-27"><a href="a-complex-example-of-chord-diagram.html#cb433-27"></a>            <span class="dt">border =</span> <span class="kw">col_fun2</span>(meth_mat_<span class="dv">1</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]] <span class="op">-</span><span class="st"> </span>meth_mat_<span class="dv">2</span>[cdm_res<span class="op">$</span>rn[i], cdm_res<span class="op">$</span>cn[i]]),</span>
-<span id="cb433-28"><a href="a-complex-example-of-chord-diagram.html#cb433-28"></a>            <span class="dt">sector.index =</span> cdm_res<span class="op">$</span>cn[i], <span class="dt">track.index =</span> <span class="dv">1</span>)</span>
-<span id="cb433-29"><a href="a-complex-example-of-chord-diagram.html#cb433-29"></a>    }</span>
-<span id="cb433-30"><a href="a-complex-example-of-chord-diagram.html#cb433-30"></a>}</span>
-<span id="cb433-31"><a href="a-complex-example-of-chord-diagram.html#cb433-31"></a><span class="kw">circos.clear</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="a-complex-example-of-chord-diagram.html#cb436-1" aria-hidden="true" tabindex="-1"></a>abs_max <span class="ot">=</span> <span class="fu">quantile</span>(<span class="fu">abs</span>(<span class="fu">c</span>(meth_mat_1, meth_mat_2) <span class="sc">-</span> <span class="fl">0.5</span>), <span class="fl">0.95</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb436-2"><a href="a-complex-example-of-chord-diagram.html#cb436-2" aria-hidden="true" tabindex="-1"></a>col_fun <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">c</span>(<span class="fl">0.5</span> <span class="sc">-</span> abs_max, <span class="fl">0.5</span>, <span class="fl">0.5</span> <span class="sc">+</span> abs_max), <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb436-3"><a href="a-complex-example-of-chord-diagram.html#cb436-3" aria-hidden="true" tabindex="-1"></a>col_fun2 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">c</span>(<span class="sc">-</span>abs_max, <span class="dv">0</span>, abs_max), <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;orange&quot;</span>))</span>
+<span id="cb436-4"><a href="a-complex-example-of-chord-diagram.html#cb436-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb436-5"><a href="a-complex-example-of-chord-diagram.html#cb436-5" aria-hidden="true" tabindex="-1"></a>ylim <span class="ot">=</span> <span class="fu">get.cell.meta.data</span>(<span class="st">&quot;ylim&quot;</span>, <span class="at">sector.index =</span> <span class="fu">rownames</span>(mat)[<span class="dv">1</span>], <span class="at">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb436-6"><a href="a-complex-example-of-chord-diagram.html#cb436-6" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">=</span> ylim[<span class="dv">1</span>] <span class="sc">+</span> (ylim[<span class="dv">2</span>] <span class="sc">-</span> ylim[<span class="dv">1</span>])<span class="sc">*</span><span class="fl">0.4</span></span>
+<span id="cb436-7"><a href="a-complex-example-of-chord-diagram.html#cb436-7" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">=</span> ylim[<span class="dv">2</span>]</span>
+<span id="cb436-8"><a href="a-complex-example-of-chord-diagram.html#cb436-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(cdm_res))) {</span>
+<span id="cb436-9"><a href="a-complex-example-of-chord-diagram.html#cb436-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(cdm_res<span class="sc">$</span>value1[i] <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb436-10"><a href="a-complex-example-of-chord-diagram.html#cb436-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="sc">-</span> <span class="fu">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y1 <span class="sc">+</span> (y2<span class="sc">-</span>y1)<span class="sc">*</span><span class="fl">0.45</span>, </span>
+<span id="cb436-11"><a href="a-complex-example-of-chord-diagram.html#cb436-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="fu">col_fun</span>(meth_mat_1[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]]), </span>
+<span id="cb436-12"><a href="a-complex-example-of-chord-diagram.html#cb436-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">border =</span> <span class="fu">col_fun</span>(meth_mat_1[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]]),</span>
+<span id="cb436-13"><a href="a-complex-example-of-chord-diagram.html#cb436-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> cdm_res<span class="sc">$</span>rn[i], <span class="at">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb436-14"><a href="a-complex-example-of-chord-diagram.html#cb436-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb436-15"><a href="a-complex-example-of-chord-diagram.html#cb436-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.rect</span>(cdm_res[i, <span class="st">&quot;x1&quot;</span>], y1 <span class="sc">+</span> (y2<span class="sc">-</span>y1)<span class="sc">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x1&quot;</span>] <span class="sc">-</span> <span class="fu">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y2, </span>
+<span id="cb436-16"><a href="a-complex-example-of-chord-diagram.html#cb436-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="fu">col_fun2</span>(meth_mat_2[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]] <span class="sc">-</span> meth_mat_1[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]]), </span>
+<span id="cb436-17"><a href="a-complex-example-of-chord-diagram.html#cb436-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">border =</span> <span class="fu">col_fun2</span>(meth_mat_2[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]] <span class="sc">-</span> meth_mat_1[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]]),</span>
+<span id="cb436-18"><a href="a-complex-example-of-chord-diagram.html#cb436-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> cdm_res<span class="sc">$</span>rn[i], <span class="at">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb436-19"><a href="a-complex-example-of-chord-diagram.html#cb436-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb436-20"><a href="a-complex-example-of-chord-diagram.html#cb436-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="sc">-</span> <span class="fu">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y1 <span class="sc">+</span> (y2<span class="sc">-</span>y1)<span class="sc">*</span><span class="fl">0.45</span>, </span>
+<span id="cb436-21"><a href="a-complex-example-of-chord-diagram.html#cb436-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="fu">col_fun</span>(meth_mat_2[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]]), </span>
+<span id="cb436-22"><a href="a-complex-example-of-chord-diagram.html#cb436-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">border =</span> <span class="fu">col_fun</span>(meth_mat_2[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]]),</span>
+<span id="cb436-23"><a href="a-complex-example-of-chord-diagram.html#cb436-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> cdm_res<span class="sc">$</span>cn[i], <span class="at">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb436-24"><a href="a-complex-example-of-chord-diagram.html#cb436-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb436-25"><a href="a-complex-example-of-chord-diagram.html#cb436-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">circos.rect</span>(cdm_res[i, <span class="st">&quot;x2&quot;</span>], y1 <span class="sc">+</span> (y2<span class="sc">-</span>y1)<span class="sc">*</span><span class="fl">0.55</span>, cdm_res[i, <span class="st">&quot;x2&quot;</span>] <span class="sc">-</span> <span class="fu">abs</span>(cdm_res[i, <span class="st">&quot;value1&quot;</span>]), y2, </span>
+<span id="cb436-26"><a href="a-complex-example-of-chord-diagram.html#cb436-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="fu">col_fun2</span>(meth_mat_1[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]] <span class="sc">-</span> meth_mat_2[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]]), </span>
+<span id="cb436-27"><a href="a-complex-example-of-chord-diagram.html#cb436-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">border =</span> <span class="fu">col_fun2</span>(meth_mat_1[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]] <span class="sc">-</span> meth_mat_2[cdm_res<span class="sc">$</span>rn[i], cdm_res<span class="sc">$</span>cn[i]]),</span>
+<span id="cb436-28"><a href="a-complex-example-of-chord-diagram.html#cb436-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> cdm_res<span class="sc">$</span>cn[i], <span class="at">track.index =</span> <span class="dv">1</span>)</span>
+<span id="cb436-29"><a href="a-complex-example-of-chord-diagram.html#cb436-29" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb436-30"><a href="a-complex-example-of-chord-diagram.html#cb436-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb436-31"><a href="a-complex-example-of-chord-diagram.html#cb436-31" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.clear</span>()</span></code></pre></div>
 <p><img src="16-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Legends can be added according to instructions discussed in Section <a href="legends.html#legends">4</a>.</p>
 <p><img src="16-a-complex-example-with-chord-diagram_files/figure-html/unnamed-chunk-12-1.png" width="695.541984" style="display: block; margin: auto;" /></p>
@@ -521,7 +523,6 @@ and group 2. Basically, on the bottom, we show <code>meth_mat_2 - meth_mat_1</co
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -540,6 +541,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -560,6 +562,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

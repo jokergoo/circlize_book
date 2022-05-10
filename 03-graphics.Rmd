@@ -475,6 +475,27 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 circos.clear()
 ```
 
+## Labels
+
+`circos.labels()` can be used to add a track of labels.
+This function creates two tracks, one for the connection lines and one for the labels.
+If two labels are too close and overlap, this function automatically adjusts the positions of neighouring labels.
+Check the following example (Figure \@ref(fig:labels)).
+
+```{r labels, fig.width = 8, fig.height = 4, fig.cap = "Label track."}
+par(mfrow = c(1, 2))
+circos.initialize(sectors = letters[1:8], xlim = c(0, 1))
+circos.track(ylim = c(0, 1))
+circos.labels(c("a", "a", "b", "b"), x = c(0.1, 0.12, 0.4, 0.6), labels = c(0.1, 0.12, 0.4, 0.6))
+circos.clear()
+
+circos.initialize(sectors = letters[1:8], xlim = c(0, 1))
+circos.labels(c("a", "a", "b", "b"), x = c(0.1, 0.12, 0.4, 0.6), labels = c(0.1, 0.12, 0.4, 0.6),
+    side = "outside")
+circos.track(ylim = c(0, 1))
+circos.clear()
+```
+
 ## Raster image {#raster-image}
 
 `circos.raster()` is used to add a raster image at a certain position in the

@@ -28,6 +28,7 @@ fig:circlize-boxplot
 fig:circlize-violinplot
 fig:circular-arrow
 fig:cell-cycle
+fig:labels
 fig:raster-normal
 fig:raster-doodle
 fig:link-example
@@ -167,6 +168,7 @@ rectangles
 axes
 barplots-boxplots-and-violin-plots
 circular-arrows
+labels
 raster-image
 links
 highlight-sectors-and-tracks
@@ -224,7 +226,7 @@ modes-rectangles
 high-level-genomic-functions
 ideograms
 genomic-heatmap
-labels
+labels-1
 genomic-axes
 genomic-density-and-rainfall-plot
 nested-zooming
