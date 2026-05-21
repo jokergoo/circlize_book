@@ -31,7 +31,7 @@ and combines them as an integrated track.
 Generally, all numeric columns (excluding the first three columns) in the
 input data frame are used to make the heatmap. Columns can also be specified
 by `numeric.column` which is either an numeric vector or a character vector.
-Colors can be specfied as a color matrix or a color mapping function generated
+Colors can be specified as a color matrix or a color mapping function generated
 by `colorRamp2()`.
 
 The height of the connection line track and the heatmap track can be set by `connection_height`
@@ -58,7 +58,7 @@ circos.genomicIdeogram()
 circos.clear()
 ```
 
-```{r genomic-heatmap, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Genomic heamtaps."}
+```{r genomic-heatmap, echo = FALSE, fig.width = 8, fig.height = 4, fig.cap = "Genomic heatmaps."}
 chunks <- knitr:::knit_code$get()
 par(mfrow = c(1, 2))
 eval(parse(text = chunks[["genomic-heatmap1"]]))
@@ -72,7 +72,7 @@ Positions of labels are automatically adjusted so that they do not
 overlap to each other.
 
 Similar as `circos.genomicHeatmap()`, `circos.genomicLabels()` also 
-creates two tracks where one for the connection lines and one for the 
+creates two tracks ,one for the connection lines and one for the 
 labels. You can set the height of the labels track to be the maximum
 width of labels by `labels_height = max(strwidth(labels))`. `padding`
 argument controls the gap between two neighbouring labels.
@@ -85,7 +85,7 @@ circos.genomicLabels(bed, labels.column = 4, side = "inside")
 circos.clear()
 ```
 
-Similarlly, labels can be put outside of the normal genomic track (Figure \@ref(fig:genomic-labels) right).
+Similarly, labels can be put outside of the normal genomic track (Figure \@ref(fig:genomic-labels) right).
 
 ```{r genomic-labels2, eval = FALSE}
 circos.initializeWithIdeogram(plotType = NULL)
@@ -104,9 +104,9 @@ eval(parse(text = chunks[["genomic-labels2"]]))
 
 ## Genomic axes
 
-The genomic axes are not really high-level graphics, but it is better to also introduce
+The genomic axes are not really high-level graphics, but it is better to introduce them
 here. For `circos.initializeWithIdeogram()`, by default it draws axes with tick labels properly 
-formatted. The axes are internally implemented by `circos.genomicAxis()` and it can be
+formatted. The axes are internally implemented by `circos.genomicAxis()` and they can be
 used to add genomic axes at any track (Figure \@ref(fig:genomic-axis)).
 
 ```{r genomic-axis, fig.cap = "Add genomic axes."}
@@ -133,7 +133,7 @@ transformed) of the region to its two neighbouring regions. A cluster of regions
 appear as a “rainfall” in the plot.
 
 `circos.genomicRainfall()` calculates neighbouring distance for each region
-and draw as points on the plot. Since `circos.genomicRainfall()` generates data on
+and draws points on the plot. Since `circos.genomicRainfall()` generates data on
 y-direction (`log10(distance)`), it is actually a high-level function which
 creates a new track.
 
@@ -151,7 +151,7 @@ visualize the genomic density of regions (defined as the fraction of a genomic
 window that is covered by genomic regions).
 
 `circos.genomicDensity()` calculates how much a genomic window is covered by
-regions in `bed`. It is also a high-level function and creates a new track.
+regions in `bed`. It is also a high-level function that creates a new track.
 
 The input data can be a single data frame or a list of data frames.
 
@@ -181,7 +181,7 @@ circos.clear()
 ```
 
 
-`circos.genomicDensity()` also supports to calculate the overlap as the **number** of the regions
+`circos.genomicDensity()` also supports calculation the overlap as the **number** of the regions
 that overlap to each window by setting `count_by = "number"`.
 
 ```{r genomic-rainfall2, fig.width = 6, fig.height = 6, fig.cap = "Genomic densities."}
@@ -191,7 +191,7 @@ circos.genomicDensity(DMR_hyper, col = c("#FF000080"), count_by = "number", trac
 circos.clear()
 ```
 
-Internally, `rainfallTransform()` and `genomicDensity()` are used to the neighbrouing distance
+Internally, `rainfallTransform()` and `genomicDensity()` are used to the neighboring distance
 and the genomic density values.
 
 ```{r}
